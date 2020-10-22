@@ -1,0 +1,9 @@
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\bin\Debug\SystemTools.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\bin\Debug\SystemTools.pdb
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\obj\Debug\SystemTools.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\obj\Debug\SystemTools.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\obj\Debug\SystemTools.pdb
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Assets\SystemTools.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Assets\SystemTools.pdb
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\bin\Debug\SystemTools.xml
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\SystemTools\obj\Debug\SystemTools.csprojAssemblyReference.cache

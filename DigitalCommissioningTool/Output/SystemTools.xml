@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SystemTools</name>
+    </assembly>
+    <members>
+        <member name="T:SystemTools.LogManager">
+            <summary>
+            Used to create and write Log files.
+            </summary>
+        </member>
+        <member name="M:SystemTools.LogManager.#cctor">
+            <summary>
+            Initializes the log manager.
+            </summary>
+        </member>
+        <member name="M:SystemTools.LogManager.WriteInfo(System.String)">
+            <summary>
+            Writes an info message into the log file while in DEBUG mode.
+            </summary>
+            <param name="message">The info message which should be written.</param>
+            <exception cref="T:System.IO.IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
+        </member>
+        <member name="M:SystemTools.LogManager.WriteWarning(System.String)">
+            <summary>
+            Writes a warning message into the log file.
+            </summary>
+            <param name="message">The warning message which should be written.</param>
+            <exception cref="T:System.IO.IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
+        </member>
+        <member name="M:SystemTools.LogManager.WriteError(System.String)">
+            <summary>
+            Writes an error message into the log file.
+            </summary>
+            <param name="message">The error message which should be written.</param>
+            <exception cref="T:System.IO.IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
+        </member>
+        <member name="M:SystemTools.LogManager.PrintToFile(System.String,System.String)">
+            <summary>
+            Prints available data into the log file.
+            </summary>
+            <param name="tag">Message priority.</param>
+            <param name="message">The message.</param>
+            <exception cref="T:System.IO.IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
+        </member>
+        <member name="M:SystemTools.LogManager.PrintFileHeader(System.IO.StreamWriter)">
+            <summary>
+            Prints the log file header.
+            </summary>
+            <param name="writer">StreamWriter object with open filestream.</param>
+            <exception cref="T:System.IO.IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
+        </member>
+    </members>
+</doc>
