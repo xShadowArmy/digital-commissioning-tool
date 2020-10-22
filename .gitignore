@@ -70,3 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Don't ignore Files for SystemTool Library
+![Ss]ystem[Tt]ools/SystemTools.csproj
+![Ss]ystem[Tt]ools/SystemTools.csproj.user
