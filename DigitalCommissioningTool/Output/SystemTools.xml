@@ -14,7 +14,7 @@
             Initializes the log manager.
             </summary>
         </member>
-        <member name="M:SystemTools.LogManager.WriteInfo(System.String)">
+        <member name="M:SystemTools.LogManager.WriteInfo(System.String,System.String,System.String)">
             <summary>
             Writes an info message into the log file while in DEBUG mode.
             </summary>

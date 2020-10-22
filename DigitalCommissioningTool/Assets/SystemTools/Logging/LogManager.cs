@@ -56,7 +56,7 @@ namespace SystemTools
         /// </summary>
         /// <param name="message">The info message which should be written.</param>
         /// <exception cref="IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
-        public static void WriteInfo( string message )
+        public static void WriteInfo( string message, string className, string methodName )
         {
 #if DEBUG
 

@@ -267,7 +267,6 @@ C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioning
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\UnityEditor.UI.pdb
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\UnityEditor.TestRunner.pdb
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\UnityEngine.TestRunner.pdb
-C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.dll
