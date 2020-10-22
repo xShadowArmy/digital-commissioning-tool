@@ -7,11 +7,12 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SystemTools.LogManager.WriteInfo( "" );
     }
 
     // Update is called once per frame
     void Update()
     {
-        SystemTools.LogManager.WriteError( "Ein Error text" );
+        
     }
 }
