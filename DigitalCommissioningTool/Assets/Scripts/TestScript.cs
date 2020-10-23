@@ -10,16 +10,19 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Lesen der Ressourcen direkt über die Managerklasse
         for ( int i = 1; i <= 10; i++ )
         {
-            Debug.Log( StringRessourceManager.LoadString( "test" + i ) );
+            Debug.Log( StringRessourceManager.LoadString( "@test" + i ) );
         }
 
-        Test = Test.LoadString( "TestFehler" );
+        Debug.Log( StringRessourceManager.LoadString( 11 ) );
+
+        // Lesen der Ressourcen direkt über den jeweiligen String
+
+        Test = Test.LoadString( "@ErrorText" );
 
         Debug.Log( Test );
-
-        Debug.Log( StringRessourceManager.LoadString( 11 ) );
     }
 
     // Update is called once per frame

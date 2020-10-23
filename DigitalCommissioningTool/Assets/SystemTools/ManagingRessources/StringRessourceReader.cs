@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.XPath;
 using SystemTools.Logging;
 
@@ -20,18 +21,22 @@ namespace SystemTools.ManagingRessources
         internal List<StringRessourceData> StringRessources { get; private set; }
         private XmlDocument Doc { get; set; }
         private CultureInfo LangInfo { get; set; }
+        private string Path { get; set; }
 
         internal StringRessourceReader( string path, CultureInfo info )
         {
             LogManager.WriteInfo( "Initialisierung des StringRessourceReader", "StringRessourceReader", "StringRessourceReader" );
 
+            Path     = path;
             LangInfo = info;
+
+            ValidateXml( );
 
             Doc = new XmlDocument( );
 
             try
             {
-                Doc.Load( path );
+                Doc.Load( Path );
             }
 
             catch ( FileNotFoundException e )
@@ -51,6 +56,8 @@ namespace SystemTools.ManagingRessources
 
         internal string LoadString( string name )
         {
+            name = RemoveQualifier( name );
+            
             string tmp = string.Empty;
 
             foreach( StringRessourceData data in StringRessources )
@@ -94,6 +101,8 @@ namespace SystemTools.ManagingRessources
 
         internal bool Exists( string name )
         {
+            name = RemoveQualifier( name );
+
             foreach ( StringRessourceData data in StringRessources )
             {
                 if ( data.Name.Equals( name ) )
@@ -147,7 +156,13 @@ namespace SystemTools.ManagingRessources
                                                                         
                                     data.Name  = nav.GetAttribute( "name", "" );
                                     data.ID    = tmpID;
-                                    data.Value = nav.Value;
+
+                                    if ( nav.MoveToFirstChild() )
+                                    {
+                                        data.Value = nav.Value;
+
+                                        nav.MoveToParent( );
+                                    }
 
                                     StringRessources.Add( data );
 
@@ -161,6 +176,47 @@ namespace SystemTools.ManagingRessources
                 {
                     LogManager.WriteError( "Fehler beim Einlesen der StringRessourcen! Fehler: " + e.Message , "StringRessourceReader", "ReadStringRessources" );
                 }
+            }
+        }
+
+        private string RemoveQualifier( string name )
+        {
+            if ( name.StartsWith( "@" ) )
+            {
+                return name.Substring( 1 );
+            }
+
+            return name;
+        }
+
+        private void ValidateXml( )
+        {
+            XmlReaderSettings settings = new XmlReaderSettings( );
+
+            settings.ValidationType   = ValidationType.Schema;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+            settings.ValidationEventHandler += new ValidationEventHandler( ValidationCallBack );
+            
+            XmlReader reader = XmlReader.Create( Path, settings );
+            
+            while ( reader.Read( ) );
+
+            reader.Close( );
+            reader.Dispose( );
+        }
+
+        private static void ValidationCallBack( object sender, ValidationEventArgs args )
+        {
+            if ( args.Severity == XmlSeverityType.Warning )
+            {
+                LogManager.WriteInfo( "XmlSchema nicht gefunden. Fehler: " + args.Message, "StringRessourceReader", "ValidationCallBack" ) ;
+            }
+
+            else
+            {
+                LogManager.WriteInfo( "Xml passt nicht zum XmlSchema. Fehler: " + args.Message, "StringRessourceReader", "ValidationCallBack" ) ;
             }
         }
     }

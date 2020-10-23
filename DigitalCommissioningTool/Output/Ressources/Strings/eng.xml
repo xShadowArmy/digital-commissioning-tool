@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<StringRessources lang="eng">
-	<string name="test1" id="1">Das ist ein Teststring1</string>
-	<string name="test2" id="2">Das ist ein Teststring2</string>
-	<string name="test3" id="3">Das ist ein Teststring3</string>
-	<string name="test4" id="4">Das ist ein Teststring4</string>
-	<string name="test5" id="5">Das ist ein Teststring5</string>
-	<string name="TestFehler" id="11">Das ist ein String der einen Fehlertext darstellen soll</string>
-	<string name="test6" id="6">Das ist ein Teststring6</string>
-	<string name="test7" id="7">Das ist ein Teststring7</string>
-	<string name="test8" id="8">Das ist ein Teststring8</string>	
-	<string name="test9" id="9">Das ist ein Teststring9</string>
-	<string name="test10" id="10">Das ist ein Teststring10</string>
+<StringRessources lang="eng" xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings StringRessourceSchema.xsd">
+	<string name="test1" id="1">
+		<value>Das ist ein Teststring1</value>
+	</string>
+	
+	<string name="test2" id="2">
+		<value>Das ist ein Teststring2</value>
+	</string>
+	
+	<string name="test3" id="3">
+		<value>Das ist ein Teststring3</value>
+	</string>
+	
+	<string name="test4" id="4">
+		<value>Das ist ein Teststring4</value>
+	</string>
+	
+	<string name="test5" id="5">
+		<value>Das ist ein Teststring5</value>
+	</string>
+	
+	<string name="test6" id="6">
+		<value>Das ist ein Teststring6</value>
+	</string>
+	
+	<string name="test7" id="7">
+		<value>Das ist ein Teststring7</value>
+	</string>
+	
+	<string name="test8" id="8">
+		<value>Das ist ein Teststring8</value>
+	</string>
+	
+	<string name="ErrorText" id="9">
+		<value>Das ist ein Text der einen Fehler darstellen soll!</value>
+	</string>
 </StringRessources>

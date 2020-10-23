@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings StringRessourceSchema.xsd" targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings">
+
+<!-- definition of Simple Elements -->
+<xs:element name="value" type="xs:string"/>
+   
+<!-- definition of Attributes -->
+<xs:attribute name="name" type="xs:string"/>
+<xs:attribute name="id" type="xs:long"/>
+<xs:attribute name="lang" type="xs:string"/>
+  
+<!-- definition of Complex elements -->
+  <xs:element name="string">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="value" maxOccurs="1" minOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="name" use="required"/>
+      <xs:attribute ref="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="StringRessources">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="string" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="lang" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
