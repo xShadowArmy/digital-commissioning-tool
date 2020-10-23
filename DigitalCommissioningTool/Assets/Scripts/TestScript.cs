@@ -16,8 +16,6 @@ public class TestScript : MonoBehaviour
             Debug.Log( StringRessourceManager.LoadString( "@test" + i ) );
         }
 
-        Debug.Log( StringRessourceManager.LoadString( 11 ) );
-
         // Lesen der Ressourcen direkt über den jeweiligen String
 
         Test = Test.LoadString( "@ErrorText" );

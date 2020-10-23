@@ -13,9 +13,24 @@ namespace SystemTools.ManagingRessources
     /// </summary>
     public static class StringRessourceManager
     {
+        /// <summary>
+        /// Verzeichniss an dem die StringRessourcen liegen.
+        /// </summary>
         private static string StringResDir { get; set; }
+
+        /// <summary>
+        /// Informationen zur aktuellen Systemsprache.
+        /// </summary>
         private static CultureInfo LangInfo { get; set; }
+
+        /// <summary>
+        /// StringRessourceReader Objekt mit dem die StringRessourcen gelesen werden.
+        /// </summary>
         private static StringRessourceReader Reader { get; set; }
+
+        /// <summary>
+        /// StringRessourceWriter Objekt mit dem die StringRessourcen geschrieben werden.
+        /// </summary>
         private static StringRessourceWriter Writer { get; set; }
 
         /// <summary>
@@ -32,9 +47,6 @@ namespace SystemTools.ManagingRessources
 
             Reader = new StringRessourceReader( StringResDir, LangInfo );
             Writer = new StringRessourceWriter( StringResDir, LangInfo );
-
-            // Einmaliges einlesen der String zu Programmstart.
-            ReadStringRessources( );
         }
         
         /// <summary>
@@ -102,6 +114,30 @@ namespace SystemTools.ManagingRessources
         }
 
         /// <summary>
+        /// Noch nicht implementiert.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
+        /// <param name="overwrite"></param>
+        /// <returns></returns>
+        public static bool StoreString( this string str, string name, string content, bool overwrite = false )
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Noch nicht implementiert.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="content"></param>
+        /// <param name="overwrite"></param>
+        /// <returns></returns>
+        public static bool StoreString( this string str, long id, string content, bool overwrite = false )
+        {
+            return false;
+        }
+
+        /// <summary>
         /// Überprüft ob eine StringRessource mit der angegebenen ID verfügbar ist.
         /// </summary>
         /// <param name="id">Die ID der zu suchenden Ressource.</param>
@@ -139,22 +175,6 @@ namespace SystemTools.ManagingRessources
         public static bool Exists( this string str, string name )
         {
             return Reader.Exists( name );
-        }
-
-        /// <summary>
-        /// Lädt die StringRessourcen in den Speicher.
-        /// </summary>
-        private static void ReadStringRessources()
-        {
-            Reader.ReadStringRessources( );
-        }
-
-        /// <summary>
-        /// Schreibt die StringRessourcen in die passende Ressourcendatei.
-        /// </summary>
-        private static void WriteStringRessource()
-        {
-
         }
     }
 }

@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.XPath;
 using SystemTools.Logging;
 
 namespace SystemTools.ManagingRessources
 {
+    /// <summary>
+    /// Wird zum Lesen von StringRessource Dateien verwendet.
+    /// </summary>
     internal class StringRessourceReader
     {
+        /// <summary>
+        /// Repräsentiert einen Eintrag in einer StringRessourceDatei.
+        /// </summary>
         internal class StringRessourceData
         {
             public string Name  { get; set; }
@@ -18,11 +23,31 @@ namespace SystemTools.ManagingRessources
             public long   ID    { get; set; }
         }
 
+        /// <summary>
+        /// Die Eingelesenen StringRessource Daten.
+        /// </summary>
         private List<StringRessourceData> StringRessources { get; set; }
+
+        /// <summary>
+        /// Repräsentiert die StringRessource Xml Datei.
+        /// </summary>
         private XmlDocument Doc { get; set; }
+
+        /// <summary>
+        /// Informationen zur aktuellen Systemsprache.
+        /// </summary>
         private CultureInfo LangInfo { get; set; }
+
+        /// <summary>
+        /// Der Pfad an dem die StringRessourcen liegen.
+        /// </summary>
         private string Path { get; set; }
 
+        /// <summary>
+        /// Initialisiert den StringRessourceReader und ließt die Ressourcen für die aktuelle Systemsprache in den Speicher.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="info"></param>
         internal StringRessourceReader( string path, CultureInfo info )
         {
             LogManager.WriteInfo( "Initialisierung des StringRessourceReader", "StringRessourceReader", "StringRessourceReader" );
@@ -35,6 +60,7 @@ namespace SystemTools.ManagingRessources
             try
             {
                 Doc.Load( Path );
+                ReadStringRessources();
             }
 
             catch ( FileNotFoundException e )
@@ -52,11 +78,16 @@ namespace SystemTools.ManagingRessources
             }
         }
 
+        /// <summary>
+        /// Lädt eine StringRessource anhand ihres Namens.
+        /// </summary>
+        /// <param name="name">Der Name der StringRessource.</param>
+        /// <returns>Die StringRessource oder <see cref="string.Empty"> wenn die Ressource nicht gefunden wurde</see>/></returns>
         internal string LoadString( string name )
         {
             name = RemoveQualifier( name );
             
-            string tmp = string.Empty;
+            string tmp = "MISSING RESSOURCE";
 
             foreach( StringRessourceData data in StringRessources )
             {
@@ -69,9 +100,14 @@ namespace SystemTools.ManagingRessources
             return tmp;
         }
 
+        /// <summary>
+        /// Lädt eine StringRessource anhand ihrer ID.
+        /// </summary>
+        /// <param name="id">Die ID der StringRessource.</param>
+        /// <returns>Die StringRessource oder <see cref="string.Empty"> wenn die Ressource nicht gefunden wurde</see>/></returns>
         internal string LoadString( long id )
         {
-            string tmp = string.Empty;
+            string tmp = "MISSING RESSOURCE";
 
             foreach ( StringRessourceData data in StringRessources )
             {
@@ -84,6 +120,11 @@ namespace SystemTools.ManagingRessources
             return tmp;
         }
 
+        /// <summary>
+        /// Überprüft ob eine StringRessource mit der angegebenen ID verfügbar ist.
+        /// </summary>
+        /// <param name="id">Die ID der zu suchenden Ressource.</param>
+        /// <returns>Gibt true zurück falls die Suche erfolgreich war.</returns>
         internal bool Exists( long id )
         {
             foreach ( StringRessourceData data in StringRessources )
@@ -97,6 +138,11 @@ namespace SystemTools.ManagingRessources
             return false;
         }
 
+        /// <summary>
+        /// Überprüft, ob eine StringRessource mit dem angegebenen Namen verfügbar ist.
+        /// </summary>
+        /// <param name="name">Der Name der zu suchenden Ressource.</param>
+        /// <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
         internal bool Exists( string name )
         {
             name = RemoveQualifier( name );
@@ -112,7 +158,10 @@ namespace SystemTools.ManagingRessources
             return false;
         }
 
-        internal void ReadStringRessources()
+        /// <summary>
+        /// Lädt die StringRessourcen in den Speicher.
+        /// </summary>
+        private void ReadStringRessources()
         {
             LogManager.WriteInfo( "Einlesen der StringRessourcen", "StringRessourceReader", "ReadStringRessources" );
 
@@ -189,6 +238,11 @@ namespace SystemTools.ManagingRessources
             }
         }
 
+        /// <summary>
+        /// Entfernt das @ bei den StringIDs.
+        /// </summary>
+        /// <param name="name">Der name der StringIDs von dem der Qualifier entfernt werden soll.</param>
+        /// <returns>Die StringID ohne Qualifier.</returns>
         private string RemoveQualifier( string name )
         {
             if ( name.StartsWith( "@" ) )
@@ -197,7 +251,6 @@ namespace SystemTools.ManagingRessources
             }
 
             return name;
-        }
-        
+        }       
     }
 }
