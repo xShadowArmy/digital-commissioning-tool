@@ -18,7 +18,7 @@ namespace SystemTools.ManagingRessources
             public long   ID    { get; set; }
         }
 
-        internal List<StringRessourceData> StringRessources { get; private set; }
+        private List<StringRessourceData> StringRessources { get; set; }
         private XmlDocument Doc { get; set; }
         private CultureInfo LangInfo { get; set; }
         private string Path { get; set; }
@@ -29,8 +29,6 @@ namespace SystemTools.ManagingRessources
 
             Path     = path;
             LangInfo = info;
-
-            ValidateXml( );
 
             Doc = new XmlDocument( );
 
@@ -118,6 +116,8 @@ namespace SystemTools.ManagingRessources
         {
             LogManager.WriteInfo( "Einlesen der StringRessourcen", "StringRessourceReader", "ReadStringRessources" );
 
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings";
+
             if ( StringRessources == null && Doc != null )
             {
                 StringRessources = new List<StringRessourceData>( );
@@ -128,13 +128,13 @@ namespace SystemTools.ManagingRessources
 
                     XPathNavigator nav = Doc.CreateNavigator( );
 
-                    if ( nav.MoveToFirstChild() )
+                    if ( nav.MoveToFirstChild( ) )
                     {
                         LogManager.WriteInfo( "Lesen des RootTags", "StringRessourceReader", "ReadStringRessources" );
 
-                        if ( nav.Name == "StringRessources" )
+                        if ( nav.LocalName == "StringRessources" )
                         {
-                            if ( !nav.GetAttribute( "lang", "" ).Equals( LangInfo.ThreeLetterISOLanguageName ) )
+                            if ( !nav.GetAttribute( "lang", xmlns ).Equals( LangInfo.ThreeLetterISOLanguageName ) )
                             {
                                 throw new Exception( "Fehler beim Lesen der StringRessource headers! Sprache ist nicht identisch zur Systemsprache" );
                             }
@@ -149,12 +149,12 @@ namespace SystemTools.ManagingRessources
                                 {
                                     data = new StringRessourceData( );
 
-                                    if ( !long.TryParse( nav.GetAttribute( "id", "" ), out long tmpID ))
+                                    if ( !long.TryParse( nav.GetAttribute( "id", xmlns ), out long tmpID ))
                                     {
                                         throw new Exception( "Fehler beim Interpretieren einer StringID! ID ist keine ganze Zahl" );
                                     }
                                                                         
-                                    data.Name  = nav.GetAttribute( "name", "" );
+                                    data.Name  = nav.GetAttribute( "name", xmlns );
                                     data.ID    = tmpID;
 
                                     if ( nav.MoveToFirstChild() )
@@ -168,6 +168,16 @@ namespace SystemTools.ManagingRessources
 
                                 } while ( nav.MoveToNext( ) );
                             }
+
+                            else
+                            {
+                                LogManager.WriteWarning( "Fehler beim Einlesen der StringRessourcen! Keine Kindelemente in StringRessources", "StringRessourceReader", "ReadStringRessources" );
+                            }
+                        }
+                        
+                        else
+                        {
+                            LogManager.WriteWarning( "Fehler beim Einlesen der StringRessourcen! Element StringRessources konnte nicht gefunden werden!", "StringRessourceReader", "ReadStringRessources" );
                         }
                     }
                 }
@@ -188,36 +198,6 @@ namespace SystemTools.ManagingRessources
 
             return name;
         }
-
-        private void ValidateXml( )
-        {
-            XmlReaderSettings settings = new XmlReaderSettings( );
-
-            settings.ValidationType   = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
-            settings.ValidationEventHandler += new ValidationEventHandler( ValidationCallBack );
-            
-            XmlReader reader = XmlReader.Create( Path, settings );
-            
-            while ( reader.Read( ) );
-
-            reader.Close( );
-            reader.Dispose( );
-        }
-
-        private static void ValidationCallBack( object sender, ValidationEventArgs args )
-        {
-            if ( args.Severity == XmlSeverityType.Warning )
-            {
-                LogManager.WriteInfo( "XmlSchema nicht gefunden. Fehler: " + args.Message, "StringRessourceReader", "ValidationCallBack" ) ;
-            }
-
-            else
-            {
-                LogManager.WriteInfo( "Xml passt nicht zum XmlSchema. Fehler: " + args.Message, "StringRessourceReader", "ValidationCallBack" ) ;
-            }
-        }
+        
     }
 }

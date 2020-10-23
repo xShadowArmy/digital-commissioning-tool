@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<StringRessources lang="eng" xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings StringRessourceSchema.xsd">
-	<string name="test1" id="1">
-		<value>Das ist ein Teststring1</value>
-	</string>
-	
-	<string name="test2" id="2">
-		<value>Das ist ein Teststring2</value>
-	</string>
-	
-	<string name="test3" id="3">
-		<value>Das ist ein Teststring3</value>
-	</string>
-	
-	<string name="test4" id="4">
-		<value>Das ist ein Teststring4</value>
-	</string>
-	
-	<string name="test5" id="5">
-		<value>Das ist ein Teststring5</value>
-	</string>
-	
-	<string name="test6" id="6">
-		<value>Das ist ein Teststring6</value>
-	</string>
-	
-	<string name="test7" id="7">
-		<value>Das ist ein Teststring7</value>
-	</string>
-	
-	<string name="test8" id="8">
-		<value>Das ist ein Teststring8</value>
-	</string>
-	
-	<string name="ErrorText" id="9">
-		<value>Das ist ein Text der einen Fehler darstellen soll!</value>
-	</string>
-</StringRessources>
+<xs:StringRessources xs:lang="eng" 
+                  xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings" 
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                  xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings StringRessourceSchema.xsd">
+	<xs:string xs:name="test1" xs:id="1">
+		<xs:value>Das ist ein Teststring1</xs:value>
+	</xs:string>
+
+  <xs:string xs:name="test2" xs:id="2">
+    <xs:value>Das ist ein Teststring2</xs:value>
+	</xs:string>
+
+  <xs:string xs:name="test3" xs:id="3">
+    <xs:value>Das ist ein Teststring3</xs:value>
+	</xs:string>
+
+  <xs:string xs:name="test4" xs:id="4">
+    <xs:value>Das ist ein Teststring4</xs:value>
+  </xs:string>
+
+  <xs:string xs:name="test5" xs:id="5">
+    <xs:value>Das ist ein Teststring5</xs:value>
+	</xs:string>
+
+  <xs:string xs:name="test6" xs:id="6">
+    <xs:value>Das ist ein Teststring6</xs:value>
+  </xs:string>
+
+  <xs:string xs:name="test7" xs:id="7">
+    <xs:value>Das ist ein Teststring7</xs:value>
+  </xs:string>
+
+  <xs:string xs:name="test8" xs:id="8">
+    <xs:value>Das ist ein Teststring8</xs:value>
+	</xs:string>
+
+  <xs:string xs:name="ErrorText" xs:id="9">
+    <xs:value>Das ist ein Text der einen Fehler darstellen soll!</xs:value>
+  </xs:string>
+</xs:StringRessources>
