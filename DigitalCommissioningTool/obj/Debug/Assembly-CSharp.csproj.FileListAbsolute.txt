@@ -115,7 +115,6 @@ C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioning
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\System.Xml.XmlSerializer.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\System.Xml.XPath.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\System.Xml.XPath.XDocument.dll
-C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\SystemTools.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Unity.CollabProxy.Editor.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Unity.Rider.Editor.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Unity.TextMeshPro.dll
@@ -255,7 +254,6 @@ C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioning
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\UnityEngine.VideoModule.xml
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\UnityEngine.WindModule.xml
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\UnityEngine.XRModule.xml
-C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\SystemTools.pdb
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Unity.Timeline.Editor.pdb
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Unity.VSCode.Editor.pdb
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Unity.TextMeshPro.Editor.pdb

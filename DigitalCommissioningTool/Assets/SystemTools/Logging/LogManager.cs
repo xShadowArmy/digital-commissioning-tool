@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SystemTools
+namespace SystemTools.Logging
 {
     /// <summary>
     /// Used to create and write Log files.
     /// </summary>
     public static class LogManager
     {
-        private static string LogPath { get; set; }
+        public static string LogPath { get; private set; }
 
         /// <summary>
         /// Initializes the log manager.
@@ -69,7 +69,7 @@ namespace SystemTools
         /// </summary>
         /// <param name="message">The warning message which should be written.</param>
         /// <exception cref="IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
-        public static void WriteWarning( string message )
+        public static void WriteWarning( string message, string classeName, string methodName )
         {
             PrintToFile( "[WARN]  ", message );
         }
@@ -79,7 +79,7 @@ namespace SystemTools
         /// </summary>
         /// <param name="message">The error message which should be written.</param>
         /// <exception cref="IOException">Will be thrown if the system is unable to open and write into the log file.</exception>
-        public static void WriteError( string message )
+        public static void WriteError( string message, string className, string methodName )
         {
             PrintToFile( "[ERROR] ", message );
         }

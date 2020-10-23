@@ -9,7 +9,7 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
-[Oo]utput/[Ll]ogs
+[Oo]utput/[Ll]ogs/*.log
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

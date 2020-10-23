@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StringRessources lang="deu">
+	<string name="test1" id="1">Das ist ein Teststring</string>
+	<string name="test2" id="2">Das ist ein Teststring</string>
+	<string name="test3" id="3">Das ist ein Teststring</string>
+	<string name="test4" id="4">Das ist ein Teststring</string>
+	<string name="test5" id="5">Das ist ein Teststring</string>
+	<string name="test6" id="6">Das ist ein Teststring</string>
+	<string name="test7" id="7">Das ist ein Teststring</string>
+	<string name="test8" id="8">Das ist ein Teststring</string>	
+	<string name="test9" id="9">Das ist ein Teststring</string>
+	<string name="test10" id="10">Das ist ein Teststring</string>
+</StringRessources>
