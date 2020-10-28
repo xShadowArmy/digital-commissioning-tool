@@ -12,7 +12,7 @@ namespace SystemTools.Logging
         /// <summary>
         /// Der Pfad, an dem die LogDateien erstellt werden.               
         /// </summary>
-        internal string LogPath { get; private set; }
+        private string LogPath { get; set; }
 
         /// <summary>
         /// Initialisiert den LogWriter und erstellt eine neue LogDatei mit Header.
@@ -56,6 +56,8 @@ namespace SystemTools.Logging
         /// Schreibt eine Info Nachricht in die LogDatei.
         /// </summary>
         /// <param name="message">Die Nachricht die geschrieben werden soll.</param>
+        /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+        /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
         public void WriteInfo( string message, string className, string methodName )
         {
@@ -66,6 +68,8 @@ namespace SystemTools.Logging
         /// Schreibt eine Warn Nachricht in die LogDatei.
         /// </summary>
         /// <param name="message">Die Nachricht die geschrieben werden soll.</param>
+        /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+        /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
         public void WriteWarning( string message, string className, string methodName )
         {
@@ -76,6 +80,8 @@ namespace SystemTools.Logging
         /// WSchreibt eine Error Nachricht in die LogDatei.
         /// </summary>
         /// <param name="message">Die Nachricht die geschrieben werden soll.</param>
+        /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+        /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
         public void WriteError( string message, string className, string methodName )
         {

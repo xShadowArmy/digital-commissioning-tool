@@ -8,11 +8,6 @@ namespace SystemTools.Logging
     public static class LogManager
     {
         /// <summary>
-        /// Der Pfad, an dem die LogDateien erstellt werden.               
-        /// </summary>
-        public static  string LogPath { get; private set; }
-
-        /// <summary>
         /// Ermöglicht das Schreiben von LogDateien.
         /// </summary>
         private static LogWriter Writer { get; set; }
@@ -23,15 +18,16 @@ namespace SystemTools.Logging
         static LogManager()
         {
             Writer  = new LogWriter( );
-            LogPath = Writer.LogPath;
         }
 
         /// <summary>
         /// Schreibt eine Info Nachricht in die LogDatei.
         /// </summary>
         /// <param name="message">Die Nachricht die geschrieben werden soll.</param>
+        /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+        /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
-        public static void WriteInfo( string message, string className, string methodName )
+        public static void WriteInfo( string message, string className = "", string methodName = "" )
         {
 #if DEBUG
             Writer.WriteInfo( message, className, methodName );
@@ -42,6 +38,8 @@ namespace SystemTools.Logging
         /// Schreibt eine Warn Nachricht in die LogDatei.
         /// </summary>
         /// <param name="message">Die Nachricht die geschrieben werden soll.</param>
+        /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+        /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
         public static void WriteWarning( string message, string className, string methodName )
         {
@@ -52,6 +50,8 @@ namespace SystemTools.Logging
         /// Schreibt eine Error Nachricht in die LogDatei.
         /// </summary>
         /// <param name="message">Die Nachricht die geschrieben werden soll.</param>
+        /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+        /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
         public static void WriteError( string message, string className, string methodName )
         {

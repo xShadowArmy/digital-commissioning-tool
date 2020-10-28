@@ -4,35 +4,35 @@
 		<xs:value>Das ist ein Teststring1</xs:value>
 	</xs:string>
 
-  <xs:string xs:name="test2" xs:id="2">
-    <xs:value>Das ist ein Teststring2</xs:value>
+    <xs:string xs:name="test2" xs:id="2">
+		<xs:value>Das ist ein Teststring2</xs:value>
 	</xs:string>
 
-  <xs:string xs:name="test3" xs:id="3">
-    <xs:value>Das ist ein Teststring3</xs:value>
+	<xs:string xs:name="test3" xs:id="3">
+		<xs:value>Das ist ein Teststring3</xs:value>
 	</xs:string>
 
-  <xs:string xs:name="test4" xs:id="4">
-    <xs:value>Das ist ein Teststring4</xs:value>
-  </xs:string>
-
-  <xs:string xs:name="test5" xs:id="5">
-    <xs:value>Das ist ein Teststring5</xs:value>
+	<xs:string xs:name="test4" xs:id="4">
+		<xs:value>Das ist ein Teststring4</xs:value>
 	</xs:string>
 
-  <xs:string xs:name="test6" xs:id="6">
-    <xs:value>Das ist ein Teststring6</xs:value>
-  </xs:string>
-
-  <xs:string xs:name="test7" xs:id="7">
-    <xs:value>Das ist ein Teststring7</xs:value>
-  </xs:string>
-
-  <xs:string xs:name="test8" xs:id="8">
-    <xs:value>Das ist ein Teststring8</xs:value>
+	<xs:string xs:name="test5" xs:id="5">
+		<xs:value>Das ist ein Teststring5</xs:value>
 	</xs:string>
 
-  <xs:string xs:name="ErrorText" xs:id="9">
-    <xs:value>Das ist ein Text der einen Fehler darstellen soll!</xs:value>
-  </xs:string>
+	<xs:string xs:name="test6" xs:id="6">
+		<xs:value>Das ist ein Teststring6</xs:value>
+	</xs:string>
+
+	<xs:string xs:name="test7" xs:id="7">
+		<xs:value>Das ist ein Teststring7</xs:value>
+	</xs:string>
+
+	<xs:string xs:name="test8" xs:id="8">
+		<xs:value>Das ist ein Teststring8</xs:value>
+	</xs:string>
+
+	<xs:string xs:name="ErrorText" xs:id="9">
+		<xs:value>Das ist ein Text der einen Fehler darstellen soll!</xs:value>
+	</xs:string>
 </xs:StringRessources>

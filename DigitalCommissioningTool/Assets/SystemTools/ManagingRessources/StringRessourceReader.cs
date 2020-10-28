@@ -16,7 +16,7 @@ namespace SystemTools.ManagingRessources
         /// <summary>
         /// Repräsentiert einen Eintrag in einer StringRessourceDatei.
         /// </summary>
-        internal class StringRessourceData
+        internal struct StringRessourceData
         {
             public string Name  { get; set; }
             public string Value { get; set; }
@@ -26,7 +26,7 @@ namespace SystemTools.ManagingRessources
         /// <summary>
         /// Die Eingelesenen StringRessource Daten.
         /// </summary>
-        private List<StringRessourceData> StringRessources { get; set; }
+        internal List<StringRessourceData> StringRessources { get; private set; }
 
         /// <summary>
         /// Repräsentiert die StringRessource Xml Datei.
@@ -46,8 +46,8 @@ namespace SystemTools.ManagingRessources
         /// <summary>
         /// Initialisiert den StringRessourceReader und ließt die Ressourcen für die aktuelle Systemsprache in den Speicher.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="info"></param>
+        /// <param name="path">Pfad an dem die StringRessourcen liegen.</param>
+        /// <param name="info">Informationen über die Systemsprache.</param>
         internal StringRessourceReader( string path, CultureInfo info )
         {
             LogManager.WriteInfo( "Initialisierung des StringRessourceReader", "StringRessourceReader", "StringRessourceReader" );
@@ -190,13 +190,11 @@ namespace SystemTools.ManagingRessources
 
                             if ( nav.MoveToFirstChild() )
                             {
-                                StringRessourceData data = null;
-                                
                                 LogManager.WriteInfo( "Lesen der Ressourcen", "StringRessourceReader", "ReadStringRessources" );
 
                                 do
                                 {
-                                    data = new StringRessourceData( );
+                                    StringRessourceData data = new StringRessourceData( );
 
                                     if ( !long.TryParse( nav.GetAttribute( "id", xmlns ), out long tmpID ))
                                     {

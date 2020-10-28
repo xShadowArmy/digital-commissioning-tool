@@ -5,8 +5,25 @@ using SystemTools.ManagingRessources;
 
 public class TestScript : MonoBehaviour
 {
-    private string Test { get; set; }
-
+    /// <summary>
+    /// Ermöglicht das Schreiben von LogDateien.
+    /// </summary>
+    /// <value>test</value>
+    private string test = "test";
+    
+    public string Test
+    {
+        get
+        {
+            return test;
+        }
+            
+        set
+        {
+            test = value;
+        }
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
