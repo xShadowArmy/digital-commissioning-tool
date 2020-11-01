@@ -269,3 +269,4 @@ C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioning
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache

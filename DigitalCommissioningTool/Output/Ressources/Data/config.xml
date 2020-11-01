@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:Config xs:dataCount="9" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data ConfigSchema.xsd">
+    <xs:complexData xs:name="testObject" xs:id="3" xs:type="objectData" xs:isArray="False" xs:elementCount="1">
+        <xs:values xs:propertyCount="3">
+            <xs:property xs:type="string" xs:value="testString1">
+            </xs:property>
+            <xs:property xs:type="string" xs:value="testString2">
+            </xs:property>
+            <xs:property xs:type="int" xs:value="1234">
+            </xs:property>
+        </xs:values>
+    </xs:complexData>
+    <xs:simpleData xs:name="ExampleText1" xs:id="2" xs:type="String" xs:isArray="false" xs:elementCount="1">
+        <xs:value>Das ist ein sehr langer Text! mit einigen Satzeichen, der beim Testen hilft?</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText2" xs:id="4" xs:type="Int32" xs:isArray="false" xs:elementCount="1">
+        <xs:value>123456789</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText3" xs:id="5" xs:type="Double" xs:isArray="false" xs:elementCount="1">
+        <xs:value>145346.67</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText4" xs:id="6" xs:type="Char" xs:isArray="false" xs:elementCount="1">
+        <xs:value>@</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText5" xs:id="7" xs:type="Boolean" xs:isArray="false" xs:elementCount="1">
+        <xs:value>False</xs:value>
+    </xs:simpleData>
+    <xs:complexData xs:name="TestClass" xs:id="8" xs:type="objectData" xs:isArray="False" xs:elementCount="1">
+        <xs:values xs:propertyCount="2">
+            <xs:property xs:type="Double" xs:value="0.55">
+            </xs:property>
+            <xs:property xs:type="String" xs:value="Irgendeintext!">
+            </xs:property>
+        </xs:values>
+    </xs:complexData>
+    <xs:simpleData xs:name="TestValues" xs:id="9" xs:type="Int32" xs:isArray="true" xs:elementCount="10">
+        <xs:value>2</xs:value>
+        <xs:value>2</xs:value>
+        <xs:value>4</xs:value>
+        <xs:value>12</xs:value>
+        <xs:value>48</xs:value>
+        <xs:value>240</xs:value>
+        <xs:value>1440</xs:value>
+        <xs:value>10080</xs:value>
+        <xs:value>80640</xs:value>
+        <xs:value>725760</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="WorkingDirectory" xs:id="1" xs:type="String" xs:isArray="false" xs:elementCount="1">
+        <xs:value>C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool</xs:value>
+    </xs:simpleData>
+</xs:Config>

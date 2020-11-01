@@ -1,48 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using SystemTools.ManagingRessources;
+using UnityEngine;
 
-public class TestScript : MonoBehaviour
+namespace Scripts
 {
-    /// <summary>
-    /// Ermöglicht das Schreiben von LogDateien.
-    /// </summary>
-    /// <value>test</value>
-    private string test = "test";
-    
-    public string Test
+    public class TestScript : MonoBehaviour
     {
-        get
+        // Start is called before the first frame update
+        void Start()
         {
-            return test;
-        }
-            
-        set
-        {
-            test = value;
-        }
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Lesen der Ressourcen direkt über die Managerklasse
-        for ( int i = 1; i <= 10; i++ )
-        {
-            Debug.Log( StringRessourceManager.LoadString( "@test" + i ) );
+            //UnitTests.ConfigTestClass obj = new UnitTests.ConfigTestClass( );
+            //obj.Test( );
         }
 
-        // Lesen der Ressourcen direkt über den jeweiligen String
-
-        Test = Test.LoadString( "@ErrorText" );
-
-        Debug.Log( Test );
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }
+

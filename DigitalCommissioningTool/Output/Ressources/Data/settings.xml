@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:Config xs:dataCount="6" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data ConfigSchema.xsd">
+    <xs:simpleData xs:name="ExampleText1" xs:id="1" xs:type="String" xs:isArray="false" xs:elementCount="1">
+        <xs:value>Das ist ein sehr langer Text! mit einigen Satzeichen, der beim Testen hilft?</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText2" xs:id="2" xs:type="Int32" xs:isArray="false" xs:elementCount="1">
+        <xs:value>123456789</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText3" xs:id="3" xs:type="Double" xs:isArray="false" xs:elementCount="1">
+        <xs:value>145346.67</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText4" xs:id="4" xs:type="Char" xs:isArray="false" xs:elementCount="1">
+        <xs:value>@</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="ExampleText5" xs:id="5" xs:type="Boolean" xs:isArray="false" xs:elementCount="1">
+        <xs:value>False</xs:value>
+    </xs:simpleData>
+    <xs:simpleData xs:name="WorkingDirectory" xs:id="6" xs:type="String" xs:isArray="false" xs:elementCount="1">
+        <xs:value>C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool</xs:value>
+    </xs:simpleData>
+</xs:Config>

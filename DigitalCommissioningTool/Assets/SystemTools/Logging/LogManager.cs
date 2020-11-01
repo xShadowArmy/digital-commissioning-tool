@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SystemTools.Logging
 {
@@ -41,7 +42,7 @@ namespace SystemTools.Logging
         /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
         /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
-        public static void WriteWarning( string message, string className, string methodName )
+        public static void WriteWarning( string message, string className = "", string methodName = "" )
         {
             Writer.WriteWarning( message, className, methodName );
         }
@@ -53,9 +54,35 @@ namespace SystemTools.Logging
         /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
         /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
-        public static void WriteError( string message, string className, string methodName )
+        public static void WriteError( string message, string className = "", string methodName = "" )
         {
             Writer.WriteError( message, className, methodName );
+        }
+        
+        public static void WriteLog( string msg, LogLevel lvl, bool throwException, string className = "", string methodName = "" )
+        {
+            switch ( lvl )
+            {
+                case LogLevel.Info:
+
+                    WriteInfo( msg, className, methodName );
+                    break;
+
+                case LogLevel.Warning:
+
+                    WriteWarning( msg, className, methodName );
+                    break;
+
+                case LogLevel.Error:
+
+                    WriteError( msg, className, methodName );
+                    break;
+            }
+
+            if ( throwException )
+            {
+                throw new Exception( msg );
+            }
         }
     }
 }

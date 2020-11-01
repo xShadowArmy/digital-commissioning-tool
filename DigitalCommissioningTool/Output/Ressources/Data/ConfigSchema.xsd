@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data" 
+           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data"
+           elementFormDefault="qualified" attributeFormDefault="qualified">
+
+<!-- definition of Simple Elements -->
+  <xs:element name="value" type="xs:string"/>
+  
+<!-- definition of Attributes -->
+  <xs:attribute name="name" type="xs:string"/>
+  <xs:attribute name="id" type="xs:long"/>
+  <xs:attribute name="type" type="xs:string"/>
+  <xs:attribute name="value" type="xs:string"/>
+  <xs:attribute name="isArray" type="xs:boolean"/>
+  <xs:attribute name="elementCount" type="xs:unsignedLong"/>
+  <xs:attribute name="propertyCount" type="xs:unsignedLong"/>
+  <xs:attribute name="dataCount" type="xs:long"/>
+    
+<!-- definition of Complex elements -->
+  <xs:element name="values">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="property" maxOccurs="unbounded" minOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="propertyCount" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:attribute ref="type" use="required"/>
+      <xs:attribute ref="value" use="required"/>
+    </xs:complexType>
+  </xs:element> 
+  
+  <xs:element name="simpleData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="value" maxOccurs="unbounded" minOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="name" use="required"/>
+      <xs:attribute ref="id" use="required"/>
+      <xs:attribute ref="type" use="required"/>
+      <xs:attribute ref="isArray" use="required"/>
+      <xs:attribute ref="elementCount" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="complexData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="values" maxOccurs="unbounded" minOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="name" use="required"/>
+      <xs:attribute ref="type" use="required"/>
+      <xs:attribute ref="id" use="required"/>
+      <xs:attribute ref="isArray" use="required" fixed="false"/>
+      <xs:attribute ref="elementCount" use="required" fixed="1"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:group name="data">
+    <xs:choice>
+      <xs:element ref="simpleData"/>
+      <xs:element ref="complexData"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="data" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="dataCount" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

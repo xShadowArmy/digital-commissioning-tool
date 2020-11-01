@@ -14,11 +14,6 @@ namespace SystemTools.ManagingRessources
     public static class StringRessourceManager
     {
         /// <summary>
-        /// Informationen zur aktuellen Systemsprache.
-        /// </summary>
-        private static CultureInfo LangInfo { get; set; }
-
-        /// <summary>
         /// StringRessourceReader Objekt mit dem die StringRessourcen gelesen werden.
         /// </summary>
         private static StringRessourceReader Reader { get; set; }
@@ -34,14 +29,11 @@ namespace SystemTools.ManagingRessources
         static StringRessourceManager()
         {
             LogManager.WriteInfo( "Initialisierung des StringRessourceManagers", "StringRessourceManager", "StringRessourceManager" );
+            
+            string StringResDir = "Output\\Ressources\\Strings\\" + CultureInfo.InstalledUICulture.ThreeLetterISOLanguageName + ".xml";
 
-            // Lesen der aktuellen Systemsprache.
-            LangInfo = CultureInfo.InstalledUICulture;
-
-            string StringResDir = "Output\\Ressources\\Strings\\" + LangInfo.ThreeLetterISOLanguageName + ".xml";
-
-            Reader = new StringRessourceReader( StringResDir, LangInfo );
-            Writer = new StringRessourceWriter( StringResDir, LangInfo );
+            Reader = new StringRessourceReader( StringResDir, CultureInfo.InstalledUICulture );
+            Writer = new StringRessourceWriter( StringResDir, CultureInfo.InstalledUICulture );
         }
         
         /// <summary>

@@ -185,6 +185,7 @@ namespace SystemTools.ManagingRessources
                         {
                             if ( !nav.GetAttribute( "lang", xmlns ).Equals( LangInfo.ThreeLetterISOLanguageName ) )
                             {
+                                LogManager.WriteError( "Fehler beim Lesen der StringRessource headers!Sprache ist nicht identisch zur Systemsprache", "StringRessourceReader", "ReadStringRessources" );
                                 throw new Exception( "Fehler beim Lesen der StringRessource headers! Sprache ist nicht identisch zur Systemsprache" );
                             }
 
@@ -198,7 +199,7 @@ namespace SystemTools.ManagingRessources
 
                                     if ( !long.TryParse( nav.GetAttribute( "id", xmlns ), out long tmpID ))
                                     {
-                                        throw new Exception( "Fehler beim Interpretieren einer StringID! ID ist keine ganze Zahl" );
+                                        LogManager.WriteInfo( "Fehler beim Interpretieren einer StringID! ID ist keine ganze Zahl", "StringRessourceReader", "ReadStringRessources" );
                                     }
                                                                         
                                     data.Name  = nav.GetAttribute( "name", xmlns );
@@ -224,7 +225,8 @@ namespace SystemTools.ManagingRessources
                         
                         else
                         {
-                            LogManager.WriteWarning( "Fehler beim Einlesen der StringRessourcen! Element StringRessources konnte nicht gefunden werden!", "StringRessourceReader", "ReadStringRessources" );
+                            LogManager.WriteError( "Fehler beim Einlesen der StringRessourcen! Element StringRessources konnte nicht gefunden werden!", "StringRessourceReader", "ReadStringRessources" );
+                            throw new Exception( "Fehler beim Einlesen der StringRessourcen! Element StringRessources konnte nicht gefunden werden!" );
                         }
                     }
                 }
@@ -232,6 +234,7 @@ namespace SystemTools.ManagingRessources
                 catch( Exception e )
                 {
                     LogManager.WriteError( "Fehler beim Einlesen der StringRessourcen! Fehler: " + e.Message , "StringRessourceReader", "ReadStringRessources" );
+                    throw new Exception( "Fehler beim Einlesen der StringRessourcen! Fehler: " + e.Message );
                 }
             }
         }
