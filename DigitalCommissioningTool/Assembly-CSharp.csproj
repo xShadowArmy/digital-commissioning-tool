@@ -78,6 +78,7 @@
     <Compile Include="Assets\SystemTools\ManagingRessources\StringRessourceReader.cs" />
     <Compile Include="Assets\SystemTools\ManagingRessources\StringRessourceWriter.cs" />
     <Compile Include="Assets\UnitTests\ConfigTestClass.cs" />
+    <Compile Include="Assets\UnitTests\StringRessourceTestClass.cs" />
     <None Include="Assets\MMI\Plugins\Newtonsoft.Json.xml" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -262,6 +263,24 @@
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="MMICoSimulation">
+      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICoSimulation.dll</HintPath>
+    </Reference>
+    <Reference Include="MMICSharp">
+      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMIStandard">
+      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIStandard.dll</HintPath>
+    </Reference>
+    <Reference Include="MMIUnity">
+      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="MMIUnity.TargetEngine">
+      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MMIUnity.TargetEngine.Editor">
+      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -271,26 +290,8 @@
     <Reference Include="Thrift">
       <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Thrift.dll</HintPath>
     </Reference>
-    <Reference Include="MMIUnity.TargetEngine">
-      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Utf8Json">
       <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Utf8Json.dll</HintPath>
-    </Reference>
-    <Reference Include="MMICSharp">
-      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="MMICoSimulation">
-      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICoSimulation.dll</HintPath>
-    </Reference>
-    <Reference Include="MMIUnity.TargetEngine.Editor">
-      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="MMIStandard">
-      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIStandard.dll</HintPath>
-    </Reference>
-    <Reference Include="MMIUnity">
-      <HintPath>C:/Users/Stefan/Documents/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

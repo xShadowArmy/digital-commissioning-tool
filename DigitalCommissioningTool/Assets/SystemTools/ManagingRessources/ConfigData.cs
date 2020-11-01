@@ -3,13 +3,34 @@ using SystemTools.Logging;
 
 namespace SystemTools.ManagingRessources
 {
+    /// <summary>
+    /// Repräsentiert gespeicherte Configurations Daten.
+    /// </summary>
     public class ConfigData
     {
+        /// <summary>
+        /// Der gespeicherte Schlüssel.
+        /// </summary>
         public string Name { get; private set; }
+        
+        /// <summary>
+        /// Die ID der Daten.
+        /// </summary>
         public long ID { get; private set; }
+
+        /// <summary>
+        /// Gibt an ob die gespeicherten Daten ein Array von Daten sind.
+        /// </summary>
         public bool IsArray { get; private set; }
+
+        /// <summary>
+        /// Gibt an ob die gespeicherten Daten ein Objekt sind.
+        /// </summary>
         public bool IsObject { get; private set; }
         
+        /// <summary>
+        /// Gibt die Anzahl der gespeicherten Daten zurück.
+        /// </summary>
         public long ArrayLength
         {
             get
@@ -18,10 +39,24 @@ namespace SystemTools.ManagingRessources
             }
         }
 
+        /// <summary>
+        /// Gibt an ob die gespeicherten Daten neu hinzugefügt wurden.
+        /// </summary>
         internal bool IsBuffered { get; private set; }
+
+        /// <summary>
+        /// Gibt die Typnamen der einzelnen Daten zurück.
+        /// </summary>
         internal string[ ] Types { get; private set; }
+
+        /// <summary>
+        /// Die gespeicherten Daten.
+        /// </summary>
         private string[ ] Data { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue leere Instanz.
+        /// </summary>
         private ConfigData()
         {
             Data = null;
@@ -31,11 +66,20 @@ namespace SystemTools.ManagingRessources
             Data = null;
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als String zurück.
+        /// </summary>
+        /// <returns>Der gespeicherte Wert.</returns>
         public string GetValueAsString()
         {
             return Data[0];
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als Short zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Der gespeicherte Wert.</returns>
         public short GetValueAsShort()
         {
             CheckType( "int16" );
@@ -43,6 +87,11 @@ namespace SystemTools.ManagingRessources
             return short.Parse( Data[0] );
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als Long zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Der gespeicherte Wert.</returns>
         public long GetValueAsLong()
         {
             CheckType( "int64" );
@@ -50,6 +99,11 @@ namespace SystemTools.ManagingRessources
             return long.Parse( Data[ 0 ] );
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als Int zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Der gespeicherte Wert.</returns>
         public int GetValueAsInt()
         {
             CheckType( "int32" );
@@ -57,6 +111,11 @@ namespace SystemTools.ManagingRessources
             return int.Parse( Data[ 0 ] );
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als Float zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Der gespeicherte Wert.</returns>
         public float GetValueAsFloat()
         {
             CheckType( "float" );
@@ -64,6 +123,11 @@ namespace SystemTools.ManagingRessources
             return float.Parse( Data[ 0 ] );
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als Double zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Der gespeicherte Wert.</returns>
         public double GetValueAsDouble()
         {
             CheckType( "double" );
@@ -71,6 +135,11 @@ namespace SystemTools.ManagingRessources
             return double.Parse( Data[ 0 ] );
         }
 
+        /// <summary>
+        /// Gibt den gespeicherten Wert als Bool zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Der gespeicherte Wert.</returns>
         public bool GetValueAsBool()
         {
             CheckType( "boolean" );
@@ -78,7 +147,11 @@ namespace SystemTools.ManagingRessources
             return bool.Parse( Data[ 0 ] );
         }
 
-        public string[] GetValuesAsString()
+        /// <summary>
+        /// Gibt die gespeicherten Werte als StringArray zurück.
+        /// </summary>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public string[ ] GetValuesAsString()
         {
             string[ ] tmp = new string[ Data.Length ];
 
@@ -87,7 +160,12 @@ namespace SystemTools.ManagingRessources
             return tmp;
         }
 
-        public short[] GetValuesAsShort()
+        /// <summary>
+        /// Gibt die gespeicherten Werte als ShortArray zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public short[ ] GetValuesAsShort()
         {
             CheckType( "int16" );
 
@@ -100,8 +178,13 @@ namespace SystemTools.ManagingRessources
 
             return tmp;
         }
-
-        public long[] GetValuesAsLong()
+        
+        /// <summary>
+        /// Gibt die gespeicherten Werte als LongArray zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public long[ ] GetValuesAsLong()
         {
             CheckType( "int64" );
 
@@ -115,7 +198,12 @@ namespace SystemTools.ManagingRessources
             return tmp;
         }
 
-        public int[] GetValuesAsInt()
+        /// <summary>
+        /// Gibt die gespeicherten Werte als IntArray zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public int[ ] GetValuesAsInt()
         {
             CheckType( "int32" );
 
@@ -128,8 +216,13 @@ namespace SystemTools.ManagingRessources
 
             return tmp;
         }
-
-        public float[] GetValuesAsFloat()
+        
+        /// <summary>
+        /// Gibt die gespeicherten Werte als FloatArray zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public float[ ] GetValuesAsFloat()
         {
             CheckType( "float" );
 
@@ -142,8 +235,13 @@ namespace SystemTools.ManagingRessources
 
             return tmp;
         }
-
-        public double[] GetValuesAsDouble()
+        
+        /// <summary>
+        /// Gibt die gespeicherten Werte als DoubleArray zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public double[ ] GetValuesAsDouble()
         {
             CheckType( "double" );
 
@@ -156,8 +254,13 @@ namespace SystemTools.ManagingRessources
 
             return tmp;
         }
-
-        public bool[] GetValuesAsBool()
+        
+        /// <summary>
+        /// Gibt die gespeicherten Werte als BoolArray zurück.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+        /// <returns>Die gespeicherten Werte.</returns>
+        public bool[ ] GetValuesAsBool()
         {
             CheckType( "boolean" );
 
@@ -171,14 +274,27 @@ namespace SystemTools.ManagingRessources
             return tmp;
         }
         
+        /// <summary>
+        /// Gibt eine neue Instanz zurück.
+        /// </summary>
+        /// <returns>Eine neue Instanz der ConfigDaten.</returns>
         internal static ConfigData Initialize()
         {
             return new ConfigData( );
         }
 
+        /// <summary>
+        /// Speichert die angegebenen Daten (SimpleData).
+        /// </summary>
+        /// <param name="name">Der verwendete Schlüssel.</param>
+        /// <param name="id">Die eindeutige ID der Daten</param>
+        /// <param name="type">Der Typ der Daten.</param>
+        /// <param name="isArray">Gibt an ob die Daten ein Array sind.</param>
+        /// <param name="isNew">Gibt an ob die Daten neu hinzugefügt wurden.</param>
+        /// <param name="data">Die zu speichernden Daten.</param>
         internal void AddData( string name, long id, string type, bool isArray, bool isNew, params string[ ] data )
         {
-            LogManager.WriteInfo( "Speichern von einfachen ConfigDaten.", "ConfigData", "AddData" );
+            LogManager.WriteInfo( "Puffern von einfachen ConfigDaten.", "ConfigData", "AddData" );
 
             Name = name;
             ID = id;
@@ -197,9 +313,17 @@ namespace SystemTools.ManagingRessources
             data.CopyTo( Data, 0 );
         }
 
+        /// <summary>
+        /// Speichert die angegebenen Daten (ComplexData).
+        /// </summary>
+        /// <param name="name">Der verwendete Schlüssel.</param>
+        /// <param name="id">Die eindeutige ID der Daten.</param>
+        /// <param name="types">Die Typen der einzelnen Daten.</param>
+        /// <param name="isNew">Gibt an ob die Daten neu hinzugefügt wurden.</param>
+        /// <param name="data">Die Daten des zu speichernden Objekts.</param>
         internal void AddData( string name, long id, string[ ] types, bool isNew, params string[ ] data )
         {
-            LogManager.WriteInfo( "Speichern von complexen ConfigDaten.", "ConfigData", "AddData" );
+            LogManager.WriteInfo( "Puffern von complexen ConfigDaten.", "ConfigData", "AddData" );
 
             Name = name;
             ID = id;
@@ -218,6 +342,11 @@ namespace SystemTools.ManagingRessources
             data.CopyTo( Data, 0 );
         }
 
+        /// <summary>
+        /// Überprüft den Typ der gespeicherten Daten mit dem angegebenen Typ.
+        /// </summary>
+        /// <param name="typeName">Der Name des Types in den die Daten umgewandelt werden sollen.</param>
+        /// <exception cref="InvalidCastException">Wird geworfen wenn der Typ der Daten nicht mit dem angegebenen Typ übereinstimmt.</exception>
         private void CheckType( string typeName )
         {
             if ( IsObject )

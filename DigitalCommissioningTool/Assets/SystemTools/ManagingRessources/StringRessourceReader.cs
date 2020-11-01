@@ -14,6 +14,11 @@ namespace SystemTools.ManagingRessources
     internal class StringRessourceReader
     {
         /// <summary>
+        /// Repräsentiert die StringRessource Xml Datei.
+        /// </summary>
+        private XmlDocument Doc { get; set; }
+
+        /// <summary>
         /// Repräsentiert einen Eintrag in einer StringRessourceDatei.
         /// </summary>
         internal struct StringRessourceData
@@ -22,17 +27,7 @@ namespace SystemTools.ManagingRessources
             public string Value { get; set; }
             public long   ID    { get; set; }
         }
-
-        /// <summary>
-        /// Die Eingelesenen StringRessource Daten.
-        /// </summary>
-        internal List<StringRessourceData> StringRessources { get; private set; }
-
-        /// <summary>
-        /// Repräsentiert die StringRessource Xml Datei.
-        /// </summary>
-        private XmlDocument Doc { get; set; }
-
+        
         /// <summary>
         /// Informationen zur aktuellen Systemsprache.
         /// </summary>
@@ -48,34 +43,16 @@ namespace SystemTools.ManagingRessources
         /// </summary>
         /// <param name="path">Pfad an dem die StringRessourcen liegen.</param>
         /// <param name="info">Informationen über die Systemsprache.</param>
-        internal StringRessourceReader( string path, CultureInfo info )
+        /// <param name="stringRessources">Das Pufferobjekt.</param>
+        internal StringRessourceReader( string path, XmlDocument doc, CultureInfo info, List<StringRessourceData> stringRessources )
         {
             LogManager.WriteInfo( "Initialisierung des StringRessourceReader", "StringRessourceReader", "StringRessourceReader" );
 
             Path     = path;
             LangInfo = info;
+            Doc      = doc;
 
-            Doc = new XmlDocument( );
-
-            try
-            {
-                Doc.Load( Path );
-                ReadStringRessources();
-            }
-
-            catch ( FileNotFoundException e )
-            {
-                LogManager.WriteError( "StringRessource Datei wurde nicht gefunden! Pfad: " + path + " Fehler: " + e.Message, "StringRessourceReader", "StringRessourceReader" );
-
-                Doc = null;
-            }
-
-            catch ( Exception e )
-            {
-                LogManager.WriteError( "StringRessource Datei konnte nicht geoffnet werden! Pfad: " + path + " Fehler: " + e.Message, "StringRessourceReader", "StringRessourceReader" );
-
-                Doc = null;
-            }
+            ReadStringRessources( stringRessources );
         }
 
         /// <summary>
@@ -83,13 +60,13 @@ namespace SystemTools.ManagingRessources
         /// </summary>
         /// <param name="name">Der Name der StringRessource.</param>
         /// <returns>Die StringRessource oder <see cref="string.Empty"> wenn die Ressource nicht gefunden wurde</see>/></returns>
-        internal string LoadString( string name )
+        internal string LoadString( string name, List<StringRessourceData> stringRessources )
         {
             name = RemoveQualifier( name );
             
             string tmp = "MISSING RESSOURCE";
 
-            foreach( StringRessourceData data in StringRessources )
+            foreach( StringRessourceData data in stringRessources )
             {
                 if ( data.Name.Equals( name ) )
                 {
@@ -104,12 +81,13 @@ namespace SystemTools.ManagingRessources
         /// Lädt eine StringRessource anhand ihrer ID.
         /// </summary>
         /// <param name="id">Die ID der StringRessource.</param>
+        /// <param name="stringRessources">Das Pufferobjekt.</param>
         /// <returns>Die StringRessource oder <see cref="string.Empty"> wenn die Ressource nicht gefunden wurde</see>/></returns>
-        internal string LoadString( long id )
+        internal string LoadString( long id, List<StringRessourceData> stringRessources )
         {
             string tmp = "MISSING RESSOURCE";
 
-            foreach ( StringRessourceData data in StringRessources )
+            foreach ( StringRessourceData data in stringRessources )
             {
                 if ( data.ID == id )
                 {
@@ -124,10 +102,11 @@ namespace SystemTools.ManagingRessources
         /// Überprüft ob eine StringRessource mit der angegebenen ID verfügbar ist.
         /// </summary>
         /// <param name="id">Die ID der zu suchenden Ressource.</param>
+        /// <param name="stringRessources">Das Pufferobjekt.</param>
         /// <returns>Gibt true zurück falls die Suche erfolgreich war.</returns>
-        internal bool Exists( long id )
+        internal bool Exists( long id, List<StringRessourceData> stringRessources )
         {
-            foreach ( StringRessourceData data in StringRessources )
+            foreach ( StringRessourceData data in stringRessources )
             {
                 if ( data.ID == id )
                 {
@@ -142,12 +121,13 @@ namespace SystemTools.ManagingRessources
         /// Überprüft, ob eine StringRessource mit dem angegebenen Namen verfügbar ist.
         /// </summary>
         /// <param name="name">Der Name der zu suchenden Ressource.</param>
+        /// <param name="stringRessources">Das Pufferobjekt.</param>
         /// <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
-        internal bool Exists( string name )
+        internal bool Exists( string name, List<StringRessourceData> stringRessources )
         {
             name = RemoveQualifier( name );
 
-            foreach ( StringRessourceData data in StringRessources )
+            foreach ( StringRessourceData data in stringRessources )
             {
                 if ( data.Name.Equals( name ) )
                 {
@@ -161,16 +141,15 @@ namespace SystemTools.ManagingRessources
         /// <summary>
         /// Lädt die StringRessourcen in den Speicher.
         /// </summary>
-        private void ReadStringRessources()
+        /// <param name="stringRessources">Das Pufferobjekt in das Geschrieben wird.</param>
+        private void ReadStringRessources( List<StringRessourceData> stringRessources )
         {
             LogManager.WriteInfo( "Einlesen der StringRessourcen", "StringRessourceReader", "ReadStringRessources" );
 
             string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings";
 
-            if ( StringRessources == null && Doc != null )
+            if ( stringRessources != null && Doc != null )
             {
-                StringRessources = new List<StringRessourceData>( );
-
                 try
                 {
                     LogManager.WriteInfo( "Erstellen des Navigators", "StringRessourceReader", "ReadStringRessources" );
@@ -212,7 +191,7 @@ namespace SystemTools.ManagingRessources
                                         nav.MoveToParent( );
                                     }
 
-                                    StringRessources.Add( data );
+                                    stringRessources.Add( data );
 
                                 } while ( nav.MoveToNext( ) );
                             }

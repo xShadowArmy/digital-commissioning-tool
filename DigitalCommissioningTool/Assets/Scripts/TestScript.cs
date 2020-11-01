@@ -1,5 +1,4 @@
-﻿using System;
-using SystemTools.ManagingRessources;
+﻿using SystemTools.Logging;
 using UnityEngine;
 
 namespace Scripts
@@ -11,6 +10,9 @@ namespace Scripts
         {
             //UnitTests.ConfigTestClass obj = new UnitTests.ConfigTestClass( );
             //obj.Test( );
+            //
+            //UnitTests.StringRessourceTestClass sRes = new UnitTests.StringRessourceTestClass( );
+            //sRes.Test( );
         }
 
         // Update is called once per frame

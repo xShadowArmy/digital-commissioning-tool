@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SystemTools.Logging
+﻿namespace SystemTools.Logging
 {
+    /// <summary>
+    /// Definiert die Priorität einer Log Nachricht.
+    /// </summary>
     public enum LogLevel
     {
         Info    = 1,

@@ -5,10 +5,22 @@ using SystemTools.Logging;
 
 namespace SystemTools.ManagingRessources
 {
+    /// <summary>
+    /// Ermöglicht das Lesen von Konfigurations Dateien.
+    /// </summary>
     internal class ConfigReader
     {
+        /// <summary>
+        /// Die Konfigurationsdatei.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz und ließt die Daten in den Puffer.
+        /// </summary>
+        /// <param name="doc">Die Konfigurationsdatei.</param>
+        /// <param name="buffer">Der Datenpuffer.</param>
+        /// <param name="newFile">Gibt an ob die Datei neu erstellt wurde.</param>
         internal ConfigReader( XmlDocument doc, ConfigManager.ConfigBuffer buffer, bool newFile )
         {
             Doc = doc;
@@ -20,7 +32,13 @@ namespace SystemTools.ManagingRessources
 
             FillBuffer( buffer );
         }
-        
+
+        /// <summary>
+        /// Ließt Daten aus dem Puffer.
+        /// </summary>
+        /// <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
+        /// <param name="name">Der Schlüssel der Daten die gelesen werden sollen.</param>
+        /// <returns>Die gelesenen Daten.</returns>
         internal ConfigData LoadData( ConfigManager.ConfigBuffer buffer, string name )
         {
             for( int i = 0; i < buffer.Data.Count; i++ )
@@ -34,6 +52,12 @@ namespace SystemTools.ManagingRessources
             return null;
         }
 
+        /// <summary>
+        /// Ließt Daten aus dem Puffer.
+        /// </summary>
+        /// <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
+        /// <param name="id">Die ID der Daten die gelesen werden sollen.</param>
+        /// <returns>Die gelesenen Daten.</returns>
         internal ConfigData LoadData( ConfigManager.ConfigBuffer buffer, long id )
         {
             for ( int i = 0; i < buffer.Data.Count; i++ )
@@ -47,6 +71,12 @@ namespace SystemTools.ManagingRessources
             return null;
         }
 
+        /// <summary>
+        /// Ließt Daten aus dem Puffer.
+        /// </summary>
+        /// <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
+        /// <param name="name">Der Schlüssel der gelesen werden soll.</param>
+        /// <param name="data">Das Objekt das wiederhergestellt werden soll.</param>
         public void LoadData( ConfigManager.ConfigBuffer buffer, string name, ISerialConfigData data )
         {
             ConfigData cd = null;
@@ -77,6 +107,10 @@ namespace SystemTools.ManagingRessources
             data.Restore( scd );
         }
 
+        /// <summary>
+        /// Füllt den Puffer mit den Daten der Konfigurations Datei.
+        /// </summary>
+        /// <param name="buffer">Der Puffer der gefüllt werden soll.</param>
         private void FillBuffer( ConfigManager.ConfigBuffer buffer )
         {
             LogManager.WriteInfo( "Einlesen von ConfigDaten", "ConfigReader", "FillBuffer" );
@@ -138,6 +172,12 @@ namespace SystemTools.ManagingRessources
             }
         }
 
+        /// <summary>
+        /// Ließt ein einfaches Datenelement in den Puffer-
+        /// </summary>
+        /// <param name="nav">Der Navigator an Position des einfachen Datenelements.</param>
+        /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der Xml namespace.</param>
         private void ReadSimpleElement( XPathNavigator nav, ConfigManager.ConfigBuffer buffer, string xmlns )
         {
             LogManager.WriteLog( "Einlesen von simpleData Element", LogLevel.Info, false, "ConfigReader", "ReadSimpleElement" );
@@ -200,7 +240,13 @@ namespace SystemTools.ManagingRessources
                 LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte Simples Datenelement nicht lesen! Fehler: " + e.Message, LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
             }
         }
-
+        
+        /// <summary>
+        /// Ließt ein complexes Datenelement in den Puffer-
+        /// </summary>
+        /// <param name="nav">Der Navigator an Position des complexen Datenelements.</param>
+        /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der Xml namespace.</param>
         private void ReadComplexElement( XPathNavigator nav, ConfigManager.ConfigBuffer buffer, string xmlns )
         {
             LogManager.WriteLog( "Einlesen von ComplexData Element", LogLevel.Info, false, "ConfigReader", "ReadComplexElement" );

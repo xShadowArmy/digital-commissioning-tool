@@ -18,7 +18,7 @@ namespace SystemTools.Logging
         /// </summary>
         static LogManager()
         {
-            Writer  = new LogWriter( );
+            Writer = new LogWriter( );
         }
 
         /// <summary>
@@ -59,6 +59,15 @@ namespace SystemTools.Logging
             Writer.WriteError( message, className, methodName );
         }
         
+        /// <summary>
+        /// Schreibt eine Log Nachricht und bietet die Möglichkeit, gleichzeitig eine Exception zu werfen.
+        /// </summary>
+        /// <param name="msg">Die Nachricht die geloggt werden soll.</param>
+        /// <param name="lvl">Die Priorität der Nachricht.</param>
+        /// <param name="throwException">Gibt an ob mit der angegebenen Nachricht eine Exception geworfen werden soll.</param>
+        /// <param name="className">Name der Klasse die eine Lognachricht schreibt.</param>
+        /// <param name="methodName">Name der MEthode die eine Lognachricht schreibt.</param>
+        /// <exception cref="Exception"></exception>
         public static void WriteLog( string msg, LogLevel lvl, bool throwException, string className = "", string methodName = "" )
         {
             switch ( lvl )

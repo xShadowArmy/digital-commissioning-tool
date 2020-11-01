@@ -4,22 +4,33 @@ using System;
 
 namespace UnitTests
 {
-    class ConfigTestClass : ISerialConfigData
+    internal class ConfigTestClass : ISerialConfigData
     {
         private string TestString { get; set; }
         private double TestValue  { get; set; }
         private int[] Data { get; set; }
 
+        internal ConfigTestClass()
+        {
+            TestString = "Hallo Welt!";
+            TestValue  = 0815;
+        }
+
         public void Restore( SerialConfigData storage )
         {
             TestString = storage.GetValueAsString( );
             TestValue  = storage.GetValueAsDouble( );
+            Debug.Log( TestString );
+            Debug.Log( TestValue  );
         }
 
         public void Serialize( SerialConfigData storage )
         {
             storage.AddData( TestString );
             storage.AddData( TestValue  );
+
+            TestString = string.Empty;
+            TestValue  = 0;
         }
 
         public void Test()
@@ -28,27 +39,7 @@ namespace UnitTests
 
             cman.OpenConfigFile( "settings.xml", true );
 
-            // Testen ob Daten korrekt entfernt werden.
-            cman.RemoveData( "WorkingDirectory" );
-
-            // Ausgabe von gelesenen Daten zum Testen ob diese korrekt sind.
-            Debug.Log( cman.LoadData( "ExampleText1" ).GetValueAsString() );
-            Debug.Log( cman.LoadData( "ExampleText2" ).GetValueAsString() );
-            Debug.Log( cman.LoadData( "ExampleText3" ).GetValueAsString() );
-            Debug.Log( cman.LoadData( "ExampleText4" ).GetValueAsString() );
-            Debug.Log( cman.LoadData( "ExampleText5" ).GetValueAsString() );
-
-            //Data = cman.LoadData( "TestValues" ).GetValuesAsInt( );
-            //
-            //for ( int i = 1; i < 10; i++ )
-            //{
-            //    Debug.Log( Data[ i ] );
-            //}
-
-            //cman.LoadData( "TestClass", this );
-
-            //Debug.Log( TestString );
-            //Debug.Log( TestValue  );
+            cman.LoadData( "TestClass", this );
 
             // Testen ob Daten korrekt gespeichert werden.
             cman.StoreData( "ExampleText1", "Das ist ein sehr langer Text! mit einigen Satzeichen, der beim Testen hilft?", true );
@@ -58,7 +49,9 @@ namespace UnitTests
             cman.StoreData( "ExampleText5", false, true );
             cman.StoreData( "WorkingDirectory", Environment.CurrentDirectory, true );
 
-            //cman.StoreData( "TestClass", this, true );
+            Debug.Log( cman.LoadData( "ExampleText1" ).GetValueAsString() );
+
+            cman.StoreData( "TestClass", this, true );
         }
     }
 }
