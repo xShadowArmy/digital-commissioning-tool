@@ -125,7 +125,14 @@ namespace SystemTools.ManagingRessources
         /// <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
         public static bool StoreString( string name, string content, bool overwrite = false )
         {
-            return Writer.StoreString( name, content, overwrite, StringRessources );
+            bool tmp = Writer.StoreString( name, content, overwrite, StringRessources );
+
+            if ( tmp )
+            {
+                WriteFile( );
+            }
+
+            return tmp;
         }
         
         /// <summary>
@@ -137,7 +144,14 @@ namespace SystemTools.ManagingRessources
         /// <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
         public static bool StoreString( this string str, string name, string content, bool overwrite = false )
         {
-            return Writer.StoreString( name, content, overwrite, StringRessources );
+            bool tmp = Writer.StoreString( name, content, overwrite, StringRessources );
+
+            if ( tmp )
+            {
+                WriteFile( );
+            }
+
+            return tmp;
         }
         
         /// <summary>

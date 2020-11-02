@@ -35,23 +35,24 @@ namespace UnitTests
 
         public void Test()
         {
-            ConfigManager cman = new ConfigManager( );
+            using ( ConfigManager cman = new ConfigManager( ) )
+            {
+                cman.OpenConfigFile( "settings.xml", true );
 
-            cman.OpenConfigFile( "settings.xml", true );
+                cman.LoadData( "TestClass", this );
 
-            cman.LoadData( "TestClass", this );
+                // Testen ob Daten korrekt gespeichert werden.
+                cman.StoreData( "ExampleText1", "Das ist ein sehr langer Text! mit einigen Satzeichen, der beim Testen hilft?", true );
+                cman.StoreData( "ExampleText2", 123456789, true );
+                cman.StoreData( "ExampleText3", 145346.67, true );
+                cman.StoreData( "ExampleText4", '@', true );
+                cman.StoreData( "ExampleText5", false, true );
+                cman.StoreData( "WorkingDirectory", Environment.CurrentDirectory, true );
 
-            // Testen ob Daten korrekt gespeichert werden.
-            cman.StoreData( "ExampleText1", "Das ist ein sehr langer Text! mit einigen Satzeichen, der beim Testen hilft?", true );
-            cman.StoreData( "ExampleText2", 123456789, true );
-            cman.StoreData( "ExampleText3", 145346.67, true );
-            cman.StoreData( "ExampleText4", '@', true );
-            cman.StoreData( "ExampleText5", false, true );
-            cman.StoreData( "WorkingDirectory", Environment.CurrentDirectory, true );
+                Debug.Log( cman.LoadData( "ExampleText1" ).GetValueAsString() );
 
-            Debug.Log( cman.LoadData( "ExampleText1" ).GetValueAsString() );
-
-            cman.StoreData( "TestClass", this, true );
+                cman.StoreData( "TestClass", this, true );
+            }
         }
     }
 }

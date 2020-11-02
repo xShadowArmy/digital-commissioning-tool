@@ -9,8 +9,13 @@ namespace SystemTools.ManagingRessources
     /// <summary>
     /// Bietet Möglichkeiten zum Erstellen, speichern und laden von Configurations Daten.
     /// </summary>
-    public class ConfigManager
+    public class ConfigManager : IDisposable
     {
+        /// <summary>
+        /// Gibt an ob das Objekt bereits freigegeben wurde.
+        /// </summary>
+        private bool _disposed { get; set; }
+
         /// <summary>
         /// Die gepufferten Daten einer Configurations Datei.
         /// </summary>
@@ -23,7 +28,7 @@ namespace SystemTools.ManagingRessources
                 Data = new List<ConfigData>( );
             }
         }
-               
+
         /// <summary>
         /// Der Name der aktuell geöffneten Konfigurations Datei.
         /// </summary>
@@ -71,8 +76,9 @@ namespace SystemTools.ManagingRessources
         {
             LogManager.WriteInfo( "Initialisierung eines ConfigManagers", "ConfigManager", "ConfigManager" );
 
+            _disposed = false;
             OpenStream = false;
-            AutoFlush  = true;
+            AutoFlush = true;
 #if DEBUG
             PATH = ".\\Output\\Ressources\\Data";
 #else
@@ -103,7 +109,7 @@ namespace SystemTools.ManagingRessources
         /// <returns>Gibt true zurück, wenn die Daten erfolgreich gespeichert oder überschrieben wurden.</returns>
         public bool StoreData( string key, Array data, bool overwrite = true )
         {
-            LogManager.WriteInfo( "Speichere Daten mit Schluessel: " + key, "ConfigManager", "StoreData");
+            LogManager.WriteInfo( "Speichere Daten mit Schluessel: " + key, "ConfigManager", "StoreData" );
 
             if ( OpenStream )
             {
@@ -167,7 +173,7 @@ namespace SystemTools.ManagingRessources
 
             return null;
         }
-        
+
         /// <summary>
         /// Lädt die Daten mit der angegebenen ID.
         /// </summary>
@@ -184,7 +190,7 @@ namespace SystemTools.ManagingRessources
 
             return null;
         }
-        
+
         /// <summary>
         /// Lädt das Objekt mit dem angegebenen Schlüssel.
         /// </summary>
@@ -254,7 +260,7 @@ namespace SystemTools.ManagingRessources
                 }
 
                 CreateFile( FileName );
-                
+
                 Buffer = new ConfigBuffer( );
                 Reader = new ConfigReader( ConfigFile, Buffer, false );
                 Writer = new ConfigWriter( ConfigFile );
@@ -272,7 +278,7 @@ namespace SystemTools.ManagingRessources
 
             OpenStream = true;
         }
-        
+
         /// <summary>
         /// Schließt und Schreibt den Stream in die Datei.
         /// </summary>
@@ -312,8 +318,8 @@ namespace SystemTools.ManagingRessources
                 using ( StreamWriter writer = new StreamWriter( File.Create( file ) ) )
                 {
                     writer.WriteLine( "<?xml version=\"1.0\" encoding=\"utf-8\"?>" );
-                    writer.WriteLine( "<xs:Config xs:dataCount=\"0\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data ConfigSchema.xsd\">");
-                    writer.WriteLine( "</xs:Config>");
+                    writer.WriteLine( "<xs:Config xs:dataCount=\"0\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data ConfigSchema.xsd\">" );
+                    writer.WriteLine( "</xs:Config>" );
 
                     writer.Flush( );
                 }
@@ -321,7 +327,7 @@ namespace SystemTools.ManagingRessources
                 ConfigFile.Load( file );
             }
 
-            catch( Exception e )
+            catch ( Exception e )
             {
                 LogManager.WriteLog( "Die angegebene ConfigDatei konnte nicht erstellt werden! Pfad: " + file + " Fehler: " + e.Message, LogLevel.Error, true, "ConfigManager", "CreateFile" );
             }
@@ -330,7 +336,7 @@ namespace SystemTools.ManagingRessources
         /// <summary>
         /// Erstellt die Verzeichnisstruktur für die Konfigurations Dateien.
         /// </summary>
-        private void CreateDir( )
+        private void CreateDir()
         {
             if ( !Directory.Exists( PATH ) )
             {
@@ -368,6 +374,35 @@ namespace SystemTools.ManagingRessources
                 Buffer = new ConfigBuffer( );
                 Reader = new ConfigReader( ConfigFile, Buffer, false );
                 Writer = new ConfigWriter( ConfigFile );
+            }
+        }
+
+        /// <summary>
+        /// Gibt Ressourcen wieder frei.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose( true );
+
+            GC.SuppressFinalize( this );
+        }
+
+        /// <summary>
+        /// Gibt Ressourcen wieder frei.
+        /// </summary>
+        protected virtual void Dispose( bool disposing )
+        {
+            if ( !_disposed )
+            {
+                if ( disposing )
+                {
+                    if ( OpenStream )
+                    {
+                        CloseConfigFile( );
+                    }
+                }
+
+                _disposed = true;
             }
         }
     }
