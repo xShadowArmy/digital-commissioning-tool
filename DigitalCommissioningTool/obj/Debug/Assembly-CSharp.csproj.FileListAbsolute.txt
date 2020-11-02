@@ -269,3 +269,15 @@ C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioning
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\MMICoSimulation.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\MMICSharp.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\MMIStandard.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\MMIUnity.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\MMIUnity.TargetEngine.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\MMIUnity.TargetEngine.Editor.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Thrift.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Utf8Json.dll
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Newtonsoft.Json.xml

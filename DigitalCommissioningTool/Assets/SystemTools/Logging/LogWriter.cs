@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Text;
+using SystemTools.ManagingRessources;
 
 namespace SystemTools.Logging
 {
@@ -19,21 +19,20 @@ namespace SystemTools.Logging
         /// </summary>
         internal LogWriter()
         {
-            StringBuilder builder = new StringBuilder( string.Empty );
+#if DEBUG
+            LogPath = ".\\Output\\Logs\\";
+#else
+            LogPath = ".\\Logs\\";
+#endif
 
-            builder.Append( "Output" );
-            builder.Append( "\\Logs" );
-            
-            if ( !Directory.Exists( builder.ToString( ) ) )
+            if ( !Directory.Exists( LogPath ) )
             {
-                Directory.CreateDirectory( builder.ToString() );
+                Directory.CreateDirectory( LogPath );
             }
 
-            builder.Append( "\\Log_" );
-            builder.Append( DateTime.Now.ToFileTime( ) );
-            builder.Append( ".log" );
-
-            LogPath = builder.ToString( );
+            LogPath += "Log_";
+            LogPath += DateTime.Now.ToFileTime( );
+            LogPath += ".log";
 
             if ( !File.Exists( LogPath ) )
             {
