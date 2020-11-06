@@ -5,7 +5,7 @@
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
-<xs:element name="value" type="xs:string"/>
+<xs:element name="Value" type="xs:string"/>
    
 <!-- definition of Attributes -->
 <xs:attribute name="name" type="xs:string"/>
@@ -13,10 +13,10 @@
 <xs:attribute name="lang" type="xs:string"/>
   
 <!-- definition of Complex elements -->
-  <xs:element name="string">
+  <xs:element name="String">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="value" maxOccurs="1" minOccurs="1"/>
+        <xs:element ref="Value" maxOccurs="1" minOccurs="1"/>
       </xs:sequence>
       <xs:attribute ref="name" use="required"/>
       <xs:attribute ref="id" use="required"/>
@@ -26,7 +26,7 @@
   <xs:element name="StringRessources">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="string" maxOccurs="unbounded"/>
+        <xs:element ref="String" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute ref="lang" use="required"/>
     </xs:complexType>

@@ -5,7 +5,7 @@
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
-  <xs:element name="value" type="xs:string"/>
+  <xs:element name="Value" type="xs:string"/>
   
 <!-- definition of Attributes -->
   <xs:attribute name="name" type="xs:string"/>
@@ -18,26 +18,26 @@
   <xs:attribute name="dataCount" type="xs:long"/>
     
 <!-- definition of Complex elements -->
-  <xs:element name="values">
+  <xs:element name="Values">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="property" maxOccurs="unbounded" minOccurs="1"/>
+        <xs:element ref="Property" maxOccurs="unbounded" minOccurs="1"/>
       </xs:sequence>
       <xs:attribute ref="propertyCount" use="required"/>
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="property">
+  <xs:element name="Property">
     <xs:complexType>
       <xs:attribute ref="type" use="required"/>
       <xs:attribute ref="value" use="required"/>
     </xs:complexType>
   </xs:element> 
   
-  <xs:element name="simpleData">
+  <xs:element name="SimpleData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="value" maxOccurs="unbounded" minOccurs="1"/>
+        <xs:element ref="Value" maxOccurs="unbounded" minOccurs="1"/>
       </xs:sequence>
       <xs:attribute ref="name" use="required"/>
       <xs:attribute ref="id" use="required"/>
@@ -47,10 +47,10 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="complexData">
+  <xs:element name="ComplexData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="values" maxOccurs="unbounded" minOccurs="1"/>
+        <xs:element ref="Values" maxOccurs="unbounded" minOccurs="1"/>
       </xs:sequence>
       <xs:attribute ref="name" use="required"/>
       <xs:attribute ref="type" use="required"/>
@@ -60,17 +60,17 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:group name="data">
+  <xs:group name="Data">
     <xs:choice>
-      <xs:element ref="simpleData"/>
-      <xs:element ref="complexData"/>
+      <xs:element ref="SimpleData"/>
+      <xs:element ref="ComplexData"/>
     </xs:choice>
   </xs:group>
 
   <xs:element name="Config">
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="data" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:group ref="Data" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute ref="dataCount" use="required"/>
     </xs:complexType>

@@ -529,7 +529,7 @@
 											"top": 551,
 											"width": 451.90869140625,
 											"height": 13,
-											"text": "-PrintFileHeader(writer: StreamWriter): void",
+											"text": "-PrintFileHeader(writer): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1441,10 +1441,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF1WqKzpI/UUNw="
 									},
-									"name": "writer",
-									"type": {
-										"$ref": "AAAAAAF1WqKzp4/dpAA="
-									}
+									"name": "writer"
 								},
 								{
 									"_type": "UMLParameter",
@@ -1588,7 +1585,7 @@
 											"width": 425.93408203125,
 											"height": 13,
 											"underline": true,
-											"text": "-LangInfo: CultureInfo",
+											"text": "-LangInfo",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2553,7 +2550,7 @@
 											"top": 620,
 											"width": 427.42578125,
 											"height": 13,
-											"text": "-Doc: XmlDocument",
+											"text": "-Doc",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3886,10 +3883,7 @@
 							},
 							"name": "LangInfo",
 							"visibility": "private",
-							"isStatic": true,
-							"type": {
-								"$ref": "AAAAAAF1WrGrRJvrF/Y="
-							}
+							"isStatic": true
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4460,10 +4454,7 @@
 								"$ref": "AAAAAAF1WrGrRJvsrvo="
 							},
 							"name": "Doc",
-							"visibility": "private",
-							"type": {
-								"$ref": "AAAAAAF1WrGrRJvtzQ0="
-							}
+							"visibility": "private"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4710,6 +4701,136 @@
 							"type": "long"
 						}
 					]
+				}
+			]
+		},
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAF1kqf9/c7xOoE=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Packetdiagramm",
+			"ownedElements": [
+				{
+					"_type": "UMLPackageDiagram",
+					"_id": "AAAAAAF1kqf9/c7yEh0=",
+					"_parent": {
+						"$ref": "AAAAAAF1kqf9/c7xOoE="
+					},
+					"name": "PackageDiagram1",
+					"ownedViews": [
+						{
+							"_type": "UMLPackageView",
+							"_id": "AAAAAAF1kqxGh88OmTI=",
+							"_parent": {
+								"$ref": "AAAAAAF1kqf9/c7yEh0="
+							},
+							"model": {
+								"$ref": "AAAAAAF1kqxGhs8MwpQ="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF1kqxGh88P7c8=",
+									"_parent": {
+										"$ref": "AAAAAAF1kqxGh88OmTI="
+									},
+									"model": {
+										"$ref": "AAAAAAF1kqxGhs8MwpQ="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF1kqxGh88Qp10=",
+											"_parent": {
+												"$ref": "AAAAAAF1kqxGh88P7c8="
+											},
+											"visible": false,
+											"fillColor": "#fbfbfb",
+											"font": "Arial;13;0",
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF1kqxGh88R1Zs=",
+											"_parent": {
+												"$ref": "AAAAAAF1kqxGh88P7c8="
+											},
+											"fillColor": "#fbfbfb",
+											"font": "Arial;13;1",
+											"left": 429,
+											"top": 254,
+											"width": 278,
+											"height": 13,
+											"text": "UserInterface"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF1kqxGh88Sis4=",
+											"_parent": {
+												"$ref": "AAAAAAF1kqxGh88P7c8="
+											},
+											"visible": false,
+											"fillColor": "#fbfbfb",
+											"font": "Arial;13;0",
+											"width": 135.80810546875,
+											"height": 13,
+											"text": "(from Packetdiagramm)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF1kqxGh88T6Wg=",
+											"_parent": {
+												"$ref": "AAAAAAF1kqxGh88P7c8="
+											},
+											"visible": false,
+											"fillColor": "#fbfbfb",
+											"font": "Arial;13;0",
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"fillColor": "#fbfbfb",
+									"font": "Arial;13;0",
+									"left": 424,
+									"top": 247,
+									"width": 288,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF1kqxGh88Qp10="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF1kqxGh88R1Zs="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF1kqxGh88Sis4="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF1kqxGh88T6Wg="
+									}
+								}
+							],
+							"fillColor": "#fbfbfb",
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 424,
+							"top": 232,
+							"width": 288,
+							"height": 160,
+							"nameCompartment": {
+								"$ref": "AAAAAAF1kqxGh88P7c8="
+							}
+						}
+					]
+				},
+				{
+					"_type": "UMLPackage",
+					"_id": "AAAAAAF1kqxGhs8MwpQ=",
+					"_parent": {
+						"$ref": "AAAAAAF1kqf9/c7xOoE="
+					},
+					"name": "UserInterface"
 				}
 			]
 		}

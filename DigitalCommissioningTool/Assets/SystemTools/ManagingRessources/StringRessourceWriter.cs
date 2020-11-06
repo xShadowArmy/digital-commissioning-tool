@@ -125,11 +125,11 @@ namespace SystemTools.ManagingRessources
                 {
                     if ( !nav.HasChildren )
                     {
-                        nav.AppendChildElement( "xs", "string", xmlns, "" );
+                        nav.AppendChildElement( "xs", "String", xmlns, "" );
                         nav.MoveToFirstChild( );
                         nav.CreateAttribute( "xs", "name", xmlns, stringRessources[i].Name );
                         nav.CreateAttribute( "xs", "id", xmlns, stringRessources[ i ].ID.ToString( ) );
-                        nav.AppendChildElement( "xs", "value", xmlns, stringRessources[ i ].Value );
+                        nav.AppendChildElement( "xs", "Value", xmlns, stringRessources[ i ].Value );
                     }
 
                     else

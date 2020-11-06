@@ -291,13 +291,13 @@ namespace SystemTools.ManagingRessources
             // DatenTyp festlegen
             if ( isFirst )
             {
-                nav.AppendChildElement( "xs", "simpleData", xmlns, "" );
+                nav.AppendChildElement( "xs", "SimpleData", xmlns, "" );
                 nav.MoveToFirstChild();
             }
 
             else
             {
-                nav.InsertElementAfter( "xs", "simpleData", xmlns, "" );
+                nav.InsertElementAfter( "xs", "SimpleData", xmlns, "" );
                 nav.MoveToNext( );
             }
 
@@ -309,7 +309,7 @@ namespace SystemTools.ManagingRessources
             nav.CreateAttribute( "xs", "elementCount", xmlns, data.ArrayLength.ToString() );
 
             // Wert einfuegen
-            nav.AppendChildElement( "xs", "value", xmlns, data.GetValueAsString( ) );
+            nav.AppendChildElement( "xs", "Value", xmlns, data.GetValueAsString( ) );
         }
 
         /// <summary>
@@ -324,13 +324,13 @@ namespace SystemTools.ManagingRessources
             // DatenTyp festlegen
             if ( isFirst )
             {
-                nav.AppendChildElement( "xs", "simpleData", xmlns, "" );
+                nav.AppendChildElement( "xs", "SimpleData", xmlns, "" );
                 nav.MoveToFirstChild( );
             }
 
             else
             {
-                nav.InsertElementAfter( "xs", "simpleData", xmlns, "" );
+                nav.InsertElementAfter( "xs", "SimpleData", xmlns, "" );
                 nav.MoveToNext( );
             }
 
@@ -344,7 +344,7 @@ namespace SystemTools.ManagingRessources
             // Werte einfuegen
             for( int i = 0; i < data.ArrayLength; i++ )
             {
-                nav.AppendChildElement( "xs", "value", xmlns, data.GetValuesAsString()[i] );
+                nav.AppendChildElement( "xs", "Value", xmlns, data.GetValuesAsString()[i] );
             }
         }
 
@@ -360,13 +360,13 @@ namespace SystemTools.ManagingRessources
             // DatenTyp festlegen
             if ( isFirst )
             {
-                nav.AppendChildElement( "xs", "complexData", xmlns, "" );
+                nav.AppendChildElement( "xs", "ComplexData", xmlns, "" );
                 nav.MoveToFirstChild( );
             }
 
             else
             {
-                nav.InsertElementAfter( "xs", "complexData", xmlns, "" );
+                nav.InsertElementAfter( "xs", "ComplexData", xmlns, "" );
                 nav.MoveToNext( );
             }
 
@@ -378,16 +378,16 @@ namespace SystemTools.ManagingRessources
             nav.CreateAttribute( "xs", "elementCount", xmlns, 1.ToString() );
 
             // Werte einfuegen
-            nav.AppendChildElement( "xs", "values", xmlns, "" );
-            nav.MoveToChild( "values", xmlns );
+            nav.AppendChildElement( "xs", "Values", xmlns, "" );
+            nav.MoveToChild( "Values", xmlns );
             nav.CreateAttribute( "xs", "propertyCount", xmlns, data.ArrayLength.ToString() );
 
             for ( int i = 0; i < data.ArrayLength; i++ )
             {
-                nav.AppendChildElement( "xs", "property", xmlns, "" );
+                nav.AppendChildElement( "xs", "Property", xmlns, "" );
             }
 
-            nav.MoveToChild( "property", xmlns );
+            nav.MoveToChild( "Property", xmlns );
 
             for ( int i = 0; i < data.ArrayLength; i++ )
             {

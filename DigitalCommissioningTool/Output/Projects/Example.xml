@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:Project xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects ProjectSchema.xsd">
+	<xs:Meta>
+		<xs:Name>Example</xs:Name>
+		<xs:ID>1</xs:ID>
+		<xs:Path>C\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Output\Projects\Example.xml</xs:Path>
+		<xs:DateCreated>04/11/2020</xs:DateCreated>
+		<xs:Edited>04/11/2020</xs:Edited>
+	</xs:Meta>
+	<xs:Settings>	
+	
+	</xs:Settings>
+	<xs:Data xs:dataCount="3">
+		<xs:StorageGroup xs:dataCount="2">
+			<xs:Storage>	
+			
+			</xs:Storage>	
+			<xs:Storage>	
+			
+			</xs:Storage>
+		</xs:StorageGroup>
+		<xs:StorageGroup xs:dataCount="1">
+			<xs:Storage>	
+			
+			</xs:Storage>
+		</xs:StorageGroup>		
+		<xs:StorageGroup xs:dataCount="1">
+			<xs:Storage>	
+			
+			</xs:Storage>
+		</xs:StorageGroup>
+	</xs:Data>
+</xs:Project>

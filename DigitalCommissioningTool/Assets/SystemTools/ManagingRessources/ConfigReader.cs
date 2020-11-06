@@ -140,12 +140,12 @@ namespace SystemTools.ManagingRessources
                     {
                         switch ( nav.LocalName )
                         {
-                            case "simpleData":
+                            case "SimpleData":
 
                                 ReadSimpleElement( nav, buffer, xmlns );
                                 break;
 
-                            case "complexData":
+                            case "ComplexData":
 
                                 ReadComplexElement( nav, buffer, xmlns );
                                 break;
