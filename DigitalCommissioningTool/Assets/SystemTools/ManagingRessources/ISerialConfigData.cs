@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Bietet die Möglichkeit für eine einfache Obektserialisierung für die Konfigurations Daten.

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings" 
-           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings"
+           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings" 
+           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings"
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
@@ -23,7 +23,7 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="StringRessources">
+  <xs:element name="StringResources">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="String" maxOccurs="unbounded"/>

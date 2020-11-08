@@ -1,7 +1,7 @@
 ﻿using System;
 using SystemTools.Logging;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Repräsentiert gespeicherte Configurations Daten.

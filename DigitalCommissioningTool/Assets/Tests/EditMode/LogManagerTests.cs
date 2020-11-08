@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using SystemTools.ManagingRessources;
+using SystemTools.ManagingResources;
 using SystemTools.Logging;
 using System.IO;
 using System.Linq;

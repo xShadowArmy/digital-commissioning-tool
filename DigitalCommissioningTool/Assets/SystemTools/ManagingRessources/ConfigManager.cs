@@ -4,7 +4,7 @@ using SystemTools.Logging;
 using System.IO;
 using System.Xml;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Bietet Möglichkeiten zum Erstellen, speichern und laden von Configurations Daten.
@@ -80,9 +80,9 @@ namespace SystemTools.ManagingRessources
             OpenStream = false;
             AutoFlush = true;
 #if DEBUG
-            PATH = ".\\Output\\Ressources\\Data";
+            PATH = ".\\Output\\Resources\\Data";
 #else
-            PATH = ".\\Ressources\\Data";
+            PATH = ".\\Resources\\Data";
 #endif
             ConfigFile = new XmlDocument( );
 
@@ -318,7 +318,7 @@ namespace SystemTools.ManagingRessources
                 using ( StreamWriter writer = new StreamWriter( File.Create( file ) ) )
                 {
                     writer.WriteLine( "<?xml version=\"1.0\" encoding=\"utf-8\"?>" );
-                    writer.WriteLine( "<xs:Config xs:dataCount=\"0\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data ConfigSchema.xsd\">" );
+                    writer.WriteLine( "<xs:Config xs:dataCount=\"0\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data ConfigSchema.xsd\">" );
                     writer.WriteLine( "</xs:Config>" );
 
                     writer.Flush( );

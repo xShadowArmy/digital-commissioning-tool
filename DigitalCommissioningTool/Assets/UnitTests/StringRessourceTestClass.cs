@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using SystemTools.ManagingRessources;
+using SystemTools.ManagingResources;
 
 namespace UnitTests
 {
@@ -7,17 +7,17 @@ namespace UnitTests
     {
         public void Test()
         {
-            StringRessourceManager.StoreString( "OutputText1", "Das ist ein Test111.", true );
-            StringRessourceManager.StoreString( "OutputText2", "Das ist ein Test2." );
-            StringRessourceManager.StoreString( "OutputText3", "Das ist ein Test3." );
+            StringResourceManager.StoreString( "OutputText1", "Das ist ein Test111.", true );
+            StringResourceManager.StoreString( "OutputText2", "Das ist ein Test2." );
+            StringResourceManager.StoreString( "OutputText3", "Das ist ein Test3." );
             
-            Debug.Log( StringRessourceManager.LoadString( "OutputText1" ) );
-            Debug.Log( StringRessourceManager.LoadString( "OutputText2" ) );
-            Debug.Log( StringRessourceManager.LoadString( "OutputText3" ) );
+            Debug.Log( StringResourceManager.LoadString( "OutputText1" ) );
+            Debug.Log( StringResourceManager.LoadString( "OutputText2" ) );
+            Debug.Log( StringResourceManager.LoadString( "OutputText3" ) );
             
-            StringRessourceManager.StoreString( "OutputText1", "Das ist ein Test1.", true );
-            StringRessourceManager.StoreString( "OutputText4", "Das ist ein Test4." );
-            StringRessourceManager.StoreString( "OutputText5", "Das ist ein Test5." );
+            StringResourceManager.StoreString( "OutputText1", "Das ist ein Test1.", true );
+            StringResourceManager.StoreString( "OutputText4", "Das ist ein Test4." );
+            StringResourceManager.StoreString( "OutputText5", "Das ist ein Test5." );
         }
     }
 }

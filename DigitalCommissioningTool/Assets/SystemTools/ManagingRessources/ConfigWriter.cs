@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.XPath;
 using SystemTools.Logging;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Ermöglicht das Schreiben von Konfigurations Dateien.
@@ -223,7 +223,7 @@ namespace SystemTools.ManagingRessources
         /// <param name="path">Der Pfad der Konfigurations Datei.</param>
         internal void WriteConfigFile( ConfigManager.ConfigBuffer buffer, string path )
         {
-            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data";
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data";
 
             XPathNavigator nav = Doc.CreateNavigator( );
 
@@ -265,6 +265,8 @@ namespace SystemTools.ManagingRessources
                     };
 
                     Doc.Save( writer );
+
+                    writer.Dispose( );
                 }
 
                 else

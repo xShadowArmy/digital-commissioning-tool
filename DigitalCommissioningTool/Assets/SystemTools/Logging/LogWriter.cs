@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using SystemTools.ManagingRessources;
+using SystemTools.ManagingResources;
 
 namespace SystemTools.Logging
 {

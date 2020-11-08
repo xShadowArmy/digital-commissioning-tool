@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.XPath;
 using SystemTools.Logging;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Ermöglicht das Lesen von Konfigurations Dateien.
@@ -115,7 +115,7 @@ namespace SystemTools.ManagingRessources
         {
             LogManager.WriteInfo( "Einlesen von ConfigDaten", "ConfigReader", "FillBuffer" );
 
-            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Data";
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data";
 
             XPathNavigator nav = Doc.CreateNavigator( );
 

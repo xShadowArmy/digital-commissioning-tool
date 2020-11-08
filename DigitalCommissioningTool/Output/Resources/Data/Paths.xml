@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:Config xs:dataCount="0" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data ConfigSchema.xsd">
+	<xs:SimpleData xs:name="LogPathDebug" xs:id="1" xs:type="string" xs:isArray="false" xs:elementCount="1">
+		<xs:Value>.\Output\Logs\</xs:Value>
+	</xs:SimpleData>
+	<xs:SimpleData xs:name="LogPathRelease" xs:id="2" xs:type="string" xs:isArray="false" xs:elementCount="1">
+		<xs:Value>.\Logs\</xs:Value>
+	</xs:SimpleData>
+	<xs:SimpleData xs:name="StringResourcePathDebug" xs:id="3" xs:type="string" xs:isArray="false" xs:elementCount="1">
+		<xs:Value>.\Output\Resources\Strings\</xs:Value>
+	</xs:SimpleData>
+	<xs:SimpleData xs:name="StringResourcePathRelease" xs:id="4" xs:type="string" xs:isArray="false" xs:elementCount="1">
+		<xs:Value>.\Resources\Strings\</xs:Value>
+	</xs:SimpleData>
+</xs:Config>

@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:StringRessources xs:lang="deu" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings StringRessourceSchema.xsd">
-    <xs:String xs:name="testResource13425346564765" xs:id="1">
-        <xs:Value>overwritten content</xs:Value>
-    </xs:String>
-</xs:StringRessources>

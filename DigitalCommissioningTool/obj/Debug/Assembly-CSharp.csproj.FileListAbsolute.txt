@@ -281,3 +281,5 @@ C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioning
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Thrift.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Utf8Json.dll
 C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\Scripts.pdb
+C:\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Temp\bin\Debug\SystemTools.pdb

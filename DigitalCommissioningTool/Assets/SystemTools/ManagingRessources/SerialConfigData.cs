@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemTools.Logging;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Enthält Daten über ein serialisiertes Objekt.

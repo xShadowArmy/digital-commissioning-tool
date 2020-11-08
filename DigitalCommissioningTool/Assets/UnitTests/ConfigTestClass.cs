@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using SystemTools.ManagingRessources;
+using SystemTools.ManagingResources;
 using System;
 
 namespace UnitTests

@@ -9,12 +9,12 @@ using System.IO;
 using SystemTools.Logging;
 using System.Globalization;
 
-namespace SystemTools.ManagingRessources
+namespace SystemTools.ManagingResources
 {
     /// <summary>
     /// Ermöglicht das Speichern von StringRessourcen.
     /// </summary>
-    internal class StringRessourceWriter
+    internal class StringResourceWriter
     {
         /// <summary>
         /// Repräsentiert die StringRessource Xml Datei.
@@ -32,14 +32,14 @@ namespace SystemTools.ManagingRessources
         private string Path { get; set; }
 
         /// <summary>
-        /// Initialisiert den StringRessourceWriter.
+        /// Initialisiert den StringResourceWriter.
         /// </summary>
         /// <param name="path">Pfad an dem die StringRessourcen liegen.</param>
         /// <param name="info">Informationen über die Systemsprache.</param>
         /// <param name="doc">Die StringRessource Datei.</param>
-        internal StringRessourceWriter( string path, XmlDocument doc, CultureInfo info )
+        internal StringResourceWriter( string path, XmlDocument doc, CultureInfo info )
         {
-            LogManager.WriteInfo( "Initialisierung des StringRessourceWriter", "StringRessourceWriter", "StringRessourceWriter" );
+            LogManager.WriteInfo( "Initialisierung des StringResourceWriter", "StringResourceWriter", "StringResourceWriter" );
 
             Path     = path;
             LangInfo = info;
@@ -52,13 +52,13 @@ namespace SystemTools.ManagingRessources
         /// <param name="name">Der Schlüssel der StringRessource.</param>
         /// <param name="content">Der String.</param>
         /// <param name="overwrite">Gibt an ob die Ressource überschrieben werden soll.</param>
-        /// <param name="stringRessources">Der Datenpuffer.</param>
+        /// <param name="stringResources">Der Datenpuffer.</param>
         /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
-        public bool StoreString( string name, string content, bool overwrite, List<StringRessourceReader.StringRessourceData> stringRessources )
+        public bool StoreString( string name, string content, bool overwrite, List<StringResourceReader.StringResourceData> stringResources )
         {
-            StringRessourceReader.StringRessourceData newData;
+            StringResourceReader.StringResourceData newData;
 
-            foreach ( StringRessourceReader.StringRessourceData data in stringRessources )
+            foreach ( StringResourceReader.StringResourceData data in stringResources )
             {
                 if ( data.Name.Equals( name ) )
                 {
@@ -69,24 +69,24 @@ namespace SystemTools.ManagingRessources
 
                     newData = data;
 
-                    stringRessources.Remove( data );
+                    stringResources.Remove( data );
 
                     newData.Value = content;
 
-                    stringRessources.Add( newData );
+                    stringResources.Add( newData );
 
                     return true;
                 }
             }
 
-            newData = new StringRessourceReader.StringRessourceData
+            newData = new StringResourceReader.StringResourceData
             {
                 Name  = name,
                 Value = content,
-                ID    = GetNextID( stringRessources )
+                ID    = GetNextID( stringResources )
             };
 
-            stringRessources.Add( newData );
+            stringResources.Add( newData );
 
             return true;
         }
@@ -94,12 +94,12 @@ namespace SystemTools.ManagingRessources
         /// <summary>
         /// Schreibt den Puffer in die Datei.
         /// </summary>
-        /// <param name="stringRessources">Der Datenpuffer.</param>
-        internal void WriteRessourceFile( List<StringRessourceReader.StringRessourceData> stringRessources )
+        /// <param name="stringResources">Der Datenpuffer.</param>
+        internal void WriteResourceFile( List<StringResourceReader.StringResourceData> stringResources )
         {
             try
             {
-                string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings";
+                string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings";
 
                 if ( File.Exists( Path ) )
                 {
@@ -109,49 +109,49 @@ namespace SystemTools.ManagingRessources
                 using ( StreamWriter writer = new StreamWriter( File.Create( Path ) ) )
                 {
                     writer.WriteLine( "<?xml version=\"1.0\" encoding=\"utf-8\"?>" );
-                    writer.WriteLine( "<xs:StringRessources xs:lang=\"" + LangInfo.ThreeLetterISOLanguageName + "\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Ressources/Strings StringRessourceSchema.xsd\">" );
-                    writer.WriteLine( "</xs:StringRessources>" );
-
+                    writer.WriteLine( "<xs:StringResources xs:lang=\"" + LangInfo.ThreeLetterISOLanguageName + "\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings StringResourceSchema.xsd\">" );
+                    writer.WriteLine( "</xs:StringResources>" );
+                    
                     writer.Flush( );
                 }
-
+                
                 Doc.Load( Path );
 
                 XPathNavigator nav = Doc.CreateNavigator( );
 
                 nav.MoveToFirstChild( );
 
-                for( int i = 0; i < stringRessources.Count; i++ )
+                for ( int i = 0; i < stringResources.Count; i++ )
                 {
                     if ( !nav.HasChildren )
                     {
                         nav.AppendChildElement( "xs", "String", xmlns, "" );
                         nav.MoveToFirstChild( );
-                        nav.CreateAttribute( "xs", "name", xmlns, stringRessources[i].Name );
-                        nav.CreateAttribute( "xs", "id", xmlns, stringRessources[ i ].ID.ToString( ) );
-                        nav.AppendChildElement( "xs", "Value", xmlns, stringRessources[ i ].Value );
+                        nav.CreateAttribute( "xs", "name", xmlns, stringResources[ i ].Name );
+                        nav.CreateAttribute( "xs", "id", xmlns, stringResources[ i ].ID.ToString( ) );
+                        nav.AppendChildElement( "xs", "Value", xmlns, stringResources[ i ].Value );
                     }
 
                     else
                     {
-                        CreateStringRessource( nav, stringRessources[i], xmlns );
+                        CreateStringRessource( nav, stringResources[ i ], xmlns );
                     }
                 }
-                               
+
                 XmlTextWriter textWriter = new XmlTextWriter( Path, Encoding.UTF8 )
                 {
-                    Formatting  = Formatting.Indented,
+                    Formatting = Formatting.Indented,
                     Indentation = 4
                 };
 
                 Doc.Save( textWriter );
 
-                textWriter.Dispose();
+                textWriter.Dispose( );
             }
 
             catch( Exception e )
             {
-                LogManager.WriteLog( "Konnte StringRessourcen nicht in die Datei schreiben! Pfad: " + Path + " Fehler: " + e.Message, LogLevel.Error, true, "StringRessourceWriter", "WriteRessourceFile" );
+                LogManager.WriteLog( "Konnte StringRessourcen nicht in die Datei schreiben! Pfad: " + Path + " Fehler: " + e.Message, LogLevel.Error, true, "StringResourceWriter", "WriteResourceFile" );
             }
         }
 
@@ -160,7 +160,7 @@ namespace SystemTools.ManagingRessources
         /// </summary>
         /// <param name="buffer">Der Puffer mit verwendeten IDs.</param>
         /// <returns>Gibt die nächste ID zurück.</returns>
-        private long GetNextID( List<StringRessourceReader.StringRessourceData> buffer )
+        private long GetNextID( List<StringResourceReader.StringResourceData> buffer )
         {
             bool used = false;
             long[ ] ids = new long[ buffer.Count ];
@@ -196,7 +196,7 @@ namespace SystemTools.ManagingRessources
         /// <param name="nav">Ein Positioniertes Navigator objekt.</param>
         /// <param name="data">Die StringRessource.</param>
         /// <param name="xmlns">Der Xml Namespace.</param>
-        private void CreateStringRessource( XPathNavigator nav, StringRessourceReader.StringRessourceData data, string xmlns )
+        private void CreateStringRessource( XPathNavigator nav, StringResourceReader.StringResourceData data, string xmlns )
         {
             nav.InsertElementAfter( "xs", "string", xmlns, "" );
             nav.MoveToNext( );
