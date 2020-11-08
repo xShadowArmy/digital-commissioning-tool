@@ -47,7 +47,7 @@ namespace SystemTools.ManagingResources
 
                 using ( ConfigManager man = new ConfigManager( ) )
                 {
-                    man.OpenConfigFile( "Paths", true );
+                    man.OpenConfigFile( "Paths", true );                    
 #if DEBUG
                     tmp = man.LoadData( "StringResourcePathDebug" ).GetValueAsString( );
 #else
