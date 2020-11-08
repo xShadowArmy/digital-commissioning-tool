@@ -1,6 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:StringResources xs:lang="deu" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings StringResourceSchema.xsd">
-    <xs:String xs:name="testResource13425346564765" xs:id="1">
-        <xs:Value>overwritten content</xs:Value>
+    <xs:String xs:name="test1" xs:id="2">
+        <xs:Value>unchanged content</xs:Value>
     </xs:String>
+    <xs:string xs:name="test2" xs:id="3">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test3" xs:id="4">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test4" xs:id="5">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test5" xs:id="6">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test6" xs:id="7">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test7" xs:id="8">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test8" xs:id="9">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="test9" xs:id="10">
+        <xs:value>unchanged content</xs:value>
+    </xs:string>
+    <xs:string xs:name="testResource13425346564765" xs:id="1">
+        <xs:value>overwritten content</xs:value>
+    </xs:string>
 </xs:StringResources>

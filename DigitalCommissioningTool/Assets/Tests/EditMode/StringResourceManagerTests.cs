@@ -4,6 +4,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using SystemTools.ManagingResources;
+using System.Xml;
+using System.Linq;
 
 namespace Tests
 {
@@ -29,9 +31,62 @@ namespace Tests
             string stringResource = StringResourceManager.LoadString("@" + key);
 
             Assert.AreEqual("overwritten content", stringResource);
-            
+        }
 
+        [Test]
+        public void sets_unique_german_string_resource_ids()
+        {
+            bool isUnique = true;
+            using (ConfigManager cman = new ConfigManager())
+            {
+                HashSet<string> set = new HashSet<string>();
 
+                cman.OpenConfigFile("Paths");
+                string germanStringResourcesPath = cman.LoadData("StringResourcePathDebug").GetValuesAsString()[0] + "deu.xml";
+
+                XmlDocument stringResourcesDocument = new XmlDocument();
+                stringResourcesDocument.Load(germanStringResourcesPath);
+
+                foreach (XmlNode node in stringResourcesDocument.ChildNodes)
+                {
+                    foreach(XmlNode innerNode in node.ChildNodes)
+                    {
+                        if (!set.Add(innerNode.Attributes["xs:id"]?.InnerText))
+                        {
+                            isUnique = false;
+                        }
+                    }
+                }
+            }
+            Assert.IsTrue(isUnique);
+        }
+
+        [Test]
+        public void sets_unique_english_string_resource_ids()
+        {
+            bool isUnique = true;
+            using (ConfigManager cman = new ConfigManager())
+            {
+                HashSet<string> set = new HashSet<string>();
+
+                cman.OpenConfigFile("Paths");
+                string englishStringResourcesPath = cman.LoadData("StringResourcePathDebug").GetValuesAsString()[0] + "eng.xml";
+
+                XmlDocument stringResourcesDocument = new XmlDocument();
+                stringResourcesDocument.Load(englishStringResourcesPath);
+
+                foreach (XmlNode node in stringResourcesDocument.ChildNodes)
+                {
+                    foreach (XmlNode innerNode in node.ChildNodes)
+                    {
+                        if (!set.Add(innerNode.Attributes["xs:id"]?.InnerText))
+                        {
+                            isUnique = false;
+                        }
+                    }
+                }
+            }
+            Assert.IsTrue(isUnique);
         }
     }
 }
