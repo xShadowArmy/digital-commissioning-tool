@@ -88,5 +88,17 @@ namespace Tests
             }
             Assert.IsTrue(isUnique);
         }
+
+        [Test]
+        public void stores_and_loads_string_resources()
+        {
+            string key = "testResource5462345634573567";
+            string value = "testStringResource";
+            StringResourceManager.StoreString(key, value);
+            string stringResource = StringResourceManager.LoadString(key);
+            Assert.AreEqual(value, stringResource);
+        }
+
+       
     }
 }
