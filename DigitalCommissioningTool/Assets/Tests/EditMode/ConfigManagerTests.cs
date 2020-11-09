@@ -78,7 +78,7 @@ namespace Tests
             string key1 = "configDataKey45634958439543";
             string value = "TestData1242314324";
 
-            string key2 = "congigObjectKey3205439058433";
+            string key2 = "configObjectKey3205439058433";
             ConfigTestClass configTestObject = new ConfigTestClass();
 
             string configData1 = "";
@@ -96,6 +96,44 @@ namespace Tests
             }
 
             Assert.IsTrue(value.Equals(configData1) && configTestObject.Equals(configData2));
+            File.Delete(TestConfigFilePath);
+        }
+
+        [Test]
+        public void overrides_config_data()
+        {
+            string key1 = "configDataKey45634958439543";
+            string origValue = "TestData1242314324";
+            string newValue = "NewTestData783474359";
+
+            string key2 = "configObjectKey3205439058433";
+            int newTestValue = 87978534;
+            string newTestString = "NewTestString8904586456";
+
+            ConfigTestClass origConfigTestObject = new ConfigTestClass();
+            ConfigTestClass newConfigTestObject = new ConfigTestClass();
+            newConfigTestObject.TestString = newTestString;
+            newConfigTestObject.TestValue = newTestValue;
+
+            string configData1 = "";
+            ConfigTestClass configData2 = new ConfigTestClass();
+
+            using (ConfigManager cman = new ConfigManager())
+            {
+                cman.OpenConfigFile("TestConfigFile2345234523", true);
+                //create
+                cman.StoreData(key1, origValue);
+                cman.StoreData(key2, origConfigTestObject);
+                //override
+                cman.StoreData(key1, newValue);
+                cman.StoreData(key2, newConfigTestObject);
+                //load
+                configData1 = cman.LoadData(key1).GetValueAsString();
+                cman.LoadData(key2, configData2);
+            }
+
+            Assert.IsTrue(newValue.Equals(configData1) && newConfigTestObject.Equals(configData2));
+            File.Delete(TestConfigFilePath);
         }
     }
 }

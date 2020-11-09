@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:Config xs:dataCount="2" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data ConfigSchema.xsd">
     <xs:SimpleData xs:name="configDataKey45634958439543" xs:id="1" xs:type="String" xs:isArray="false" xs:elementCount="1">
-        <xs:Value>TestData1242314324</xs:Value>
+        <xs:Value>NewTestData783474359</xs:Value>
     </xs:SimpleData>
-    <xs:ComplexData xs:name="congigObjectKey3205439058433" xs:id="2" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
+    <xs:ComplexData xs:name="configObjectKey3205439058433" xs:id="2" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="2">
-            <xs:Property xs:type="String" xs:value="TestString3425345">
+            <xs:Property xs:type="String" xs:value="NewTestString8904586456">
             </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="23452354">
+            <xs:Property xs:type="Int32" xs:value="87978534">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>
