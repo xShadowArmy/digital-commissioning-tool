@@ -27,10 +27,10 @@
     <xs:string xs:name="test9" xs:id="9">
         <xs:value>unchanged content</xs:value>
     </xs:string>
-    <xs:string xs:name="testResource13425346564765" xs:id="10">
-        <xs:value>overwritten content</xs:value>
-    </xs:string>
-    <xs:string xs:name="testResource5462345634573567" xs:id="11">
+    <xs:string xs:name="testResource5462345634573567" xs:id="10">
         <xs:value>testStringResource</xs:value>
+    </xs:string>
+    <xs:string xs:name="testResource13425346564765" xs:id="11">
+        <xs:value>overwritten content</xs:value>
     </xs:string>
 </xs:StringResources>
