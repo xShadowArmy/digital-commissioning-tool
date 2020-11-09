@@ -73,7 +73,7 @@ namespace Tests
         }
 
         [Test]
-        public void stores_config_data()
+        public void stores_and_loads_config_data()
         {
             string key1 = "configDataKey45634958439543";
             string value = "TestData1242314324";
@@ -100,7 +100,7 @@ namespace Tests
         }
 
         [Test]
-        public void overrides_config_data()
+        public void overrides_and_loads_config_data()
         {
             string key1 = "configDataKey45634958439543";
             string origValue = "TestData1242314324";
