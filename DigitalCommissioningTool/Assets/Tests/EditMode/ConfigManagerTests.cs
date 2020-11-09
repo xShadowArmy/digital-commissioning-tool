@@ -53,19 +53,22 @@ namespace Tests
             }
         }
 
+        private string TestConfigFileName { get; set; }
+        private string TestConfigFilePath { get; set; }
+
         public ConfigManagerTests()
         {
+            TestConfigFileName = "TestConfigFile2345234523.xml";
             TestConfigFilePath = ".\\Output\\Resources\\Data\\TestConfigFile2345234523.xml";
         }
 
-        private string TestConfigFilePath { get; set; }
 
         [Test]
         public void creates_config_files()
         {
             using (ConfigManager cman = new ConfigManager())
             {
-                cman.OpenConfigFile("TestConfigFile2345234523", true);
+                cman.OpenConfigFile(TestConfigFileName, true);
             }
 
             Assert.IsTrue(File.Exists(TestConfigFilePath));
@@ -87,7 +90,7 @@ namespace Tests
 
             using (ConfigManager cman = new ConfigManager())
             {
-                cman.OpenConfigFile("TestConfigFile2345234523", true);
+                cman.OpenConfigFile(TestConfigFileName, true);
                 cman.StoreData(key1, value);
                 cman.StoreData(key2, configTestObject);
 
@@ -120,7 +123,7 @@ namespace Tests
 
             using (ConfigManager cman = new ConfigManager())
             {
-                cman.OpenConfigFile("TestConfigFile2345234523", true);
+                cman.OpenConfigFile(TestConfigFileName, true);
                 //create
                 cman.StoreData(key1, origValue);
                 cman.StoreData(key2, origConfigTestObject);
@@ -134,6 +137,35 @@ namespace Tests
 
             Assert.IsTrue(newValue.Equals(configData1) && newConfigTestObject.Equals(configData2));
             File.Delete(TestConfigFilePath);
+        }
+
+        [Test]
+        public void deletes_config_data()
+        {
+            string key1 = "configDataKey45634958439543";
+            string value = "TestData1242314324";
+
+            string key2 = "configObjectKey3205439058433";
+            ConfigTestClass configTestObject = new ConfigTestClass();
+
+            ConfigData configData1 = null;
+            ConfigData configData2 = null;
+
+            using (ConfigManager cman = new ConfigManager())
+            {
+                //create
+                cman.OpenConfigFile(TestConfigFileName, true);
+                cman.StoreData(key1, value);
+                cman.StoreData(key2, configTestObject);
+                //remove
+                cman.RemoveData(key1);
+                cman.RemoveData(key2);
+                //load
+                configData1 = cman.LoadData(key1);
+                configData2 = cman.LoadData(key2);
+            }
+
+            Assert.IsTrue(configData1 is null && configData2 is null);
         }
     }
 }
