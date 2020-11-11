@@ -41,7 +41,7 @@ public class TestAvatarBehavior : AvatarBehavior
             MInstruction idleInstruction = new MInstruction(MInstructionFactory.GenerateID(), "Idle", "idle")
             {
                 //Start idle after walk has been finished
-                StartCondition = walkInstruction.ID + ":" + mmiConstants.MSimulationEvent_End 
+                StartCondition = walkInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
             };
 
             //Abort all current tasks
@@ -126,10 +126,10 @@ public class TestAvatarBehavior : AvatarBehavior
             MInstruction carryInstruction = new MInstruction(carryID, "carry object", "Object/Carry")
             {
                 Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance["GraspObject"].ID, "Hand", "Right"),
-                StartCondition = reachInstruction.ID +":"+ mmiConstants.MSimulationEvent_End + "+ 0.01"
+                StartCondition = reachInstruction.ID + ":" + mmiConstants.MSimulationEvent_End + "+ 0.01"
             };
 
-           
+
             this.CoSimulator.AssignInstruction(idleInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
             this.CoSimulator.AssignInstruction(reachInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
             this.CoSimulator.AssignInstruction(carryInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
@@ -149,7 +149,45 @@ public class TestAvatarBehavior : AvatarBehavior
         }
 
 
+        if (GUI.Button(new Rect(10, 130, 220, 50), "Pickup box"))
+        {
+            MInstruction walkInstruction = new MInstruction(MInstructionFactory.GenerateID(), "Walk", "walk")
+            {
+                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName("WalkTargetBox").ID)
+            };
 
+            MInstruction idleInstruction = new MInstruction(MInstructionFactory.GenerateID(), "Idle", "idle")
+            {
+                StartCondition = walkInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
+            };
+
+            MInstruction reachLeft = new MInstruction(MInstructionFactory.GenerateID(), "reachLeft", "Pose/Reach")
+            {
+                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance["BoxGraspL"].ID, "Hand", "Left"),
+                StartCondition = walkInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
+            };
+
+            MInstruction reachRight = new MInstruction(MInstructionFactory.GenerateID(), "reachRight", "Pose/Reach")
+            {
+                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance["BoxGraspR"].ID, "Hand", "Right"),
+                StartCondition = walkInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
+            };
+
+            carryID = MInstructionFactory.GenerateID();
+            MInstruction carryInstruction = new MInstruction(carryID, "carry object", "Object/Carry")
+            {
+                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance["BoxClosed"].ID, "Hand", "Both", "CarryDistance", 0.4f.ToString(), "CarryTarget", UnitySceneAccess.Instance["CarryTarget"].ID),
+                StartCondition = reachLeft.ID + ":" + mmiConstants.MSimulationEvent_End + " && " + reachRight.ID + ":" + mmiConstants.MSimulationEvent_End
+            };
+
+            this.CoSimulator.AssignInstruction(walkInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+            this.CoSimulator.AssignInstruction(idleInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+            this.CoSimulator.AssignInstruction(reachLeft, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+            this.CoSimulator.AssignInstruction(reachRight, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+
+            this.CoSimulator.AssignInstruction(carryInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+            this.CoSimulator.MSimulationEventHandler += this.CoSimulator_MSimulationEventHandler;
+        }
 
 
 
