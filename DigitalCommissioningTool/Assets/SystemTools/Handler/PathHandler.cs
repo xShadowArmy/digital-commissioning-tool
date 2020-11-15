@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,42 @@ namespace SystemTools.Handler
                 for( int i = 0; i < keys.Length; i++ )
                 {
                     Table.Add( keys[ i ], vals[ i ] );
+
+                    Logger.WriteInfo( "Ueberpruefe ob Verzeichnis \"" + vals[ i ] + "\" existiert.", "PathHandler", "ReadPaths" );
+
+#if DEBUG
+                    if ( keys[i].Contains( "Debug" ) && !Directory.Exists( vals[i] ) )
+                    {
+                        try
+                        {
+                            Logger.WriteWarning( "Verzeichnis \"" + vals[ i ] + "\" wird erstellt.", "PathHandler", "ReadPaths" );
+                            Directory.CreateDirectory( vals[ i ] );
+                        }
+
+                        catch( Exception e )
+                        {
+                            Logger.WriteLog( "Verzeichnis \"" + vals[ i ] + "\" konnte nicht erstellt werden! Fehler: " + e.Message, 3, true, "PathHandler", "ReadPaths" );
+                        }
+                    }
+#else
+                    if ( keys[i].Contains( "Release" ) && !Directory.Exists( vals[i] ) )
+                    {
+                        try
+                        {
+                            Logger.WriteWarning( "Verzeichnis \"" + vals[ i ] + "\" wird erstellt.", "PathHandler", "ReadPaths" );
+                            Directory.CreateDirectory( vals[ i ] );
+                        }
+
+                        catch( Exception e )
+                        {
+                            Logger.WriteLog( "Verzeichnis \"" + vals[ i ] + "\" konnte nicht erstellt werden! Fehler: " + e.Message, 3, true, "PathHandler", "ReadPaths" );
+                        }
+                    }
+#endif
+                    else
+                    {
+                        Logger.WriteInfo( "Verzeichnis \"" + vals[ i ] + "\" existiert!", "PathHandler", "ReadPaths" );
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SystemTools.Logging
 {
@@ -58,9 +59,11 @@ namespace SystemTools.Logging
         ~LogWriter()
         {
             RefCnt -= 1;
+            Debug.Log( "LogRefCount: " + RefCnt  );
 
             if ( RefCnt == 0 )
             {
+                Debug.Log( "FlushLogs" );
                 PrintToFile( );
             }
         }
