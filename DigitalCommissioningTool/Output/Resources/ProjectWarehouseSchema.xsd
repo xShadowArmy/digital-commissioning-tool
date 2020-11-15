@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects/" 
+           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects/"
+           elementFormDefault="qualified" attributeFormDefault="qualified">
+
+<!-- definition of Simple Elements -->
+  <xs:element name="Length" type="xs:double"/>
+  <xs:element name="Width" type="xs:double"/>
+  <xs:element name="Height" type="xs:double"/>
+  
+<!-- definition of Attributes -->
+  <xs:attribute name="count" type="xs:unsignedLong"/>
+  <xs:attribute name="id" type="xs:unsignedLong"/>
+  <xs:attribute name="idRef" type="xs:unsignedLong"/>  
+  <xs:attribute name="x" type="xs:double"/>
+  <xs:attribute name="y" type="xs:double"/>
+  <xs:attribute name="z" type="xs:double"/>
+  <xs:attribute name="type" type="xs:string"/>
+
+<!-- definition of Complex elements -->
+  <xs:element name="Size">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Length" maxOccurs="1" minOccurs="1"/>
+        <xs:element ref="Width" maxOccurs="1" minOccurs="1"/>
+        <xs:element ref="Height" maxOccurs="1" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Position">
+    <xs:complexType>
+      <xs:attribute ref="x" use="required"/>
+      <xs:attribute ref="y" use="required"/>
+      <xs:attribute ref="z" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Rotation">
+    <xs:complexType>
+      <xs:attribute ref="x" use="required"/>
+      <xs:attribute ref="y" use="required"/>
+      <xs:attribute ref="z" use="required"/>      
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Scale">
+    <xs:complexType>
+      <xs:attribute ref="x" use="required"/>
+      <xs:attribute ref="y" use="required"/>
+      <xs:attribute ref="z" use="required"/>      
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Window">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Position" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+      <xs:attribute ref="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Windows">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Window" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="count" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Door">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Position" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="type" use="required"/>
+      <xs:attribute ref="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Doors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Door" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="count" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Transform">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Position" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Position" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="idRef" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Items">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Item" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="count" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Storage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Transform" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Items" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="StorageRecks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Storage" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="count" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ProjectWarehouse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Size" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Windows" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Doors" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="StorageRecks" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

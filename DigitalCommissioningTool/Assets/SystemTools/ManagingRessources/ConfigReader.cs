@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Xml.XPath;
 using SystemTools.Logging;
+using SystemTools.Handler;
 
 namespace SystemTools.ManagingResources
 {
@@ -16,13 +17,19 @@ namespace SystemTools.ManagingResources
         private XmlDocument Doc { get; set; }
 
         /// <summary>
+        /// Wird fuer das Schreiben von LogDateien verwendet.
+        /// </summary>
+        private LogHandler Logger;
+
+        /// <summary>
         /// Erstellt eine neue Instanz und ließt die Daten in den Puffer.
         /// </summary>
         /// <param name="doc">Die Konfigurationsdatei.</param>
         /// <param name="buffer">Der Datenpuffer.</param>
         /// <param name="newFile">Gibt an ob die Datei neu erstellt wurde.</param>
-        internal ConfigReader( XmlDocument doc, ConfigManager.ConfigBuffer buffer, bool newFile )
+        internal ConfigReader( XmlDocument doc, ConfigHandler.ConfigBuffer buffer, bool newFile )
         {
+            Logger = new LogHandler( );
             Doc = doc;
 
             if ( newFile )
@@ -39,7 +46,7 @@ namespace SystemTools.ManagingResources
         /// <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
         /// <param name="name">Der Schlüssel der Daten die gelesen werden sollen.</param>
         /// <returns>Die gelesenen Daten.</returns>
-        internal ConfigData LoadData( ConfigManager.ConfigBuffer buffer, string name )
+        internal ConfigData LoadData( ConfigHandler.ConfigBuffer buffer, string name )
         {
             for( int i = 0; i < buffer.Data.Count; i++ )
             {
@@ -58,7 +65,7 @@ namespace SystemTools.ManagingResources
         /// <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
         /// <param name="id">Die ID der Daten die gelesen werden sollen.</param>
         /// <returns>Die gelesenen Daten.</returns>
-        internal ConfigData LoadData( ConfigManager.ConfigBuffer buffer, long id )
+        internal ConfigData LoadData( ConfigHandler.ConfigBuffer buffer, long id )
         {
             for ( int i = 0; i < buffer.Data.Count; i++ )
             {
@@ -77,7 +84,7 @@ namespace SystemTools.ManagingResources
         /// <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
         /// <param name="name">Der Schlüssel der gelesen werden soll.</param>
         /// <param name="data">Das Objekt das wiederhergestellt werden soll.</param>
-        public void LoadData( ConfigManager.ConfigBuffer buffer, string name, ISerialConfigData data )
+        internal void LoadData( ConfigHandler.ConfigBuffer buffer, string name, ISerialConfigData data )
         {
             ConfigData cd = null;
             SerialConfigData scd;
@@ -111,11 +118,11 @@ namespace SystemTools.ManagingResources
         /// Füllt den Puffer mit den Daten der Konfigurations Datei.
         /// </summary>
         /// <param name="buffer">Der Puffer der gefüllt werden soll.</param>
-        private void FillBuffer( ConfigManager.ConfigBuffer buffer )
+        private void FillBuffer( ConfigHandler.ConfigBuffer buffer )
         {
-            LogManager.WriteInfo( "Einlesen von ConfigDaten", "ConfigReader", "FillBuffer" );
+            Logger.WriteInfo( "Einlesen von ConfigDaten", "ConfigReader", "FillBuffer" );
 
-            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data";
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/";
 
             XPathNavigator nav = Doc.CreateNavigator( );
 
@@ -125,14 +132,14 @@ namespace SystemTools.ManagingResources
                 {                 
                     if ( !long.TryParse( nav.GetAttribute( "dataCount", xmlns ), out long dataCount ) )
                     {
-                        LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! DataCount attribut ist keine ganze zahl!", LogLevel.Error, true, "ConfigReader", "FilBuffer" );
+                        Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! DataCount attribut ist keine ganze zahl!", 3, true, "ConfigReader", "FilBuffer" );
                     }
 
                     if ( dataCount > 0 )
                     {
                         if ( !nav.MoveToFirstChild( ) )
                         {
-                            LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! DataCount entspricht nicht der Anzahl an Daten!", LogLevel.Warning, false, "ConfigReader", "FilBuffer" );
+                            Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! DataCount entspricht nicht der Anzahl an Daten!", 2, false, "ConfigReader", "FilBuffer" );
                         }
                     }
 
@@ -152,7 +159,7 @@ namespace SystemTools.ManagingResources
 
                             default:
 
-                                LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Unbekanntes Datenelement!", LogLevel.Warning, false, "ConfigReader", "FilBuffer" );
+                                Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Unbekanntes Datenelement!", 2, false, "ConfigReader", "FilBuffer" );
                                 break;
                         }
 
@@ -162,13 +169,13 @@ namespace SystemTools.ManagingResources
 
                 else
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! 'Config' Element konnte nicht gefunden werden!", LogLevel.Error, true, "ConfigReader", "FilBuffer" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! 'Config' Element konnte nicht gefunden werden!", 3, true, "ConfigReader", "FilBuffer" );
                 }
             }
 
             catch( Exception e )
             {
-                LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Fehler: " + e.Message, LogLevel.Error, true, "ConfigReader", "FilBuffer" );
+                Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Fehler: " + e.Message, 3, true, "ConfigReader", "FilBuffer" );
             }
         }
 
@@ -178,9 +185,9 @@ namespace SystemTools.ManagingResources
         /// <param name="nav">Der Navigator an Position des einfachen Datenelements.</param>
         /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
         /// <param name="xmlns">Der Xml namespace.</param>
-        private void ReadSimpleElement( XPathNavigator nav, ConfigManager.ConfigBuffer buffer, string xmlns )
+        private void ReadSimpleElement( XPathNavigator nav, ConfigHandler.ConfigBuffer buffer, string xmlns )
         {
-            LogManager.WriteLog( "Einlesen von simpleData Element", LogLevel.Info, false, "ConfigReader", "ReadSimpleElement" );
+            Logger.WriteLog( "Einlesen von simpleData Element", 1, false, "ConfigReader", "ReadSimpleElement" );
 
             try
             {
@@ -190,27 +197,27 @@ namespace SystemTools.ManagingResources
 
                 if ( name.Equals( string.Empty ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'name' nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'name' nicht lesen! ", 3, true, "ConfigReader", "ReadSimpleElement" );
                 }
 
                 if ( type.Equals( string.Empty ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'type' nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'type' nicht lesen! ", 3, true, "ConfigReader", "ReadSimpleElement" );
                 }
 
                 if ( !long.TryParse( nav.GetAttribute( "id", xmlns ), out long id ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'id; nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'id; nicht lesen! ", 3, true, "ConfigReader", "ReadSimpleElement" );
                 }
 
                 if ( !long.TryParse( nav.GetAttribute( "elementCount", xmlns ), out long elementCount ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'elementCount' nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'elementCount' nicht lesen! ", 3, true, "ConfigReader", "ReadSimpleElement" );
                 }
 
                 if ( !bool.TryParse( nav.GetAttribute( "isArray", xmlns ), out bool isArray ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'isArray' nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'isArray' nicht lesen! ", 3, true, "ConfigReader", "ReadSimpleElement" );
                 }
 
                 ConfigData data = ConfigData.Initialize( );
@@ -219,7 +226,7 @@ namespace SystemTools.ManagingResources
 
                 if ( !nav.MoveToFirstChild() )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Daten angelegt aber kein Wert! ", LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Daten angelegt aber kein Wert! ", 3, true, "ConfigReader", "ReadSimpleElement" );
                 }
                 
                 for( long i = 0; i < elementCount; i++ )
@@ -237,7 +244,7 @@ namespace SystemTools.ManagingResources
 
             catch( Exception e )
             {
-                LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte Simples Datenelement nicht lesen! Fehler: " + e.Message, LogLevel.Error, true, "ConfigReader", "ReadSimpleElement" );
+                Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte Simples Datenelement nicht lesen! Fehler: " + e.Message, 3, true, "ConfigReader", "ReadSimpleElement" );
             }
         }
         
@@ -247,9 +254,9 @@ namespace SystemTools.ManagingResources
         /// <param name="nav">Der Navigator an Position des complexen Datenelements.</param>
         /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
         /// <param name="xmlns">Der Xml namespace.</param>
-        private void ReadComplexElement( XPathNavigator nav, ConfigManager.ConfigBuffer buffer, string xmlns )
+        private void ReadComplexElement( XPathNavigator nav, ConfigHandler.ConfigBuffer buffer, string xmlns )
         {
-            LogManager.WriteLog( "Einlesen von ComplexData Element", LogLevel.Info, false, "ConfigReader", "ReadComplexElement" );
+            Logger.WriteLog( "Einlesen von ComplexData Element", 1, false, "ConfigReader", "ReadComplexElement" );
         
             try
             {
@@ -260,27 +267,27 @@ namespace SystemTools.ManagingResources
 
                 if ( name.Equals( string.Empty ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'name' nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'name' nicht lesen! ", 3, true, "ConfigReader", "ReadComplexElement" );
                 }
 
                 if ( !type.Equals( "objectData" ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Falscher Type fuer complexData! ", LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Falscher Type fuer complexData! ", 3, true, "ConfigReader", "ReadComplexElement" );
                 }
 
                 if ( !long.TryParse( nav.GetAttribute( "id", xmlns ), out long id ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'id; nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'id; nicht lesen! ", 3, true, "ConfigReader", "ReadComplexElement" );
                 }
 
                 if ( !nav.MoveToFirstChild() )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! 'Values' element nicht vorhanden! ", LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! 'Values' element nicht vorhanden! ", 3, true, "ConfigReader", "ReadComplexElement" );
                 }
 
                 if ( !long.TryParse( nav.GetAttribute( "propertyCount", xmlns ), out long propertyCount ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'propertyCount; nicht lesen! ", LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte 'propertyCount; nicht lesen! ", 3, true, "ConfigReader", "ReadComplexElement" );
                 }
 
                 ConfigData data = ConfigData.Initialize( );
@@ -290,7 +297,7 @@ namespace SystemTools.ManagingResources
 
                 if ( !nav.MoveToFirstChild( ) )
                 {
-                    LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! complexElement hat keinen Wert! ", LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                    Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! complexElement hat keinen Wert! ", 3, true, "ConfigReader", "ReadComplexElement" );
                 }
 
                 for ( long i = 0; i < propertyCount; i++ )
@@ -310,7 +317,7 @@ namespace SystemTools.ManagingResources
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte Simples Datenelement nicht lesen! Fehler: " + e.Message, LogLevel.Error, true, "ConfigReader", "ReadComplexElement" );
+                Logger.WriteLog( "Fehler beim Einlesen der ConfigDaten! Konnte Simples Datenelement nicht lesen! Fehler: " + e.Message, 3, true, "ConfigReader", "ReadComplexElement" );
             }
         }
     }

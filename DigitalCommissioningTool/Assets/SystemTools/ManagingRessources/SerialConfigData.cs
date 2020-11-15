@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemTools.Logging;
 
-namespace SystemTools.ManagingResources
+namespace SystemTools
 {
     /// <summary>
     /// Enthält Daten über ein serialisiertes Objekt.
@@ -20,7 +20,7 @@ namespace SystemTools.ManagingResources
         /// <summary>
         /// Erstellt eine neue leere Instanz.
         /// </summary>
-        private SerialConfigData()
+        protected SerialConfigData()
         {
             Data = new Stack<ConfigData>();
         }

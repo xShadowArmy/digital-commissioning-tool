@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:ProjectWarehouse xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ProjectWarehouseSchema.xsd">
+	<xs:Size>
+		<xs:Length>25</xs:Length>
+		<xs:Width>25</xs:Width>
+		<xs:Height>5</xs:Height>
+	</xs:Size>
+	<xs:Windows xs:count="3">
+		<xs:Window xs:id="1">
+			<xs:Position xs:x="" xs:y="" xs:z=""/>
+			<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+			<xs:Scale xs:x="" xs:y="" xs:z=""/>
+		</xs:Window>
+		<xs:Window xs:id="2">
+			<xs:Position xs:x="" xs:y="" xs:z=""/>
+			<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+			<xs:Scale xs:x="" xs:y="" xs:z=""/>
+		</xs:Window>
+		<xs:Window xs:id="3">
+			<xs:Position xs:x="" xs:y="" xs:z=""/>
+			<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+			<xs:Scale xs:x="" xs:y="" xs:z=""/>
+		</xs:Window>
+	</xs:Windows>
+	<xs:Doors xs:count="3" >
+		<xs:Door xs:type="door" xs:id="1">
+			<xs:Position xs:x="" xs:y="" xs:z=""/>
+			<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+			<xs:Scale xs:x="" xs:y="" xs:z=""/>
+		</xs:Door>
+		<xs:Door xs:type="door" xs:id="1">
+			<xs:Position xs:x="" xs:y="" xs:z=""/>
+			<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+			<xs:Scale xs:x="" xs:y="" xs:z=""/>
+		</xs:Door>
+		<xs:Door xs:type="gate" xs:id="1">
+			<xs:Position xs:x="" xs:y="" xs:z=""/>
+			<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+			<xs:Scale xs:x="" xs:y="" xs:z=""/>
+		</xs:Door>
+	</xs:Doors>
+	<xs:StorageRecks xs:count="1">
+		<xs:Storage xs:id="1">
+			<xs:Transform>
+				<xs:Position xs:x="" xs:y="" xs:z=""/>
+				<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+				<xs:Scale xs:x="" xs:y="" xs:z=""/>
+			</xs:Transform>
+			<xs:Items xs:count="3">
+				<xs:Item xs:idRef="1">
+					<xs:Position xs:x="" xs:y="" xs:z=""/>
+					<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+					<xs:Scale xs:x="" xs:y="" xs:z=""/>
+				</xs:Item>
+				<xs:Item xs:idRef="2">
+					<xs:Position xs:x="" xs:y="" xs:z=""/>
+					<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+					<xs:Scale xs:x="" xs:y="" xs:z=""/>
+				</xs:Item>
+				<xs:Item xs:idRef="3">
+					<xs:Position xs:x="" xs:y="" xs:z=""/>
+					<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+					<xs:Scale xs:x="" xs:y="" xs:z=""/>
+				</xs:Item>
+			</xs:Items>
+		</xs:Storage>
+	</xs:StorageRecks>
+</xs:ProjectWarehouse>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using SystemTools.ManagingResources;
+using System.Collections.Generic;
 
 namespace SystemTools.Logging
 {
@@ -9,6 +9,16 @@ namespace SystemTools.Logging
     /// </summary>
     internal class LogWriter
     {
+        /// <summary>
+        /// Text der in die LogDatei geschrieben werden soll.
+        /// </summary>
+        private static List<string> Buffer = null;
+
+        /// <summary>
+        /// Gibt an wie viele Objekte der Klasse vorhanden sind.
+        /// </summary>
+        private static long RefCnt = 0;
+
         /// <summary>
         /// Der Pfad, an dem die LogDateien erstellt werden.               
         /// </summary>
@@ -25,6 +35,8 @@ namespace SystemTools.Logging
             LogPath = ".\\Logs\\";
 #endif
 
+            RefCnt += 1;
+
             if ( !Directory.Exists( LogPath ) )
             {
                 Directory.CreateDirectory( LogPath );
@@ -34,20 +46,22 @@ namespace SystemTools.Logging
             LogPath += DateTime.Now.ToFileTime( );
             LogPath += ".log";
 
-            if ( !File.Exists( LogPath ) )
+            if ( Buffer == null )
             {
-                try
-                {
-                    using ( StreamWriter writer = File.CreateText( LogPath ) )
-                    {
-                        PrintFileHeader( writer );
-                    }
-                }
+                Buffer = new List<string>( );
+            }
+        }
 
-                catch ( Exception e )
-                {
-                    throw new Exception( "Log Datei konnte nicht erstellt werden in Pfad: " + LogPath + " Fehler: " + e.Message );
-                }
+        /// <summary>
+        /// Schreibt den Puffer in die Datei.
+        /// </summary>
+        ~LogWriter()
+        {
+            RefCnt -= 1;
+
+            if ( RefCnt == 0 )
+            {
+                PrintToFile( );
             }
         }
 
@@ -58,9 +72,9 @@ namespace SystemTools.Logging
         /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
         /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
-        public void WriteInfo( string message, string className, string methodName )
+        internal void WriteInfo( string message, string className, string methodName )
         {
-            PrintToFile( "[INFO] ", "[" + className + "][" + methodName + "] " + message );
+            AddToBuffer( "[INFO] ", "[" + className + "][" + methodName + "] " + message );
         }
 
         /// <summary>
@@ -70,9 +84,9 @@ namespace SystemTools.Logging
         /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
         /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
-        public void WriteWarning( string message, string className, string methodName )
+        internal void WriteWarning( string message, string className, string methodName )
         {
-            PrintToFile( "[WARN] ", "[" + className + "][" + methodName + "] " + message );
+            AddToBuffer( "[WARN] ", "[" + className + "][" + methodName + "] " + message );
         }
 
         /// <summary>
@@ -82,22 +96,30 @@ namespace SystemTools.Logging
         /// <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
         /// <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
-        public void WriteError( string message, string className, string methodName )
+        internal void WriteError( string message, string className, string methodName )
         {
-            PrintToFile( "[ERROR] ", "[" + className + "][" + methodName + "] " + message );
+            AddToBuffer( "[ERROR] ", "[" + className + "][" + methodName + "] " + message );
         }
-        
+
         /// <summary>
-        /// Schreibt die Daten in die LogDatei.
+        /// Schreibt die Daten in den Buffer.
         /// </summary>
         /// <param name="tag">Priorität der Nachricht.</param>
         /// <param name="message">Die Nachricht.</param>
+        private void AddToBuffer( string tag, string message )
+        {
+            Buffer.Add( tag + message );
+        }
+
+        /// <summary>
+        /// Schreibt den Buffer in die LogDatei.
+        /// </summary>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht beschrieben werden kann.</exception>
-        private void PrintToFile( string tag, string message )
+        private void PrintToFile( )
         {
             try
             {
-                using ( StreamWriter writer = new StreamWriter( LogPath, true ) )
+                using ( StreamWriter writer = File.CreateText( LogPath ) )
                 {
                     if ( writer != null )
                     {
@@ -105,7 +127,12 @@ namespace SystemTools.Logging
                         {
                             try
                             {
-                                writer.WriteLine( tag + message );
+                                PrintFileHeader( writer );
+
+                                foreach ( string s in Buffer )
+                                {
+                                    writer.WriteLine( s );
+                                }
 
                                 writer.Flush( );
                             }

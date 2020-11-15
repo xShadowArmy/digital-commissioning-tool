@@ -1,15 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:Config xs:dataCount="4" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data ConfigSchema.xsd">
-    <xs:SimpleData xs:name="LogPathDebug" xs:id="1" xs:type="string" xs:isArray="false" xs:elementCount="1">
+<xs:Config xs:dataCount="2" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
+    <xs:SimpleData xs:name="vals" xs:id="1" xs:type="String" xs:isArray="true" xs:elementCount="12">
         <xs:Value>.\Output\Logs\</xs:Value>
-    </xs:SimpleData>
-    <xs:SimpleData xs:name="LogPathRelease" xs:id="2" xs:type="string" xs:isArray="false" xs:elementCount="1">
         <xs:Value>.\Logs\</xs:Value>
-    </xs:SimpleData>
-    <xs:SimpleData xs:name="StringResourcePathDebug" xs:id="3" xs:type="string" xs:isArray="false" xs:elementCount="1">
         <xs:Value>.\Output\Resources\Strings\</xs:Value>
-    </xs:SimpleData>
-    <xs:SimpleData xs:name="StringResourcePathRelease" xs:id="4" xs:type="string" xs:isArray="false" xs:elementCount="1">
         <xs:Value>.\Resources\Strings\</xs:Value>
+        <xs:Value>.\Output\Resources\Data\</xs:Value>
+        <xs:Value>.\Resources\Data\</xs:Value>
+        <xs:Value>.\Output\Resources\</xs:Value>
+        <xs:Value>.\Resources\</xs:Value>
+        <xs:Value>.\Output\Projects\</xs:Value>
+        <xs:Value>.\Projects\</xs:Value>
+        <xs:Value>.\Output\Temp\</xs:Value>
+        <xs:Value>.\Temp\</xs:Value>
+    </xs:SimpleData>
+    <xs:SimpleData xs:name="keys" xs:id="2" xs:type="String" xs:isArray="true" xs:elementCount="12">
+        <xs:Value>LogPathDebug</xs:Value>
+        <xs:Value>LogPathRelease</xs:Value>
+        <xs:Value>StringResourcePathDebug</xs:Value>
+        <xs:Value>StringResourcePathRelease</xs:Value>
+        <xs:Value>DataResourcePathDebug</xs:Value>
+        <xs:Value>DataResourcePathRelease</xs:Value>
+        <xs:Value>ResourcePathDebug</xs:Value>
+        <xs:Value>ResourcePathRelease</xs:Value>
+        <xs:Value>ProjectsPathDebug</xs:Value>
+        <xs:Value>ProjectsPathRelease</xs:Value>
+        <xs:Value>TempPathDebug</xs:Value>
+        <xs:Value>TempPathRelease</xs:Value>
     </xs:SimpleData>
 </xs:Config>

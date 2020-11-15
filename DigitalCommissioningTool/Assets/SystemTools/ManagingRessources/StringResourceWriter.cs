@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
 using System.IO;
-using SystemTools.Logging;
+using SystemTools.Handler;
 using System.Globalization;
 
 namespace SystemTools.ManagingResources
@@ -32,6 +32,11 @@ namespace SystemTools.ManagingResources
         private string Path { get; set; }
 
         /// <summary>
+        /// Wird fuer das Schreiben von LogDateien verwendet.
+        /// </summary>
+        private LogHandler Logger;
+
+        /// <summary>
         /// Initialisiert den StringResourceWriter.
         /// </summary>
         /// <param name="path">Pfad an dem die StringRessourcen liegen.</param>
@@ -39,7 +44,9 @@ namespace SystemTools.ManagingResources
         /// <param name="doc">Die StringRessource Datei.</param>
         internal StringResourceWriter( string path, XmlDocument doc, CultureInfo info )
         {
-            LogManager.WriteInfo( "Initialisierung des StringResourceWriter", "StringResourceWriter", "StringResourceWriter" );
+            Logger = new LogHandler( );
+
+            Logger.WriteInfo( "Initialisierung des StringResourceWriter", "StringResourceWriter", "StringResourceWriter" );
 
             Path     = path;
             LangInfo = info;
@@ -99,7 +106,7 @@ namespace SystemTools.ManagingResources
         {
             try
             {
-                string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings";
+                string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/";
 
                 if ( File.Exists( Path ) )
                 {
@@ -109,7 +116,7 @@ namespace SystemTools.ManagingResources
                 using ( StreamWriter writer = new StreamWriter( File.Create( Path ) ) )
                 {
                     writer.WriteLine( "<?xml version=\"1.0\" encoding=\"utf-8\"?>" );
-                    writer.WriteLine( "<xs:StringResources xs:lang=\"" + LangInfo.ThreeLetterISOLanguageName + "\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings StringResourceSchema.xsd\">" );
+                    writer.WriteLine( "<xs:StringResources xs:lang=\"" + LangInfo.ThreeLetterISOLanguageName + "\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ StringResourceSchema.xsd\">" );
                     writer.WriteLine( "</xs:StringResources>" );
                     
                     writer.Flush( );
@@ -151,7 +158,7 @@ namespace SystemTools.ManagingResources
 
             catch( Exception e )
             {
-                LogManager.WriteLog( "Konnte StringRessourcen nicht in die Datei schreiben! Pfad: " + Path + " Fehler: " + e.Message, LogLevel.Error, true, "StringResourceWriter", "WriteResourceFile" );
+                Logger.WriteLog( "Konnte StringRessourcen nicht in die Datei schreiben! Pfad: " + Path + " Fehler: " + e.Message, 3, true, "StringResourceWriter", "WriteResourceFile" );
             }
         }
 

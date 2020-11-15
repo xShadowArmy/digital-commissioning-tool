@@ -1,0 +1,19 @@
+{
+    "name": "ApplicationFacade",
+    "references": [
+        "GUID:7e607eeca6afed749bd80064dee69045",
+        "GUID:99cd9232eeab0c24da3b6970ea9964f9",
+        "GUID:c9ebd0577c9b0cf4282ff4b3ffcfe053",
+        "GUID:4115c54a2ccaec3459a2551b269c3492",
+        "GUID:0887094fc593f9b459b734353cec3742"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

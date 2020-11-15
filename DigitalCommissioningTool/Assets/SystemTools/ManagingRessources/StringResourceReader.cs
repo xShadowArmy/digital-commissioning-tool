@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
-using SystemTools.Logging;
+using SystemTools.Handler;
 
 namespace SystemTools.ManagingResources
 {
@@ -17,6 +17,11 @@ namespace SystemTools.ManagingResources
         /// Repräsentiert die StringResource Xml Datei.
         /// </summary>
         private XmlDocument Doc { get; set; }
+
+        /// <summary>
+        /// Wird fuer das Schreiben von LogDateien verwendet.
+        /// </summary>
+        private LogHandler Logger;
 
         /// <summary>
         /// Repräsentiert einen Eintrag in einer StringResourceDatei.
@@ -46,7 +51,9 @@ namespace SystemTools.ManagingResources
         /// <param name="stringResources">Das Pufferobjekt.</param>
         internal StringResourceReader( string path, XmlDocument doc, CultureInfo info, List<StringResourceData> stringResources )
         {
-            LogManager.WriteInfo( "Initialisierung des StringResourceReader", "StringResourceReader", "StringResourceReader" );
+            Logger = new LogHandler( );
+
+            Logger.WriteInfo( "Initialisierung des StringResourceReader", "StringResourceReader", "StringResourceReader" );
 
             Path     = path;
             LangInfo = info;
@@ -144,33 +151,33 @@ namespace SystemTools.ManagingResources
         /// <param name="stringResources">Das Pufferobjekt in das Geschrieben wird.</param>
         private void ReadStringResources( List<StringResourceData> stringResources )
         {
-            LogManager.WriteInfo( "Einlesen der StringResourcen", "StringResourceReader", "ReadStringResources" );
+            Logger.WriteInfo( "Einlesen der StringResourcen", "StringResourceReader", "ReadStringResources" );
 
-            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Strings";
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/";
 
             if ( stringResources != null && Doc != null )
             {
                 try
                 {
-                    LogManager.WriteInfo( "Erstellen des Navigators", "StringResourceReader", "ReadStringResources" );
+                    Logger.WriteInfo( "Erstellen des Navigators", "StringResourceReader", "ReadStringResources" );
 
                     XPathNavigator nav = Doc.CreateNavigator( );
 
                     if ( nav.MoveToFirstChild( ) )
                     {
-                        LogManager.WriteInfo( "Lesen des RootTags", "StringResourceReader", "ReadStringResources" );
+                        Logger.WriteInfo( "Lesen des RootTags", "StringResourceReader", "ReadStringResources" );
 
                         if ( nav.LocalName == "StringResources" )
                         {
                             if ( !nav.GetAttribute( "lang", xmlns ).Equals( LangInfo.ThreeLetterISOLanguageName ) )
                             {
-                                LogManager.WriteError( "Fehler beim Lesen der StringResource headers!Sprache ist nicht identisch zur Systemsprache", "StringResourceReader", "ReadStringResources" );
+                                Logger.WriteError( "Fehler beim Lesen der StringResource headers!Sprache ist nicht identisch zur Systemsprache", "StringResourceReader", "ReadStringResources" );
                                 throw new Exception( "Fehler beim Lesen der StringResource headers! Sprache ist nicht identisch zur Systemsprache" );
                             }
 
                             if ( nav.MoveToFirstChild() )
                             {
-                                LogManager.WriteInfo( "Lesen der Resourcen", "StringResourceReader", "ReadStringResources" );
+                                Logger.WriteInfo( "Lesen der Resourcen", "StringResourceReader", "ReadStringResources" );
 
                                 do
                                 {
@@ -178,7 +185,7 @@ namespace SystemTools.ManagingResources
 
                                     if ( !long.TryParse( nav.GetAttribute( "id", xmlns ), out long tmpID ))
                                     {
-                                        LogManager.WriteInfo( "Fehler beim Interpretieren einer StringID! ID ist keine ganze Zahl", "StringResourceReader", "ReadStringResources" );
+                                        Logger.WriteInfo( "Fehler beim Interpretieren einer StringID! ID ist keine ganze Zahl", "StringResourceReader", "ReadStringResources" );
                                     }
                                                                         
                                     data.Name  = nav.GetAttribute( "name", xmlns );
@@ -207,13 +214,13 @@ namespace SystemTools.ManagingResources
 
                             else
                             {
-                                LogManager.WriteWarning( "Fehler beim Einlesen der StringResourcen! Keine Kindelemente in StringResources", "StringResourceReader", "ReadStringResources" );
+                                Logger.WriteWarning( "Fehler beim Einlesen der StringResourcen! Keine Kindelemente in StringResources", "StringResourceReader", "ReadStringResources" );
                             }
                         }
                         
                         else
                         {
-                            LogManager.WriteError( "Fehler beim Einlesen der StringResourcen! Element StringResources konnte nicht gefunden werden!", "StringResourceReader", "ReadStringResources" );
+                            Logger.WriteError( "Fehler beim Einlesen der StringResourcen! Element StringResources konnte nicht gefunden werden!", "StringResourceReader", "ReadStringResources" );
                             throw new Exception( "Fehler beim Einlesen der StringResourcen! Element StringResources konnte nicht gefunden werden!" );
                         }
                     }
@@ -221,7 +228,7 @@ namespace SystemTools.ManagingResources
 
                 catch( Exception e )
                 {
-                    LogManager.WriteError( "Fehler beim Einlesen der StringResourcen! Fehler: " + e.Message , "StringResourceReader", "ReadStringResources" );
+                    Logger.WriteError( "Fehler beim Einlesen der StringResourcen! Fehler: " + e.Message , "StringResourceReader", "ReadStringResources" );
                     throw new Exception( "Fehler beim Einlesen der StringResourcen! Fehler: " + e.Message );
                 }
             }

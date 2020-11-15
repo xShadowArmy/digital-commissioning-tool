@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:ProjectData xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ProjectDataSchema.xsd">
+	<xs:Name>Example</xs:Name>
+	<xs:ID>1</xs:ID>
+	<xs:Path>C\Users\Stefan\Documents\GitHub\digital-commissioning-tool\DigitalCommissioningTool\Output\Projects\Example.xml</xs:Path>
+	<xs:DateCreated>04/11/2020</xs:DateCreated>
+	<xs:DateModified>04/11/2020</xs:DateModified>
+</xs:ProjectData>

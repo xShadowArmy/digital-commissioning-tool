@@ -1,7 +1,7 @@
 ﻿using System;
-using SystemTools.Logging;
+using SystemTools.Handler;
 
-namespace SystemTools.ManagingResources
+namespace SystemTools
 {
     /// <summary>
     /// Repräsentiert gespeicherte Configurations Daten.
@@ -55,15 +55,21 @@ namespace SystemTools.ManagingResources
         private string[ ] Data { get; set; }
 
         /// <summary>
+        /// Wird fuer das Schreiben von Logdateien verwendet.
+        /// </summary>
+        private LogHandler Logger;
+
+        /// <summary>
         /// Erstellt eine neue leere Instanz.
         /// </summary>
-        private ConfigData()
+        protected ConfigData()
         {
             Data = null;
             ID = 0;
             Types = null;
             IsArray = false;
             Data = null;
+            Logger = new LogHandler( );
         }
 
         /// <summary>
@@ -294,7 +300,7 @@ namespace SystemTools.ManagingResources
         /// <param name="data">Die zu speichernden Daten.</param>
         internal void AddData( string name, long id, string type, bool isArray, bool isNew, params string[ ] data )
         {
-            LogManager.WriteInfo( "Puffern von einfachen ConfigDaten.", "ConfigData", "AddData" );
+            Logger.WriteInfo( "Puffern von einfachen ConfigDaten.", "ConfigData", "AddData" );
 
             Name = name;
             ID = id;
@@ -323,7 +329,7 @@ namespace SystemTools.ManagingResources
         /// <param name="data">Die Daten des zu speichernden Objekts.</param>
         internal void AddData( string name, long id, string[ ] types, bool isNew, params string[ ] data )
         {
-            LogManager.WriteInfo( "Puffern von complexen ConfigDaten.", "ConfigData", "AddData" );
+            Logger.WriteInfo( "Puffern von complexen ConfigDaten.", "ConfigData", "AddData" );
 
             Name = name;
             ID = id;
@@ -351,7 +357,7 @@ namespace SystemTools.ManagingResources
         {
             if ( IsObject )
             {
-                LogManager.WriteError( "Kann Serialisiertes Objekt nicht in einfachen Typen umwandeln!", "ConfigData", "CheckType" );
+                Logger.WriteError( "Kann Serialisiertes Objekt nicht in einfachen Typen umwandeln!", "ConfigData", "CheckType" );
                 throw new InvalidCastException( "Kann Serialisiertes Objekt nicht in einfachen Typen umwandeln!" );
             }
 
@@ -367,7 +373,7 @@ namespace SystemTools.ManagingResources
                     return;
                 }
 
-                LogManager.WriteError( "Kann Daten nicht in angegebenen Typ umwandeln! '" + Types[ 0 ] + "' zu '" + typeName + "'", "ConfigData", "CheckType" );
+                Logger.WriteError( "Kann Daten nicht in angegebenen Typ umwandeln! '" + Types[ 0 ] + "' zu '" + typeName + "'", "ConfigData", "CheckType" );
                 throw new InvalidCastException( "Kann Daten nicht in angegebenen Typ umwandeln! '" + Types[0] + "' zu '" + typeName + "'" );
             }
         }

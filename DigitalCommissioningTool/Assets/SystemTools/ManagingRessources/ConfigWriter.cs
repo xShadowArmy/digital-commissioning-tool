@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using SystemTools.Logging;
+using SystemTools.Handler;
 
 namespace SystemTools.ManagingResources
 {
@@ -16,12 +18,18 @@ namespace SystemTools.ManagingResources
         private XmlDocument Doc { get; set; }
 
         /// <summary>
+        /// Wird fuer das Schreiben von LogDateien verwendet.
+        /// </summary>
+        private LogHandler Logger;
+
+        /// <summary>
         /// Erstellt eine neue Instanz.
         /// </summary>
         /// <param name="doc">Die Konfigurationsdatei.</param>
         internal ConfigWriter( XmlDocument doc )
         {
             Doc = doc;
+            Logger = new LogHandler( );
         }
 
         /// <summary>
@@ -32,7 +40,7 @@ namespace SystemTools.ManagingResources
         /// <param name="overwrite">Gibt an ob die Daten überschrieben werden sollen.</param>
         /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
         /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
-        internal bool StoreData( string key, object data, bool overwrite, ConfigManager.ConfigBuffer buffer )
+        internal bool StoreData( string key, object data, bool overwrite, ConfigHandler.ConfigBuffer buffer )
         {
             ConfigData newData;
             
@@ -75,7 +83,7 @@ namespace SystemTools.ManagingResources
         /// <param name="overwrite">Gibt an ob die Daten überschrieben werden sollen.</param>
         /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
         /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
-        internal bool StoreData( string key, Array data, bool overwrite, ConfigManager.ConfigBuffer buffer )
+        internal bool StoreData( string key, Array data, bool overwrite, ConfigHandler.ConfigBuffer buffer )
         {
             ConfigData newData;
             
@@ -124,7 +132,7 @@ namespace SystemTools.ManagingResources
         /// <param name="overwrite">Gibt an ob die Daten überschrieben werden sollen.</param>
         /// <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
         /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
-        internal bool StoreData( string key, ISerialConfigData data, bool overwrite, ConfigManager.ConfigBuffer buffer )
+        internal bool StoreData( string key, ISerialConfigData data, bool overwrite, ConfigHandler.ConfigBuffer buffer )
         {
             SerialConfigData newSData = SerialConfigData.Initialize( );
             ConfigData newData;
@@ -180,7 +188,7 @@ namespace SystemTools.ManagingResources
         /// <param name="key">Der Schlüssel der Daten die Entfernt werden sollen.</param>
         /// <param name="buffer">Der Datenpuffer.</param>
         /// <returns>Gibt true zurück wenn erfolgreich.</returns>
-        internal bool RemoveData( string key, ConfigManager.ConfigBuffer buffer )
+        internal bool RemoveData( string key, ConfigHandler.ConfigBuffer buffer )
         {
             foreach ( ConfigData cd in buffer.Data )
             {
@@ -201,7 +209,7 @@ namespace SystemTools.ManagingResources
         /// <param name="id">Die ID der Daten die Entfernt werden sollen.</param>
         /// <param name="buffer">Der Datenpuffer.</param>
         /// <returns>Gibt true zurück wenn erfolgreich.</returns>
-        internal bool RemoveData( long id, ConfigManager.ConfigBuffer buffer )
+        internal bool RemoveData( long id, ConfigHandler.ConfigBuffer buffer )
         {
             foreach ( ConfigData cd in buffer.Data )
             {
@@ -221,9 +229,9 @@ namespace SystemTools.ManagingResources
         /// </summary>
         /// <param name="buffer">Der Puffer der in die Datei geschrieben werden soll.</param>
         /// <param name="path">Der Pfad der Konfigurations Datei.</param>
-        internal void WriteConfigFile( ConfigManager.ConfigBuffer buffer, string path )
+        internal void WriteConfigFile( ConfigHandler.ConfigBuffer buffer, string path )
         {
-            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/Data";
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/";
 
             XPathNavigator nav = Doc.CreateNavigator( );
 
@@ -271,13 +279,13 @@ namespace SystemTools.ManagingResources
 
                 else
                 {
-                    LogManager.WriteLog( "Fehler beim Schreiben der ConfigDaten! 'Config' Element konnte nicht gefunden werden!", LogLevel.Error, true, "ConfigWriter", "WriteConfigData" );
+                    Logger.WriteLog( "Fehler beim Schreiben der ConfigDaten! 'Config' Element konnte nicht gefunden werden!", 3, true, "ConfigWriter", "WriteConfigData" );
                 }
             }
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( "Fehler beim Schreiben der ConfigDaten! Fehler: " + e.Message, LogLevel.Error, true, "ConfigWriter", "WriteConfigFile" );
+                Logger.WriteLog( "Fehler beim Schreiben der ConfigDaten! Fehler: " + e.Message, 3, true, "ConfigWriter", "WriteConfigFile" );
             }
         }
 
@@ -408,7 +416,7 @@ namespace SystemTools.ManagingResources
         /// <param name="key">Der Schlüssel der getestet werden soll.</param>
         /// <param name="buffer">Der Puffer mit verwendeten Schlüsseln.</param>
         /// <returns>Gibt true zurück wenn der Schlüssel verfügbar ist.</returns>
-        private bool IsUniqueName( string key, ConfigManager.ConfigBuffer buffer )
+        private bool IsUniqueName( string key, ConfigHandler.ConfigBuffer buffer )
         {
             foreach( ConfigData data in buffer.Data )
             {
@@ -426,7 +434,7 @@ namespace SystemTools.ManagingResources
         /// </summary>
         /// <param name="buffer">Der Puffer mit verwendeten IDs.</param>
         /// <returns>Gibt die nächste ID zurück.</returns>
-        private long GetNextID( ConfigManager.ConfigBuffer buffer )
+        private long GetNextID( ConfigHandler.ConfigBuffer buffer )
         {
             bool used = false;
             long[ ] ids = new long[ buffer.Data.Count ];
