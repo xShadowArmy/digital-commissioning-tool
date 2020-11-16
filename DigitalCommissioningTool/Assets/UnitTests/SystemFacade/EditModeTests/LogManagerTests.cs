@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using NUnit.Framework;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using SystemFacade;
 using System.IO;
 using System.Linq;
-using SystemFacade;
 using SystemTools;
 
 namespace UnitTests.SystemFacade.SystemTools
 {
     public class LogManagerTests
     {
-        //[Test]
+        [Test]
         public void writes_log_message()
         {
             string testString = "ABCDEFG123456789";
@@ -48,7 +47,7 @@ namespace UnitTests.SystemFacade.SystemTools
                 }
             }
 
-            //Assert.IsTrue(infoLogMessageFound && errorLogMessageFound);
+            Assert.IsTrue(infoLogMessageFound && errorLogMessageFound);
         }
     }
 }

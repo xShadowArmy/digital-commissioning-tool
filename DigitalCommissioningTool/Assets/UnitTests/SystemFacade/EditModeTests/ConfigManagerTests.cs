@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-//using NUnit.Framework;
+using NUnit.Framework;
 using SystemFacade;
 using SystemTools;
 using UnityEngine;
@@ -24,13 +24,13 @@ namespace UnitTests.SystemFacade.SystemTools
                 TestString = "TestString3425345";
             }
 
-            public void Serialize( SerialConfigData storage)
+            public void Serialize(SerialConfigData storage)
             {
                 storage.AddData(TestValue);
                 storage.AddData(TestString);
             }
 
-            public void Restore( SerialConfigData storage)
+            public void Restore(SerialConfigData storage)
             {
                 TestValue = storage.GetValueAsInt();
                 TestString = storage.GetValueAsString();
@@ -64,19 +64,19 @@ namespace UnitTests.SystemFacade.SystemTools
         }
 
 
-       // [Test]
+        [Test]
         public void creates_config_files()
         {
-            using (ConfigManager cman = new ConfigManager( ))
+            using (ConfigManager cman = new ConfigManager())
             {
                 cman.OpenConfigFile(TestConfigFileName, true);
             }
 
-     //       Assert.IsTrue(File.Exists(TestConfigFilePath));
+            Assert.IsTrue(File.Exists(TestConfigFilePath));
             File.Delete(TestConfigFilePath);
         }
 
-       // [Test]
+        [Test]
         public void stores_and_loads_config_data()
         {
             string key1 = "configDataKey45634958439543";
@@ -89,7 +89,7 @@ namespace UnitTests.SystemFacade.SystemTools
             ConfigTestClass configData2 = new ConfigTestClass();
 
 
-            using ( ConfigManager cman = new ConfigManager( ))
+            using (ConfigManager cman = new ConfigManager())
             {
                 cman.OpenConfigFile(TestConfigFileName, true);
                 cman.StoreData(key1, value);
@@ -99,11 +99,11 @@ namespace UnitTests.SystemFacade.SystemTools
                 cman.LoadData(key2, configData2);
             }
 
-      //      Assert.IsTrue(value.Equals(configData1) && configTestObject.Equals(configData2));
+            Assert.IsTrue(value.Equals(configData1) && configTestObject.Equals(configData2));
             File.Delete(TestConfigFilePath);
         }
 
-     //   [Test]
+        [Test]
         public void overrides_and_loads_config_data()
         {
             string key1 = "configDataKey45634958439543";
@@ -122,7 +122,7 @@ namespace UnitTests.SystemFacade.SystemTools
             string configData1 = "";
             ConfigTestClass configData2 = new ConfigTestClass();
 
-            using ( ConfigManager cman = new ConfigManager( ))
+            using (ConfigManager cman = new ConfigManager())
             {
                 cman.OpenConfigFile(TestConfigFileName, true);
                 //create
@@ -136,11 +136,11 @@ namespace UnitTests.SystemFacade.SystemTools
                 cman.LoadData(key2, configData2);
             }
 
-     //       Assert.IsTrue(newValue.Equals(configData1) && newConfigTestObject.Equals(configData2));
+            Assert.IsTrue(newValue.Equals(configData1) && newConfigTestObject.Equals(configData2));
             File.Delete(TestConfigFilePath);
         }
 
-     //   [Test]
+        [Test]
         public void deletes_config_data()
         {
             string key1 = "configDataKey45634958439543";
@@ -152,7 +152,7 @@ namespace UnitTests.SystemFacade.SystemTools
             ConfigData configData1 = null;
             ConfigData configData2 = null;
 
-            using ( ConfigManager cman = new ConfigManager( ))
+            using (ConfigManager cman = new ConfigManager())
             {
                 //create
                 cman.OpenConfigFile(TestConfigFileName, true);
@@ -166,7 +166,7 @@ namespace UnitTests.SystemFacade.SystemTools
                 configData2 = cman.LoadData(key2);
             }
 
-     //       Assert.IsTrue(configData1 is null && configData2 is null);
+            Assert.IsTrue(configData1 is null && configData2 is null);
         }
     }
 }

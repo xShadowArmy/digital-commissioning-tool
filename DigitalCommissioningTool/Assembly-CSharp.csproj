@@ -666,10 +666,6 @@
       <Project>{9355519D-AE13-7825-2A1E-60C85FD4F021}</Project>
       <Name>ApplicationFacade</Name>
     </ProjectReference>
-    <ProjectReference Include="UnitTests.csproj">
-      <Project>{000611C3-A58A-365A-F3F2-128773B08A54}</Project>
-      <Name>UnitTests</Name>
-    </ProjectReference>
     <ProjectReference Include="SystemTools.csproj">
       <Project>{EA2CFAB5-9FCA-CA89-29DA-EB928D7D5F82}</Project>
       <Name>SystemTools</Name>
