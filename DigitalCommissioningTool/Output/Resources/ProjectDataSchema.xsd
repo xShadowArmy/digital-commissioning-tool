@@ -6,7 +6,6 @@
 
 <!-- definition of Simple Elements -->
   <xs:element name="Name" type="xs:string"/>
-  <xs:element name="ID" type="xs:unsignedLong"/>
   <xs:element name="Path" type="xs:string"/>
   <xs:element name="DateCreated" type="xs:string"/>
   <xs:element name="DateModified" type="xs:string"/>
@@ -18,7 +17,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Name" maxOccurs="1" minOccurs="1"/>
-		    <xs:element ref="ID" maxOccurs="1" minOccurs="1"/>
 		    <xs:element ref="Path" maxOccurs="1" minOccurs="1"/>
 		    <xs:element ref="DateCreated" maxOccurs="1" minOccurs="1"/>
 		    <xs:element ref="DateModified" maxOccurs="1" minOccurs="1"/>

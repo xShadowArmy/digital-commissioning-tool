@@ -5,9 +5,6 @@
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
-  <xs:element name="Length" type="xs:double"/>
-  <xs:element name="Width" type="xs:double"/>
-  <xs:element name="Height" type="xs:double"/>
   
 <!-- definition of Attributes -->
   <xs:attribute name="count" type="xs:unsignedLong"/>
@@ -19,16 +16,6 @@
   <xs:attribute name="type" type="xs:string"/>
 
 <!-- definition of Complex elements -->
-  <xs:element name="Size">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="Length" maxOccurs="1" minOccurs="1"/>
-        <xs:element ref="Width" maxOccurs="1" minOccurs="1"/>
-        <xs:element ref="Height" maxOccurs="1" minOccurs="1"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-
   <xs:element name="Position">
     <xs:complexType>
       <xs:attribute ref="x" use="required"/>
@@ -50,6 +37,25 @@
       <xs:attribute ref="x" use="required"/>
       <xs:attribute ref="y" use="required"/>
       <xs:attribute ref="z" use="required"/>      
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Wall">
+    <xs:complexType>
+      <xs:sequence>
+		<xs:element ref="Position" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute ref="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="Walls">
+    <xs:complexType>
+      <xs:sequence>
+		<xs:element ref="Wall" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 
