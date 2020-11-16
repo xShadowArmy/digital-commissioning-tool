@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 5696287228221670444}
   - component: {fileID: 7966491884520353505}
   - component: {fileID: 3836060159342293938}
+  - component: {fileID: -45493869130646757}
   m_Layer: 0
   m_Name: StorageRack
   m_TagString: Untagged
@@ -274,6 +275,21 @@ MonoBehaviour:
   FinalLocation: {fileID: 0}
   IsLocatedAt: {fileID: 0}
   Constraints: []
+--- !u!114 &-45493869130646757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903369500346441671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c1b1a7e21a712429f21483b327a055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragable:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &3576042355640935056
 GameObject:
   m_ObjectHideFlags: 0
