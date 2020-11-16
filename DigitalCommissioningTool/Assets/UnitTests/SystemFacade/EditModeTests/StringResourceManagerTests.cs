@@ -7,7 +7,7 @@ using SystemFacade;
 using System.Xml;
 using System.Linq;
 
-namespace UnitTests.SystemFacade.SystemTools
+namespace UnitTests.SystemFacade
 {
     public class StringResourceManagerTests
     {
@@ -37,25 +37,19 @@ namespace UnitTests.SystemFacade.SystemTools
         public void sets_unique_german_string_resource_ids()
         {
             bool isUnique = true;
-            using (ConfigManager cman = new ConfigManager())
+            HashSet<string> set = new HashSet<string>();
+
+            string germanStringResourcesPath = Paths.StringResourcePath + "deu.xml";
+            XmlDocument stringResourcesDocument = new XmlDocument();
+            stringResourcesDocument.Load(germanStringResourcesPath);
+
+            foreach (XmlNode node in stringResourcesDocument.ChildNodes)
             {
-                HashSet<string> set = new HashSet<string>();
-
-                cman.OpenConfigFile("Paths");
-                string germanStringResourcesPath =
-                    cman.LoadData("StringResourcePathDebug").GetValuesAsString()[0] + "deu.xml";
-
-                XmlDocument stringResourcesDocument = new XmlDocument();
-                stringResourcesDocument.Load(germanStringResourcesPath);
-
-                foreach (XmlNode node in stringResourcesDocument.ChildNodes)
+                foreach (XmlNode innerNode in node.ChildNodes)
                 {
-                    foreach (XmlNode innerNode in node.ChildNodes)
+                    if (!set.Add(innerNode.Attributes["xs:id"]?.InnerText))
                     {
-                        if (!set.Add(innerNode.Attributes["xs:id"]?.InnerText))
-                        {
-                            isUnique = false;
-                        }
+                        isUnique = false;
                     }
                 }
             }
@@ -67,25 +61,19 @@ namespace UnitTests.SystemFacade.SystemTools
         public void sets_unique_english_string_resource_ids()
         {
             bool isUnique = true;
-            using (ConfigManager cman = new ConfigManager())
+            HashSet<string> set = new HashSet<string>();
+
+            string englishStringResourcesPath = Paths.StringResourcePath + "eng.xml";
+            XmlDocument stringResourcesDocument = new XmlDocument();
+            stringResourcesDocument.Load(englishStringResourcesPath);
+
+            foreach (XmlNode node in stringResourcesDocument.ChildNodes)
             {
-                HashSet<string> set = new HashSet<string>();
-
-                cman.OpenConfigFile("Paths");
-                string englishStringResourcesPath =
-                    cman.LoadData("StringResourcePathDebug").GetValuesAsString()[0] + "eng.xml";
-
-                XmlDocument stringResourcesDocument = new XmlDocument();
-                stringResourcesDocument.Load(englishStringResourcesPath);
-
-                foreach (XmlNode node in stringResourcesDocument.ChildNodes)
+                foreach (XmlNode innerNode in node.ChildNodes)
                 {
-                    foreach (XmlNode innerNode in node.ChildNodes)
+                    if (!set.Add(innerNode.Attributes["xs:id"]?.InnerText))
                     {
-                        if (!set.Add(innerNode.Attributes["xs:id"]?.InnerText))
-                        {
-                            isUnique = false;
-                        }
+                        isUnique = false;
                     }
                 }
             }

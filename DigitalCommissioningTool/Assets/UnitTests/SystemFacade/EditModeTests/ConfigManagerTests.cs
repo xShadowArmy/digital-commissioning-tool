@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Object = System.Object;
 
-namespace UnitTests.SystemFacade.SystemTools
+namespace UnitTests.SystemFacade
 {
     public class ConfigManagerTests
     {
