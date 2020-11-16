@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2124837832805241613}
+  - component: {fileID: 8990530726797081939}
   m_Layer: 0
   m_Name: WallWest
   m_TagString: Untagged
@@ -35,6 +36,19 @@ Transform:
   m_Father: {fileID: 1703260498087539620}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8990530726797081939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427351884829969261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30.004509, y: 3.179388, z: 0.17474365}
+  m_Center: {x: 41.78374, y: 2.5947957, z: 193.44363}
 --- !u!1 &1431489628063584197
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4419923659744688134}
+  - component: {fileID: 6980086867309638340}
   m_Layer: 0
   m_Name: WallEast
   m_TagString: Untagged
@@ -68,6 +83,19 @@ Transform:
   m_Father: {fileID: 1703260498087539620}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6980086867309638340
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431489628063584197}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30.013432, y: 3.2073374, z: 0.20986938}
+  m_Center: {x: 41.791473, y: 2.595593, z: 172.65947}
 --- !u!1 &1988811094784248385
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4993681766440087365}
+  - component: {fileID: 1648618890886080292}
   m_Layer: 0
   m_Name: WallSouth
   m_TagString: Untagged
@@ -727,6 +756,19 @@ Transform:
   m_Father: {fileID: 1703260498087539620}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1648618890886080292
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814370648148358145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17804623, y: 3.2222404, z: 19.782196}
+  m_Center: {x: 5.502709, y: 1.3007412, z: 96.517914}
 --- !u!1 &5764197369032671727
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341629501806121946}
+  - component: {fileID: 9186240437410054892}
   m_Layer: 0
   m_Name: WallNord
   m_TagString: Untagged
@@ -891,6 +934,19 @@ Transform:
   m_Father: {fileID: 1703260498087539620}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9186240437410054892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717919290665902075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16682434, y: 3.2167048, z: 20.009216}
+  m_Center: {x: 57.21534, y: 2.604956, z: 183.08698}
 --- !u!1 &6967951995424150944
 GameObject:
   m_ObjectHideFlags: 0

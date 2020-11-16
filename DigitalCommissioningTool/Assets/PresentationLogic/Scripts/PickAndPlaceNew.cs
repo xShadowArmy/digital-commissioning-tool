@@ -10,7 +10,7 @@ public class PickAndPlaceNew : MonoBehaviour
         //Bewegen
         int a = 5;                                      //=Geschwindigkeit
 
-        Debug.Log("hold!");
+        //Debug.Log("hold!");
         // GetComponent<Rigidbody>().useGravity = false;         
         float x = Input.GetAxis("Horizontal") * a;          //Horizontale Eingabe (w,s)
         float y = Input.GetAxis("Vertical") * a;            //Vertikale Eingabe (a,d)
