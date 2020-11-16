@@ -24,12 +24,13 @@ public class SelectionManager : MonoBehaviour
         RaycastHit hit;
         if (Input.GetMouseButtonUp(0) && Physics.Raycast(ray, out hit))
         {
-            
             Transform tempObject = hit.transform;
             if (tempObject.CompareTag("SelectableWall"))
             {
+                Debug.Log("1a");
                 if (SelectedObject != null)
                 {
+                    Debug.Log("2a");
                     SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material = defaultMaterial;
                 }
                 SelectedObject = tempObject;
@@ -38,6 +39,7 @@ public class SelectionManager : MonoBehaviour
             }
             else if(SelectedObject != null)
             {
+                Debug.Log("1b");
                 Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                 invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
             }
