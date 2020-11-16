@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
-using SystemTools.Handler;
+using SystemTools.ManagingResources;
+using UnityEngine;
 
-namespace SystemTools.ManagingResources
+namespace SystemTools.Handler
 {
     /// <summary>
     /// Verwaltet String Resourcen und bietet Load and Store Architektur.
@@ -51,9 +52,11 @@ namespace SystemTools.ManagingResources
                 Doc = new XmlDocument( );
 
                 string tmp, StringResDir;
-
-                tmp = new PathHandler( ).RetrievePath( "StringResourcePath" );
-
+#if DEBUG
+                tmp = new PathHandler().RetrievePath( "StringResourcePathDebug" );
+#else
+                tmp = new PathHandler().RetrievePath( "StringResourcePathRelease" );
+#endif
                 StringResDir = tmp + CultureInfo.InstalledUICulture.ThreeLetterISOLanguageName + ".xml";
                 
                 try

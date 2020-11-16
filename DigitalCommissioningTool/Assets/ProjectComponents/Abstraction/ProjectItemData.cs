@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectComponents.Abstraction
 {
-    public class ProjectItemData
+    public struct ProjectItemData
     {
         public long IDRef { get; set; }
         public ProjectTransformationData Transformation { get; set; }

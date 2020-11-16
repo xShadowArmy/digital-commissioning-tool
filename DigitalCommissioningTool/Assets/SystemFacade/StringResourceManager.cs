@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Xml;
 using SystemTools.Handler; 
-using SystemTools.ManagingResources;
 
 namespace SystemFacade
 {
