@@ -20,9 +20,12 @@ public class PickAndPlaceNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        Camera editorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
+        GameObject switchModeButton = GameObject.Find("SwitchModeButton");
+        ModeHandler modeHandler = switchModeButton.GetComponent<ModeHandler>();
+        if (Input.GetMouseButton(0) && modeHandler.Mode.Equals("EditorMode"))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = editorModeCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, dragable))
             {
@@ -44,7 +47,7 @@ public class PickAndPlaceNew : MonoBehaviour
 
         Vector3 mousePos()
         {
-            return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
+            return editorModeCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
         }
     }
 }

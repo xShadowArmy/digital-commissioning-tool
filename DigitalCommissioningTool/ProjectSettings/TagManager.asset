@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - SelectableWall
+  - EditorModeCamera
+  - Button
   layers:
   - Default
   - TransparentFX
