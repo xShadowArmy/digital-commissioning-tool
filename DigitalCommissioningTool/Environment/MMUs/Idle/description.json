@@ -2,7 +2,7 @@
   "Name": "UnityIdleMMU",
   "ID": "dffe45fa-4411-455a-8c14-564c8c0fd0ae",
   "AssemblyName": "UnityIdleMMU.dll",
-  "MotionType": "idle",
+  "MotionType": "Pose/Idle",
   "Language": "UnityC#",
   "Author": "Felix Gaisbauer, Daimler AG",
   "Version": "1.0",

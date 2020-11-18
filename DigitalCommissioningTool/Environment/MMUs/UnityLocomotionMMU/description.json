@@ -2,7 +2,7 @@
   "Name": "UnityLocomotionMMU",
   "ID": "4b8e33c0-2db1-424a-96a8-ca9fdcbcb56a",
   "AssemblyName": "UnityLocomotionMMU.dll",
-  "MotionType": "walk",
+  "MotionType": "Locomotion/Walk",
   "Language": "UnityC#",
   "Author": "Felix Gaisbauer, Daimler AG",
   "Version": "1.0",

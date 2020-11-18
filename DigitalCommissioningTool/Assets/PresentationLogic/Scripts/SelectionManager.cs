@@ -7,12 +7,18 @@ public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material selectedMaterial;
+    [HideInInspector] public bool selected = false;
+    private GameObject controller;
+    private WallEditor popUp;
+
     private Transform SelectedObject { get; set; }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        controller = GameObject.Find("GameController");
+        popUp = controller.GetComponent<WallEditor>();
     }
 
     // Update is called once per frame
@@ -21,7 +27,7 @@ public class SelectionManager : MonoBehaviour
         Camera editorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
         GameObject switchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler modeHandler = switchModeButton.GetComponent<ModeHandler>();
-        
+
         if (modeHandler.Mode.Equals("EditorMode"))
         {
             Ray ray = editorModeCamera.ScreenPointToRay(Input.mousePosition);
@@ -37,17 +43,24 @@ public class SelectionManager : MonoBehaviour
                         Debug.Log("2a");
                         SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
                             defaultMaterial;
+                        selected = false;
+                        popUp.SetPopUp(tempObject.name);
                     }
 
                     SelectedObject = tempObject;
                     Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                     invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
+                    selected = true;
+                    popUp.SetPopUp(tempObject.name);
                 }
                 else if (SelectedObject != null)
                 {
                     Debug.Log("1b");
                     Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                     invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
+                    selected = false;
+                    popUp.SetPopUp(tempObject.name);
+
                 }
             }
         }
