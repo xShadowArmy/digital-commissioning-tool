@@ -40,6 +40,16 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="Floor">
+    <xs:complexType>
+      <xs:sequence>
+		<xs:element ref="Position" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>	
+  </xs:element>
+
   <xs:element name="Wall">
     <xs:complexType>
       <xs:sequence>

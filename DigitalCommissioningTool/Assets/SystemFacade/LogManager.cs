@@ -71,5 +71,10 @@ namespace SystemFacade
         {
             Handler.WriteLog( msg, (int)lvl, throwException, className, methodName );
         }
+
+        public static void Flush()
+        {
+            Handler.Flush( );
+        }
     }
 }

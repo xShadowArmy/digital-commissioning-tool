@@ -17,9 +17,9 @@ namespace ProjectComponents.FileIntegration
             Doc = doc;
         }
 
-        internal void WriteFile( ProjectData data )
+        internal void WriteFile( InternalProjectData data )
         {
-            LogManager.WriteInfo( "Datei \"Data.xml\" wird erstellt." );
+            LogManager.WriteInfo( "Datei \"Data.xml\" wird erstellt.", "DataWriter", "WriteFile" );
 
             ReCreateFile( );
 

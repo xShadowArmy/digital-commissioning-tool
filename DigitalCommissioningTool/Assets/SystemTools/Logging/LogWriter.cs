@@ -105,24 +105,14 @@ namespace SystemTools.Logging
         }
 
         /// <summary>
-        /// Schreibt die Daten in den Buffer.
-        /// </summary>
-        /// <param name="tag">Priorität der Nachricht.</param>
-        /// <param name="message">Die Nachricht.</param>
-        private void AddToBuffer( string tag, string message )
-        {
-            Buffer.Add( tag + message );
-        }
-
-        /// <summary>
         /// Schreibt den Buffer in die LogDatei.
         /// </summary>
         /// <exception cref="IOException">Wird geworfen wenn die Datei nicht beschrieben werden kann.</exception>
-        private void PrintToFile( )
+        internal void PrintToFile()
         {
             try
             {
-                using ( StreamWriter writer = File.CreateText( LogPath ) )
+                using ( StreamWriter writer = (( !File.Exists( LogPath ) ) ? File.CreateText( LogPath ) : new StreamWriter( LogPath ) ) )
                 {
                     if ( writer != null )
                     {
@@ -132,9 +122,12 @@ namespace SystemTools.Logging
                             {
                                 PrintFileHeader( writer );
 
-                                foreach ( string s in Buffer )
+                                if ( Buffer.Count > 0 )
                                 {
-                                    writer.WriteLine( s );
+                                    foreach ( string s in Buffer )
+                                    {
+                                        writer.WriteLine( s );
+                                    }
                                 }
 
                                 writer.Flush( );
@@ -147,12 +140,24 @@ namespace SystemTools.Logging
                         }
                     }
                 }
+
+                Buffer.Clear( );
             }
 
             catch ( Exception e )
             {
                 throw new IOException( "Log Datei konnte nicht geoeffnet und geschrieben werden Pfad: " + LogPath + " Fehler: " + e.Message );
             }
+        }
+
+        /// <summary>
+        /// Schreibt die Daten in den Buffer.
+        /// </summary>
+        /// <param name="tag">Priorität der Nachricht.</param>
+        /// <param name="message">Die Nachricht.</param>
+        private void AddToBuffer( string tag, string message )
+        {
+            Buffer.Add( tag + message );
         }
 
         /// <summary>

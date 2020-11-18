@@ -25,7 +25,7 @@ namespace UnitTests.SystemFacade
 
             DirectoryInfo logDirectory = new DirectoryInfo(Paths.LogPath);
             FileInfo logFile = logDirectory.GetFiles().OrderByDescending(f => f.LastWriteTime).First();
-
+            
             using (StreamReader sr = logFile.OpenText())
             {
                 string s = "";

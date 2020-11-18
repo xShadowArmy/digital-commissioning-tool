@@ -8,7 +8,7 @@ using SystemFacade;
 
 namespace ProjectComponents.Abstraction
 {
-    public class ProjectData
+    public class InternalProjectData
     {
         public string Name { get; private set; }
         public string FullPath { get; private set; }
@@ -16,7 +16,7 @@ namespace ProjectComponents.Abstraction
         public DateTime DateModified { get; private set; }
         private string Extension { get; set; }
 
-        public ProjectData()
+        public InternalProjectData()
         {
             if ( !StringResourceManager.Exists( "@DefaultProjectName" ) )
             {
@@ -32,11 +32,11 @@ namespace ProjectComponents.Abstraction
 
         public void ChangeProjectName( string newName )
         {
-            LogManager.WriteInfo( "Aendere Projektname von \"" + Name + "\" zu \"" + newName + "\"", "ProjectData", "ChangeProjectName" );
+            LogManager.WriteInfo( "Aendere Projektname von \"" + Name + "\" zu \"" + newName + "\"", "InternalProjectData", "ChangeProjectName" );
 
             if ( newName == null || newName == string.Empty )
             {
-                LogManager.WriteWarning( "Ungueltiger Projektname!", "ProjectData", "ChangeProjectName" );
+                LogManager.WriteWarning( "Ungueltiger Projektname!", "InternalProjectData", "ChangeProjectName" );
 
                 return;
             }
@@ -46,11 +46,11 @@ namespace ProjectComponents.Abstraction
 
         public void ChangeProjectPath( string newPath )
         {
-            LogManager.WriteInfo( "Aendere Projektpfad von \"" + FullPath + "\" zu \"" + newPath + Name + Extension + "\"", "ProjectData", "ChangeProjectPath" );
+            LogManager.WriteInfo( "Aendere Projektpfad von \"" + FullPath + "\" zu \"" + newPath + Name + Extension + "\"", "InternalProjectData", "ChangeProjectPath" );
 
             if ( newPath == null || newPath == string.Empty )
             {
-                LogManager.WriteWarning( "Ungueltiger Projektpfad!", "ProjectData", "ChangeProjectPath" );
+                LogManager.WriteWarning( "Ungueltiger Projektpfad!", "InternalProjectData", "ChangeProjectPath" );
 
                 return;
             }
@@ -60,11 +60,11 @@ namespace ProjectComponents.Abstraction
 
         public void ChangeDateCreated( DateTime date )
         {
-            LogManager.WriteInfo( "Aendere Projekterstellungsdatum von \"" + DateCreated + "\" zu \"" + date.ToShortDateString() + "\"", "ProjectData", "ChangeDateCreated" );
+            LogManager.WriteInfo( "Aendere Projekterstellungsdatum von \"" + DateCreated + "\" zu \"" + date.ToShortDateString() + "\"", "InternalProjectData", "ChangeDateCreated" );
 
             if ( date == null )
             {
-                LogManager.WriteWarning( "Ungueltiges Projekterstellungsdatum!", "ProjectData", "ChangeDateCreated" );
+                LogManager.WriteWarning( "Ungueltiges Projekterstellungsdatum!", "InternalProjectData", "ChangeDateCreated" );
 
                 return;
             }
@@ -74,11 +74,11 @@ namespace ProjectComponents.Abstraction
 
         public void ChangeDateModified( DateTime date )
         {
-            LogManager.WriteInfo( "Aendere Projektaenderungsdatum von \"" + DateCreated + "\" zu \"" + date.ToShortDateString( ) + "\"", "ProjectData", "ChangeDateModified" );
+            LogManager.WriteInfo( "Aendere Projektaenderungsdatum von \"" + DateCreated + "\" zu \"" + date.ToShortDateString( ) + "\"", "InternalProjectData", "ChangeDateModified" );
 
             if ( date == null )
             {
-                LogManager.WriteWarning( "Ungueltiges Projektaenderungsdatum!", "ProjectData", "ChangeDateModified" );
+                LogManager.WriteWarning( "Ungueltiges Projektaenderungsdatum!", "InternalProjectData", "ChangeDateModified" );
 
                 return;
             }

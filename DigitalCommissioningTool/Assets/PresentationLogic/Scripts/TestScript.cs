@@ -17,6 +17,8 @@ namespace Scripts
             Debug.Log( Paths.DataResourcePath );
             Debug.Log( Paths.TempPath );
 
+            LogManager.Flush( );
+
             ArchiveManager.ArchiveDirectory( Paths.ProjectsPath, Paths.TempPath + "project.prj" );
         }
 
