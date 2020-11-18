@@ -88,7 +88,12 @@ namespace SystemTools.Handler
                 Logger.WriteLog( "StringRessourceHandler konnte nicht initialisiert werden! Fehler: " + e.Message, 3, true, "StringRessourceHandler", "StringRessourceHandler" );
             }
         }
-        
+
+        ~StringResourceHandler()
+        {
+            WriteFile( );
+        }
+
         /// <summary>
         /// Lädt eine StringResource anhand ihres Namens.
         /// </summary>
@@ -118,14 +123,7 @@ namespace SystemTools.Handler
         /// <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
         public bool StoreString( string name, string content, bool overwrite = false )
         {
-            bool tmp = Writer.StoreString( name, content, overwrite, StringResources );
-
-            if ( tmp )
-            {
-                WriteFile( );
-            }
-
-            return tmp;
+            return Writer.StoreString( name, content, overwrite, StringResources );
         }
         
         /// <summary>
@@ -135,7 +133,7 @@ namespace SystemTools.Handler
         {
             Writer.WriteResourceFile( StringResources );
         }
-
+         
         /// <summary>
         /// Überprüft ob eine StringResource mit der angegebenen ID verfügbar ist.
         /// </summary>

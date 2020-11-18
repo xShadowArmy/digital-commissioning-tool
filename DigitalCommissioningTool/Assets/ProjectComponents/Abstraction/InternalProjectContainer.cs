@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace ProjectComponents.Abstraction
 {
-    public class ProjectContainer
+    public class InternalProjectContainer
     {
         public List<ProjectStorageData> StorageRecks { get; private set; }
 
-        public ProjectContainer()
+        public InternalProjectContainer()
         {
             StorageRecks = new List<ProjectStorageData>( );
         }

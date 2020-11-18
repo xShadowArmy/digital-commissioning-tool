@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectComponents.Abstraction
 {
-    public class ProjectSettings
+    public class InternalProjectSettings
     {
-        public ProjectSettings()
+        public InternalProjectSettings()
         {
 
         }

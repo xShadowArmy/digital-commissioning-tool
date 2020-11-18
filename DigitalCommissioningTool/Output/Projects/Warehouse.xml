@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:ProjectWarehouse xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ProjectWarehouseSchema.xsd">
+	<xs:Floor>
+		<xs:Position xs:x="" xs:y="" xs:z=""/>
+		<xs:Rotation xs:x="" xs:y="" xs:z=""/>
+		<xs:Scale xs:x="" xs:y="" xs:z=""/>
+	</xs:Floor>
 	<xs:Walls>
 		<xs:Wall xs:id="1">
 			<xs:Position xs:x="" xs:y="" xs:z=""/>

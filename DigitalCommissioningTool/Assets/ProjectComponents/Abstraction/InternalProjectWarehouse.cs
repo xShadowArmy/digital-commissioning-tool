@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectComponents.Abstraction
 {
-    public class ProjectWarehouse
+    public class InternalProjectWarehouse
     {
         public ProjectTransformationData Size { get; private set; }
 
@@ -19,7 +19,7 @@ namespace ProjectComponents.Abstraction
 
         public List<ProjectStorageData> StorageRecks { get; private set; }
 
-        public ProjectWarehouse()
+        public InternalProjectWarehouse()
         {
             Size = new ProjectTransformationData( );
 

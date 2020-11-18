@@ -94,5 +94,10 @@ namespace SystemTools.Handler
                 throw new Exception( msg );
             }
         }
+
+        public void Flush()
+        {
+            Writer.PrintToFile( );
+        }
     }
 }
