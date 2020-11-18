@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainCamera : MonoBehaviour
 {
@@ -18,6 +19,22 @@ public class MainCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Menu"))
+        {
+            if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
+            {
+                SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+            }
+            GameObject[] gameObjects = SceneManager.GetSceneByName("MainMenu").GetRootGameObjects();
+            foreach (GameObject g in gameObjects)
+            {
+                if (g.name.Equals("Canvas"))
+                {
+                    g.SetActive(!g.activeSelf);
+                }
+            }
+        }
+
         _rightClicked = Input.GetMouseButton(1);
 
         if (_rightClicked)
