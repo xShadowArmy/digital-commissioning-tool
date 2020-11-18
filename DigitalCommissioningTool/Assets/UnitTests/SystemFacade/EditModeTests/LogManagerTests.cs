@@ -22,6 +22,7 @@ namespace UnitTests.SystemFacade
 
             LogManager.WriteLog(testString, LogLevel.Info, false, "LogManagerTests", "writes_log_message");
             LogManager.WriteError(testString, "LogManagerTests", "writes_log_message");
+            LogManager.Flush();
 
             DirectoryInfo logDirectory = new DirectoryInfo(Paths.LogPath);
             FileInfo logFile = logDirectory.GetFiles().OrderByDescending(f => f.LastWriteTime).First();
