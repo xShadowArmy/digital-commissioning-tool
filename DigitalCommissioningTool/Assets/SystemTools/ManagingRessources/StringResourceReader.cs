@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using SystemTools.Handler;
+using UnityEngine;
 
 namespace SystemTools.ManagingResources
 {
@@ -36,7 +37,7 @@ namespace SystemTools.ManagingResources
         /// <summary>
         /// Informationen zur aktuellen Systemsprache.
         /// </summary>
-        private CultureInfo LangInfo { get; set; }
+        private SystemLanguage LangInfo { get; set; }
 
         /// <summary>
         /// Der Pfad an dem die StringResourcen liegen.
@@ -49,7 +50,7 @@ namespace SystemTools.ManagingResources
         /// <param name="path">Pfad an dem die StringResourcen liegen.</param>
         /// <param name="info">Informationen über die Systemsprache.</param>
         /// <param name="stringResources">Das Pufferobjekt.</param>
-        internal StringResourceReader( string path, XmlDocument doc, CultureInfo info, List<StringResourceData> stringResources )
+        internal StringResourceReader( string path, XmlDocument doc, SystemLanguage info, List<StringResourceData> stringResources )
         {
             Logger = new LogHandler( );
 
@@ -169,7 +170,7 @@ namespace SystemTools.ManagingResources
 
                         if ( nav.LocalName == "StringResources" )
                         {
-                            if ( !nav.GetAttribute( "lang", xmlns ).Equals( LangInfo.ThreeLetterISOLanguageName ) )
+                            if ( !nav.GetAttribute( "lang", xmlns ).Equals( LangInfo.ToString() ) )
                             {
                                 Logger.WriteError( "Fehler beim Lesen der StringResource headers!Sprache ist nicht identisch zur Systemsprache", "StringResourceReader", "ReadStringResources" );
                                 throw new Exception( "Fehler beim Lesen der StringResource headers! Sprache ist nicht identisch zur Systemsprache" );

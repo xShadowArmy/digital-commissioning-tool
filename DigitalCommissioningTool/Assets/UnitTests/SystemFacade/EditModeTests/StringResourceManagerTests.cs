@@ -14,6 +14,8 @@ namespace UnitTests.SystemFacade
         [Test]
         public void overrides_string_resources()
         {
+            StringResourceManager.SelectLanguage( SystemLanguage.German );
+
             string key = "testResource13425346564765";
             StringResourceManager.StoreString(key, "unchanged content");
             StringResourceManager.StoreString(key, "overwritten content", true);
@@ -39,7 +41,7 @@ namespace UnitTests.SystemFacade
             bool isUnique = true;
             HashSet<string> set = new HashSet<string>();
 
-            string germanStringResourcesPath = Paths.StringResourcePath + "deu.xml";
+            string germanStringResourcesPath = Paths.StringResourcePath + "German.xml";
             XmlDocument stringResourcesDocument = new XmlDocument();
             stringResourcesDocument.Load(germanStringResourcesPath);
 
@@ -63,7 +65,7 @@ namespace UnitTests.SystemFacade
             bool isUnique = true;
             HashSet<string> set = new HashSet<string>();
 
-            string englishStringResourcesPath = Paths.StringResourcePath + "eng.xml";
+            string englishStringResourcesPath = Paths.StringResourcePath + "English.xml";
             XmlDocument stringResourcesDocument = new XmlDocument();
             stringResourcesDocument.Load(englishStringResourcesPath);
 

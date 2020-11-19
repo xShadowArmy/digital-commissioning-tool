@@ -8,6 +8,7 @@ using System.Xml.XPath;
 using System.IO;
 using SystemTools.Handler;
 using System.Globalization;
+using UnityEngine;
 
 namespace SystemTools.ManagingResources
 {
@@ -24,7 +25,7 @@ namespace SystemTools.ManagingResources
         /// <summary>
         /// Informationen zur aktuellen Systemsprache.
         /// </summary>
-        private CultureInfo LangInfo { get; set; }
+        private SystemLanguage LangInfo { get; set; }
 
         /// <summary>
         /// Der Pfad an dem die StringRessourcen liegen.
@@ -42,7 +43,7 @@ namespace SystemTools.ManagingResources
         /// <param name="path">Pfad an dem die StringRessourcen liegen.</param>
         /// <param name="info">Informationen über die Systemsprache.</param>
         /// <param name="doc">Die StringRessource Datei.</param>
-        internal StringResourceWriter( string path, XmlDocument doc, CultureInfo info )
+        internal StringResourceWriter( string path, XmlDocument doc, SystemLanguage info )
         {
             Logger = new LogHandler( );
 
@@ -116,7 +117,7 @@ namespace SystemTools.ManagingResources
                 using ( StreamWriter writer = new StreamWriter( File.Create( Path ) ) )
                 {
                     writer.WriteLine( "<?xml version=\"1.0\" encoding=\"utf-8\"?>" );
-                    writer.WriteLine( "<xs:StringResources xs:lang=\"" + LangInfo.ThreeLetterISOLanguageName + "\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ StringResourceSchema.xsd\">" );
+                    writer.WriteLine( "<xs:StringResources xs:lang=\"" + LangInfo.ToString() + "\" xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ StringResourceSchema.xsd\">" );
                     writer.WriteLine( "</xs:StringResources>" );
                     
                     writer.Flush( );

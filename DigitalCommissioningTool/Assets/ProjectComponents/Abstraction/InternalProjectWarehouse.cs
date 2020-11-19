@@ -9,7 +9,7 @@ namespace ProjectComponents.Abstraction
 {
     public class InternalProjectWarehouse
     {
-        public ProjectTransformationData Size { get; private set; }
+        public ProjectFloorData Floor { get; private set; }
 
         public List<ProjectWallData> Walls { get; private set; }
 
@@ -21,7 +21,7 @@ namespace ProjectComponents.Abstraction
 
         public InternalProjectWarehouse()
         {
-            Size = new ProjectTransformationData( );
+            Floor = new ProjectFloorData( );
 
             Walls = new List<ProjectWallData>( );
 
@@ -35,6 +35,51 @@ namespace ProjectComponents.Abstraction
         public void SetDefaultValues()
         {
 
+        }
+
+        public void UpdateFloor( ProjectFloorData data )
+        {
+            Floor = data;
+        }
+
+        public void AddWall( ProjectWallData data )
+        {
+            Walls.Add( data );
+        }
+
+        public bool RemoveWall( ProjectWallData data )
+        {
+            return Walls.Remove( data );
+        }
+
+        public void AddWindow( ProjectWindowData data )
+        {
+            Windows.Add( data );
+        }
+
+        public bool RemoveWindow( ProjectWindowData data )
+        {
+            return Windows.Remove( data );
+        }
+
+        public void AddDoor( ProjectDoorData data )
+        {
+            Doors.Add( data );
+        }
+
+        public bool RemoveDoor( ProjectDoorData data )
+        {
+            return Doors.Remove( data );
+        }
+
+        public void AddStorageReck( ProjectStorageData data )
+        {
+            StorageRecks.Add( data );
+        }
+
+        public bool RemoveStorageReck( ProjectStorageData data )
+        {
+            return StorageRecks.Remove( data );
         }
     }
 }

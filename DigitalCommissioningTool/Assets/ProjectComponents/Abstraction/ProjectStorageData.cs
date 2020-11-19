@@ -24,7 +24,7 @@ namespace ProjectComponents.Abstraction
             ID = id;
         }
 
-        public void SetTransformationData( ProjectTransformationData transformation )
+        public void SetTransformation( ProjectTransformationData transformation )
         {
             Transformation = transformation;
         }

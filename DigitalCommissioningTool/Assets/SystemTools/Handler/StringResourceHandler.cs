@@ -41,11 +41,11 @@ namespace SystemTools.Handler
         /// <summary>
         /// Initialisiert den StringRessourceHandler und lädt die Strings in den Speicher.
         /// </summary>
-        public StringResourceHandler()
+        public StringResourceHandler( SystemLanguage lang )
         {
             Logger = new LogHandler( );
 
-            Logger.WriteInfo( "Initialisierung des StringResourceManagers", "StringRessourceHandler", "StringRessourceHandler" );
+            Logger.WriteInfo( "Initialisierung des StringResourceHandlers", "StringRessourceHandler", "StringRessourceHandler" );
 
             try
             {
@@ -57,7 +57,7 @@ namespace SystemTools.Handler
 #else
                 tmp = new PathHandler().RetrievePath( "StringResourcePathRelease" );
 #endif
-                StringResDir = tmp + CultureInfo.InstalledUICulture.ThreeLetterISOLanguageName + ".xml";
+                StringResDir = tmp + lang.ToString() + ".xml";
                 
                 try
                 {
@@ -79,8 +79,8 @@ namespace SystemTools.Handler
                     Doc = null;
                 }
 
-                Reader = new StringResourceReader( StringResDir, Doc, CultureInfo.InstalledUICulture, StringResources );
-                Writer = new StringResourceWriter( StringResDir, Doc, CultureInfo.InstalledUICulture );
+                Reader = new StringResourceReader( StringResDir, Doc, lang, StringResources );
+                Writer = new StringResourceWriter( StringResDir, Doc, lang );
             }
 
             catch( Exception e )

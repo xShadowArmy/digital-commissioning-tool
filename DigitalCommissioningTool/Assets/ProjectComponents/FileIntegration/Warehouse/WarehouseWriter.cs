@@ -1,11 +1,303 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.XPath;
+using ProjectComponents.Abstraction;
+using SystemFacade;
 using UnityEngine;
 
 namespace ProjectComponents.FileIntegration
 {
     internal class WarehouseWriter
     {
+        private XmlDocument Doc { get; set; }
 
+        internal WarehouseWriter( XmlDocument doc )
+        {
+            Doc = doc;
+        }
+
+        internal void WriteFile( InternalProjectWarehouse data )
+        {
+            LogManager.WriteInfo( "Datei \"Warehouse.xml\" wird erstellt.", "WarehouseWriter", "WriteFile" );
+
+            ReCreateFile( );
+
+            string xmlns = "https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/";
+
+            try
+            {
+                Doc.Load( Paths.TempPath + "Warehouse.xml" );
+
+                XPathNavigator nav = Doc.CreateNavigator( );
+
+                nav.MoveToFirstChild( );
+
+                nav.AppendChildElement( "xs", "Floor", xmlns, "" );
+                nav.MoveToChild( "Floor", xmlns );                
+                WriteFloor( nav, data, xmlns );
+
+                nav.AppendChildElement( "xs", "Walls", xmlns, "" );
+                nav.MoveToChild( "Walls", xmlns );
+                WriteWalls( nav, data, xmlns );
+                
+                nav.AppendChildElement( "xs", "Windows", xmlns, "" );
+                nav.MoveToChild( "Windows", xmlns );
+                WriteWindows( nav, data, xmlns );
+                
+                nav.AppendChildElement( "xs", "Doors", xmlns, "" );
+                nav.MoveToChild( "Doors", xmlns );
+                WriteDoors( nav, data, xmlns );
+
+                nav.AppendChildElement( "xs", "StorageRecks", xmlns, "" );
+                nav.MoveToChild( "StorageRecks", xmlns );
+                WriteStorageRecks( nav, data, xmlns );
+
+                XmlTextWriter writer = new XmlTextWriter( Paths.TempPath + "Warehouse.xml", System.Text.Encoding.UTF8 )
+                {
+                    Formatting = Formatting.Indented,
+                    Indentation = 4
+                };
+
+                Doc.Save( writer );
+
+                writer.Dispose( );
+            }
+
+            catch ( Exception e )
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseWriter", "WriteFile" );
+            }
+        }
+
+        private void WriteFloor( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
+        {
+            if ( nav.LocalName.Equals( "Floor" ) )
+            {
+                WriteTransformationData( nav, data.Floor.Transformation, xmlns );
+            }
+
+            else
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<Floor>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteFloor" );
+            }
+        }
+
+        private void WriteWalls( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
+        {
+            if ( nav.LocalName.Equals( "Walls" ) )
+            {
+                nav.CreateAttribute( "xs", "count", xmlns, data.Walls.Count.ToString( ) );
+
+                for ( int i = 0; i < data.Walls.Count; i++ )
+                {
+                    if ( i == 0 )
+                    {
+                        nav.AppendChildElement( "xs", "Wall", xmlns, "" );
+                        nav.MoveToChild( "Wall", xmlns );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
+                    }
+
+                    else
+                    {
+                        nav.InsertElementAfter( "xs", "Wall", xmlns, "" );
+                        nav.MoveToNext( );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
+                    }
+
+                    WriteTransformationData( nav, data.Walls[i].Transformation, xmlns );
+                }
+
+                nav.MoveToParent( );
+            }
+
+            else
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<Walls>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteWalls" );
+            }
+        }
+
+        private void WriteWindows( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
+        {
+            if ( nav.LocalName.Equals( "Windows" ) )
+            {
+                nav.CreateAttribute( "xs", "count", xmlns, data.Windows.Count.ToString( ) );
+
+                for ( int i = 0; i < data.Windows.Count; i++ )
+                {
+                    if ( i == 0 )
+                    {
+                        nav.AppendChildElement( "xs", "Window", xmlns, "" );
+                        nav.MoveToChild( "Window", xmlns );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Windows[ i ].ID.ToString( ) );
+                    }
+
+                    else
+                    {
+                        nav.InsertElementAfter( "xs", "Window", xmlns, "" );
+                        nav.MoveToNext( );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Windows[ i ].ID.ToString( ) );
+                    }
+
+                    WriteTransformationData( nav, data.Windows[ i ].Transformation, xmlns );
+                }
+
+                nav.MoveToParent( );
+            }
+
+            else
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<Windows>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteWindows" );
+            }
+        }
+
+        private void WriteDoors( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
+        {
+            if ( nav.LocalName.Equals( "Doors" ) )
+            {
+                nav.CreateAttribute( "xs", "count", xmlns, data.Doors.Count.ToString( ) );
+
+                for ( int i = 0; i < data.Doors.Count; i++ )
+                {
+                    if ( i == 0 )
+                    {
+                        nav.AppendChildElement( "xs", "Door", xmlns, "" );
+                        nav.MoveToChild( "Door", xmlns );
+                        nav.CreateAttribute( "xs", "type", xmlns, data.Doors[ i ].Type );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Doors[ i ].ID.ToString( ) );
+                    }
+
+                    else
+                    {
+                        nav.InsertElementAfter( "xs", "Door", xmlns, "" );
+                        nav.MoveToNext( );
+                        nav.CreateAttribute( "xs", "type", xmlns, data.Doors[ i ].Type );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Doors[ i ].ID.ToString( ) );
+                    }
+
+                    WriteTransformationData( nav, data.Doors[ i ].Transformation, xmlns );
+                }
+
+                nav.MoveToParent( );
+            }
+
+            else
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<Doors>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteDoors" );
+            }
+        }
+
+        private void WriteStorageRecks( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
+        {
+            if ( nav.LocalName.Equals( "StorageRecks" ) )
+            {
+                nav.CreateAttribute( "xs", "count", xmlns, data.StorageRecks.Count.ToString( ) );
+
+                for ( int i = 0; i < data.StorageRecks.Count; i++ )
+                {
+                    if ( i == 0 )
+                    {
+                        nav.AppendChildElement( "xs", "Storage", xmlns, "" );
+                        nav.MoveToChild( "Storage", xmlns );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].ID.ToString( ) );
+                    }
+
+                    else
+                    {
+                        nav.InsertElementAfter( "xs", "Storage", xmlns, "" );
+                        nav.MoveToNext( );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].ID.ToString( ) );
+                    }
+
+                    nav.AppendChildElement( "xs", "Transform", xmlns, "" );
+                    nav.MoveToChild( "Transform", xmlns );
+                    
+                    WriteTransformationData( nav, data.StorageRecks[ i ].Transformation, xmlns );
+
+                    nav.InsertElementAfter( "xs", "Items", xmlns, "" );
+                    nav.MoveToNext( );
+                    nav.CreateAttribute( "xs", "count", xmlns, data.StorageRecks[ i ].GetItems( ).Length.ToString( ) );
+                    
+                    for( int j = 0; j < data.StorageRecks[i].GetItems().Length; j++ )
+                    {
+                        if ( j == 0 )
+                        {
+                            nav.AppendChildElement( "xs", "Item", xmlns, "" );
+                            nav.MoveToChild( "Item", xmlns );
+                            nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                        }
+
+                        else
+                        {
+                            nav.AppendChildElement( "xs", "Item", xmlns, "" );
+                            nav.MoveToNext( );
+                            nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                        }
+                        
+                        WriteTransformationData( nav, data.StorageRecks[ i ].GetItems()[j].Transformation, xmlns );
+                    }
+
+                    nav.MoveToParent( );
+                    nav.MoveToParent( );
+                }
+
+                nav.MoveToParent( );
+            }
+
+            else
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<StorageRecks>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteStorageRecks" );
+            }
+        }
+
+        private void WriteTransformationData( XPathNavigator nav, ProjectTransformationData data, string xmlns )
+        {
+            nav.AppendChildElement( "xs", "Position", xmlns, "" );
+            nav.MoveToChild( "Position", xmlns );
+            nav.CreateAttribute( "xs", "x", xmlns, data.Position.x.ToString( ) );
+            nav.CreateAttribute( "xs", "y", xmlns, data.Position.y.ToString( ) );
+            nav.CreateAttribute( "xs", "z", xmlns, data.Position.z.ToString( ) );
+
+            nav.InsertElementAfter( "xs", "Rotation", xmlns, "" );
+            nav.MoveToNext( );
+            nav.CreateAttribute( "xs", "x", xmlns, data.Rotation.x.ToString( ) );
+            nav.CreateAttribute( "xs", "y", xmlns, data.Rotation.y.ToString( ) );
+            nav.CreateAttribute( "xs", "z", xmlns, data.Rotation.z.ToString( ) );
+
+            nav.InsertElementAfter( "xs", "Scale", xmlns, "" );
+            nav.MoveToNext( );
+            nav.CreateAttribute( "xs", "x", xmlns, data.Scale.x.ToString( ) );
+            nav.CreateAttribute( "xs", "y", xmlns, data.Scale.y.ToString( ) );
+            nav.CreateAttribute( "xs", "z", xmlns, data.Scale.z.ToString( ) );
+
+            nav.MoveToParent( );
+        }
+
+        private void ReCreateFile()
+        {
+            try
+            {
+                if ( File.Exists( Paths.TempPath + "Warehouse.xml" ) )
+                {
+                    File.Delete( Paths.TempPath + "Warehouse.xml" );
+                }
+
+                using ( StreamWriter writer = new StreamWriter( File.Create( Paths.TempPath + "Warehouse.xml" ) ) )
+                {
+                    writer.WriteLine( "<?xml version=\"1.0\" encoding=\"utf-8\"?>" );
+                    writer.WriteLine( "<xs:ProjectWarehouse xmlns:xs=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ProjectWarehouseSchema.xsd\">" );
+                    writer.WriteLine( "</xs:ProjectWarehouse>" );
+
+                    writer.Flush( );
+                }
+            }
+
+            catch ( Exception e )
+            {
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReCreateFile" );
+            }
+        }
     }
 }

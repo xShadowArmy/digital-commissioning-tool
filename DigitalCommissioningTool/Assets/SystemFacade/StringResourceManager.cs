@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
-using SystemTools.Handler; 
+using SystemTools.Handler;
+using UnityEngine;
 
 namespace SystemFacade
 {
@@ -20,9 +21,9 @@ namespace SystemFacade
         /// <summary>
         /// Initialisiert den StringRessourceHandler und lädt die Strings in den Speicher.
         /// </summary>
-        static StringResourceManager()
+        static StringResourceManager( )
         {
-            Handler = new StringResourceHandler( );
+            Handler = new StringResourceHandler( Application.systemLanguage );
         }
 
         /// <summary>
@@ -135,6 +136,11 @@ namespace SystemFacade
         public static bool Exists( this string str, string name )
         {
             return Handler.Exists( name );
+        }
+
+        public static void SelectLanguage( SystemLanguage lang )
+        {
+            Handler = new StringResourceHandler( lang );
         }
     }
 }

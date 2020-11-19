@@ -66,6 +66,7 @@
       <xs:sequence>
 		<xs:element ref="Wall" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
+      <xs:attribute ref="count" use="required"/>
     </xs:complexType>
   </xs:element>
 

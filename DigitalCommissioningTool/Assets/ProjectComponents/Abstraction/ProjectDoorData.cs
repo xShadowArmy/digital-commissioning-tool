@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjectComponents.Abstraction
 {
-    public class ProjectDoorData
+    public struct ProjectDoorData
     {
-        public long ID { get; set; }
-        public string Type { get; set; }
-        public ProjectTransformationData Transformation { get; set; }
+        public long ID { get; private set; }
+        public string Type { get; private set; }
+        public ProjectTransformationData Transformation { get; private set; }
 
         public ProjectDoorData( long id, string type, ProjectTransformationData transformation )
         {
