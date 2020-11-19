@@ -33358,6 +33358,11 @@ PrefabInstance:
       propertyPath: dragable.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 51959459360970597, guid: f5eb5de138cd6b24b886aca5d1954313,
+        type: 3}
+      propertyPath: mask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 606197324494146602, guid: f5eb5de138cd6b24b886aca5d1954313,
         type: 3}
       propertyPath: m_Layer
@@ -51919,6 +51924,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2627113339639770193, guid: f622d1f902e8c2649a3734676f49d8c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2660833451017572328, guid: f622d1f902e8c2649a3734676f49d8c3,
         type: 3}
       propertyPath: m_RootOrder
@@ -66053,6 +66063,9 @@ MonoBehaviour:
   dragable:
     serializedVersion: 2
     m_Bits: 256
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &2111836331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66806,6 +66819,9 @@ MonoBehaviour:
   dragable:
     serializedVersion: 2
     m_Bits: 256
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &2145446676
 BoxCollider:
   m_ObjectHideFlags: 0

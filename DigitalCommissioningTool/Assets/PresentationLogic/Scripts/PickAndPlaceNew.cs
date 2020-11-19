@@ -8,6 +8,11 @@ public class PickAndPlaceNew : MonoBehaviour
     GameObject selected;
     bool isDragging;
     bool hitObject; //keinObject bewegen wenn schon eins ausgewählt
+    float lastPosX;
+    float lastPosZ;
+    Vector3 mousePos;
+    public LayerMask mask;
+
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +20,9 @@ public class PickAndPlaceNew : MonoBehaviour
         //pos = transform.position;
         isDragging = false;
         hitObject = false;
+        lastPosX = 0f;
+        lastPosZ = 0f;
+        selected = null;
     }
 
     // Update is called once per frame
@@ -33,22 +41,56 @@ public class PickAndPlaceNew : MonoBehaviour
                 {
                     selected = hit.collider.gameObject;
                     isDragging = true;
-                    Debug.Log("hit");
                     hitObject = true;
                 }
             }
-            if (isDragging)
+        }
+        if (isDragging)
+        {
+            Ray ray2 = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit2;
+            //                  (ray, hit, range, mask)
+            if (Physics.Raycast(ray2, out hit2, Mathf.Infinity, mask))
             {
-                Vector3 pos = mousePos();
-                selected.transform.position = pos;
+                //get position (x,y,z) from click
+                float posX = hit2.point.x;
+                float posZ = hit2.point.z;
+
+                //   Debug.Log("x: " + posX + "z: " + posZ);
+
+                //=> erhält maus position
+                //Updated Posx!=x, only when mouse is moving 
+                if (lastPosX != posX || lastPosZ != posZ)
+                {
+                    lastPosX = posX;
+                    lastPosZ = posZ;
+                    //    Debug.Log("x: " + posX + "z: " + posZ);
+
+                    //Cursor
+                    selected.transform.position = new Vector3(posX, 0f, posZ);
+                    //Objekte fliegen auf kamera zu => add layer floor -> boden hinzufügen und am würfel entfernen
+                }
+
+
+                //When space
+                if (Input.GetKeyDown("space"))
+                {
+                    selected.transform.rotation = selected.transform.rotation * Quaternion.AngleAxis(45, Vector3.up);
+                    // hit.collider.transform.rotation = *Quaternion.AngleAxis(90, Vector3.up);
+                }
+
+            }
+            if (Input.GetKeyDown("return"))
+            {
+                hitObject = false;
+                isDragging = false;
             }
         }
-        else { isDragging = false; hitObject = false; }
 
-        Vector3 mousePos()
-        {
-            return editorModeCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
-        }
     }
+
 }
+
+
+
 
