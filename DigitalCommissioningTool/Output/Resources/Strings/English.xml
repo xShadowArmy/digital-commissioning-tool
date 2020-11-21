@@ -33,4 +33,7 @@
     <xs:string xs:name="testResource13425346564765" xs:id="11">
         <xs:value>overwritten content</xs:value>
     </xs:string>
+    <xs:string xs:name="DefaultProjectName" xs:id="12">
+        <xs:value>NeuesProject</xs:value>
+    </xs:string>
 </xs:StringResources>

@@ -32,7 +32,7 @@ namespace ProjectComponents.Abstraction
 
         public void SetScale( Vector3 scale )
         {
-            Rotation = Scale;
+            Scale = scale;
         }
     }
 }

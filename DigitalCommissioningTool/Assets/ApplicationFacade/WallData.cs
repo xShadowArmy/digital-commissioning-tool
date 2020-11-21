@@ -4,43 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using UnityEngine;
 
 namespace ApplicationFacade
 {
-    public class WallData
+    public class WallData : GameObjectData
     {
-        public long ID
+        internal WallData() : base( )
         {
-            get
-            {
-                return Data.ID;
-            }
-
-            set
-            {
-                Data.SetID( value );
-            }
         }
 
-        public TransformationData Transformation
+        internal WallData( long id ) : base( id )
         {
-            get
-            {
-                return new TransformationData( Data.Transformation.Position, Data.Transformation.Rotation, Data.Transformation.Scale );
-            }
-
-            set
-            {
-                Data.SetTransformation( new ProjectTransformationData( value.Position, value.Rotation, value.Scale ) );
-            }
-
-
         }
 
+        internal WallData( long id, Vector3 position, Vector3 rotation, Vector3 scale ) : base( id, position, rotation, scale )
+        {
+        }
 
-        private ProjectWallData Data { get; set; }
-
-        public WallData( long id, ProjectTransformationData transformation )
+        internal WallData( long id, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( id, position, rotation, scale, obj )
         {
         }
     }

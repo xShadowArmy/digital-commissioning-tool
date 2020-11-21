@@ -20,15 +20,21 @@ namespace ProjectComponents.FileIntegration
             Writer = new DataWriter( new XmlDocument() );
         }
 
-        public void LoadFile( InternalProjectData data )
+        public InternalProjectData LoadFile( )
         {
             LogManager.WriteInfo( "ProjektData Datei wird gelesen.", "DataHandler", "LoadFile" );
+
+            InternalProjectData data = new InternalProjectData( );
+
             Reader.ReadFile( data );
+
+            return data;
         }
 
         public void SaveFile( InternalProjectData data )
         {
             LogManager.WriteInfo( "ProjektData Datei wird geschrieben.", "DataHandler", "SaveFile" );
+            
             Writer.WriteFile( data );
         }
     }

@@ -59,7 +59,6 @@ namespace SystemTools.Logging
         ~LogWriter()
         {
             RefCnt -= 1;
-            Debug.Log( "LogRefCount: " + RefCnt  );
 
             if ( RefCnt == 0 )
             {

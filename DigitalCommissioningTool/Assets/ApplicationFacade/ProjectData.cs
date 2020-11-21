@@ -57,7 +57,7 @@ namespace ApplicationFacade
             }
         }
 
-        private InternalProjectData Data { get; set; }
+        internal InternalProjectData Data { get; private set; }
                
         public ProjectData()
         {

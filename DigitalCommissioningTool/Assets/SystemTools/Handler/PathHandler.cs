@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace SystemTools.Handler
 {
@@ -63,6 +64,27 @@ namespace SystemTools.Handler
                 Table.Remove( name );
 
                 return con.RemoveData( name );
+            }
+        }
+
+        public void ClearTempPath()
+        {
+#if DEBUG
+            string temp = RetrievePath( "TempPathDebug" );
+#else
+            string temp = RetrievePath( "TempPathRelease" );
+#endif
+            try
+            {
+                foreach( string tmp in Directory.GetFiles( temp ) )
+                {
+                    File.Delete( tmp );
+                }
+            }
+
+            catch( Exception e )
+            {
+                Logger.WriteWarning( "Temp Pfad konnte nicht geleert werden! Fehler: " + e.Message, "PathHandler", "ClearTempPath" );
             }
         }
 

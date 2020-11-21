@@ -138,6 +138,10 @@ namespace SystemFacade
             return Handler.Exists( name );
         }
 
+        /// <summary>
+        /// Wählt die passenden StringResourcen für die jeweilige Sprache aus.
+        /// </summary>
+        /// <param name="lang">Die Sprache die verwendet werden soll.</param>
         public static void SelectLanguage( SystemLanguage lang )
         {
             Handler = new StringResourceHandler( lang );

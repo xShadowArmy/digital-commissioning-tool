@@ -4,42 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using UnityEngine;
 
 namespace ApplicationFacade
 {
-    public struct WindowData
+    public class WindowData : GameObjectData
     {
-        public long ID
+        internal WindowData() : base( )
         {
-            get
-            {
-                return Data.ID;
-            }
-
-            set
-            {
-                Data.SetID( value );
-            }
-        }
-        
-        public TransformationData Transformation
-        {
-            get
-            {
-                return new TransformationData( Data.Transformation.Position, Data.Transformation.Rotation, Data.Transformation.Scale );
-            }
-
-            set
-            {
-                Data.SetTransformation( new ProjectTransformationData( value.Position, value.Rotation, value.Scale ) );
-            }
         }
 
-        private ProjectWindowData Data { get; set; }
-
-        public WindowData( long id, TransformationData transformation )
+        internal WindowData( long id ) : base( id )
         {
-            Data = new ProjectWindowData( id, new ProjectTransformationData( transformation.Position, transformation.Rotation, transformation.Scale ) );
+        }
+
+        internal WindowData( long id, Vector3 position, Vector3 rotation, Vector3 scale ) : base( id, position, rotation, scale )
+        {
+        }
+
+        internal WindowData( long id, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( id, position, rotation, scale, obj )
+        {
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 using ProjectComponents.Abstraction;
@@ -37,8 +38,14 @@ namespace ProjectComponents.FileIntegration
 
                 nav.MoveToNext( );
                 ReadWalls( nav, warehouse, xmlns );
+
+                nav.MoveToNext( );
                 ReadWindows( nav, warehouse, xmlns );
+
+                nav.MoveToNext( );
                 ReadDoors( nav, warehouse, xmlns );
+
+                nav.MoveToNext( );
                 ReadStorageRecks( nav, warehouse, xmlns );
             }
 
@@ -67,7 +74,7 @@ namespace ProjectComponents.FileIntegration
 
             try
             {
-                long count = long.Parse( nav.GetAttribute( "count", xmlns ) );
+                long count = long.Parse( nav.GetAttribute( "count", xmlns ), NumberStyles.Integer );
 
                 if ( count <= 0 )
                 {
@@ -82,7 +89,7 @@ namespace ProjectComponents.FileIntegration
                 {
                     data = new ProjectWallData( );
 
-                    data.SetID( long.Parse( nav.GetAttribute( "count", xmlns ) ) );
+                    data.SetID( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
                     data.SetTransformation( ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
@@ -95,7 +102,7 @@ namespace ProjectComponents.FileIntegration
 
             catch( Exception e )
             {
-                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadWalls" );
+                LogManager.WriteLog( e.Message, LogLevel.Error, true, "WarehouseReader", "ReadWalls" );
             }
         }
 
@@ -105,7 +112,7 @@ namespace ProjectComponents.FileIntegration
 
             try
             {
-                long count = long.Parse( nav.GetAttribute( "count", xmlns ) );
+                long count = long.Parse( nav.GetAttribute( "count", xmlns ), NumberStyles.Integer );
 
                 if ( count <= 0 )
                 {
@@ -120,7 +127,7 @@ namespace ProjectComponents.FileIntegration
                 {
                     data = new ProjectWindowData( );
 
-                    data.SetID( long.Parse( nav.GetAttribute( "count", xmlns ) ) );
+                    data.SetID( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
                     data.SetTransformation( ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
@@ -133,7 +140,7 @@ namespace ProjectComponents.FileIntegration
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadWindows" );
+                LogManager.WriteLog( e.Message, LogLevel.Error, true, "WarehouseReader", "ReadWindows" );
             }
         }
 
@@ -143,7 +150,7 @@ namespace ProjectComponents.FileIntegration
 
             try
             {
-                long count = long.Parse( nav.GetAttribute( "count", xmlns ) );
+                long count = long.Parse( nav.GetAttribute( "count", xmlns ), NumberStyles.Integer );
 
                 if ( count <= 0 )
                 {
@@ -159,7 +166,7 @@ namespace ProjectComponents.FileIntegration
                     data = new ProjectDoorData( );
 
                     data.SetType( nav.GetAttribute( "type", xmlns ) );
-                    data.SetID(  long.Parse( nav.GetAttribute( "count", xmlns ) ) );
+                    data.SetID(  long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
                     data.SetTransformation( ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
@@ -172,7 +179,7 @@ namespace ProjectComponents.FileIntegration
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadDoors" );
+                LogManager.WriteLog( e.Message, LogLevel.Error, true, "WarehouseReader", "ReadDoors" );
             }
         }
 
@@ -182,7 +189,7 @@ namespace ProjectComponents.FileIntegration
 
             try
             {
-                long storageCount = long.Parse( nav.GetAttribute( "count", xmlns ) );
+                long storageCount = long.Parse( nav.GetAttribute( "count", xmlns ), NumberStyles.Integer );
                 long itemCount;
 
                 if ( storageCount <= 0 )
@@ -196,21 +203,29 @@ namespace ProjectComponents.FileIntegration
 
                 for ( int i = 0; i < storageCount; i++ )
                 {
+                    if ( i > 0 )
+                    {
+                        nav.MoveToNext( );
+                    }
+
                     data = new ProjectStorageData( );
 
-                    data.SetID( long.Parse( nav.GetAttribute( "count", xmlns ) ) );
-
+                    data.SetID( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
+                    
                     nav.MoveToFirstChild( );
 
                     data.SetTransformation( ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
 
-                    itemCount = long.Parse( nav.GetAttribute( "count", xmlns ) );
+                    itemCount = long.Parse( nav.GetAttribute( "count", xmlns ), NumberStyles.Integer );
 
                     if ( itemCount <= 0 )
                     {
                         nav.MoveToParent( );
+                        
+                        warehouse.AddStorageReck( data );
+
                         continue;
                     }
 
@@ -222,7 +237,7 @@ namespace ProjectComponents.FileIntegration
                     {
                         item = new ProjectItemData( );
 
-                        item.SetIDRef( long.Parse( nav.GetAttribute( "count", xmlns ) ) );
+                        item.SetIDRef( long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer ) );
 
                         item.SetTransformation( ReadTransformation( nav, xmlns ) );
 
@@ -241,7 +256,7 @@ namespace ProjectComponents.FileIntegration
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadWalls" );
+                LogManager.WriteLog( e.Message, LogLevel.Error, true, "WarehouseReader", "ReadWalls" );
             }
         }
 
@@ -252,13 +267,14 @@ namespace ProjectComponents.FileIntegration
             try
             {
                 nav.MoveToChild( "Position", xmlns );
-                data.SetPosition( new Vector3( float.Parse( nav.GetAttribute( "x",xmlns ) ), float.Parse( nav.GetAttribute( "y", xmlns ) ), float.Parse( nav.GetAttribute( "z", xmlns ) ) ) );
+                
+                data.SetPosition( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
 
                 nav.MoveToNext( );
-                data.SetRotation( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ) ), float.Parse( nav.GetAttribute( "y", xmlns ) ), float.Parse( nav.GetAttribute( "z", xmlns ) ) ) );
+                data.SetRotation( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
 
                 nav.MoveToNext( );
-                data.SetScale( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ) ), float.Parse( nav.GetAttribute( "y", xmlns ) ), float.Parse( nav.GetAttribute( "z", xmlns ) ) ) );
+                data.SetScale( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
 
                 nav.MoveToParent( );
             }

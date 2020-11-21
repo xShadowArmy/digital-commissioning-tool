@@ -14,7 +14,7 @@ namespace ProjectComponents.Abstraction
         public string FullPath { get; private set; }
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }
-        private string Extension { get; set; }
+        public static string Extension { get; private set; }
 
         public InternalProjectData()
         {
@@ -24,10 +24,10 @@ namespace ProjectComponents.Abstraction
             }
 
             Name = Name.LoadString( "@DefaultProjectName" );
-            Extension = ".prf";
-            FullPath = Paths.ProjectsPath + Name + Extension;
-            DateCreated  = new DateTime( );
-            DateModified = new DateTime( );
+            Extension = ".prj";
+            FullPath = Paths.ProjectsPath;
+            DateCreated  = DateTime.Now;
+            DateModified = DateTime.Now;
         }
 
         public void ChangeProjectName( string newName )
@@ -55,7 +55,7 @@ namespace ProjectComponents.Abstraction
                 return;
             }
 
-            FullPath = newPath + Name + Extension;
+            FullPath = newPath;
         }
 
         public void ChangeDateCreated( DateTime date )

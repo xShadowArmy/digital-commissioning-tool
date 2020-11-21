@@ -26,7 +26,7 @@ namespace ProjectComponents.Abstraction
 
         public void SetType( string type )
         {
-            if ( !type.Equals( "door" ) && !type.Equals( "gate" ) )
+            if ( !type.ToLower().Equals( "door" ) && !type.ToLower().Equals( "gate" ) )
             {
                 return;
             }

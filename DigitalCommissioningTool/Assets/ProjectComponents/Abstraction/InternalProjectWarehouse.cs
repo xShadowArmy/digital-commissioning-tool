@@ -32,11 +32,6 @@ namespace ProjectComponents.Abstraction
             StorageRecks = new List<ProjectStorageData>( );
         }
 
-        public void SetDefaultValues()
-        {
-
-        }
-
         public void UpdateFloor( ProjectFloorData data )
         {
             Floor = data;

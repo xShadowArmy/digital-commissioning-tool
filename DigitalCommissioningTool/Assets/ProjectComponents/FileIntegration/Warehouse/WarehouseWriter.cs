@@ -38,21 +38,21 @@ namespace ProjectComponents.FileIntegration
                 nav.AppendChildElement( "xs", "Floor", xmlns, "" );
                 nav.MoveToChild( "Floor", xmlns );                
                 WriteFloor( nav, data, xmlns );
-
-                nav.AppendChildElement( "xs", "Walls", xmlns, "" );
-                nav.MoveToChild( "Walls", xmlns );
+                
+                nav.InsertElementAfter( "xs", "Walls", xmlns, "" );
+                nav.MoveToNext( );
                 WriteWalls( nav, data, xmlns );
                 
-                nav.AppendChildElement( "xs", "Windows", xmlns, "" );
-                nav.MoveToChild( "Windows", xmlns );
+                nav.InsertElementAfter( "xs", "Windows", xmlns, "" );
+                nav.MoveToNext( );
                 WriteWindows( nav, data, xmlns );
                 
-                nav.AppendChildElement( "xs", "Doors", xmlns, "" );
-                nav.MoveToChild( "Doors", xmlns );
+                nav.InsertElementAfter( "xs", "Doors", xmlns, "" );
+                nav.MoveToNext( );
                 WriteDoors( nav, data, xmlns );
 
-                nav.AppendChildElement( "xs", "StorageRecks", xmlns, "" );
-                nav.MoveToChild( "StorageRecks", xmlns );
+                nav.InsertElementAfter( "xs", "StorageRecks", xmlns, "" );
+                nav.MoveToNext( );
                 WriteStorageRecks( nav, data, xmlns );
 
                 XmlTextWriter writer = new XmlTextWriter( Paths.TempPath + "Warehouse.xml", System.Text.Encoding.UTF8 )
@@ -91,6 +91,11 @@ namespace ProjectComponents.FileIntegration
             {
                 nav.CreateAttribute( "xs", "count", xmlns, data.Walls.Count.ToString( ) );
 
+                if ( data.Walls.Count == 0 )
+                {
+                    return;
+                }
+
                 for ( int i = 0; i < data.Walls.Count; i++ )
                 {
                     if ( i == 0 )
@@ -125,6 +130,11 @@ namespace ProjectComponents.FileIntegration
             {
                 nav.CreateAttribute( "xs", "count", xmlns, data.Windows.Count.ToString( ) );
 
+                if ( data.Windows.Count == 0 )
+                {
+                    return;
+                }
+
                 for ( int i = 0; i < data.Windows.Count; i++ )
                 {
                     if ( i == 0 )
@@ -158,6 +168,11 @@ namespace ProjectComponents.FileIntegration
             if ( nav.LocalName.Equals( "Doors" ) )
             {
                 nav.CreateAttribute( "xs", "count", xmlns, data.Doors.Count.ToString( ) );
+
+                if ( data.Doors.Count == 0 )
+                {
+                    return;
+                }
 
                 for ( int i = 0; i < data.Doors.Count; i++ )
                 {
@@ -195,6 +210,11 @@ namespace ProjectComponents.FileIntegration
             {
                 nav.CreateAttribute( "xs", "count", xmlns, data.StorageRecks.Count.ToString( ) );
 
+                if ( data.StorageRecks.Count == 0 )
+                {
+                    return;
+                }
+
                 for ( int i = 0; i < data.StorageRecks.Count; i++ )
                 {
                     if ( i == 0 )
@@ -226,20 +246,19 @@ namespace ProjectComponents.FileIntegration
                         {
                             nav.AppendChildElement( "xs", "Item", xmlns, "" );
                             nav.MoveToChild( "Item", xmlns );
-                            nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
                         }
 
                         else
                         {
-                            nav.AppendChildElement( "xs", "Item", xmlns, "" );
+                            nav.InsertElementAfter( "xs", "Item", xmlns, "" );
                             nav.MoveToNext( );
-                            nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
                         }
                         
                         WriteTransformationData( nav, data.StorageRecks[ i ].GetItems()[j].Transformation, xmlns );
                     }
 
-                    nav.MoveToParent( );
                     nav.MoveToParent( );
                 }
 

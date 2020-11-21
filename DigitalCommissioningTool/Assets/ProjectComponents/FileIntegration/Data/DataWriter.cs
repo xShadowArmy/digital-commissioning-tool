@@ -34,8 +34,8 @@ namespace ProjectComponents.FileIntegration
                 nav.MoveToFirstChild( );
                 nav.AppendChildElement( "xs", "Name", xmlns, data.Name );
                 nav.AppendChildElement( "xs", "Path", xmlns, data.FullPath );
-                nav.AppendChildElement( "xs", "DateCreated", xmlns, data.DateCreated.ToString() );
-                nav.AppendChildElement( "xs", "DateModified", xmlns, data.DateModified.ToString() );
+                nav.AppendChildElement( "xs", "DateCreated", xmlns, data.DateCreated.ToString( "dd/MM/yyyy" ) );
+                nav.AppendChildElement( "xs", "DateModified", xmlns, data.DateModified.ToString( "dd/MM/yyyy" ) );
 
                 XmlTextWriter writer = new XmlTextWriter( Paths.TempPath + "Data.xml", System.Text.Encoding.UTF8 )
                 {

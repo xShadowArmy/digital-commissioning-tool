@@ -19,12 +19,12 @@ namespace ProjectComponents.FileIntegration
             Writer = new WarehouseWriter( new XmlDocument() );
         }
 
-        public void SaveWarehouse( InternalProjectWarehouse warehouse)
+        public void SaveFile( InternalProjectWarehouse warehouse)
         {
             Writer.WriteFile( warehouse );
         }
 
-        public InternalProjectWarehouse LoadWarehouse()
+        public InternalProjectWarehouse LoadFile()
         {
             return Reader.ReadFile( );
         }

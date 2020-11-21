@@ -84,6 +84,7 @@
       <xs:sequence>
         <xs:element ref="Storage" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
+	  <xs:attribute ref="count" use="required"/>
     </xs:complexType>
   </xs:element>
   

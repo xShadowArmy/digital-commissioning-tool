@@ -4,29 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using UnityEngine;
 
 namespace ApplicationFacade
 {
-    public class FloorData
+    public class FloorData : GameObjectData
     {
-        public TransformationData Transformation
+        internal FloorData() : base( )
         {
-            get
-            {
-                return new TransformationData( Data.Transformation.Position, Data.Transformation.Rotation, Data.Transformation.Scale );
-            }
-
-            set
-            {
-                Data.SetTransformation( new ProjectTransformationData( value.Position, value.Rotation, value.Scale ) );
-            }
         }
 
-        private ProjectFloorData Data { get; set; }
-
-        public FloorData( TransformationData transformation )
+        internal FloorData( Vector3 position, Vector3 rotation, Vector3 scale ) : base( 0, position, rotation, scale )
         {
-            Data = new ProjectFloorData( new ProjectTransformationData( transformation.Position, transformation.Rotation, transformation.Scale ) );
+        }
+
+        internal FloorData( Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( 0, position, rotation, scale, obj )
+        {
+        }
+
+        public new void SetID( long id )
+        {
+            ID = 0;
         }
     }
 }

@@ -4,55 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using UnityEngine;
 
 namespace ApplicationFacade
 {
-    public struct DoorData
+    public class DoorData : GameObjectData
     {
-        public long ID
-        {
-            get
-            {
-                return Data.ID;
-            }
+        public DoorType Type { get; protected set; }
 
-            set
-            {
-                Data.SetID( value );
-            }
+        internal DoorData() : base( )
+        {
+            Type = DoorType.Door;
         }
 
-        public string Type
+        internal DoorData( long id, DoorType type ) : base( id )
         {
-            get
-            {
-                return Data.Type;
-            }
-
-            set
-            {
-                Data.SetType( value );
-            }
-        }
-        
-        public TransformationData Transformation
-        {
-            get
-            {
-                return new TransformationData( Data.Transformation.Position, Data.Transformation.Rotation, Data.Transformation.Scale );
-            }
-
-            set
-            {
-                Data.SetTransformation( new ProjectTransformationData( value.Position, value.Rotation, value.Scale ) );
-            }
+            Type = type;
         }
 
-        private ProjectDoorData Data { get; set; }
-        
-        public DoorData( long id, string type, TransformationData transformation )
+        internal DoorData( long id, DoorType type, Vector3 position, Vector3 rotation, Vector3 scale ) : base( id, position, rotation, scale )
         {
-            Data = new ProjectDoorData( id, type, new ProjectTransformationData( transformation.Position, transformation.Rotation, transformation.Scale) );
+            Type = type;
+        }
+
+        internal DoorData( long id, DoorType type, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( id, position, rotation, scale, obj )
+        {
+            Type = type;
+        }
+
+        public void SetDoorType( DoorType type )
+        {
+            Type = type;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Xml;
 using SystemFacade;
 using ProjectComponents.Abstraction;
 using System.Xml.XPath;
+using System.Globalization;
 
 namespace ProjectComponents.FileIntegration
 {
@@ -32,21 +33,21 @@ namespace ProjectComponents.FileIntegration
                 nav.MoveToFirstChild( );
                 nav.MoveToFirstChild( );
 
-                data.ChangeProjectName( nav.LocalName );
+                data.ChangeProjectName( nav.Value );
                 nav.MoveToNext( );
 
-                data.ChangeProjectPath( nav.LocalName );
+                data.ChangeProjectPath( nav.Value );
                 nav.MoveToNext( );
 
-                data.ChangeDateCreated( DateTime.Parse( nav.LocalName ) );
+                data.ChangeDateCreated( DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture ) );
                 nav.MoveToNext( );
 
-                data.ChangeDateModified( DateTime.Parse( nav.LocalName ) );
+                data.ChangeDateModified( DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture ) );
             }
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( "Datei \"Data.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "DataReader", "ReadFile" );
+                LogManager.WriteLog( "Datei \"Data.xml\" konnte nicht  werden! Fehler: " + e.Message, LogLevel.Error, true, "DataReader", "ReadFile" );
             }
         }
     }

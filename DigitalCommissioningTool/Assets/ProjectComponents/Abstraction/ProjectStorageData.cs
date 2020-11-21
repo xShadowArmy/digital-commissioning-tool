@@ -31,21 +31,41 @@ namespace ProjectComponents.Abstraction
 
         public void AddItem( ProjectItemData item )
         {
+            if ( Items == null )
+            {
+                Items = new List<ProjectItemData>( );
+            }
+
             Items.Add( item );
         }
 
         public bool RemoveItem( ProjectItemData item )
         {
+            if ( Items == null )
+            {
+                return false;
+            }
+
             return Items.Remove( item );
         }
 
         public bool ContainsItem( ProjectItemData item )
         {
+            if ( Items == null )
+            {
+                return false;
+            }
+
             return Items.Contains( item );
         }
 
         public ProjectItemData[] GetItems()
         {
+            if ( Items == null )
+            {
+                Items = new List<ProjectItemData>( );
+            }
+
             return Items.ToArray( );
         }
     }

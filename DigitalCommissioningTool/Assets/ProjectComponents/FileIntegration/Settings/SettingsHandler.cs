@@ -15,15 +15,20 @@ namespace ProjectComponents.FileIntegration
             Writer = new SettingsWriter( new XmlDocument() );
         }
 
-        public void LoadFile( InternalProjectSettings settings )
+        public InternalProjectSettings LoadFile( )
         {
             LogManager.WriteInfo( "ProjektSettings Datei wird gelesen.", "SettingsHandler", "LoadFile" );
-            Reader.ReadFile( settings );
+
+            InternalProjectSettings tmp = new InternalProjectSettings( );
+
+            Reader.ReadFile( tmp );
+
+            return tmp;
         }
 
         public void SaveFile( InternalProjectSettings settings )
         {
-            LogManager.WriteInfo( "ProjektSettings Datei wird gelesen.", "SettingsHandler", "SaveFile" );
+            LogManager.WriteInfo( "ProjektSettings Datei wird geschrieben.", "SettingsHandler", "SaveFile" );
             Writer.WriteFile( settings );
         }
     }

@@ -102,5 +102,10 @@ namespace SystemFacade
         {
             return Handler.RemovePath( name );
         }
+
+        public static void ClearTempPath()
+        {
+            Handler.ClearTempPath( );
+        }
     }
 }
