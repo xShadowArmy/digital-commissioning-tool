@@ -555,8 +555,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8158419, y: 2.0414634, z: 2.000052}
-  m_Center: {x: -1.7985185, y: 0.9823086, z: 2.4223607}
+  m_Size: {x: 0.37740016, y: 2.0414634, z: 1.4562583}
+  m_Center: {x: -1.8106898, y: 0.9823086, z: 2.4235818}
 --- !u!114 &740203175617747361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +607,9 @@ MonoBehaviour:
   dragable:
     serializedVersion: 2
     m_Bits: 256
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2743434085737632571
 GameObject:
   m_ObjectHideFlags: 0
