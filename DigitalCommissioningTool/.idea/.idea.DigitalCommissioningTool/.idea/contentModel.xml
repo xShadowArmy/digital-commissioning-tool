@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Jonas\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Jonas\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_DigitalCommissioningTool.2069852528.00" t="ExcludeRecursive" />
+    <e p="D:\GitHub\digital-commissioning-tool\DigitalCommissioningTool" t="IncludeRecursive">
+      <e p="ApplicationFacade.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="ApplicationFacade" t="Include">
+          <e p="ApplicationFacade.asmdef" t="Include" />
+          <e p="Container.cs" t="Include" />
+          <e p="DoorData.cs" t="Include" />
+          <e p="DoorType.cs" t="Include" />
+          <e p="FloorData.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="GameObjectData.cs" t="Include" />
+          <e p="GameObjectDataType.cs" t="Include" />
+          <e p="IDataIdentifier.cs" t="Include" />
+          <e p="ItemData.cs" t="Include" />
+          <e p="ProjectData.cs" t="Include" />
+          <e p="ProjectManager.cs" t="Include" />
+          <e p="ProjectSettings.cs" t="Include" />
+          <e p="StorageData.cs" t="Include" />
+          <e p="WallData.cs" t="Include" />
+          <e p="Warehouse.cs" t="Include" />
+          <e p="WindowData.cs" t="Include" />
+        </e>
+        <e p="MMI" t="Include">
+          <e p="Plugins" t="Include">
+            <e p="Newtonsoft.Json.xml" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="FlyCamera.cs" t="Include" />
+            <e p="TestAvatarBehavior.cs" t="Include" />
+            <e p="WalkTrajectory.cs" t="Include" />
+          </e>
+        </e>
+        <e p="PresentationLogic" t="Include">
+          <e p="PresentationLogic.asmdef" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="AddObjectsToWall.cs" t="Include" />
+            <e p="EditorModeCamera.cs" t="Include" />
+            <e p="MainCamera.cs" t="Include" />
+            <e p="MainMenu.cs" t="Include" />
+            <e p="ModeHandler.cs" t="Include" />
+            <e p="PickAndPlaceNew.cs" t="Include" />
+            <e p="SelectionManager.cs" t="Include" />
+            <e p="TestScript.cs" t="Include" />
+            <e p="WallEditor.cs" t="Include" />
+          </e>
+        </e>
+        <e p="ProjectComponents" t="Include">
+          <e p="Abstraction" t="Include">
+            <e p="InternalProjectContainer.cs" t="Include" />
+            <e p="InternalProjectData.cs" t="Include" />
+            <e p="InternalProjectSettings.cs" t="Include" />
+            <e p="InternalProjectWarehouse.cs" t="Include" />
+            <e p="ProjectDoorData.cs" t="Include" />
+            <e p="ProjectFloorData.cs" t="Include" />
+            <e p="ProjectItemData.cs" t="Include" />
+            <e p="ProjectStorageData.cs" t="Include" />
+            <e p="ProjectTransformationData.cs" t="Include" />
+            <e p="ProjectWallData.cs" t="Include" />
+            <e p="ProjectWindowData.cs" t="Include" />
+          </e>
+          <e p="FileIntegration" t="Include">
+            <e p="Container" t="Include">
+              <e p="ContainerHandler.cs" t="Include" />
+              <e p="ContainerReader.cs" t="Include" />
+              <e p="ContainerWriter.cs" t="Include" />
+            </e>
+            <e p="Data" t="Include">
+              <e p="DataHandler.cs" t="Include" />
+              <e p="DataReader.cs" t="Include" />
+              <e p="DataWriter.cs" t="Include" />
+            </e>
+            <e p="MoSim" t="Include">
+              <e p="MoSimHandler.cs" t="Include" />
+              <e p="MoSimReader.cs" t="Include" />
+              <e p="MoSimWriter.cs" t="Include" />
+            </e>
+            <e p="Settings" t="Include">
+              <e p="SettingsHandler.cs" t="Include" />
+              <e p="SettingsReader.cs" t="Include" />
+              <e p="SettingsWriter.cs" t="Include" />
+            </e>
+            <e p="Warehouse" t="Include">
+              <e p="WarehouseHandler.cs" t="Include" />
+              <e p="WarehouseReader.cs" t="Include" />
+              <e p="WarehouseWriter.cs" t="Include" />
+            </e>
+          </e>
+          <e p="ProjectComponents.asmdef" t="Include" />
+        </e>
+        <e p="SystemFacade" t="Include">
+          <e p="ArchiveManager.cs" t="Include" />
+          <e p="ConfigManager.cs" t="Include" />
+          <e p="LogLevel.cs" t="Include" />
+          <e p="LogManager.cs" t="Include" />
+          <e p="Paths.cs" t="Include" />
+          <e p="StringResourceManager.cs" t="Include" />
+          <e p="SystemFacade.asmdef" t="Include" />
+        </e>
+        <e p="SystemTools" t="Include">
+          <e p="Handler" t="Include">
+            <e p="ArchiveHandler.cs" t="Include" />
+            <e p="ConfigHandler.cs" t="Include" />
+            <e p="LogHandler.cs" t="Include" />
+            <e p="PathHandler.cs" t="Include" />
+            <e p="StringResourceHandler.cs" t="Include" />
+          </e>
+          <e p="Logging" t="Include">
+            <e p="LogWriter.cs" t="Include" />
+          </e>
+          <e p="ManagingRessources" t="Include">
+            <e p="ConfigData.cs" t="Include" />
+            <e p="ConfigReader.cs" t="Include" />
+            <e p="ConfigWriter.cs" t="Include" />
+            <e p="ISerialConfigData.cs" t="Include" />
+            <e p="SerialConfigData.cs" t="Include" />
+            <e p="StringResourceReader.cs" t="Include" />
+            <e p="StringResourceWriter.cs" t="Include" />
+          </e>
+          <e p="SystemTools.asmdef" t="Include" />
+        </e>
+        <e p="UnitTests" t="Include">
+          <e p="SystemFacade" t="Include">
+            <e p="EditModeTests" t="Include">
+              <e p="ConfigManagerTests.cs" t="Include" />
+              <e p="EditModeTests.asmdef" t="Include" />
+              <e p="GameManagerTests.cs" t="Include" />
+              <e p="LogManagerTests.cs" t="Include" />
+              <e p="StringResourceManagerTests.cs" t="Include" />
+            </e>
+            <e p="PlayModeTests" t="Include">
+              <e p="NewTestScript.cs" t="Include" />
+              <e p="PlayModeTests.asmdef" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="DigitalCommissioningTool.sln" t="IncludeFlat" />
+      <e p="EditModeTests.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="PlayModeTests.csproj" t="IncludeRecursive" />
+      <e p="PresentationLogic.csproj" t="IncludeRecursive" />
+      <e p="ProjectComponents.csproj" t="IncludeRecursive" />
+      <e p="SystemFacade.csproj" t="IncludeRecursive" />
+      <e p="SystemTools.csproj" t="IncludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

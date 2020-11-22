@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse.cs" />
+        <option value="$PROJECT_DIR$/Assets/UnitTests/SystemFacade/EditModeTests/GameManagerTests.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="UnitTestsCoverage.Settings">
+    <option name="coveragePercentColumnWidth" value="150" />
+    <option name="sortOrder" value="DESCENDING" />
+    <option name="sortedColumn" value="1" />
+    <option name="symbolColumnWidth" value="229" />
+    <coverage-tree-state>
+      <expand>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="ConfigData 0% 177/177" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SerialConfigData 0% 43/43" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="ManagingResources 0% 727/727" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Logging 0% 88/88" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="SystemTools 0% 1430/1430" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Logging 0% 88/88" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="LogWriter 0% 88/88" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="ApplicationFacade 0% 1239/1239" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="ApplicationFacade 0% 1239/1239" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="ApplicationFacade 0% 1239/1239" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+        <path>
+          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
+          <item name="Total 0% 4637/4637" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="EditModeTests 0% 221/221" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+        </path>
+      </expand>
+      <select />
+    </coverage-tree-state>
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1606068672583">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606068672583" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606059225671">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606059225671" />
+  </component>
+</project>
