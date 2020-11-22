@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:ProjectData xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ProjectDataSchema.xsd">
+    <xs:Name>Project123</xs:Name>
+    <xs:Path>.\Output\Projects\</xs:Path>
+    <xs:DateCreated>22/11/2020</xs:DateCreated>
+    <xs:DateModified>22/11/2020</xs:DateModified>
+</xs:ProjectData>

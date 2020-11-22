@@ -25,7 +25,9 @@ namespace Scripts
             GameManager.GameWarehouse.CreateStorageReckItem( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), data0 );
 
             StorageData data = GameManager.GameContainer.CreateContainer( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ) );
-            GameManager.GameContainer.CreateContainerItem( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), data );
+            ItemData item = GameManager.GameContainer.CreateContainerItem( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), data );
+
+            item.SetPosition( new Vector3( 1234567f, 1234567f, 1234567f ) );
 
             GameManager.SaveProject( "Project123" );
             GameManager.CloseProject( );

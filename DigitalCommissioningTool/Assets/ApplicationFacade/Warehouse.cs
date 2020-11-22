@@ -430,9 +430,6 @@ namespace ApplicationFacade
         {
             LogManager.WriteInfo( "Ein RegalItem wird entfernt.", "Warehouse", "RemoveItemFromStorageReck" );
             
-            item.GameObjectDataChanged -= GameObjectHasChanged;
-            item.ItemChanged -= StorageReckItemHasChanged;
-
             item.SetParent( null );
             storage.RemoveItem( item );
 
@@ -444,6 +441,9 @@ namespace ApplicationFacade
                     {
                         if ( Data.StorageRecks[i].GetItems()[j].IDRef == item.GetID() )
                         {
+                            item.GameObjectDataChanged -= GameObjectHasChanged;
+                            item.ItemChanged -= StorageReckItemHasChanged;
+
                             return Data.StorageRecks[ i ].RemoveItem( Data.StorageRecks[ i ].GetItems( )[ j ] );
                         }
                     }

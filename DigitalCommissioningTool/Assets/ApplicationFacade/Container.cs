@@ -27,6 +27,9 @@ namespace ApplicationFacade
 
             StorageData container = new StorageData( GetUniqueID( ContainerData.ToArray( ) ), position, rotation, scale );
 
+            container.GameObjectDataChanged += GameObjectHasChanged;
+            container.StorageChanged += ContainerHasChanged;
+
             ContainerData.Add( container );
 
             Data.AddContainer( new ProjectStorageData( container.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
@@ -37,6 +40,9 @@ namespace ApplicationFacade
         public void AddContainer( StorageData container )
         {
             LogManager.WriteInfo( "Mobiles Regal wird hinzugefuegt.", "Warehouse", "AddContainer" );
+
+            container.GameObjectDataChanged += GameObjectHasChanged;
+            container.StorageChanged += ContainerHasChanged;
 
             ContainerData.Add( container );
 
@@ -56,6 +62,9 @@ namespace ApplicationFacade
             {
                 if ( Data.Container[ i ].ID == container.GetID( ) )
                 {
+                    container.GameObjectDataChanged -= GameObjectHasChanged;
+                    container.StorageChanged -= ContainerHasChanged;
+
                     Data.Container.Remove( Data.Container[ i ] );
 
                     return true;
@@ -102,11 +111,15 @@ namespace ApplicationFacade
             ItemData item = new ItemData( 0, 0, position, rotation, scale );
 
             container.AddItem( item );
+            item.SetParent( container );
 
             for ( int i = 0; i < Data.Container.Count; i++ )
             {
                 if ( Data.Container[ i ].ID == container.GetID( ) )
                 {
+                    item.GameObjectDataChanged += GameObjectHasChanged;
+                    item.ItemChanged += ContainerItemHasChanged;
+
                     Data.Container[ i ].AddItem( new ProjectItemData( 0, new ProjectTransformationData( position, rotation, scale ) ) );
 
                     return item;
@@ -121,13 +134,17 @@ namespace ApplicationFacade
         public void AddItemToContainer( StorageData container, ItemData item )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "AddItemToContainer" );
-
+                       
             container.AddItem( item );
+            item.SetParent( container );
 
             for ( int i = 0; i < Data.Container.Count; i++ )
             {
                 if ( Data.Container[ i ].ID == container.GetID( ) )
                 {
+                    item.GameObjectDataChanged += GameObjectHasChanged;
+                    item.ItemChanged += ContainerItemHasChanged;
+
                     Data.Container[ i ].AddItem( new ProjectItemData( item.GetID( ), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
 
                     return;
@@ -151,6 +168,9 @@ namespace ApplicationFacade
                     {
                         if ( Data.Container[ i ].GetItems( )[ j ].IDRef == item.GetID( ) )
                         {
+                            item.GameObjectDataChanged -= GameObjectHasChanged;
+                            item.ItemChanged -= ContainerItemHasChanged;
+
                             return Data.Container[ i ].RemoveItem( Data.Container[ i ].GetItems( )[ j ] );
                         }
                     }
@@ -180,6 +200,115 @@ namespace ApplicationFacade
                 if ( !used )
                 {
                     return i + 1;
+                }
+            }
+        }
+        
+        private void GameObjectHasChanged( GameObjectData obj, GameObjectDataType type )
+        {
+            LogManager.WriteInfo( "[Event]Aktualisiere GameObjectData. Type=" + type.ToString( ), "Container", "GameObjectHasChanged" );
+
+            switch ( type )
+            {
+                case GameObjectDataType.StorageReck:
+
+                    ContainerHasChanged( obj as StorageData );
+                    break;
+
+                case GameObjectDataType.Item:
+
+                    ContainerItemHasChanged( obj as ItemData );
+                    break;
+
+                default:
+
+                    LogManager.WriteWarning( "[Event] Falscher Typ in EventSystem referenziert!", "Container", "GameObjectHasChanged" );
+                    break;
+            }
+        }
+
+        private void ContainerHasChanged( StorageData storage )
+        {
+            LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageReckHasChanged" );
+
+            for ( int i = 0; i < Data.Container.Count; i++ )
+            {
+                if ( storage.GetID( ) == Data.Container[ i ].ID )
+                {
+                    if ( storage.GetItems( ).Length > Data.Container[ i ].GetItems( ).Length )
+                    {
+                        ProjectTransformationData data = new ProjectTransformationData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Position,
+                                                                                        storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Rotation,
+                                                                                        storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Scale );
+
+                        Data.Container[ i ].AddItem( new ProjectItemData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].GetID( ), data ) );
+
+                        break;
+                    }
+
+                    else if ( storage.GetItems( ).Length < Data.Container[ i ].GetItems( ).Length )
+                    {
+                        if ( storage.GetItems( ).Length == 1 )
+                        {
+                            Data.Container[ i ].RemoveItem( Data.Container[ i ].GetItems( )[ 0 ] );
+
+                            break;
+                        }
+
+                        for ( int j = 0; j < Data.Container[ i ].GetItems( ).Length; j++ )
+                        {
+                            if ( Data.Container[ i ].GetItems( )[ j ].IDRef != storage.GetItems( )[ j ].GetID( ) )
+                            {
+                                Data.Container[ i ].RemoveItem( Data.Container[ i ].GetItems( )[ j ] );
+
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+
+                    else
+                    {
+                        ProjectItemData[ ] items = Data.Container[ i ].GetItems( );
+                        ProjectStorageData data = new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) );
+
+                        foreach ( ProjectItemData item in items )
+                        {
+                            data.AddItem( item );
+                        }
+
+                        Data.Container.Remove( Data.Container[ i ] );
+                        Data.Container.Insert( i, data );
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ContainerItemHasChanged( ItemData item )
+        {
+            LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageReckItemHasChanged" );
+
+            for ( int i = 0; i < ContainerData.Count; i++ )
+            {
+                if ( item.Parent.GetID( ) == ContainerData[ i ].GetID( ) )
+                {
+                    for ( int j = 0; j < Data.Container[ i ].GetItems( ).Length; j++ )
+                    {
+                        if ( Data.Container[ i ].GetItems( )[ j ].IDRef == item.GetID( ) )
+                        {
+                            ProjectTransformationData data = new ProjectTransformationData( item.Position, item.Rotation, item.Scale );
+
+                            Data.Container[ i ].RemoveItem( Data.Container[ i ].GetItems( )[ j ] );
+                            Data.Container[ i ].AddItem( j, new ProjectItemData( item.GetID( ), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+
+                            break;
+                        }
+                    }
+
+                    break;
                 }
             }
         }
