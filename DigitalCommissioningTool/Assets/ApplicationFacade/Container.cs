@@ -89,7 +89,7 @@ namespace ApplicationFacade
             return null;
         }
 
-        public StorageData GetStorageReck( GameObject obj )
+        public StorageData GetContainer( GameObject obj )
         {
             LogManager.WriteInfo( "Mobiles Regal wird abgefragt.", "ContainerData", "GetContainer" );
 
@@ -126,7 +126,7 @@ namespace ApplicationFacade
                 }
             }
 
-            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "CreateStorageReckItem" );
+            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "CreateStorageRackItem" );
 
             return item;
         }
@@ -229,7 +229,7 @@ namespace ApplicationFacade
 
         private void ContainerHasChanged( StorageData storage )
         {
-            LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageReckHasChanged" );
+            LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageRackHasChanged" );
 
             for ( int i = 0; i < Data.Container.Count; i++ )
             {
@@ -289,7 +289,7 @@ namespace ApplicationFacade
 
         private void ContainerItemHasChanged( ItemData item )
         {
-            LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageReckItemHasChanged" );
+            LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageRackItemHasChanged" );
 
             for ( int i = 0; i < ContainerData.Count; i++ )
             {

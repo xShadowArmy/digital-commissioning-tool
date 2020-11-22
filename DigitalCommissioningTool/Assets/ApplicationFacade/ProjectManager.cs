@@ -251,30 +251,30 @@ namespace ApplicationFacade
                 warehouse.AddDoor( door );
             }
 
-            for ( int i = 0; i < iwarehouse.StorageRecks.Count; i++ )
+            for ( int i = 0; i < iwarehouse.StorageRacks.Count; i++ )
             {
-                StorageData data = new StorageData( iwarehouse.StorageRecks[ i ].ID );
+                StorageData data = new StorageData( iwarehouse.StorageRacks[ i ].ID );
 
-                data.SetPosition( iwarehouse.StorageRecks[ i ].Transformation.Position );
-                data.SetRotation( iwarehouse.StorageRecks[ i ].Transformation.Rotation );
-                data.SetScale( iwarehouse.StorageRecks[ i ].Transformation.Scale );
+                data.SetPosition( iwarehouse.StorageRacks[ i ].Transformation.Position );
+                data.SetRotation( iwarehouse.StorageRacks[ i ].Transformation.Rotation );
+                data.SetScale( iwarehouse.StorageRacks[ i ].Transformation.Scale );
 
-                warehouse.AddStorageReck( data );
+                warehouse.AddStorageRack( data );
 
-                //if ( iwarehouse.StorageRecks[i].GetItems() == null )
+                //if ( iwarehouse.StorageRacks[i].GetItems() == null )
                 //{
                 //    continue;
                 //}
 
-                for ( int j = 0; j < iwarehouse.StorageRecks[i].GetItems().Length; j++ )
+                for ( int j = 0; j < iwarehouse.StorageRacks[i].GetItems().Length; j++ )
                 {
-                    ItemData item = new ItemData( iwarehouse.StorageRecks[ i ].GetItems( )[ j ].IDRef, 0 );
+                    ItemData item = new ItemData( iwarehouse.StorageRacks[ i ].GetItems( )[ j ].IDRef, 0 );
                     
-                    item.SetPosition( iwarehouse.StorageRecks[ i ].GetItems()[j].Transformation.Position );
-                    item.SetRotation( iwarehouse.StorageRecks[ i ].GetItems( )[ j ].Transformation.Rotation );
-                    item.SetScale( iwarehouse.StorageRecks[ i ].GetItems( )[ j ].Transformation.Scale );
+                    item.SetPosition( iwarehouse.StorageRacks[ i ].GetItems()[j].Transformation.Position );
+                    item.SetRotation( iwarehouse.StorageRacks[ i ].GetItems( )[ j ].Transformation.Rotation );
+                    item.SetScale( iwarehouse.StorageRacks[ i ].GetItems( )[ j ].Transformation.Scale );
 
-                    warehouse.AddItemToStorageReck( data, item );
+                    warehouse.AddItemToStorageRack( data, item );
                 }
             }
         }

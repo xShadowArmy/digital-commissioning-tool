@@ -210,7 +210,7 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.MoveToParent( );
                         
-                        warehouse.AddStorageReck( data );
+                        warehouse.AddStorageRack( data );
 
                         continue;
                     }
@@ -230,7 +230,7 @@ namespace ProjectComponents.FileIntegration
 
                     nav.MoveToParent( );
 
-                    warehouse.AddStorageReck( data );
+                    warehouse.AddStorageRack( data );
                 }
 
                 nav.MoveToParent( );

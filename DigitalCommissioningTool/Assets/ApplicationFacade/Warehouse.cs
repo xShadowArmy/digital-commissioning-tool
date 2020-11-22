@@ -19,7 +19,7 @@ namespace ApplicationFacade
 
         public List<DoorData> Doors { get; private set; }
 
-        public List<StorageData> StorageRecks { get; private set; }
+        public List<StorageData> StorageRacks { get; private set; }
 
         internal InternalProjectWarehouse Data { get; private set; }
 
@@ -29,7 +29,7 @@ namespace ApplicationFacade
             Walls   = new List<WallData>( );
             Windows = new List<WindowData>( );
             Doors   = new List<DoorData>( );
-            StorageRecks = new List<StorageData>( );
+            StorageRacks = new List<StorageData>( );
             Data = new InternalProjectWarehouse( );
         }
         
@@ -293,51 +293,51 @@ namespace ApplicationFacade
             return null;
         }
 
-        public StorageData CreateStorageReck( Vector3 position, Vector3 rotation, Vector3 scale )
+        public StorageData CreateStorageRack( Vector3 position, Vector3 rotation, Vector3 scale )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageReck" );
+            LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
 
-            StorageData storage = new StorageData( GetUniqueID( StorageRecks.ToArray( ) ), position, rotation, scale );
+            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), position, rotation, scale );
 
             storage.GameObjectDataChanged += GameObjectHasChanged;
-            storage.StorageChanged += StorageReckHasChanged;
+            storage.StorageChanged += StorageRackHasChanged;
 
-            StorageRecks.Add( storage );
+            StorageRacks.Add( storage );
 
-            Data.AddStorageReck( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
+            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
 
             return storage;
         }
 
-        public void AddStorageReck( StorageData storage )
+        public void AddStorageRack( StorageData storage )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird hinzugefuegt.", "Warehouse", "AddStorageReck" );
+            LogManager.WriteInfo( "Lagerhausregal wird hinzugefuegt.", "Warehouse", "AddStorageRack" );
 
             storage.GameObjectDataChanged += GameObjectHasChanged;
-            storage.StorageChanged += StorageReckHasChanged;
+            storage.StorageChanged += StorageRackHasChanged;
 
-            StorageRecks.Add( storage );
+            StorageRacks.Add( storage );
 
-            Data.AddStorageReck( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) ) );
+            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) ) );
         }
 
-        public bool RemoveStorageReck( StorageData storage )
+        public bool RemoveStorageRack( StorageData storage )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird entfernt.", "Warehouse", "RemoveStorageReck" );
+            LogManager.WriteInfo( "Lagerhausregal wird entfernt.", "Warehouse", "RemoveStorageRack" );
 
-            if ( !StorageRecks.Remove( storage ) )
+            if ( !StorageRacks.Remove( storage ) )
             {
                 return false;
             }
 
-            for ( int i = 0; i < Data.StorageRecks.Count; i++ )
+            for ( int i = 0; i < Data.StorageRacks.Count; i++ )
             {
-                if ( Data.StorageRecks[ i ].ID == storage.GetID( ) )
+                if ( Data.StorageRacks[ i ].ID == storage.GetID( ) )
                 {
-                    Data.StorageRecks.Remove( Data.StorageRecks[ i ] );
+                    Data.StorageRacks.Remove( Data.StorageRacks[ i ] );
 
                     storage.GameObjectDataChanged -= GameObjectHasChanged;
-                    storage.StorageChanged -= StorageReckHasChanged;
+                    storage.StorageChanged -= StorageRackHasChanged;
 
                     return true;
                 }
@@ -346,105 +346,105 @@ namespace ApplicationFacade
             return false;
         }
 
-        public StorageData GetStorageReck( long id )
+        public StorageData GetStorageRack( long id )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageReck" );
+            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
 
-            for ( int i = 0; i < StorageRecks.Count; i++ )
+            for ( int i = 0; i < StorageRacks.Count; i++ )
             {
-                if ( StorageRecks[ i ].GetID( ) == id )
+                if ( StorageRacks[ i ].GetID( ) == id )
                 {
-                    return StorageRecks[ i ];
+                    return StorageRacks[ i ];
                 }
             }
 
             return null;
         }
 
-        public StorageData GetStorageReck( GameObject obj )
+        public StorageData GetStorageRack( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageReck" );
+            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
 
-            for ( int i = 0; i < StorageRecks.Count; i++ )
+            for ( int i = 0; i < StorageRacks.Count; i++ )
             {
-                if ( StorageRecks[ i ].Object == obj )
+                if ( StorageRacks[ i ].Object == obj )
                 {
-                    return StorageRecks[ i ];
+                    return StorageRacks[ i ];
                 }
             }
 
             return null;
         }
         
-        public ItemData CreateStorageReckItem( Vector3 position, Vector3 rotation, Vector3 scale, StorageData storage )
+        public ItemData CreateStorageRackItem( Vector3 position, Vector3 rotation, Vector3 scale, StorageData storage )
         {
-            LogManager.WriteInfo( "Ein RegalItem wird erstellt.", "Warehouse", "CreateStorageReckItem" );
+            LogManager.WriteInfo( "Ein RegalItem wird erstellt.", "Warehouse", "CreateStorageRackItem" );
 
             ItemData item = new ItemData( 0, 0, position, rotation, scale );
 
             item.GameObjectDataChanged += GameObjectHasChanged;
-            item.ItemChanged += StorageReckItemHasChanged;
+            item.ItemChanged += StorageRackItemHasChanged;
 
             item.SetParent( storage );
             storage.AddItem( item );
                        
-            for ( int i = 0; i < Data.StorageRecks.Count; i++ )
+            for ( int i = 0; i < Data.StorageRacks.Count; i++ )
             {
-                if ( Data.StorageRecks[ i ].ID == storage.GetID() )
+                if ( Data.StorageRacks[ i ].ID == storage.GetID() )
                 {
-                    Data.StorageRecks[ i ].AddItem( new ProjectItemData( 0, new ProjectTransformationData( position, rotation, scale ) ) );
+                    Data.StorageRacks[ i ].AddItem( new ProjectItemData( 0, new ProjectTransformationData( position, rotation, scale ) ) );
                                        
                     return item;
                 }
             }
 
-            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "CreateStorageReckItem" );
+            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "CreateStorageRackItem" );
             
             return item;
         }
 
-        public void AddItemToStorageReck( StorageData storage, ItemData item )
+        public void AddItemToStorageRack( StorageData storage, ItemData item )
         {
-            LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageReck" );
+            LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
 
             item.GameObjectDataChanged += GameObjectHasChanged;
-            item.ItemChanged += StorageReckItemHasChanged;
+            item.ItemChanged += StorageRackItemHasChanged;
 
             item.SetParent( storage );
             storage.AddItem( item );
 
-            for ( int i = 0; i < Data.StorageRecks.Count; i++ )
+            for ( int i = 0; i < Data.StorageRacks.Count; i++ )
             {
-                if ( Data.StorageRecks[ i ].ID == storage.GetID( ) )
+                if ( Data.StorageRacks[ i ].ID == storage.GetID( ) )
                 {
-                    Data.StorageRecks[ i ].AddItem( new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                    Data.StorageRacks[ i ].AddItem( new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
 
                     return;
                 }
             }
 
-            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "AddItemToStorageReck" );
+            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "AddItemToStorageRack" );
         }
 
-        public bool RemoveItemFromStorageReck( StorageData storage, ItemData item )
+        public bool RemoveItemFromStorageRack( StorageData storage, ItemData item )
         {
-            LogManager.WriteInfo( "Ein RegalItem wird entfernt.", "Warehouse", "RemoveItemFromStorageReck" );
+            LogManager.WriteInfo( "Ein RegalItem wird entfernt.", "Warehouse", "RemoveItemFromStorageRack" );
             
             item.SetParent( null );
             storage.RemoveItem( item );
 
-            for ( int i = 0; i < Data.StorageRecks.Count; i++ )
+            for ( int i = 0; i < Data.StorageRacks.Count; i++ )
             {
-                if ( Data.StorageRecks[ i ].ID == storage.GetID( ) )
+                if ( Data.StorageRacks[ i ].ID == storage.GetID( ) )
                 {
-                    for( int j = 0; j < Data.StorageRecks[i].GetItems().Length; j++ )
+                    for( int j = 0; j < Data.StorageRacks[i].GetItems().Length; j++ )
                     {
-                        if ( Data.StorageRecks[i].GetItems()[j].IDRef == item.GetID() )
+                        if ( Data.StorageRacks[i].GetItems()[j].IDRef == item.GetID() )
                         {
                             item.GameObjectDataChanged -= GameObjectHasChanged;
-                            item.ItemChanged -= StorageReckItemHasChanged;
+                            item.ItemChanged -= StorageRackItemHasChanged;
 
-                            return Data.StorageRecks[ i ].RemoveItem( Data.StorageRecks[ i ].GetItems( )[ j ] );
+                            return Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[ i ].GetItems( )[ j ] );
                         }
                     }
                 }
@@ -505,12 +505,12 @@ namespace ApplicationFacade
 
                 case GameObjectDataType.StorageReck:
 
-                    StorageReckHasChanged( obj as StorageData );
+                    StorageRackHasChanged( obj as StorageData );
                     break;
 
                 case GameObjectDataType.Item:
 
-                    StorageReckItemHasChanged( obj as ItemData );
+                    StorageRackItemHasChanged( obj as ItemData );
                     break;
 
                 default:
@@ -576,39 +576,39 @@ namespace ApplicationFacade
             }
         }
 
-        private void StorageReckHasChanged( StorageData storage )
+        private void StorageRackHasChanged( StorageData storage )
         {
-            LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageReckHasChanged" );
+            LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageRackHasChanged" );
 
-            for ( int i = 0; i < Data.StorageRecks.Count; i++ )
+            for ( int i = 0; i < Data.StorageRacks.Count; i++ )
             {
-                if ( storage.GetID( ) == Data.StorageRecks[ i ].ID )
+                if ( storage.GetID( ) == Data.StorageRacks[ i ].ID )
                 {
-                    if ( storage.GetItems().Length > Data.StorageRecks[i].GetItems().Length )
+                    if ( storage.GetItems().Length > Data.StorageRacks[i].GetItems().Length )
                     {
                         ProjectTransformationData data = new ProjectTransformationData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Position,
                                                                                         storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Rotation,
                                                                                         storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Scale );
                         
-                        Data.StorageRecks[ i ].AddItem( new ProjectItemData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].GetID( ), data ) );
+                        Data.StorageRacks[ i ].AddItem( new ProjectItemData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].GetID( ), data ) );
 
                         break;
                     }
 
-                    else if ( storage.GetItems( ).Length < Data.StorageRecks[ i ].GetItems( ).Length )
+                    else if ( storage.GetItems( ).Length < Data.StorageRacks[ i ].GetItems( ).Length )
                     {
                         if ( storage.GetItems( ).Length == 1 )
                         {
-                            Data.StorageRecks[ i ].RemoveItem( Data.StorageRecks[ i ].GetItems( )[ 0 ] );
+                            Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[ i ].GetItems( )[ 0 ] );
 
                             break;
                         }
 
-                        for ( int j = 0; j < Data.StorageRecks[i].GetItems().Length; j++ )
+                        for ( int j = 0; j < Data.StorageRacks[i].GetItems().Length; j++ )
                         {
-                            if ( Data.StorageRecks[i].GetItems()[j].IDRef != storage.GetItems()[j].GetID() )
+                            if ( Data.StorageRacks[i].GetItems()[j].IDRef != storage.GetItems()[j].GetID() )
                             {
-                                Data.StorageRecks[ i ].RemoveItem( Data.StorageRecks[i].GetItems()[j] );
+                                Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[i].GetItems()[j] );
 
                                 break;
                             }
@@ -619,7 +619,7 @@ namespace ApplicationFacade
 
                     else
                     {
-                        ProjectItemData[ ] items = Data.StorageRecks[ i ].GetItems( );
+                        ProjectItemData[ ] items = Data.StorageRacks[ i ].GetItems( );
                         ProjectStorageData data = new ProjectStorageData( storage.GetID(), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) );
 
                         foreach( ProjectItemData item in items )
@@ -627,8 +627,8 @@ namespace ApplicationFacade
                             data.AddItem( item );
                         }
 
-                        Data.StorageRecks.Remove( Data.StorageRecks[ i ] );
-                        Data.StorageRecks.Insert( i, data );
+                        Data.StorageRacks.Remove( Data.StorageRacks[ i ] );
+                        Data.StorageRacks.Insert( i, data );
 
                         break;
                     }
@@ -636,22 +636,22 @@ namespace ApplicationFacade
             }
         }
 
-        private void StorageReckItemHasChanged( ItemData item )
+        private void StorageRackItemHasChanged( ItemData item )
         {
-            LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageReckItemHasChanged" );
+            LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageRackItemHasChanged" );
             
-            for( int i = 0; i < StorageRecks.Count; i++ )
+            for( int i = 0; i < StorageRacks.Count; i++ )
             {
-                if ( item.Parent.GetID() == StorageRecks[i].GetID() )
+                if ( item.Parent.GetID() == StorageRacks[i].GetID() )
                 {
-                    for( int j = 0; j < Data.StorageRecks[i].GetItems().Length; j++ )
+                    for( int j = 0; j < Data.StorageRacks[i].GetItems().Length; j++ )
                     {
-                        if ( Data.StorageRecks[i].GetItems()[j].IDRef == item.GetID() )
+                        if ( Data.StorageRacks[i].GetItems()[j].IDRef == item.GetID() )
                         {
                             ProjectTransformationData data = new ProjectTransformationData( item.Position, item.Rotation, item.Scale );
 
-                            Data.StorageRecks[ i ].RemoveItem( Data.StorageRecks[ i ].GetItems( )[ j ] );
-                            Data.StorageRecks[ i ].AddItem( j, new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                            Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[ i ].GetItems( )[ j ] );
+                            Data.StorageRacks[ i ].AddItem( j, new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
 
                             break;
                         }
