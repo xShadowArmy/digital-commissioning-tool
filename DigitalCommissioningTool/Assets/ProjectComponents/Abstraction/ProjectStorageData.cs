@@ -24,11 +24,6 @@ namespace ProjectComponents.Abstraction
             ID = id;
         }
 
-        public void SetTransformation( ProjectTransformationData transformation )
-        {
-            Transformation = transformation;
-        }
-
         public void AddItem( ProjectItemData item )
         {
             if ( Items == null )
@@ -37,6 +32,16 @@ namespace ProjectComponents.Abstraction
             }
 
             Items.Add( item );
+        }
+    
+        public void AddItem( int pos, ProjectItemData item )
+        {
+            if ( Items == null )
+            {
+                Items = new List<ProjectItemData>( );
+            }
+
+            Items.Insert( pos, item );
         }
 
         public bool RemoveItem( ProjectItemData item )

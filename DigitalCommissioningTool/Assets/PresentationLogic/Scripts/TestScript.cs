@@ -48,11 +48,11 @@ namespace Scripts
             GameManager.GameWarehouse.CreateDoor( new Vector3( 1f, 2f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 77f, 88f, 99f ), DoorType.Door );
             GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
+            StorageData data2 = GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateStorageReck( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
@@ -60,9 +60,13 @@ namespace Scripts
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
+            WallData data3 = GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameContainer.CreateContainer( new Vector3( 0f, 0f, 1f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 1f, 0f ) );
             GameManager.GameContainer.CreateContainer( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 1f, 0f ), new Vector3( 0f, 0f, 0f ) );
+
+            data3.SetPosition( new Vector3( 999f, 999f, 999f) );
+
+            data2.SetScale( new Vector3( 12345f, 6789f, 0.12345f ) );
 
             GameManager.SaveProject( "Project123" );
             GameManager.CloseProject( );

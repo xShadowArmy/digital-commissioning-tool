@@ -21,10 +21,5 @@ namespace ProjectComponents.Abstraction
         {
             IDRef = idRef;
         }
-
-        public void SetTransformation( ProjectTransformationData transformation )
-        {
-            Transformation = transformation;
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace ProjectComponents.Abstraction
         public Vector3 Position { get; set; }
         public Vector3 Rotation { get; set; }
         public Vector3 Scale { get; set; }
-        
+
         public ProjectTransformationData( Vector3 position, Vector3 rotation, Vector3 scale )
         {
             Position = position;

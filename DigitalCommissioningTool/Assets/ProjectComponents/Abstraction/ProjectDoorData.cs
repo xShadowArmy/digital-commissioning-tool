@@ -33,10 +33,5 @@ namespace ProjectComponents.Abstraction
 
             Type = type;
         }
-
-        public void SetTransformation( ProjectTransformationData transformation )
-        {
-            Transformation = transformation;
-        }
     }
 }

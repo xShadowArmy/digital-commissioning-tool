@@ -61,9 +61,7 @@ namespace ProjectComponents.FileIntegration
         {
             LogManager.WriteInfo( "Der Boden wird gelesen.", "WarehouseReader", "ReadFloor" );
 
-            ProjectFloorData data = new ProjectFloorData();
-
-            data.SetTransformation( ReadTransformation( nav, xmlns ) );
+            ProjectFloorData data = new ProjectFloorData( ReadTransformation( nav, xmlns ) );
 
             warehouse.UpdateFloor( data );
         }
@@ -87,11 +85,8 @@ namespace ProjectComponents.FileIntegration
 
                 for( int i = 0; i < count; i++ )
                 {
-                    data = new ProjectWallData( );
-
-                    data.SetID( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
-                    data.SetTransformation( ReadTransformation( nav, xmlns ) );
-
+                    data = new ProjectWallData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), ReadTransformation( nav, xmlns ) );
+                    
                     nav.MoveToNext( );
 
                     warehouse.AddWall( data );
@@ -125,10 +120,7 @@ namespace ProjectComponents.FileIntegration
 
                 for ( int i = 0; i < count; i++ )
                 {
-                    data = new ProjectWindowData( );
-
-                    data.SetID( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
-                    data.SetTransformation( ReadTransformation( nav, xmlns ) );
+                    data = new ProjectWindowData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
 
@@ -163,12 +155,8 @@ namespace ProjectComponents.FileIntegration
 
                 for ( int i = 0; i < count; i++ )
                 {
-                    data = new ProjectDoorData( );
-
-                    data.SetType( nav.GetAttribute( "type", xmlns ) );
-                    data.SetID(  long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
-                    data.SetTransformation( ReadTransformation( nav, xmlns ) );
-
+                    data = new ProjectDoorData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), nav.GetAttribute( "type", xmlns ), ReadTransformation( nav, xmlns ) );
+                    
                     nav.MoveToNext( );
 
                     warehouse.AddDoor( data );
@@ -208,13 +196,11 @@ namespace ProjectComponents.FileIntegration
                         nav.MoveToNext( );
                     }
 
-                    data = new ProjectStorageData( );
-
-                    data.SetID( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ) );
+                    long id = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
                     
                     nav.MoveToFirstChild( );
 
-                    data.SetTransformation( ReadTransformation( nav, xmlns ) );
+                    data = new ProjectStorageData( id, ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
 
@@ -235,12 +221,8 @@ namespace ProjectComponents.FileIntegration
 
                     for ( int j = 0; j < itemCount; j++ )
                     {
-                        item = new ProjectItemData( );
-
-                        item.SetIDRef( long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer ) );
-
-                        item.SetTransformation( ReadTransformation( nav, xmlns ) );
-
+                        item = new ProjectItemData( long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer ), ReadTransformation( nav, xmlns ) );
+                        
                         nav.MoveToNext( );
 
                         data.AddItem( item );

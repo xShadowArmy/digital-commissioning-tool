@@ -14,10 +14,5 @@ namespace ProjectComponents.Abstraction
         {
             Transformation = transformation;
         }
-
-        public void SetTransformation( ProjectTransformationData transformation )
-        {
-            Transformation = transformation;
-        }
     }
 }

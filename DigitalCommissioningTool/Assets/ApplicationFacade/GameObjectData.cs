@@ -10,6 +10,10 @@ namespace ApplicationFacade
 {
     public class GameObjectData : IDataIdentifier
     {
+        public delegate void GameObjectChangedEventHandler( GameObjectData obj, GameObjectDataType type );
+
+        public event GameObjectChangedEventHandler GameObjectDataChanged;
+
         public Vector3 Position { get; protected set; }
 
         public Vector3 Rotation { get; protected set; }
@@ -18,59 +22,68 @@ namespace ApplicationFacade
         
         public GameObject Object { get; protected set; }
 
+        protected GameObjectDataType ObjType { get; set; }
+
         protected long ID { get; set; }
 
-        internal GameObjectData()
+        internal GameObjectData( GameObjectDataType type )
         {
             Position = new Vector3( );
             Rotation = new Vector3( );
             Scale    = new Vector3( );
             Object   = null;
             ID       = 0;
+            ObjType = type;
         }
 
-        internal GameObjectData( long id )
+        internal GameObjectData( GameObjectDataType type, long id )
         {
             Position = new Vector3( );
             Rotation = new Vector3( );
             Scale    = new Vector3( );
             Object   = null;
             ID       = id;
+            ObjType = type;
         }
 
-        internal GameObjectData( long id, Vector3 position, Vector3 rotation, Vector3 scale )
+        internal GameObjectData( GameObjectDataType type, long id, Vector3 position, Vector3 rotation, Vector3 scale )
         {
             Position = position;
             Rotation = rotation;
             Scale    = scale;
             Object   = null;
             ID       = id;
+            ObjType = type;
         }
 
-        internal GameObjectData( long id, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj )
+        internal GameObjectData( GameObjectDataType type, long id, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj )
         {
             Position = position;
             Rotation = rotation;
             Scale    = scale;
             Object   = obj;
             ID       = id;
+            ObjType = type;
         }
 
         public void SetPosition( Vector3 position )
         {
             Position = position;
+            OnChange( );
         }
 
         public void SetRotation( Vector3 rotation )
         {
             Rotation = rotation;
+            OnChange( );
         }
 
         public void SetScale( Vector3 scale )
         {
             Scale = scale;
+            OnChange( );
         }
-        
+
         public void ChangeGameObject( GameObject obj )
         {
             Object = obj;
@@ -84,6 +97,11 @@ namespace ApplicationFacade
         public long GetID()
         {
             return ID;
+        }
+
+        protected virtual void OnChange()
+        {
+            GameObjectDataChanged?.Invoke( this, ObjType );
         }
     }
 }
