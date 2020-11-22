@@ -17,7 +17,7 @@ namespace ProjectComponents.Abstraction
 
         public List<ProjectDoorData> Doors { get; private set; }
 
-        public List<ProjectStorageData> StorageRecks { get; private set; }
+        public List<ProjectStorageData> StorageRacks { get; private set; }
 
         public InternalProjectWarehouse()
         {
@@ -29,7 +29,7 @@ namespace ProjectComponents.Abstraction
 
             Doors = new List<ProjectDoorData>( );
 
-            StorageRecks = new List<ProjectStorageData>( );
+            StorageRacks = new List<ProjectStorageData>( );
         }
 
         public void UpdateFloor( ProjectFloorData data )
@@ -67,14 +67,14 @@ namespace ProjectComponents.Abstraction
             return Doors.Remove( data );
         }
 
-        public void AddStorageReck( ProjectStorageData data )
+        public void AddStorageRack( ProjectStorageData data )
         {
-            StorageRecks.Add( data );
+            StorageRacks.Add( data );
         }
 
-        public bool RemoveStorageReck( ProjectStorageData data )
+        public bool RemoveStorageRack( ProjectStorageData data )
         {
-            return StorageRecks.Remove( data );
+            return StorageRacks.Remove( data );
         }
     }
 }

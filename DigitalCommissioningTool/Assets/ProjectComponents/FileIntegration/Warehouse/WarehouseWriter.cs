@@ -51,7 +51,7 @@ namespace ProjectComponents.FileIntegration
                 nav.MoveToNext( );
                 WriteDoors( nav, data, xmlns );
 
-                nav.InsertElementAfter( "xs", "StorageRecks", xmlns, "" );
+                nav.InsertElementAfter( "xs", "StorageRacks", xmlns, "" );
                 nav.MoveToNext( );
                 WriteStorageRecks( nav, data, xmlns );
 
@@ -206,57 +206,57 @@ namespace ProjectComponents.FileIntegration
 
         private void WriteStorageRecks( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
         {
-            if ( nav.LocalName.Equals( "StorageRecks" ) )
+            if ( nav.LocalName.Equals( "StorageRacks" ) )
             {
-                nav.CreateAttribute( "xs", "count", xmlns, data.StorageRecks.Count.ToString( ) );
+                nav.CreateAttribute( "xs", "count", xmlns, data.StorageRacks.Count.ToString( ) );
 
-                if ( data.StorageRecks.Count == 0 )
+                if ( data.StorageRacks.Count == 0 )
                 {
                     return;
                 }
 
-                for ( int i = 0; i < data.StorageRecks.Count; i++ )
+                for ( int i = 0; i < data.StorageRacks.Count; i++ )
                 {
                     if ( i == 0 )
                     {
                         nav.AppendChildElement( "xs", "Storage", xmlns, "" );
                         nav.MoveToChild( "Storage", xmlns );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].ID.ToString( ) );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
                     }
 
                     else
                     {
                         nav.InsertElementAfter( "xs", "Storage", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRecks[ i ].ID.ToString( ) );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
                     }
 
                     nav.AppendChildElement( "xs", "Transform", xmlns, "" );
                     nav.MoveToChild( "Transform", xmlns );
                     
-                    WriteTransformationData( nav, data.StorageRecks[ i ].Transformation, xmlns );
+                    WriteTransformationData( nav, data.StorageRacks[ i ].Transformation, xmlns );
 
                     nav.InsertElementAfter( "xs", "Items", xmlns, "" );
                     nav.MoveToNext( );
-                    nav.CreateAttribute( "xs", "count", xmlns, data.StorageRecks[ i ].GetItems( ).Length.ToString( ) );
+                    nav.CreateAttribute( "xs", "count", xmlns, data.StorageRacks[ i ].GetItems( ).Length.ToString( ) );
                     
-                    for( int j = 0; j < data.StorageRecks[i].GetItems().Length; j++ )
+                    for( int j = 0; j < data.StorageRacks[i].GetItems().Length; j++ )
                     {
                         if ( j == 0 )
                         {
                             nav.AppendChildElement( "xs", "Item", xmlns, "" );
                             nav.MoveToChild( "Item", xmlns );
-                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
                         }
 
                         else
                         {
                             nav.InsertElementAfter( "xs", "Item", xmlns, "" );
                             nav.MoveToNext( );
-                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRecks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
                         }
                         
-                        WriteTransformationData( nav, data.StorageRecks[ i ].GetItems()[j].Transformation, xmlns );
+                        WriteTransformationData( nav, data.StorageRacks[ i ].GetItems()[j].Transformation, xmlns );
                     }
 
                     nav.MoveToParent( );
@@ -267,7 +267,7 @@ namespace ProjectComponents.FileIntegration
 
             else
             {
-                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<StorageRecks>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteStorageRecks" );
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<StorageRacks>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteStorageRecks" );
             }
         }
 
