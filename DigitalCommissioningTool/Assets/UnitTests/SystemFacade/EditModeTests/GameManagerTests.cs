@@ -1,4 +1,7 @@
-﻿using ApplicationFacade;
+﻿
+using System.IO;
+using SystemFacade;
+using ApplicationFacade;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -10,7 +13,8 @@ namespace UnitTests.SystemFacade
         [Test]
         public void creates_project()
         {
-            string projectName = "TestProject3490580298540";
+            string projectName = "TestProject3490580298541";
+            string projectPath = Paths.ProjectsPath + projectName + ".prj";
             GameManager.CreateProject(projectName);
             GameManager.GameWarehouse.CreateWall(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
             GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Gate);
@@ -25,9 +29,9 @@ namespace UnitTests.SystemFacade
 
             GameManager.SaveProject(projectName);
             GameManager.CloseProject();
-            Assert.IsTrue(GameManager.OpenProject(projectName));
             
-            
+            Assert.IsTrue(File.Exists(projectPath) && new FileInfo(projectPath).Length > 0);
+            File.Delete(projectPath);
         }
     }
 }
