@@ -33,6 +33,7 @@
           <e p="Scripts" t="Include">
             <e p="FlyCamera.cs" t="Include" />
             <e p="TestAvatarBehavior.cs" t="Include" />
+            <e p="TestPascal.cs" t="Include" />
             <e p="WalkTrajectory.cs" t="Include" />
           </e>
         </e>
