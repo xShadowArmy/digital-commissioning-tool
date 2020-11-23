@@ -165,9 +165,9 @@ namespace ApplicationFacade
                 CloseProject( );
             }
 
-            if ( File.Exists( Data.ProjectPath + Data.ProjectName + ".prj" ) )
+            if ( File.Exists( Data.ProjectPath + name + InternalProjectData.Extension ) )
             {
-                File.Delete( Data.ProjectPath + Data.ProjectName + ".prj" );
+                File.Delete( Data.ProjectPath + name + InternalProjectData.Extension );
             }
         }
 
