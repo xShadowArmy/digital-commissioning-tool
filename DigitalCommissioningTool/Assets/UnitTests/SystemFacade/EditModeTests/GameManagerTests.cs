@@ -1,5 +1,4 @@
-﻿
-using System.IO;
+﻿using System.IO;
 using SystemFacade;
 using ApplicationFacade;
 using NUnit.Framework;
@@ -11,7 +10,7 @@ namespace UnitTests.SystemFacade
     {
         // A Test behaves as an ordinary method
         [Test]
-        public void creates_project()
+        public void creates_projects()
         {
             string projectName = "TestProject3490580298541";
             string projectPath = Paths.ProjectsPath + projectName + ".prj";
@@ -29,9 +28,43 @@ namespace UnitTests.SystemFacade
 
             GameManager.SaveProject(projectName);
             GameManager.CloseProject();
-            
+
             Assert.IsTrue(File.Exists(projectPath) && new FileInfo(projectPath).Length > 0);
-            File.Delete(projectPath);
+            GameManager.DeleteProject(projectName);
+        }
+
+        [Test]
+        public void loads_and_restores_projects()
+        {
+            string projectName = "TestProject3490580298545";
+            string projectPath = Paths.ProjectsPath + projectName + ".prj";
+            GameManager.CreateProject(projectName);
+            GameManager.GameWarehouse.CreateWall(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
+            GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Gate);
+            GameManager.GameWarehouse.CreateStorageRack(new Vector3(11f, 222f, 333f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
+            StorageData origData1 = GameManager.GameWarehouse.CreateStorageRack(new Vector3(1f, 2f, 3f), new Vector3(433f, 555f, 666f), new Vector3(7f, 8f, 9f));
+            GameManager.GameWarehouse.CreateStorageRackItem(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), origData1);
+
+            StorageData origData2 = GameManager.GameContainer.CreateContainer(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+            ItemData item = GameManager.GameContainer.CreateContainerItem(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), origData2);
+
+            item.SetPosition(new Vector3(1234567f, 1234567f, 1234567f));
+
+            GameManager.SaveProject(projectName);
+            GameManager.CloseProject();
+
+            GameManager.OpenProject(projectName);
+
+            StorageData loadedData1 = GameManager.GameWarehouse.GetStorageRack(origData1.GetID());
+            StorageData loadedData2 = GameManager.GameContainer.GetContainer(origData2.GetID());
+
+            GameManager.CloseProject();
+            GameManager.DeleteProject(projectName);
+
+            bool same = origData1.Position == loadedData1.Position && origData1.Rotation == loadedData1.Rotation && origData1.Scale == loadedData1.Scale &&
+                        origData2.Position == loadedData2.Position && origData2.Rotation == loadedData2.Rotation && origData2.Scale == loadedData2.Scale;
+            Assert.IsTrue(same);
+            
         }
     }
 }

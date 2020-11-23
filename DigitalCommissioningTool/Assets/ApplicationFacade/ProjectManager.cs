@@ -160,14 +160,14 @@ namespace ApplicationFacade
 
         public void DeleteProject( string name )
         {
-            if( ProjectName.Equals( name ) )
+            if( ProjectName != null && ProjectName.Equals( name ) )
             {
                 CloseProject( );
             }
 
-            if ( File.Exists( Data.ProjectPath + name + InternalProjectData.Extension ) )
+            if ( File.Exists( Paths.ProjectsPath + name + InternalProjectData.Extension ) )
             {
-                File.Delete( Data.ProjectPath + name + InternalProjectData.Extension );
+                File.Delete( Paths.ProjectsPath + name + InternalProjectData.Extension );
             }
         }
 
