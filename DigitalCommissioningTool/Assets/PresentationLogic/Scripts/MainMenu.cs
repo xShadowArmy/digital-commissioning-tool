@@ -11,6 +11,10 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ReplaceResources();
+    }
+    void ReplaceResources()
+    {
         GameObject[] labels = GameObject.FindGameObjectsWithTag("Resource");
 
         foreach (GameObject label in labels)
@@ -19,11 +23,6 @@ public class MainMenu : MonoBehaviour
             string localizedText = StringResourceManager.LoadString("@" + key);
             label.GetComponent<UnityEngine.UI.Text>().text = localizedText;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
     public void NewProject()
     {
@@ -35,6 +34,8 @@ public class MainMenu : MonoBehaviour
     }
     public void Settings()
     {
+        gameObject.transform.parent.Find("SettingsPanel").gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
     public void Exit()
     {
