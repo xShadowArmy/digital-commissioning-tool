@@ -20,8 +20,8 @@ namespace Scripts
 
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateDoor( new Vector3( 1f, 2f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 77f, 88f, 99f ), DoorType.Gate );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            StorageData data0 = GameManager.GameWarehouse.CreateStorageRack( new Vector3( 1f, 2f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
+            GameManager.GameWarehouse.CreateStorageRack(  );
+            StorageData data0 = GameManager.GameWarehouse.CreateStorageRack(  );
             GameManager.GameWarehouse.CreateStorageRackItem( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), data0 );
 
             StorageData data = GameManager.GameContainer.CreateContainer( new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ), new Vector3( 0f, 0f, 0f ) );
@@ -48,13 +48,13 @@ namespace Scripts
             GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateDoor( new Vector3( 1f, 2f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 77f, 88f, 99f ), DoorType.Door );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            StorageData data2 = GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateStorageRack( new Vector3( 11f, 222f, 333f ), new Vector3( 4f, 0.4f, 6f ), new Vector3( 7f, 8f, 9f ) );
+            GameManager.GameWarehouse.CreateStorageRack(  );
+            GameManager.GameWarehouse.CreateStorageRack(  );
+            StorageData data2 = GameManager.GameWarehouse.CreateStorageRack(  );
+            GameManager.GameWarehouse.CreateStorageRack( );
+            GameManager.GameWarehouse.CreateStorageRack( );
+            GameManager.GameWarehouse.CreateStorageRack( );
+            GameManager.GameWarehouse.CreateStorageRack( );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWall( new Vector3( 1f, 2.1f, 3f ), new Vector3( 433f, 555f, 666f ), new Vector3( 7f, 8f, 9f ) );
@@ -104,7 +104,10 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-        
+            if ( Input.GetKeyDown( KeyCode.Return ) )
+            {
+                GameManager.GameWarehouse.CreateStorageRack( );
+            }
         }
     }
 }

@@ -26,8 +26,6 @@ namespace SystemTools.Handler
 
         public string RetrievePath( string name )
         {
-            Logger.WriteInfo( "Pfad \"" + name + "\" wird gesucht", "PathHandler", "RetrievePath" );
-
             foreach ( KeyValuePair<string,string> tmp in Table )
             {
                 if ( name.Equals( tmp.Key ) )

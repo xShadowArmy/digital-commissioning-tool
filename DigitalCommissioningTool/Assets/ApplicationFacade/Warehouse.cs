@@ -50,6 +50,8 @@ namespace ApplicationFacade
             
             WallData wall = new WallData( GetUniqueID( Walls.ToArray() ), position, rotation, scale );
 
+            wall.WallChanged += WallHasChanged;
+
             wall.GameObjectDataChanged += GameObjectHasChanged;
             wall.WallChanged += WallHasChanged;
 
@@ -293,18 +295,36 @@ namespace ApplicationFacade
             return null;
         }
 
-        public StorageData CreateStorageRack( Vector3 position, Vector3 rotation, Vector3 scale )
+        public StorageData CreateStorageRack( )
         {
             LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
 
-            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), position, rotation, scale );
+            GameObject rack = GameObject.Find( "StorageRack" );
+
+            Camera editorModeCamera = GameObject.FindGameObjectWithTag( "EditorModeCamera" ).GetComponent<Camera>( );
+            Ray ray = editorModeCamera.ScreenPointToRay( Input.mousePosition );
+            RaycastHit hit;
+
+            StorageData storage;
+
+            if ( Physics.Raycast( ray, out hit ) )
+            {
+                storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), hit.transform.position, hit.transform.rotation.eulerAngles, hit.transform.localScale );
+
+                storage.ChangeGameObject( GameObject.Instantiate( rack, hit.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
+            }
+
+            else
+            {
+                return null;
+            }
 
             storage.GameObjectDataChanged += GameObjectHasChanged;
             storage.StorageChanged += StorageRackHasChanged;
 
             StorageRacks.Add( storage );
 
-            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
+            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( rack.transform.position, rack.transform.rotation.eulerAngles, rack.transform.localScale ) ) );
 
             return storage;
         }

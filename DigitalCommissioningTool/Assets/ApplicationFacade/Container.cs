@@ -11,6 +11,12 @@ namespace ApplicationFacade
 {
     public class Container
     {
+        public delegate void StorageReckModified( StorageData storage );
+
+        public event StorageReckModified StorageCreated;
+
+        public event StorageReckModified StorageDeleted;
+
         public List<StorageData> ContainerData { get; private set; }
 
         internal InternalProjectContainer Data { get; private set; }
@@ -33,6 +39,8 @@ namespace ApplicationFacade
             ContainerData.Add( container );
 
             Data.AddContainer( new ProjectStorageData( container.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
+
+            OnStorageCreate( container );
 
             return container;
         }
@@ -66,6 +74,8 @@ namespace ApplicationFacade
                     container.StorageChanged -= ContainerHasChanged;
 
                     Data.Container.Remove( Data.Container[ i ] );
+
+                    OnStorageDeleted( container );
 
                     return true;
                 }
@@ -311,6 +321,16 @@ namespace ApplicationFacade
                     break;
                 }
             }
+        }
+        
+        protected virtual void OnStorageCreate( StorageData data )
+        {
+            StorageCreated?.Invoke( data );
+        }
+
+        protected virtual void OnStorageDeleted( StorageData data )
+        {
+            StorageDeleted?.Invoke( data );
         }
     }
 }

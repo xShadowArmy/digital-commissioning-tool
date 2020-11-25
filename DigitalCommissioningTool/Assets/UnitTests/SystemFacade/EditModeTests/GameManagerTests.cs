@@ -17,8 +17,8 @@ namespace UnitTests.SystemFacade
             GameManager.CreateProject(projectName);
             GameManager.GameWarehouse.CreateWall(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
             GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Gate);
-            GameManager.GameWarehouse.CreateStorageRack(new Vector3(11f, 222f, 333f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
-            StorageData data0 = GameManager.GameWarehouse.CreateStorageRack(new Vector3(1f, 2f, 3f), new Vector3(433f, 555f, 666f), new Vector3(7f, 8f, 9f));
+            GameManager.GameWarehouse.CreateStorageRack();
+            StorageData data0 = GameManager.GameWarehouse.CreateStorageRack();
             GameManager.GameWarehouse.CreateStorageRackItem(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), data0);
 
             StorageData data = GameManager.GameContainer.CreateContainer(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
@@ -41,8 +41,8 @@ namespace UnitTests.SystemFacade
             GameManager.CreateProject(projectName);
             GameManager.GameWarehouse.CreateWall(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
             GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), new Vector3(4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Gate);
-            GameManager.GameWarehouse.CreateStorageRack(new Vector3(11f, 222f, 333f), new Vector3(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
-            StorageData origData1 = GameManager.GameWarehouse.CreateStorageRack(new Vector3(1f, 2f, 3f), new Vector3(433f, 555f, 666f), new Vector3(7f, 8f, 9f));
+            GameManager.GameWarehouse.CreateStorageRack();
+            StorageData origData1 = GameManager.GameWarehouse.CreateStorageRack();
             GameManager.GameWarehouse.CreateStorageRackItem(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), origData1);
 
             StorageData origData2 = GameManager.GameContainer.CreateContainer(new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
