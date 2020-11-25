@@ -13,10 +13,11 @@ public class SettingsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitResolution();
-        InitLanguage();
-        ReplaceResources();
-        fullscreen.isOn = Screen.fullScreen;
+        LoadSettings();
+    }
+    private void OnApplicationQuit()
+    {
+        StoreSettings();
     }
     void InitResolution()
     {
@@ -48,6 +49,33 @@ public class SettingsMenu : MonoBehaviour
             string localizedText = StringResourceManager.LoadString("@" + key);
             label.GetComponent<UnityEngine.UI.Text>().text = localizedText;
         }
+    }
+    public void LoadSettings()
+    {
+        InitResolution();
+        InitLanguage();
+        ReplaceResources();
+        using (ConfigManager cman = new ConfigManager())
+        {
+            cman.OpenConfigFile("Settings.xml", true);
+            string resolution = cman.LoadData("Resolution").GetValueAsString();
+            dropdownResolution.value = dropdownResolution.options.FindIndex((i) => { return i.text.Equals(resolution); });
+            dropdownLanguage.value = cman.LoadData("Language").GetValueAsInt();
+            fullscreen.isOn = cman.LoadData("fullscreen").GetValueAsBool();
+            FullscreenChanged();
+            LanguageChanged();
+        }
+    }
+    private void StoreSettings()
+    {
+        using (ConfigManager cman = new ConfigManager())
+        {
+            cman.OpenConfigFile("Settings.xml", true);
+            cman.StoreData("Resolution", resolutions[resolutions.Length - 1 - dropdownResolution.value]);
+            cman.StoreData("Language", dropdownLanguage.value);
+            cman.StoreData("fullscreen", fullscreen.isOn);
+        }
+
     }
     public void FullscreenChanged()
     {

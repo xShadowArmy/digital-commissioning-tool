@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    public GameObject settingsPanel;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        settingsPanel.GetComponent<SettingsMenu>().LoadSettings();
         ReplaceResources();
     }
     void ReplaceResources()
@@ -34,7 +35,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Settings()
     {
-        gameObject.transform.parent.Find("SettingsPanel").gameObject.SetActive(true);
+        settingsPanel.SetActive(true);
         gameObject.SetActive(false);
     }
     public void Exit()
