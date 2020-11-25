@@ -10,8 +10,12 @@ namespace Scripts
         // Start is called before the first frame update
         void Start()
         {
-            TestCreate( );
-            TestAddData( );
+            KeyManager.SaveKeyConfiguration( );
+            KeyManager.LoadKeyConfiguration( );
+            Debug.Log( KeyManager.InsertItem.Code.ToString() );
+            Debug.Log( KeyManager.ChangeMode.Code.ToString( ) );
+            //TestCreate( );
+            //TestAddData( );
         }
 
         public void TestCreate()

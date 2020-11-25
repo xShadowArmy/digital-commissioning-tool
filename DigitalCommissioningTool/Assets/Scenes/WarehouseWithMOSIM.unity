@@ -5769,7 +5769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4edb30f77f56946a61c40482032e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 1
+  Sensitivity: 4
 --- !u!20 &306542203
 Camera:
   m_ObjectHideFlags: 0
@@ -33958,6 +33958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627113339639770193, guid: f622d1f902e8c2649a3734676f49d8c3,
+        type: 3}
+      propertyPath: m_TagString
+      value: SelectableFloor
       objectReference: {fileID: 0}
     - target: {fileID: 2660833451017572328, guid: f622d1f902e8c2649a3734676f49d8c3,
         type: 3}

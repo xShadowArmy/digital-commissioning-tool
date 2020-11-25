@@ -309,9 +309,17 @@ namespace ApplicationFacade
 
             if ( Physics.Raycast( ray, out hit ) )
             {
-                storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), hit.transform.position, hit.transform.rotation.eulerAngles, hit.transform.localScale );
+                if ( hit.transform.CompareTag( "SelectableFloor" ) )
+                {
+                    storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), hit.transform.position, hit.transform.rotation.eulerAngles, hit.transform.localScale );
 
-                storage.ChangeGameObject( GameObject.Instantiate( rack, hit.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
+                    storage.ChangeGameObject( GameObject.Instantiate( rack, hit.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
+                }
+
+                else
+                {
+                    return null;
+                }
             }
 
             else
@@ -426,7 +434,7 @@ namespace ApplicationFacade
         public void AddItemToStorageRack( StorageData storage, ItemData item )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
-
+            
             item.GameObjectDataChanged += GameObjectHasChanged;
             item.ItemChanged += StorageRackItemHasChanged;
 

@@ -8,6 +8,7 @@ TagManager:
   - EditorModeCamera
   - Button
   - Resource
+  - SelectableFloor
   layers:
   - Default
   - TransparentFX
