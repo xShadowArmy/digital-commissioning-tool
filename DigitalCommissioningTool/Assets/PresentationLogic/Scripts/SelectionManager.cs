@@ -14,11 +14,11 @@ public class SelectionManager : MonoBehaviour
     private GameObject SwitchModeButton;
     private ModeHandler ModeHandler;
 
-    public delegate void ObjectSelected(Transform selectedObject);
+    public delegate void ObjectSelectedEventHandler(Transform selectedObject);
 
-    public event ObjectSelected WallSelected;
+    public static event ObjectSelectedEventHandler WallSelected;
 
-    public event ObjectSelected StorageSelected;
+    public static ObjectSelectedEventHandler StorageSelected;
 
     private Transform SelectedObject { get; set; }
 
@@ -26,12 +26,20 @@ public class SelectionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         controller = GameObject.Find("GameController");
         popUp = controller.GetComponent<WallEditor>();
         EditorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        //SelectionManager.StorageSelected += OnWallSelected;
+       
     }
+
+    //private void  OnWallSelected(Transform selectedobject)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     // Update is called once per frame
     void Update()
@@ -70,7 +78,7 @@ public class SelectionManager : MonoBehaviour
 
                     SelectedObject = tempObject;
                     selected = true;
-                    StorageSelected?.Invoke(SelectedObject);
+                    OnStorageSelected(SelectedObject);
                 }
                 else if (SelectedObject != null)
                 {
@@ -81,5 +89,10 @@ public class SelectionManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    protected virtual void OnStorageSelected(Transform selectedObject)
+    {
+        StorageSelected?.Invoke(SelectedObject);
     }
 }
