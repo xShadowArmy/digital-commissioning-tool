@@ -62,7 +62,7 @@ namespace ApplicationFacade
 
         public void AddWall( WallData wall )
         {
-            LogManager.WriteInfo( "Lagehauswand wird hinzugefuegt.", "Warehouse", "AddWall" );
+            LogManager.WriteInfo( "Lagerhauswand wird hinzugefuegt.", "Warehouse", "AddWall" );
 
             wall.GameObjectDataChanged += GameObjectHasChanged;
             wall.WallChanged += WallHasChanged;
@@ -74,7 +74,7 @@ namespace ApplicationFacade
 
         public bool RemoveWall( WallData wall )
         {
-            LogManager.WriteInfo( "Lagehauswand wird entfernt.", "Warehouse", "RemoveWall" );
+            LogManager.WriteInfo( "Lagerhauswand wird entfernt.", "Warehouse", "RemoveWall" );
 
             if (! Walls.Remove( wall ) )
             {

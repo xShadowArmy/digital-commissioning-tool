@@ -28,20 +28,20 @@ public class EditorModeCamera : MonoBehaviour
             //Fix Z-Axis
             float z = transform.eulerAngles.z;
             this.transform.Rotate(0, 0, -z);
-        }
+            
+            VerticalAxis = Input.GetAxis("Vertical");
+            HorizontalAxis = Input.GetAxis("Horizontal");
 
-        VerticalAxis = Input.GetAxis("Vertical");
-        HorizontalAxis = Input.GetAxis("Horizontal");
+            if (_speed < 15 && (VerticalAxis != 0 || HorizontalAxis != 0))
+            {
+                _speed += 0.1f;
+            }
+            else if (VerticalAxis == 0 && HorizontalAxis == 0)
+            {
+                _speed = 0;
+            }
 
-        if (_speed < 15 && (VerticalAxis != 0 || HorizontalAxis != 0))
-        {
-            _speed += 0.1f;
+            this.transform.Translate(new Vector3(HorizontalAxis, 0, VerticalAxis) * (Time.deltaTime * _speed));
         }
-        else if (VerticalAxis == 0 && HorizontalAxis == 0)
-        {
-            _speed = 0;
-        }
-
-        this.transform.Translate(new Vector3(HorizontalAxis, 0, VerticalAxis) * Time.deltaTime * _speed);
     }
 }
