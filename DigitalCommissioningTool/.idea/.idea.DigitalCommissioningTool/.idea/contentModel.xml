@@ -47,6 +47,7 @@
             <e p="ModeHandler.cs" t="Include" />
             <e p="PickAndPlaceNew.cs" t="Include" />
             <e p="SelectionManager.cs" t="Include" />
+            <e p="SettingsMenu.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
             <e p="WallEditor.cs" t="Include" />
           </e>

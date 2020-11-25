@@ -20,7 +20,6 @@
       <Path>Library</Path>
       <Path>Output</Path>
       <Path>Resources</Path>
-      <Path>Temp</Path>
       <Path>obj</Path>
     </explicitExcludes>
   </component>

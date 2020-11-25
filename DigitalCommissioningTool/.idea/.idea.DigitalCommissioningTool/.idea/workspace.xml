@@ -35,12 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/ProjectManager.cs" />
         <option value="$PROJECT_DIR$/Assets/UnitTests/SystemFacade/EditModeTests/GameManagerTests.cs" />
+        <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/EditorModeCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
       </list>
     </option>
   </component>
@@ -86,6 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606135079785</updated>
       <workItem from="1606135119357" duration="2075000" />
+      <workItem from="1606295593546" duration="7949000" />
     </task>
     <servers />
   </component>

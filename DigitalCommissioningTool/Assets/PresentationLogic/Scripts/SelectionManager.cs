@@ -10,6 +10,15 @@ public class SelectionManager : MonoBehaviour
     [HideInInspector] public bool selected = false;
     private GameObject controller;
     private WallEditor popUp;
+    private Camera EditorModeCamera;
+    private GameObject SwitchModeButton;
+    private ModeHandler ModeHandler;
+
+    public delegate void ObjectSelectedEventHandler(Transform selectedObject);
+
+    public static event ObjectSelectedEventHandler WallSelected;
+
+    public static ObjectSelectedEventHandler StorageSelected;
 
     private Transform SelectedObject { get; set; }
 
@@ -17,30 +26,35 @@ public class SelectionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         controller = GameObject.Find("GameController");
         popUp = controller.GetComponent<WallEditor>();
+        EditorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
+        SwitchModeButton = GameObject.Find("SwitchModeButton");
+        ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        //SelectionManager.StorageSelected += OnWallSelected;
+       
     }
+
+    //private void  OnWallSelected(Transform selectedobject)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     // Update is called once per frame
     void Update()
     {
-        Camera editorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
-        GameObject switchModeButton = GameObject.Find("SwitchModeButton");
-        ModeHandler modeHandler = switchModeButton.GetComponent<ModeHandler>();
-
-        if (modeHandler.Mode.Equals("EditorMode"))
+        if (ModeHandler.Mode.Equals("EditorMode"))
         {
-            Ray ray = editorModeCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Input.GetMouseButtonUp(0) && Physics.Raycast(ray, out hit))
             {
                 Transform tempObject = hit.transform;
                 if (tempObject.CompareTag("SelectableWall"))
                 {
-                    Debug.Log("1a");
                     if (SelectedObject != null)
                     {
-                        Debug.Log("2a");
                         SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
                             defaultMaterial;
                         selected = false;
@@ -53,16 +67,32 @@ public class SelectionManager : MonoBehaviour
                     selected = true;
                     popUp.SetPopUp(tempObject.name);
                 }
+                else if (tempObject.CompareTag("SelectableStorage"))
+                {
+                    if (SelectedObject != null)
+                    {
+                        SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
+                            defaultMaterial;
+                        selected = false;
+                    }
+
+                    SelectedObject = tempObject;
+                    selected = true;
+                    OnStorageSelected(SelectedObject);
+                }
                 else if (SelectedObject != null)
                 {
-                    Debug.Log("1b");
                     Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                     invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
                     selected = false;
                     popUp.SetPopUp(tempObject.name);
-
                 }
             }
         }
+    }
+
+    protected virtual void OnStorageSelected(Transform selectedObject)
+    {
+        StorageSelected?.Invoke(SelectedObject);
     }
 }
