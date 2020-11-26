@@ -12,19 +12,9 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         settingsPanel.GetComponent<SettingsMenu>().LoadSettings();
-        ReplaceResources();
+        ResourceHandler.ReplaceResources();
     }
-    void ReplaceResources()
-    {
-        GameObject[] labels = GameObject.FindGameObjectsWithTag("Resource");
-
-        foreach (GameObject label in labels)
-        {
-            string key = label.GetComponent<UnityEngine.UI.Text>().text.TrimStart('<').TrimEnd('>');
-            string localizedText = StringResourceManager.LoadString("@" + key);
-            label.GetComponent<UnityEngine.UI.Text>().text = localizedText;
-        }
-    }
+    
     public void NewProject()
     {
         LoadDefaultScene();

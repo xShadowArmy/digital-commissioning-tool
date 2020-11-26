@@ -36,4 +36,34 @@
     <xs:string xs:name="DefaultProjectName" xs:id="12">
         <xs:value>NeuesProject</xs:value>
     </xs:string>
+    <xs:string xs:name="NewProject" xs:id="13">
+        <xs:value>New Project</xs:value>
+    </xs:string>
+    <xs:string xs:name="OpenProject" xs:id="14">
+        <xs:value>Open Project</xs:value>
+    </xs:string>
+    <xs:string xs:name="Settings" xs:id="15">
+        <xs:value>Settings</xs:value>
+    </xs:string>
+    <xs:string xs:name="Exit" xs:id="16">
+        <xs:value>Exit</xs:value>
+    </xs:string>
+    <xs:string xs:name="Fullscreen" xs:id="17">
+        <xs:value>Fullscreen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Resolution" xs:id="18">
+        <xs:value>Resolution</xs:value>
+    </xs:string>
+    <xs:string xs:name="Language" xs:id="19">
+        <xs:value>Language</xs:value>
+    </xs:string>
+    <xs:string xs:name="Back" xs:id="20">
+        <xs:value>Back</xs:value>
+    </xs:string>
+    <xs:string xs:name="German" xs:id="21">
+        <xs:value>German</xs:value>
+    </xs:string>
+    <xs:string xs:name="English" xs:id="22">
+        <xs:value>English</xs:value>
+    </xs:string>
 </xs:StringResources>
