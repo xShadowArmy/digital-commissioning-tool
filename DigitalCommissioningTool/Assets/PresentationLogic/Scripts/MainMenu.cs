@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsPanel;
+    public GameObject NewProjectPanel;
+    public GameObject OpenProjectPanel;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         settingsPanel.GetComponent<SettingsMenu>().LoadSettings();
         ResourceHandler.ReplaceResources();
@@ -17,11 +19,12 @@ public class MainMenu : MonoBehaviour
     
     public void NewProject()
     {
-        LoadDefaultScene();
+        NewProjectPanel.SetActive(true);      
     }
     public void OpenProject()
     {
-        LoadDefaultScene();
+        OpenProjectPanel.SetActive(true);
+        gameObject.SetActive(false);
     }
     public void Settings()
     {

@@ -66,4 +66,25 @@
     <xs:string xs:name="English" xs:id="22">
         <xs:value>Englisch</xs:value>
     </xs:string>
+    <xs:string xs:name="NewProjectNamePrompt" xs:id="23">
+        <xs:value>Bitte geben sie einen Projektnamen ein</xs:value>
+    </xs:string>
+    <xs:string xs:name="Continue" xs:id="24">
+        <xs:value>Fortsetzen</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectNamePlaceholder" xs:id="25">
+        <xs:value>Projektname</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectNameLabel" xs:id="26">
+        <xs:value>Projektname:</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectPathLabel" xs:id="27">
+        <xs:value>Pfad:</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectModifiedLabel" xs:id="28">
+        <xs:value>Zuletzt Geändert:</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectCreatedLabel" xs:id="29">
+        <xs:value>Erstellt:</xs:value>
+    </xs:string>
 </xs:StringResources>
