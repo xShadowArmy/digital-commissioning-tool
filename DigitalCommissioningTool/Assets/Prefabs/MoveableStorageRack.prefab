@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 51959459360970597}
   m_Layer: 0
   m_Name: MoveableStorageRack
-  m_TagString: Untagged
+  m_TagString: SelectableStorage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
