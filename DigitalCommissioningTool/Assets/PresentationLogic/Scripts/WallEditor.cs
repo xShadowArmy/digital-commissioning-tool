@@ -41,19 +41,20 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableWindow"))
         {
+            Transform parent = SelectedObjectTransform.parent;
             if (SelectedObjectTransform.CompareTag("SelectableDoor"))
             {
                 Destroy(SelectedObjectTransform.gameObject);
                 Vector3 position = SelectedObjectTransform.position;
                 Vector3 localScale = SelectedObjectTransform.localScale;
                 Quaternion rotation = SelectedObjectTransform.rotation;
-                Instantiate(WindowPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation);
-                Instantiate(WindowPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation);
+                Instantiate(WindowPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
+                Instantiate(WindowPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
             }
             else
             {
                 Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(WindowPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation);
+                Instantiate(WindowPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
         }
     }
@@ -68,7 +69,7 @@ public class WallEditor : MonoBehaviour
             bool foundLeftWallElement = false;
             GameObject rightWallElement = null;
             GameObject leftWallElement = null;
-
+            Transform parent = SelectedObjectTransform.parent;
 
             if (colliders.Length > 1)
             {
@@ -98,13 +99,13 @@ public class WallEditor : MonoBehaviour
             {
                 Destroy(rightWallElement);
                 Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(DoorPrefab, SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2)), SelectedObjectTransform.rotation);
+                Instantiate(DoorPrefab, SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2)), SelectedObjectTransform.rotation, parent);
             }
             else if (foundLeftWallElement)
             {
                 Destroy(leftWallElement);
                 Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(DoorPrefab, leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2)), SelectedObjectTransform.rotation);
+                Instantiate(DoorPrefab, leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2)), SelectedObjectTransform.rotation, parent);
             }
             else
             {
@@ -118,19 +119,21 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableWall"))
         {
+            Transform parent = SelectedObjectTransform.parent;
             if (SelectedObjectTransform.CompareTag("SelectableDoor"))
             {
                 Destroy(SelectedObjectTransform.gameObject);
                 Vector3 position = SelectedObjectTransform.position;
                 Vector3 localScale = SelectedObjectTransform.localScale;
                 Quaternion rotation = SelectedObjectTransform.rotation;
-                Instantiate(WallPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation);
-                Instantiate(WallPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation);
+
+                Instantiate(WallPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
+                Instantiate(WallPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
             }
             else
             {
                 Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation);
+                Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
         }
     }

@@ -47,7 +47,10 @@
             <e p="MainCamera.cs" t="Include" />
             <e p="MainMenu.cs" t="Include" />
             <e p="ModeHandler.cs" t="Include" />
+            <e p="NewProjectMenu.cs" t="Include" />
+            <e p="OpenProjectMenu.cs" t="Include" />
             <e p="PickAndPlaceNew.cs" t="Include" />
+            <e p="ResourceHandler.cs" t="Include" />
             <e p="SelectionManager.cs" t="Include" />
             <e p="SettingsMenu.cs" t="Include" />
             <e p="SwitchWallModules.cs" t="Include" />
