@@ -87,4 +87,13 @@
     <xs:string xs:name="ProjectCreatedLabel" xs:id="29">
         <xs:value>Erstellt:</xs:value>
     </xs:string>
+	<xs:string xs:name="AddWallText" xs:id="30">
+        <xs:value>Wand hinzufügen</xs:value>
+    </xs:string>
+	<xs:string xs:name="AddWindowText" xs:id="31">
+        <xs:value>Fenster hinzufügen</xs:value>
+    </xs:string>
+	<xs:string xs:name="AddDoorText" xs:id="32">
+        <xs:value>Tür hinzufügen</xs:value>
+    </xs:string>
 </xs:StringResources>
