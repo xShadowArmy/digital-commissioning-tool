@@ -8,30 +8,23 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsPanel;
+    public GameObject NewProjectPanel;
+    public GameObject OpenProjectPanel;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         settingsPanel.GetComponent<SettingsMenu>().LoadSettings();
-        ReplaceResources();
+        ResourceHandler.ReplaceResources();
     }
-    void ReplaceResources()
-    {
-        GameObject[] labels = GameObject.FindGameObjectsWithTag("Resource");
-
-        foreach (GameObject label in labels)
-        {
-            string key = label.GetComponent<UnityEngine.UI.Text>().text.TrimStart('<').TrimEnd('>');
-            string localizedText = StringResourceManager.LoadString("@" + key);
-            label.GetComponent<UnityEngine.UI.Text>().text = localizedText;
-        }
-    }
+    
     public void NewProject()
     {
-        LoadDefaultScene();
+        NewProjectPanel.SetActive(true);      
     }
     public void OpenProject()
     {
-        LoadDefaultScene();
+        OpenProjectPanel.SetActive(true);
+        gameObject.SetActive(false);
     }
     public void Settings()
     {

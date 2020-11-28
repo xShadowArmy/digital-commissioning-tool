@@ -39,22 +39,12 @@ public class SettingsMenu : MonoBehaviour
             data.text = localizedText;
         }
     }
-    void ReplaceResources()
-    {
-        GameObject[] labels = GameObject.FindGameObjectsWithTag("Resource");
 
-        foreach (GameObject label in labels)
-        {
-            string key = label.GetComponent<UnityEngine.UI.Text>().text.TrimStart('<').TrimEnd('>');
-            string localizedText = StringResourceManager.LoadString("@" + key);
-            label.GetComponent<UnityEngine.UI.Text>().text = localizedText;
-        }
-    }
     public void LoadSettings()
     {
         InitResolution();
         InitLanguage();
-        ReplaceResources();
+        ResourceHandler.ReplaceResources();
         using (ConfigManager cman = new ConfigManager())
         {
             cman.OpenConfigFile("Settings.xml", true);
@@ -89,15 +79,18 @@ public class SettingsMenu : MonoBehaviour
     }
     public void LanguageChanged()
     {
-        switch (dropdownLanguage.itemText.text)
+        switch (dropdownLanguage.value)
         {
-            case "<German>":
+            case 0:
                 StringResourceManager.SelectLanguage(SystemLanguage.German);
+                dropdownLanguage.captionText.text = "<German>";
                 break;
-            case "<English>":
+            case 1:
                 StringResourceManager.SelectLanguage(SystemLanguage.English);
+                dropdownLanguage.captionText.text = "<English>";
                 break;
         }
+        ResourceHandler.ReplaceResources();
     }
     public void Back()
     {
