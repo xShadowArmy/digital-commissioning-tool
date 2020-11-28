@@ -47,6 +47,7 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/EditorModeCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
       </list>
     </option>
   </component>
@@ -93,6 +94,8 @@
       <updated>1606135079785</updated>
       <workItem from="1606135119357" duration="2075000" />
       <workItem from="1606295593546" duration="7949000" />
+      <workItem from="1606430527449" duration="605000" />
+      <workItem from="1606477895721" duration="16246000" />
     </task>
     <servers />
   </component>
@@ -186,10 +189,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="461" y="165" key="SettingsEditor" timestamp="1606068672583">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1606519508688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606068672583" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606519508688" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606059225671">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

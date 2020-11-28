@@ -18,6 +18,8 @@
           <e p="GameObjectDataType.cs" t="Include" />
           <e p="IDataIdentifier.cs" t="Include" />
           <e p="ItemData.cs" t="Include" />
+          <e p="KeyData.cs" t="Include" />
+          <e p="KeyManager.cs" t="Include" />
           <e p="ProjectData.cs" t="Include" />
           <e p="ProjectManager.cs" t="Include" />
           <e p="ProjectSettings.cs" t="Include" />
@@ -48,6 +50,7 @@
             <e p="PickAndPlaceNew.cs" t="Include" />
             <e p="SelectionManager.cs" t="Include" />
             <e p="SettingsMenu.cs" t="Include" />
+            <e p="SwitchWallModules.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
             <e p="WallEditor.cs" t="Include" />
           </e>

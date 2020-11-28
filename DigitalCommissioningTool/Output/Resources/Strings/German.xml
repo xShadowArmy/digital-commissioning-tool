@@ -36,4 +36,13 @@
     <xs:string xs:name="testResource13425346564765" xs:id="12">
         <xs:value>overwritten content</xs:value>
     </xs:string>
+    <xs:string xs:name="AddWindowText" xs:id="13">
+        <xs:value>Fenster hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddDoorText" xs:id="14">
+        <xs:value>Tür hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddWallText" xs:id="15">
+        <xs:value>Wand hinzufügen</xs:value>
+    </xs:string>
 </xs:StringResources>

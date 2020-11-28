@@ -9,6 +9,10 @@ TagManager:
   - Button
   - Resource
   - SelectableFloor
+  - SelectableStorage
+  - SelectableWindow
+  - SelectableDoor
+  - SelectableGate
   layers:
   - Default
   - TransparentFX
