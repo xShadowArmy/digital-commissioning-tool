@@ -82,6 +82,19 @@ public class SelectionManager : MonoBehaviour
                         selected = true;
                         OnStorageSelected(SelectedObject);
                     }
+                    else if (tempObject.parent != null && tempObject.parent.CompareTag("SelectableStorage"))
+                    {
+                        if (SelectedObject != null)
+                        {
+                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
+                                defaultMaterial;
+                            selected = false;
+                        }
+
+                        SelectedObject = tempObject.parent;
+                        selected = true;
+                        OnStorageSelected(SelectedObject);
+                    }
                     else if (SelectedObject != null)
                     {
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
