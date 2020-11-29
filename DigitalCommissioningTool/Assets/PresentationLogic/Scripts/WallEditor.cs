@@ -27,13 +27,19 @@ public class WallEditor : MonoBehaviour
 
     void Start()
     {
-        addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
-        addDoorText.text = StringResourceManager.LoadString("@AddDoorText");
-        addWallText.text = StringResourceManager.LoadString("@AddWallText");
+        //addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
+        //addDoorText.text = StringResourceManager.LoadString("@AddDoorText");
+        //addWallText.text = StringResourceManager.LoadString("@AddWallText");
         selectedObject = GameObject.Find("SelectionManager");
         selectWall = selectedObject.GetComponent<SelectionManager>();
         SelectedObjectTransform = selectionManager.SelectedObject;
         popUp.SetActive(selectWall.selected);
+        SelectionManager.WallSelected += OnWallSelected;
+    }
+
+    private void OnWallSelected(Transform selectedobject)
+    {
+        Debug.Log("Event method called!");
     }
 
     public void OnAddWindowClick()
@@ -165,7 +171,10 @@ public class WallEditor : MonoBehaviour
         }
 
         myText.text = "Geben Sie die gewünschte Länge von der " + wand + " ein";
-        popUp.SetActive(selectWall.selected);
+        if (selectWall != null)
+        {
+            popUp.SetActive(selectWall.selected);
+        }
     }
 
     public void close()
