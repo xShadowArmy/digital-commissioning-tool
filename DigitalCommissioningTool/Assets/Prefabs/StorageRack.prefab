@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: -45493869130646757}
   m_Layer: 0
   m_Name: StorageRack
-  m_TagString: Untagged
+  m_TagString: SelectableStorage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
