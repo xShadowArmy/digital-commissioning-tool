@@ -32,7 +32,7 @@ public class AddStorage : MonoBehaviour
     void TaskOnClick()
     {
         //Debug.Log("You have clicked the button!");
-        ApplicationFacade.GameManager.GameWarehouse.CreateStorageRack();
+        GameManager.GameWarehouse.CreateStorageRack();
 
     }
 
