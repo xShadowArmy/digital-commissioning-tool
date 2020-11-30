@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using ApplicationFacade;
 
 public class AddStorage : MonoBehaviour
 {
 
     // public UnityEngine.UI.Button button;
     Button addStorageButton;
-    
 
     void Update() {
 
@@ -31,7 +31,8 @@ public class AddStorage : MonoBehaviour
     //create a new storage  (method in different script this one just gets it)
     void TaskOnClick()
     {
-        Debug.Log("You have clicked the button!");
+        //Debug.Log("You have clicked the button!");
+        ApplicationFacade.GameManager.GameWarehouse.CreateStorageRack();
 
     }
 
@@ -44,10 +45,6 @@ public class AddStorage : MonoBehaviour
        // addStorageButton.gameObject.SetActive(false);
         //do taskOnClick method when clicked
         addStorageButton.onClick.AddListener(TaskOnClick);
-
-       // GameManager.GameWarehouse.CreateStorageRack += 
-
     }
-
 
 }
