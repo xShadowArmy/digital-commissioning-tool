@@ -42,8 +42,8 @@ namespace Scripts
             GameManager.OpenProject( "Project123" );
 
             GameManager.GameWarehouse.AdjustFloor( new Vector3( 1f, 2.1f, 3f ), new Vector3( 0f, 0f, 0f ), new Vector3( 100f, 1f, 100f ) );
-            GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
-            GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
+            GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3(7f, 8f, 9f));
+            GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3(7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );
             GameManager.GameWarehouse.CreateWindow( new Vector3( 1f, 8.345f, 3f ), new Vector3( 4f, 5f, 6f ), new Vector3( 7f, 8f, 9f ) );

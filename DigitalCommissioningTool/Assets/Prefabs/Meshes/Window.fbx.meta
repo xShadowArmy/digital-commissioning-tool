@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: adb2f670e27c5b34a8cc4c7cf927f018
+guid: 50906001d0b9cb240a746666c58e69b9
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -12,13 +12,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wall_material
+      name: Material
     second: {fileID: 2100000, guid: 6f2a8c0f4819e1f42b82233a1c1ee435, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Plastic_Handle_material
+    second: {fileID: 2100000, guid: 227d2ef182f883544bb9b618101f6e02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sill_material
+    second: {fileID: 2100000, guid: 227d2ef182f883544bb9b618101f6e02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window_material
+    second: {fileID: 2100000, guid: 424790be70d77934299a17a20947469b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: hidden_material
-    second: {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+    second: {fileID: 15302, guid: 0000000000000000f000000000000000, type: 0}
   materials:
     materialImportMode: 1
     materialName: 0
