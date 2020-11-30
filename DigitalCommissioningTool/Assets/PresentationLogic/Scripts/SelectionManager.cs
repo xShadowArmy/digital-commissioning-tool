@@ -20,7 +20,7 @@ public class SelectionManager : MonoBehaviour
 
     public static event ObjectSelectedEventHandler WallSelected;
 
-    public static ObjectSelectedEventHandler StorageSelected;
+    public static event ObjectSelectedEventHandler StorageSelected;
 
     public Transform SelectedObject { get; private set; }
 
@@ -33,7 +33,7 @@ public class SelectionManager : MonoBehaviour
         EditorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
-        //SelectionManager.StorageSelected += OnWallSelected;
+        //SelectionManager.StorageSelected += OnStorageSelected;
     }
 
     //private void  OnWallSelected(Transform selectedobject)
@@ -67,6 +67,8 @@ public class SelectionManager : MonoBehaviour
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                         invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
+                        Debug.Log("HIER23423!");
+                        OnWallSelected(SelectedObject);
                         popUp.SetPopUp(tempObject.name);
                     }
                     else if (tempObject.CompareTag("SelectableStorage"))
@@ -79,6 +81,19 @@ public class SelectionManager : MonoBehaviour
                         }
 
                         SelectedObject = tempObject;
+                        selected = true;
+                        OnStorageSelected(SelectedObject);
+                    }
+                    else if (tempObject.parent != null && tempObject.parent.CompareTag("SelectableStorage"))
+                    {
+                        if (SelectedObject != null)
+                        {
+                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
+                                defaultMaterial;
+                            selected = false;
+                        }
+
+                        SelectedObject = tempObject.parent;
                         selected = true;
                         OnStorageSelected(SelectedObject);
                     }
@@ -105,4 +120,11 @@ public class SelectionManager : MonoBehaviour
     {
         StorageSelected?.Invoke(SelectedObject);
     }
+    
+    protected virtual void OnWallSelected(Transform selectedObject)
+    {
+        WallSelected?.Invoke(SelectedObject);
+    }
+    
+    
 }
