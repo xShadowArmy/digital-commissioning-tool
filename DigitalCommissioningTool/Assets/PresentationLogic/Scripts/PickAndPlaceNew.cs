@@ -5,8 +5,8 @@ using UnityEngine;
 public class PickAndPlaceNew : MonoBehaviour
 {
     public LayerMask dragable;
-    GameObject selected;
-    bool isDragging;
+    public GameObject selected;
+    public bool isDragging;
     bool hitObject; //keinObject bewegen wenn schon eins ausgewählt
     float lastPosX;
     float lastPosZ;
@@ -17,6 +17,7 @@ public class PickAndPlaceNew : MonoBehaviour
     int rotationRight = 0;
     int rotationLeft = 0;
     int rotation = 0;
+
 
 
     // Start is called before the first frame update
@@ -37,10 +38,12 @@ public class PickAndPlaceNew : MonoBehaviour
     {
         if (isDragging)
         {
+            Debug.Log(selected);
 
             //rotation
             if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.E))
             {
+               // selected.transform.Rotate(new Vector3(0,45,0));
                 selected.transform.rotation = selected.transform.rotation * Quaternion.AngleAxis(45, Vector3.up);
                 //bei 90 rotiert es um 180°? 
 
@@ -99,7 +102,7 @@ public class PickAndPlaceNew : MonoBehaviour
                     {
                         lastPosX = posX;
                         lastPosZ = posZ;
-                        Debug.Log("x: " + posX + "z: " + posZ);
+                      //  Debug.Log("x: " + posX + "z: " + posZ);
 
                         //Cursor
                         selected.transform.position = new Vector3(posX, 0f, posZ);
@@ -230,6 +233,13 @@ public class PickAndPlaceNew : MonoBehaviour
                     isDragging = false;
                 }
             }
+            if (Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace)) {
+                Debug.Log("Delete " + selected.name);
+                Destroy(selected);
+                isDragging = false;
+            }
+
+
         }
     }
 

@@ -165,7 +165,12 @@ public class WallEditor : MonoBehaviour
         }
 
         myText.text = "Geben Sie die gewünschte Länge von der " + wand + " ein";
-        popUp.SetActive(selectWall.selected);
+
+        Debug.Log(selectWall);
+
+        if (selectWall != null) {
+            popUp.SetActive(selectWall.selected);
+        }
     }
 
     public void close()
