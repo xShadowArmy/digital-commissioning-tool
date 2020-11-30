@@ -43,6 +43,8 @@
           <e p="PresentationLogic.asmdef" t="Include" />
           <e p="Scripts" t="Include">
             <e p="AddObjectsToWall.cs" t="Include" />
+            <e p="AddStorage.cs" t="Include" />
+            <e p="Delete.cs" t="Include" />
             <e p="EditorModeCamera.cs" t="Include" />
             <e p="MainCamera.cs" t="Include" />
             <e p="MainMenu.cs" t="Include" />

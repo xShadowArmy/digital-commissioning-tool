@@ -680,6 +680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6294322375740202001}
+  - component: {fileID: 3971167609210706023}
   m_Layer: 0
   m_Name: Window
   m_TagString: SelectableWindow
@@ -704,6 +705,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3971167609210706023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6634431680746210987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9926958, y: 3.2045126, z: 0.21406364}
+  m_Center: {x: 0.0022063255, y: -0.0064406395, z: -0.0031433105}
 --- !u!1 &7847260864984621777
 GameObject:
   m_ObjectHideFlags: 0

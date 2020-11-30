@@ -47,20 +47,61 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableWindow"))
         {
-            Transform parent = SelectedObjectTransform.parent;
-            if (SelectedObjectTransform.CompareTag("SelectableDoor"))
+            if (SelectedObjectTransform.gameObject.CompareTag("SelectableDoor"))
             {
+                Transform parent = SelectedObjectTransform.parent;
                 Destroy(SelectedObjectTransform.gameObject);
-                Vector3 position = SelectedObjectTransform.position;
-                Vector3 localScale = SelectedObjectTransform.localScale;
-                Quaternion rotation = SelectedObjectTransform.rotation;
-                Instantiate(WindowPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
-                Instantiate(WindowPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
+                Instantiate(WindowPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
             else
             {
-                Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(WindowPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
+                Collider[] colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x + 0.1f);
+                bool foundRightWallElement = false;
+                bool foundLeftWallElement = false;
+                GameObject rightWallElement = null;
+                GameObject leftWallElement = null;
+                Transform parent = SelectedObjectTransform.parent;
+
+                if (colliders.Length > 1)
+                {
+                    foreach (Collider collider in colliders)
+                    {
+                        Transform colliderTransform = collider.gameObject.transform;
+
+                        // Prüfen ob es dieselbe Wand ist
+                        if (colliderTransform != SelectedObjectTransform && colliderTransform.rotation == SelectedObjectTransform.rotation && !collider.gameObject.CompareTag("SelectableDoor") && !collider.gameObject.CompareTag("SelectableWindow"))
+                        {
+                            Vector3 relativePoint = SelectedObjectTransform.InverseTransformPoint(colliderTransform.position);
+                            if (relativePoint.x < 0.0)
+                            {
+                                foundRightWallElement = true;
+                                rightWallElement = collider.gameObject;
+                            }
+                            else
+                            {
+                                foundLeftWallElement = true;
+                                leftWallElement = collider.gameObject;
+                            }
+                        }
+                    }
+                }
+
+                if (foundRightWallElement)
+                {
+                    Destroy(rightWallElement);
+                    Destroy(SelectedObjectTransform.gameObject);
+                    Instantiate(WindowPrefab, SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, parent);
+                }
+                else if (foundLeftWallElement)
+                {
+                    Destroy(leftWallElement);
+                    Destroy(SelectedObjectTransform.gameObject);
+                    Instantiate(WindowPrefab, leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, parent);
+                }
+                else
+                {
+                    Debug.Log("Not enough Space for Door");
+                }
             }
         }
     }
@@ -70,52 +111,61 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableDoor"))
         {
-            Collider[] colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x + 0.1f);
-            bool foundRightWallElement = false;
-            bool foundLeftWallElement = false;
-            GameObject rightWallElement = null;
-            GameObject leftWallElement = null;
-            Transform parent = SelectedObjectTransform.parent;
-
-            if (colliders.Length > 1)
+            if (SelectedObjectTransform.gameObject.CompareTag("SelectableWindow"))
             {
-                foreach (Collider collider in colliders)
-                {
-                    Transform colliderTransform = collider.gameObject.transform;
-
-                    // Prüfen ob es dieselbe Wand ist
-                    if (colliderTransform != SelectedObjectTransform && colliderTransform.rotation == SelectedObjectTransform.rotation)
-                    {
-                        Vector3 relativePoint = SelectedObjectTransform.InverseTransformPoint(colliderTransform.position);
-                        if (relativePoint.x < 0.0)
-                        {
-                            foundRightWallElement = true;
-                            rightWallElement = collider.gameObject;
-                        }
-                        else
-                        {
-                            foundLeftWallElement = true;
-                            leftWallElement = collider.gameObject;
-                        }
-                    }
-                }
-            }
-
-            if (foundRightWallElement)
-            {
-                Destroy(rightWallElement);
+                Transform parent = SelectedObjectTransform.parent;
                 Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(DoorPrefab, SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2)), SelectedObjectTransform.rotation, parent);
-            }
-            else if (foundLeftWallElement)
-            {
-                Destroy(leftWallElement);
-                Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(DoorPrefab, leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2)), SelectedObjectTransform.rotation, parent);
+                Instantiate(DoorPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
             else
             {
-                Debug.Log("Not enough Space for Door");
+                Collider[] colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x + 0.1f);
+                bool foundRightWallElement = false;
+                bool foundLeftWallElement = false;
+                GameObject rightWallElement = null;
+                GameObject leftWallElement = null;
+                Transform parent = SelectedObjectTransform.parent;
+
+                if (colliders.Length > 1)
+                {
+                    foreach (Collider collider in colliders)
+                    {
+                        Transform colliderTransform = collider.gameObject.transform;
+
+                        // Prüfen ob es dieselbe Wand ist
+                        if (colliderTransform != SelectedObjectTransform && colliderTransform.rotation == SelectedObjectTransform.rotation  && !collider.gameObject.CompareTag("SelectableDoor") && !collider.gameObject.CompareTag("SelectableWindow"))
+                        {
+                            Vector3 relativePoint = SelectedObjectTransform.InverseTransformPoint(colliderTransform.position);
+                            if (relativePoint.x < 0.0)
+                            {
+                                foundRightWallElement = true;
+                                rightWallElement = collider.gameObject;
+                            }
+                            else
+                            {
+                                foundLeftWallElement = true;
+                                leftWallElement = collider.gameObject;
+                            }
+                        }
+                    }
+                }
+
+                if (foundRightWallElement)
+                {
+                    Destroy(rightWallElement);
+                    Destroy(SelectedObjectTransform.gameObject);
+                    Instantiate(DoorPrefab, SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, parent);
+                }
+                else if (foundLeftWallElement)
+                {
+                    Destroy(leftWallElement);
+                    Destroy(SelectedObjectTransform.gameObject);
+                    Instantiate(DoorPrefab, leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, parent);
+                }
+                else
+                {
+                    Debug.Log("Not enough Space for Door");
+                }
             }
         }
     }
@@ -126,15 +176,15 @@ public class WallEditor : MonoBehaviour
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableWall"))
         {
             Transform parent = SelectedObjectTransform.parent;
-            if (SelectedObjectTransform.CompareTag("SelectableDoor"))
+            if (SelectedObjectTransform.CompareTag("SelectableDoor") || SelectedObjectTransform.CompareTag("SelectableWindow"))
             {
                 Destroy(SelectedObjectTransform.gameObject);
                 Vector3 position = SelectedObjectTransform.position;
                 Vector3 localScale = SelectedObjectTransform.localScale;
                 Quaternion rotation = SelectedObjectTransform.rotation;
 
-                Instantiate(WallPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
-                Instantiate(WallPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 4)), rotation, parent);
+                Instantiate(WallPrefab, position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, parent);
+                Instantiate(WallPrefab, position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, parent);
             }
             else
             {
