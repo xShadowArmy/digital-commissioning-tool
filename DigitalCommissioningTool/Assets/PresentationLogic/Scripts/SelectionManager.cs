@@ -79,8 +79,9 @@ public class SelectionManager : MonoBehaviour
                                 defaultMaterial;
                             selected = false;
                         }
-
                         SelectedObject = tempObject;
+                        Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
+                        invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
                         OnStorageSelected(SelectedObject);
                     }
@@ -92,8 +93,9 @@ public class SelectionManager : MonoBehaviour
                                 defaultMaterial;
                             selected = false;
                         }
-
                         SelectedObject = tempObject.parent;
+                        Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
+                        invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
                         OnStorageSelected(SelectedObject);
                     }

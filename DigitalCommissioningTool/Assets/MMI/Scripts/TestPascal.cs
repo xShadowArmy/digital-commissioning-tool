@@ -12,7 +12,8 @@ public class TestPascal : AvatarBehavior
     public MMISceneObject WalkTrajectoryTarget;
 
     private string carryID;
-    public GameObject storageRackPrefab;
+    public GameObject Container1Object;
+    public GameObject Container1Target;
 
     protected override void GUIBehaviorInput()
     {
@@ -295,10 +296,10 @@ public class TestPascal : AvatarBehavior
             this.CoSimulator.Abort();
         }
 
-        if (GUI.Button(new Rect(175, 130, 150, 50), "Add Storage Rack"))
+        if (GUI.Button(new Rect(175, 130, 150, 50), "Move Box"))
         {
-            GameObject newStorageRack = Instantiate(storageRackPrefab, new Vector3(-3, -0.3f, 2), Quaternion.Euler(0, 90, 0));
-            newStorageRack.GetComponent<MMISceneObject>();
+            PickupBoth("WalkTarget123", "BoxGraspL123", "BoxGraspR123", "StorageContainer123", "StorageContainer321", "WalkTarget321");
+
         }
         if (GUI.Button(new Rect(330, 130, 100, 50), "Pickup box"))
         {
@@ -372,27 +373,27 @@ public class TestPascal : AvatarBehavior
         }
         if (GUI.Button(new Rect(575, 130, 80, 50), "Low"))
         {
-            PickupBoth("WalkTargetContainerLow", "ContainerGraspLLow", "ContainerGraspRLow", "StorageContainerLow");
+           // PickupBoth("WalkTargetContainerLow", "ContainerGraspLLow", "ContainerGraspRLow", "StorageContainerLow");
         }
         if (GUI.Button(new Rect(660, 130, 80, 50), "Middle"))
         {
-            PickupBoth("WalkTargetContainerMiddle", "ContainerGraspLMiddle", "ContainerGraspRMiddle", "StorageContainerMiddle");
+           // PickupBoth("WalkTargetContainerMiddle", "ContainerGraspLMiddle", "ContainerGraspRMiddle", "StorageContainerMiddle");
         }
         if (GUI.Button(new Rect(745, 130, 80, 50), "High"))
         {
-            PickupBoth("WalkTargetContainerHigh", "ContainerGraspLHigh", "ContainerGraspRHigh", "StorageContainerHigh");
+           // PickupBoth("WalkTargetContainerHigh", "ContainerGraspLHigh", "ContainerGraspRHigh", "StorageContainerHigh");
         }
         if (GUI.Button(new Rect(830, 130, 80, 50), "Top"))
         {
-            PickupBoth("WalkTargetContainerTop", "ContainerGraspLTop", "ContainerGraspRTop", "StorageContainerTop");
+           // PickupBoth("WalkTargetContainerTop", "ContainerGraspLTop", "ContainerGraspRTop", "StorageContainerTop");
         }
     }
 
-    private void PickupBoth(string walkTarget, string graspL,string graspR,string carryObject) 
+    private void PickupBoth(string walkObject, string graspL,string graspR,string carryObject, string carryTarget, string walkTarget) 
     {
         MInstruction walkInstruction = new MInstruction(MInstructionFactory.GenerateID(), "Walk", "Locomotion/Walk")
         {
-            Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName(walkTarget).ID)
+            Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName(walkObject).ID)
         };
 
         MInstruction idleInstruction = new MInstruction(MInstructionFactory.GenerateID(), "Idle", "Pose/Idle")
@@ -419,12 +420,47 @@ public class TestPascal : AvatarBehavior
             StartCondition = reachLeft.ID + ":" + mmiConstants.MSimulationEvent_End + " && " + reachRight.ID + ":" + mmiConstants.MSimulationEvent_End
         };
 
+
+        MInstruction walkInstructionBack = new MInstruction(MInstructionFactory.GenerateID(), "Walk", "Locomotion/Walk")
+        {
+            Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName(walkTarget).ID),
+            StartCondition = walkInstruction.ID + ":" + mmiConstants.MSimulationEvent_End + "+ 2.0"
+        };
+
+        MInstruction moveInstruction = new MInstruction(MInstructionFactory.GenerateID(), "move object", "Object/Move")
+        {
+            Properties = PropertiesCreator.Create("SubjectID", UnitySceneAccess.Instance[carryObject].ID, "Hand", "Both", "TargetID", UnitySceneAccess.Instance[carryTarget].ID, "HoldDuration", 1.0f.ToString()),
+
+            //Terminate the carry
+            Action = CoSimTopic.OnStart + "->" + carryID + ":" + CoSimAction.EndInstruction,
+            StartCondition = walkInstructionBack.ID + ":" + mmiConstants.MSimulationEvent_End
+        };
+
+        MInstruction releaseLeft = new MInstruction(MInstructionFactory.GenerateID(), "release object left", "Object/Release")
+        {
+            Properties = PropertiesCreator.Create("Hand", "Left"),
+            StartCondition = moveInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
+        };
+
+        MInstruction releaseRight = new MInstruction(MInstructionFactory.GenerateID(), "release object right", "Object/Release")
+        {
+            Properties = PropertiesCreator.Create("Hand", "Right"),
+            StartCondition = moveInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
+        };
+
+
+        
+
         this.CoSimulator.AssignInstruction(walkInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.AssignInstruction(idleInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.AssignInstruction(reachLeft, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.AssignInstruction(reachRight, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
-
         this.CoSimulator.AssignInstruction(carryInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+
+        this.CoSimulator.AssignInstruction(walkInstructionBack, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+        this.CoSimulator.AssignInstruction(moveInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+        this.CoSimulator.AssignInstruction(releaseLeft, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+        this.CoSimulator.AssignInstruction(releaseRight, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.MSimulationEventHandler += this.CoSimulator_MSimulationEventHandler;
     }
 
