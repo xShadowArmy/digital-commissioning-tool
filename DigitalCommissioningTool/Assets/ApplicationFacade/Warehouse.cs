@@ -9,17 +9,39 @@ using UnityEngine;
 
 namespace ApplicationFacade
 {
+    /// <summary>
+    /// Stellt ein Lagerhaus in der 3D-Umgebung dar.
+    /// </summary>
     public class Warehouse
     {
-        public FloorData Floor { get; private set; }
+        /// <summary>
+        /// EventHandler Definition für StorageRack events.
+        /// </summary>
+        /// <param name="data">Das Regal das verändert wurde.</param>
+        public delegate void StorageRackModifiedEventHandler( StorageData data );
 
-        public List<WallData> Walls { get; private set; }
+        /// <summary>
+        /// Event das ausgelöst wird, wenn ein Regal erstellt wurde.
+        /// </summary>
+        public event StorageRackModifiedEventHandler StorageRackCreated;
 
-        public List<WindowData> Windows { get; private set; }
+        /// <summary>
+        /// Event das ausgelöst wird, wenn ein Regal entfernt wurde.
+        /// </summary>
+        public event StorageRackModifiedEventHandler StorageRackDeleted;
 
-        public List<DoorData> Doors { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        internal FloorData Floor { get; private set; }
 
-        public List<StorageData> StorageRacks { get; private set; }
+        internal List<WallData> Walls { get; private set; }
+
+        internal List<WindowData> Windows { get; private set; }
+
+        internal List<DoorData> Doors { get; private set; }
+
+        internal List<StorageData> StorageRacks { get; private set; }
 
         internal InternalProjectWarehouse Data { get; private set; }
 
@@ -44,13 +66,20 @@ namespace ApplicationFacade
             Data.UpdateFloor( new ProjectFloorData( new ProjectTransformationData( position, rotation, scale ) ) );
         }
 
+        public FloorData GetFloor()
+        {
+            return Floor;
+        }
+
         public WallData CreateWall( Vector3 position, Vector3 rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Lagehauswand wird erstellt.", "Warehouse", "CreateWall" );
             
-            WallData wall = new WallData( GetUniqueID( Walls.ToArray() ), position, rotation, scale );
+            GameObject spawn = GameObject.Find( "ObjectSpawn" );
 
-            wall.WallChanged += WallHasChanged;
+            WallData wall = new WallData( GetUniqueID( Walls.ToArray() ) );
+
+            wall.ChangeGameObject( GameObject.Instantiate( GameObject.Find( "Wall" ), spawn.transform.position, Quaternion.Euler( 0, 0, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
 
             wall.GameObjectDataChanged += GameObjectHasChanged;
             wall.WallChanged += WallHasChanged;
@@ -58,11 +87,11 @@ namespace ApplicationFacade
             Walls.Add( wall );
 
             Data.AddWall( new ProjectWallData( wall.GetID(), new ProjectTransformationData( position, rotation, scale ) ) );
-
+            
             return wall;
         }
 
-        public void AddWall( WallData wall )
+        internal void AddWall( WallData wall )
         {
             LogManager.WriteInfo( "Lagerhauswand wird hinzugefuegt.", "Warehouse", "AddWall" );
 
@@ -145,7 +174,7 @@ namespace ApplicationFacade
             return window;
         }
 
-        public void AddWindow( WindowData window )
+        internal void AddWindow( WindowData window )
         {
             LogManager.WriteInfo( "Lagehaus Fenster wird hinzugefuegt.", "Warehouse", "AddWindow" );
 
@@ -228,7 +257,7 @@ namespace ApplicationFacade
             return door;
         }
 
-        public void AddDoor( DoorData door )
+        internal void AddDoor( DoorData door )
         {
             LogManager.WriteInfo( "Lagehaustuer wird hinzugefuegt.", "Warehouse", "AddDoor" );
 
@@ -298,46 +327,26 @@ namespace ApplicationFacade
         public StorageData CreateStorageRack( )
         {
             LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
+            
+            GameObject spawn = GameObject.Find( "ObjectSpawn" );
+            
+            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), spawn.transform.position, spawn.transform.rotation.eulerAngles, spawn.transform.localScale );
 
-            GameObject rack = GameObject.Find( "StorageRack" );
-
-            Camera editorModeCamera = GameObject.FindGameObjectWithTag( "EditorModeCamera" ).GetComponent<Camera>( );
-            Ray ray = editorModeCamera.ScreenPointToRay( Input.mousePosition );
-            RaycastHit hit;
-
-            StorageData storage;
-
-            if ( Physics.Raycast( ray, out hit ) )
-            {
-                if ( hit.transform.CompareTag( "SelectableFloor" ) )
-                {
-                    storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), hit.transform.position, hit.transform.rotation.eulerAngles, hit.transform.localScale );
-
-                    storage.ChangeGameObject( GameObject.Instantiate( rack, hit.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
-                }
-
-                else
-                {
-                    return null;
-                }
-            }
-
-            else
-            {
-                return null;
-            }
-
+            storage.ChangeGameObject( GameObject.Instantiate( GameObject.Find( "StorageRack" ), spawn.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
+               
             storage.GameObjectDataChanged += GameObjectHasChanged;
             storage.StorageChanged += StorageRackHasChanged;
 
             StorageRacks.Add( storage );
 
-            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( rack.transform.position, rack.transform.rotation.eulerAngles, rack.transform.localScale ) ) );
+            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( spawn.transform.position, spawn.transform.rotation.eulerAngles, spawn.transform.localScale ) ) );
+
+            OnStorageRackModified( 0, storage );
 
             return storage;
         }
 
-        public void AddStorageRack( StorageData storage )
+        internal void AddStorageRack( StorageData storage )
         {
             LogManager.WriteInfo( "Lagerhausregal wird hinzugefuegt.", "Warehouse", "AddStorageRack" );
 
@@ -364,8 +373,16 @@ namespace ApplicationFacade
                 {
                     Data.StorageRacks.Remove( Data.StorageRacks[ i ] );
 
+                    if ( storage.Object != null )
+                    {
+                        GameObject.Destroy( storage.Object );
+                        storage.ChangeGameObject( null );
+                    }
+
                     storage.GameObjectDataChanged -= GameObjectHasChanged;
                     storage.StorageChanged -= StorageRackHasChanged;
+
+                    OnStorageRackModified( 1, storage );
 
                     return true;
                 }
@@ -687,6 +704,19 @@ namespace ApplicationFacade
 
                     break;
                 }
+            }
+        }
+
+        private void OnStorageRackModified( int mode, StorageData data )
+        {
+            if ( mode == 0 )
+            {
+                StorageRackCreated?.Invoke( data );
+            }
+
+            else
+            {
+                StorageRackDeleted?.Invoke( data );
             }
         }
     }

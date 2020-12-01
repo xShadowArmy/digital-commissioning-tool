@@ -11,11 +11,11 @@ namespace ApplicationFacade
 {
     public class Container
     {
-        public delegate void StorageReckModified( StorageData storage );
+        public delegate void ContainerChangedEventHandler( StorageData storage );
 
-        public event StorageReckModified StorageCreated;
+        public event ContainerChangedEventHandler ContainerCreated;
 
-        public event StorageReckModified StorageDeleted;
+        public event ContainerChangedEventHandler ContainerDeleted;
 
         public List<StorageData> ContainerData { get; private set; }
 
@@ -40,12 +40,12 @@ namespace ApplicationFacade
 
             Data.AddContainer( new ProjectStorageData( container.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
 
-            OnStorageCreate( container );
+            OnSContainerCreated( container );
 
             return container;
         }
 
-        public void AddContainer( StorageData container )
+        internal void AddContainer( StorageData container )
         {
             LogManager.WriteInfo( "Mobiles Regal wird hinzugefuegt.", "Warehouse", "AddContainer" );
 
@@ -75,7 +75,7 @@ namespace ApplicationFacade
 
                     Data.Container.Remove( Data.Container[ i ] );
 
-                    OnStorageDeleted( container );
+                    OnContainerDeleted( container );
 
                     return true;
                 }
@@ -323,14 +323,14 @@ namespace ApplicationFacade
             }
         }
         
-        protected virtual void OnStorageCreate( StorageData data )
+        protected virtual void OnSContainerCreated( StorageData data )
         {
-            StorageCreated?.Invoke( data );
+            ContainerCreated?.Invoke( data );
         }
 
-        protected virtual void OnStorageDeleted( StorageData data )
+        protected virtual void OnContainerDeleted( StorageData data )
         {
-            StorageDeleted?.Invoke( data );
+            ContainerDeleted?.Invoke( data );
         }
     }
 }

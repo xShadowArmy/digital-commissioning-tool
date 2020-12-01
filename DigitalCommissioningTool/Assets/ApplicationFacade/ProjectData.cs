@@ -12,7 +12,7 @@ namespace ApplicationFacade
                 return Data.Name;
             }
 
-            set
+            internal set
             {
                 Data.ChangeProjectName( value );
             }
@@ -25,7 +25,7 @@ namespace ApplicationFacade
                 return Data.FullPath;
             }
 
-            set
+            internal set
             {
                 Data.ChangeProjectPath( value );
             }
@@ -38,7 +38,7 @@ namespace ApplicationFacade
                 return Data.DateCreated;
             }
 
-            set
+            internal set
             {
                 Data.ChangeDateCreated( value );
             }
@@ -51,7 +51,7 @@ namespace ApplicationFacade
                 return Data.DateModified;
             }
 
-            set
+            internal set
             {
                 Data.ChangeDateModified( value );
             }
@@ -59,7 +59,7 @@ namespace ApplicationFacade
 
         internal InternalProjectData Data { get; private set; }
                
-        public ProjectData()
+        internal ProjectData()
         {
             Data = new InternalProjectData( );
         }

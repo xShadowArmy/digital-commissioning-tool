@@ -32,10 +32,10 @@ namespace ApplicationFacade
         public ProjectData Data { get; private set; }
         public ProjectSettings Settings { get; private set; }
 
-        private DataHandler      DHandler { get; set; }
-        private SettingsHandler  SHandler { get; set; }
-        private WarehouseHandler WHandler { get; set; }
-        private ContainerHandler CHandler { get; set; }
+        internal DataHandler      DHandler { get; set; }
+        internal SettingsHandler  SHandler { get; set; }
+        internal WarehouseHandler WHandler { get; set; }
+        internal ContainerHandler CHandler { get; set; }
         
         public ProjectManager()
         {
@@ -206,7 +206,7 @@ namespace ApplicationFacade
 
         private void ReadProjectWarehouse( InternalProjectWarehouse iwarehouse, Warehouse warehouse )
         {
-            warehouse.AdjustFloor( iwarehouse.Floor.Transformation.Position, iwarehouse.Floor.Transformation.Rotation, iwarehouse.Floor.Transformation.Scale );
+            //warehouse.AdjustFloor( iwarehouse.Floor.Transformation.Position, iwarehouse.Floor.Transformation.Rotation, iwarehouse.Floor.Transformation.Scale );
 
             for( int i = 0; i < iwarehouse.Walls.Count; i++ )
             {

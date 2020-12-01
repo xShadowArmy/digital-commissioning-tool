@@ -4,6 +4,7 @@ using SystemFacade;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using ApplicationFacade;
 
 public class MainMenu : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class MainMenu : MonoBehaviour
     
     public void NewProject()
     {
-        NewProjectPanel.SetActive(true);      
+        NewProjectPanel.SetActive(true);
     }
     public void OpenProject()
     {

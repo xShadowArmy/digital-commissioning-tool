@@ -8,6 +8,14 @@ namespace ApplicationFacade
 {
     public static class GameManager
     {
+        public static ProjectData OpenProjectData
+        {
+            get
+            {
+                return PManager.Data;
+            }
+        }
+        
         public static Warehouse GameWarehouse { get; private set; }
 
         public static Container GameContainer { get; private set; }

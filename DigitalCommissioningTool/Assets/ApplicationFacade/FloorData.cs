@@ -16,14 +16,17 @@ namespace ApplicationFacade
 
         internal FloorData() : base( GameObjectDataType.Floor )
         {
+            Object = GameObject.Instantiate( GameObject.Find( "Floor" ), GameObject.Find( "AvatarScene" ).transform );
         }
 
         internal FloorData( Vector3 position, Vector3 rotation, Vector3 scale ) : base( GameObjectDataType.Floor, 0, position, rotation, scale )
         {
+            Object = GameObject.Instantiate( GameObject.Find( "Floor" ), GameObject.Find( "AvatarScene" ).transform );
         }
 
         internal FloorData( Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Floor, 0, position, rotation, scale, obj )
         {
+            Object = GameObject.Instantiate( GameObject.Find( "Floor" ), GameObject.Find( "AvatarScene" ).transform );
         }
 
         public new void SetID( long id )

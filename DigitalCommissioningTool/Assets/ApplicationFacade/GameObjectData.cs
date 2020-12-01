@@ -69,18 +69,52 @@ namespace ApplicationFacade
         public void SetPosition( Vector3 position )
         {
             Position = position;
+
+            if ( Object != null )
+            {
+                Object.transform.position = position;
+            }
+
             OnChange( );
         }
 
         public void SetRotation( Vector3 rotation )
         {
             Rotation = rotation;
+
+            if ( Object != null )
+            {
+                Object.transform.rotation = Quaternion.Euler( rotation );
+            }
+
             OnChange( );
         }
 
         public void SetScale( Vector3 scale )
         {
             Scale = scale;
+
+            if ( Object != null )
+            {
+                Object.transform.localScale = scale;
+            }
+
+            OnChange( );
+        }
+
+        public void SetTransform( Transform transform )
+        {
+            Position = transform.position;
+            Rotation = transform.rotation.eulerAngles;
+            Scale    = transform.localScale;
+
+            if ( Object != null )
+            {
+                Object.transform.rotation   = transform.rotation;
+                Object.transform.position   = transform.position;
+                Object.transform.localScale = transform.localScale;
+            }
+
             OnChange( );
         }
 
