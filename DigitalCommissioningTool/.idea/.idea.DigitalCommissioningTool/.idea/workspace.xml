@@ -30,11 +30,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Window.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Window.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/door.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/door.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestSceneJonas.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestSceneJonas.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +113,7 @@
       <workItem from="1606565675406" duration="957000" />
       <workItem from="1606659530690" duration="1706000" />
       <workItem from="1606680680086" duration="5032000" />
+      <workItem from="1606825239790" duration="2860000" />
     </task>
     <servers />
   </component>

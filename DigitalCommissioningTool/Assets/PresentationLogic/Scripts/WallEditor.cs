@@ -35,11 +35,39 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         popUp.SetActive(selectWall.selected);
         SelectionManager.WallSelected += OnWallSelected;
+        SelectionManager.LeftWallRimSelected += OnLeftWallRimSelected;
+        SelectionManager.RightWallRimSelected += OnRightWallRimSelected;
     }
 
-    private void OnWallSelected(Transform selectedobject)
+    private void OnRightWallRimSelected(Transform selectedObject)
     {
-        Debug.Log("Event method called!");
+        Debug.Log("RighWallRimSelected: " + selectedObject.gameObject.name);
+    }
+
+    private void OnLeftWallRimSelected(Transform selectedObject)
+    {
+        Debug.Log("LeftWallRimSelected: " + selectedObject.gameObject.name);
+    }
+
+    private void OnWallSelected(Transform selectedObject)
+    {
+        // Alle Wandelemente die in der gleichen Wand (East,West,  ...) sind
+        //
+        // Transform parentGameObject = selectedObject.parent;
+        // Debug.Log(parentGameObject.gameObject.name);
+        // foreach (Transform child in parentGameObject)
+        // {
+        //     Debug.Log(child.gameObject.name);
+        // }
+        // Debug.Log("___________________________________________");
+        //
+        // // Angrenzende Wände bekommen
+        // Collider[] colliders = Physics.OverlapSphere(selectedObject.position, selectedObject.localScale.x + 0.1f);
+        // foreach (Collider collider in colliders)
+        // {
+        //     Debug.Log(collider.gameObject.name);
+        // }
+
     }
 
     public void OnAddWindowClick()
@@ -221,6 +249,7 @@ public class WallEditor : MonoBehaviour
         }
 
         myText.text = "Geben Sie die gewünschte Länge von der " + wand + " ein";
+        
         if (selectWall != null)
         {
             popUp.SetActive(selectWall.selected);
