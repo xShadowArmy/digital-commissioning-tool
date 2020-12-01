@@ -24,6 +24,7 @@ namespace ApplicationFacade
 
         static GameManager()
         {
+            GameWarehouse = new Warehouse( );
             PManager = new ProjectManager( );
         }
 
