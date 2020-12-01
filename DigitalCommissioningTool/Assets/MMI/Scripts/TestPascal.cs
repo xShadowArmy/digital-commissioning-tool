@@ -328,7 +328,7 @@ public class TestPascal : AvatarBehavior
             carryID = MInstructionFactory.GenerateID();
             MInstruction carryInstruction = new MInstruction(carryID, "carry object", "Object/Carry")
             {
-                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance["BoxClosedTest"].ID, "Hand", "Both", "CarryDistance", 0.4f.ToString(), "CarryTarget", UnitySceneAccess.Instance["CarryTarget"].ID),
+                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance["BoxClosedTest"].ID, "Hand", "Both", "CarryDistance", 1.4f.ToString(), "CarryTarget", UnitySceneAccess.Instance["CarryTarget"].ID),
                 StartCondition = reachLeft.ID + ":" + mmiConstants.MSimulationEvent_End + " && " + reachRight.ID + ":" + mmiConstants.MSimulationEvent_End
             };
 

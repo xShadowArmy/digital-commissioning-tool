@@ -50,6 +50,10 @@ public class TreeViewItem
     {
     }
     public EventHandler HoverOff = null;
+    public class ExpandEventArgs : System.EventArgs
+    {
+    }
+    public EventHandler Expand = null;
     /// <summary>
     /// The distance to the hover item
     /// </summary>
@@ -177,13 +181,28 @@ public class TreeViewItem
                 switch (siblingOrder)
                 {
                     case SiblingOrder.FIRST_CHILD:
-                        result = ParentControl.Button(TextureIcons.MIDDLE_SIBLING_EXPANDED);
+                        if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_EXPANDED))
+                        {
+                            result = true;
+                            Expand.Invoke(this, new ExpandEventArgs());
+                        }
+                        else { result = false; }
                         break;
                     case SiblingOrder.MIDDLE_CHILD:
-                        result = ParentControl.Button(TextureIcons.MIDDLE_SIBLING_EXPANDED);
+                        if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_EXPANDED))
+                        {
+                            result = true;
+                            Expand.Invoke(this, new ExpandEventArgs());
+                        }
+                        else { result = false; }
                         break;
                     case SiblingOrder.LAST_CHILD:
-                        result = ParentControl.Button(TextureIcons.LAST_SIBLING_EXPANDED);
+                        if (ParentControl.Button(TextureIcons.LAST_SIBLING_EXPANDED))
+                        {
+                            result = true;
+                            Expand.Invoke(this, new ExpandEventArgs());
+                        }
+                        else { result = false; }
                         break;
                     default:
                         result = false;
@@ -200,13 +219,28 @@ public class TreeViewItem
                 switch (siblingOrder)
                 {
                     case SiblingOrder.FIRST_CHILD:
-                        result = ParentControl.Button(TextureIcons.MIDDLE_SIBLING_COLLAPSED);
+                        if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_COLLAPSED))
+                        {
+                            result = true;
+                            Expand.Invoke(this, new ExpandEventArgs());
+                        }
+                        else { result = false; }
                         break;
                     case SiblingOrder.MIDDLE_CHILD:
-                        result = ParentControl.Button(TextureIcons.MIDDLE_SIBLING_COLLAPSED);
+                        if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_COLLAPSED))
+                        {
+                            result = true;
+                            Expand.Invoke(this, new ExpandEventArgs());
+                        }
+                        else { result = false; }
                         break;
                     case SiblingOrder.LAST_CHILD:
-                        result = ParentControl.Button(TextureIcons.LAST_SIBLING_COLLAPSED);
+                        if (ParentControl.Button(TextureIcons.LAST_SIBLING_COLLAPSED))
+                        {
+                            result = true;
+                            Expand.Invoke(this, new ExpandEventArgs());
+                        }
+                        else { result = false; }
                         break;
                     default:
                         result = false;
@@ -358,7 +392,7 @@ public class TreeViewItem
                 {
                     Rect lastRect = GUILayoutUtility.GetLastRect();
                     if (lastRect.Contains(mousePos))
-                    {                        
+                    {
                         if (null != HoverOn && !IsHover)
                         {
                             HoverOn.Invoke(this, new HoverOnEventArgs());
