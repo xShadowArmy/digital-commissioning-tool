@@ -28,7 +28,7 @@ public class TreeView : MonoBehaviour
             item.Data = child.gameObject;
             AddEvents(item);
         }
-        float newHeight = 40 + treeView.RootItem.Items.Count * 25;//System.Math.Max(420, paths.Length * 105);
+        float newHeight = System.Math.Min(40 + treeView.RootItem.Items.Count * 25, 450);
         gameObject.transform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
     }
     public void Handler(object sender, System.EventArgs args)
@@ -40,7 +40,7 @@ public class TreeView : MonoBehaviour
         float newHeight;
         if (!treeView.RootItem.IsExpanded)
         {
-            newHeight = System.Math.Min(40 + treeView.RootItem.Items.Count * 25, 500);
+            newHeight = System.Math.Min(40 + treeView.RootItem.Items.Count * 25, 450);
         }
         else
         {
