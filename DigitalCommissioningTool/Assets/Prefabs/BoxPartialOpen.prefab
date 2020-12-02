@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 1617022762762433957}
   - component: {fileID: 1492338777420175001}
   m_Layer: 0
-  m_Name: WalkTarget
+  m_Name: BoxWalkTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,13 +782,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5919393385772199115}
-  m_LocalRotation: {x: 0.008726458, y: 0.004816264, z: 0.000042030588, w: 0.9999505}
-  m_LocalPosition: {x: 0.5, y: 0, z: 1.8}
+  m_LocalRotation: {x: 0.0061089084, y: -0.7070804, z: 0.0062323078, w: 0.70707935}
+  m_LocalPosition: {x: 1.556, y: -0.024, z: 0.5}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 8279048989771705113}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -89.448006, z: 0}
+  m_LocalEulerAnglesHint: {x: 1, y: -90, z: 0.010000001}
 --- !u!33 &8545958016110916709
 MeshFilter:
   m_ObjectHideFlags: 0

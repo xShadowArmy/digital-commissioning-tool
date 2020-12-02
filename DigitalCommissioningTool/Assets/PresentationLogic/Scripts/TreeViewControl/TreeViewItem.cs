@@ -58,6 +58,7 @@ public class TreeViewItem
     /// The distance to the hover item
     /// </summary>
     float m_hoverTime = 0f;
+    private bool expanded;
 
     public TreeViewItem(TreeViewControl parentControl, TreeViewItem parent)
     {
@@ -138,6 +139,7 @@ public class TreeViewItem
 
     public void DisplayItem(int levels, SiblingOrder siblingOrder)
     {
+        expanded = false;
         if (null == ParentControl)
         {
             return;
@@ -184,7 +186,7 @@ public class TreeViewItem
                         if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_EXPANDED))
                         {
                             result = true;
-                            Expand.Invoke(this, new ExpandEventArgs());
+                            expanded = true;
                         }
                         else { result = false; }
                         break;
@@ -192,7 +194,7 @@ public class TreeViewItem
                         if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_EXPANDED))
                         {
                             result = true;
-                            Expand.Invoke(this, new ExpandEventArgs());
+                            expanded = true;
                         }
                         else { result = false; }
                         break;
@@ -200,7 +202,7 @@ public class TreeViewItem
                         if (ParentControl.Button(TextureIcons.LAST_SIBLING_EXPANDED))
                         {
                             result = true;
-                            Expand.Invoke(this, new ExpandEventArgs());
+                            expanded = true;
                         }
                         else { result = false; }
                         break;
@@ -222,7 +224,7 @@ public class TreeViewItem
                         if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_COLLAPSED))
                         {
                             result = true;
-                            Expand.Invoke(this, new ExpandEventArgs());
+                            expanded = true;
                         }
                         else { result = false; }
                         break;
@@ -230,7 +232,7 @@ public class TreeViewItem
                         if (ParentControl.Button(TextureIcons.MIDDLE_SIBLING_COLLAPSED))
                         {
                             result = true;
-                            Expand.Invoke(this, new ExpandEventArgs());
+                            expanded = true;
                         }
                         else { result = false; }
                         break;
@@ -238,7 +240,7 @@ public class TreeViewItem
                         if (ParentControl.Button(TextureIcons.LAST_SIBLING_COLLAPSED))
                         {
                             result = true;
-                            Expand.Invoke(this, new ExpandEventArgs());
+                            expanded = true;
                         }
                         else { result = false; }
                         break;
@@ -448,5 +450,9 @@ public class TreeViewItem
             }
         }
         IsSelected = ParentControl.SelectedItem == this;
+        if (expanded && null != Expand)
+        {
+            Expand.Invoke(this, new ExpandEventArgs());
+        }        
     }
 }

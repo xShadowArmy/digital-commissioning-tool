@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 5446963573532088378}
   - component: {fileID: 5039731149775990131}
   m_Layer: 0
-  m_Name: WalkTarget
+  m_Name: BoxWalkTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

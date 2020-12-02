@@ -32,6 +32,18 @@ public class MainCamera : MonoBehaviour
                 {
                     g.SetActive(!g.activeSelf);
                 }
+                if (g.name.Equals("Main Camera"))
+                {
+                    g.SetActive(false);
+                }
+            }
+            gameObjects = SceneManager.GetSceneByName("WarehouseWithMOSIM").GetRootGameObjects();
+            foreach (GameObject g in gameObjects)
+            {
+                if (g.name.Equals("CanvasTreeView"))
+                {
+                    g.SetActive(!g.activeSelf);
+                }
             }
         }
 

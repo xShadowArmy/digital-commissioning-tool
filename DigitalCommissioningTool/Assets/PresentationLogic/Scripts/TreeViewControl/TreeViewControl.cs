@@ -17,10 +17,7 @@ public class TreeViewControl : MonoBehaviour
     public bool DisplayOnGame = false;
     public bool DisplayOnScene = true;
     public bool DisplayInInspector = false;
-    public class ExpandEventArgs : System.EventArgs
-    {
-    }
-    public EventHandler Expand = null;
+
     /// <summary>
     /// The root item
     /// </summary>
@@ -186,7 +183,6 @@ public class TreeViewControl : MonoBehaviour
                 {
                     if (ShowButtonTexture(m_textureLastSiblingCollapsed))
                     {
-                        Expand.Invoke(this, new ExpandEventArgs());
                         return true;
                     }
                     return false;
@@ -201,7 +197,6 @@ public class TreeViewControl : MonoBehaviour
                 {
                     if (ShowButtonTexture(m_textureLastSiblingExpanded))
                     {
-                        Expand.Invoke(this, new ExpandEventArgs());
                         return true;
                     }
                     return false;
@@ -226,7 +221,7 @@ public class TreeViewControl : MonoBehaviour
                 {  
                     if (ShowButtonTexture(m_textureMiddleSiblingCollapsed))
                     {
-                        Expand.Invoke(this, new ExpandEventArgs());
+                        //Expand.Invoke(this, new ExpandEventArgs());
                         return true;
                     }
                     return false;
@@ -241,7 +236,6 @@ public class TreeViewControl : MonoBehaviour
                 {
                     if (ShowButtonTexture(m_textureMiddleSiblingExpanded))
                     {
-                        Expand.Invoke(this, new ExpandEventArgs());
                         return true;
                     }
                     return false;
