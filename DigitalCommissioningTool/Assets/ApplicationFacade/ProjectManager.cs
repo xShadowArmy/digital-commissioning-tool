@@ -51,7 +51,7 @@ namespace ApplicationFacade
 
         public void OpenProject( string name, ref Warehouse warehouse, ref Container container )
         {
-            if ( !File.Exists( Paths.ProjectsPath + name + InternalProjectData.Extension ) )
+            if ( !File.Exists( Paths.ProjectsPath + name + ".prj" ) )
             {
                 warehouse = null;
                 container = null;
@@ -59,7 +59,7 @@ namespace ApplicationFacade
                 return;
             }
 
-            ArchiveManager.ExtractArchive( Paths.ProjectsPath + name + InternalProjectData.Extension, Paths.TempPath );
+            ArchiveManager.ExtractArchive( Paths.ProjectsPath + name + ".prj", Paths.TempPath );
             
             DHandler = new DataHandler( );
             SHandler = new SettingsHandler( );
