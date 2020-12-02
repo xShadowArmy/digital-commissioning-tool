@@ -27,9 +27,9 @@ public class WallEditor : MonoBehaviour
 
     void Start()
     {
-        //addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
-        //addDoorText.text = StringResourceManager.LoadString("@AddDoorText");
-        //addWallText.text = StringResourceManager.LoadString("@AddWallText");
+        addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
+        addDoorText.text = StringResourceManager.LoadString("@AddDoorText");
+        addWallText.text = StringResourceManager.LoadString("@AddWallText");
         selectedObject = GameObject.Find("SelectionManager");
         selectWall = selectedObject.GetComponent<SelectionManager>();
         SelectedObjectTransform = selectionManager.SelectedObject;

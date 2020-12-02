@@ -28,12 +28,11 @@
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ApplicationFacade/FloorData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApplicationFacade/FloorData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Warehouse.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Warehouse.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Window.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Window.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/door.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/door.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/WarehouseWithMOSIM.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/WarehouseWithMOSIM.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitTests/ApplicationFacade.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,8 +60,8 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
         <option value="$PROJECT_DIR$/Assets/MMI/Scripts/TestAvatarBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/FloorData.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
       </list>
     </option>
   </component>
