@@ -35,8 +35,6 @@
           <e p="Scripts" t="Include">
             <e p="FlyCamera.cs" t="Include" />
             <e p="TestAvatarBehavior.cs" t="Include" />
-            <e p="TestPascal.cs" t="Include" />
-            <e p="WalkTrajectory.cs" t="Include" />
           </e>
         </e>
         <e p="PresentationLogic" t="Include">
@@ -55,7 +53,20 @@
             <e p="SelectionManager.cs" t="Include" />
             <e p="SettingsMenu.cs" t="Include" />
             <e p="SwitchWallModules.cs" t="Include" />
+            <e p="TestPascal.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
+            <e p="TreeView.cs" t="Include" />
+            <e p="TreeViewControl" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ExampleTreeViewPanel.cs" t="Include" />
+                <e p="TreeViewInspector.cs" t="Include" />
+              </e>
+              <e p="Example.cs" t="Include" />
+              <e p="Readme.txt" t="Include" />
+              <e p="TreeViewControl.cs" t="Include" />
+              <e p="TreeViewItem.cs" t="Include" />
+            </e>
+            <e p="WalkTrajectory.cs" t="Include" />
             <e p="WallEditor.cs" t="Include" />
           </e>
         </e>

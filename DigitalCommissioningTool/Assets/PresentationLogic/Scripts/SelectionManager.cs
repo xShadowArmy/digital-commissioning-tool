@@ -39,13 +39,8 @@ public class SelectionManager : MonoBehaviour
         EditorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
-        //SelectionManager.StorageSelected += OnStorageSelected;
     }
-
-    //private void  OnWallSelected(Transform selectedobject)
-    //{
-    //    throw new System.NotImplementedException();
-    //}
+    
 
     // Update is called once per frame
     void Update()
@@ -66,6 +61,7 @@ public class SelectionManager : MonoBehaviour
                             SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
                                 defaultMaterial;
                             selected = false;
+                            popUp.SetPopUpScaleWall();
                             popUp.SetPopUp(tempObject.name);
                         }
 
@@ -91,7 +87,6 @@ public class SelectionManager : MonoBehaviour
                         invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
                         OnLeftWallRimSelected(SelectedObject);
-                        popUp.SetPopUp(tempObject.name);
                     }
                     else if (tempObject.CompareTag("RightWallRim"))
                     {
@@ -107,7 +102,6 @@ public class SelectionManager : MonoBehaviour
                         invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
                         OnRightWallRimSelected(SelectedObject);
-                        popUp.SetPopUp(tempObject.name);
                     }
                     else if (tempObject.CompareTag("SelectableStorage"))
                     {
