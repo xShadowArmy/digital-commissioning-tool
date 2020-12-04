@@ -62,7 +62,7 @@ public class SelectionManager : MonoBehaviour
                                 defaultMaterial;
                             selected = false;
                             popUp.SetPopUpScaleWall();
-                            popUp.SetPopUp(tempObject.name);
+                            popUp.SetPopUp();
                         }
 
                         SelectedObject = tempObject;
@@ -70,7 +70,7 @@ public class SelectionManager : MonoBehaviour
                         invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
                         OnWallSelected(SelectedObject);
-                        popUp.SetPopUp(tempObject.name);
+                        popUp.SetPopUp();
                     }
                     else if (tempObject.CompareTag("LeftWallRim"))
                     {
@@ -79,7 +79,7 @@ public class SelectionManager : MonoBehaviour
                             SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
                                 defaultMaterial;
                             selected = false;
-                            popUp.SetPopUp(tempObject.name);
+                            popUp.SetPopUp();
                         }
                         
                         SelectedObject = tempObject;
@@ -95,7 +95,7 @@ public class SelectionManager : MonoBehaviour
                             SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
                                 defaultMaterial;
                             selected = false;
-                            popUp.SetPopUp(tempObject.name);
+                            popUp.SetPopUp();
                         }
                         SelectedObject = tempObject;
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
@@ -136,7 +136,8 @@ public class SelectionManager : MonoBehaviour
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                         invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
                         selected = false;
-                        popUp.SetPopUp(tempObject.name);
+                        popUp.SetPopUp();
+                        popUp.SetPopUpScaleWall();
                     }
                 }
                 else if (Input.GetMouseButtonUp(0) && SelectedObject != null)
@@ -144,7 +145,8 @@ public class SelectionManager : MonoBehaviour
                     Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                     invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
                     selected = false;
-                    popUp.SetPopUp(SelectedObject.name);
+                    popUp.SetPopUp();
+                    popUp.SetPopUpScaleWall();
                 }
             }
         }

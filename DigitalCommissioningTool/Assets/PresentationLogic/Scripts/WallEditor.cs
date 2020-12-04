@@ -44,18 +44,22 @@ public class WallEditor : MonoBehaviour
 
     private void OnRightWallRimSelected(Transform selectedObject)
     {
-        Debug.Log("RighWallRimSelected: " + selectedObject.gameObject.name);
         SetPopUpScaleWall();
+        popUp.SetActive(false);
+        popUpScaleWall.SetActive(true);
     }
 
     private void OnLeftWallRimSelected(Transform selectedObject)
     {
-        Debug.Log("LeftWallRimSelected: " + selectedObject.gameObject.name);
         SetPopUpScaleWall();
+        popUp.SetActive(false);
+        popUpScaleWall.SetActive(true);
     }
 
     private void OnWallSelected(Transform selectedObject)
     {
+        popUp.SetActive(true);
+        popUpScaleWall.SetActive(false);
     }
 
     public void OnAddWindowClick()
@@ -88,12 +92,12 @@ public class WallEditor : MonoBehaviour
                         if (colliderTransform != SelectedObjectTransform && colliderTransform.rotation == SelectedObjectTransform.rotation && !collider.gameObject.CompareTag("SelectableDoor") && !collider.gameObject.CompareTag("SelectableWindow"))
                         {
                             Vector3 relativePoint = SelectedObjectTransform.InverseTransformPoint(colliderTransform.position);
-                            if (relativePoint.x < 0.0)
+                            if (relativePoint.x < 0.0 && !collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim"))
                             {
                                 foundRightWallElement = true;
                                 rightWallElement = collider.gameObject;
                             }
-                            else
+                            else if (!collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim"))
                             {
                                 foundLeftWallElement = true;
                                 leftWallElement = collider.gameObject;
@@ -120,6 +124,7 @@ public class WallEditor : MonoBehaviour
                 }
             }
         }
+        close(popUp);
     }
 
     public void OnAddDoorClick()
@@ -152,12 +157,12 @@ public class WallEditor : MonoBehaviour
                         if (colliderTransform != SelectedObjectTransform && colliderTransform.rotation == SelectedObjectTransform.rotation && !collider.gameObject.CompareTag("SelectableDoor") && !collider.gameObject.CompareTag("SelectableWindow"))
                         {
                             Vector3 relativePoint = SelectedObjectTransform.InverseTransformPoint(colliderTransform.position);
-                            if (relativePoint.x < 0.0)
+                            if (relativePoint.x < 0.0 && !collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim"))
                             {
                                 foundRightWallElement = true;
                                 rightWallElement = collider.gameObject;
                             }
-                            else
+                            else if (!collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim"))
                             {
                                 foundLeftWallElement = true;
                                 leftWallElement = collider.gameObject;
@@ -184,6 +189,7 @@ public class WallEditor : MonoBehaviour
                 }
             }
         }
+        close(popUp);
     }
 
     public void OnAddWallClick()
@@ -208,15 +214,18 @@ public class WallEditor : MonoBehaviour
                 Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
         }
+        close(popUp);
     }
 
-    public void SetPopUp(string s)
+    public void SetPopUp()
     {
+        SelectedObjectTransform = selectionManager.SelectedObject;
         string wand = null;
+        string s = SelectedObjectTransform.parent.name;
 
         switch (s)
         {
-            case "WallNord":
+            case "WallNorth":
                 wand = "Nordwand";
                 break;
             case "WallEast":
@@ -249,7 +258,6 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         string wand = null;
         string s = SelectedObjectTransform.parent.name;
-        Debug.Log(selectionManager.SelectedObject.gameObject);
 
         switch (s)
         {
@@ -297,11 +305,12 @@ public class WallEditor : MonoBehaviour
 
     private void ScaleWall(int length)
     {
-        if (length <= -(SelectedObjectTransform.parent.childCount-1))
+        if (length <= -(SelectedObjectTransform.parent.childCount - 1))
         {
             Debug.Log("Warehouse smaller than number of walls that should be removed!");
             return;
         }
+
         GameObject oppositeWall = null;
         Transform oppositeWallRim = null;
         GameObject temp;
@@ -316,7 +325,6 @@ public class WallEditor : MonoBehaviour
             if (collider.gameObject.transform.parent.rotation != SelectedObjectTransform.parent.rotation)
             {
                 connectingWall = collider.transform.parent;
-                Debug.Log(connectingWall.gameObject.name);
             }
             else if (collider.transform != SelectedObjectTransform)
             {
@@ -335,8 +343,7 @@ public class WallEditor : MonoBehaviour
 
         if (oppositeWall != null && connectingWall != null && neighborWall != null)
         {
-            Vector3 dir = -((SelectedObjectTransform.position - neighborWall.position).normalized);
-            Debug.Log(dir);
+            Vector3 direction = -((SelectedObjectTransform.position - neighborWall.position).normalized);
             if (SelectedObjectTransform.CompareTag("LeftWallRim"))
             {
                 foreach (var wallRim in GameObject.FindGameObjectsWithTag("RightWallRim"))
@@ -354,17 +361,15 @@ public class WallEditor : MonoBehaviour
                     {
                         if (length < 0)
                         {
-                            SelectedObjectTransform.position = SelectedObjectTransform.position + dir * selectedWallLocalScale.x;
-                            oppositeWallRim.position = oppositeWallRim.position + dir * oppositeWallRim.localScale.x;
-                            connectingWall.position = connectingWall.position + dir * selectedWallLocalScale.x;
+                            SelectedObjectTransform.position = SelectedObjectTransform.position + direction * selectedWallLocalScale.x;
+                            oppositeWallRim.position = oppositeWallRim.position + direction * oppositeWallRim.localScale.x;
+                            connectingWall.position = connectingWall.position + direction * selectedWallLocalScale.x;
 
                             colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x / 4);
                             foreach (var collider in colliders)
                             {
                                 if (collider.gameObject != SelectedObjectTransform.gameObject)
                                 {
-                                    Debug.Log(colliders.Length);
-                                    Debug.Log(collider.gameObject.name);
                                     Destroy(collider.gameObject);
                                 }
                             }
@@ -374,8 +379,6 @@ public class WallEditor : MonoBehaviour
                             {
                                 if (collider.gameObject != SelectedObjectTransform.gameObject)
                                 {
-                                    Debug.Log(colliders.Length);
-                                    Debug.Log(collider.gameObject.name);
                                     Destroy(collider.gameObject);
                                 }
                             }
@@ -385,15 +388,15 @@ public class WallEditor : MonoBehaviour
                             //Extend Selected Wall
                             temp = Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, SelectedObjectTransform.parent);
                             temp.tag = "SelectableWall";
-                            SelectedObjectTransform.position = SelectedObjectTransform.position - dir * selectedWallLocalScale.x;
+                            SelectedObjectTransform.position = SelectedObjectTransform.position - direction * selectedWallLocalScale.x;
 
                             //Extend Opposite Wall
                             temp = Instantiate(WallPrefab, oppositeWallRim.position, oppositeWallRim.rotation, oppositeWallRim.parent);
                             temp.tag = "SelectableWall";
-                            oppositeWallRim.position = oppositeWallRim.position - dir * oppositeWallRim.localScale.x;
+                            oppositeWallRim.position = oppositeWallRim.position - direction * oppositeWallRim.localScale.x;
 
                             //Move Connecting Wall
-                            connectingWall.position = connectingWall.position - dir * selectedWallLocalScale.x;
+                            connectingWall.position = connectingWall.position - direction * selectedWallLocalScale.x;
                         }
                     }
                 }
@@ -415,17 +418,15 @@ public class WallEditor : MonoBehaviour
                     {
                         if (length < 0)
                         {
-                            SelectedObjectTransform.position = SelectedObjectTransform.position + dir * selectedWallLocalScale.x;
-                            oppositeWallRim.position = oppositeWallRim.position + dir * oppositeWallRim.localScale.x;
-                            connectingWall.position = connectingWall.position + dir * selectedWallLocalScale.x;
+                            SelectedObjectTransform.position = SelectedObjectTransform.position + direction * selectedWallLocalScale.x;
+                            oppositeWallRim.position = oppositeWallRim.position + direction * oppositeWallRim.localScale.x;
+                            connectingWall.position = connectingWall.position + direction * selectedWallLocalScale.x;
 
                             colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x / 4);
                             foreach (var collider in colliders)
                             {
                                 if (collider.gameObject != SelectedObjectTransform.gameObject)
                                 {
-                                    Debug.Log(colliders.Length);
-                                    Debug.Log(collider.gameObject.name);
                                     Destroy(collider.gameObject);
                                 }
                             }
@@ -435,8 +436,6 @@ public class WallEditor : MonoBehaviour
                             {
                                 if (collider.gameObject != SelectedObjectTransform.gameObject)
                                 {
-                                    Debug.Log(colliders.Length);
-                                    Debug.Log(collider.gameObject.name);
                                     Destroy(collider.gameObject);
                                 }
                             }
@@ -446,15 +445,15 @@ public class WallEditor : MonoBehaviour
                             //Extend Selected Wall
                             temp = Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, SelectedObjectTransform.parent);
                             temp.tag = "SelectableWall";
-                            SelectedObjectTransform.position = SelectedObjectTransform.position - dir * selectedWallLocalScale.x;
+                            SelectedObjectTransform.position = SelectedObjectTransform.position - direction * selectedWallLocalScale.x;
 
                             //Extend Opposite Wall
                             temp = Instantiate(WallPrefab, oppositeWallRim.position, oppositeWallRim.rotation, oppositeWallRim.parent);
                             temp.tag = "SelectableWall";
-                            oppositeWallRim.position = oppositeWallRim.position - dir * oppositeWallRim.localScale.x;
+                            oppositeWallRim.position = oppositeWallRim.position - direction * oppositeWallRim.localScale.x;
 
                             //Move Connecting Wall
-                            connectingWall.position = connectingWall.position - dir * selectedWallLocalScale.x;
+                            connectingWall.position = connectingWall.position - direction * selectedWallLocalScale.x;
                         }
                     }
                 }
