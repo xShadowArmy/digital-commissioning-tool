@@ -21,12 +21,14 @@ public class SelectionManager : MonoBehaviour
     public static event ObjectSelectedEventHandler WallSelected;
 
     public static event ObjectSelectedEventHandler StorageSelected;
-    
+
     public static event ObjectSelectedEventHandler LeftWallRimSelected;
-    
+
     public static event ObjectSelectedEventHandler RightWallRimSelected;
+
+    public static event ObjectSelectedEventHandler InnerWallSelected;
     
-    
+    public static event ObjectSelectedEventHandler AttachedInnerWallSelected;
 
     public Transform SelectedObject { get; private set; }
 
@@ -40,7 +42,7 @@ public class SelectionManager : MonoBehaviour
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
     }
-    
+
 
     // Update is called once per frame
     void Update()
@@ -54,90 +56,57 @@ public class SelectionManager : MonoBehaviour
                 if (Input.GetMouseButtonUp(0) && Physics.Raycast(ray, out hit))
                 {
                     Transform tempObject = hit.transform;
-                    if (tempObject.CompareTag("SelectableWall") || tempObject.CompareTag("SelectableWindow") || tempObject.CompareTag("SelectableDoor"))
+                    if (tempObject.CompareTag("SelectableWall") || tempObject.CompareTag("SelectableWindow") || tempObject.CompareTag("SelectableDoor") || tempObject.CompareTag("LeftWallRim") ||
+                        tempObject.CompareTag("RightWallRim") || tempObject.CompareTag("SelectableInnerWall") || tempObject.CompareTag("SelectableAttachedInnerWall") ||
+                        tempObject.CompareTag("SelectableStorage") || FindParentWithTag(ref tempObject, "SelectableStorage") != null
+                    )
                     {
                         if (SelectedObject != null)
                         {
-                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
-                                defaultMaterial;
-                            selected = false;
-                            popUp.SetPopUpScaleWall();
-                            popUp.SetPopUp();
+                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material = defaultMaterial;
                         }
 
                         SelectedObject = tempObject;
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                         invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
-                        OnWallSelected(SelectedObject);
-                        popUp.SetPopUp();
-                    }
-                    else if (tempObject.CompareTag("LeftWallRim"))
-                    {
-                        if (SelectedObject != null)
+                        
+                        switch (tempObject.tag)
                         {
-                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
-                                defaultMaterial;
-                            selected = false;
-                            popUp.SetPopUp();
+                            case "SelectableWall":
+                                OnWallSelected(SelectedObject);
+                                break;
+                            case "SelectableWindow":
+                                OnWallSelected(SelectedObject);
+                                break;
+                            case "SelectableDoor":
+                                OnWallSelected(SelectedObject);
+                                break;
+                            case "LeftWallRim":
+                                OnLeftWallRimSelected(SelectedObject);
+                                break;
+                            case "RightWallRim":
+                                OnRightWallRimSelected(SelectedObject);
+                                break;
+                            case "SelectableInnerWall":
+                                OnInnerWallSelected(SelectedObject);
+                                break;
+                            case "SelectableAttachedInnerWall":
+                                OnAttachedInnerWallSelected(SelectedObject);
+                                break;
+                            case "SelectableStorage":
+                                OnStorageSelected(SelectedObject);
+                                break;
                         }
                         
-                        SelectedObject = tempObject;
-                        Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
-                        invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
-                        selected = true;
-                        OnLeftWallRimSelected(SelectedObject);
-                    }
-                    else if (tempObject.CompareTag("RightWallRim"))
-                    {
-                        if (SelectedObject != null)
-                        {
-                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
-                                defaultMaterial;
-                            selected = false;
-                            popUp.SetPopUp();
-                        }
-                        SelectedObject = tempObject;
-                        Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
-                        invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
-                        selected = true;
-                        OnRightWallRimSelected(SelectedObject);
-                    }
-                    else if (tempObject.CompareTag("SelectableStorage"))
-                    {
-                        if (SelectedObject != null)
-                        {
-                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
-                                defaultMaterial;
-                            selected = false;
-                        }
-                        SelectedObject = tempObject;
-                        Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
-                        invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
-                        selected = true;
-                        OnStorageSelected(SelectedObject);
-                    }
-                    else if (tempObject.parent != null && tempObject.parent.CompareTag("SelectableStorage"))
-                    {
-                        if (SelectedObject != null)
-                        {
-                            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material =
-                                defaultMaterial;
-                            selected = false;
-                        }
-                        SelectedObject = tempObject.parent;
-                        Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
-                        invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
-                        selected = true;
-                        OnStorageSelected(SelectedObject);
+                        SetPopUps();
                     }
                     else if (SelectedObject != null)
                     {
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                         invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
                         selected = false;
-                        popUp.SetPopUp();
-                        popUp.SetPopUpScaleWall();
+                        SetPopUps();
                     }
                 }
                 else if (Input.GetMouseButtonUp(0) && SelectedObject != null)
@@ -145,34 +114,70 @@ public class SelectionManager : MonoBehaviour
                     Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                     invisibleWall.GetComponent<Renderer>().material = defaultMaterial;
                     selected = false;
-                    popUp.SetPopUp();
-                    popUp.SetPopUpScaleWall();
+                    SetPopUps();
                 }
             }
         }
     }
 
+    private void SetPopUps()
+    {
+        popUp.SetPopUp();
+        popUp.SetPopUpScaleWall();
+    }
+
+    public void ResetSelection()
+    {
+        if (SelectedObject != null)
+        {
+            SelectedObject.Find("InvisibleWall").transform.GetComponent<Renderer>().material = defaultMaterial;
+            selected = false;
+            SelectedObject = null;
+        }
+    }
+
+    private Transform FindParentWithTag(ref Transform child, string searchTag)
+    {
+        Transform temp = child;
+        while (temp.parent != null)
+        {
+            if (temp.parent.CompareTag(searchTag))
+            {
+                child = temp.parent;
+                return child;
+            }
+            temp = temp.parent;
+        }
+        return null;
+    }
+    
+    private void OnInnerWallSelected(Transform selectedObject)
+    {
+        InnerWallSelected?.Invoke(SelectedObject);
+    }
+    
+    private void OnAttachedInnerWallSelected(Transform selectedObject)
+    {
+        AttachedInnerWallSelected?.Invoke(SelectedObject);
+    }
+    
     protected virtual void OnStorageSelected(Transform selectedObject)
     {
         StorageSelected?.Invoke(SelectedObject);
     }
-    
+
     protected virtual void OnWallSelected(Transform selectedObject)
     {
         WallSelected?.Invoke(SelectedObject);
     }
-    
+
     protected virtual void OnLeftWallRimSelected(Transform selectedObject)
     {
         LeftWallRimSelected?.Invoke(SelectedObject);
     }
-    
+
     protected virtual void OnRightWallRimSelected(Transform selectedObject)
     {
         RightWallRimSelected?.Invoke(SelectedObject);
     }
-    
-    
-    
-    
 }

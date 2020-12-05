@@ -17,6 +17,8 @@ TagManager:
   - LeftWallRim
   - OuterWall
   - InnerWall
+  - SelectableInnerWall
+  - SelectableAttachedInnerWall
   layers:
   - Default
   - TransparentFX
