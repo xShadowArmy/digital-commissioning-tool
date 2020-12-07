@@ -1,90 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:StringResources xs:lang="English" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ StringResourceSchema.xsd">
-    <xs:String xs:name="test1" xs:id="1">
-        <xs:Value>unchanged content</xs:Value>
+    <xs:String xs:name="DefaultProjectName" xs:id="1">
+        <xs:Value>DefaultProject</xs:Value>
     </xs:String>
-    <xs:string xs:name="test2" xs:id="2">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test3" xs:id="3">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test4" xs:id="4">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test5" xs:id="5">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test6" xs:id="6">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test7" xs:id="7">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test8" xs:id="8">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="test9" xs:id="9">
-        <xs:value>unchanged content</xs:value>
-    </xs:string>
-    <xs:string xs:name="testResource5462345634573567" xs:id="10">
-        <xs:value>testStringResource</xs:value>
-    </xs:string>
-    <xs:string xs:name="testResource13425346564765" xs:id="11">
-        <xs:value>overwritten content</xs:value>
-    </xs:string>
-    <xs:string xs:name="DefaultProjectName" xs:id="12">
-        <xs:value>NeuesProject</xs:value>
-    </xs:string>
-    <xs:string xs:name="NewProject" xs:id="13">
+    <xs:string xs:name="NewProject" xs:id="2">
         <xs:value>New Project</xs:value>
     </xs:string>
-    <xs:string xs:name="OpenProject" xs:id="14">
+    <xs:string xs:name="OpenProject" xs:id="3">
         <xs:value>Open Project</xs:value>
     </xs:string>
-    <xs:string xs:name="Settings" xs:id="15">
+    <xs:string xs:name="Settings" xs:id="4">
         <xs:value>Settings</xs:value>
     </xs:string>
-    <xs:string xs:name="Exit" xs:id="16">
+    <xs:string xs:name="Exit" xs:id="5">
         <xs:value>Exit</xs:value>
     </xs:string>
-    <xs:string xs:name="Fullscreen" xs:id="17">
+    <xs:string xs:name="Fullscreen" xs:id="6">
         <xs:value>Fullscreen</xs:value>
     </xs:string>
-    <xs:string xs:name="Resolution" xs:id="18">
+    <xs:string xs:name="Resolution" xs:id="7">
         <xs:value>Resolution</xs:value>
     </xs:string>
-    <xs:string xs:name="Language" xs:id="19">
+    <xs:string xs:name="Language" xs:id="8">
         <xs:value>Language</xs:value>
     </xs:string>
-    <xs:string xs:name="Back" xs:id="20">
+    <xs:string xs:name="Back" xs:id="9">
         <xs:value>Back</xs:value>
     </xs:string>
-    <xs:string xs:name="German" xs:id="21">
+    <xs:string xs:name="German" xs:id="10">
         <xs:value>German</xs:value>
     </xs:string>
-    <xs:string xs:name="English" xs:id="22">
+    <xs:string xs:name="English" xs:id="11">
         <xs:value>English</xs:value>
     </xs:string>
-    <xs:string xs:name="NewProjectNamePrompt" xs:id="23">
+    <xs:string xs:name="NewProjectNamePrompt" xs:id="12">
         <xs:value>Please enter a project title</xs:value>
     </xs:string>
-    <xs:string xs:name="Continue" xs:id="24">
+    <xs:string xs:name="Continue" xs:id="13">
         <xs:value>Continue</xs:value>
     </xs:string>
-    <xs:string xs:name="ProjectNamePlaceholder" xs:id="25">
+    <xs:string xs:name="ProjectNamePlaceholder" xs:id="14">
         <xs:value>Project Title</xs:value>
     </xs:string>
-    <xs:string xs:name="ProjectNameLabel" xs:id="26">
+    <xs:string xs:name="ProjectNameLabel" xs:id="15">
         <xs:value>Name:</xs:value>
     </xs:string>
-    <xs:string xs:name="ProjectPathLabel" xs:id="27">
+    <xs:string xs:name="ProjectPathLabel" xs:id="16">
         <xs:value>Path:</xs:value>
     </xs:string>
-    <xs:string xs:name="ProjectModifiedLabel" xs:id="28">
+    <xs:string xs:name="ProjectModifiedLabel" xs:id="17">
         <xs:value>Last Modified:</xs:value>
     </xs:string>
-    <xs:string xs:name="ProjectCreatedLabel" xs:id="29">
+    <xs:string xs:name="ProjectCreatedLabel" xs:id="18">
         <xs:value>Created:</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddWallText" xs:id="19">
+        <xs:value>Add wall</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddWindowText" xs:id="20">
+        <xs:value>Add window</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddDoorText" xs:id="21">
+        <xs:value>Add door</xs:value>
     </xs:string>
 </xs:StringResources>
