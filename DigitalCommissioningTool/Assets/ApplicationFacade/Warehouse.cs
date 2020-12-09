@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using AppData.Warehouse;
 using SystemFacade;
 using UnityEngine;
 
@@ -29,11 +30,8 @@ namespace ApplicationFacade
         /// Event das ausgelöst wird, wenn ein Regal entfernt wurde.
         /// </summary>
         public event StorageRackModifiedEventHandler StorageRackDeleted;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal FloorData Floor { get; private set; }
+        
+        internal List<FloorData> Floor { get; private set; }
 
         internal List<WallData> Walls { get; private set; }
 
@@ -47,46 +45,119 @@ namespace ApplicationFacade
 
         internal Warehouse()
         {
-            Floor   = new FloorData( );
+            Floor   = new List<FloorData>( );
             Walls   = new List<WallData>( );
             Windows = new List<WindowData>( );
             Doors   = new List<DoorData>( );
             StorageRacks = new List<StorageData>( );
             Data = new InternalProjectWarehouse( );
         }
+
+        public FloorData CreateFloor( Vector3 position, Quaternion rotation, Vector3 scale )
+        {
+            LogManager.WriteInfo( "Lagehausboden wird erstellt.", "Warehouse", "CreateFloor" );
+            
+            FloorData floor = new FloorData( GetUniqueID( Floor.ToArray() ), position, rotation, scale );
+                       
+            floor.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableFloor" ), position, rotation, GameObject.FindWithTag( "FloorDefinition" ).transform ) );
+            
+            floor.Object.name = "Floor" + floor.GetID( );
+            
+            floor.GameObjectDataChanged += GameObjectHasChanged;
+            floor.FloorChanged += FloorHasChanged;
+            
+            Floor.Add( floor );
+            
+            Data.Floor.Add( new ProjectFloorData( floor.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
+
+            return floor;
+        }
+
+        internal void AddFloor( FloorData floor )
+        {
+            LogManager.WriteInfo( "Lagerhausboden wird hinzugefuegt.", "Warehouse", "AddFloor" );
+
+            floor.GameObjectDataChanged += GameObjectHasChanged;
+            floor.FloorChanged += FloorHasChanged;
+
+            Floor.Add( floor );
+
+            Data.Floor.Add( new ProjectFloorData( floor.GetID( ), new ProjectTransformationData( floor.Position, floor.Rotation, floor.Scale ) ) );
+        }
+
+        public bool RemoveFloor( FloorData floor )
+        {
+            LogManager.WriteInfo( "Lagerhausboden wird entfernt.", "Warehouse", "RemoveFloor" );
+
+            if ( !Floor.Remove( floor ) )
+            {
+                return false;
+            }
+
+            for ( int i = 0; i < Data.Floor.Count; i++ )
+            {
+                if ( Data.Floor[ i ].ID == floor.GetID( ) )
+                {
+                    Data.Floor.Remove( Data.Floor[ i ] );
+
+                    floor.GameObjectDataChanged -= GameObjectHasChanged;
+                    floor.FloorChanged -= FloorHasChanged;
+
+                    floor.Destroy( );
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public FloorData GetFloor( long id )
+        {
+            LogManager.WriteInfo( "Lagerhausboden wird abgefragt.", "Warehouse", "GetFloor" );
+
+            for ( int i = 0; i < Floor.Count; i++ )
+            {
+                if ( Floor[ i ].GetID( ) == id )
+                {
+                    return Floor[ i ];
+                }
+            }
+
+            return null;
+        }
+
+        public FloorData GetFloor( GameObject obj )
+        {
+            LogManager.WriteInfo( "Lagerhausboden wird abgefragt.", "Warehouse", "GetFloor" );
+
+            for ( int i = 0; i < Walls.Count; i++ )
+            {
+                if ( Floor[ i ].Object == obj )
+                {
+                    return Floor[ i ];
+                }
+            }
+
+            return null;
+        }
         
-        public void AdjustFloor( Vector3 position, Vector3 rotation, Vector3 scale )
-        {
-            LogManager.WriteInfo( "Lagerhausboden wird angepasst.", "Warehouse", "AdjustFloor" );
-
-            Floor.SetPosition( position );
-            Floor.SetRotation( rotation );
-            Floor.SetScale( scale );
-
-            Data.UpdateFloor( new ProjectFloorData( new ProjectTransformationData( position, rotation, scale ) ) );
-        }
-
-        public FloorData GetFloor()
-        {
-            return Floor;
-        }
-
-        public WallData CreateWall( Vector3 position, Vector3 rotation, Vector3 scale )
+        public WallData CreateWall( Vector3 position, Quaternion rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Lagehauswand wird erstellt.", "Warehouse", "CreateWall" );
             
-            GameObject spawn = GameObject.Find( "ObjectSpawn" );
+            WallData wall = new WallData( GetUniqueID( Walls.ToArray() ), position, rotation, scale );
 
-            WallData wall = new WallData( GetUniqueID( Walls.ToArray() ) );
-
-            wall.ChangeGameObject( GameObject.Instantiate( GameObject.Find( "Wall" ), spawn.transform.position, Quaternion.Euler( 0, 0, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
+            wall.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), position, rotation, GameObject.FindGameObjectWithTag( "WallDefinition" ).transform ) );
+            
+            wall.Object.name = "Wall" + wall.GetID();
 
             wall.GameObjectDataChanged += GameObjectHasChanged;
             wall.WallChanged += WallHasChanged;
 
             Walls.Add( wall );
 
-            Data.AddWall( new ProjectWallData( wall.GetID(), new ProjectTransformationData( position, rotation, scale ) ) );
+            Data.Walls.Add( new ProjectWallData( wall.GetID(), new ProjectTransformationData( position, rotation, scale ) ) );
             
             return wall;
         }
@@ -100,7 +171,7 @@ namespace ApplicationFacade
 
             Walls.Add( wall );
 
-            Data.AddWall( new ProjectWallData( wall.GetID( ), new ProjectTransformationData( wall.Position, wall.Rotation, wall.Scale ) ) );
+            Data.Walls.Add( new ProjectWallData( wall.GetID( ), new ProjectTransformationData( wall.Position, wall.Rotation, wall.Scale ) ) );
         }
 
         public bool RemoveWall( WallData wall )
@@ -120,6 +191,8 @@ namespace ApplicationFacade
                     
                     wall.GameObjectDataChanged -= GameObjectHasChanged;
                     wall.WallChanged -= WallHasChanged;
+
+                    wall.Destroy( );
 
                     return true;
                 }
@@ -158,18 +231,22 @@ namespace ApplicationFacade
             return null;
         }
 
-        public WindowData CreateWindow( Vector3 position, Vector3 rotation, Vector3 scale )
+        public WindowData CreateWindow( Vector3 position, Quaternion rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Lagerhausfenster wird erstellt.", "Warehouse", "CreateWindow" );
 
             WindowData window = new WindowData( GetUniqueID( Windows.ToArray( ) ), position, rotation, scale );
+
+            window.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWindow" ), position, rotation, GameObject.FindGameObjectWithTag( "WindowDefinition" ).transform ) );
+
+            window.Object.name = "Window" + window.GetID( );
 
             window.GameObjectDataChanged += GameObjectHasChanged;
             window.WindowChanged += WindowHasChanged;
 
             Windows.Add( window );
 
-            Data.AddWindow( new ProjectWindowData( window.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
+            Data.Windows.Add( new ProjectWindowData( window.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
 
             return window;
         }
@@ -183,7 +260,7 @@ namespace ApplicationFacade
 
             Windows.Add( window );
 
-            Data.AddWindow( new ProjectWindowData( window.GetID( ), new ProjectTransformationData( window.Position, window.Rotation, window.Scale ) ) );
+            Data.Windows.Add( new ProjectWindowData( window.GetID( ), new ProjectTransformationData( window.Position, window.Rotation, window.Scale ) ) );
         }
 
         public bool RemoveWindow( WindowData window )
@@ -203,6 +280,8 @@ namespace ApplicationFacade
 
                     window.GameObjectDataChanged -= GameObjectHasChanged;
                     window.WindowChanged -= WindowHasChanged;
+
+                    window.Destroy( );
 
                     return true;
                 }
@@ -241,18 +320,22 @@ namespace ApplicationFacade
             return null;
         }
 
-        public DoorData CreateDoor( Vector3 position, Vector3 rotation, Vector3 scale, DoorType type )
+        public DoorData CreateDoor( Vector3 position, Quaternion rotation, Vector3 scale, DoorType type )
         {
             LogManager.WriteInfo( "Lagerhaustuer wird erstellt.", "Warehouse", "CreateDoor" );
 
             DoorData door = new DoorData( GetUniqueID( Doors.ToArray( ) ), type, position, rotation, scale );
+
+            door.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableDoor" ), position, rotation, GameObject.FindGameObjectWithTag( "DoorDefinition" ).transform ) );
+
+            door.Object.name = "Door" + door.GetID( );
 
             door.GameObjectDataChanged += GameObjectHasChanged;
             door.DoorChanged += DoorHasChanged;
 
             Doors.Add( door );
 
-            Data.AddDoor( new ProjectDoorData( door.GetID( ), type.ToString(), new ProjectTransformationData( position, rotation, scale ) ) );
+            Data.Doors.Add( new ProjectDoorData( door.GetID( ), type.ToString(), new ProjectTransformationData( position, rotation, scale ) ) );
 
             return door;
         }
@@ -266,7 +349,7 @@ namespace ApplicationFacade
 
             Doors.Add( door );
 
-            Data.AddDoor( new ProjectDoorData( door.GetID( ), door.Type.ToString(), new ProjectTransformationData( door.Position, door.Rotation, door.Scale ) ) );
+            Data.Doors.Add( new ProjectDoorData( door.GetID( ), door.Type.ToString(), new ProjectTransformationData( door.Position, door.Rotation, door.Scale ) ) );
         }
 
         public bool RemoveDoor( DoorData door )
@@ -286,6 +369,8 @@ namespace ApplicationFacade
 
                     door.GameObjectDataChanged -= GameObjectHasChanged;
                     door.DoorChanged -= DoorHasChanged;
+
+                    door.Destroy( );
 
                     return true;
                 }
@@ -330,16 +415,18 @@ namespace ApplicationFacade
             
             GameObject spawn = GameObject.Find( "ObjectSpawn" );
             
-            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), spawn.transform.position, spawn.transform.rotation.eulerAngles, spawn.transform.localScale );
+            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), spawn.transform.position, spawn.transform.rotation, spawn.transform.localScale );
 
-            storage.ChangeGameObject( GameObject.Instantiate( GameObject.Find( "StorageRack" ), spawn.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.Find( "AvatarScene" ).transform ) );
-               
+            storage.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), spawn.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+
+            storage.Object.name = "Storage" + storage.GetID( );
+
             storage.GameObjectDataChanged += GameObjectHasChanged;
             storage.StorageChanged += StorageRackHasChanged;
 
             StorageRacks.Add( storage );
 
-            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( spawn.transform.position, spawn.transform.rotation.eulerAngles, spawn.transform.localScale ) ) );
+            Data.StorageRacks.Add( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( spawn.transform.position, spawn.transform.rotation, spawn.transform.localScale ) ) );
 
             OnStorageRackModified( 0, storage );
 
@@ -355,7 +442,7 @@ namespace ApplicationFacade
 
             StorageRacks.Add( storage );
 
-            Data.AddStorageRack( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) ) );
+            Data.StorageRacks.Add( new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) ) );
         }
 
         public bool RemoveStorageRack( StorageData storage )
@@ -373,16 +460,12 @@ namespace ApplicationFacade
                 {
                     Data.StorageRacks.Remove( Data.StorageRacks[ i ] );
 
-                    if ( storage.Object != null )
-                    {
-                        GameObject.Destroy( storage.Object );
-                        storage.ChangeGameObject( null );
-                    }
-
                     storage.GameObjectDataChanged -= GameObjectHasChanged;
                     storage.StorageChanged -= StorageRackHasChanged;
 
                     OnStorageRackModified( 1, storage );
+
+                    storage.Destroy( );
 
                     return true;
                 }
@@ -421,7 +504,7 @@ namespace ApplicationFacade
             return null;
         }
         
-        public ItemData CreateStorageRackItem( Vector3 position, Vector3 rotation, Vector3 scale, StorageData storage )
+        public ItemData CreateStorageRackItem( Vector3 position, Quaternion rotation, Vector3 scale, StorageData storage )
         {
             LogManager.WriteInfo( "Ein RegalItem wird erstellt.", "Warehouse", "CreateStorageRackItem" );
 
@@ -432,12 +515,16 @@ namespace ApplicationFacade
 
             item.SetParent( storage );
             storage.AddItem( item );
-                       
+
+            // item.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), spawn.transform.position, Quaternion.Euler( 0, 90, 0 ), GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+
+            //item.Object.name = "Item_" + item.Name + "_" + item.GetID( );
+
             for ( int i = 0; i < Data.StorageRacks.Count; i++ )
             {
                 if ( Data.StorageRacks[ i ].ID == storage.GetID() )
                 {
-                    Data.StorageRacks[ i ].AddItem( new ProjectItemData( 0, new ProjectTransformationData( position, rotation, scale ) ) );
+                    Data.StorageRacks[ i ].Items.Add( new ProjectItemData( 0, new ProjectTransformationData( position, rotation, scale ) ) );
                                        
                     return item;
                 }
@@ -462,7 +549,7 @@ namespace ApplicationFacade
             {
                 if ( Data.StorageRacks[ i ].ID == storage.GetID( ) )
                 {
-                    Data.StorageRacks[ i ].AddItem( new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                    Data.StorageRacks[ i ].Items.Add( new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
 
                     return;
                 }
@@ -482,14 +569,18 @@ namespace ApplicationFacade
             {
                 if ( Data.StorageRacks[ i ].ID == storage.GetID( ) )
                 {
-                    for( int j = 0; j < Data.StorageRacks[i].GetItems().Length; j++ )
+                    for( int j = 0; j < Data.StorageRacks[i].GetItems.Length; j++ )
                     {
-                        if ( Data.StorageRacks[i].GetItems()[j].IDRef == item.GetID() )
+                        if ( Data.StorageRacks[i].GetItems[j].IDRef == item.GetID() )
                         {
+                            Data.StorageRacks[ i ].Items.Remove( Data.StorageRacks[ i ].GetItems[ j ] );
+
                             item.GameObjectDataChanged -= GameObjectHasChanged;
                             item.ItemChanged -= StorageRackItemHasChanged;
 
-                            return Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[ i ].GetItems( )[ j ] );
+                            item.Destroy( );
+
+                            return true;
                         }
                     }
                 }
@@ -569,7 +660,16 @@ namespace ApplicationFacade
         {
             LogManager.WriteInfo( "[Event]Aktualisiere FloorData.", "Warehouse", "FloorHasChanged" );
 
-            Data.UpdateFloor( new ProjectFloorData( new ProjectTransformationData( floor.Position, floor.Rotation, floor.Scale ) ) );
+            for ( int i = 0; i < Data.Floor.Count; i++ )
+            {
+                if ( floor.GetID( ) == Data.Floor[ i ].ID )
+                {
+                    Data.Floor.Remove( Data.Floor[ i ] );
+                    Data.Floor.Insert( i, new ProjectFloorData( floor.GetID( ), new ProjectTransformationData( floor.Position, floor.Rotation, floor.Scale ) ) );
+
+                    return;
+                }
+            }
         }
 
         private void WallHasChanged( WallData wall )
@@ -614,7 +714,6 @@ namespace ApplicationFacade
                 {
                     Data.Doors.Remove( Data.Doors[ i ] );
                     Data.Doors.Insert(i, new ProjectDoorData( door.GetID(), door.Type.ToString(), new ProjectTransformationData( door.Position, door.Rotation, door.Scale ) ) );
-                    Data.Doors[ i ].SetType( door.Type.ToString( ) );
 
                     return;
                 }
@@ -629,31 +728,31 @@ namespace ApplicationFacade
             {
                 if ( storage.GetID( ) == Data.StorageRacks[ i ].ID )
                 {
-                    if ( storage.GetItems().Length > Data.StorageRacks[i].GetItems().Length )
+                    if ( storage.GetItems.Length > Data.StorageRacks[i].GetItems.Length )
                     {
-                        ProjectTransformationData data = new ProjectTransformationData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Position,
-                                                                                        storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Rotation,
-                                                                                        storage.GetItems( )[ storage.GetItems( ).Length - 1 ].Scale );
+                        ProjectTransformationData data = new ProjectTransformationData( storage.GetItems[ storage.GetItems.Length - 1 ].Position,
+                                                                                        storage.GetItems[ storage.GetItems.Length - 1 ].Rotation,
+                                                                                        storage.GetItems[ storage.GetItems.Length - 1 ].Scale );
                         
-                        Data.StorageRacks[ i ].AddItem( new ProjectItemData( storage.GetItems( )[ storage.GetItems( ).Length - 1 ].GetID( ), data ) );
+                        Data.StorageRacks[ i ].Items.Add( new ProjectItemData( storage.GetItems[ storage.GetItems.Length - 1 ].GetID( ), data ) );
 
                         break;
                     }
 
-                    else if ( storage.GetItems( ).Length < Data.StorageRacks[ i ].GetItems( ).Length )
+                    else if ( storage.GetItems.Length < Data.StorageRacks[ i ].GetItems.Length )
                     {
-                        if ( storage.GetItems( ).Length == 1 )
+                        if ( storage.GetItems.Length == 1 )
                         {
-                            Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[ i ].GetItems( )[ 0 ] );
+                            Data.StorageRacks[ i ].Items.Remove( Data.StorageRacks[ i ].GetItems[ 0 ] );
 
                             break;
                         }
 
-                        for ( int j = 0; j < Data.StorageRacks[i].GetItems().Length; j++ )
+                        for ( int j = 0; j < Data.StorageRacks[i].GetItems.Length; j++ )
                         {
-                            if ( Data.StorageRacks[i].GetItems()[j].IDRef != storage.GetItems()[j].GetID() )
+                            if ( Data.StorageRacks[i].GetItems[j].IDRef != storage.GetItems[j].GetID() )
                             {
-                                Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[i].GetItems()[j] );
+                                Data.StorageRacks[ i ].Items.Remove( Data.StorageRacks[i].GetItems[j] );
 
                                 break;
                             }
@@ -664,12 +763,12 @@ namespace ApplicationFacade
 
                     else
                     {
-                        ProjectItemData[ ] items = Data.StorageRacks[ i ].GetItems( );
+                        ProjectItemData[ ] items = Data.StorageRacks[ i ].GetItems;
                         ProjectStorageData data = new ProjectStorageData( storage.GetID(), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) );
 
                         foreach( ProjectItemData item in items )
                         {
-                            data.AddItem( item );
+                            data.Items.Add( item );
                         }
 
                         Data.StorageRacks.Remove( Data.StorageRacks[ i ] );
@@ -689,14 +788,14 @@ namespace ApplicationFacade
             {
                 if ( item.Parent.GetID() == StorageRacks[i].GetID() )
                 {
-                    for( int j = 0; j < Data.StorageRacks[i].GetItems().Length; j++ )
+                    for( int j = 0; j < Data.StorageRacks[i].GetItems.Length; j++ )
                     {
-                        if ( Data.StorageRacks[i].GetItems()[j].IDRef == item.GetID() )
+                        if ( Data.StorageRacks[i].GetItems[j].IDRef == item.GetID() )
                         {
                             ProjectTransformationData data = new ProjectTransformationData( item.Position, item.Rotation, item.Scale );
 
-                            Data.StorageRacks[ i ].RemoveItem( Data.StorageRacks[ i ].GetItems( )[ j ] );
-                            Data.StorageRacks[ i ].AddItem( j, new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                            Data.StorageRacks[ i ].Items.Remove( Data.StorageRacks[ i ].GetItems[ j ] );
+                            Data.StorageRacks[ i ].Items.Insert( j, new ProjectItemData( item.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
 
                             break;
                         }

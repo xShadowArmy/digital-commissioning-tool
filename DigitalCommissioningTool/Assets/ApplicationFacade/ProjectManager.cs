@@ -6,6 +6,7 @@ using SystemFacade;
 using System;
 using UnityEngine;
 using System.IO;
+using AppData.Warehouse;
 
 namespace ApplicationFacade
 {
@@ -49,7 +50,7 @@ namespace ApplicationFacade
             }
         }
 
-        public void OpenProject( string name, ref Warehouse warehouse, ref Container container )
+        public void LoadProject( string name, ref Warehouse warehouse, ref Container container )
         {
             if ( !File.Exists( Paths.ProjectsPath + name + ".prj" ) )
             {
@@ -76,7 +77,7 @@ namespace ApplicationFacade
 
             InternalProjectWarehouse iwarehouse = WHandler.LoadFile( );
             ReadProjectWarehouse( iwarehouse, warehouse );
-
+            
             InternalProjectContainer icontainer = CHandler.LoadFile( );
             ReadProjectContainer( icontainer, container );
         }
@@ -117,7 +118,7 @@ namespace ApplicationFacade
             Paths.ClearTempPath( );
         }
 
-        public void CreateProject( string name, ref Warehouse warehouse, ref Container container )
+        public void CreateProject( string name, WarehouseSize size, ref Warehouse warehouse, ref Container container )
         {
             if ( ProjectName != null )
             {
@@ -141,21 +142,29 @@ namespace ApplicationFacade
             ProjectName = name;
             Data.ProjectPath = Paths.ProjectsPath;
 
-            Settings = new ProjectSettings( );
+            Settings  = new ProjectSettings( );
 
-            SaveProject( name, GetDefaultWarehouse(), GetDefaultContainer() );
+            container = GetDefaultContainer( );
 
-            InternalProjectData idata = DHandler.LoadFile( );
-            ReadProjectData( idata );
+            switch ( size )
+            {
+                case WarehouseSize.Small:
+                    
+                    warehouse = GetDefaultWarehouse( new SmallWarehouseStrategie() );
+                    break;
 
-            InternalProjectSettings isettings = SHandler.LoadFile( );
-            ReadProjectSettings( isettings );
+                case WarehouseSize.Medium:
 
-            InternalProjectWarehouse iwarehouse = WHandler.LoadFile( );
-            ReadProjectWarehouse( iwarehouse, warehouse );
+                    warehouse = GetDefaultWarehouse( new MediumWarehouseStrategie() );
+                    break;
 
-            InternalProjectContainer icontainer = CHandler.LoadFile( );
-            ReadProjectContainer( icontainer, container );
+                case WarehouseSize.Large:
+
+                    warehouse = GetDefaultWarehouse( new LargeWarehouseStrategie() );
+                    break;
+            }
+
+            SaveProject( name, warehouse, GetDefaultContainer( ) );
         }
 
         public void DeleteProject( string name )
@@ -206,7 +215,16 @@ namespace ApplicationFacade
 
         private void ReadProjectWarehouse( InternalProjectWarehouse iwarehouse, Warehouse warehouse )
         {
-            //warehouse.AdjustFloor( iwarehouse.Floor.Transformation.Position, iwarehouse.Floor.Transformation.Rotation, iwarehouse.Floor.Transformation.Scale );
+            for( int i = 0; i < iwarehouse.Floor.Count; i++ )
+            {
+                FloorData floor = new FloorData( iwarehouse.Floor[ i ].ID );
+
+                floor.SetPosition( iwarehouse.Floor[ i ].Transformation.Position );
+                floor.SetRotation( iwarehouse.Floor[ i ].Transformation.Rotation );
+                floor.SetScale( iwarehouse.Floor[ i ].Transformation.Scale );
+
+                warehouse.CreateFloor( floor.Position, floor.Rotation, floor.Scale );
+            }
 
             for( int i = 0; i < iwarehouse.Walls.Count; i++ )
             {
@@ -216,7 +234,7 @@ namespace ApplicationFacade
                 wall.SetRotation( iwarehouse.Walls[ i ].Transformation.Rotation );
                 wall.SetScale( iwarehouse.Walls[ i ].Transformation.Scale );
 
-                warehouse.AddWall( wall );
+                warehouse.CreateWall( wall.Position, wall.Rotation, wall.Scale );
             }
 
             for ( int i = 0; i < iwarehouse.Windows.Count; i++ )
@@ -261,18 +279,13 @@ namespace ApplicationFacade
 
                 warehouse.AddStorageRack( data );
 
-                //if ( iwarehouse.StorageRacks[i].GetItems() == null )
-                //{
-                //    continue;
-                //}
-
-                for ( int j = 0; j < iwarehouse.StorageRacks[i].GetItems().Length; j++ )
+                for ( int j = 0; j < iwarehouse.StorageRacks[i].GetItems.Length; j++ )
                 {
-                    ItemData item = new ItemData( iwarehouse.StorageRacks[ i ].GetItems( )[ j ].IDRef, 0 );
+                    ItemData item = new ItemData( iwarehouse.StorageRacks[ i ].GetItems[ j ].IDRef, 0 );
                     
-                    item.SetPosition( iwarehouse.StorageRacks[ i ].GetItems()[j].Transformation.Position );
-                    item.SetRotation( iwarehouse.StorageRacks[ i ].GetItems( )[ j ].Transformation.Rotation );
-                    item.SetScale( iwarehouse.StorageRacks[ i ].GetItems( )[ j ].Transformation.Scale );
+                    item.SetPosition( iwarehouse.StorageRacks[ i ].GetItems[j].Transformation.Position );
+                    item.SetRotation( iwarehouse.StorageRacks[ i ].GetItems[ j ].Transformation.Rotation );
+                    item.SetScale( iwarehouse.StorageRacks[ i ].GetItems[ j ].Transformation.Scale );
 
                     warehouse.AddItemToStorageRack( data, item );
                 }
@@ -291,22 +304,49 @@ namespace ApplicationFacade
 
                 container.AddContainer( data );
 
-                for ( int j = 0; j < icontainer.Container[ i ].GetItems( ).Length; j++ )
+                for ( int j = 0; j < icontainer.Container[ i ].GetItems.Length; j++ )
                 {
-                    ItemData item = new ItemData( icontainer.Container[ i ].GetItems( )[ j ].IDRef, 0 );
+                    ItemData item = new ItemData( icontainer.Container[ i ].GetItems[ j ].IDRef, 0 );
 
-                    item.SetPosition( icontainer.Container[ i ].GetItems( )[ j ].Transformation.Position );
-                    item.SetRotation( icontainer.Container[ i ].GetItems( )[ j ].Transformation.Rotation );
-                    item.SetScale( icontainer.Container[ i ].GetItems( )[ j ].Transformation.Scale );
+                    item.SetPosition( icontainer.Container[ i ].GetItems[ j ].Transformation.Position );
+                    item.SetRotation( icontainer.Container[ i ].GetItems[ j ].Transformation.Rotation );
+                    item.SetScale( icontainer.Container[ i ].GetItems[ j ].Transformation.Scale );
 
                     container.AddItemToContainer( data, item );
                 }
             }
         }
 
-        private Warehouse GetDefaultWarehouse()
+        private Warehouse GetDefaultWarehouse( IWarehouseStrategie size )
         {
             Warehouse warehouse = new Warehouse( );
+
+            size.StartGeneration( );
+
+            foreach( ObjectTransformation data in size.GetFloor() )
+            {
+                warehouse.CreateFloor( data.Position, data.Rotation, data.Scale );
+            }
+
+            foreach ( ObjectTransformation data in size.GetWalls( ) )
+            {
+                warehouse.CreateWall( data.Position, data.Rotation, data.Scale );
+            }
+
+            foreach ( ObjectTransformation data in size.GetWindows( ) )
+            {
+                warehouse.CreateWindow( data.Position, data.Rotation, data.Scale );
+            }
+
+            foreach ( ObjectTransformation data in size.GetDoors( ) )
+            {
+                warehouse.CreateDoor( data.Position, data.Rotation, data.Scale, DoorType.Door );
+            }
+
+            foreach ( ObjectTransformation data in size.GetStorageRacks( ) )
+            {
+                //warehouse.CreateStorageRack( data.Position, data.Rotation, data.Scale );
+            }
 
             return warehouse;
         }

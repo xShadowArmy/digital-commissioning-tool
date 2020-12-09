@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using SystemFacade;
 using UnityEngine;
 
 namespace ApplicationFacade
@@ -13,40 +14,76 @@ namespace ApplicationFacade
         public delegate void ItemChangedEventHandler( ItemData item );
 
         public event ItemChangedEventHandler ItemChanged;
-                
-        public long ItemCount { get; protected set; }
+
+        public long Count { get; protected set; }
+
+        public string Name { get; protected set; }
 
         public StorageData Parent { get; private set; }
 
         internal ItemData() : base( GameObjectDataType.Item )
         {
-            ItemCount = 0;
+            Count = 0;
+            Name = string.Empty;
         }
 
         internal ItemData( long id, long itemCount ) : base( GameObjectDataType.Item, id )
         {
-            ItemCount = itemCount;
+            Count = itemCount;
+            Name = string.Empty;
         }
 
-        internal ItemData( long id, long itemCount, Vector3 position, Vector3 rotation, Vector3 scale ) : base( GameObjectDataType.Item, id, position, rotation, scale )
+        internal ItemData( long id, long itemCount, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.Item, id, position, rotation, scale )
         {
-            ItemCount = itemCount;
+            Count = itemCount;
+            Name = string.Empty;
         }
 
-        internal ItemData( long id, long itemCount, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Item, id, position, rotation, scale, obj )
+        internal ItemData( long id, long itemCount, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Item, id, position, rotation, scale, obj )
         {
-            ItemCount = itemCount;
+            Count = itemCount;
+            Name = string.Empty;
         }
 
         internal void SetParent( StorageData storage )
         {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetParent" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return;
+            }
+
             Parent = storage;
         }
 
         public void SetItemCount( long itemCount )
         {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetItemCount" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return;
+            }
+
+            Count = itemCount;
             OnChange( );
-            ItemCount = itemCount;
+        }
+
+        public void SetItemName( string itemName )
+        {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetItemName" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return;
+            }
+
+            Name = itemName;
+            OnChange( );
         }
 
         protected new virtual void OnChange()

@@ -9,7 +9,7 @@ namespace ProjectComponents.Abstraction
 {
     public class InternalProjectWarehouse
     {
-        public ProjectFloorData Floor { get; private set; }
+        public List<ProjectFloorData> Floor { get; private set; }
 
         public List<ProjectWallData> Walls { get; private set; }
 
@@ -21,7 +21,7 @@ namespace ProjectComponents.Abstraction
 
         public InternalProjectWarehouse()
         {
-            Floor = new ProjectFloorData( );
+            Floor = new List<ProjectFloorData>( );
 
             Walls = new List<ProjectWallData>( );
 
@@ -30,51 +30,6 @@ namespace ProjectComponents.Abstraction
             Doors = new List<ProjectDoorData>( );
 
             StorageRacks = new List<ProjectStorageData>( );
-        }
-
-        public void UpdateFloor( ProjectFloorData data )
-        {
-            Floor = data;
-        }
-
-        public void AddWall( ProjectWallData data )
-        {
-            Walls.Add( data );
-        }
-
-        public bool RemoveWall( ProjectWallData data )
-        {
-            return Walls.Remove( data );
-        }
-
-        public void AddWindow( ProjectWindowData data )
-        {
-            Windows.Add( data );
-        }
-
-        public bool RemoveWindow( ProjectWindowData data )
-        {
-            return Windows.Remove( data );
-        }
-
-        public void AddDoor( ProjectDoorData data )
-        {
-            Doors.Add( data );
-        }
-
-        public bool RemoveDoor( ProjectDoorData data )
-        {
-            return Doors.Remove( data );
-        }
-
-        public void AddStorageRack( ProjectStorageData data )
-        {
-            StorageRacks.Add( data );
-        }
-
-        public bool RemoveStorageRack( ProjectStorageData data )
-        {
-            return StorageRacks.Remove( data );
         }
     }
 }

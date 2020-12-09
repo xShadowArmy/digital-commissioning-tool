@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using SystemFacade;
 using UnityEngine;
 
 namespace ApplicationFacade
@@ -26,18 +27,26 @@ namespace ApplicationFacade
             Type = type;
         }
 
-        internal DoorData( long id, DoorType type, Vector3 position, Vector3 rotation, Vector3 scale ) : base( GameObjectDataType.Door, id, position, rotation, scale )
+        internal DoorData( long id, DoorType type, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.Door, id, position, rotation, scale )
         {
             Type = type;
         }
 
-        internal DoorData( long id, DoorType type, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Door, id, position, rotation, scale, obj )
+        internal DoorData( long id, DoorType type, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Door, id, position, rotation, scale, obj )
         {
             Type = type;
         }
 
         public void SetDoorType( DoorType type )
         {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "DoorData", "SetDoorType" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return;
+            }
+
             Type = type;
             OnChange( );
         }

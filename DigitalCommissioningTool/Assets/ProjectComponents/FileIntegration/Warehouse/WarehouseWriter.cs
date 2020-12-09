@@ -76,7 +76,33 @@ namespace ProjectComponents.FileIntegration
         {
             if ( nav.LocalName.Equals( "Floor" ) )
             {
-                WriteTransformationData( nav, data.Floor.Transformation, xmlns );
+                nav.CreateAttribute( "xs", "count", xmlns, data.Floor.Count.ToString( ) );
+
+                if ( data.Floor.Count == 0 )
+                {
+                    return;
+                }
+
+                for ( int i = 0; i < data.Floor.Count; i++ )
+                {
+                    if ( i == 0 )
+                    {
+                        nav.AppendChildElement( "xs", "Floor", xmlns, "" );
+                        nav.MoveToChild( "Floor", xmlns );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Floor[ i ].ID.ToString( ) );
+                    }
+
+                    else
+                    {
+                        nav.InsertElementAfter( "xs", "Floor", xmlns, "" );
+                        nav.MoveToNext( );
+                        nav.CreateAttribute( "xs", "id", xmlns, data.Floor[ i ].ID.ToString( ) );
+                    }
+
+                    WriteTransformationData( nav, data.Floor[ i ].Transformation, xmlns );
+                }
+
+                nav.MoveToParent( );
             }
 
             else
@@ -238,25 +264,25 @@ namespace ProjectComponents.FileIntegration
 
                     nav.InsertElementAfter( "xs", "Items", xmlns, "" );
                     nav.MoveToNext( );
-                    nav.CreateAttribute( "xs", "count", xmlns, data.StorageRacks[ i ].GetItems( ).Length.ToString( ) );
+                    nav.CreateAttribute( "xs", "count", xmlns, data.StorageRacks[ i ].GetItems.Length.ToString( ) );
                     
-                    for( int j = 0; j < data.StorageRacks[i].GetItems().Length; j++ )
+                    for( int j = 0; j < data.StorageRacks[i].GetItems.Length; j++ )
                     {
                         if ( j == 0 )
                         {
                             nav.AppendChildElement( "xs", "Item", xmlns, "" );
                             nav.MoveToChild( "Item", xmlns );
-                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems[ j ].IDRef.ToString( ) );
                         }
 
                         else
                         {
                             nav.InsertElementAfter( "xs", "Item", xmlns, "" );
                             nav.MoveToNext( );
-                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems( )[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems[ j ].IDRef.ToString( ) );
                         }
                         
-                        WriteTransformationData( nav, data.StorageRacks[ i ].GetItems()[j].Transformation, xmlns );
+                        WriteTransformationData( nav, data.StorageRacks[ i ].GetItems[j].Transformation, xmlns );
                     }
 
                     nav.MoveToParent( );
@@ -281,9 +307,9 @@ namespace ProjectComponents.FileIntegration
 
             nav.InsertElementAfter( "xs", "Rotation", xmlns, "" );
             nav.MoveToNext( );
-            nav.CreateAttribute( "xs", "x", xmlns, data.Rotation.x.ToString( ) );
-            nav.CreateAttribute( "xs", "y", xmlns, data.Rotation.y.ToString( ) );
-            nav.CreateAttribute( "xs", "z", xmlns, data.Rotation.z.ToString( ) );
+            nav.CreateAttribute( "xs", "x", xmlns, data.Rotation.eulerAngles.x.ToString( ) );
+            nav.CreateAttribute( "xs", "y", xmlns, data.Rotation.eulerAngles.y.ToString( ) );
+            nav.CreateAttribute( "xs", "z", xmlns, data.Rotation.eulerAngles.z.ToString( ) );
 
             nav.InsertElementAfter( "xs", "Scale", xmlns, "" );
             nav.MoveToNext( );

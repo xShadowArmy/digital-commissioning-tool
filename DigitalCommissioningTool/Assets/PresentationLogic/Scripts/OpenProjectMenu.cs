@@ -26,7 +26,7 @@ public class OpenProjectMenu : MonoBehaviour
         int i = 0;
         foreach (string path in paths)
         {
-            GameManager.OpenProject(Path.GetFileName(path).TrimEnd(".prj".ToCharArray()));
+            GameManager.LoadProject(Path.GetFileName(path).TrimEnd(".prj".ToCharArray()));
 
             //projectName.GetComponent<UnityEngine.UI.Text>().text = "Sample Name "+ ++i;
             //projectPath.GetComponent<UnityEngine.UI.Text>().text = "C:/Sample/Path";

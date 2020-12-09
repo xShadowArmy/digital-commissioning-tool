@@ -19,6 +19,17 @@ TagManager:
   - InnerWall
   - SelectableInnerWall
   - SelectableAttachedInnerWall
+  - WarehouseDefinition
+  - FloorDefinition
+  - WallDefinition
+  - WindowDefinition
+  - DoorDefinition
+  - StorageRackDefinition
+  - ContainerDefinition
+  - StorageContainer
+  - StorageBoxOpen
+  - StorageBoxClosed
+  - StorageBoxPartialOpen
   layers:
   - Default
   - TransparentFX

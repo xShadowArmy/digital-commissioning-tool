@@ -59,11 +59,11 @@ namespace ProjectComponents.FileIntegration
 
                         nav.InsertElementAfter( "xs", "Items", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "count", xmlns, data.Container[i].GetItems().Length.ToString() );
+                        nav.CreateAttribute( "xs", "count", xmlns, data.Container[i].GetItems.Length.ToString() );
 
-                        if ( data.Container[i].GetItems().Length > 0 )
+                        if ( data.Container[i].GetItems.Length > 0 )
                         {
-                            for( int j = 0; j < data.Container[i].GetItems().Length; j++ )
+                            for( int j = 0; j < data.Container[i].GetItems.Length; j++ )
                             {
                                 if ( j == 0 )
                                 {
@@ -77,8 +77,8 @@ namespace ProjectComponents.FileIntegration
                                     nav.MoveToNext( );
                                 }
 
-                                nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[ i ].GetItems( )[ j ].IDRef.ToString( ) );
-                                WriteTransformationData( nav, data.Container[ i ].GetItems( )[ j ].Transformation, xmlns );
+                                nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[ i ].GetItems[ j ].IDRef.ToString( ) );
+                                WriteTransformationData( nav, data.Container[ i ].GetItems[ j ].Transformation, xmlns );
                             }
 
                             nav.MoveToParent( );

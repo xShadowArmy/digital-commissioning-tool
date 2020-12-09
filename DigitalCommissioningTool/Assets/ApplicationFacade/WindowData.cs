@@ -22,11 +22,11 @@ namespace ApplicationFacade
         {
         }
 
-        internal WindowData( long id, Vector3 position, Vector3 rotation, Vector3 scale ) : base( GameObjectDataType.Window, id, position, rotation, scale )
+        internal WindowData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.Window, id, position, rotation, scale )
         {
         }
 
-        internal WindowData( long id, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Window, id, position, rotation, scale, obj )
+        internal WindowData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Window, id, position, rotation, scale, obj )
         {
         }
 

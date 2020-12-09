@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
+using SystemFacade;
 using UnityEngine;
 
 namespace ApplicationFacade
@@ -16,6 +17,14 @@ namespace ApplicationFacade
 
         private List<ItemData> Data { get; set; }
 
+        public ItemData[] GetItems
+        {
+            get
+            {
+                return Data.ToArray( );
+            }
+        }
+
         internal StorageData() : base( GameObjectDataType.StorageReck )
         {
             Data = new List<ItemData>( );
@@ -26,30 +35,49 @@ namespace ApplicationFacade
             Data = new List<ItemData>( );
         }
 
-        internal StorageData( long id, Vector3 position, Vector3 rotation, Vector3 scale ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale )
+        internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale )
         {
             Data = new List<ItemData>( );
         }
 
-        internal StorageData( long id, Vector3 position, Vector3 rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale, obj )
+        internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale, obj )
         {
             Data = new List<ItemData>( );
         }
 
         internal void AddItem( ItemData item )
         {
-            OnChange( );
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "AddItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return;
+            }
+
             Data.Add( item );
+            OnChange( );
         }
 
         internal bool RemoveItem( ItemData item )
         {
-            for( int i = 0; i < Data.Count; i++ )
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "AddItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return false;
+            }
+
+            for ( int i = 0; i < Data.Count; i++ )
             {
                 if ( Data[i].GetID() == item.GetID() )
                 {
+                    bool res = Data.Remove( Data[ i ] );
+
                     OnChange( );
-                    return Data.Remove( Data[ i ] );
+
+                    return res;
                 }
             }
 
@@ -58,6 +86,14 @@ namespace ApplicationFacade
 
         internal bool ContainsItem( ItemData item )
         {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "AddItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return false;
+            }
+
             for ( int i = 0; i < Data.Count; i++ )
             {
                 if ( Data[ i ].GetID() == item.GetID() )
@@ -71,7 +107,15 @@ namespace ApplicationFacade
 
         public ItemData GetItem( long id )
         {
-            for( int i = 0; i < Data.Count; i++ )
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return null;
+            }
+
+            for ( int i = 0; i < Data.Count; i++ )
             {
                 if ( Data[i].GetID() == id )
                 {
@@ -84,6 +128,14 @@ namespace ApplicationFacade
 
         public ItemData GetItem( GameObject obj )
         {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return null;
+            }
+
             for ( int i = 0; i < Data.Count; i++ )
             {
                 if ( Data[ i ].Object == obj )
@@ -93,11 +145,6 @@ namespace ApplicationFacade
             }
 
             return null;
-        }
-
-        public ItemData[ ] GetItems()
-        {
-            return Data.ToArray( );
         }
 
         protected new virtual void OnChange()

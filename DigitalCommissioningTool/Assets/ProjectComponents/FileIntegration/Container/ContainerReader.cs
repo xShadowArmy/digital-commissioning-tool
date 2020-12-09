@@ -62,7 +62,7 @@ namespace ProjectComponents.FileIntegration
                     if ( itemCount <= 0 )
                     {
                         nav.MoveToParent( );
-                        container.AddContainer( data );
+                        container.Container.Add( data );
 
                         continue;
                     }
@@ -77,12 +77,12 @@ namespace ProjectComponents.FileIntegration
                         
                         nav.MoveToNext( );
 
-                        data.AddItem( item );
+                        data.Items.Add( item );
                     }
 
                     nav.MoveToParent( );
 
-                    container.AddContainer( data );
+                    container.Container.Add( data );
 
                     nav.MoveToParent( );
                 } 
@@ -98,29 +98,33 @@ namespace ProjectComponents.FileIntegration
         
         private ProjectTransformationData ReadTransformation( XPathNavigator nav, string xmlns )
         {
-            ProjectTransformationData data = new ProjectTransformationData( );
+            ProjectTransformationData data;
 
             try
             {
                 nav.MoveToChild( "Position", xmlns );
 
-                data.SetPosition( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
+                Vector3 position = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
 
                 nav.MoveToNext( );
-                data.SetRotation( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
+                Vector3 rotation =  new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
 
                 nav.MoveToNext( );
-                data.SetScale( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
+                Vector3 scale = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
+
+                data = new ProjectTransformationData( position, Quaternion.Euler( rotation ), scale );
 
                 nav.MoveToParent( );
+
+                return data;
             }
 
             catch ( Exception e )
             {
                 LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadTransformation" );
-            }
 
-            return data;
+                return new ProjectTransformationData( );
+            }
         }
     }
 }

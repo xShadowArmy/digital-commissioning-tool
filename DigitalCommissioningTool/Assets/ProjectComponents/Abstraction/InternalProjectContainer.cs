@@ -15,20 +15,5 @@ namespace ProjectComponents.Abstraction
         {
             Container = new List<ProjectStorageData>( );
         }
-
-        public void AddContainer( ProjectStorageData container )
-        {
-            Container.Add( container );
-        }
-
-        public bool RemoveContainer( ProjectStorageData container )
-        {
-            return Container.Remove( container );
-        }
-
-        public bool ContainsContainer( ProjectStorageData container )
-        {
-            return Container.Contains( container );
-        }
     }
 }

@@ -28,12 +28,12 @@ namespace ApplicationFacade
             PManager = new ProjectManager( );
         }
 
-        public static bool OpenProject( string name )
+        public static bool LoadProject( string name )
         {
             Warehouse wtmp = new Warehouse( );
             Container ctmp = new Container( );
 
-            PManager.OpenProject( name, ref wtmp, ref ctmp );
+            PManager.LoadProject( name, ref wtmp, ref ctmp );
 
             GameWarehouse = wtmp;
             GameContainer = ctmp;
@@ -56,12 +56,12 @@ namespace ApplicationFacade
             PManager.CloseProject( );
         }
 
-        public static bool CreateProject( string name )
+        public static bool CreateProject( string name, WarehouseSize size = WarehouseSize.Medium )
         {
             Warehouse wtmp = new Warehouse( );
             Container ctmp = new Container( );
 
-            PManager.CreateProject( name, ref wtmp, ref ctmp );
+            PManager.CreateProject( name, size, ref wtmp, ref ctmp );
 
             GameWarehouse = wtmp;
             GameContainer = ctmp;

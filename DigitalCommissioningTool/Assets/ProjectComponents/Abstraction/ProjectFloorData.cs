@@ -8,11 +8,13 @@ namespace ProjectComponents.Abstraction
 {
     public struct ProjectFloorData
     {
-        public ProjectTransformationData Transformation { get; set; }
+        public long ID { get; set; }
+        public ProjectTransformationData Transformation { get; private set; }
 
-        public ProjectFloorData( ProjectTransformationData transformation )
+        public ProjectFloorData( long id, ProjectTransformationData transformation )
         {
             Transformation = transformation;
+            ID = id;
         }
     }
 }

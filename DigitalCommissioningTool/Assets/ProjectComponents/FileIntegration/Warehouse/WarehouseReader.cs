@@ -61,9 +61,35 @@ namespace ProjectComponents.FileIntegration
         {
             LogManager.WriteInfo( "Der Boden wird gelesen.", "WarehouseReader", "ReadFloor" );
 
-            ProjectFloorData data = new ProjectFloorData( ReadTransformation( nav, xmlns ) );
+            try
+            {
+                long count = long.Parse( nav.GetAttribute( "count", xmlns ), NumberStyles.Integer );
 
-            warehouse.UpdateFloor( data );
+                if ( count <= 0 )
+                {
+                    return;
+                }
+
+                nav.MoveToFirstChild( );
+
+                ProjectFloorData data;
+
+                for ( int i = 0; i < count; i++ )
+                {
+                    data = new ProjectFloorData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), ReadTransformation( nav, xmlns ) );
+
+                    nav.MoveToNext( );
+
+                    warehouse.Floor.Add( data );
+                }
+
+                nav.MoveToParent( );
+            }
+
+            catch ( Exception e )
+            {
+                LogManager.WriteLog( e.Message, LogLevel.Error, true, "WarehouseReader", "ReadFloor" );
+            }
         }
 
         private void ReadWalls( XPathNavigator nav, InternalProjectWarehouse warehouse, string xmlns )
@@ -89,7 +115,7 @@ namespace ProjectComponents.FileIntegration
                     
                     nav.MoveToNext( );
 
-                    warehouse.AddWall( data );
+                    warehouse.Walls.Add( data );
                 }
 
                 nav.MoveToParent( );
@@ -124,7 +150,7 @@ namespace ProjectComponents.FileIntegration
 
                     nav.MoveToNext( );
 
-                    warehouse.AddWindow( data );
+                    warehouse.Windows.Add( data );
                 }
 
                 nav.MoveToParent( );
@@ -159,7 +185,7 @@ namespace ProjectComponents.FileIntegration
                     
                     nav.MoveToNext( );
 
-                    warehouse.AddDoor( data );
+                    warehouse.Doors.Add( data );
                 }
 
                 nav.MoveToParent( );
@@ -210,7 +236,7 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.MoveToParent( );
                         
-                        warehouse.AddStorageRack( data );
+                        warehouse.StorageRacks.Add( data );
 
                         continue;
                     }
@@ -225,12 +251,12 @@ namespace ProjectComponents.FileIntegration
                         
                         nav.MoveToNext( );
 
-                        data.AddItem( item );
+                        data.Items.Add( item );
                     }
 
                     nav.MoveToParent( );
 
-                    warehouse.AddStorageRack( data );
+                    warehouse.StorageRacks.Add( data );
                 }
 
                 nav.MoveToParent( );
@@ -244,29 +270,33 @@ namespace ProjectComponents.FileIntegration
 
         private ProjectTransformationData ReadTransformation( XPathNavigator nav, string xmlns )
         {
-            ProjectTransformationData data = new ProjectTransformationData();
+            ProjectTransformationData data;
 
             try
             {
                 nav.MoveToChild( "Position", xmlns );
-                
-                data.SetPosition( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
+
+                Vector3 position = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
 
                 nav.MoveToNext( );
-                data.SetRotation( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
+                Vector3 rotation = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
 
                 nav.MoveToNext( );
-                data.SetScale( new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) ) );
+                Vector3 scale = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
+
+                data = new ProjectTransformationData( position, Quaternion.Euler( rotation ), scale );
 
                 nav.MoveToParent( );
+
+                return data;
             }
 
             catch( Exception e )
             {
                 LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadTransformation" );
-            }
 
-            return data;
+                return new ProjectTransformationData( );
+            }
         }
     }
 }

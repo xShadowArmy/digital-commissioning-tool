@@ -15,11 +15,6 @@ namespace ProjectComponents.Abstraction
         {
             ID = id;
             Transformation = transformation;
-        }
-
-        public void SetID( long id )
-        {
-            ID = id;
-        }
+        }        
     }
 }

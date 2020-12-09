@@ -8,8 +8,8 @@ namespace ProjectComponents.Abstraction
 {
     public struct ProjectDoorData
     {
-        public long ID { get; private set; }
-        public string Type { get; private set; }
+        public long ID { get; set; }
+        public string Type { get; set; }
         public ProjectTransformationData Transformation { get; private set; }
 
         public ProjectDoorData( long id, string type, ProjectTransformationData transformation )
@@ -17,21 +17,6 @@ namespace ProjectComponents.Abstraction
             ID = id;
             Type = type;
             Transformation = transformation;
-        }
-
-        public void SetID( long id )
-        {
-            ID = id;
-        }
-
-        public void SetType( string type )
-        {
-            if ( !type.ToLower().Equals( "door" ) && !type.ToLower().Equals( "gate" ) )
-            {
-                return;
-            }
-
-            Type = type;
         }
     }
 }

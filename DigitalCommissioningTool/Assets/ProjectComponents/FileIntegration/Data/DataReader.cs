@@ -33,16 +33,16 @@ namespace ProjectComponents.FileIntegration
                 nav.MoveToFirstChild( );
                 nav.MoveToFirstChild( );
 
-                data.ChangeProjectName( nav.Value );
+                data.Name =  nav.Value;
                 nav.MoveToNext( );
 
-                data.ChangeProjectPath( nav.Value );
+                data.FullPath = nav.Value;
                 nav.MoveToNext( );
 
-                data.ChangeDateCreated( DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture ) );
+                data.DateCreated = DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture );
                 nav.MoveToNext( );
 
-                data.ChangeDateModified( DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture ) );
+                data.DateModified = DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture );
             }
 
             catch ( Exception e )
