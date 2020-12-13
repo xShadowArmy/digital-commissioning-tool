@@ -3,8 +3,8 @@
     "references": [
         "GUID:4115c54a2ccaec3459a2551b269c3492",
         "GUID:b2c3225e6193e3642ab059d1142b16dd",
-        "GUID:0887094fc593f9b459b734353cec3742"
-    ],
+        "GUID:0887094fc593f9b459b734353cec3742",
+        "Unity.TextMeshPro"    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
