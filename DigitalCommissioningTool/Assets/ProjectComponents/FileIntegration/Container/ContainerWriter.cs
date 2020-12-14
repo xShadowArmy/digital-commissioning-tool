@@ -52,7 +52,9 @@ namespace ProjectComponents.FileIntegration
                             nav.MoveToNext( );
                         }
 
+                        nav.CreateAttribute( "xs", "slotCount", xmlns, data.Container[i].SlotCount.ToString() );
                         nav.CreateAttribute( "xs", "id", xmlns, data.Container[ i ].ID.ToString() );
+                        
                         nav.AppendChildElement( "xs", "Transform", xmlns, "" );
                         nav.MoveToChild( "Transform", xmlns );
                         WriteTransformationData( nav, data.Container[i].Transformation, xmlns );
@@ -77,6 +79,9 @@ namespace ProjectComponents.FileIntegration
                                     nav.MoveToNext( );
                                 }
 
+                                nav.CreateAttribute( "xs", "itemName", xmlns, data.Container[i].GetItems[j].Name );
+                                nav.CreateAttribute( "xs", "itemWeight", xmlns, data.Container[i].GetItems[j].Weight.ToString( ) );
+                                nav.CreateAttribute( "xs", "itemCount", xmlns, data.Container[i].GetItems[j].Count.ToString( ) );
                                 nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[ i ].GetItems[ j ].IDRef.ToString( ) );
                                 WriteTransformationData( nav, data.Container[ i ].GetItems[ j ].Transformation, xmlns );
                             }

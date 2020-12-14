@@ -15,26 +15,26 @@ namespace ApplicationFacade
 
         public event DoorChangedEventHandler DoorChanged;
 
-        public DoorType Type { get; protected set; }
+        public DoorType Type { get; internal set; }
 
         internal DoorData() : base( GameObjectDataType.Door )
         {
             Type = DoorType.Door;
         }
 
-        internal DoorData( long id, DoorType type ) : base( GameObjectDataType.Door, id )
+        internal DoorData( long id ) : base( GameObjectDataType.Door, id )
         {
-            Type = type;
+            Type = DoorType.Door;
         }
 
-        internal DoorData( long id, DoorType type, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.Door, id, position, rotation, scale )
+        internal DoorData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.Door, id, position, rotation, scale )
         {
-            Type = type;
+            Type = DoorType.Door;
         }
-
-        internal DoorData( long id, DoorType type, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Door, id, position, rotation, scale, obj )
+                                  
+        internal DoorData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Door, id, position, rotation, scale, obj )
         {
-            Type = type;
+            Type = DoorType.Door;
         }
 
         public void SetDoorType( DoorType type )

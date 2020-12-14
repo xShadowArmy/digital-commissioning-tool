@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects/" 
-           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects/"
+           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources" 
+           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources"
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
@@ -10,11 +10,45 @@
   <xs:attribute name="count" type="xs:unsignedLong"/>
   <xs:attribute name="id" type="xs:unsignedLong"/>
   <xs:attribute name="idRef" type="xs:unsignedLong"/>  
+  <xs:attribute name="itemName" type="xs:string"/>
+  <xs:attribute name="itemWeight" type="xs:double"/>  
+  <xs:attribute name="itemCount" type="xs:unsignedLong"/>
+  <xs:attribute name="slotCount" type="xs:unsignedLong"/>    
   <xs:attribute name="x" type="xs:double"/>
   <xs:attribute name="y" type="xs:double"/>
   <xs:attribute name="z" type="xs:double"/>
-  <xs:attribute name="type" type="xs:string"/>
+  
+  <xs:attribute name="type">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="[Dd]oor"/>
+			<xs:enumeration value="[Gg]ate"/>
+		</xs:restriction>
+	</xs:simpleType>
+  </xs:attribute>
 
+  <xs:attribute name="wallClass">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+		<xs:enumeration value="[Ii]nner"/>
+		<xs:enumeration value="[Oo]ter"/>
+		<xs:enumeration value="[Uu]ndefined"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  
+  <xs:attribute name="face">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+		<xs:enumeration value="[Nn]orth"/>
+		<xs:enumeration value="[Ee]ast"/>
+		<xs:enumeration value="[Ss]outh"/>
+		<xs:enumeration value="[Ww]est"/>
+		<xs:enumeration value="[Uu]ndefined"/>
+		</xs:restriction>
+	  </xs:simpleType>
+  </xs:attribute>
+   
 <!-- definition of Complex elements -->
   <xs:element name="Position">
     <xs:complexType>
@@ -50,6 +84,15 @@
     </xs:complexType>	
   </xs:element>
 
+  <xs:element name="Floors">
+    <xs:complexType>
+      <xs:sequence>
+		<xs:element ref="Floor" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="count" use="required"/>
+    </xs:complexType>	
+  </xs:element>
+
   <xs:element name="Wall">
     <xs:complexType>
       <xs:sequence>
@@ -57,7 +100,9 @@
         <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
       </xs:sequence>
-      <xs:attribute ref="id" use="required"/>
+	    <xs:attribute ref="face" use="required"/>
+      <xs:attribute ref="doorClass" use="required"/>	  
+      <xs:attribute ref="id" use="required"/>  
     </xs:complexType>
   </xs:element>
   
@@ -128,6 +173,9 @@
         <xs:element ref="Rotation" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="Scale" minOccurs="1" maxOccurs="1"/>
       </xs:sequence>
+	  <xs:attribute ref="itemName" use="required"/>
+	  <xs:attribute ref="ItemWeight" use="required"/>
+	  <xs:attribute ref="itemCount" use="required"/>
       <xs:attribute ref="idRef" use="required"/>
     </xs:complexType>
   </xs:element>
@@ -147,6 +195,7 @@
         <xs:element ref="Transform" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="Items" minOccurs="1" maxOccurs="1"/>
       </xs:sequence>
+	  <xs:attribute ref="slotCount" use="required"/>
       <xs:attribute ref="id" use="required"/>
     </xs:complexType>
   </xs:element>
@@ -163,7 +212,8 @@
   <xs:element name="ProjectWarehouse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="Size" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Floors" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Walls" minOccurs="1" maxOccurs="1"/>        
         <xs:element ref="Windows" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="Doors" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="StorageRecks" minOccurs="1" maxOccurs="1"/>

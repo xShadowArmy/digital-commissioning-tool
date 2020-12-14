@@ -23,34 +23,22 @@ namespace AppData.Warehouse
 
         public void GenerateWall()
         {
-            int j = 0;
-
             Vector3 wallScale = new Vector3( 1f, 3.2f, 0.2f );
             Quaternion nsWallRotation = Quaternion.Euler( 0f, 90f, 0f );
             Quaternion ewWallRotation = Quaternion.Euler( 0f, 0f, 0f );
             
-            // North wall
-            for ( int i = 0; i < 40; i++ )
+            // NorthSouth wall
+            for ( int i = 0; i < WallsNorth.Length; i++ )
             {
-                Walls[j++] = new ObjectTransformation( new Vector3( xOffset + 0f, yOffset + 0f, zOffset + 1f + i ), nsWallRotation, wallScale );
+                WallsNorth[i] = new ObjectTransformation( new Vector3( xOffset + 0f, yOffset + 0f, zOffset + 1f + i ), nsWallRotation, wallScale );
+                WallsSouth[i] = new ObjectTransformation( new Vector3( xOffset + 50f, yOffset + 0f, zOffset + 40.2f - i ), nsWallRotation, wallScale );
             }
 
-            // East wall
-            for ( int i = 0; i < 50; i++ )
+            // EastWest wall
+            for ( int i = 0; i < WallsEast.Length; i++ )
             {
-                Walls[j++] = new ObjectTransformation( new Vector3( xOffset + 0.4f + i, yOffset + 0f, zOffset + 40.6f ), ewWallRotation, wallScale );
-            }
-
-            // South wall
-            for ( int i = 0; i < 40; i++ )
-            {
-                Walls[j++] = new ObjectTransformation( new Vector3( xOffset + 50f, yOffset + 0f, zOffset + 40.2f - i ), nsWallRotation, wallScale );
-            }
-
-            // West wall
-            for ( int i = 0; i < 50; i++ )
-            {
-                Walls[j++] = new ObjectTransformation( new Vector3( xOffset + 49.6f - i, yOffset + 0f, zOffset + 0.6f ), ewWallRotation, wallScale );
+                WallsEast[i] = new ObjectTransformation( new Vector3( xOffset + 0.4f + i, yOffset + 0f, zOffset + 40.6f ), ewWallRotation, wallScale );
+                WallsWest[i] = new ObjectTransformation( new Vector3( xOffset + 49.6f - i, yOffset + 0f, zOffset + 0.6f ), ewWallRotation, wallScale );
             }
         }
 
@@ -69,7 +57,11 @@ namespace AppData.Warehouse
         public override void StartGeneration()
         {
             Floor = new ObjectTransformation[2];
-            Walls = new ObjectTransformation[180];
+            WallsNorth = new ObjectTransformation[40];
+            WallsEast = new ObjectTransformation[50];
+            WallsSouth = new ObjectTransformation[40];
+            WallsWest = new ObjectTransformation[50];
+            WallsInner = new ObjectTransformation[0];
             Windows = new ObjectTransformation[0];
             Doors = new ObjectTransformation[0];
             StorageRacks = new ObjectTransformation[0];

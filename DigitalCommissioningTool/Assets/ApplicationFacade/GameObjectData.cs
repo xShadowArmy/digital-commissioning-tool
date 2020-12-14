@@ -15,15 +15,15 @@ namespace ApplicationFacade
 
         public event GameObjectChangedEventHandler GameObjectDataChanged;
 
-        public Vector3 Position { get; protected set; }
+        public Vector3 Position { get; internal set; }
 
-        public Quaternion Rotation { get; protected set; }
+        public Quaternion Rotation { get; internal set; }
 
-        public Vector3 Scale { get; protected set; }
+        public Vector3 Scale { get; internal set; }
         
-        public GameObject Object { get; protected set; }
+        public GameObject Object { get; internal set; }
 
-        internal bool Destroyed { get; set; }
+        public bool Destroyed { get; private set; }
 
         protected GameObjectDataType ObjType { get; set; }
 

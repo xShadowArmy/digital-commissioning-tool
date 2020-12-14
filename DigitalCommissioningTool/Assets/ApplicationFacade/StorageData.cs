@@ -15,7 +15,17 @@ namespace ApplicationFacade
 
         public event StorageChangedEventHandlder StorageChanged;
 
-        private List<ItemData> Data { get; set; }
+        public int SlotCount { get; internal set; }
+
+        public static int DefaultSlotCount
+        {
+            get
+            {
+                return 12;
+            }
+        }
+
+        private ItemData[] Data { get; set; }
 
         public ItemData[] GetItems
         {
@@ -25,27 +35,31 @@ namespace ApplicationFacade
             }
         }
 
-        internal StorageData() : base( GameObjectDataType.StorageReck )
+        internal StorageData( ) : base( GameObjectDataType.StorageReck )
         {
-            Data = new List<ItemData>( );
+            Data = new ItemData[DefaultSlotCount];
+            SlotCount = DefaultSlotCount;
         }
 
         internal StorageData( long id ) : base( GameObjectDataType.StorageReck, id )
         {
-            Data = new List<ItemData>( );
+            Data = new ItemData[DefaultSlotCount];
+            SlotCount = DefaultSlotCount;
         }
 
         internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale )
         {
-            Data = new List<ItemData>( );
+            Data = new ItemData[DefaultSlotCount];
+            SlotCount = DefaultSlotCount;
         }
 
         internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale, obj )
         {
-            Data = new List<ItemData>( );
+            Data = new ItemData[DefaultSlotCount];
+            SlotCount = DefaultSlotCount;
         }
 
-        internal void AddItem( ItemData item )
+        internal void AddItem( ItemData item, int slot )
         {
             if ( Destroyed )
             {
@@ -55,8 +69,22 @@ namespace ApplicationFacade
                 return;
             }
 
-            Data.Add( item );
-            OnChange( );
+            if ( slot > SlotCount )
+            {
+                LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
+
+                return;
+            }
+
+            if ( Data[slot] != null )
+            {
+                LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der bereits belegt ist!", "StorageData", "AddItem" );
+
+                return;
+            }
+
+            Data[slot] = item;
+            OnChange( this );
         }
 
         internal bool RemoveItem( ItemData item )
@@ -69,15 +97,15 @@ namespace ApplicationFacade
                 return false;
             }
 
-            for ( int i = 0; i < Data.Count; i++ )
+            for ( int i = 0; i < Data.Length; i++ )
             {
                 if ( Data[i].GetID() == item.GetID() )
                 {
-                    bool res = Data.Remove( Data[ i ] );
+                    Data[i] = null;
 
-                    OnChange( );
+                    OnChange( this );
 
-                    return res;
+                    return true;
                 }
             }
 
@@ -94,15 +122,32 @@ namespace ApplicationFacade
                 return false;
             }
 
-            for ( int i = 0; i < Data.Count; i++ )
+            for ( int i = 0; i < Data.Length; i++ )
             {
-                if ( Data[ i ].GetID() == item.GetID() )
+                if ( Data[i].GetID() == item.GetID() )
                 {
                     return true;
                 }
             }
 
             return false;
+        }
+
+        public ItemData GetItem( int slot )
+        {
+            if ( slot > SlotCount )
+            {
+                LogManager.WriteWarning( "Ein Objekt soll aus einem Slot abgefragt werden der nicht existiert!", "StorageData", "AddItem" );
+
+                return null;
+            }
+
+            if ( Data[slot] == null )
+            {
+                return null;
+            }
+
+            return Data[slot];
         }
 
         public ItemData GetItem( long id )
@@ -115,7 +160,7 @@ namespace ApplicationFacade
                 return null;
             }
 
-            for ( int i = 0; i < Data.Count; i++ )
+            for ( int i = 0; i < Data.Length; i++ )
             {
                 if ( Data[i].GetID() == id )
                 {
@@ -136,9 +181,9 @@ namespace ApplicationFacade
                 return null;
             }
 
-            for ( int i = 0; i < Data.Count; i++ )
+            for ( int i = 0; i < Data.Length; i++ )
             {
-                if ( Data[ i ].Object == obj )
+                if ( Data[i].Object == obj )
                 {
                     return Data[ i ];
                 }
@@ -146,10 +191,72 @@ namespace ApplicationFacade
 
             return null;
         }
+        
+        public int GetSlot( GameObject obj )
+        {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
 
-        protected new virtual void OnChange()
+                return -1;
+            }
+
+            for ( int i = 0; i < Data.Length; i++ )
+            {
+                if ( Data[i].Object == obj )
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public int GetSlot( ItemData item )
+        {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return -1;
+            }
+
+            for ( int i = 0; i < Data.Length; i++ )
+            {
+                if ( Data[i].GetID() == item.GetID() )
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public void ChangeSlotCount( int slots )
+        {
+            ItemData[] tmp = Data;
+
+            SlotCount = slots;
+
+            Data = new ItemData[slots];
+
+            for( int i = 0; i < Data.Length; i++ )
+            {
+                if ( i < tmp.Length )
+                {
+                    Data[i] = tmp[i];
+                }
+            }
+
+            OnChange( );
+        }
+        
+        protected virtual void OnChange( StorageData data )
         {
             base.OnChange( );
+            StorageChanged?.Invoke( data );
         }
     }
 }

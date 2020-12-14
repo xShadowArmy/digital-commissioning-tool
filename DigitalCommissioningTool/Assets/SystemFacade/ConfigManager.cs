@@ -98,7 +98,7 @@ namespace SystemFacade
         }
 
         /// <summary>
-        /// Speicher ein Objekt mit eindeutigen Schlüssel.
+        /// Speichert ein Objekt mit eindeutigen Schlüssel.
         /// </summary>
         /// <param name="key">Ein eindeutiger Schlüssel.</param>
         /// <param name="data">Die Daten die gespeichert werden sollen.</param>
@@ -108,7 +108,7 @@ namespace SystemFacade
         {
             return Handler.StoreData( key, data, overwrite );
         }
-
+        
         /// <summary>
         /// Lädt die Daten mit dem angegebenen Schlüssel.
         /// </summary>
@@ -168,6 +168,16 @@ namespace SystemFacade
         public void OpenConfigFile( string name, bool create = false )
         {
             Handler.OpenConfigFile( name, create );
+        }
+
+        /// <summary>
+        /// Öffnet eine Konfigurations Datei.
+        /// </summary>
+        /// <param name="name">Der Name der Konfigurationsdatei.</param>
+        /// <param name="create">Gibt an ob die Konfigurations Datei erstellt werden soll.</param>
+        public void OpenConfigFile( string path, string name, bool create = false )
+        {
+            Handler.OpenConfigFile( path, name, create );
         }
 
         /// <summary>

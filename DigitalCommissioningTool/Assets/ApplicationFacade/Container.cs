@@ -38,7 +38,7 @@ namespace ApplicationFacade
 
             ContainerData.Add( container );
 
-            Data.Container.Add( new ProjectStorageData( container.GetID( ), new ProjectTransformationData( position, rotation, scale ) ) );
+            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.SlotCount, new ProjectTransformationData( position, rotation, scale ) ) );
 
             OnSContainerCreated( container );
 
@@ -54,7 +54,7 @@ namespace ApplicationFacade
 
             ContainerData.Add( container );
 
-            Data.Container.Add( new ProjectStorageData( container.GetID( ), new ProjectTransformationData( container.Position, container.Rotation, container.Scale ) ) );
+            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.SlotCount, new ProjectTransformationData( container.Position, container.Rotation, container.Scale ) ) );
         }
 
         public bool RemoveContainer( StorageData container )
@@ -114,13 +114,13 @@ namespace ApplicationFacade
             return null;
         }
 
-        public ItemData CreateContainerItem( Vector3 position, Quaternion rotation, Vector3 scale, StorageData container )
+        public ItemData CreateContainerItem( Vector3 position, Quaternion rotation, Vector3 scale, StorageData container, int slot )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "CreateContainerItem" );
 
-            ItemData item = new ItemData( 0, 0, position, rotation, scale );
+            ItemData item = new ItemData( 0 );
 
-            container.AddItem( item );
+            container.AddItem( item, slot );
             item.SetParent( container );
 
             for ( int i = 0; i < Data.Container.Count; i++ )
@@ -130,7 +130,7 @@ namespace ApplicationFacade
                     item.GameObjectDataChanged += GameObjectHasChanged;
                     item.ItemChanged += ContainerItemHasChanged;
 
-                    Data.Container[ i ].Items.Add( new ProjectItemData( 0, new ProjectTransformationData( position, rotation, scale ) ) );
+                    Data.Container[ i ].Items.Add( new ProjectItemData( item.GetID(), item.Count, item.Weight, item.Name, new ProjectTransformationData( position, rotation, scale ) ) );
 
                     return item;
                 }
@@ -141,11 +141,11 @@ namespace ApplicationFacade
             return item;
         }
 
-        public void AddItemToContainer( StorageData container, ItemData item )
+        public void AddItemToContainer( StorageData container, ItemData item, int slot )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "AddItemToContainer" );
                        
-            container.AddItem( item );
+            container.AddItem( item, slot );
             item.SetParent( container );
 
             for ( int i = 0; i < Data.Container.Count; i++ )
@@ -155,7 +155,7 @@ namespace ApplicationFacade
                     item.GameObjectDataChanged += GameObjectHasChanged;
                     item.ItemChanged += ContainerItemHasChanged;
 
-                    Data.Container[ i ].Items.Add( new ProjectItemData( item.GetID( ), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                    Data.Container[ i ].Items.Add( new ProjectItemData( item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
 
                     return;
                 }
@@ -251,7 +251,11 @@ namespace ApplicationFacade
                                                                                         storage.GetItems[ storage.GetItems.Length - 1 ].Rotation,
                                                                                         storage.GetItems[ storage.GetItems.Length - 1 ].Scale );
 
-                        Data.Container[ i ].Items.Add( new ProjectItemData( storage.GetItems[ storage.GetItems.Length - 1 ].GetID( ), data ) );
+                        Data.Container[i].Items.Add( new ProjectItemData( storage.GetItems[storage.GetItems.Length - 1].GetID( ),
+                                                       storage.GetItems[storage.GetItems.Length - 1].Count,
+                                                       storage.GetItems[storage.GetItems.Length - 1].Weight,
+                                                       storage.GetItems[storage.GetItems.Length - 1].Name,
+                                                       data ) );
 
                         break;
                     }
@@ -281,7 +285,7 @@ namespace ApplicationFacade
                     else
                     {
                         ProjectItemData[ ] items = Data.Container[ i ].GetItems;
-                        ProjectStorageData data = new ProjectStorageData( storage.GetID( ), new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) );
+                        ProjectStorageData data = new ProjectStorageData( storage.GetID( ), Data.Container[i].SlotCount, new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) );
 
                         foreach ( ProjectItemData item in items )
                         {
@@ -301,27 +305,27 @@ namespace ApplicationFacade
         {
             LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageRackItemHasChanged" );
 
-            for ( int i = 0; i < ContainerData.Count; i++ )
-            {
-                if ( item.Parent.GetID( ) == ContainerData[ i ].GetID( ) )
-                {
-                    for ( int j = 0; j < Data.Container[ i ].GetItems.Length; j++ )
-                    {
-                        if ( Data.Container[ i ].GetItems[ j ].IDRef == item.GetID( ) )
-                        {
-                            ProjectTransformationData data = new ProjectTransformationData( item.Position, item.Rotation, item.Scale );
-
-                            Data.Container[ i ].Items.Remove( Data.Container[ i ].GetItems[ j ] );
-                            Data.Container[ i ].Items.Insert( j, new ProjectItemData( item.GetID( ), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
-
-                            break;
-                        }
-                    }
-
-                    break;
-                }
-            }
-        }
+           // for ( int i = 0; i < ContainerData.Count; i++ )
+           // {
+           //     if ( item.Parent.GetID( ) == ContainerData[ i ].GetID( ) )
+           //     {
+           //         for ( int j = 0; j < Data.Container[ i ].GetItems.Length; j++ )
+           //         {
+           //             if ( Data.Container[ i ].GetItems[ j ].IDRef == item.GetID( ) )
+           //             {
+           //                 ProjectTransformationData data = new ProjectTransformationData( item.Position, item.Rotation, item.Scale );
+           //
+           //                 Data.Container[ i ].Items.Remove( Data.Container[ i ].GetItems[ j ] );
+           //                 Data.Container[ i ].Items.Insert( j, new ProjectItemData( item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+           //
+           //                 break;
+           //             }
+           //         }
+           //
+           //         break;
+           //     }
+           // }
+        }  //
         
         protected virtual void OnSContainerCreated( StorageData data )
         {

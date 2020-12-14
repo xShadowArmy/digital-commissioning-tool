@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects/" 
-           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Projects/"
+           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources" 
+           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources"
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
@@ -17,9 +17,9 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Name" maxOccurs="1" minOccurs="1"/>
-		    <xs:element ref="Path" maxOccurs="1" minOccurs="1"/>
-		    <xs:element ref="DateCreated" maxOccurs="1" minOccurs="1"/>
-		    <xs:element ref="DateModified" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="Path" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="DateCreated" maxOccurs="1" minOccurs="1"/>
+		<xs:element ref="DateModified" maxOccurs="1" minOccurs="1"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

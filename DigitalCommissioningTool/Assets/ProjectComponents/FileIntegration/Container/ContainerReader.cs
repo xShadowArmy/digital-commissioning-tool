@@ -50,10 +50,11 @@ namespace ProjectComponents.FileIntegration
                 for ( int i = 0; i < storageCount; i++ )
                 {
                     long id = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
-                    
+                    int slotCount = int.Parse( nav.GetAttribute( "slotCount", xmlns ) );
+
                     nav.MoveToFirstChild( );
 
-                    data = new ProjectStorageData( id, ReadTransformation( nav, xmlns ) );
+                    data = new ProjectStorageData( id, slotCount, ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
 
@@ -73,7 +74,12 @@ namespace ProjectComponents.FileIntegration
 
                     for ( int j = 0; j < itemCount; j++ )
                     {
-                        item = new ProjectItemData( long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer ), ReadTransformation( nav, xmlns ) );
+                        long idRef = long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer );
+                        string itemName = nav.GetAttribute( "itemName", xmlns );
+                        double weight = double.Parse( nav.GetAttribute( "itemWeight", xmlns ), NumberStyles.Number );
+                        int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ), NumberStyles.Integer );
+
+                        item = new ProjectItemData( idRef, count, weight, itemName, ReadTransformation( nav, xmlns ) );
                         
                         nav.MoveToNext( );
 

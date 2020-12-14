@@ -128,6 +128,8 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.AppendChildElement( "xs", "Wall", xmlns, "" );
                         nav.MoveToChild( "Wall", xmlns );
+                        nav.CreateAttribute( "xs", "face", xmlns, data.Walls[i].Face );
+                        nav.CreateAttribute( "xs", "wallClass", xmlns, data.Walls[i].Class );
                         nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
                     }
 
@@ -135,6 +137,8 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.InsertElementAfter( "xs", "Wall", xmlns, "" );
                         nav.MoveToNext( );
+                        nav.CreateAttribute( "xs", "face", xmlns, data.Walls[i].Face );
+                        nav.CreateAttribute( "xs", "wallClass", xmlns, data.Walls[i].Class );
                         nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
                     }
 
@@ -272,6 +276,9 @@ namespace ProjectComponents.FileIntegration
                         {
                             nav.AppendChildElement( "xs", "Item", xmlns, "" );
                             nav.MoveToChild( "Item", xmlns );
+                            nav.CreateAttribute( "xs", "itemName", xmlns, data.StorageRacks[i].GetItems[j].Name );
+                            nav.CreateAttribute( "xs", "itemWeight", xmlns, data.StorageRacks[i].GetItems[j].Weight.ToString( ) );
+                            nav.CreateAttribute( "xs", "itemCount", xmlns, data.StorageRacks[i].GetItems[j].Count.ToString( ) );
                             nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems[ j ].IDRef.ToString( ) );
                         }
 
@@ -279,6 +286,9 @@ namespace ProjectComponents.FileIntegration
                         {
                             nav.InsertElementAfter( "xs", "Item", xmlns, "" );
                             nav.MoveToNext( );
+                            nav.CreateAttribute( "xs", "itemName", xmlns, data.StorageRacks[i].GetItems[j].Name );
+                            nav.CreateAttribute( "xs", "itemWeight", xmlns, data.StorageRacks[i].GetItems[j].Weight.ToString( ) );
+                            nav.CreateAttribute( "xs", "itemCount", xmlns, data.StorageRacks[i].GetItems[j].Count.ToString( ) );
                             nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].GetItems[ j ].IDRef.ToString( ) );
                         }
                         

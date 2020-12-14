@@ -217,77 +217,80 @@ namespace ApplicationFacade
         {
             for( int i = 0; i < iwarehouse.Floor.Count; i++ )
             {
-                FloorData floor = new FloorData( iwarehouse.Floor[ i ].ID );
+                FloorData floor = new FloorData( iwarehouse.Floor[i].ID )
+                {
+                    Position = iwarehouse.Floor[i].Transformation.Position,
+                    Rotation = iwarehouse.Floor[i].Transformation.Rotation,
+                    Scale    = iwarehouse.Floor[i].Transformation.Scale
+                };
 
-                floor.SetPosition( iwarehouse.Floor[ i ].Transformation.Position );
-                floor.SetRotation( iwarehouse.Floor[ i ].Transformation.Rotation );
-                floor.SetScale( iwarehouse.Floor[ i ].Transformation.Scale );
-
-                warehouse.CreateFloor( floor.Position, floor.Rotation, floor.Scale );
+                warehouse.AddFloor( floor );
             }
 
             for( int i = 0; i < iwarehouse.Walls.Count; i++ )
             {
-                WallData wall = new WallData( iwarehouse.Walls[i].ID );
+                WallData wall = new WallData( iwarehouse.Walls[i].ID )
+                {
+                    Position = iwarehouse.Walls[i].Transformation.Position,
+                    Rotation = iwarehouse.Walls[i].Transformation.Rotation,
+                    Scale = iwarehouse.Walls[i].Transformation.Scale,
+                    Face  =  (WallFace)Enum.Parse( typeof( WallFace ), iwarehouse.Walls[i].Face ),
+                    Class = (WallClass)Enum.Parse( typeof( WallClass ), iwarehouse.Walls[i].Class )
+                };
 
-                wall.SetPosition( iwarehouse.Walls[ i ].Transformation.Position );
-                wall.SetRotation( iwarehouse.Walls[ i ].Transformation.Rotation );
-                wall.SetScale( iwarehouse.Walls[ i ].Transformation.Scale );
-
-                warehouse.CreateWall( wall.Position, wall.Rotation, wall.Scale );
+                warehouse.AddWall( wall );
             }
 
             for ( int i = 0; i < iwarehouse.Windows.Count; i++ )
             {
-                WindowData window = new WindowData( iwarehouse.Windows[ i ].ID );
-
-                window.SetPosition( iwarehouse.Windows[ i ].Transformation.Position );
-                window.SetRotation( iwarehouse.Windows[ i ].Transformation.Rotation );
-                window.SetScale( iwarehouse.Windows[ i ].Transformation.Scale );
+                WindowData window = new WindowData( iwarehouse.Windows[ i ].ID )
+                {
+                    Position = iwarehouse.Windows[i].Transformation.Position,
+                    Rotation = iwarehouse.Windows[i].Transformation.Rotation,
+                    Scale = iwarehouse.Windows[i].Transformation.Scale
+                };
 
                 warehouse.AddWindow( window );
             }
 
             for ( int i = 0; i < iwarehouse.Doors.Count; i++ )
             {
-                DoorData door;
-
-                if ( iwarehouse.Doors[i].Type.ToLower().Equals( "door" ) )
+                DoorData door = new DoorData( iwarehouse.Doors[i].ID )
                 {
-                    door = new DoorData( iwarehouse.Doors[ i ].ID, DoorType.Door );
-                }
-
-                else
-                {
-                    door = new DoorData( iwarehouse.Doors[ i ].ID, DoorType.Gate );
-                }
-
-                door.SetPosition( iwarehouse.Doors[ i ].Transformation.Position );
-                door.SetRotation( iwarehouse.Doors[ i ].Transformation.Rotation );
-                door.SetScale( iwarehouse.Doors[ i ].Transformation.Scale );
+                    Position = iwarehouse.Doors[i].Transformation.Position,
+                    Rotation = iwarehouse.Doors[i].Transformation.Rotation,
+                    Scale    = iwarehouse.Doors[i].Transformation.Scale,
+                    Type     = (DoorType) Enum.Parse( typeof( DoorType ), iwarehouse.Doors[i].Type )
+                };
 
                 warehouse.AddDoor( door );
             }
 
             for ( int i = 0; i < iwarehouse.StorageRacks.Count; i++ )
             {
-                StorageData data = new StorageData( iwarehouse.StorageRacks[ i ].ID );
-
-                data.SetPosition( iwarehouse.StorageRacks[ i ].Transformation.Position );
-                data.SetRotation( iwarehouse.StorageRacks[ i ].Transformation.Rotation );
-                data.SetScale( iwarehouse.StorageRacks[ i ].Transformation.Scale );
+                StorageData data = new StorageData( iwarehouse.StorageRacks[ i ].ID )
+                {
+                    Position = iwarehouse.StorageRacks[i].Transformation.Position,
+                    Rotation = iwarehouse.StorageRacks[i].Transformation.Rotation,
+                    Scale = iwarehouse.StorageRacks[i].Transformation.Scale,
+                    SlotCount = iwarehouse.StorageRacks[i].SlotCount
+                };
 
                 warehouse.AddStorageRack( data );
 
                 for ( int j = 0; j < iwarehouse.StorageRacks[i].GetItems.Length; j++ )
                 {
-                    ItemData item = new ItemData( iwarehouse.StorageRacks[ i ].GetItems[ j ].IDRef, 0 );
-                    
-                    item.SetPosition( iwarehouse.StorageRacks[ i ].GetItems[j].Transformation.Position );
-                    item.SetRotation( iwarehouse.StorageRacks[ i ].GetItems[ j ].Transformation.Rotation );
-                    item.SetScale( iwarehouse.StorageRacks[ i ].GetItems[ j ].Transformation.Scale );
+                    ItemData item = new ItemData( iwarehouse.StorageRacks[ i ].GetItems[ j ].IDRef )
+                    {
+                        Position = iwarehouse.StorageRacks[i].Transformation.Position,
+                        Rotation = iwarehouse.StorageRacks[i].Transformation.Rotation,
+                        Scale = iwarehouse.StorageRacks[i].Transformation.Scale,
+                        Name = iwarehouse.StorageRacks[i].GetItems[j].Name,
+                        Weight = iwarehouse.StorageRacks[i].GetItems[j].Weight,
+                        Count = iwarehouse.StorageRacks[i].GetItems[j].Count
+                    };
 
-                    warehouse.AddItemToStorageRack( data, item );
+                    warehouse.AddItemToStorageRack( data, item, j );
                 }
             }
         }
@@ -296,23 +299,29 @@ namespace ApplicationFacade
         {
             for( int i = 0; i < icontainer.Container.Count; i++ )
             {
-                StorageData data = new StorageData( icontainer.Container[i].ID );
-
-                data.SetPosition( icontainer.Container[ i ].Transformation.Position );
-                data.SetRotation( icontainer.Container[ i ].Transformation.Rotation );
-                data.SetScale( icontainer.Container[ i ].Transformation.Scale );
+                StorageData data = new StorageData( icontainer.Container[i].ID )
+                {
+                    Position = icontainer.Container[i].Transformation.Position,
+                    Rotation = icontainer.Container[i].Transformation.Rotation,
+                    Scale = icontainer.Container[i].Transformation.Scale,
+                    SlotCount = icontainer.Container[i].SlotCount
+                };
 
                 container.AddContainer( data );
 
                 for ( int j = 0; j < icontainer.Container[ i ].GetItems.Length; j++ )
                 {
-                    ItemData item = new ItemData( icontainer.Container[ i ].GetItems[ j ].IDRef, 0 );
+                    ItemData item = new ItemData( icontainer.Container[ i ].GetItems[ j ].IDRef )
+                    {
+                        Position = icontainer.Container[i].GetItems[j].Transformation.Position,
+                        Rotation = icontainer.Container[i].GetItems[j].Transformation.Rotation,
+                        Scale = icontainer.Container[i].GetItems[j].Transformation.Scale,
+                        Name = icontainer.Container[i].GetItems[j].Name,
+                        Weight = icontainer.Container[i].GetItems[j].Weight,
+                        Count = icontainer.Container[i].GetItems[j].Count
+                    };
 
-                    item.SetPosition( icontainer.Container[ i ].GetItems[ j ].Transformation.Position );
-                    item.SetRotation( icontainer.Container[ i ].GetItems[ j ].Transformation.Rotation );
-                    item.SetScale( icontainer.Container[ i ].GetItems[ j ].Transformation.Scale );
-
-                    container.AddItemToContainer( data, item );
+                    container.AddItemToContainer( data,  item, j );
                 }
             }
         }
@@ -323,29 +332,67 @@ namespace ApplicationFacade
 
             size.StartGeneration( );
 
+            //Floor
             foreach( ObjectTransformation data in size.GetFloor() )
             {
                 warehouse.CreateFloor( data.Position, data.Rotation, data.Scale );
             }
 
-            foreach ( ObjectTransformation data in size.GetWalls( ) )
+            //Walls
+
+            ObjectTransformation[] n = size.GetNorthWalls();
+            ObjectTransformation[] e = size.GetEastWalls();
+            ObjectTransformation[] s = size.GetSouthWalls();
+            ObjectTransformation[] w = size.GetWestWalls();
+
+            foreach ( ObjectTransformation data in n )
             {
-                warehouse.CreateWall( data.Position, data.Rotation, data.Scale );
+                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.North, WallClass.Outer );
             }
 
+            warehouse.Walls[0].Object.tag = "LeftWallRim";
+            warehouse.Walls[n.Length - 1].Object.tag = "RightWallRim";
+
+            foreach ( ObjectTransformation data in e )
+            {
+                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.East, WallClass.Outer );
+            }
+
+            warehouse.Walls[n.Length].Object.tag = "LeftWallRim";
+            warehouse.Walls[e.Length + n.Length - 1].Object.tag = "RightWallRim";
+
+            foreach ( ObjectTransformation data in s )
+            {
+                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.South, WallClass.Outer );
+            }
+
+            warehouse.Walls[e.Length + n.Length].Object.tag = "LeftWallRim";
+            warehouse.Walls[s.Length + e.Length + n.Length - 1].Object.tag = "RightWallRim";
+
+            foreach ( ObjectTransformation data in w )
+            {
+                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.West, WallClass.Outer );
+            }
+
+            warehouse.Walls[s.Length + e.Length + n.Length].Object.tag = "LeftWallRim";
+            warehouse.Walls[w.Length + s.Length + e.Length + n.Length - 1].Object.tag = "RightWallRim";
+
+            //Windows
             foreach ( ObjectTransformation data in size.GetWindows( ) )
             {
                 warehouse.CreateWindow( data.Position, data.Rotation, data.Scale );
             }
 
+            //Doors
             foreach ( ObjectTransformation data in size.GetDoors( ) )
             {
                 warehouse.CreateDoor( data.Position, data.Rotation, data.Scale, DoorType.Door );
             }
 
+            //StorageRacks
             foreach ( ObjectTransformation data in size.GetStorageRacks( ) )
             {
-                //warehouse.CreateStorageRack( data.Position, data.Rotation, data.Scale );
+                warehouse.CreateStorageRack( data.Position, data.Rotation, data.Scale );
             }
 
             return warehouse;

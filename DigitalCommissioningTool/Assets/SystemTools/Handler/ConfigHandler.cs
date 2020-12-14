@@ -286,6 +286,40 @@ namespace SystemTools.Handler
         }
 
         /// <summary>
+        /// Öffnet eine Konfigurations Datei.
+        /// </summary>
+        /// <param name="name">Der Name der Konfigurationsdatei.</param>
+        /// <param name="create">Gibt an ob die Konfigurations Datei erstellt werden soll.</param>
+        public void OpenConfigFile( string path, string name, bool create = false )
+        {
+            FileName = path + "\\" + name + ( ( name.EndsWith( ".xml" ) ? "" : ".xml" ) );
+
+            Logger.WriteInfo( "Oeffnen einer neuen ConfigDatei. Name: " + FileName, "ConfigHandler", "OpenConfigFile" );
+
+            if ( !File.Exists( FileName ) )
+            {
+                if ( !create )
+                {
+                    Logger.WriteLog( "Die angegebene ConfigDatei konnte nicht gefunden werden! Pfad: " + FileName, 3, true, "ConfigHandler", "OpenConfigFile" );
+                }
+
+                CreateFile( FileName );
+
+                Buffer = new ConfigBuffer( );
+                Reader = new ConfigReader( ConfigFile, Buffer, false );
+                Writer = new ConfigWriter( ConfigFile );
+
+                OpenStream = true;
+
+                return;
+            }
+
+            InitializeConfigFile( false, FileName );
+
+            OpenStream = true;
+        }
+
+        /// <summary>
         /// Schließt und Schreibt den Stream in die Datei.
         /// </summary>
         public void CloseConfigFile()

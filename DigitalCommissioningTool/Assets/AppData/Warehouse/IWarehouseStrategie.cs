@@ -7,9 +7,14 @@ namespace AppData.Warehouse
     public interface IWarehouseStrategie 
     {
         void StartGeneration();
-
+         
         ObjectTransformation[] GetFloor();
-        ObjectTransformation[] GetWalls();
+        ObjectTransformation[] GetOuterWalls();
+        ObjectTransformation[] GetInnerWalls();
+        ObjectTransformation[] GetNorthWalls();
+        ObjectTransformation[] GetEastWalls();
+        ObjectTransformation[] GetSouthWalls();
+        ObjectTransformation[] GetWestWalls();
         ObjectTransformation[] GetWindows();
         ObjectTransformation[] GetDoors();
         ObjectTransformation[] GetStorageRacks();
