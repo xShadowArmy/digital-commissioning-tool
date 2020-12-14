@@ -4,6 +4,7 @@ using UnityEngine;
 using ApplicationFacade;
 using System;
 using System.Reflection;
+using TMPro;
 
 public class KeyBindMenu : MonoBehaviour
 {
@@ -23,8 +24,8 @@ public class KeyBindMenu : MonoBehaviour
             {
                 Keys.Add(property);
                 KeyData key = (KeyData)property.GetValue(null);
-                Function.GetComponent<UnityEngine.UI.Text>().text = property.Name;
-                Key.GetComponent<UnityEngine.UI.Text>().text = key.ToString();
+                Function.GetComponent<TextMeshProUGUI>().text = property.Name;
+                Key.GetComponent<TextMeshProUGUI>().text = key.ToString();
                 GameObject item = Instantiate(template);
                 item.transform.SetParent(template.transform.parent);
                 item.SetActive(true);
@@ -39,7 +40,7 @@ public class KeyBindMenu : MonoBehaviour
     {
         int keyIndex = sender.transform.GetSiblingIndex() - 1;
         KeyData key = (KeyData)Keys[keyIndex].GetValue(null);
-        UnityEngine.UI.Text keyText = sender.transform.Find("Key").GetComponent<UnityEngine.UI.Text>();
+        TextMeshProUGUI keyText = sender.transform.Find("Key").GetComponent<TextMeshProUGUI>();
         if (activeKey == keyIndex)
         {
             keyText.text = key.ToString();
@@ -52,7 +53,7 @@ public class KeyBindMenu : MonoBehaviour
             {
                 KeyData oldKey = (KeyData)Keys[activeKey].GetValue(null);
                 Transform oldKeyText = template.transform.parent.GetChild(activeKey + 1).transform.Find("Key");
-                oldKeyText.GetComponent<UnityEngine.UI.Text>().text = oldKey.ToString();
+                oldKeyText.GetComponent<TextMeshProUGUI>().text = oldKey.ToString();
             }
             activeKey = keyIndex;
         }
@@ -68,7 +69,7 @@ public class KeyBindMenu : MonoBehaviour
             KeyManager.SaveKeyConfiguration();
             KeyData Key = (KeyData)Keys[activeKey].GetValue(null);
             Transform KeyText = template.transform.parent.GetChild(activeKey + 1).transform.Find("Key");
-            KeyText.GetComponent<UnityEngine.UI.Text>().text = Key.ToString();
+            KeyText.GetComponent<TextMeshProUGUI>().text = Key.ToString();
             activeKey = -1;
         }
     }

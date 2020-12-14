@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using SystemFacade;
+using TMPro;
 using UnityEngine;
 
 public class ResourceHandler : MonoBehaviour
@@ -12,7 +13,17 @@ public class ResourceHandler : MonoBehaviour
         GameObject[] labels = GameObject.FindGameObjectsWithTag("Resource");
         foreach (GameObject g in labels)
         {
-            string text = g.GetComponent<UnityEngine.UI.Text>().text;
+            string text = "";
+            TextMeshProUGUI tmpText = g.GetComponent<TextMeshProUGUI>();
+            if (tmpText == null)
+            {
+                UnityEngine.UI.Text uiText = g.GetComponent<UnityEngine.UI.Text>();
+                text = uiText.text;
+            }
+            else
+            {
+                text = tmpText.text;
+            }
             if (!resources.ContainsKey(g) || text.StartsWith("<") && text.EndsWith(">"))
             {
                 resources[g] = text.TrimStart('<').TrimEnd('>');
@@ -27,13 +38,21 @@ public class ResourceHandler : MonoBehaviour
         {
             if (item.Key != null)
             {
-                item.Key.GetComponent<UnityEngine.UI.Text>().text = StringResourceManager.LoadString("@" + item.Value);
+                TextMeshProUGUI tmpText = item.Key.GetComponent<TextMeshProUGUI>();
+                if (tmpText == null)
+                {
+                    item.Key.GetComponent<UnityEngine.UI.Text>().text = StringResourceManager.LoadString("@" + item.Value);
+                }
+                else
+                {
+                    tmpText.text = StringResourceManager.LoadString("@" + item.Value);
+                }
             }
             else
             {
                 deletedResources.Add(item.Key);
             }
-            
+
         }
         foreach (GameObject g in deletedResources)
         {

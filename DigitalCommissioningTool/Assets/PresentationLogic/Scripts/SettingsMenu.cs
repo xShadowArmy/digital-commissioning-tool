@@ -32,11 +32,17 @@ public class SettingsMenu : MonoBehaviour
     }
     void InitLanguage()
     {
-        foreach (Dropdown.OptionData data in dropdownLanguage.options)
+        for (int i = 0; i < dropdownLanguage.options.Count; i++)
         {
-            string key = data.text.TrimStart('<').TrimEnd('>');
-            string localizedText = StringResourceManager.LoadString("@" + key);
-            data.text = localizedText;
+            switch (i)
+            {
+                case 0:
+                    dropdownLanguage.options[i].text = StringResourceManager.LoadString("@German");
+                    break;
+                case 1:
+                    dropdownLanguage.options[i].text = StringResourceManager.LoadString("@English");
+                    break;
+            }
         }
     }
 
@@ -83,14 +89,15 @@ public class SettingsMenu : MonoBehaviour
         {
             case 0:
                 StringResourceManager.SelectLanguage(SystemLanguage.German);
-                dropdownLanguage.captionText.text = "<German>";
+                dropdownLanguage.captionText.text = StringResourceManager.LoadString("@German");
                 break;
             case 1:
                 StringResourceManager.SelectLanguage(SystemLanguage.English);
-                dropdownLanguage.captionText.text = "<English>";
+                dropdownLanguage.captionText.text = StringResourceManager.LoadString("@English");
                 break;
         }
         ResourceHandler.ReplaceResources();
+        InitLanguage();
     }
     public void Back()
     {
