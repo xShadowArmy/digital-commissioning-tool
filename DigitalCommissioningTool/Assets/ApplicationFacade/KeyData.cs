@@ -30,5 +30,15 @@ namespace ApplicationFacade
             Code = (KeyCode)Enum.Parse( typeof( KeyCode ), storage.GetValueAsString() );
             ShiftNeeded = storage.GetValueAsBool( );
         }
+
+        public override string ToString()
+        {
+            string keyString = "";
+            if (this.ShiftNeeded)
+            {
+                keyString = "Shift + ";
+            }
+            return keyString += this.Code.ToString();
+        }
     }
 }

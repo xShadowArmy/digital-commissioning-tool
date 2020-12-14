@@ -8,13 +8,14 @@ using ApplicationFacade;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel;
+    public GameObject SettingsPanel;
     public GameObject NewProjectPanel;
     public GameObject OpenProjectPanel;
+    public GameObject KeyBindPanel;
     // Start is called before the first frame update
     void Start()
     {
-        settingsPanel.GetComponent<SettingsMenu>().LoadSettings();
+        SettingsPanel.GetComponent<SettingsMenu>().LoadSettings();
         ResourceHandler.ReplaceResources();
     }
     
@@ -29,7 +30,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Settings()
     {
-        settingsPanel.SetActive(true);
+        SettingsPanel.SetActive(true);
         gameObject.SetActive(false);
     }
     public void Exit()

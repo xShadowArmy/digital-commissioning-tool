@@ -63,4 +63,7 @@
     <xs:string xs:name="AddDoorText" xs:id="21">
         <xs:value>Tür hinzufügen</xs:value>
     </xs:string>
+    <xs:string xs:name="KeyBinds" xs:id="22">
+        <xs:value>Tastenbelegung</xs:value>
+    </xs:string>
 </xs:StringResources>

@@ -97,6 +97,11 @@ public class SettingsMenu : MonoBehaviour
         gameObject.transform.parent.Find("MainPanel").gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
+    public void KeyBinds()
+    {
+        gameObject.transform.parent.Find("KeyBindPanel").gameObject.SetActive(true);
+        gameObject.SetActive(false);
+    }
 }
 
 
