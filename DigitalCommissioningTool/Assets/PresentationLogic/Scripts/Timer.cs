@@ -20,6 +20,10 @@ public class Timer : MonoBehaviour
     [SerializeField] private Button resetBtn;
     [SerializeField] private ModeHandler mode;
     [SerializeField] private GameObject panelTimer;
+    
+    public delegate void TimerEventHandler(float currentTime);
+
+    public static event TimerEventHandler TimerStopped;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +75,10 @@ public class Timer : MonoBehaviour
     {
         clicked = !clicked;
         timerBtn.text = clicked ? "Stop" : "Resume";
+        if (timerBtn.text.Equals("Resume") && currentTime > 0)
+        {
+            TimerStopped?.Invoke(currentTime);
+        }
     }
 
     //Wird von Rest Button referenziert
