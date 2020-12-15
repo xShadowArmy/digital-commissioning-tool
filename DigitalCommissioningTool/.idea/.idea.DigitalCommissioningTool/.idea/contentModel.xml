@@ -4,29 +4,54 @@
     <e p="C:\Users\Jonas\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
     <e p="C:\Users\Jonas\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_DigitalCommissioningTool.2069852528.00" t="ExcludeRecursive" />
     <e p="D:\GitHub\digital-commissioning-tool\DigitalCommissioningTool" t="IncludeRecursive">
+      <e p="AppData.csproj" t="IncludeRecursive" />
       <e p="ApplicationFacade.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AppData" t="Include">
+          <e p="AppData.asmdef" t="Include" />
+          <e p="Warehouse" t="Include">
+            <e p="IWarehouseStrategie.cs" t="Include" />
+            <e p="LargeWarehouseStrategie.cs" t="Include" />
+            <e p="MediumWarehouseStrategie.cs" t="Include" />
+            <e p="ObjectTransformation.cs" t="Include" />
+            <e p="SmallWarehouseStrategie.cs" t="Include" />
+            <e p="WarehouseStrategieBase.cs" t="Include" />
+          </e>
+        </e>
         <e p="ApplicationFacade" t="Include">
+          <e p="Application" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="KeyData.cs" t="Include" />
+            <e p="KeyManager.cs" t="Include" />
+            <e p="ProjectData.cs" t="Include" />
+            <e p="ProjectManager.cs" t="Include" />
+            <e p="ProjectSettings.cs" t="Include" />
+          </e>
           <e p="ApplicationFacade.asmdef" t="Include" />
-          <e p="Container.cs" t="Include" />
-          <e p="DoorData.cs" t="Include" />
-          <e p="DoorType.cs" t="Include" />
-          <e p="FloorData.cs" t="Include" />
-          <e p="GameManager.cs" t="Include" />
-          <e p="GameObjectData.cs" t="Include" />
-          <e p="GameObjectDataType.cs" t="Include" />
-          <e p="IDataIdentifier.cs" t="Include" />
-          <e p="ItemData.cs" t="Include" />
-          <e p="KeyData.cs" t="Include" />
-          <e p="KeyManager.cs" t="Include" />
-          <e p="ProjectData.cs" t="Include" />
-          <e p="ProjectManager.cs" t="Include" />
-          <e p="ProjectSettings.cs" t="Include" />
-          <e p="StorageData.cs" t="Include" />
-          <e p="WallData.cs" t="Include" />
-          <e p="Warehouse.cs" t="Include" />
-          <e p="WindowData.cs" t="Include" />
+          <e p="TimeMeasurementEntry.cs" t="Include" />
+          <e p="Warehouse" t="Include">
+            <e p="Container.cs" t="Include" />
+            <e p="Definitions" t="Include">
+              <e p="DoorType.cs" t="Include" />
+              <e p="GameObjectDataType.cs" t="Include" />
+              <e p="IDataIdentifier.cs" t="Include" />
+              <e p="WallClass.cs" t="Include" />
+              <e p="WallFace.cs" t="Include" />
+              <e p="WarehouseSize.cs" t="Include" />
+            </e>
+            <e p="Objects" t="Include">
+              <e p="DoorData.cs" t="Include" />
+              <e p="FloorData.cs" t="Include" />
+              <e p="GameObjectData.cs" t="Include" />
+              <e p="ItemData.cs" t="Include" />
+              <e p="StorageData.cs" t="Include" />
+              <e p="WallData.cs" t="Include" />
+              <e p="WindowData.cs" t="Include" />
+            </e>
+            <e p="Warehouse.cs" t="Include" />
+          </e>
         </e>
         <e p="MMI" t="Include">
           <e p="Plugins" t="Include">
@@ -43,6 +68,8 @@
             <e p="AddObjectsToWall.cs" t="Include" />
             <e p="AddStorage.cs" t="Include" />
             <e p="EditorModeCamera.cs" t="Include" />
+            <e p="KeyBindMenu.cs" t="Include" />
+            <e p="LoadSceneData.cs" t="Include" />
             <e p="MainCamera.cs" t="Include" />
             <e p="MainMenu.cs" t="Include" />
             <e p="ModeHandler.cs" t="Include" />
@@ -55,6 +82,8 @@
             <e p="SwitchWallModules.cs" t="Include" />
             <e p="TestPascal.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
+            <e p="TimeMeasurementHistory.cs" t="Include" />
+            <e p="Timer.cs" t="Include" />
             <e p="TreeView.cs" t="Include" />
             <e p="TreeViewControl" t="Include">
               <e p="Editor" t="Include">
@@ -113,6 +142,97 @@
           </e>
           <e p="ProjectComponents.asmdef" t="Include" />
         </e>
+        <e p="RuntimeGUITable" t="Include">
+          <e p="Examples" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="EnemiesManager.cs" t="Include" />
+              <e p="Enemy.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="AddRow.cs" t="Include" />
+            <e p="CellContainers" t="Include">
+              <e p="CellContainer.cs" t="Include" />
+              <e p="HeaderCellContainer.cs" t="Include" />
+              <e p="SpecialCellContainer.cs" t="Include" />
+              <e p="TableCellContainer.cs" t="Include" />
+            </e>
+            <e p="Cells" t="Include">
+              <e p="Button" t="Include">
+                <e p="AddRowButtonCell.cs" t="Include" />
+                <e p="ButtonCell.cs" t="Include" />
+                <e p="ButtonCellStyle.cs" t="Include" />
+                <e p="RemoveRowButtonCell.cs" t="Include" />
+              </e>
+              <e p="Dropdown" t="Include">
+                <e p="DropdownCell.cs" t="Include" />
+                <e p="DropdownCellStyle.cs" t="Include" />
+              </e>
+              <e p="Image" t="Include">
+                <e p="ImageCell.cs" t="Include" />
+                <e p="ImageCellStyle.cs" t="Include" />
+              </e>
+              <e p="Input" t="Include">
+                <e p="InputCell.cs" t="Include" />
+                <e p="InputCellStyle.cs" t="Include" />
+              </e>
+              <e p="InteractableCell.cs" t="Include" />
+              <e p="InteractableCellStyle.cs" t="Include" />
+              <e p="Label" t="Include">
+                <e p="LabelCell.cs" t="Include" />
+                <e p="LabelCellStyle.cs" t="Include" />
+              </e>
+              <e p="Slider" t="Include">
+                <e p="SliderCell.cs" t="Include" />
+                <e p="SliderCellStyle.cs" t="Include" />
+              </e>
+              <e p="StyleableTableCell.cs" t="Include" />
+              <e p="TableCell.cs" t="Include" />
+              <e p="TableCellStyle.cs" t="Include" />
+              <e p="Toggle" t="Include">
+                <e p="ToggleCell.cs" t="Include" />
+                <e p="ToggleCellStyle.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Columns" t="Include">
+              <e p="AddCellInfo.cs" t="Include" />
+              <e p="DeleteColumnInfo.cs" t="Include" />
+              <e p="TableColumnInfo.cs" t="Include" />
+            </e>
+            <e p="Data" t="Include">
+              <e p="MyFontData.cs" t="Include" />
+              <e p="PropertyOrFieldInfo.cs" t="Include" />
+              <e p="SortingState.cs" t="Include" />
+              <e p="UnityMemberInfo.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="CellStyleWindow.cs" t="Include" />
+              <e p="FontDataDrawer.cs" t="Include" />
+              <e p="SettingDrawer.cs" t="Include" />
+              <e p="TableColumnInfoDrawer.cs" t="Include" />
+              <e p="TableEditor.cs" t="Include" />
+              <e p="TableMenuOptions.cs" t="Include" />
+              <e p="TableStyleEditor.cs" t="Include" />
+              <e p="UnityMemberInfoDrawer.cs" t="Include" />
+            </e>
+            <e p="HeaderRow.cs" t="Include" />
+            <e p="ScrollTableContainer.cs" t="Include" />
+            <e p="Table.cs" t="Include" />
+            <e p="TableRow.cs" t="Include" />
+            <e p="TableStyle.cs" t="Include" />
+            <e p="Utils" t="Include">
+              <e p="CollectionUtils.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="EditorUtils.cs" t="Include" />
+                <e p="ReflectionUtilsEditor.cs" t="Include" />
+              </e>
+              <e p="ExpandableInputField.cs" t="Include" />
+              <e p="GameObjectUtils.cs" t="Include" />
+              <e p="ReflectionUtils.cs" t="Include" />
+              <e p="TransformUtils.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="SystemFacade" t="Include">
           <e p="ArchiveManager.cs" t="Include" />
           <e p="ConfigManager.cs" t="Include" />
@@ -143,6 +263,80 @@
             <e p="StringResourceWriter.cs" t="Include" />
           </e>
           <e p="SystemTools.asmdef" t="Include" />
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Examples &amp; Extras" t="Include">
+            <e p="Fonts" t="Include">
+              <e p="Anton OFL.txt" t="Include" />
+              <e p="Bangers - OFL.txt" t="Include" />
+              <e p="Oswald-Bold - OFL.txt" t="Include" />
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="Benchmark01.cs" t="Include" />
+              <e p="Benchmark01_UGUI.cs" t="Include" />
+              <e p="Benchmark02.cs" t="Include" />
+              <e p="Benchmark03.cs" t="Include" />
+              <e p="Benchmark04.cs" t="Include" />
+              <e p="CameraController.cs" t="Include" />
+              <e p="ChatController.cs" t="Include" />
+              <e p="DropdownSample.cs" t="Include" />
+              <e p="EnvMapAnimator.cs" t="Include" />
+              <e p="ObjectSpin.cs" t="Include" />
+              <e p="ShaderPropAnimator.cs" t="Include" />
+              <e p="SimpleScript.cs" t="Include" />
+              <e p="SkewTextExample.cs" t="Include" />
+              <e p="TeleType.cs" t="Include" />
+              <e p="TextConsoleSimulator.cs" t="Include" />
+              <e p="TextMeshProFloatingText.cs" t="Include" />
+              <e p="TextMeshSpawner.cs" t="Include" />
+              <e p="TMP_DigitValidator.cs" t="Include" />
+              <e p="TMP_ExampleScript_01.cs" t="Include" />
+              <e p="TMP_FrameRateCounter.cs" t="Include" />
+              <e p="TMP_PhoneNumberValidator.cs" t="Include" />
+              <e p="TMP_TextEventCheck.cs" t="Include" />
+              <e p="TMP_TextEventHandler.cs" t="Include" />
+              <e p="TMP_TextInfoDebugTool.cs" t="Include" />
+              <e p="TMP_TextSelector_A.cs" t="Include" />
+              <e p="TMP_TextSelector_B.cs" t="Include" />
+              <e p="TMP_UiFrameRateCounter.cs" t="Include" />
+              <e p="TMPro_InstructionOverlay.cs" t="Include" />
+              <e p="VertexColorCycler.cs" t="Include" />
+              <e p="VertexJitter.cs" t="Include" />
+              <e p="VertexShakeA.cs" t="Include" />
+              <e p="VertexShakeB.cs" t="Include" />
+              <e p="VertexZoom.cs" t="Include" />
+              <e p="WarpTextExample.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+            <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+            <e p="TMP_Bitmap.shader" t="Include" />
+            <e p="TMP_SDF Overlay.shader" t="Include" />
+            <e p="TMP_SDF SSD.shader" t="Include" />
+            <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+            <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+            <e p="TMP_SDF-Mobile SSD.shader" t="Include" />
+            <e p="TMP_SDF-Mobile.shader" t="Include" />
+            <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+            <e p="TMP_SDF-Surface.shader" t="Include" />
+            <e p="TMP_SDF.shader" t="Include" />
+            <e p="TMP_Sprite.shader" t="Include" />
+            <e p="TMPro.cginc" t="Include" />
+            <e p="TMPro_Mobile.cginc" t="Include" />
+            <e p="TMPro_Properties.cginc" t="Include" />
+            <e p="TMPro_Surface.cginc" t="Include" />
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
         </e>
         <e p="UnitTests" t="Include">
           <e p="SystemFacade" t="Include">

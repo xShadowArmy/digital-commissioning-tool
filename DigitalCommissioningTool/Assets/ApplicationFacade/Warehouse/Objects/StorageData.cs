@@ -110,7 +110,7 @@ namespace ApplicationFacade
         {
             if ( IsDestroyed( ) )
             {
-                return;
+                return false;
             }
 
             for ( int i = 0; i < Data.Length; i++ )
