@@ -19,13 +19,13 @@ namespace ApplicationFacade
 
         public WallClass Class { get; internal set; }
 
-        public static long NorthWallLength { get; internal set; }
+        public static int NorthWallLength { get; internal set; }
 
-        public static long EastWallLength { get; internal set; }
+        public static int EastWallLength { get; internal set; }
 
-        public static long SouthWallLength { get; internal set; }
+        public static int SouthWallLength { get; internal set; }
 
-        public static long WesthWallLength { get; internal set; }
+        public static int WesthWallLength { get; internal set; }
         
         internal WallData() : base( GameObjectDataType.Wall )
         {

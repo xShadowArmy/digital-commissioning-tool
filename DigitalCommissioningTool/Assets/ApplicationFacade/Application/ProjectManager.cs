@@ -12,6 +12,15 @@ namespace ApplicationFacade
 {
     public class ProjectManager
     {
+
+        public ProjectData Data { get; private set; }
+        public ProjectSettings Settings { get; private set; }
+
+        internal DataHandler      DHandler { get; set; }
+        internal SettingsHandler  SHandler { get; set; }
+        internal WarehouseHandler WHandler { get; set; }
+        internal ContainerHandler CHandler { get; set; }
+        
         public string ProjectName
         {
             get
@@ -30,14 +39,6 @@ namespace ApplicationFacade
             }
         }
 
-        public ProjectData Data { get; private set; }
-        public ProjectSettings Settings { get; private set; }
-
-        internal DataHandler      DHandler { get; set; }
-        internal SettingsHandler  SHandler { get; set; }
-        internal WarehouseHandler WHandler { get; set; }
-        internal ContainerHandler CHandler { get; set; }
-        
         public ProjectManager()
         {
         }
@@ -237,9 +238,18 @@ namespace ApplicationFacade
                     Face  =  (WallFace)Enum.Parse( typeof( WallFace ), iwarehouse.Walls[i].Face ),
                     Class = (WallClass)Enum.Parse( typeof( WallClass ), iwarehouse.Walls[i].Class )
                 };
-
+                
                 warehouse.AddWall( wall );
             }
+            
+            warehouse.Walls[0].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[WallData.NorthWallLength].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength + WallData.WesthWallLength - 1].Object.tag = "RightWallRim";
 
             for ( int i = 0; i < iwarehouse.Windows.Count; i++ )
             {
