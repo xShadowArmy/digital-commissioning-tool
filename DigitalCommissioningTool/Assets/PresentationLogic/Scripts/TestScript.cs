@@ -88,10 +88,10 @@ namespace Scripts
             //Debug.Log( "Door3 Rotation: " + "Type: " + GameManager.GameWarehouse.Doors[ 2 ].Type + " " + GameManager.GameWarehouse.Doors[ 2 ].Rotation );
             //Debug.Log( "Door3 Scale:    " + "Type: " + GameManager.GameWarehouse.Doors[ 2 ].Type + " " + GameManager.GameWarehouse.Doors[ 2 ].Scale );
             //
-            //Debug.Log( "Storage1 Itew2 Position: " + GameManager.GameWarehouse.StorageRacks[ 0 ].GetItems( )[ 1 ].Position );
-            //Debug.Log( "Storage1 Itew2 Rotation: " + GameManager.GameWarehouse.StorageRacks[ 0 ].GetItems( )[ 1 ].Rotation );
-            //Debug.Log( "Storage1 Itew2 Scale:    " + GameManager.GameWarehouse.StorageRacks[ 0 ].GetItems( )[ 1 ].Scale );
-            //Debug.Log( "Storage1 Itew2 IDRef: " + GameManager.GameWarehouse.StorageRacks[ 0 ].GetItems( )[ 1 ].GetID( ) );
+            //Debug.Log( "Storage1 Itew2 Position: " + GameManager.GameWarehouse.StorageRackList[ 0 ].GetItems( )[ 1 ].Position );
+            //Debug.Log( "Storage1 Itew2 Rotation: " + GameManager.GameWarehouse.StorageRackList[ 0 ].GetItems( )[ 1 ].Rotation );
+            //Debug.Log( "Storage1 Itew2 Scale:    " + GameManager.GameWarehouse.StorageRackList[ 0 ].GetItems( )[ 1 ].Scale );
+            //Debug.Log( "Storage1 Itew2 IDRef: " + GameManager.GameWarehouse.StorageRackList[ 0 ].GetItems( )[ 1 ].GetID( ) );
             //
             //// man.Warehouse.Doors[ 1 ].Transformation.SetPosition( new Vector3( 30f, 1f, 59.345f ) );
             //

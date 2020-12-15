@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemFacade;
 using UnityEngine;
+using System.Reflection;
 
 namespace ApplicationFacade
 {
@@ -26,10 +27,39 @@ namespace ApplicationFacade
         public static KeyData InsertItem { get; set; }
         public static KeyData RemoveSelected { get; set; }
         public static KeyData MoveSelected { get; set; }
-        
+        public static KeyData ToogleTimer { get; set; }
+
         static KeyManager()
         {
             SetDefault( );
+        }
+
+        public static KeyData[] Keys
+        {
+            get
+            {
+                KeyData[] data = new KeyData[17];
+                
+                data[0]  = Rotate;
+                data[1]  = RotateLeft;
+                data[2]  = RotateRight;
+                data[3]  = MoveCameraUp;
+                data[4]  = MoveCameraDown;
+                data[5]  = MoveXAxis;
+                data[6]  = MoveZAxis;
+                data[7]  = ChangeMode;
+                data[8]  = InsertStorageReck;
+                data[9]  = InsertWall;
+                data[10] = InsertWindow;
+                data[11] = InsertDoor;
+                data[12] = InsertGate;
+                data[13] = InsertItem;
+                data[14] = RemoveSelected;
+                data[15] = MoveSelected;
+                data[16] = ToogleTimer;
+
+                return data;
+            }
         }
 
         public static void LoadKeyConfiguration()
@@ -55,7 +85,8 @@ namespace ApplicationFacade
                 man.LoadData( "InsertItem", InsertItem );
                 man.LoadData( "RemoveSelected", RemoveSelected );
                 man.LoadData( "MoveSelected", MoveSelected );
-                
+                man.LoadData( "ToogleTimer", ToogleTimer );
+
                 man.CloseConfigFile( );
             }
         }
@@ -78,6 +109,8 @@ namespace ApplicationFacade
             InsertDoor = new KeyData( KeyCode.Alpha4, true );
             InsertGate = new KeyData( KeyCode.Alpha5, true );
             InsertItem = new KeyData( KeyCode.Alpha6, true );
+
+            ToogleTimer = new KeyData( KeyCode.P, false );
 
             ChangeMode = new KeyData( KeyCode.M, true );
             RemoveSelected = new KeyData( KeyCode.Delete, false );
@@ -106,6 +139,7 @@ namespace ApplicationFacade
                 man.StoreData( "InsertItem", InsertItem, false );
                 man.StoreData( "RemoveSelected", RemoveSelected, false );
                 man.StoreData( "MoveSelected", MoveSelected, false );
+                man.StoreData( "ToggleTimer", ToogleTimer, false );
 
                 man.CloseConfigFile( );
             }

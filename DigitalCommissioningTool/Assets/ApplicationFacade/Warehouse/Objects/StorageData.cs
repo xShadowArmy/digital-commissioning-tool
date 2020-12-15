@@ -61,11 +61,8 @@ namespace ApplicationFacade
 
         internal void AddItem( ItemData item, int slot )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "AddItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -89,11 +86,8 @@ namespace ApplicationFacade
 
         internal bool RemoveItem( ItemData item )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "AddItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return false;
             }
 
@@ -114,12 +108,9 @@ namespace ApplicationFacade
 
         internal bool ContainsItem( ItemData item )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "AddItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
-                return false;
+                return;
             }
 
             for ( int i = 0; i < Data.Length; i++ )
@@ -135,6 +126,11 @@ namespace ApplicationFacade
 
         public ItemData GetItem( int slot )
         {
+            if ( IsDestroyed( ) )
+            {
+                return null;
+            }
+
             if ( slot > SlotCount )
             {
                 LogManager.WriteWarning( "Ein Objekt soll aus einem Slot abgefragt werden der nicht existiert!", "StorageData", "AddItem" );
@@ -152,11 +148,8 @@ namespace ApplicationFacade
 
         public ItemData GetItem( long id )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return null;
             }
 
@@ -173,11 +166,8 @@ namespace ApplicationFacade
 
         public ItemData GetItem( GameObject obj )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return null;
             }
 
@@ -194,11 +184,8 @@ namespace ApplicationFacade
         
         public int GetSlot( GameObject obj )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return -1;
             }
 
@@ -215,11 +202,8 @@ namespace ApplicationFacade
 
         public int GetSlot( ItemData item )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "StorageData", "GetItem" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return -1;
             }
 
@@ -236,6 +220,11 @@ namespace ApplicationFacade
 
         public void ChangeSlotCount( int slots )
         {
+            if ( IsDestroyed( ) )
+            {
+                return;
+            }
+
             ItemData[] tmp = Data;
 
             SlotCount = slots;

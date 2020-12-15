@@ -117,75 +117,22 @@ namespace ApplicationFacade
         public ItemData CreateContainerItem( Vector3 position, Quaternion rotation, Vector3 scale, StorageData container, int slot )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "CreateContainerItem" );
+            
 
-            ItemData item = new ItemData( 0 );
-
-            container.AddItem( item, slot );
-            item.SetParent( container );
-
-            for ( int i = 0; i < Data.Container.Count; i++ )
-            {
-                if ( Data.Container[ i ].ID == container.GetID( ) )
-                {
-                    item.GameObjectDataChanged += GameObjectHasChanged;
-                    item.ItemChanged += ContainerItemHasChanged;
-
-                    Data.Container[ i ].Items.Add( new ProjectItemData( item.GetID(), item.Count, item.Weight, item.Name, new ProjectTransformationData( position, rotation, scale ) ) );
-
-                    return item;
-                }
-            }
-
-            LogManager.WriteWarning( "Interne Regale stimmen nicht mit den Regaldaten ueberein!.", "Warehouse", "CreateStorageRackItem" );
-
-            return item;
+            return null;
         }
 
         public void AddItemToContainer( StorageData container, ItemData item, int slot )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "AddItemToContainer" );
-                       
-            container.AddItem( item, slot );
-            item.SetParent( container );
-
-            for ( int i = 0; i < Data.Container.Count; i++ )
-            {
-                if ( Data.Container[ i ].ID == container.GetID( ) )
-                {
-                    item.GameObjectDataChanged += GameObjectHasChanged;
-                    item.ItemChanged += ContainerItemHasChanged;
-
-                    Data.Container[ i ].Items.Add( new ProjectItemData( item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
-
-                    return;
-                }
-            }
-
-            LogManager.WriteWarning( "Interne ContainerData stimmen nicht mit den Containerdaten ueberein!.", "ContainerData", "AddItemToContainer" );
+                     
+            
         }
 
         public bool RemoveItemFromContainer( StorageData storage, ItemData item )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird entfernt.", "ContainerData", "RemoveItemFromContainer" );
-
-            storage.RemoveItem( item );
-
-            for ( int i = 0; i < Data.Container.Count; i++ )
-            {
-                if ( Data.Container[ i ].ID == storage.GetID( ) )
-                {
-                    for ( int j = 0; j < Data.Container[ i ].GetItems.Length; j++ )
-                    {
-                        if ( Data.Container[ i ].GetItems[ j ].IDRef == item.GetID( ) )
-                        {
-                            item.GameObjectDataChanged -= GameObjectHasChanged;
-                            item.ItemChanged -= ContainerItemHasChanged;
-
-                            return Data.Container[ i ].Items.Remove( Data.Container[ i ].GetItems[ j ] );
-                        }
-                    }
-                }
-            }
+            
 
             return false;
         }

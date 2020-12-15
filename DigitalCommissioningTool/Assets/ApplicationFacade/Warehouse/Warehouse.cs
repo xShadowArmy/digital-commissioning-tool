@@ -59,23 +59,31 @@ namespace ApplicationFacade
         /// <summary>
         /// Enthält alle Lagerregale die aktuell in der Umgebung dargestellt werden.
         /// </summary>
-        internal List<StorageData> StorageRacks { get; private set; }
+        internal List<StorageData> StorageRackList { get; private set; }
 
         /// <summary>
         /// Interne Struktur die alle Objekte protokolliert.
         /// </summary>
         internal InternalProjectWarehouse Data { get; private set; }
 
+        public StorageData[] StorageRacks
+        {
+            get
+            {
+                return StorageRackList.ToArray( );
+            }
+        }
+
         /// <summary>
         /// Erstellt eine neue Instanz und initialisiert alle Objekte.
         /// </summary>
         internal Warehouse()
         {
-            Floor   = new List<FloorData>( );
-            Walls   = new List<WallData>( );
+            Floor = new List<FloorData>( );
+            Walls = new List<WallData>( );
             Windows = new List<WindowData>( );
-            Doors   = new List<DoorData>( );
-            StorageRacks = new List<StorageData>( );
+            Doors = new List<DoorData>( );
+            StorageRackList = new List<StorageData>( );
             Data = new InternalProjectWarehouse( );
 
             ObjectSpawn = GameObject.FindGameObjectWithTag( "Respawn" );
@@ -464,7 +472,7 @@ namespace ApplicationFacade
         {
             LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
 
-            for ( int i = 0; i < StorageRacks.Count; i++ )
+            for ( int i = 0; i < StorageRackList.Count; i++ )
             {
                 if ( StorageRacks[ i ].GetID( ) == id )
                 {
@@ -479,7 +487,7 @@ namespace ApplicationFacade
         {
             LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
 
-            for ( int i = 0; i < StorageRacks.Count; i++ )
+            for ( int i = 0; i < StorageRackList.Count; i++ )
             {
                 if ( StorageRacks[ i ].Object == obj )
                 {
@@ -491,30 +499,39 @@ namespace ApplicationFacade
         }
         
         // StorageRackItem
-        
+         
         public void AddItemToStorageRack( StorageData storage, ItemData item, int slot )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
-
-            item.ItemChanged += StorageRackItemHasChanged;
-
-            storage.AddItem( item, slot );
+            
         }
 
         public bool RemoveItemFromStorageRack( StorageData storage, ItemData item )
         {
             LogManager.WriteInfo( "Ein RegalItem wird entfernt.", "Warehouse", "RemoveItemFromStorageRack" );
+            
 
-            bool tmp = storage.RemoveItem( item );
-
-            if ( tmp )
-            {
-                item.ItemChanged -= StorageRackItemHasChanged;
-            }
-
-            return tmp;
+            return false;
         }
         
+        public ItemData GetStorageRackItem( GameObject obj )
+        {
+            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
+
+            for ( int i = 0; i < StorageRackList.Count; i++ )
+            {
+                for ( int j = 0; j < StorageRackList[i].GetItems.Length; j++ )
+                {
+                    if ( StorageRackList[i].GetItems[j].Object == obj )
+                    {
+                        return StorageRackList[i].GetItems[j];
+                    }
+                }
+            }
+
+            return null;
+        }
+
         // Implementierungen
 
         internal static long GetUniqueID( IDataIdentifier[] idUsed )
@@ -765,7 +782,7 @@ namespace ApplicationFacade
             data.GameObjectDataChanged += GameObjectHasChanged;
             data.StorageChanged += StorageRackHasChanged;
 
-            StorageRacks.Add( data );
+            StorageRackList.Add( data );
 
             Data.StorageRacks.Add( new ProjectStorageData( data.GetID( ), data.SlotCount, new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
 
@@ -774,7 +791,7 @@ namespace ApplicationFacade
 
         private bool DestroyStorageRackObject( StorageData data )
         {
-            if ( !StorageRacks.Remove( data ) )
+            if ( !StorageRackList.Remove( data ) )
             {
                 return false;
             }

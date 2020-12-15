@@ -71,11 +71,8 @@ namespace ApplicationFacade
 
         public void SetPosition( Vector3 position )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "SetPosition" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -91,11 +88,8 @@ namespace ApplicationFacade
 
         public void SetRotation( Quaternion rotation )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "SetRotation" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -111,11 +105,8 @@ namespace ApplicationFacade
 
         public void SetScale( Vector3 scale )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "SetScale" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -131,11 +122,8 @@ namespace ApplicationFacade
 
         public void SetTransform( Transform transform )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "SetTransform" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -155,11 +143,8 @@ namespace ApplicationFacade
 
         public void ChangeGameObject( GameObject obj )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "ChangeGameObject" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -183,11 +168,8 @@ namespace ApplicationFacade
 
         public void SetID( long id )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "SetID" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -196,11 +178,8 @@ namespace ApplicationFacade
 
         public long GetID()
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "GetID" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return 0;
             }
 
@@ -210,6 +189,19 @@ namespace ApplicationFacade
         protected virtual void OnChange()
         {
             GameObjectDataChanged?.Invoke( this, ObjType );
+        }
+
+        protected bool IsDestroyed()
+        {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "GameObjectData", "IsDestroyed" );
+                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

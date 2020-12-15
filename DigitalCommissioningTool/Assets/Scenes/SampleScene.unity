@@ -5703,6 +5703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdce3549174b8e48a0b3410f2d2b6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WalkTrajectory: {fileID: 0}
+  WalkTrajectoryTarget: {fileID: 0}
 --- !u!114 &1374764596
 MonoBehaviour:
   m_ObjectHideFlags: 0

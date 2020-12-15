@@ -39,11 +39,8 @@ namespace ApplicationFacade
 
         public void SetDoorType( DoorType type )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "DoorData", "SetDoorType" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 

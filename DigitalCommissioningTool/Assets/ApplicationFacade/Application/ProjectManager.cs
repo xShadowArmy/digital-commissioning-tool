@@ -389,7 +389,7 @@ namespace ApplicationFacade
                 warehouse.CreateDoor( data.Position, data.Rotation, data.Scale, DoorType.Door );
             }
 
-            //StorageRacks
+            //StorageRackList
             foreach ( ObjectTransformation data in size.GetStorageRacks( ) )
             {
                 warehouse.CreateStorageRack( data.Position, data.Rotation, data.Scale );

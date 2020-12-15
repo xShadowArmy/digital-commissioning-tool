@@ -50,7 +50,7 @@ namespace ApplicationFacade
         {
             get
             {
-                if ( ChildItems.Count != 0 )
+                if ( ChildItems.Count != 0 || ParentItem != null )
                 {
                     return false;
                 }
@@ -84,46 +84,69 @@ namespace ApplicationFacade
             ChildItems = new List<ItemData>( );
         }
         
-        public void SetItemCount( int itemCount )
+        public bool IncreaseItemCount( int itemCount )
         {
-            if ( Destroyed )
+            if ( IsDestroyed() )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetItemCount" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
+                return false;
+            }
+            
+            if ( ParentItem == null )
+            {
+                Count += itemCount;
 
-                return;
+                return true;
             }
 
-            Count = itemCount;
-            OnChange( );
+            else
+            {
+                if ( ParentItem.Count > itemCount )
+                {
+
+                }
+            }
+            Count += itemCount;
+                        
+            return true;
+        }
+
+        public bool DecreaseItemCount( int itemCount )
+        {
+            if ( IsDestroyed( ) )
+            {
+                return false;
+            }
+
+            if ( itemCount > Count )
+            {
+                return false;
+            }
+
+            Count -= itemCount;
+
+            return true;
         }
 
         public void SetItemName( string itemName )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetItemName" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
             Name = itemName;
-            OnChange( );
+            OnChange( this );
         }
 
         public void SetItemWeight( double itemWeight )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetItemName" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
             Weight = itemWeight;
-            OnChange( );
+            OnChange( this );
         }
 
         public void Serialize( SerialConfigData storage )
@@ -138,6 +161,70 @@ namespace ApplicationFacade
             Name = storage.GetValueAsString( );
             Weight = storage.GetValueAsDouble( );
             Count = storage.GetValueAsInt( );
+        }
+                
+        public ItemData RequestItem( int count )
+        {
+            if ( IsDestroyed( ) )
+            {
+                return null;
+            }
+
+            if ( count > Count )
+            {
+                LogManager.WriteWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!", "ItemData", "GetStockItem" );
+                Debug.LogWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!" );
+
+                return null;
+            }
+
+            ItemData data = new ItemData( ID )
+            {
+                Count = count,
+                Name = Name,
+                Weight = Weight,
+                ParentItem = this
+            };
+
+            Count -= count;
+            ChildItems.Add( data );
+
+            data.ItemChanged += ItemDataChanged;
+
+            return data;
+        }
+
+        public bool ReturnItem( )
+        {
+            if ( IsDestroyed( ) )
+            {
+                return false;
+            }
+
+            if ( ParentItem == null )
+            {
+                return false;
+            }
+
+            ParentItem.Count += Count;
+
+            if ( ChildItems.Count > 0 )
+            {
+                for( int i = 0; i < ChildItems.Count; i++ )
+                {
+                    ParentItem.ChildItems.Add( ChildItems[i] );
+                }
+            }
+
+            ParentItem.ChildItems.Remove( this );
+
+            ParentItem = null;
+
+            ItemChanged -= ItemDataChanged;
+
+            Destroy( );
+
+            return true;
         }
 
         public static ItemData AddItemToStock( string name, int count = 1, double weight = 0 )
@@ -196,89 +283,6 @@ namespace ApplicationFacade
             return false;
         }
 
-        public static ItemData RequestStockItem( string name, int count )
-        {
-            for ( int i = 0; i < ItemStock.Count; i++ )
-            {
-                if ( ItemStock[i].Name == name )
-                {
-                    if ( count > ItemStock[i].Count )
-                    {
-                        LogManager.WriteWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!", "ItemData", "GetStockItem" );
-                        Debug.LogWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!" );
-
-                        return null;
-                    }
-
-                    ItemData data = new ItemData( ItemStock[i].GetID( ) )
-                    {
-                        Count = count,
-                        Name = name,
-                        Weight = ItemStock[i].Weight,
-                        ParentItem = ItemStock[i]
-                    };
-
-                    ItemStock[i].Count -= count;
-                    ItemStock[i].ChildItems.Add( data );
-
-                    data.ItemChanged += ItemDataChanged;
-
-                    return data;
-                }
-            }
-
-            return null;
-        }
-
-        public static ItemData RequestStockItem( long id, int count )
-        {
-            for ( int i = 0; i < ItemStock.Count; i++ )
-            {
-                if ( count > ItemStock[i].Count )
-                {
-                    LogManager.WriteWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!", "ItemData", "GetStockItem" );
-                    Debug.LogWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!" );
-
-                    return null;
-                }
-
-                ItemData data = new ItemData( ItemStock[i].GetID( ) )
-                {
-                    Count = count,
-                    Name = ItemStock[i].Name,
-                    Weight = ItemStock[i].Weight,
-                    ParentItem = ItemStock[i]
-                };
-
-                ItemStock[i].Count -= count;
-                ItemStock[i].ChildItems.Add( data );
-
-                data.ItemChanged += ItemDataChanged;
-            }
-
-            return null;
-        }
-
-        public static bool ReturnStockItem( ItemData item )
-        {
-            if ( item.ParentItem != null )
-            {
-                return false;
-            }
-
-            int cnt = GetStockCount( item );
-
-            item.Count = cnt;
-
-            foreach( ItemData data in item.ChildItems )
-            {
-                RemoveStockItem( data );
-                item.ChildItems.Remove( data );
-            }
-
-            return true;
-        }
-
         public static bool StockContainsItem( string name )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
@@ -305,7 +309,20 @@ namespace ApplicationFacade
             return false;
         }
         
-        internal void SetParent( StorageData storage )
+        public static ItemData RequestStockItem( string Name )
+        {
+            foreach( ItemData item in ItemStock )
+            {
+                if ( item.Name.Equals( Name ) )
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+        
+        internal void SetParentStorage( StorageData storage )
         {
             if ( Destroyed )
             {
@@ -365,10 +382,52 @@ namespace ApplicationFacade
 
             return count;
         } 
-
-        private static void ItemDataChanged( ItemData item )
+        
+        private void UpdateItemData( ItemData changed, ItemData data )
         {
+            if ( data == null )
+            {
+                if ( changed.ChildItems != null )
+                {
+                    foreach( ItemData item in changed.ChildItems )
+                    {
+                        UpdateItemData( changed, item );
+                    }
+                }
 
+                else
+                {
+                    data.Name   = changed.Name;
+                    data.Weight = changed.Weight;
+                }
+            }
+
+            else
+            {
+                if ( data.ChildItems != null )
+                {
+                    foreach ( ItemData item in data.ChildItems )
+                    {
+                        UpdateItemData( changed, item );
+                    }
+                }
+
+                else
+                {
+                    data.Name   = changed.Name;
+                    data.Weight = changed.Weight;
+                }
+            }
+        }
+
+        private void ItemDataChanged( ItemData item )
+        {
+            if ( item.ParentItem != null )
+            {
+                ItemDataChanged( item.ParentItem );
+            }
+
+            UpdateItemData( item, null );
         }
     }
 }

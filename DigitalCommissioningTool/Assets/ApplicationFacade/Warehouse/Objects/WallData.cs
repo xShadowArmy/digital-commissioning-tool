@@ -45,11 +45,8 @@ namespace ApplicationFacade
 
         public void SetFace( WallFace face )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "WallData", "SetFace" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -59,11 +56,8 @@ namespace ApplicationFacade
 
         public void SetClass( WallClass wClass )
         {
-            if ( Destroyed )
+            if ( IsDestroyed( ) )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "WallData", "SetClass" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
