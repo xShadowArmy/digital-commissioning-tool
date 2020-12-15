@@ -843,6 +843,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7158211891594389271, guid: cf9ab549f41fb0742a87f4c6d068a3bd,
+        type: 3}
+      propertyPath: mask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf9ab549f41fb0742a87f4c6d068a3bd, type: 3}
 --- !u!4 &323263711 stripped
@@ -3148,7 +3153,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1393590793}
         m_MethodName: OnAddWallClick
         m_Mode: 1
         m_Arguments:
@@ -3338,7 +3343,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1393590793}
         m_MethodName: OnAddDoorClick
         m_Mode: 1
         m_Arguments:
@@ -3899,10 +3904,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUp: {fileID: 1247279067}
-  addWindowText: {fileID: 2119704396}
-  addDoorText: {fileID: 1032472403}
-  addWallText: {fileID: 11852764}
-  addInnerWallText: {fileID: 2024512448}
+  addWindowText: {fileID: 48101958}
+  addDoorText: {fileID: 1450561520}
+  addWallText: {fileID: 167556274}
+  addInnerWallText: {fileID: 1874520349}
   selectionManager: {fileID: 323263712}
   greenMaterial: {fileID: 2100000, guid: 59b25de449125664e99e6b52bcf303a1, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 911c06f14ceaf3845af0dcac3192b0a4, type: 2}
@@ -3919,7 +3924,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 512
-  myText: {fileID: 0}
+  myText: {fileID: 11852764}
 --- !u!4 &1393590794
 Transform:
   m_ObjectHideFlags: 0
@@ -4412,7 +4417,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1393590793}
         m_MethodName: OnAddWindowClick
         m_Mode: 1
         m_Arguments:
@@ -4724,6 +4729,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863076891}
   m_CullTransparentMesh: 0
+--- !u!114 &1874520349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1796248801612656460, guid: 509f7967403ea1f4f91eadb138dded4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 881783902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1929505027
 PrefabInstance:
   m_ObjectHideFlags: 0

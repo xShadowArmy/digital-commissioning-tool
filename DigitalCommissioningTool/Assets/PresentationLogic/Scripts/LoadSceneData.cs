@@ -8,10 +8,10 @@ public class LoadSceneData : MonoBehaviour
     void Start()
     {
         //GameManager.CreateProject( "SmallWarehouse", WarehouseSize.Small );
-        //GameManager.CreateProject( "MediumWarehouse", WarehouseSize.Medium );
+        GameManager.CreateProject( "MediumWarehouse", WarehouseSize.Medium );
         //GameManager.CreateProject( "LargeWarehouse", WarehouseSize.Large );
 
-        GameManager.LoadProject( "MediumWarehouse" );
+        //GameManager.LoadProject( "MediumWarehouse" );
 
         //GameManager.GameWarehouse.CreateWall( new Vector3( -25 + 0f, 1.6f, -17 + 1f ),  new Quaternion( 0,0,0, 0 ), new Vector3( 1f, 3.2f, 0.2f ) );
         //GameManager.GameWarehouse.CreateWall( new Vector3( -20 + 0f, 1.6f, -15 + 2f ),  new Vector3( 0, 90, 0 ), new Vector3( 1f, 3.2f, 0.2f ) );
