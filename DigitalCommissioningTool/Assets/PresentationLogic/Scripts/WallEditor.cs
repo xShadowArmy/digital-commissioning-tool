@@ -40,6 +40,11 @@ public class WallEditor : MonoBehaviour
     private Transform SelectedObjectTransform;
     private bool innerWallSelected = false;
     public Text myText;
+    private ModeHandler ModeHandler;
+    private GameObject SwitchModeButton;
+    private GameObject AddInnerWallButton;
+    
+    
 
     private List<Collider> objectsInRange = new List<Collider>();
 
@@ -50,6 +55,7 @@ public class WallEditor : MonoBehaviour
         addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
         addDoorText.text = StringResourceManager.LoadString("@AddDoorText");
         addWallText.text = StringResourceManager.LoadString("@AddWallText");
+        addInnerWallText.text = StringResourceManager.LoadString("@AddInnerWallText");
         SelectedObjectTransform = selectionManager.SelectedObject;
         popUp.SetActive(selectionManager.selected);
         SelectionManager.WallSelected += OnWallSelected;
@@ -58,10 +64,23 @@ public class WallEditor : MonoBehaviour
         SelectionManager.InnerWallSelected += OnInnerWallSelected;
         SelectionManager.AttachedInnerWallSelected += OnAttachedInnerWallSelected;
         Physics.autoSyncTransforms = true;
+        
+        AddInnerWallButton = GameObject.Find("AddInnerWallButton");
+        SwitchModeButton = GameObject.Find("SwitchModeButton");
+        ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        
     }
 
     private void Update()
     {
+        if (ModeHandler.Mode.Equals("EditorMode"))
+        {
+            AddInnerWallButton.SetActive(true);
+        }
+        else
+        {
+            AddInnerWallButton.SetActive(false);
+        }
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (innerWallSelected)
         {
@@ -474,7 +493,8 @@ public class WallEditor : MonoBehaviour
                                 foundOuterWall = true;
                             }
 
-                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))
+                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation && 
+                                (collider1.CompareTag("SelectableWall") || collider1.CompareTag("SelectableWindow") || collider1.CompareTag("SelectableDoor")))
                             {
                                 Destroy(collider1.gameObject);
                             }
