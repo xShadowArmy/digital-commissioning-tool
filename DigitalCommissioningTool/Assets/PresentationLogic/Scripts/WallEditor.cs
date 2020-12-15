@@ -57,6 +57,7 @@ public class WallEditor : MonoBehaviour
         SelectionManager.RightWallRimSelected += OnRightWallRimSelected;
         SelectionManager.InnerWallSelected += OnInnerWallSelected;
         SelectionManager.AttachedInnerWallSelected += OnAttachedInnerWallSelected;
+        Physics.autoSyncTransforms = true;
     }
 
     private void Update()
@@ -81,7 +82,7 @@ public class WallEditor : MonoBehaviour
                 Collider[] colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                 foreach (Collider collider1 in colliders)
                 {
-                    if (collider1.gameObject != SelectedObjectTransform.gameObject && collider1.transform.rotation != SelectedObjectTransform.rotation)
+                    if (collider1.gameObject != SelectedObjectTransform.gameObject && collider1.transform.rotation != SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))
                     {
                         Transform invisibleWall = collider1.transform.Find("InvisibleWall").transform;
                         if (!objectsInRange.Contains(collider1))
@@ -126,7 +127,7 @@ public class WallEditor : MonoBehaviour
                     }
 
                     SelectedObjectTransform.tag = "SelectableAttachedInnerWall";
-                    SelectedObjectTransform.parent = snapObject.parent.Find("InnerWalls");
+                    SelectedObjectTransform.parent = snapObject.parent.Find("InnerWall");
                     foreach (Collider collider1 in objectsInRange)
                     {
                         Transform invisibleWall = collider1.transform.Find("InvisibleWall").transform;
@@ -431,10 +432,13 @@ public class WallEditor : MonoBehaviour
 
     public void OnScaleWallButtonClicked()
     {
-        SelectedObjectTransform = selectionManager.SelectedObject;
-        int length = Convert.ToInt32(inputNumberOfWalls.text);
-        inputNumberOfWalls.text = "";
-        ScaleWall(length);
+        if (!string.IsNullOrEmpty(inputNumberOfWalls.text))
+        {
+            SelectedObjectTransform = selectionManager.SelectedObject;
+            int length = Convert.ToInt32(inputNumberOfWalls.text);
+            inputNumberOfWalls.text = "";
+            ScaleWall(length);
+        }
     }
 
     private void ScaleWall(int length)
@@ -446,7 +450,8 @@ public class WallEditor : MonoBehaviour
             foreach (Collider collider1 in colliders)
             {
                 if (collider1.transform != SelectedObjectTransform &&
-                    ((collider1.transform.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent) || collider1.transform.rotation == SelectedObjectTransform.rotation))
+                    ((collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent) || 
+                     (collider1.transform.rotation == SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))))
                 {
                     neighborWall = collider1.transform;
                 }
@@ -464,12 +469,12 @@ public class WallEditor : MonoBehaviour
                         colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
-                            if (collider1.transform.parent.CompareTag("OuterWall"))
+                            if (collider1.transform.parent.parent.CompareTag("OuterWall"))
                             {
                                 foundOuterWall = true;
                             }
 
-                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation)
+                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))
                             {
                                 Destroy(collider1.gameObject);
                             }
@@ -495,7 +500,7 @@ public class WallEditor : MonoBehaviour
                         colliders = Physics.OverlapBox(position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction), localScale / 2, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
-                            if (collider1.transform.parent.CompareTag("OuterWall") && SelectedObjectTransform.parent.parent != collider1.transform.parent)
+                            if (collider1.transform.parent.parent.CompareTag("OuterWall") && SelectedObjectTransform.parent.parent != collider1.transform.parent)
                             {
                                 foundOuterWall = true;
                             }
@@ -534,7 +539,7 @@ public class WallEditor : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x + 0.1f);
             foreach (var collider in colliders)
             {
-                if (collider.gameObject.transform.parent.rotation != SelectedObjectTransform.parent.rotation)
+                if (collider.transform.rotation != SelectedObjectTransform.rotation)
                 {
                     connectingWall = collider.transform.parent;
                 }
@@ -544,13 +549,21 @@ public class WallEditor : MonoBehaviour
                 }
             }
 
-            foreach (var wall in GameObject.FindGameObjectsWithTag("OuterWall"))
+            string parentWallTag = parentWall.tag;
+            switch (parentWallTag)
             {
-                if (wall.transform.rotation == parentWall.transform.rotation && wall != parentWall)
-                {
-                    oppositeWall = wall;
+                case "NorthWall":
+                    oppositeWall = GameObject.FindGameObjectWithTag("SouthWall");
                     break;
-                }
+                case "EastWall":
+                    oppositeWall = GameObject.FindGameObjectWithTag("WestWall");
+                    break;
+                case "SouthWall":
+                    oppositeWall = GameObject.FindGameObjectWithTag("NorthWall");
+                    break;
+                case "WestWall":
+                    oppositeWall = GameObject.FindGameObjectWithTag("EastWall");
+                    break;
             }
 
             if (oppositeWall != null && connectingWall != null && neighborWall != null)
@@ -589,7 +602,7 @@ public class WallEditor : MonoBehaviour
                                 colliders = Physics.OverlapSphere(oppositeWallRim.position, oppositeWallRim.localScale.x / 4);
                                 foreach (var collider in colliders)
                                 {
-                                    if (collider.gameObject != SelectedObjectTransform.gameObject)
+                                    if (collider.gameObject != oppositeWallRim.gameObject)
                                     {
                                         Destroy(collider.gameObject);
                                     }
@@ -646,7 +659,7 @@ public class WallEditor : MonoBehaviour
                                 colliders = Physics.OverlapSphere(oppositeWallRim.position, oppositeWallRim.localScale.x / 4);
                                 foreach (var collider in colliders)
                                 {
-                                    if (collider.gameObject != SelectedObjectTransform.gameObject)
+                                    if (collider.gameObject != oppositeWallRim.gameObject)
                                     {
                                         Destroy(collider.gameObject);
                                     }

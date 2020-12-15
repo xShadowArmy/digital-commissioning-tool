@@ -8,7 +8,7 @@ public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material selectedMaterial;
-
+    public LayerMask mask;
     [HideInInspector] public bool selected = false;
     private GameObject controller;
     private WallEditor popUp;
@@ -41,6 +41,7 @@ public class SelectionManager : MonoBehaviour
         EditorModeCamera = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>();
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        Physics.autoSyncTransforms = true;
     }
 
 
