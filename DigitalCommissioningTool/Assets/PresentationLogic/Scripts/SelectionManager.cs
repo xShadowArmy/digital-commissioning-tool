@@ -16,6 +16,10 @@ public class SelectionManager : MonoBehaviour
     private GameObject SwitchModeButton;
     private ModeHandler ModeHandler;
 
+    public delegate void ShelveSelectedEventHandler(GameObject selectedObject);
+
+    public event ShelveSelectedEventHandler ShelveSelected;
+
     public delegate void ObjectSelectedEventHandler(Transform selectedObject);
 
     public static event ObjectSelectedEventHandler WallSelected;
@@ -119,6 +123,24 @@ public class SelectionManager : MonoBehaviour
                 }
             }
         }
+        else if (ModeHandler.Mode.Equals("MosimMode"))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 90.0f)&& hit.transform.tag == "SelectableBox")
+                {
+                   
+                        GameObject g1 = hit.transform.gameObject;
+                        OnShelveSelected(g1);
+                }
+
+            }
+
+
+        }
     }
 
     private void SetPopUps()
@@ -180,5 +202,15 @@ public class SelectionManager : MonoBehaviour
     protected virtual void OnRightWallRimSelected(Transform selectedObject)
     {
         RightWallRimSelected?.Invoke(SelectedObject);
+    }
+    protected void OnShelveSelected(GameObject source)
+    {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            ShelveSelected?.Invoke(source);
+        }
+        Debug.Log("Called");
+        
     }
 }

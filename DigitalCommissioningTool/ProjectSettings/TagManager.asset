@@ -34,6 +34,7 @@ TagManager:
   - EastWall
   - SouthWall
   - WestWall
+  - SelectableBox
   layers:
   - Default
   - TransparentFX
