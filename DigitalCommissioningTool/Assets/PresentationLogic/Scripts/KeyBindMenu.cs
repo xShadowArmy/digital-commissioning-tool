@@ -16,6 +16,7 @@ public class KeyBindMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        KeyManager.LoadKeyConfiguration();
         Type t = typeof(KeyManager);
         PropertyInfo[] propertys = t.GetProperties(BindingFlags.Public | BindingFlags.Static);
         foreach (PropertyInfo property in propertys)
@@ -57,8 +58,6 @@ public class KeyBindMenu : MonoBehaviour
             }
             activeKey = keyIndex;
         }
-
-        Debug.Log(activeKey);
     }
     void OnGUI()
     {

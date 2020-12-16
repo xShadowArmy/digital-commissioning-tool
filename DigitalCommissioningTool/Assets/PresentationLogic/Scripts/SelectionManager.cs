@@ -31,11 +31,20 @@ public class SelectionManager : MonoBehaviour
     public static event ObjectSelectedEventHandler RightWallRimSelected;
 
     public static event ObjectSelectedEventHandler InnerWallSelected;
-    
+
     public static event ObjectSelectedEventHandler AttachedInnerWallSelected;
 
     public Transform SelectedObject { get; private set; }
 
+    private void Awake()
+    {
+        WallSelected = null;
+        StorageSelected = null;
+        LeftWallRimSelected = null;
+        RightWallRimSelected = null;
+        InnerWallSelected = null;
+        AttachedInnerWallSelected = null;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +84,7 @@ public class SelectionManager : MonoBehaviour
                         Transform invisibleWall = SelectedObject.Find("InvisibleWall").transform;
                         invisibleWall.GetComponent<Renderer>().material = selectedMaterial;
                         selected = true;
-                        
+
                         switch (tempObject.tag)
                         {
                             case "SelectableWall":
@@ -103,7 +112,7 @@ public class SelectionManager : MonoBehaviour
                                 OnStorageSelected(SelectedObject);
                                 break;
                         }
-                        
+
                         SetPopUps();
                     }
                     else if (SelectedObject != null)
@@ -130,11 +139,11 @@ public class SelectionManager : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 90.0f)&& hit.transform.tag == "SelectableBox")
+                if (Physics.Raycast(ray, out hit, 90.0f) && hit.transform.tag == "SelectableBox")
                 {
-                   
-                        GameObject g1 = hit.transform.gameObject;
-                        OnShelveSelected(g1);
+
+                    GameObject g1 = hit.transform.gameObject;
+                    OnShelveSelected(g1);
                 }
 
             }
@@ -173,17 +182,17 @@ public class SelectionManager : MonoBehaviour
         }
         return null;
     }
-    
+
     private void OnInnerWallSelected(Transform selectedObject)
     {
         InnerWallSelected?.Invoke(SelectedObject);
     }
-    
+
     private void OnAttachedInnerWallSelected(Transform selectedObject)
     {
         AttachedInnerWallSelected?.Invoke(SelectedObject);
     }
-    
+
     protected virtual void OnStorageSelected(Transform selectedObject)
     {
         StorageSelected?.Invoke(SelectedObject);
@@ -211,6 +220,6 @@ public class SelectionManager : MonoBehaviour
             ShelveSelected?.Invoke(source);
         }
         Debug.Log("Called");
-        
+
     }
 }

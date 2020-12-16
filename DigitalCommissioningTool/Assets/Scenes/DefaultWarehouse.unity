@@ -4860,8 +4860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StorageRacks: {fileID: 176537664}
-  MoveableStorageRacks: {fileID: 2114561045709557848, guid: f5eb5de138cd6b24b886aca5d1954313,
-    type: 3}
+  MoveableStorageRacks: {fileID: 1132897849}
   defaultMaterial: {fileID: 2100000, guid: 911c06f14ceaf3845af0dcac3192b0a4, type: 2}
   selectedMaterial: {fileID: 2100000, guid: ea04aa4db010f5e41a16a087b9b55fd9, type: 2}
   avatar: {fileID: 0}

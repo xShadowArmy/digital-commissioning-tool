@@ -8,7 +8,7 @@ public class LoadSceneData : MonoBehaviour
     void Start()
     {
         //GameManager.CreateProject( "SmallWarehouse", WarehouseSize.Small );
-        GameManager.CreateProject( "MediumWarehouse", WarehouseSize.Medium );
+        //GameManager.CreateProject( "MediumWarehouse", WarehouseSize.Medium );
         //GameManager.CreateProject( "LargeWarehouse", WarehouseSize.Large );
 
         //GameManager.LoadProject( "MediumWarehouse" );

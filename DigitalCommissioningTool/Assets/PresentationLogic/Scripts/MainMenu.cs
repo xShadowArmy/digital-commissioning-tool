@@ -15,8 +15,20 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!SceneManager.GetSceneByName("DefaultWarehouse").isLoaded)
+        {
+            SceneManager.LoadScene("DefaultWarehouse", LoadSceneMode.Additive);
+        }
+        GameObject[] gameObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject g in gameObjects)
+        {
+            if (g.name.Equals("CanvasTreeView"))
+            {
+                g.SetActive(!g.activeSelf);
+            }
+        }
         SettingsPanel.GetComponent<SettingsMenu>().LoadSettings();
-        ResourceHandler.ReplaceResources();
+        ResourceHandler.ReplaceResources(); 
     }
     
     public void NewProject()
@@ -37,21 +49,5 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Application.Quit() called");
         Application.Quit();
-    }
-    public void LoadDefaultScene()
-    {
-        if (!SceneManager.GetSceneByName("WarehouseWithMOSIM").isLoaded)
-        {
-            SceneManager.LoadScene("WarehouseWithMOSIM", LoadSceneMode.Additive);
-            GameObject.Find("Background").SetActive(false);
-        }
-        GameObject[] gameObjects = SceneManager.GetSceneByName("MainMenu").GetRootGameObjects();
-        foreach (GameObject g in gameObjects)
-        {
-            if (g.name.Equals("Canvas"))
-            {
-                g.SetActive(false);
-            }
-        }
     }
 }

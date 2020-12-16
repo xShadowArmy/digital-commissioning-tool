@@ -123,23 +123,23 @@ namespace ApplicationFacade
             {
                 man.OpenConfigFile( "UserSettings" );
 
-                man.StoreData( "Rotate", Rotate, false );
-                man.StoreData( "RotateLeft", RotateLeft, false );
-                man.StoreData( "RotateRight", RotateRight, false );
-                man.StoreData( "MoveCameraUp", MoveCameraUp, false );
-                man.StoreData( "MoveCameraDown", MoveCameraDown, false );
-                man.StoreData( "MoveXAxis", MoveXAxis, false );
-                man.StoreData( "MoveZAxis", MoveZAxis, false );
-                man.StoreData( "ChangeMode", ChangeMode, false );
-                man.StoreData( "InsertStorageReck", InsertStorageReck, false );
-                man.StoreData( "InsertWall", InsertWall, false );
-                man.StoreData( "InsertWindow", InsertWindow, false );
-                man.StoreData( "InsertDoor", InsertDoor, false );
-                man.StoreData( "InsertGate", InsertGate, false );
-                man.StoreData( "InsertItem", InsertItem, false );
-                man.StoreData( "RemoveSelected", RemoveSelected, false );
-                man.StoreData( "MoveSelected", MoveSelected, false );
-                man.StoreData( "ToggleTimer", ToogleTimer, false );
+                man.StoreData( "Rotate", Rotate, true );
+                man.StoreData( "RotateLeft", RotateLeft, true);
+                man.StoreData( "RotateRight", RotateRight, true);
+                man.StoreData( "MoveCameraUp", MoveCameraUp, true);
+                man.StoreData( "MoveCameraDown", MoveCameraDown, true);
+                man.StoreData( "MoveXAxis", MoveXAxis, true);
+                man.StoreData( "MoveZAxis", MoveZAxis, true);
+                man.StoreData( "ChangeMode", ChangeMode, true);
+                man.StoreData( "InsertStorageReck", InsertStorageReck, true);
+                man.StoreData( "InsertWall", InsertWall, true);
+                man.StoreData( "InsertWindow", InsertWindow, true);
+                man.StoreData( "InsertDoor", InsertDoor, true);
+                man.StoreData( "InsertGate", InsertGate, true);
+                man.StoreData( "InsertItem", InsertItem, true);
+                man.StoreData( "RemoveSelected", RemoveSelected, true);
+                man.StoreData( "MoveSelected", MoveSelected, true);
+                man.StoreData( "ToggleTimer", ToogleTimer, true);
 
                 man.CloseConfigFile( );
             }

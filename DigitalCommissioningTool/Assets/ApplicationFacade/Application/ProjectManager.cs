@@ -242,14 +242,14 @@ namespace ApplicationFacade
                 warehouse.AddWall( wall );
             }
             
-            warehouse.Walls[0].Object.tag = "LeftWallRim";
-            warehouse.Walls[WallData.NorthWallLength - 1].Object.tag = "RightWallRim";
-            warehouse.Walls[WallData.NorthWallLength].Object.tag = "LeftWallRim";
-            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength - 1].Object.tag = "RightWallRim";
-            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength].Object.tag = "LeftWallRim";
-            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength - 1].Object.tag = "RightWallRim";
-            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength].Object.tag = "LeftWallRim";
-            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength + WallData.WesthWallLength - 1].Object.tag = "RightWallRim";
+            //warehouse.Walls[0].Object.tag = "LeftWallRim";
+            //warehouse.Walls[WallData.NorthWallLength - 1].Object.tag = "RightWallRim";
+            //warehouse.Walls[WallData.NorthWallLength].Object.tag = "LeftWallRim";
+            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength - 1].Object.tag = "RightWallRim";
+            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength].Object.tag = "LeftWallRim";
+            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength - 1].Object.tag = "RightWallRim";
+            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength].Object.tag = "LeftWallRim";
+            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength + WallData.WesthWallLength - 1].Object.tag = "RightWallRim";
 
             for ( int i = 0; i < iwarehouse.Windows.Count; i++ )
             {
