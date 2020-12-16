@@ -66,4 +66,31 @@
     <xs:string xs:name="AddInnerWallText" xs:id="22">
         <xs:value>Add Inner Wall</xs:value>
     </xs:string>
+    <xs:string xs:name="Edit" xs:id="23">
+        <xs:value>Edit</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddItem" xs:id="24">
+        <xs:value>Add Item</xs:value>
+    </xs:string>
+    <xs:string xs:name="WarehouseItems" xs:id="25">
+        <xs:value>Warehouse Items</xs:value>
+    </xs:string>
+    <xs:string xs:name="SaveItem" xs:id="26">
+        <xs:value>Save</xs:value>
+    </xs:string>
+    <xs:string xs:name="Count" xs:id="27">
+        <xs:value>Count</xs:value>
+    </xs:string>
+    <xs:string xs:name="Weight" xs:id="28">
+        <xs:value>Weight</xs:value>
+    </xs:string>
+    <xs:string xs:name="Name" xs:id="29">
+        <xs:value>Name</xs:value>
+    </xs:string>
+    <xs:string xs:name="EditItem" xs:id="30">
+        <xs:value>Edit Item</xs:value>
+    </xs:string>
+    <xs:string xs:name="KeyBinds" xs:id="31">
+        <xs:value>Key Binds</xs:value>
+    </xs:string>
 </xs:StringResources>

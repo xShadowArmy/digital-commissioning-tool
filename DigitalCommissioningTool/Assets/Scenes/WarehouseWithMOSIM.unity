@@ -2730,7 +2730,7 @@ MonoBehaviour:
   addWindowText: {fileID: 711382086}
   addDoorText: {fileID: 125062067}
   addWallText: {fileID: 289976448}
-  addInnerWallText: {fileID: 0}
+  addInnerWallText: {fileID: 1253121397}
   selectionManager: {fileID: 263761820}
   greenMaterial: {fileID: 2100000, guid: 59b25de449125664e99e6b52bcf303a1, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 911c06f14ceaf3845af0dcac3192b0a4, type: 2}
@@ -28626,6 +28626,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 509f7967403ea1f4f91eadb138dded4e, type: 3}
+--- !u!114 &1253121397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1796248801612656460, guid: 509f7967403ea1f4f91eadb138dded4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1253121396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1256527227
 PrefabInstance:
   m_ObjectHideFlags: 0
