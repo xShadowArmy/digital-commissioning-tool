@@ -4,37 +4,33 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SelectableWall
-  - EditorModeCamera
+  - StorageRackDefinition
+  - NorthWall
   - Button
-  - Resource
-  - SelectableFloor
-  - SelectableStorage
-  - SelectableWindow
-  - SelectableDoor
-  - SelectableGate
-  - RightWallRim
-  - LeftWallRim
   - OuterWall
-  - InnerWall
-  - SelectableInnerWall
-  - SelectableAttachedInnerWall
-  - WarehouseDefinition
+  - DoorDefinition
   - FloorDefinition
   - WallDefinition
-  - WindowDefinition
-  - DoorDefinition
-  - StorageRackDefinition
-  - ContainerDefinition
-  - StorageContainer
-  - StorageBoxOpen
-  - StorageBoxClosed
-  - StorageBoxPartialOpen
-  - NorthWall
-  - EastWall
-  - SouthWall
   - WestWall
-  - SelectableBox
+  - EditorModeCamera
+  - ContainerDefinition
+  - EastWall
+  - WindowDefinition
+  - WarehouseDefinition
+  - SouthWall
+  - SelectableWall
+  - SelectableDoor
+  - SelectableWindow
+  - SelectableStorage
+  - SelectableFloor
+  - StorageBoxOpen
+  - StorageBoxPartialOpen
+  - StorageBoxClosed
+  - StorageContainer
+  - StorageRackLayer
+  - StorageSlot
+  - LeftWallRim
+  - RightWallRim
   layers:
   - Default
   - TransparentFX
@@ -44,8 +40,8 @@ TagManager:
   - UI
   - 
   - 
-  - dragable
-  - floor
+  - 
+  - 
   - 
   - 
   - 

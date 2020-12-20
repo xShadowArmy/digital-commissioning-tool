@@ -37,17 +37,6 @@ namespace ApplicationFacade
             Type = DoorType.Door;
         }
 
-        public void SetDoorType( DoorType type )
-        {
-            if ( IsDestroyed( ) )
-            {
-                return;
-            }
-
-            Type = type;
-            OnChange( );
-        }
-
         protected new virtual void OnChange()
         {
             base.OnChange( );

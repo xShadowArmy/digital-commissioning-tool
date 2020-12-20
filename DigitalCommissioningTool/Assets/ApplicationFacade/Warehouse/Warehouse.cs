@@ -65,7 +65,7 @@ namespace ApplicationFacade
         /// Interne Struktur die alle Objekte protokolliert.
         /// </summary>
         internal InternalProjectWarehouse Data { get; private set; }
-
+        
         public StorageData[] StorageRacks
         {
             get
@@ -330,8 +330,6 @@ namespace ApplicationFacade
                 Type = type
             };
 
-            door.SetDoorType( type );
-
             CreateDoorObject( door );
 
             return door;
@@ -345,8 +343,6 @@ namespace ApplicationFacade
             {
                 Type = type
             };
-
-            door.SetDoorType( type );
 
             CreateDoorObject( door );
 
@@ -409,20 +405,8 @@ namespace ApplicationFacade
             };
 
             CreateStorageRackObject( storage );
-
-            return storage;
-        }
-
-        public StorageData CreateStorageRack( int slotCount )
-        {
-            LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
-
-            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), ObjectSpawn.transform.position, ObjectSpawn.transform.rotation, ObjectSpawn.transform.localScale )
-            {
-                SlotCount = slotCount
-            };
-
-            CreateStorageRackObject( storage );
+            
+            storage.Initialize( );
 
             return storage;
         }
@@ -435,19 +419,7 @@ namespace ApplicationFacade
 
             CreateStorageRackObject( storage );
 
-            return storage;
-        }
-
-        public StorageData CreateStorageRack( Vector3 position, Quaternion rotation, Vector3 scale, int slotCount )
-        {
-            LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
-
-            StorageData storage = new StorageData( GetUniqueID( StorageRacks.ToArray( ) ), position, rotation, scale )
-            {
-                SlotCount = slotCount
-            };
-
-            CreateStorageRackObject( storage );
+            storage.Initialize( );
 
             return storage;
         }
@@ -455,8 +427,10 @@ namespace ApplicationFacade
         internal void AddStorageRack( StorageData storage )
         {
             LogManager.WriteInfo( "Lagerhausregal wird hinzugefuegt.", "Warehouse", "AddStorageRack" );
-
+            
             CreateStorageRackObject( storage );
+
+            storage.Initialize( );
         }
 
         public bool RemoveStorageRack( StorageData storage )
@@ -503,13 +477,61 @@ namespace ApplicationFacade
         public void AddItemToStorageRack( StorageData storage, ItemData item, int slot )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
-            
+
+            if ( storage.GetItems[slot] != null )
+            {
+                if ( storage.RemoveItem( storage.GetItems[slot] ) )
+                {
+                    storage.GetItems[slot].ReturnItem( );
+                }
+            }
+                       
+            storage.AddItem( item, slot );
+
+            item.GameObjectDataChanged += GameObjectHasChanged;
+            item.ItemChanged += StorageRackItemHasChanged;
+
+            foreach( ProjectStorageData data in Data.StorageRacks )
+            {
+                if ( data.ID == storage.GetID() )
+                {
+                    data.Items.Add( new ProjectItemData( item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                }
+            }
         }
 
         public bool RemoveItemFromStorageRack( StorageData storage, ItemData item )
         {
             LogManager.WriteInfo( "Ein RegalItem wird entfernt.", "Warehouse", "RemoveItemFromStorageRack" );
             
+            if ( storage.GetItems[0] == null )
+            {
+                return false;
+            }
+            
+            if ( storage.RemoveItem( item ) )
+            {
+                item.ReturnItem( );
+
+                item.GameObjectDataChanged -= GameObjectHasChanged;
+                item.ItemChanged -= StorageRackItemHasChanged;
+
+                foreach ( ProjectStorageData data in Data.StorageRacks )
+                {
+                    if ( data.ID == storage.GetID( ) )
+                    {
+                        foreach ( ProjectItemData idata in data.Items )
+                        {
+                            if ( idata.IDRef == item.GetID( ) )
+                            {
+                                return data.Items.Remove( idata );
+                            }
+                        }
+                    }
+                }
+
+                return false;
+            }
 
             return false;
         }
@@ -520,12 +542,11 @@ namespace ApplicationFacade
 
             for ( int i = 0; i < StorageRackList.Count; i++ )
             {
-                for ( int j = 0; j < StorageRackList[i].GetItems.Length; j++ )
+                ItemData data = StorageRackList[i].GetItem( obj );
+
+                if ( data != null )
                 {
-                    if ( StorageRackList[i].GetItems[j].Object == obj )
-                    {
-                        return StorageRackList[i].GetItems[j];
-                    }
+                    return data;
                 }
             }
 
@@ -631,7 +652,7 @@ namespace ApplicationFacade
 
                     case WallFace.West:
 
-                        WallData.WesthWallLength += 1;
+                        WallData.WestWallLength += 1;
                         break;
 
                     case WallFace.Undefined:
@@ -677,7 +698,7 @@ namespace ApplicationFacade
 
                         case WallFace.West:
 
-                            WallData.WesthWallLength -= 1;
+                            WallData.WestWallLength -= 1;
                             break;
 
                         case WallFace.Undefined:
@@ -929,84 +950,13 @@ namespace ApplicationFacade
         private void StorageRackHasChanged( StorageData storage )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageRackHasChanged" );
-
-            for ( int i = 0; i < Data.StorageRacks.Count; i++ )
-            {
-                if ( storage.GetID( ) == Data.StorageRacks[ i ].ID )
-                {
-                    if ( storage.GetItems.Length > Data.StorageRacks[i].GetItems.Length )
-                    {
-                        ProjectTransformationData data = new ProjectTransformationData( storage.GetItems[ storage.GetItems.Length - 1 ].Position,
-                                                                                        storage.GetItems[ storage.GetItems.Length - 1 ].Rotation,
-                                                                                        storage.GetItems[ storage.GetItems.Length - 1 ].Scale );
-                        
-                        Data.StorageRacks[ i ].Items.Add( new ProjectItemData( storage.GetItems[ storage.GetItems.Length - 1 ].GetID( ),
-                                                                               storage.GetItems[storage.GetItems.Length - 1].Count,
-                                                                               storage.GetItems[storage.GetItems.Length - 1].Weight,
-                                                                               storage.GetItems[storage.GetItems.Length - 1].Name,
-                                                                               data ) );
-
-                        break;
-                    }
-
-                    else if ( storage.GetItems.Length < Data.StorageRacks[ i ].GetItems.Length )
-                    {
-                        if ( storage.GetItems.Length == 1 )
-                        {
-                            Data.StorageRacks[ i ].Items.Remove( Data.StorageRacks[ i ].GetItems[ 0 ] );
-
-                            break;
-                        }
-
-                        for ( int j = 0; j < Data.StorageRacks[i].GetItems.Length; j++ )
-                        {
-                            if ( Data.StorageRacks[i].GetItems[j].IDRef != storage.GetItems[j].GetID() )
-                            {
-                                Data.StorageRacks[ i ].Items.Remove( Data.StorageRacks[i].GetItems[j] );
-
-                                break;
-                            }
-                        }
-
-                        break;
-                    }
-
-                    else
-                    {
-                        ProjectItemData[ ] items = Data.StorageRacks[ i ].GetItems;
-                        ProjectStorageData data = new ProjectStorageData( storage.GetID(), Data.StorageRacks[i].SlotCount, new ProjectTransformationData( storage.Position, storage.Rotation, storage.Scale ) );
-
-                        foreach( ProjectItemData item in items )
-                        {
-                            data.Items.Add( item );
-                        }
-
-                        Data.StorageRacks.Remove( Data.StorageRacks[ i ] );
-                        Data.StorageRacks.Insert( i, data );
-
-                        break;
-                    }
-                }
-            }
+            
         }
 
         private void StorageRackItemHasChanged( ItemData item )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageRackItemHasChanged" );
-
-            List<ItemData> items = new List<ItemData>( );
-
-            foreach( StorageData sdata in StorageRacks )
-            {
-                foreach( ItemData idata in sdata.GetItems )
-                {
-                    if ( idata.GetID() == item.GetID() )
-                    {
-
-                        items.Add( idata );
-                    }
-                }
-            }
+            
         }
 
         private void OnStorageRackModified( int mode, StorageData data )

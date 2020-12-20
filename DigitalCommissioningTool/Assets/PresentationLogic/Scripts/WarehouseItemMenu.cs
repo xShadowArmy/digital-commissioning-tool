@@ -113,7 +113,9 @@ public class WarehouseItemMenu : MonoBehaviour
         PanelListItem.SetActive(true);
         if (SelectedItem == null)
         {
-            SelectedItem = ItemData.AddItemToStock("");
+            ItemData.AddItemToStock( "." );
+
+            SelectedItem = ItemData.RequestStockItem( "." );
             Array.Resize(ref Stock, Stock.Length + 1);
             Stock[Stock.Length - 1] = SelectedItem;
             Instantiate(ItemTemplate, ItemTemplate.transform.parent).SetActive(true);

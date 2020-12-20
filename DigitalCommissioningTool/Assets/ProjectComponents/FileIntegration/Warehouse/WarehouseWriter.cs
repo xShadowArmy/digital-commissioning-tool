@@ -252,6 +252,7 @@ namespace ProjectComponents.FileIntegration
                         nav.AppendChildElement( "xs", "Storage", xmlns, "" );
                         nav.MoveToChild( "Storage", xmlns );
                         nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
+                        nav.CreateAttribute( "xs", "slotCount", xmlns, data.StorageRacks[i].SlotCount.ToString() );
                     }
 
                     else
@@ -259,6 +260,7 @@ namespace ProjectComponents.FileIntegration
                         nav.InsertElementAfter( "xs", "Storage", xmlns, "" );
                         nav.MoveToNext( );
                         nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
+                        nav.CreateAttribute( "xs", "slotCount", xmlns, data.StorageRacks[i].SlotCount.ToString( ) );
                     }
 
                     nav.AppendChildElement( "xs", "Transform", xmlns, "" );

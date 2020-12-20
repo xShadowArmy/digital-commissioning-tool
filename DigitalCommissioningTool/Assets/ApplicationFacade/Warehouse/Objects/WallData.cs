@@ -25,7 +25,7 @@ namespace ApplicationFacade
 
         public static int SouthWallLength { get; internal set; }
 
-        public static int WesthWallLength { get; internal set; }
+        public static int WestWallLength { get; internal set; }
         
         internal WallData() : base( GameObjectDataType.Wall )
         {
@@ -41,28 +41,6 @@ namespace ApplicationFacade
 
         internal WallData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Wall, id, position, rotation, scale, obj )
         {
-        }
-
-        public void SetFace( WallFace face )
-        {
-            if ( IsDestroyed( ) )
-            {
-                return;
-            }
-
-            Face = face;
-            OnChange( );
-        }
-
-        public void SetClass( WallClass wClass )
-        {
-            if ( IsDestroyed( ) )
-            {
-                return;
-            }
-
-            Class = wClass;
-            OnChange( );
         }
         
         protected new virtual void OnChange()

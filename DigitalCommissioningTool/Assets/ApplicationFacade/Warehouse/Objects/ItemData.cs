@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
 using SystemFacade;
-using SystemTools;
 using UnityEngine;
 
 namespace ApplicationFacade
 {
-    public class ItemData : GameObjectData, ISerialConfigData
+    public class ItemData : GameObjectData
     {
         public delegate void ItemChangedEventHandler( ItemData item );
 
@@ -90,7 +89,12 @@ namespace ApplicationFacade
             {
                 return false;
             }
-            
+
+            if ( IsReadonly( ) )
+            {
+                return false;
+            }
+
             if ( ParentItem == null )
             {
                 Count += itemCount;
@@ -102,10 +106,15 @@ namespace ApplicationFacade
             {
                 if ( ParentItem.Count > itemCount )
                 {
+                    ParentItem.Count -= itemCount;
+                    Count += itemCount;
+                }
 
+                else
+                {
+                    return false;
                 }
             }
-            Count += itemCount;
                         
             return true;
         }
@@ -117,9 +126,19 @@ namespace ApplicationFacade
                 return false;
             }
 
-            if ( itemCount > Count )
+            if ( IsReadonly( ) )
             {
                 return false;
+            }
+
+            if ( itemCount >= Count )
+            {
+                return false;
+            }
+
+            if ( ParentItem != null )
+            {
+                ParentItem.Count += Count;
             }
 
             Count -= itemCount;
@@ -130,6 +149,11 @@ namespace ApplicationFacade
         public void SetItemName( string itemName )
         {
             if ( IsDestroyed( ) )
+            {
+                return;
+            }
+
+            if ( IsReadonly( ) )
             {
                 return;
             }
@@ -145,27 +169,23 @@ namespace ApplicationFacade
                 return;
             }
 
+            if ( IsReadonly( ) )
+            {
+                return;
+            }
+
             Weight = itemWeight;
             OnChange( this );
-        }
-
-        public void Serialize( SerialConfigData storage )
-        {
-            storage.AddData( Name );
-            storage.AddData( Weight );
-            storage.AddData( Count );
-        }
-
-        public void Restore( SerialConfigData storage )
-        {
-            Name = storage.GetValueAsString( );
-            Weight = storage.GetValueAsDouble( );
-            Count = storage.GetValueAsInt( );
         }
                 
         public ItemData RequestItem( int count )
         {
             if ( IsDestroyed( ) )
+            {
+                return null;
+            }
+
+            if ( IsReadonly( ) )
             {
                 return null;
             }
@@ -201,6 +221,11 @@ namespace ApplicationFacade
                 return false;
             }
 
+            if ( IsReadonly( ) )
+            {
+                return false;
+            }
+
             if ( ParentItem == null )
             {
                 return false;
@@ -227,7 +252,7 @@ namespace ApplicationFacade
             return true;
         }
 
-        public static ItemData AddItemToStock( string name, int count = 1, double weight = 0 )
+        public static void AddItemToStock( string name, int count = 1, double weight = 0 )
         {
             ItemData item = new ItemData( Warehouse.GetUniqueID( ItemStock.ToArray( ) ) )
             {
@@ -237,8 +262,18 @@ namespace ApplicationFacade
             };
 
             ItemStock.Add( item );
+        }
+        
+        internal static void AddItemToStock( long idRef, string name, int count = 1, double weight = 0 )
+        {
+            ItemData item = new ItemData( idRef )
+            {
+                Name = name,
+                Count = count,
+                Weight = weight,
+            };
 
-            return item;
+            ItemStock.Add( item );
         }
 
         public static bool RemoveItemFromStock( ItemData item )

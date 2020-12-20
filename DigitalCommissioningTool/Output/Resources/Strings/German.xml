@@ -69,28 +69,28 @@
     <xs:string xs:name="KeyBinds" xs:id="23">
         <xs:value>Tastenbelegung</xs:value>
     </xs:string>
-    <xs:string xs:name="Edit" xs:id="34">
+    <xs:string xs:name="Edit" xs:id="24">
         <xs:value>Bearbeiten</xs:value>
     </xs:string>
-    <xs:string xs:name="AddItem" xs:id="35">
+    <xs:string xs:name="AddItem" xs:id="25">
         <xs:value>Hinzufügen</xs:value>
     </xs:string>
-    <xs:string xs:name="WarehouseItems" xs:id="36">
+    <xs:string xs:name="WarehouseItems" xs:id="26">
         <xs:value>Warenhaus</xs:value>
     </xs:string>
-    <xs:string xs:name="SaveItem" xs:id="37">
+    <xs:string xs:name="SaveItem" xs:id="27">
         <xs:value>Speichern</xs:value>
     </xs:string>
-    <xs:string xs:name="Count" xs:id="38">
+    <xs:string xs:name="Count" xs:id="28">
         <xs:value>Anzahl</xs:value>
     </xs:string>
-    <xs:string xs:name="Weight" xs:id="39">
+    <xs:string xs:name="Weight" xs:id="29">
         <xs:value>Gewicht</xs:value>
     </xs:string>
-    <xs:string xs:name="Name" xs:id="40">
+    <xs:string xs:name="Name" xs:id="30">
         <xs:value>Name</xs:value>
     </xs:string>
-    <xs:string xs:name="EditItem" xs:id="41">
+    <xs:string xs:name="EditItem" xs:id="31">
         <xs:value>Bearbeiten</xs:value>
     </xs:string>
 </xs:StringResources>

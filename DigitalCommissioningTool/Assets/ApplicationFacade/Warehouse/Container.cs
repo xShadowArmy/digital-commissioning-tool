@@ -27,14 +27,40 @@ namespace ApplicationFacade
             Data = new InternalProjectContainer( );
         }
 
+        public StorageData CreateContainer( )
+        {
+            LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
+            
+            StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale );
+            
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+            
+            container.GameObjectDataChanged += GameObjectHasChanged;
+            container.StorageChanged += ContainerHasChanged;
+
+            container.Object.name = "Container" + container.GetID( );
+
+            ContainerData.Add( container );
+
+            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.SlotCount, new ProjectTransformationData( GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale ) ) );
+
+            OnSContainerCreated( container );
+            
+            return container;
+        }
+        
         public StorageData CreateContainer( Vector3 position, Quaternion rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
 
-            StorageData container = new StorageData( GetUniqueID( ContainerData.ToArray( ) ), position, rotation, scale );
+            StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), position, rotation, scale );
+
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), position, rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
 
             container.GameObjectDataChanged += GameObjectHasChanged;
             container.StorageChanged += ContainerHasChanged;
+
+            container.Object.name = "Container" + container.GetID( );
 
             ContainerData.Add( container );
 
@@ -49,12 +75,18 @@ namespace ApplicationFacade
         {
             LogManager.WriteInfo( "Mobiles Regal wird hinzugefuegt.", "Warehouse", "AddContainer" );
 
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+
             container.GameObjectDataChanged += GameObjectHasChanged;
             container.StorageChanged += ContainerHasChanged;
 
+            container.Object.name = "Container" + container.GetID( );
+
             ContainerData.Add( container );
 
-            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.SlotCount, new ProjectTransformationData( container.Position, container.Rotation, container.Scale ) ) );
+            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.SlotCount, new ProjectTransformationData( GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale ) ) );
+
+            OnSContainerCreated( container );
         }
 
         public bool RemoveContainer( StorageData container )
@@ -74,8 +106,10 @@ namespace ApplicationFacade
                     container.StorageChanged -= ContainerHasChanged;
 
                     Data.Container.Remove( Data.Container[ i ] );
-
+                                        
                     OnContainerDeleted( container );
+
+                    container.Destroy( );
 
                     return true;
                 }
@@ -113,52 +147,67 @@ namespace ApplicationFacade
 
             return null;
         }
-
-        public ItemData CreateContainerItem( Vector3 position, Quaternion rotation, Vector3 scale, StorageData container, int slot )
-        {
-            LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "CreateContainerItem" );
-            
-
-            return null;
-        }
-
+        
         public void AddItemToContainer( StorageData container, ItemData item, int slot )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird erstellt.", "ContainerData", "AddItemToContainer" );
-                     
+
+            if ( container.Slots[slot] != null )
+            {
+                if ( container.RemoveItem( container.GetItems[slot] ) )
+                {
+                    container.GetItems[slot].ReturnItem( );
+                }
+            }
+
+            container.AddItem( item, slot );
             
+            item.GameObjectDataChanged += GameObjectHasChanged;
+            item.ItemChanged += ContainerItemHasChanged;
+
+            foreach ( ProjectStorageData data in Data.Container )
+            {
+                if ( data.ID == container.GetID( ) )
+                {
+                    data.Items.Add( new ProjectItemData( item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
+                }
+            }
         }
 
-        public bool RemoveItemFromContainer( StorageData storage, ItemData item )
+        public bool RemoveItemFromContainer( StorageData container, ItemData item )
         {
             LogManager.WriteInfo( "Ein ContainerItem wird entfernt.", "ContainerData", "RemoveItemFromContainer" );
-            
 
-            return false;
-        }
-
-        private long GetUniqueID( IDataIdentifier[ ] idUsed )
-        {
-            bool used = false;
-
-            for ( int i = 0; ; i++ )
+            if ( container.GetItems[0] == null )
             {
-                used = false;
+                return false;
+            }
 
-                for ( int j = 0; j < idUsed.Length; j++ )
+            if ( container.RemoveItem( item ) )
+            {
+                item.ReturnItem( );
+                
+                item.GameObjectDataChanged -= GameObjectHasChanged;
+                item.ItemChanged -= ContainerItemHasChanged;
+
+                foreach ( ProjectStorageData data in Data.Container )
                 {
-                    if ( i + 1 == idUsed[ j ].GetID( ) )
+                    if ( data.ID == container.GetID( ) )
                     {
-                        used = true;
-                        break;
+                        foreach( ProjectItemData idata in data.Items )
+                        {
+                            if ( idata.IDRef == item.GetID() )
+                            {
+                                return data.Items.Remove( idata );
+                            }
+                        }
                     }
                 }
 
-                if ( !used )
-                {
-                    return i + 1;
-                }
+                return false;
             }
+
+            return false;
         }
         
         private void GameObjectHasChanged( GameObjectData obj, GameObjectDataType type )
@@ -251,28 +300,8 @@ namespace ApplicationFacade
         private void ContainerItemHasChanged( ItemData item )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageRackItemHasChanged" );
-
-           // for ( int i = 0; i < ContainerData.Count; i++ )
-           // {
-           //     if ( item.Parent.GetID( ) == ContainerData[ i ].GetID( ) )
-           //     {
-           //         for ( int j = 0; j < Data.Container[ i ].GetItems.Length; j++ )
-           //         {
-           //             if ( Data.Container[ i ].GetItems[ j ].IDRef == item.GetID( ) )
-           //             {
-           //                 ProjectTransformationData data = new ProjectTransformationData( item.Position, item.Rotation, item.Scale );
-           //
-           //                 Data.Container[ i ].Items.Remove( Data.Container[ i ].GetItems[ j ] );
-           //                 Data.Container[ i ].Items.Insert( j, new ProjectItemData( item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) ) );
-           //
-           //                 break;
-           //             }
-           //         }
-           //
-           //         break;
-           //     }
-           // }
-        }  //
+            
+        }  
         
         protected virtual void OnSContainerCreated( StorageData data )
         {

@@ -25,6 +25,8 @@ namespace ApplicationFacade
 
         public bool Destroyed { get; private set; }
 
+        public bool Readonly { get; internal set; }
+
         protected GameObjectDataType ObjType { get; set; }
 
         protected long ID { get; set; }
@@ -76,6 +78,11 @@ namespace ApplicationFacade
                 return;
             }
 
+            if ( IsReadonly() )
+            {
+                return;
+            }
+
             Position = position;
 
             if ( Object != null )
@@ -89,6 +96,11 @@ namespace ApplicationFacade
         public void SetRotation( Quaternion rotation )
         {
             if ( IsDestroyed( ) )
+            {
+                return;
+            }
+
+            if ( IsReadonly( ) )
             {
                 return;
             }
@@ -110,6 +122,11 @@ namespace ApplicationFacade
                 return;
             }
 
+            if ( IsReadonly( ) )
+            {
+                return;
+            }
+
             Scale = scale;
 
             if ( Object != null )
@@ -123,6 +140,11 @@ namespace ApplicationFacade
         public void SetTransform( Transform transform )
         {
             if ( IsDestroyed( ) )
+            {
+                return;
+            }
+
+            if ( IsReadonly( ) )
             {
                 return;
             }
@@ -144,6 +166,11 @@ namespace ApplicationFacade
         public void ChangeGameObject( GameObject obj )
         {
             if ( IsDestroyed( ) )
+            {
+                return;
+            }
+
+            if ( IsReadonly( ) )
             {
                 return;
             }
@@ -189,6 +216,19 @@ namespace ApplicationFacade
         protected virtual void OnChange()
         {
             GameObjectDataChanged?.Invoke( this, ObjType );
+        }
+
+        protected bool IsReadonly()
+        {
+            if ( Destroyed )
+            {
+                LogManager.WriteWarning( "Es soll ein Objekt geändert werden das Readonly ist!", "GameObjectData", "IsReadonly" );
+                Debug.LogWarning( "Es soll ein Objekt geändert werden das Readonly ist!" );
+
+                return true;
+            }
+
+            return false;
         }
 
         protected bool IsDestroyed()

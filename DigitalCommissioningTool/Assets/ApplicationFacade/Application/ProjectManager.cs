@@ -12,7 +12,6 @@ namespace ApplicationFacade
 {
     public class ProjectManager
     {
-
         public ProjectData Data { get; private set; }
         public ProjectSettings Settings { get; private set; }
 
@@ -20,7 +19,8 @@ namespace ApplicationFacade
         internal SettingsHandler  SHandler { get; set; }
         internal WarehouseHandler WHandler { get; set; }
         internal ContainerHandler CHandler { get; set; }
-        
+        internal StockHandler     IHandler { get; set; }
+
         public string ProjectName
         {
             get
@@ -61,12 +61,19 @@ namespace ApplicationFacade
                 return;
             }
 
+            WallData.NorthWallLength = 0;
+            WallData.EastWallLength  = 0;
+            WallData.SouthWallLength = 0;
+            WallData.WestWallLength  = 0;
+
             ArchiveManager.ExtractArchive( Paths.ProjectsPath + name + ".prj", Paths.TempPath );
             
             DHandler = new DataHandler( );
             SHandler = new SettingsHandler( );
             WHandler = new WarehouseHandler( );
             CHandler = new ContainerHandler( );
+            IHandler = new StockHandler( );
+
 
             InternalProjectData idata = DHandler.LoadFile( );
             Data = new ProjectData( );
@@ -75,6 +82,8 @@ namespace ApplicationFacade
             InternalProjectSettings isettings = SHandler.LoadFile( );
             Settings = new ProjectSettings( );
             ReadProjectSettings( isettings );
+            
+            ReadProjectStock( );
 
             InternalProjectWarehouse iwarehouse = WHandler.LoadFile( );
             ReadProjectWarehouse( iwarehouse, warehouse );
@@ -97,6 +106,7 @@ namespace ApplicationFacade
             WriteProjectSettings( );
             WriteProjectWarehouse( warehouse );
             WriteProjectContainer( container );
+            WriteProjectStock( );
 
             if ( File.Exists( Data.ProjectPath + Data.ProjectName + InternalProjectData.Extension ) )
             {
@@ -115,6 +125,7 @@ namespace ApplicationFacade
             WHandler = new WarehouseHandler( );
             SHandler = new SettingsHandler( );
             CHandler = new ContainerHandler( );
+            IHandler = new StockHandler( );
 
             Paths.ClearTempPath( );
         }
@@ -133,11 +144,17 @@ namespace ApplicationFacade
 
                 return;
             }
-            
+
+            WallData.NorthWallLength = 0;
+            WallData.EastWallLength = 0;
+            WallData.SouthWallLength = 0;
+            WallData.WestWallLength = 0;
+
             DHandler = new DataHandler( );
             SHandler = new SettingsHandler( );
             WHandler = new WarehouseHandler( );
             CHandler = new ContainerHandler( );
+            IHandler = new StockHandler( );
 
             Data = new ProjectData( );
             ProjectName = name;
@@ -181,6 +198,18 @@ namespace ApplicationFacade
             }
         }
 
+        private void WriteProjectStock()
+        {
+            ProjectItemData[] data = new ProjectItemData[ItemData.GetStock.Length];
+
+            for( int i = 0; i < data.Length; i++ )
+            {
+                data[i] = new ProjectItemData( ItemData.GetStock[i].GetID(), ItemData.GetStock[i].StockCount, ItemData.GetStock[i].Weight, ItemData.GetStock[i].Name, new ProjectTransformationData() );
+            }
+
+            IHandler.SaveFile( data );
+        }
+
         private void WriteProjectData( )
         {
             DHandler.SaveFile( Data.Data );
@@ -199,6 +228,14 @@ namespace ApplicationFacade
         private void WriteProjectContainer( Container container )
         {
             CHandler.SaveFile( container.Data );
+        }
+
+        private void ReadProjectStock()
+        {
+            foreach( ProjectItemData item in IHandler.LoadFile() )
+            {
+                ItemData.AddItemToStock( item.Name, item.Count, item.Weight );
+            }
         }
 
         private void ReadProjectData( InternalProjectData data )
@@ -242,14 +279,14 @@ namespace ApplicationFacade
                 warehouse.AddWall( wall );
             }
             
-            //warehouse.Walls[0].Object.tag = "LeftWallRim";
-            //warehouse.Walls[WallData.NorthWallLength - 1].Object.tag = "RightWallRim";
-            //warehouse.Walls[WallData.NorthWallLength].Object.tag = "LeftWallRim";
-            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength - 1].Object.tag = "RightWallRim";
-            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength].Object.tag = "LeftWallRim";
-            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength - 1].Object.tag = "RightWallRim";
-            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength].Object.tag = "LeftWallRim";
-            //warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength + WallData.WesthWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[0].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[WallData.NorthWallLength].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength - 1].Object.tag = "RightWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength].Object.tag = "LeftWallRim";
+            warehouse.Walls[WallData.NorthWallLength + WallData.EastWallLength + WallData.SouthWallLength + WallData.WestWallLength - 1].Object.tag = "RightWallRim";
 
             for ( int i = 0; i < iwarehouse.Windows.Count; i++ )
             {
@@ -290,17 +327,9 @@ namespace ApplicationFacade
 
                 for ( int j = 0; j < iwarehouse.StorageRacks[i].GetItems.Length; j++ )
                 {
-                    ItemData item = new ItemData( iwarehouse.StorageRacks[ i ].GetItems[ j ].IDRef )
-                    {
-                        Position = iwarehouse.StorageRacks[i].Transformation.Position,
-                        Rotation = iwarehouse.StorageRacks[i].Transformation.Rotation,
-                        Scale = iwarehouse.StorageRacks[i].Transformation.Scale,
-                        Name = iwarehouse.StorageRacks[i].GetItems[j].Name,
-                        Weight = iwarehouse.StorageRacks[i].GetItems[j].Weight,
-                        Count = iwarehouse.StorageRacks[i].GetItems[j].Count
-                    };
+                    ItemData item = ItemData.RequestStockItem( iwarehouse.StorageRacks[i].GetItems[j].Name );
 
-                    warehouse.AddItemToStorageRack( data, item, j );
+                    warehouse.AddItemToStorageRack( data, item.RequestItem( iwarehouse.StorageRacks[i].GetItems[j].Count ), j );
                 }
             }
         }
@@ -321,17 +350,9 @@ namespace ApplicationFacade
 
                 for ( int j = 0; j < icontainer.Container[ i ].GetItems.Length; j++ )
                 {
-                    ItemData item = new ItemData( icontainer.Container[ i ].GetItems[ j ].IDRef )
-                    {
-                        Position = icontainer.Container[i].GetItems[j].Transformation.Position,
-                        Rotation = icontainer.Container[i].GetItems[j].Transformation.Rotation,
-                        Scale = icontainer.Container[i].GetItems[j].Transformation.Scale,
-                        Name = icontainer.Container[i].GetItems[j].Name,
-                        Weight = icontainer.Container[i].GetItems[j].Weight,
-                        Count = icontainer.Container[i].GetItems[j].Count
-                    };
+                    ItemData item = ItemData.RequestStockItem( icontainer.Container[i].GetItems[j].Name );
 
-                    container.AddItemToContainer( data,  item, j );
+                    container.AddItemToContainer( data, item.RequestItem( icontainer.Container[i].GetItems[j].Count ), j );
                 }
             }
         }
