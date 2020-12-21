@@ -8,12 +8,22 @@ using SystemFacade;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Schreibt und Ließt die Daten des kompletten Lagerbestandes für ein Projekt.
+    /// </summary>
     public class StockHandler
     {
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         public StockHandler()
         {
         }
         
+        /// <summary>
+        /// Ließt die Lagerdaten aus der Datei.
+        /// </summary>
+        /// <returns>Gibt Informationen über alle gespeicherten Items zurück.</returns>
         public ProjectItemData[] LoadFile()
         {
             LogManager.WriteInfo( "ProjektStock Datei wird gelesen.", "StockHandler", "LoadFile" );
@@ -41,6 +51,10 @@ namespace ProjectComponents.FileIntegration
             return data.ToArray();
         }
 
+        /// <summary>
+        /// Speichert die Lagerdaten in die Datei.
+        /// </summary>
+        /// <param name="data">Die Daten die gespeichert werden sollen.</param>
         public void SaveFile( ProjectItemData[] data )
         {
             LogManager.WriteInfo( "ProjektStock Datei wird geschrieben.", "StockHandler", "SaveFile" );

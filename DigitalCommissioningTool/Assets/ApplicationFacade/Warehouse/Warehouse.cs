@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
-using AppData.Warehouse;
 using SystemFacade;
 using UnityEngine;
 
@@ -66,6 +62,9 @@ namespace ApplicationFacade
         /// </summary>
         internal InternalProjectWarehouse Data { get; private set; }
         
+        /// <summary>
+        /// Gibt alle Regal Objekte die aktuell im Lagerhaus stehen zurück.
+        /// </summary>
         public StorageData[] StorageRacks
         {
             get
@@ -89,7 +88,7 @@ namespace ApplicationFacade
             ObjectSpawn = GameObject.FindGameObjectWithTag( "Respawn" );
         }
 
-        // Floor
+        // --- Floor ---
 
         /// <summary>
         /// Erstellt einen Boden an dem Objektspawn.
@@ -131,6 +130,11 @@ namespace ApplicationFacade
         internal void AddFloor( FloorData floor )
         {
             LogManager.WriteInfo( "Lagerhausboden wird hinzugefuegt.", "Warehouse", "AddFloor" );
+
+            if ( Floor.Contains( floor ) )
+            {
+                return;
+            }
 
             CreateFloorObject( floor );
         }
@@ -187,9 +191,17 @@ namespace ApplicationFacade
             return null;
         }
 
-        // Wall
+        // --- Wall ---
 
-        
+        /// <summary>
+        /// Erstellt eine Wand mit den angegebenen Eigenschaften.
+        /// </summary>
+        /// <param name="position">Die Position der Wand.</param>
+        /// <param name="rotation">Die Rotation der Wand.</param>
+        /// <param name="scale">Die Skalierung der Wand.</param>
+        /// <param name="face">Die Ausrichtung der Wand.</param>
+        /// <param name="wClass">Gibt an ob die Wand das Lagerhaus oder einen internen Raum definiert.</param>
+        /// <returns>Das <see cref="WallData"/> Objekt das die Wand repräsentiert.</returns>
         public WallData CreateWall( Vector3 position, Quaternion rotation, Vector3 scale, WallFace face, WallClass wClass )
         {
             LogManager.WriteInfo( "Lagehauswand wird erstellt.", "Warehouse", "CreateWall" );
@@ -204,7 +216,11 @@ namespace ApplicationFacade
 
             return wall;
         }
-
+        
+        /// <summary>
+        /// Fügt ein Wandobjekt zur Lagerhalle hinzu.
+        /// </summary>
+        /// <param name="wall">Das Objekt das die Wand repräsentiert.</param>
         internal void AddWall( WallData wall )
         {
             LogManager.WriteInfo( "Lagerhauswand wird hinzugefuegt.", "Warehouse", "AddWall" );
@@ -212,6 +228,11 @@ namespace ApplicationFacade
             CreateWallObject( wall );
         }
 
+        /// <summary>
+        /// Entfernt die angegebene Wand.
+        /// </summary>
+        /// <param name="wall">Die Wand die entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn erfolgreich.</returns>
         public bool RemoveWall( WallData wall )
         {
             LogManager.WriteInfo( "Lagerhauswand wird entfernt.", "Warehouse", "RemoveWall" );
@@ -219,6 +240,11 @@ namespace ApplicationFacade
             return DestroyWallObject( wall );
         }
 
+        /// <summary>
+        /// SUcht ein Wand Objekt anhand der gegebenen ID.
+        /// </summary>
+        /// <param name="id">Die ID des Wand Objekts.</param>
+        /// <returns>Gibt das <see cref="WallData"/> Objekt das die Wand repräsentiert zurück oder null.</returns>
         public WallData GetWall( long id )
         {
             LogManager.WriteInfo( "Lagehauswand wird abgefragt.", "Warehouse", "GetWall" );
@@ -233,7 +259,12 @@ namespace ApplicationFacade
 
             return null;
         }
-
+  
+        /// <summary>
+        /// SUcht ein Wand Objekt anhand des GameObjects.
+        /// </summary>
+        /// <param name="obj">Das GameObject der Wand.</param>
+        /// <returns>Gibt das <see cref="WallData"/> Objekt das die Wand repräsentiert zurück oder null.</returns>
         public WallData GetWall( GameObject obj )
         {
             LogManager.WriteInfo( "Lagehauswand wird abgefragt.", "Warehouse", "GetWall" );
@@ -249,9 +280,12 @@ namespace ApplicationFacade
             return null;
         }
 
-        // Window
+        // --- Window ---
 
-        
+        /// <summary>
+        /// Erstellt ein neues Fenster am default Spawnpunkt.
+        /// </summary>
+        /// <returns>Das <see cref="WindowData"/> Objekt dass das Fenster repräsentiert.</returns>
         public WindowData CreateWindow()
         {
             LogManager.WriteInfo( "Lagerhausfenster wird erstellt.", "Warehouse", "CreateWindow" );
@@ -263,6 +297,13 @@ namespace ApplicationFacade
             return window;
         }
 
+        /// <summary>
+        /// Erstellt ein neues Fenster mit den angegebenen Eigenschaften.
+        /// </summary>
+        /// <param name="position">Die Position des Fensters.</param>
+        /// <param name="rotation">Die Rotation des Fensters.</param>
+        /// <param name="scale">Die Skalierung des Fensters.</param>
+        /// <returns>Gibt das <see cref="WindowData"/> Objekt zurück dass das Fenster repräsentiert.</returns>
         public WindowData CreateWindow( Vector3 position, Quaternion rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Lagerhausfenster wird erstellt.", "Warehouse", "CreateWindow" );
@@ -274,20 +315,39 @@ namespace ApplicationFacade
             return window;
         }
 
+        /// <summary>
+        /// Fügt ein Fenster Objekt zur Lagerhalle hinzu.
+        /// </summary>
+        /// <param name="window">Das Fenster das hinzugefügt werden soll.</param>
         internal void AddWindow( WindowData window )
         {
             LogManager.WriteInfo( "Lagehaus Fenster wird hinzugefuegt.", "Warehouse", "AddWindow" );
 
+            if ( Windows.Contains( window ) )
+            {
+                return;
+            }
+
             CreateWindowObject( window );
         }
 
+        /// <summary>
+        /// Entfernt das angegebene Fenster.
+        /// </summary>
+        /// <param name="window">Das Fenster das entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemoveWindow( WindowData window )
         {
             LogManager.WriteInfo( "Lagehaus Fenster wird entfernt.", "Warehouse", "RemoveWindow" );
             
             return DestroyWindowObject( window );
         }
-
+        
+        /// <summary>
+        /// SUcht ein Fenster Objekt anhand der gegebenen ID.
+        /// </summary>
+        /// <param name="id">Die ID des Fenster Objekts.</param>
+        /// <returns>Gibt das <see cref="WindowData"/> Objekt das das Fenster repräsentiert zurück oder null.</returns>
         public WindowData GetWindow( long id )
         {
             LogManager.WriteInfo( "Lagerhaufenster wird abgefragt.", "Warehouse", "GetWindow" );
@@ -302,7 +362,12 @@ namespace ApplicationFacade
 
             return null;
         }
-
+        
+        /// <summary>
+        /// SUcht ein Fenster Objekt anhand des GameObjects.
+        /// </summary>
+        /// <param name="obj">Das GameObject des Fenster Objekts.</param>
+        /// <returns>Gibt das <see cref="WindowData"/> Objekt das das Fenster repräsentiert zurück oder null.</returns>
         public WindowData GetWindow( GameObject obj )
         {
             LogManager.WriteInfo( "Lagerhaufenster wird abgefragt.", "Warehouse", "GetWindow" );
@@ -318,9 +383,13 @@ namespace ApplicationFacade
             return null;
         }
 
-        // Door
-
+        // --- Door ---
         
+        /// <summary>
+        /// Erstellt eine neue Tür am default Spawnpunkt.
+        /// </summary>
+        /// <param name="type">Die Türart.</param>
+        /// <returns>Das <see cref="DoorData"/> Objekt dass die Tür repräsentiert.</returns>
         public DoorData CreateDoor( DoorType type )
         {
             LogManager.WriteInfo( "Lagerhaustuer wird erstellt.", "Warehouse", "CreateDoor" );
@@ -334,7 +403,15 @@ namespace ApplicationFacade
 
             return door;
         }
-
+        
+        /// <summary>
+        /// Erstellt eine neue Tür mit den angegebenen Eigenschaften.
+        /// </summary>
+        /// <param name="position">Die Position der Tür.</param>
+        /// <param name="rotation">Die Rotation der Tür.</param>
+        /// <param name="scale">Die Skalierung der Tür.</param>
+        /// <param name="type">Die Türart.</param>
+        /// <returns>Gibt das <see cref="DoorData"/> Objekt zurück dass die Tür repräsentiert.</returns>
         public DoorData CreateDoor( Vector3 position, Quaternion rotation, Vector3 scale, DoorType type )
         {
             LogManager.WriteInfo( "Lagerhaustuer wird erstellt.", "Warehouse", "CreateDoor" );
@@ -349,20 +426,39 @@ namespace ApplicationFacade
             return door;
         }
 
+        /// <summary>
+        /// Fügt ein Tür Objekt zur Lagerhalle hinzu.
+        /// </summary>
+        /// <param name="door">Die Tür die hinzugefügt werden soll.</param>
         internal void AddDoor( DoorData door )
         {
             LogManager.WriteInfo( "Lagehaustuer wird hinzugefuegt.", "Warehouse", "AddDoor" );
 
+            if ( Doors.Contains( door ) )
+            {
+                return;
+            }
+
             CreateDoorObject( door );
         }
-
+        
+        /// <summary>
+        /// Entfernt die angegebene Tür.
+        /// </summary>
+        /// <param name="door">Die Tür die entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemoveDoor( DoorData door )
         {
             LogManager.WriteInfo( "Lagerhaustuer wird entfernt.", "Warehouse", "RemoveDoor" );
             
             return DestroyDoorObject( door );
         }
-
+        
+        /// <summary>
+        /// SUcht ein Tür Objekt anhand der gegebenen ID.
+        /// </summary>
+        /// <param name="id">Die ID des Tür Objekts.</param>
+        /// <returns>Gibt das <see cref="DoorData"/> Objekt das die Tür repräsentiert zurück oder null.</returns>
         public DoorData GetDoor( long id )
         {
             LogManager.WriteInfo( "Lagerhaustuer wird abgefragt.", "Warehouse", "GetDoor" );
@@ -377,7 +473,12 @@ namespace ApplicationFacade
 
             return null;
         }
-
+        
+        /// <summary>
+        /// SUcht ein Tür Objekt anhand des GameObjects.
+        /// </summary>
+        /// <param name="obj">Das GameObject des Tür Objekts.</param>
+        /// <returns>Gibt das <see cref="DoorData"/> Objekt das die Tür repräsentiert zurück oder null.</returns>
         public DoorData GetDoor( GameObject obj )
         {
             LogManager.WriteInfo( "Lagerhaustuer wird abgefragt.", "Warehouse", "GetDoor" );
@@ -393,9 +494,12 @@ namespace ApplicationFacade
             return null;
         }
 
-        // StorageRack
+        // --- StorageRack ---
 
-        
+        /// <summary>
+        /// Erstellt ein neues Regal am default Spawnpunkt.
+        /// </summary>
+        /// <returns>Das <see cref="StorageData"/> Objekt das das Regal repräsentiert.</returns>
         public StorageData CreateStorageRack( )
         {
             LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
@@ -411,6 +515,13 @@ namespace ApplicationFacade
             return storage;
         }
 
+        /// <summary>
+        /// Erstellt ein neues Regal mit den angegebenen Eigenschaften.
+        /// </summary>
+        /// <param name="position">Die Position des Regals.</param>
+        /// <param name="rotation">Die Rotation des Regals</param>
+        /// <param name="scale">Die Skalierung desRegals.</param>
+        /// <returns>Das <see cref="StorageData"/> Objekt das das Regal repräsentiert.</returns>
         public StorageData CreateStorageRack( Vector3 position, Quaternion rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Lagerhausregal wird erstellt.", "Warehouse", "CreateStorageRack" );
@@ -424,6 +535,10 @@ namespace ApplicationFacade
             return storage;
         }
 
+        /// <summary>
+        /// Fügt ein Regal Objekt zur Lagerhalle hinzu.
+        /// </summary>
+        /// <param name="storage">Das Regal das hinzugefügt werden soll.</param>
         internal void AddStorageRack( StorageData storage )
         {
             LogManager.WriteInfo( "Lagerhausregal wird hinzugefuegt.", "Warehouse", "AddStorageRack" );
@@ -433,6 +548,11 @@ namespace ApplicationFacade
             storage.Initialize( );
         }
 
+        /// <summary>
+        /// Entfernt das angegebene Regal.
+        /// </summary>
+        /// <param name="storage">Das Regal das entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemoveStorageRack( StorageData storage )
         {
             LogManager.WriteInfo( "Lagerhausregal wird entfernt.", "Warehouse", "RemoveStorageRack" );
@@ -442,6 +562,11 @@ namespace ApplicationFacade
             return false;
         }
 
+        /// <summary>
+        /// SUcht ein Regal Objekt anhand der gegebenen ID.
+        /// </summary>
+        /// <param name="id">Die ID des Regal Objekts.</param>
+        /// <returns>Gibt das <see cref="StorageData"/> Objekt das das Regal repräsentiert zurück oder null.</returns>
         public StorageData GetStorageRack( long id )
         {
             LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
@@ -457,6 +582,11 @@ namespace ApplicationFacade
             return null;
         }
 
+        /// <summary>
+        /// SUcht ein Regal Objekt anhand des GameObjects.
+        /// </summary>
+        /// <param name="obj">Das GameObject des Regal Objekts.</param>
+        /// <returns>Gibt das <see cref="StorageData"/> Objekt das das Regal repräsentiert zurück oder null.</returns>
         public StorageData GetStorageRack( GameObject obj )
         {
             LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
@@ -472,8 +602,14 @@ namespace ApplicationFacade
             return null;
         }
         
-        // StorageRackItem
+        // --- StorageRackItem ---
          
+        /// <summary>
+        /// Fügt ein Item aus dem Lagerbestand zu einem Regal hinzu.
+        /// </summary>
+        /// <param name="storage">Das Regal zu dem das Item hinzugefpgt werden soll.</param>
+        /// <param name="item">Das Item das hinzugefügt werden soll.</param>
+        /// <param name="slot">Der Slot auf dem das Item abgelegt werden soll.</param>
         public void AddItemToStorageRack( StorageData storage, ItemData item, int slot )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
@@ -500,6 +636,12 @@ namespace ApplicationFacade
             }
         }
 
+        /// <summary>
+        /// Entfernt ein Item aus einem Regal.
+        /// </summary>
+        /// <param name="storage">Das Regal aus dem ein Item entfernt werden soll.</param>
+        /// <param name="item">Das Item das entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemoveItemFromStorageRack( StorageData storage, ItemData item )
         {
             LogManager.WriteInfo( "Ein RegalItem wird entfernt.", "Warehouse", "RemoveItemFromStorageRack" );
@@ -511,10 +653,10 @@ namespace ApplicationFacade
             
             if ( storage.RemoveItem( item ) )
             {
-                item.ReturnItem( );
-
-                item.GameObjectDataChanged -= GameObjectHasChanged;
-                item.ItemChanged -= StorageRackItemHasChanged;
+                //item.ReturnItem( );
+                //
+                //item.GameObjectDataChanged -= GameObjectHasChanged;
+                //item.ItemChanged -= StorageRackItemHasChanged;
 
                 foreach ( ProjectStorageData data in Data.StorageRacks )
                 {
@@ -535,7 +677,12 @@ namespace ApplicationFacade
 
             return false;
         }
-        
+
+        /// <summary>
+        /// Sucht anhand des <see cref="GameObject"/> ein Regalitem.
+        /// </summary>
+        /// <param name="obj">Das <see cref="GameObject"/> mit dem gesucht wird.</param>
+        /// <returns>Gibt das passende Item oder null zurück.</returns>
         public ItemData GetStorageRackItem( GameObject obj )
         {
             LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
@@ -553,8 +700,13 @@ namespace ApplicationFacade
             return null;
         }
 
-        // Implementierungen
+        // --- Implementierungen ---
 
+        /// <summary>
+        /// Erzeugt eine für die Objektgruppe eindeutige ID.
+        /// </summary>
+        /// <param name="idUsed">Enthält alle IDs die bereits in der Objektgruppe vorhanden sind.</param>
+        /// <returns>Eine für die Objektgruppe eindeutige ID.</returns>
         internal static long GetUniqueID( IDataIdentifier[] idUsed )
         {
             bool used = false;
@@ -578,7 +730,11 @@ namespace ApplicationFacade
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Erstellt ein Tür Objekt und lädt es in die Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das in die Umgebung geladen werden soll.</param>
         private void CreateFloorObject( FloorData data )
         {
             data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableFloor" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( "FloorDefinition" ).transform ) );
@@ -593,6 +749,11 @@ namespace ApplicationFacade
             Data.Floor.Add( new ProjectFloorData( data.GetID( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
         }
 
+        /// <summary>
+        /// Zerstört ein Boden Objekt und entfernt es aus der Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das Zerstört werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         private bool DestroyFloorObject( FloorData data )
         {
             if ( !Floor.Remove( data ) )
@@ -618,6 +779,10 @@ namespace ApplicationFacade
             return false;
         }
 
+        /// <summary>
+        /// Erstellt ein Wand Objekt und lädt es in die Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das in die Umgebung geladen werden soll.</param>
         private void CreateWallObject( WallData data )
         {
             data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( data.Face.ToString( ) + "Wall" ).transform ) );
@@ -663,6 +828,11 @@ namespace ApplicationFacade
             }
         }
 
+        /// <summary>
+        /// Zerstört ein Wand Objekt und entfernt es aus der Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das Zerstört werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         private bool DestroyWallObject( WallData data )
         {
             if ( !Walls.Remove( data ) )
@@ -716,6 +886,10 @@ namespace ApplicationFacade
             return false;
         }
 
+        /// <summary>
+        /// Erstellt ein Fenster Objekt und lädt es in die Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das in die Umgebung geladen werden soll.</param>
         private void CreateWindowObject( WindowData data )
         {
             data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWindow" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( "WindowDefinition" ).transform ) );
@@ -730,6 +904,11 @@ namespace ApplicationFacade
             Data.Windows.Add( new ProjectWindowData( data.GetID( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
         }
 
+        /// <summary>
+        /// Zerstört ein Fenster Objekt und entfernt es aus der Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das Zerstört werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         private bool DestroyWindowObject( WindowData data )
         {
             if ( !Windows.Remove( data ) )
@@ -755,6 +934,10 @@ namespace ApplicationFacade
             return false;
         }
 
+        /// <summary>
+        /// Erstellt ein Tür Objekt und lädt es in die Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das in die Umgebung geladen werden soll.</param>
         private void CreateDoorObject( DoorData data )
         {
             data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableDoor" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( "DoorDefinition" ).transform ) );
@@ -769,6 +952,11 @@ namespace ApplicationFacade
             Data.Doors.Add( new ProjectDoorData( data.GetID( ), data.Type.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
         }
 
+        /// <summary>
+        /// Zerstört ein Tür Objekt und entfernt es aus der Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das Zerstört werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         private bool DestroyDoorObject( DoorData data )
         {
             if ( !Doors.Remove( data ) )
@@ -793,7 +981,11 @@ namespace ApplicationFacade
 
             return false;
         }
-
+        
+        /// <summary>
+        /// Erstellt ein Regal Objekt und lädt es in die Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das in die Umgebung geladen werden soll.</param>
         private void CreateStorageRackObject( StorageData data )
         {
             data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
@@ -810,6 +1002,11 @@ namespace ApplicationFacade
             OnStorageRackModified( 0, data );
         }
 
+        /// <summary>
+        /// Zerstört ein Regal Objekt und entfernt es aus der Umgebung.
+        /// </summary>
+        /// <param name="data">Das Objekt das Zerstört werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         private bool DestroyStorageRackObject( StorageData data )
         {
             if ( !StorageRackList.Remove( data ) )
@@ -839,7 +1036,11 @@ namespace ApplicationFacade
 
         // Eventhandler
 
-        
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="GameObjectData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="obj">Das betroffene Objekt.</param>
+        /// <param name="type">Gibt an um was für einen Teil des Lagerhauses es sicht handelt.</param>
         private void GameObjectHasChanged( GameObjectData obj, GameObjectDataType type )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere GameObjectData. Type=" + type.ToString( ), "Warehouse", "GameObjectHasChanged" );
@@ -882,7 +1083,11 @@ namespace ApplicationFacade
                     break;
             }
         }
-
+        
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="FloorData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="floor">Das betroffene Objekt.</param>
         private void FloorHasChanged( FloorData floor )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere FloorData.", "Warehouse", "FloorHasChanged" );
@@ -898,7 +1103,11 @@ namespace ApplicationFacade
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="WallData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="wall">Das betroffene Objekt.</param>
         private void WallHasChanged( WallData wall )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere WallData.", "Warehouse", "WallHasChanged" );
@@ -914,7 +1123,11 @@ namespace ApplicationFacade
                 }
             }
         }
-
+       
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="WindowData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="window">Das betroffene Objekt.</param>
         private void WindowHasChanged( WindowData window )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere WindowData.", "Warehouse", "WindowHasChanged" );
@@ -930,7 +1143,11 @@ namespace ApplicationFacade
                 }
             }
         }
-
+       
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="DoorData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="door">Das betroffene Objekt.</param>
         private void DoorHasChanged( DoorData door )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere DoorData.", "Warehouse", "DoorHasChanged" );
@@ -946,19 +1163,32 @@ namespace ApplicationFacade
                 }
             }
         }
-
+       
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="StorageData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="storage">Das betroffene Objekt.</param>
         private void StorageRackHasChanged( StorageData storage )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere StorageData.", "Warehouse", "StorageRackHasChanged" );
             
         }
-
+        
+        /// <summary>
+        /// Wird aufgerufen wenn sich ein <see cref="ItemData"/> Objekt ändert.
+        /// </summary>
+        /// <param name="item">Das betroffene Objekt.</param>
         private void StorageRackItemHasChanged( ItemData item )
         {
             LogManager.WriteInfo( "[Event]Aktualisiere ItemData.", "Warehouse", "StorageRackItemHasChanged" );
             
         }
 
+        /// <summary>
+        /// Wird aufgerufen wenn ein Regal hinzugefügt oder entfernt wurde und löst das passende Event aus.
+        /// </summary>
+        /// <param name="mode">Gibt an ob ein Regal hinzugefügt oder entfernt wurde. 0 = Hinzugefügt, !0 = Entfernt</param>
+        /// <param name="data">Das betroffene Regal.</param>
         private void OnStorageRackModified( int mode, StorageData data )
         {
             if ( mode == 0 )

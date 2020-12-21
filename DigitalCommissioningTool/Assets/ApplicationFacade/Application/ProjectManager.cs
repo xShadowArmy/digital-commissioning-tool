@@ -14,12 +14,34 @@ namespace ApplicationFacade
     {
         public ProjectData Data { get; private set; }
         public ProjectSettings Settings { get; private set; }
-
+        
         internal DataHandler      DHandler { get; set; }
         internal SettingsHandler  SHandler { get; set; }
         internal WarehouseHandler WHandler { get; set; }
         internal ContainerHandler CHandler { get; set; }
         internal StockHandler     IHandler { get; set; }
+
+        public ProjectData[] ProjectList
+        {
+            get
+            {
+                ProjectData[] data = new ProjectData[Directory.GetFiles(Paths.ProjectsPath).Length];
+
+                for ( int i = 0; i < data.Length; i++ )
+                {
+                    ArchiveManager.ExtractArchive( Directory.GetFiles(Paths.ProjectsPath)[i], Paths.TempPath );
+
+                    DataHandler dhandler = new DataHandler( );
+                    data[i] = new ProjectData( );
+
+                    ReadProjectData( data[i], dhandler.LoadFile() );
+
+                    Paths.ClearTempPath( );
+                }
+
+                return data;
+            }
+        }
 
         public string ProjectName
         {
@@ -73,11 +95,10 @@ namespace ApplicationFacade
             WHandler = new WarehouseHandler( );
             CHandler = new ContainerHandler( );
             IHandler = new StockHandler( );
-
-
+            
             InternalProjectData idata = DHandler.LoadFile( );
             Data = new ProjectData( );
-            ReadProjectData( idata );
+            ReadProjectData( Data, idata );
 
             InternalProjectSettings isettings = SHandler.LoadFile( );
             Settings = new ProjectSettings( );
@@ -238,12 +259,12 @@ namespace ApplicationFacade
             }
         }
 
-        private void ReadProjectData( InternalProjectData data )
+        private void ReadProjectData( ProjectData pData, InternalProjectData data )
         {
-            Data.DateCreated  = data.DateCreated;
-            Data.DateModified = DateTime.Today;
-            Data.ProjectName  = data.Name;
-            Data.ProjectPath  = data.FullPath;
+            pData.DateCreated  = data.DateCreated;
+            pData.DateModified = DateTime.Today;
+            pData.ProjectName  = data.Name;
+            pData.ProjectPath  = data.FullPath;
         }
 
         private void ReadProjectSettings( InternalProjectSettings settings )
