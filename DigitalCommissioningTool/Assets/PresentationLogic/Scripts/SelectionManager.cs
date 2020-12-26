@@ -6,17 +6,19 @@ using UnityEngine.UIElements;
 
 public class SelectionManager : MonoBehaviour
 {
-    [SerializeField] private Material defaultMaterial;
-    [SerializeField] private Material selectedMaterial;
+
     public LayerMask mask;
     [HideInInspector] public bool selected = false;
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material selectedMaterial;
     private GameObject controller;
     private WallEditor popUp;
     private Camera EditorModeCamera;
     private GameObject SwitchModeButton;
     private ModeHandler ModeHandler;
+    private int pointerID = -1;
 
-    public delegate void ShelveSelectedEventHandler(GameObject selectedObject);
+    public delegate void ShelveSelectedEventHandler(GameObject selectedObject, bool activs);
 
     public event ShelveSelectedEventHandler ShelveSelected;
 
@@ -139,11 +141,19 @@ public class SelectionManager : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 90.0f) && hit.transform.tag == "SelectableBox")
+                if (EventSystem.current.IsPointerOverGameObject(pointerID) == false)                    //checkt, ob Maus über Gui Element ist
                 {
+                    if (Physics.Raycast(ray, out hit, 90.0f) &&  hit.transform.tag.Contains("StorageBox") || hit.transform.tag == ("StorageContainer"))   //normaler physics ray cast, kann aber nicht UI elemente erkennen
+                    {
 
-                    GameObject g1 = hit.transform.gameObject;
-                    OnShelveSelected(g1);
+                        GameObject g1 = hit.transform.gameObject;
+                        OnShelveSelected(g1, true);
+                    }
+                    else
+                    {
+                        GameObject g1 = null;
+                        OnShelveSelected(g1, false);
+                    }
                 }
 
             }
@@ -212,14 +222,13 @@ public class SelectionManager : MonoBehaviour
     {
         RightWallRimSelected?.Invoke(SelectedObject);
     }
-    protected void OnShelveSelected(GameObject source)
+    protected void OnShelveSelected(GameObject source, bool active)
     {
 
         if (Input.GetMouseButtonDown(0))
         {
-            ShelveSelected?.Invoke(source);
+            ShelveSelected?.Invoke(source, active);
         }
-        Debug.Log("Called");
-
+        
     }
 }

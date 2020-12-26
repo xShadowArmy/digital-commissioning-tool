@@ -31,6 +31,10 @@ TagManager:
   - StorageSlot
   - LeftWallRim
   - RightWallRim
+  - Resource
+  - SelectableBox
+  - SelectableAttachedInnerWall
+  - SelectableInnerWall
   layers:
   - Default
   - TransparentFX

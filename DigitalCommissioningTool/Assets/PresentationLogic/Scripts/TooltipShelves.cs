@@ -31,13 +31,22 @@ namespace ApplicationFacade
             tooltip = current.GetComponent<Tooltip>();
         }
 
-        private void SelectionManager_ShelveSelected(GameObject selectedObject)
+        private void SelectionManager_ShelveSelected(GameObject selectedObject, bool active)
         {
-           
-                Debug.Log("Selected!");
+
+
+            if (active)
+            {
                 headerMessage = selectedObject.name;
-                activate(selectedObject);
-            
+                getMessages(selectedObject);
+                activate();
+
+            }
+            else
+            {
+                deactivate();
+            }
+
 
         }
 
@@ -61,12 +70,11 @@ namespace ApplicationFacade
             {
                 deactivate();
             }
-            
+
         }
 
-        public void activate(GameObject selectedObject)
+        public void activate()
         {
-            getMessages(selectedObject);
 
             tooltip.SetTooltip(headerMessage, contentMessage);
         }
@@ -80,13 +88,11 @@ namespace ApplicationFacade
 
         private void getMessages(GameObject selectedObject)
         {
-            //ItemData list = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
-            //Debug.Log(list.Count);
-            System.Random rnd = new System.Random();
-            int anzahl = rnd.Next(1, 13);
-            string count = "Anzahl: " + anzahl +"\n";
-            contentMessage = count;
-            contentMessage += "Gewicht: " + anzahl * (rnd.Next(1, 2) - 0.4f) + " kg";
+
+            ItemData list = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
+            contentMessage = "Anzahl: " + list.Count + "\n";
+            contentMessage += "Gewicht: " + list.Weight + " kg";
+
         }
 
 
