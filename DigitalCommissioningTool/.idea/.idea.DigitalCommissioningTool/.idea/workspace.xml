@@ -27,13 +27,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitTests/ApplicationFacade.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/TimeMeasurements.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Data/TimeMeasurements.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +65,8 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/LoadSceneData.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" />
       </list>
     </option>
   </component>
@@ -77,6 +77,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34995976" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30008045" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -93,10 +95,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18296">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="18296" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -122,7 +124,7 @@
       <workItem from="1607034286331" duration="12473000" />
       <workItem from="1607091122157" duration="2071000" />
       <workItem from="1609160518669" duration="4277000" />
-      <workItem from="1609245685180" duration="1024000" />
+      <workItem from="1609245685180" duration="3992000" />
     </task>
     <servers />
   </component>
@@ -237,6 +239,74 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="505" height="464" key="DebuggerActiveHint" timestamp="1609247745696">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="505" height="464" key="DebuggerActiveHint/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247745696" />
+    <state width="2517" height="65" key="GridCell.Tab.0.bottom" timestamp="1609247779446">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779446" />
+    <state width="2517" height="65" key="GridCell.Tab.0.center" timestamp="1609247779446">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779446" />
+    <state width="2517" height="65" key="GridCell.Tab.0.left" timestamp="1609247779446">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779446" />
+    <state width="2517" height="65" key="GridCell.Tab.0.right" timestamp="1609247779446">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779446" />
+    <state width="2517" height="65" key="GridCell.Tab.1.bottom" timestamp="1609247796966">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.1.bottom/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247796966" />
+    <state width="2517" height="65" key="GridCell.Tab.1.center" timestamp="1609247796966">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.1.center/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247796966" />
+    <state width="2517" height="65" key="GridCell.Tab.1.left" timestamp="1609247796966">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.1.left/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247796966" />
+    <state width="2517" height="65" key="GridCell.Tab.1.right" timestamp="1609247796966">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.1.right/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247796966" />
+    <state width="2517" height="65" key="GridCell.Tab.2.bottom" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.2.bottom/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
+    <state width="2517" height="65" key="GridCell.Tab.2.center" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.2.center/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
+    <state width="2517" height="65" key="GridCell.Tab.2.left" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.2.left/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
+    <state width="2517" height="65" key="GridCell.Tab.2.right" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.2.right/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
+    <state width="2517" height="65" key="GridCell.Tab.3.bottom" timestamp="1609247779255">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.3.bottom/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779255" />
+    <state width="2517" height="65" key="GridCell.Tab.3.center" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.3.center/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
+    <state width="2517" height="65" key="GridCell.Tab.3.left" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.3.left/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
+    <state width="2517" height="65" key="GridCell.Tab.3.right" timestamp="1609247779254">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="65" key="GridCell.Tab.3.right/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609247779254" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1607042029128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

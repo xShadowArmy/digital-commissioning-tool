@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:Config xs:dataCount="16" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
+<xs:Config xs:dataCount="7" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
     <xs:ComplexData xs:name="TimeMeasurement1" xs:id="1" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="0,8365713">
+            <xs:Property xs:type="Single" xs:value="0,159086">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:44">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:40">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="0">
             </xs:Property>
@@ -12,9 +12,9 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="TimeMeasurement2" xs:id="2" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="1,320567">
+            <xs:Property xs:type="Single" xs:value="0,3933258">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:46">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:40">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="1">
             </xs:Property>
@@ -22,9 +22,9 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="TimeMeasurement3" xs:id="3" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="1,755507">
+            <xs:Property xs:type="Single" xs:value="0,5557975">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:47">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:40">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="2">
             </xs:Property>
@@ -32,9 +32,9 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="TimeMeasurement4" xs:id="4" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="2,2377">
+            <xs:Property xs:type="Single" xs:value="0,6801158">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:48">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:41">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="3">
             </xs:Property>
@@ -42,9 +42,9 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="TimeMeasurement5" xs:id="5" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="2,44112">
+            <xs:Property xs:type="Single" xs:value="0,8622266">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:49">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:41">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="4">
             </xs:Property>
@@ -52,9 +52,9 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="TimeMeasurement6" xs:id="6" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="2,646724">
+            <xs:Property xs:type="Single" xs:value="1,155363">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:49">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:42">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="5">
             </xs:Property>
@@ -62,101 +62,11 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="TimeMeasurement7" xs:id="7" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="2,801075">
+            <xs:Property xs:type="Single" xs:value="2,308894">
             </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:49">
+            <xs:Property xs:type="String" xs:value="29.12.2020 14:30:43">
             </xs:Property>
             <xs:Property xs:type="Int32" xs:value="6">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement8" xs:id="8" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="2,950628">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:50">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="7">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement9" xs:id="9" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="3,080113">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:50">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="8">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement10" xs:id="10" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="3,23132">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:50">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="9">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement11" xs:id="11" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="3,413782">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:51">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="10">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement12" xs:id="12" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="5,427423">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 18:58:53">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="11">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement13" xs:id="13" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="6,252417">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 19:01:13">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="12">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement14" xs:id="14" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="6,697802">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 19:01:14">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="13">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement15" xs:id="15" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="7,477055">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 19:01:15">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="14">
-            </xs:Property>
-        </xs:Values>
-    </xs:ComplexData>
-    <xs:ComplexData xs:name="TimeMeasurement16" xs:id="16" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
-        <xs:Values xs:propertyCount="3">
-            <xs:Property xs:type="Single" xs:value="7,935767">
-            </xs:Property>
-            <xs:Property xs:type="String" xs:value="15.12.2020 19:01:17">
-            </xs:Property>
-            <xs:Property xs:type="Int32" xs:value="15">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>

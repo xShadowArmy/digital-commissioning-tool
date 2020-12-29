@@ -24,6 +24,9 @@ public class Timer : MonoBehaviour
     public delegate void TimerEventHandler(float currentTime);
 
     public static event TimerEventHandler TimerStopped;
+    
+    public static event TimerEventHandler TimerReset;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +91,7 @@ public class Timer : MonoBehaviour
         textBox.text = currentTime.ToString("F2");
         timerBtn.text = "Start";
         clicked = false;
+        TimerReset?.Invoke(currentTime);
     }
 
     //Macht Buttons sichtbar
