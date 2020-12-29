@@ -38,6 +38,9 @@ public class SelectionManager : MonoBehaviour
 
     public Transform SelectedObject { get; private set; }
 
+    /// <summary>
+    /// Setzt vor Ausführung alle Selected Variablen auf null. 
+    /// </summary>
     private void Awake()
     {
         WallSelected = null;
@@ -60,7 +63,9 @@ public class SelectionManager : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+    /// <summary>
+    /// Prüft anhand eines Raycasts ob ein auswählbares Objekt angeklickt wurde und löst in diesem Fall das entsprechende Event aus.
+    /// </summary>
     void Update()
     {
         if (ModeHandler.Mode.Equals("EditorMode"))
@@ -162,12 +167,18 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Aktiviert bzw. deaktiviert die UI Popups
+    /// </summary>
     private void SetPopUps()
     {
         popUp.SetPopUp();
         popUp.SetPopUpScaleWall();
     }
 
+    /// <summary>
+    /// Entfernt die Auswahl des Objekts und setzt das Material zurück
+    /// </summary>
     public void ResetSelection()
     {
         if (SelectedObject != null)
@@ -178,6 +189,16 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sucht in allen Elternelementen ein GameObject mit dem entsprechenden Tag und gibt dessen Transform zurück 
+    /// </summary>
+    /// <param name="child">
+    ///    Objekt dessen Elternelemente durchsucht werden sollen
+    /// </param>
+    /// <param name="searchTag">
+    ///    Tag nach dem gesucht werden soll
+    /// </param>
+    /// <returns></returns>
     private Transform FindParentWithTag(ref Transform child, string searchTag)
     {
         Transform temp = child;

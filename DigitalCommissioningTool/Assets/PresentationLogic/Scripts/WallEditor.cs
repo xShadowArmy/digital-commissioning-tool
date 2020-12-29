@@ -43,8 +43,7 @@ public class WallEditor : MonoBehaviour
     private ModeHandler ModeHandler;
     private GameObject SwitchModeButton;
     private GameObject AddInnerWallButton;
-    
-    
+
 
     private List<Collider> objectsInRange = new List<Collider>();
 
@@ -64,13 +63,15 @@ public class WallEditor : MonoBehaviour
         SelectionManager.InnerWallSelected += OnInnerWallSelected;
         SelectionManager.AttachedInnerWallSelected += OnAttachedInnerWallSelected;
         Physics.autoSyncTransforms = true;
-        
+
         AddInnerWallButton = GameObject.Find("AddInnerWallButton");
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
-        
     }
 
+    /// <summary>
+    /// Sorgt dafür, dass Innenwände per Maus ausgewählt und verschoben/gedreht werden können. Während dem Bewegen wird nach einer Außenwand gesucht, an die die Wand angedockt werden kann.
+    /// </summary>
     private void Update()
     {
         if (ModeHandler.Mode.Equals("EditorMode"))
@@ -81,6 +82,7 @@ public class WallEditor : MonoBehaviour
         {
             AddInnerWallButton.SetActive(false);
         }
+
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (innerWallSelected)
         {
@@ -166,6 +168,7 @@ public class WallEditor : MonoBehaviour
         }
     }
 
+
     private void OnInnerWallSelected(Transform selectedObject)
     {
         innerWallSelected = true;
@@ -199,12 +202,18 @@ public class WallEditor : MonoBehaviour
         innerWallSelected = false;
     }
 
+    /// <summary>
+    /// Fügt Innenwand hinzu und passt den Tag entsprechend an.
+    /// </summary>
     public void OnAddInnerWallButtonClicked()
     {
         GameObject temp = Instantiate(WallPrefab, ObjectSpawn.transform.position, ObjectSpawn.transform.rotation);
         temp.tag = "SelectableInnerWall";
     }
 
+    /// <summary>
+    /// Ersetzt das ausgewählte Wandelement durch ein Fensterelement
+    /// </summary>
     public void OnAddWindowClick()
     {
         SelectedObjectTransform = selectionManager.SelectedObject;
@@ -251,15 +260,17 @@ public class WallEditor : MonoBehaviour
 
                 if (foundRightWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( rightWallElement ) );
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( SelectedObjectTransform.gameObject ) );
-                    GameManager.GameWarehouse.CreateWindow( SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, SelectedObjectTransform.localScale );                    
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(rightWallElement));
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    GameManager.GameWarehouse.CreateWindow(SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
+                        SelectedObjectTransform.localScale);
                 }
                 else if (foundLeftWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( leftWallElement ) );
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( SelectedObjectTransform.gameObject ) );
-                    GameManager.GameWarehouse.CreateWindow( leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, SelectedObjectTransform.localScale);
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(leftWallElement));
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    GameManager.GameWarehouse.CreateWindow(leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
+                        SelectedObjectTransform.localScale);
                 }
                 else
                 {
@@ -271,6 +282,9 @@ public class WallEditor : MonoBehaviour
         close(popUp);
     }
 
+    /// <summary>
+    /// Ersetzt das ausgewählte Wandelement durch ein Türelement
+    /// </summary>
     public void OnAddDoorClick()
     {
         SelectedObjectTransform = selectionManager.SelectedObject;
@@ -317,15 +331,17 @@ public class WallEditor : MonoBehaviour
 
                 if (foundRightWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( rightWallElement ) );
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( SelectedObjectTransform.gameObject ) );
-                    GameManager.GameWarehouse.CreateDoor( SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, SelectedObjectTransform.localScale, DoorType.Door );
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(rightWallElement));
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    GameManager.GameWarehouse.CreateDoor(SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
+                        SelectedObjectTransform.localScale, DoorType.Door);
                 }
                 else if (foundLeftWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( leftWallElement ) );
-                    GameManager.GameWarehouse.RemoveWall( GameManager.GameWarehouse.GetWall( SelectedObjectTransform.gameObject ) );
-                    GameManager.GameWarehouse.CreateDoor( leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation, SelectedObjectTransform.localScale, DoorType.Door );
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(leftWallElement));
+                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    GameManager.GameWarehouse.CreateDoor(leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
+                        SelectedObjectTransform.localScale, DoorType.Door);
                 }
                 else
                 {
@@ -337,6 +353,9 @@ public class WallEditor : MonoBehaviour
         close(popUp);
     }
 
+    /// <summary>
+    /// Ersetzt das ausgewählte Wandelement durch ein Wandelement
+    /// </summary>
     public void OnAddWallClick()
     {
         SelectedObjectTransform = selectionManager.SelectedObject;
@@ -350,33 +369,32 @@ public class WallEditor : MonoBehaviour
                 Vector3 localScale = SelectedObjectTransform.localScale;
                 Quaternion rotation = SelectedObjectTransform.rotation;
 
-                switch ( SelectedObjectTransform.parent.tag )
+                switch (SelectedObjectTransform.parent.tag)
                 {
                     case "NorthWall":
-                        
-                        GameManager.GameWarehouse.CreateWall( position - SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer );
-                        GameManager.GameWarehouse.CreateWall( position + SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer );
+
+                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer);
+                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer);
                         break;
 
                     case "EasthWall":
 
-                        GameManager.GameWarehouse.CreateWall( position - SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer );
-                        GameManager.GameWarehouse.CreateWall( position + SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer );
+                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer);
+                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer);
                         break;
 
                     case "SouthWall":
 
-                        GameManager.GameWarehouse.CreateWall( position - SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer );
-                        GameManager.GameWarehouse.CreateWall( position + SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer );
+                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer);
+                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer);
                         break;
 
                     case "WestWall":
 
-                        GameManager.GameWarehouse.CreateWall( position - SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer );
-                        GameManager.GameWarehouse.CreateWall( position + SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer );
+                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer);
+                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer);
                         break;
                 }
-
             }
             else
             {
@@ -388,6 +406,9 @@ public class WallEditor : MonoBehaviour
         close(popUp);
     }
 
+    /// <summary>
+    /// Setzt den Text für das UI Popup zur Anpassung der Wandelemente
+    /// </summary>
     public void SetPopUp()
     {
         SelectedObjectTransform = selectionManager.SelectedObject;
@@ -405,18 +426,15 @@ public class WallEditor : MonoBehaviour
                 break;
             case "WallEast":
                 wand = "Ostwand";
-
                 break;
             case "WallSouth":
                 wand = "Südwand";
-
                 break;
             case "WallWest":
                 wand = "Westwand";
-
                 break;
             default:
-                myText.text = "Geben Sie die gewünschte Länge von der Südwand ein";
+                wand = "Wand";
                 break;
         }
 
@@ -428,6 +446,10 @@ public class WallEditor : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Setzt den Text für das UI Popup zur Anpassung der Wandlänge
+    /// </summary>
     public void SetPopUpScaleWall()
     {
         SelectedObjectTransform = selectionManager.SelectedObject;
@@ -445,18 +467,15 @@ public class WallEditor : MonoBehaviour
                 break;
             case "WallEast":
                 wand = "Ostwand";
-
                 break;
             case "WallSouth":
                 wand = "Südwand";
-
                 break;
             case "WallWest":
                 wand = "Westwand";
-
                 break;
             default:
-                myText.text = "Geben Sie die gewünschte Länge von der Südwand ein";
+                wand = "Wand";
                 break;
         }
 
@@ -468,12 +487,19 @@ public class WallEditor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Entfernt das UI Popup
+    /// </summary>
+    /// <param name="popUp"> Das Popup das geschlossen werden soll</param>
     public void close(GameObject popUp)
     {
         popUp.SetActive(false);
     }
 
 
+    /// <summary>
+    /// Prüft ob Eingabe gültig ist und ruft entsprechende Methode auf
+    /// </summary>
     public void OnScaleWallButtonClicked()
     {
         if (!string.IsNullOrEmpty(inputNumberOfWalls.text))
@@ -485,6 +511,10 @@ public class WallEditor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Passt die Wand um die übergebene Länge an
+    /// </summary>
+    /// <param name="length"> Länge um die Wand verlängert(+) oder verkürzt(-) werden soll</param>
     private void ScaleWall(int length)
     {
         if (SelectedObjectTransform.CompareTag("SelectableAttachedInnerWall"))
@@ -494,7 +524,7 @@ public class WallEditor : MonoBehaviour
             foreach (Collider collider1 in colliders)
             {
                 if (collider1.transform != SelectedObjectTransform &&
-                    ((collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent) || 
+                    ((collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent) ||
                      (collider1.transform.rotation == SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))))
                 {
                     neighborWall = collider1.transform;
@@ -518,7 +548,7 @@ public class WallEditor : MonoBehaviour
                                 foundOuterWall = true;
                             }
 
-                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation && 
+                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation &&
                                 (collider1.CompareTag("SelectableWall") || collider1.CompareTag("SelectableWindow") || collider1.CompareTag("SelectableDoor")))
                             {
                                 Destroy(collider1.gameObject);

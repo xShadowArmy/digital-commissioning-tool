@@ -84,6 +84,8 @@
             <e p="TestScript.cs" t="Include" />
             <e p="TimeMeasurementHistory.cs" t="Include" />
             <e p="Timer.cs" t="Include" />
+            <e p="Tooltip.cs" t="Include" />
+            <e p="TooltipShelves.cs" t="Include" />
             <e p="TreeView.cs" t="Include" />
             <e p="TreeViewControl" t="Include">
               <e p="Editor" t="Include">
@@ -97,6 +99,7 @@
             </e>
             <e p="WalkTrajectory.cs" t="Include" />
             <e p="WallEditor.cs" t="Include" />
+            <e p="WarehouseItemMenu.cs" t="Include" />
           </e>
         </e>
         <e p="ProjectComponents" t="Include">
@@ -133,6 +136,9 @@
               <e p="SettingsHandler.cs" t="Include" />
               <e p="SettingsReader.cs" t="Include" />
               <e p="SettingsWriter.cs" t="Include" />
+            </e>
+            <e p="StockData" t="Include">
+              <e p="StockHandler.cs" t="Include" />
             </e>
             <e p="Warehouse" t="Include">
               <e p="WarehouseHandler.cs" t="Include" />
