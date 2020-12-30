@@ -20,7 +20,8 @@ public class Timer : MonoBehaviour
     [SerializeField] private Button resetBtn;
     [SerializeField] private ModeHandler mode;
     [SerializeField] private GameObject panelTimer;
-    
+    [SerializeField] private GameObject panelTimeMeasure;
+
     public delegate void TimerEventHandler(float currentTime);
 
     public static event TimerEventHandler TimerStopped;
@@ -33,7 +34,7 @@ public class Timer : MonoBehaviour
     {
         resetBtn.gameObject.SetActive(false);
         timerBtn.transform.parent.gameObject.SetActive(false);
-
+        panelTimeMeasure.SetActive(false);
     }
 
     void Update()
@@ -101,6 +102,7 @@ public class Timer : MonoBehaviour
         resetBtn.gameObject.SetActive(true);
         timerBtn.transform.parent.gameObject.SetActive(true);
         isHovered = !isHovered;                                     //bool Value für den Taste P
+        panelTimeMeasure.SetActive(true);
     }
 
     //Deaktiviert und macht Button unsichtbar
@@ -114,6 +116,10 @@ public class Timer : MonoBehaviour
         resetBtn.gameObject.SetActive(false);
         timerBtn.transform.parent.gameObject.SetActive(false);
         isHovered = !isHovered;                                     //bool Value für den Taste P
+        if (currentTime == 0)
+        {
+            panelTimeMeasure.SetActive(false);
+        }
 
     }
 }

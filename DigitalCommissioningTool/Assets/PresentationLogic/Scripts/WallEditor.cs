@@ -207,8 +207,13 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     public void OnAddInnerWallButtonClicked()
     {
-        GameObject temp = Instantiate(WallPrefab, ObjectSpawn.transform.position, ObjectSpawn.transform.rotation);
-        temp.tag = "SelectableInnerWall";
+        Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 20))
+        {
+            GameObject temp = Instantiate(WallPrefab, hit.point + new Vector3(0, 1.6f, 0), ObjectSpawn.transform.rotation);
+            temp.tag = "SelectableInnerWall";
+        }
     }
 
     /// <summary>
