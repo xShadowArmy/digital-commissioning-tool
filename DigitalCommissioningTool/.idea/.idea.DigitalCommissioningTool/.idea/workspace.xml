@@ -27,11 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/DebugExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/DebugExtension.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/TimeMeasurements.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Data/TimeMeasurements.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/TimeMeasurements.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +62,6 @@
         <option value="$PROJECT_DIR$/Assets/UnitTests/SystemFacade/EditModeTests/GameManagerTests.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/EditorModeCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
         <option value="$PROJECT_DIR$/Assets/MMI/Scripts/TestAvatarBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/FloorData.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse/Objects/StorageData.cs" />
@@ -66,6 +69,7 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" />
       </list>
     </option>
@@ -124,7 +128,7 @@
       <workItem from="1607034286331" duration="12473000" />
       <workItem from="1607091122157" duration="2071000" />
       <workItem from="1609160518669" duration="4277000" />
-      <workItem from="1609245685180" duration="3992000" />
+      <workItem from="1609245685180" duration="12951000" />
     </task>
     <servers />
   </component>
@@ -320,11 +324,13 @@
       <screen x="-1360" y="1" width="1360" height="728" />
     </state>
     <state x="-1360" y="1" width="1376" height="815" key="dock-window-2/0.0.1920.1040/-1360.1.1360.728@0.0.1920.1040" timestamp="1608069373149" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1608065890274">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="831" y="303" width="896" height="913" key="search.everywhere.popup" timestamp="1609266965450">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
+    <state x="1989" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1609263977039" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1360.1.1360.728@0.0.1920.1040" timestamp="1608065890274" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1360.121.1360.728@0.0.1920.1040" timestamp="1607046332784" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606528642519" />
+    <state x="831" y="303" width="896" height="913" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609266965450" />
   </component>
 </project>

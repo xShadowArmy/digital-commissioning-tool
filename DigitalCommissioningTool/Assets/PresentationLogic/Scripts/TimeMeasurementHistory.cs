@@ -8,36 +8,39 @@ using UnityEngine;
 
 public class TimeMeasurementHistory : MonoBehaviour
 {
-    public List<TimeMeasurementEntry> timeMeasurementEntries;
+    private List<TimeMeasurementEntry> timeMeasurementEntries;
+    private ConfigManager cman = new ConfigManager();
+
 
     // Start is called before the first frame update
     void Start()
     {
         Timer.TimerStopped += OnTimerStopped;
         Timer.TimerReset += OnTimerReset;
-
-        using (ConfigManager cman = new ConfigManager())
+        cman.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
+        for (int i = 1; i < 1000; i++)
         {
-            cman.OpenConfigFile("TimeMeasurements.xml", true);
-            for (int i = 1; i < 1000; i++)
+            string key = "TimeMeasurement" + i;
+            TimeMeasurementEntry temp = new TimeMeasurementEntry();
+            if (cman.LoadData(key) == null)
             {
-                string key = "TimeMeasurement" + i;
-                TimeMeasurementEntry temp = new TimeMeasurementEntry();
-                if (cman.LoadData(key) == null)
-                {
-                    break;
-                }
-
-                cman.LoadData(key, temp);
-                timeMeasurementEntries.Add(temp);
+                break;
             }
+
+            cman.LoadData(key, temp);
+            timeMeasurementEntries.Add(temp);
         }
     }
 
+
     private void OnTimerReset(float currentTime)
     {
+        for (int i = 1; i <= timeMeasurementEntries.Count; i++)
+        {
+            string key = "TimeMeasurement" + i;
+            cman.RemoveData(key);
+        }
         timeMeasurementEntries.Clear();
-        File.Delete(Paths.DataResourcePath + "TimeMeasurements.xml");
     }
 
     private void OnTimerStopped(float currentTime)
@@ -46,7 +49,7 @@ public class TimeMeasurementHistory : MonoBehaviour
         timeMeasurementEntries.Add(timeMeasurementEntry);
         using (ConfigManager cman = new ConfigManager())
         {
-            cman.OpenConfigFile("TimeMeasurements.xml", true);
+            cman.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
             cman.StoreData("TimeMeasurement" + timeMeasurementEntries.Count, timeMeasurementEntry);
         }
     }
