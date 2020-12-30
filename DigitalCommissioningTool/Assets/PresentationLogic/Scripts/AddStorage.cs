@@ -7,22 +7,15 @@ using ApplicationFacade;
 
 public class AddStorage : MonoBehaviour
 {
-
-    // public UnityEngine.UI.Button button;
     Button addStorageButton;
-    //public static int objectNumber = 1;
-
     void Update()
     {
 
-        //To Ask in which mode modeHandler has value 
-        //(Because modehandler is in different GameObject first find object with script then get whatever is need)
-        ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();
-
-        // Button shall be interactable only when in Editor Mode  
+        //Button soll nur interagierbar sein wenn im editormodus ist:
+        ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();              //Durch Modehandler herausfinden ob im Editormodus oder nicht
         if (modeHandler.Mode.Equals("EditorMode"))
         {
-            addStorageButton.interactable = true;
+            addStorageButton.interactable = true;                                                               //wenn ja => Button = interagierbar ansonstem nicht
         }
         else
         {
@@ -31,26 +24,18 @@ public class AddStorage : MonoBehaviour
 
     }
 
-    //create a new storage  (method in different script this one just gets it)
+    //Wird ausgeführt wenn Button geklickt:
     void TaskOnClick()
     {
-        // objectNumber++;
-        //if (objectNumber==5) { objectNumber = 1; }
-        //Debug.Log("You have clicked the button!");
-        GameManager.GameWarehouse.CreateStorageRack();
-
-
+        GameManager.GameWarehouse.CreateStorageRack();              //Erstellt Regal
     }
 
     void Start()
     {
-        //initialize button as addStorageButton
-        addStorageButton = GetComponent<Button>();
-        //start = not editormode therefore not interactable at start
-        addStorageButton.interactable = false;
-        // addStorageButton.gameObject.SetActive(false);
-        //do taskOnClick method when clicked
-        addStorageButton.onClick.AddListener(TaskOnClick);
+        //Button zugewisen, auf nicht interagierbar gesetzt, was onClick aufgerufen wird festgelegt:
+        addStorageButton = GetComponent<Button>();                      
+        addStorageButton.interactable = false;                          
+        addStorageButton.onClick.AddListener(TaskOnClick);              
     }
 
 }
