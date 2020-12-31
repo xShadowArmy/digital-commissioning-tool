@@ -93,4 +93,10 @@
     <xs:string xs:name="KeyBinds" xs:id="31">
         <xs:value>Key Binds</xs:value>
     </xs:string>
+    <xs:string xs:name="RemoveItem" xs:id="31">
+        <xs:value>Remove Item</xs:value>
+    </xs:string>
+    <xs:string xs:name="Queue" xs:id="31">
+        <xs:value>Queue</xs:value>
+    </xs:string>
 </xs:StringResources>
