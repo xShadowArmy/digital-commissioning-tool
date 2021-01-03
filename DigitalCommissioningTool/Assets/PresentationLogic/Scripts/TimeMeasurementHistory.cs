@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using SystemFacade;
 using ApplicationFacade;
+using TimeMeasurement;
 using UnityEngine;
 
 public class TimeMeasurementHistory : MonoBehaviour
 {
-    private List<TimeMeasurementEntry> timeMeasurementEntries;
+    private List<TimeMeasurementEntry> timeMeasurementEntries = new List<TimeMeasurementEntry>();
     private ConfigManager cman = new ConfigManager();
 
 
@@ -40,6 +41,7 @@ public class TimeMeasurementHistory : MonoBehaviour
             string key = "TimeMeasurement" + i;
             cman.RemoveData(key);
         }
+
         timeMeasurementEntries.Clear();
     }
 
@@ -47,15 +49,12 @@ public class TimeMeasurementHistory : MonoBehaviour
     {
         TimeMeasurementEntry timeMeasurementEntry = new TimeMeasurementEntry(timeMeasurementEntries.Count, DateTime.Now.ToString(), currentTime);
         timeMeasurementEntries.Add(timeMeasurementEntry);
-        using (ConfigManager cman = new ConfigManager())
-        {
-            cman.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
-            cman.StoreData("TimeMeasurement" + timeMeasurementEntries.Count, timeMeasurementEntry);
-        }
+        cman.StoreData("TimeMeasurement" + timeMeasurementEntries.Count, timeMeasurementEntry);
     }
 
     // Update is called once per frame
     void Update()
     {
     }
+    
 }

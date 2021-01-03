@@ -137,13 +137,35 @@ public class WallEditor : MonoBehaviour
                 if (objectsInRange.Count > 0)
                 {
                     Transform snapObject = objectsInRange[0].transform;
-                    Vector3 direction = (SelectedObjectTransform.position - snapObject.position).normalized;
-                    if (SelectedObjectTransform.rotation.eulerAngles.y % 180.0f == 0)
+                    Vector3 direction = new Vector3();
+
+                    Debug.Log(snapObject.name);
+                    if (Math.Abs(SelectedObjectTransform.rotation.eulerAngles.y - 180.0f) < 1f || Math.Abs(SelectedObjectTransform.rotation.eulerAngles.y) < 1f)
                     {
+                        if (snapObject.parent.CompareTag("NorthWall"))
+                        {
+                            direction = Vector3.right;
+                        }
+                        else if (snapObject.parent.CompareTag("SouthWall"))
+                        {
+                            direction = Vector3.left;
+                        }
+
+                        Debug.Log("0/180 " + direction);
                         SelectedObjectTransform.position = snapObject.position + Vector3.Scale(new Vector3(SelectedObjectTransform.localScale.z / 2.0f + SelectedObjectTransform.localScale.x / 2.0f, 0, 0), direction);
                     }
                     else
                     {
+                        if (snapObject.parent.CompareTag("EastWall"))
+                        {
+                            direction = Vector3.back;
+                        }
+                        else if (snapObject.parent.CompareTag("WestWall"))
+                        {
+                            direction = Vector3.forward;
+                        }
+
+                        Debug.Log("270/90 " + direction);
                         SelectedObjectTransform.position = snapObject.position + Vector3.Scale(new Vector3(0, 0, SelectedObjectTransform.localScale.z / 2.0f + SelectedObjectTransform.localScale.x / 2.0f), direction);
                     }
 
@@ -369,42 +391,42 @@ public class WallEditor : MonoBehaviour
             Transform parent = SelectedObjectTransform.parent;
             if (SelectedObjectTransform.CompareTag("SelectableDoor") || SelectedObjectTransform.CompareTag("SelectableWindow"))
             {
-                Destroy(SelectedObjectTransform.gameObject);
                 Vector3 position = SelectedObjectTransform.position;
                 Vector3 localScale = SelectedObjectTransform.localScale;
                 Quaternion rotation = SelectedObjectTransform.rotation;
-
+                Debug.Log(SelectedObjectTransform.parent.tag);
+                Debug.Log(SelectedObjectTransform.name);
                 switch (SelectedObjectTransform.parent.tag)
                 {
                     case "NorthWall":
-
+                        Debug.Log("NorthWall");
                         GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer);
                         GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer);
                         break;
 
                     case "EasthWall":
-
+                        Debug.Log("EastWall");
                         GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer);
                         GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer);
                         break;
 
                     case "SouthWall":
-
+                        Debug.Log("SouthWall");
                         GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer);
                         GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer);
                         break;
 
                     case "WestWall":
-
+                        Debug.Log("WestWall");
                         GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer);
                         GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer);
                         break;
+                    default:
+                        Debug.Log("DefCase");
+                        break;
                 }
-            }
-            else
-            {
+
                 Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
         }
 
@@ -507,7 +529,7 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     public void OnScaleWallButtonClicked()
     {
-        if (!string.IsNullOrEmpty(inputNumberOfWalls.text))
+        if (!string.IsNullOrEmpty(inputNumberOfWalls.text) && !inputNumberOfWalls.text.Equals("0"))
         {
             SelectedObjectTransform = selectionManager.SelectedObject;
             int length = Convert.ToInt32(inputNumberOfWalls.text);
@@ -524,7 +546,22 @@ public class WallEditor : MonoBehaviour
     {
         if (SelectedObjectTransform.CompareTag("SelectableAttachedInnerWall"))
         {
-            Collider[] colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
+            Vector3 direction = new Vector3();
+            if (SelectedObjectTransform.parent.parent.CompareTag("NorthWall")) direction = Vector3.right;
+            else if (SelectedObjectTransform.parent.parent.CompareTag("EastWall")) direction = Vector3.back;
+            else if (SelectedObjectTransform.parent.parent.CompareTag("SouthWall")) direction = Vector3.left;
+            else if (SelectedObjectTransform.parent.parent.CompareTag("WestWall")) direction = Vector3.forward;
+            
+            // Wenn das Wandelement nicht die Ursprungsgröße hat, wird diese wiederhergestellt.
+            if (SelectedObjectTransform.localScale.x < 0.99f)
+            {
+                SelectedObjectTransform.localScale = new Vector3(1.0f, 3.2f, 0.2f);
+                SelectedObjectTransform.position += Vector3.Scale(new Vector3(0.2f, 0, 0.2f), direction);
+            }
+            
+            var scale = SelectedObjectTransform.localScale;
+            Vector3 overlapBox = new Vector3(scale.x * 1.1f, scale.y, scale.z);
+            Collider[] colliders = Physics.OverlapBox(SelectedObjectTransform.position, overlapBox / 2f, SelectedObjectTransform.rotation);
             Transform neighborWall = null;
             foreach (Collider collider1 in colliders)
             {
@@ -539,7 +576,6 @@ public class WallEditor : MonoBehaviour
 
             if (neighborWall != null)
             {
-                Vector3 direction = (SelectedObjectTransform.position - neighborWall.position).normalized;
                 for (int i = 0; i < Math.Abs(length); i++)
                 {
                     if (length < 0)
@@ -548,7 +584,7 @@ public class WallEditor : MonoBehaviour
                         colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
-                            if (collider1.transform.parent.parent.CompareTag("OuterWall"))
+                            if (collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent)
                             {
                                 foundOuterWall = true;
                             }
@@ -575,11 +611,24 @@ public class WallEditor : MonoBehaviour
                     {
                         Vector3 position = SelectedObjectTransform.position;
                         Vector3 localScale = SelectedObjectTransform.localScale;
+                        Transform hitInnerWall = null;
                         bool foundOuterWall = false;
+                        bool hitsInnerWall = false;
+                        bool isEndPiece = false;
 
-                        colliders = Physics.OverlapBox(position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction), localScale / 2, SelectedObjectTransform.rotation);
+                        colliders = Physics.OverlapBox(position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction), localScale / 2.1f, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
+                            if (i == length - 1 && collider1.transform.parent.name.Equals("InnerWall"))
+                            {
+                                hitsInnerWall = true;
+                                hitInnerWall = collider1.transform;
+                                if (collider1.CompareTag("SelectableAttachedInnerWall"))
+                                {
+                                    isEndPiece = true;
+                                }
+                            }
+
                             if (collider1.transform.parent.parent.CompareTag("OuterWall") && SelectedObjectTransform.parent.parent != collider1.transform.parent)
                             {
                                 foundOuterWall = true;
@@ -588,9 +637,23 @@ public class WallEditor : MonoBehaviour
 
                         if (!foundOuterWall)
                         {
+                            Vector3 dirHitInnerWall = new Vector3();
                             Instantiate(WallPrefab, position, SelectedObjectTransform.rotation, SelectedObjectTransform.parent);
-                            position += Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction);
-                            SelectedObjectTransform.position = position;
+                            SelectedObjectTransform.position += Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction);
+                            if (hitsInnerWall)
+                            {
+                                if (hitInnerWall.parent.parent.CompareTag("NorthWall")) dirHitInnerWall = Vector3.right;
+                                else if (hitInnerWall.parent.parent.CompareTag("EastWall")) dirHitInnerWall = Vector3.back;
+                                else if (hitInnerWall.parent.parent.CompareTag("SouthWall")) dirHitInnerWall = Vector3.left;
+                                else if (hitInnerWall.parent.parent.CompareTag("WestWall")) dirHitInnerWall = Vector3.forward;
+                                SelectedObjectTransform.localScale = new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z);
+                                SelectedObjectTransform.position -= Vector3.Scale(new Vector3(0.2f, 0, 0.2f), direction);
+                                if (isEndPiece)
+                                {
+                                    hitInnerWall.localScale = new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z);
+                                    hitInnerWall.position -= Vector3.Scale(new Vector3(0.2f, 0, 0.2f), dirHitInnerWall);
+                                }
+                            }
                         }
                         else
                         {

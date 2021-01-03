@@ -1,13 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SystemTools;
-using  UnityEngine;
 
-
-namespace ApplicationFacade
+namespace TimeMeasurement
 {
-    [System.Serializable]
     public class TimeMeasurementEntry: ISerialConfigData
     {
         public int Index { get; set; }
