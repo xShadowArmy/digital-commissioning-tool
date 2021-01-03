@@ -3,17 +3,17 @@ using MMICSharp.MMIStandard.Utils;
 using MMIStandard;
 using MMIUnity.TargetEngine;
 using MMIUnity.TargetEngine.Scene;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TestPascal : AvatarBehavior
 {
     public WalkTrajectory WalkTrajectory;
     public MMISceneObject WalkTrajectoryTarget;
+    public List<Transform> WalkTrajectoryPoints = new List<Transform>();
 
     private string carryID;
     public GameObject StorageRack;
-    public GameObject Container1Object;
-    public GameObject Container1Target;
 
     protected override void GUIBehaviorInput()
     {
@@ -39,9 +39,9 @@ public class TestPascal : AvatarBehavior
                 //Write the target id to the properties (the target id is gathered from the scene).
                 //An alternative way to get a target would be to directly use the MMISceneObject as editor variable
                 //Force path means a straight line path is enfored if no path can be found
-                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName("WalkTarget").ID, "ForcePath", true.ToString())//"ReplanningTime", 500.ToString())
+                Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName("WalkTarget").ID, "ForcePath", false.ToString(), "Velocity", 2.0f.ToString())//"ReplanningTime", 500.ToString())
             };
-
+            this.CoSimulator.AssignInstruction(walkInstruction, null);
 
 
             //Furthermore create an idle instruction
@@ -83,6 +83,22 @@ public class TestPascal : AvatarBehavior
             }
             this.CoSimulator.MSimulationEventHandler += this.CoSimulator_MSimulationEventHandler;
         }
+        if (GUI.Button(new Rect(710, 10, 150, 50), "Plan Path"))
+        {
+            UpdatePath();
+        }
+    }
+    public void UpdatePath()
+    {
+        this.WalkTrajectory.Points.Clear();
+        this.WalkTrajectory.Points.Add(this.transform);
+        foreach (Transform child in WalkTrajectoryPoints)
+        {
+            this.WalkTrajectory.Points.Add(child);
+        }
+        WalkTrajectoryTarget = this.WalkTrajectory.Points[this.WalkTrajectory.Points.Count - 1].GetComponent<MMISceneObject>();
+        MMICSharp.Access.MMUAccess mmuAccess = this.avatar.MMUAccess;
+        this.WalkTrajectory.GetPathConstraintCollision(mmuAccess, 1.0f);
     }
     private MInstruction PickupOneHand(MMISceneObject target, MInstruction startCondition)
     {

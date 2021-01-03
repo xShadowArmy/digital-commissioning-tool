@@ -39,9 +39,9 @@ public class TestAvatarBehavior : AvatarBehavior
                 //Force path means a straight line path is enfored if no path can be found
                 Properties = PropertiesCreator.Create("TargetID", UnitySceneAccess.Instance.GetSceneObjectByName("WalkTarget").ID, "ForcePath",true.ToString())//"ReplanningTime", 500.ToString())
             };
+           
 
-                
-  
+
             //Furthermore create an idle instruction
             MInstruction idleInstruction = new MInstruction(MInstructionFactory.GenerateID(), "Idle", "Pose/Idle")
             {

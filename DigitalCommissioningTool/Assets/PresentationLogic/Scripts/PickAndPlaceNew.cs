@@ -7,77 +7,31 @@ using ApplicationFacade;
 public class PickAndPlaceNew : MonoBehaviour
 {
     public GameObject selected;                 //= ausgewähltes Regal
-    public bool isDragging;                     //= true wenn ein Regal ausgewählt
+    bool isDragging;                            //= true wenn ein Regal ausgewählt
     float lastPosX;                             //= letzte MausPosition (X)
     float lastPosZ;                             //= letzte MausPosition (Z)
-    public LayerMask mask;
+    public LayerMask m_LayerMask, mask;
     bool moveX, moveZ;                          //=true wenn jeweilige Achse ausgewählt     
-    public int collision;                       //Anzahl der Kollisionen
-    public bool onObject;                       //=true wenn auf einem Objekt
     public Material material1, material2;       //material bei Kollision ändern (material1 = ok(blau), material2 = Kollision(rot))
     Renderer rend;
     Transform invisibleWall;                    //zum färben (Kindelement von Regal: "Überzug" ohne Kollider)            
-                                                //    private static int temp;
-
-
+    int rotation;                               //gesamt Rotation       
+    int rotationRight;                          //Rotation im Uhrzeigersinn
+    int rotationLeft;                           //Rotation gen den Uhrzeigersinn
 
     // Start is called before the first frame update
     void Start()
     {
-        //Beim starten alles auf Anfangswerte setzen: 0, null, false
+        //Beim starten alles auf Anfangswerte setzen: 
         isDragging = false;
         lastPosX = 0f;
         lastPosZ = 0f;
-        // temp = 1;
         invisibleWall = null;
-        onObject = false;
         selected = null;
-
+        rotation = 0;
+        rotationRight = 0;
+        rotationLeft = 0;
         SelectionManager.StorageSelected += OnStorageSelected;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isDragging)
-        {
-            invisibleWall = selected.transform.Find("InvisibleWall");               //aus ausgwähltem Regal das Kindelement "invisibleWall" finden
-            rend = invisibleWall.GetComponent<Renderer>();                          //renderer um später das Material zu ändern
-            //temp = AddStorage.objectNumber;
-            HitSomething();
-            Rotate(selected);
-            if (!moveX && !moveZ)                                                   //Wenn keine gewünschte Achse Angegeben erfolgt die Bewegung durch die Mausposition
-            {
-                MoveAnywhere(selected);
-            }
-
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                moveX = true;
-                moveZ = false;
-            }
-            if (moveX)                                                              //wenn x ausgewählt soll es nur möglich sein das Regal in X-Achse zu bewegen 
-            {
-                MoveInXAxis(selected);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                moveX = false;
-                moveZ = true;
-            }
-            if (moveZ)
-            {
-                MoveInYAxis(selected);
-            }
-
-            if (Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace))
-            {  //Mit entf oder backspace ausgewähltes Regal entfernen
-                DeleteObject(selected);
-            }
-
-
-        }
     }
 
     //Auswahl Regal :
@@ -88,34 +42,64 @@ public class PickAndPlaceNew : MonoBehaviour
 
     }
 
+    //Gibt zurück ob Objekt getroffen:
+    private bool HitSomething()
+    {
+        BoxCollider c = selected.GetComponent<BoxCollider>();
+        Collider[] hitColliders = Physics.OverlapBox(invisibleWall.position, invisibleWall.localScale / 2, Quaternion.identity, m_LayerMask);
+        bool collisonDetected = false;
+        foreach (Collider collider in hitColliders)
+        {
+            if ((collider.gameObject != selected && collider.transform.parent != selected.transform && collider.transform.parent.parent != selected.transform && !collider.CompareTag("SelectableFloor")))         //keine Kollision mit sich selber oder dem Boden 
+            {
+                collisonDetected = true;
+            }
+        }
+        return collisonDetected;
+    }
+
     //Übergebenes Objekt rotieren
     private void Rotate(GameObject selected)
     {
-
-        //rotation im Uhrzeigersinn (90° um X-Achse)
+        //rotation im Uhrzeigersinn berechnen:
         if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.E))
         {
-            //selected.transform.rotation = Quaternion.identity;
-            // selected.transform.Rotate(new Vector3(0,45,0));
-            selected.transform.rotation = selected.transform.rotation * Quaternion.AngleAxis(90, Vector3.up);
-            //    selected.transform.Rotate(Vector3.up * 90 , Space.World);
-            //selected.transform.Rotate(Vector3.up * 90);
+            //Debug.Log("x: " + selected.transform.eulerAngles.x + " y: " + selected.transform.eulerAngles.y + " z : " + selected.transform.eulerAngles.z);
 
-            /*if (temp == 1) { selected.transform.Rotate(new Vector3(0, 90, 0)); }
-            if (temp == 2) { selected.transform.Rotate(new Vector3(0, 30, 0)); }
-            if (temp == 3) { selected.transform.rotation = selected.transform.rotation * Quaternion.AngleAxis(90, Vector3.up); }
-            if (temp == 4) { selected.transform.rotation = selected.transform.rotation * Quaternion.AngleAxis(45, Vector3.up); }*/
+            if (rotationRight < 4)                      //ermitteln wie oft im Uhrzeigersinn rotiert wurde da nur 4 möglich sind => bei 4 = 0
+            {
+                rotationRight++;
+            }
 
-            //selected.transform.Rotate(Vector3.up * 180 * Time.deltaTime);
-
+            if (rotationRight == 4)
+            {
+                rotationRight = 0;
+            }
         }
-        //rotation gegen den Uhrezeigersinn (90° um X-Achse)
+        //Rotation gegen den Uhrzeigersinn berechnen (beinahe identisch wie im Uhrzeiger sinn nur die Rotationswerte werden vertauscht)
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            selected.transform.rotation = selected.transform.rotation * Quaternion.AngleAxis(-90, Vector3.up);
+            if (rotationLeft < 4)
+            {
+                rotationLeft++;
+            }
 
+            if (rotationLeft == 4)
+            {
+                rotationLeft = 0;
+            }
         }
-
+        //Gesamte Rotation:
+        rotation = rotationRight - rotationLeft;   //Rotation gegenden Uhrzeigersinn abziehen um einen Wert für die gemeinsame rotation zu erhalten
+        if (rotation < 0)
+        {
+            rotation = rotation + 4;               //Um nicht zwichen positiven und negativen Werten unterscheiden zu müssen, wird der gesamtwert mit 4 (Rotationsmöglichkeiten) addiert
+        }
+        //die einzelnen Rotationsmöglichkeiten:
+        if (rotation == 0) { selected.transform.rotation = Quaternion.Euler(0, 0, 0); }
+        if (rotation == 1) { selected.transform.rotation = Quaternion.Euler(0, 90, 0); }
+        if (rotation == 2) { selected.transform.rotation = Quaternion.Euler(0, 180, 0); }
+        if (rotation == 3) { selected.transform.rotation = Quaternion.Euler(0, 270, 0); }
     }
 
     //Bewegen mit Maus
@@ -142,8 +126,6 @@ public class PickAndPlaceNew : MonoBehaviour
 
                 //(Wenn Objekt auf kamera zu fliegen => add layer floor -> boden hinzufügen und am würfel entfernen)
             }
-            //Objekt platzieren
-            PlaceObject();
         }
 
     }
@@ -155,9 +137,15 @@ public class PickAndPlaceNew : MonoBehaviour
         {
             if (HitSomething() == false)                         //Platzieren (mit enter taste) nur zulassen wenn das Objekt nicht auf (bzw. sich in) einem anderen Objekt steht
             {
+                //Werte wieder auf Anfangswerte setzten:
                 moveX = false;
                 moveZ = false;
                 isDragging = false;
+                rotation = 0;
+                rotationRight = 0;
+                rotationLeft = 0;
+                invisibleWall = null;
+                selected = null;
             }
             /*else
             {   
@@ -193,19 +181,6 @@ public class PickAndPlaceNew : MonoBehaviour
 
         selected.transform.Translate(pos, Space.World);                                             //bewege Regal nach pos, Space.World damit unabhängig von rotation 
 
-
-        if (Input.GetKeyDown(KeyCode.Y))                                                            //Y Taste wenn Achsen Bewegung gewechselt werden soll
-        {
-            moveX = false;
-            moveZ = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {                                                          //Z Taste wenn wieder mit Maus Bewegt werden soll 
-            moveX = false;
-            moveZ = false;
-        }
-        PlaceObject();
     }
 
     //In Y-Richtung Bewegen
@@ -233,17 +208,6 @@ public class PickAndPlaceNew : MonoBehaviour
         pos = new Vector3((z * Time.deltaTime), 0, 0);
         pos = cF * pos.x;
         selected.transform.Translate(pos, Space.World);
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            moveX = true;
-            moveZ = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            moveX = false;
-            moveZ = false;
-        }
-        PlaceObject();
 
     }
 
@@ -255,43 +219,55 @@ public class PickAndPlaceNew : MonoBehaviour
         isDragging = false;     //= false da kein Objekt mehr ausgewählt 
     }
 
-    //Gibt Anzahl an Kollisionen zurück
-    private int CheckCollision()
+    // Update is called once per frame
+    void Update()
     {
-        BoxCollider c = selected.GetComponent<BoxCollider>();
-        //Vector3 vec = new Vector3(selected.transform.position.x - selected.transform.localScale.x / 2, selected.transform.position.y, selected.transform.position.z - selected.transform.localScale.z / 2);
-        Collider[] hitColliders = Physics.OverlapBox(selected.transform.position, selected.transform.localScale / 2, selected.transform.rotation);
-        int i = 0;
-        foreach (Collider collider in hitColliders)
+        if (isDragging)
         {
-            if (collider.gameObject != selected && !collider.CompareTag("SelectableFloor"))         //keine Kollision mit sich selber oder dem Boden 
+            invisibleWall = selected.transform.Find("InvisibleWall");               //aus ausgwähltem Regal das Kindelement "invisibleWall" finden
+            rend = invisibleWall.GetComponent<Renderer>();                          //renderer um später das Material zu ändern
+            if (HitSomething())
             {
-                i++;                                                                                //wenn Kollision vorhanden erhöhe i um eins
+                rend.material = material2;          //material ändern wenn es sich auf einem Objekt befindet
             }
             else
             {
-                i--;                                                                                //wenn nicht mehr ziehe ab 
+                rend.material = material1;          //material ändern wenn nicht mehr auf einem anderen Objekt ist    
             }
+            Rotate(selected);
+            if (!moveX && !moveZ)                                                   //Wenn keine gewünschte Achse Angegeben erfolgt die Bewegung durch die Mausposition
+            {
+                MoveAnywhere(selected);
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                moveX = true;
+                moveZ = false;
+            }
+            if (moveX)                                                              //wenn x ausgewählt soll es nur möglich sein das Regal in X-Achse zu bewegen 
+            {
+                MoveInXAxis(selected);
+            }
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                moveX = false;
+                moveZ = true;
+            }
+            if (moveZ)
+            {
+                MoveInYAxis(selected);
+            }
+            if (Input.GetKeyDown(KeyCode.Z))                                        //Z Taste wenn wieder mit Maus Bewegt werden soll 
+            {
+                moveX = false;
+                moveZ = false;
+            }
+            if (Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace))
+            {  //Mit entf oder backspace ausgewähltes Regal entfernen
+                DeleteObject(selected);
+            }
+            PlaceObject();
         }
-        return i;
-    }
-
-    //Gibt An ob Kollision vorhanden ist (= true wenn auf Objekt) 
-    private bool HitSomething()
-    {
-        collision = this.CheckCollision();
-        if (collision > -1)                      // collision = -1 wenn auf keinem Objekt 
-        {
-            onObject = true;
-            rend.material = material2;          //material ändern wenn es sich auf einem Objekt befindet
-        }
-        else
-        {
-            onObject = false;
-            rend.material = material1;          //material ändern wenn nicht mehr auf einem anderen Objekt ist 
-        }
-
-        return onObject;
     }
 }
 
