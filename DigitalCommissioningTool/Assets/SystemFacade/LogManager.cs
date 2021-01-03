@@ -14,6 +14,7 @@ namespace SystemFacade
         /// </summary>
         private static LogHandler Handler;
 
+
         /// <summary>
         /// Initialisiert den LogHandler.
         /// </summary>

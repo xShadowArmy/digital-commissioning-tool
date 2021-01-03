@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1769335405914338108}
   m_Layer: 0
   m_Name: Shelf (1)
-  m_TagString: Untagged
+  m_TagString: StorageRackLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 7695446435339646939}
   m_Layer: 0
   m_Name: Shelf
-  m_TagString: Untagged
+  m_TagString: StorageRackLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 8801881324942351485}
   m_Layer: 0
   m_Name: Shelf (2)
-  m_TagString: Untagged
+  m_TagString: StorageRackLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,8 +635,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.37740016, y: 2.0414634, z: 1.4562583}
-  m_Center: {x: -1.8106898, y: 0.9823086, z: 2.4235818}
+  m_Size: {x: 0.6527549, y: 2.0414634, z: 1.8382907}
+  m_Center: {x: 0.40019602, y: 0.9823086, z: 0.9985219}
 --- !u!114 &740203175617747361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,14 +684,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c1b1a7e21a712429f21483b327a055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragable:
-    serializedVersion: 2
-    m_Bits: 256
   selected: {fileID: 0}
-  isDragging: 0
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   mask:
     serializedVersion: 2
     m_Bits: 0
+  material1: {fileID: 0}
+  material2: {fileID: 0}
 --- !u!1 &2743434085737632571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1551,7 @@ GameObject:
   - component: {fileID: 1006096519524514466}
   m_Layer: 0
   m_Name: Shelf (3)
-  m_TagString: Untagged
+  m_TagString: StorageRackLayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

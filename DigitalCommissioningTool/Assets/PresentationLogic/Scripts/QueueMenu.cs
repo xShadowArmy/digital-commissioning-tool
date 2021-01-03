@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using ApplicationFacade;
 using UnityEngine.UI;
+using ApplicationFacade.Warehouse;
+using ApplicationFacade.Application;
 
 public class QueueMenu : MonoBehaviour
 {

@@ -968,7 +968,7 @@ namespace ApplicationFacade.Warehouse
 
             StorageRackList.Add( data );
 
-            data.ChangeSlotCount( new StorageSlotCalculation( ) );
+            data.ChangeSlotCount( new StorageSlotCalculation( 8, 4, new Vector3( 0.8f, 0.04f, 2f ), 0.5f ) );
 
             Data.StorageRacks.Add( new ProjectStorageData( data.GetID( ), data.SlotCount, new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
 
