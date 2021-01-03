@@ -30,14 +30,14 @@ namespace AppData.Warehouse
             // NorthSouth wall
             for ( int i = 0; i < WallsNorth.Length; i++ )
             {
-                WallsNorth[i] = new ObjectTransformation( new Vector3( xOffset + 0f, yOffset + 0f, zOffset + 1f + i ), nsWallRotation, wallScale );
-                WallsSouth[i] = new ObjectTransformation( new Vector3( xOffset + 50f, yOffset + 0f, zOffset + 40.2f - i ), nsWallRotation, wallScale );
+                WallsNorth[i] = new ObjectTransformation( new Vector3( xOffset + 0f, yOffset + 0f, zOffset + 1.2f + i ), nsWallRotation, wallScale );
+                WallsSouth[i] = new ObjectTransformation( new Vector3( xOffset + 50.2f, yOffset + 0f, zOffset + 40.2f - i ), nsWallRotation, wallScale );
             }
 
             // EastWest wall
             for ( int i = 0; i < WallsEast.Length; i++ )
             {
-                WallsEast[i] = new ObjectTransformation( new Vector3( xOffset + 0.4f + i, yOffset + 0f, zOffset + 40.6f ), ewWallRotation, wallScale );
+                WallsEast[i] = new ObjectTransformation( new Vector3( xOffset + 0.6f + i, yOffset + 0f, zOffset + 40.8f ), ewWallRotation, wallScale );
                 WallsWest[i] = new ObjectTransformation( new Vector3( xOffset + 49.6f - i, yOffset + 0f, zOffset + 0.6f ), ewWallRotation, wallScale );
             }
         }

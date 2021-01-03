@@ -30,7 +30,6 @@
             <e p="ProjectSettings.cs" t="Include" />
           </e>
           <e p="ApplicationFacade.asmdef" t="Include" />
-          <e p="TimeMeasurementEntry.cs" t="Include" />
           <e p="Warehouse" t="Include">
             <e p="Container.cs" t="Include" />
             <e p="Definitions" t="Include">
@@ -352,6 +351,10 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
+        <e p="TimeMeasurement" t="Include">
+          <e p="TimeMeasurement.asmdef" t="Include" />
+          <e p="TimeMeasurementEntry.cs" t="Include" />
+        </e>
         <e p="UnitTests" t="Include">
           <e p="SystemFacade" t="Include">
             <e p="EditModeTests" t="Include">
@@ -378,6 +381,7 @@
       <e p="SystemFacade.csproj" t="IncludeRecursive" />
       <e p="SystemTools.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="TimeMeasurement.csproj" t="IncludeRecursive" />
     </e>
   </component>
 </project>
