@@ -7,7 +7,7 @@ using SystemFacade;
 using UnityEngine;
 using System.Reflection;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Application
 {
     public static class KeyManager
     {

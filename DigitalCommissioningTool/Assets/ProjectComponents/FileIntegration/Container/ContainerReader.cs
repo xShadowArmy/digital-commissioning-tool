@@ -75,15 +75,16 @@ namespace ProjectComponents.FileIntegration
                     for ( int j = 0; j < itemCount; j++ )
                     {
                         long idRef = long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer );
+                        long iid = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
                         string itemName = nav.GetAttribute( "itemName", xmlns );
                         double weight = double.Parse( nav.GetAttribute( "itemWeight", xmlns ), NumberStyles.Number );
                         int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ), NumberStyles.Integer );
 
-                        item = new ProjectItemData( idRef, count, weight, itemName, ReadTransformation( nav, xmlns ) );
+                        item = new ProjectItemData( idRef, iid, count, weight, itemName, ReadTransformation( nav, xmlns ) );
                         
-                        nav.MoveToNext( );
+                        data.Items[int.Parse( nav.GetAttribute( "slot", xmlns ), NumberStyles.Integer )] = item;
 
-                        data.Items.Add( item );
+                        nav.MoveToNext( );
                     }
 
                     nav.MoveToParent( );

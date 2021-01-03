@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading;
+using ApplicationFacade.Application;
 
 public class OpenProjectMenu : MonoBehaviour
 {
@@ -37,20 +38,33 @@ public class OpenProjectMenu : MonoBehaviour
 
         string[] paths = Directory.GetFiles(Paths.ProjectsPath, "*.prj");
         int i = 0;
-        foreach (string path in paths)
+        //foreach (string path in paths)
+        //{
+        //    string fileName = Path.GetFileName(path).TrimEnd(".prj".ToCharArray());
+        //    projects.Add(Path.GetFileName(path).TrimEnd(".prj".ToCharArray()));
+        //    GameManager.LoadProject(Path.GetFileName(path).TrimEnd(".prj".ToCharArray()));
+        //    projectName.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.ProjectName;
+        //    projectPath.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.ProjectPath;
+        //    projectCreated.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.DateCreated.ToString("dd/MM/yyyy");
+        //    projectModified.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.DateModified.ToString("dd/MM/yyyy");
+        //    GameObject item = Instantiate(template);
+        //    item.transform.SetParent(template.transform.parent);
+        //    item.SetActive(true);
+        //    GameManager.CloseProject();
+        //}
+
+        foreach( ProjectData data in ProjectManager.ProjectList )
         {
-            string fileName = Path.GetFileName(path).TrimEnd(".prj".ToCharArray());
-            projects.Add(Path.GetFileName(path).TrimEnd(".prj".ToCharArray()));
-            GameManager.LoadProject(Path.GetFileName(path).TrimEnd(".prj".ToCharArray()));
-            projectName.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.ProjectName;
-            projectPath.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.ProjectPath;
-            projectCreated.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.DateCreated.ToString("dd/MM/yyyy");
-            projectModified.GetComponent<TextMeshProUGUI>().text = GameManager.OpenProjectData.DateModified.ToString("dd/MM/yyyy");
+            projects.Add( data.ProjectName );
+            projectName.GetComponent<TextMeshProUGUI>().text = data.ProjectName;
+            projectPath.GetComponent<TextMeshProUGUI>().text = data.ProjectPath;
+            projectCreated.GetComponent<TextMeshProUGUI>().text = data.DateCreated.ToString("dd/MM/yyyy");
+            projectModified.GetComponent<TextMeshProUGUI>().text = data.DateModified.ToString("dd/MM/yyyy");
             GameObject item = Instantiate(template);
             item.transform.SetParent(template.transform.parent);
             item.SetActive(true);
-            GameManager.CloseProject();
         }
+
         SceneManager.UnloadSceneAsync("DefaultWarehouse");
         float newHeight = System.Math.Max(420, paths.Length * 105);
         RectTransform contentBox = template.transform.parent.GetComponent<RectTransform>();

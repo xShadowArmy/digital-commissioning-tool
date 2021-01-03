@@ -8,6 +8,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
+
 public class WallEditor : MonoBehaviour
 {
     public GameObject popUp;
@@ -211,8 +214,7 @@ public class WallEditor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
         {
-            GameObject temp = Instantiate(WallPrefab, hit.point + new Vector3(0, 1.6f, 0), ObjectSpawn.transform.rotation);
-            temp.tag = "SelectableInnerWall";
+            WallData wall = GameManager.GameWarehouse.CreateWall( hit.point + new Vector3(0f,1.6f,0f), ObjectSpawn.transform.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner );
         }
     }
 
@@ -226,9 +228,10 @@ public class WallEditor : MonoBehaviour
         {
             if (SelectedObjectTransform.gameObject.CompareTag("SelectableDoor"))
             {
-                Transform parent = SelectedObjectTransform.parent;
-                Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(WindowPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
+                DoorData door = GameManager.GameWarehouse.GetDoor( SelectedObjectTransform.gameObject );
+
+                GameManager.GameWarehouse.CreateWindow( door.Position, door.Rotation, door.Scale, door.Face, door.Class );
+                GameManager.GameWarehouse.RemoveDoor( door );
             }
             else
             {
@@ -265,17 +268,25 @@ public class WallEditor : MonoBehaviour
 
                 if (foundRightWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(rightWallElement));
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    WallData rw = GameManager.GameWarehouse.GetWall(rightWallElement);
+                    WallData lw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
+
+                    GameManager.GameWarehouse.RemoveWall( rw );
+                    GameManager.GameWarehouse.RemoveWall( lw );
+
                     GameManager.GameWarehouse.CreateWindow(SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale);
+                        SelectedObjectTransform.localScale, rw.Face, rw.Class );
                 }
                 else if (foundLeftWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(leftWallElement));
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    WallData lw = GameManager.GameWarehouse.GetWall(leftWallElement);
+                    WallData rw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
+
+                    GameManager.GameWarehouse.RemoveWall( rw );
+                    GameManager.GameWarehouse.RemoveWall( lw );
+
                     GameManager.GameWarehouse.CreateWindow(leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale);
+                        SelectedObjectTransform.localScale, rw.Face, rw.Class );
                 }
                 else
                 {
@@ -297,9 +308,10 @@ public class WallEditor : MonoBehaviour
         {
             if (SelectedObjectTransform.gameObject.CompareTag("SelectableWindow"))
             {
-                Transform parent = SelectedObjectTransform.parent;
-                Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(DoorPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
+                WindowData window = GameManager.GameWarehouse.GetWindow( SelectedObjectTransform.gameObject );
+
+                GameManager.GameWarehouse.CreateDoor( window.Position, window.Rotation, window.Scale, DoorType.Door, window.Face, window.Class );
+                GameManager.GameWarehouse.RemoveWindow( window );
             }
             else
             {
@@ -336,17 +348,25 @@ public class WallEditor : MonoBehaviour
 
                 if (foundRightWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(rightWallElement));
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    WallData rw = GameManager.GameWarehouse.GetWall(rightWallElement);
+                    WallData lw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
+
+                    GameManager.GameWarehouse.RemoveWall( rw );
+                    GameManager.GameWarehouse.RemoveWall( lw );
+
                     GameManager.GameWarehouse.CreateDoor(SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale, DoorType.Door);
+                        SelectedObjectTransform.localScale, DoorType.Door, rw.Face, rw.Class );
                 }
                 else if (foundLeftWallElement)
                 {
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(leftWallElement));
-                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
+                    WallData lw = GameManager.GameWarehouse.GetWall(leftWallElement);
+                    WallData rw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
+
+                    GameManager.GameWarehouse.RemoveWall( rw );
+                    GameManager.GameWarehouse.RemoveWall( lw );
+
                     GameManager.GameWarehouse.CreateDoor(leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale, DoorType.Door);
+                        SelectedObjectTransform.localScale, DoorType.Door, rw.Face, rw.Class);
                 }
                 else
                 {
@@ -367,44 +387,38 @@ public class WallEditor : MonoBehaviour
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableWall"))
         {
             Transform parent = SelectedObjectTransform.parent;
-            if (SelectedObjectTransform.CompareTag("SelectableDoor") || SelectedObjectTransform.CompareTag("SelectableWindow"))
+            if ( SelectedObjectTransform.CompareTag("SelectableWindow") )
             {
-                Destroy(SelectedObjectTransform.gameObject);
-                Vector3 position = SelectedObjectTransform.position;
-                Vector3 localScale = SelectedObjectTransform.localScale;
-                Quaternion rotation = SelectedObjectTransform.rotation;
+                WindowData window = GameManager.GameWarehouse.GetWindow( SelectedObjectTransform.gameObject );
+                GameManager.GameWarehouse.RemoveWindow( window );
 
-                switch (SelectedObjectTransform.parent.tag)
-                {
-                    case "NorthWall":
+                Vector3 position = window.Position;
+                Vector3 localScale = window.Scale;
+                Quaternion rotation = window.Rotation;
 
-                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer);
-                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.North, WallClass.Outer);
-                        break;
-
-                    case "EasthWall":
-
-                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer);
-                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.East, WallClass.Outer);
-                        break;
-
-                    case "SouthWall":
-
-                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer);
-                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.South, WallClass.Outer);
-                        break;
-
-                    case "WestWall":
-
-                        GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer);
-                        GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, WallFace.West, WallClass.Outer);
-                        break;
-                }
+                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class );
+                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class );
+                      
             }
+
+            else if( SelectedObjectTransform.CompareTag( "SelectableDoor" ) )
+            {
+                DoorData door = GameManager.GameWarehouse.GetDoor( SelectedObjectTransform.gameObject );
+                GameManager.GameWarehouse.RemoveDoor( door );
+
+                Vector3 position = door.Position;
+                Vector3 localScale = door.Scale;
+                Quaternion rotation = door.Rotation;
+
+                GameManager.GameWarehouse.CreateWall( position - SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, door.Face, door.Class );
+                GameManager.GameWarehouse.CreateWall( position + SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, door.Face, door.Class );
+
+            }
+
             else
             {
-                Destroy(SelectedObjectTransform.gameObject);
-                Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
+                //Destroy(SelectedObjectTransform.gameObject);
+                //Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
             }
         }
 

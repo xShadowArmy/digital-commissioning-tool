@@ -5,6 +5,7 @@ using ApplicationFacade;
 using System;
 using System.Reflection;
 using TMPro;
+using ApplicationFacade.Application;
 
 public class KeyBindMenu : MonoBehaviour
 {

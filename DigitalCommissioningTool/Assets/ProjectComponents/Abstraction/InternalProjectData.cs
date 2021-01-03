@@ -18,12 +18,7 @@ namespace ProjectComponents.Abstraction
 
         public InternalProjectData()
         {
-            if ( !StringResourceManager.Exists( "@DefaultProjectName" ) )
-            {
-                StringResourceManager.StoreString( "DefaultProjectName", "NeuesProject" );
-            }
-
-            Name = Name.LoadString( "@DefaultProjectName" );
+            Name = StringResourceManager.LoadString( "@DefaultProjectName" );
             Extension = ".prj";
             FullPath = Paths.ProjectsPath;
             DateCreated  = DateTime.Now;

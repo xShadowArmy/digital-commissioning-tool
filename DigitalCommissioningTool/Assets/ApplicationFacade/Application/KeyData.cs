@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using SystemTools;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Application
 {
-    public struct KeyData : ISerialConfigData
+    public class KeyData : ISerialConfigData
     {
         public KeyCode Code { get; set; }
         public bool ShiftNeeded { get; set; }

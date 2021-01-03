@@ -1,75 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AppData.Warehouse;
+using ApplicationFacade.Application;
 using ProjectComponents.Abstraction;
 using SystemFacade;
 using UnityEngine;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Warehouse
 {
     public class StorageData : GameObjectData
     {
-        public delegate void StorageChangedEventHandlder( StorageData storage );
-
-        public event StorageChangedEventHandlder StorageChanged;
+        public bool IsContainer { get; internal set; }
 
         public int SlotCount { get; internal set; }
 
-        public int LayerCount { get; internal set; }
-
-        public Vector3 LayerSize { get; internal set; }
-        
-        public float LayerDistance { get; internal set; }
-
-        public int SlotsPerLayer
-        {
-            get
-            {
-                return SlotCount / LayerCount;
-            }
-        }
-
-        public static int DefaultSlotCount
-        {
-            get
-            {
-                return 16;
-            }
-        }
-
-        public static int DefaultLayerCount
-        {
-            get
-            {
-                return 4;
-            }
-        }
-
-        public static Vector3 DefaultLayerSize
-        {
-            get
-            {
-                return new Vector3( 0.8f, 0.04f, 2f );
-            }
-
-        }
-
-        public static float DefaultLayerDistance
-        {
-            get
-            {
-                return 0.5f;
-            }
-        }
-
-        private static System.Random RNG { get; set; }
-
         private ItemData[] Data { get; set; }
 
-        internal GameObject[] Slots { get; set; }
+        private GameObject[] Slots { get; set; }
 
         public ItemData[] GetItems
         {
@@ -79,58 +26,30 @@ namespace ApplicationFacade
             }
         }
 
-        internal StorageData( ) : base( GameObjectDataType.StorageReck )
+        internal StorageData( ) : base( )
         {
-            Data = new ItemData[DefaultSlotCount];
-            Slots = new GameObject[DefaultSlotCount];
-            SlotCount = DefaultSlotCount;
-            LayerCount = DefaultLayerCount;
-            LayerSize = DefaultLayerSize;
-            LayerDistance = DefaultLayerDistance;
-            RNG = new System.Random( );
         }
 
-        internal StorageData( long id ) : base( GameObjectDataType.StorageReck, id )
+        internal StorageData( long id ) : base( id )
         {
-            Data = new ItemData[DefaultSlotCount];
-            Slots = new GameObject[DefaultSlotCount];
-            SlotCount = DefaultSlotCount;
-            LayerCount = DefaultLayerCount;
-            LayerSize = DefaultLayerSize;
-            LayerDistance = DefaultLayerDistance;
-            RNG = new System.Random( );
         }
 
-        internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale )
+        internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( id, position, rotation, scale )
         {
-            Data = new ItemData[DefaultSlotCount];
-            Slots = new GameObject[DefaultSlotCount];
-            SlotCount = DefaultSlotCount;
-            LayerCount = DefaultLayerCount;
-            LayerSize = DefaultLayerSize;
-            LayerDistance = DefaultLayerDistance;
-            RNG = new System.Random( );
         }
 
-        internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.StorageReck, id, position, rotation, scale, obj )
+        internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( id, position, rotation, scale, obj )
         {
-            Data = new ItemData[DefaultSlotCount];
-            Slots = new GameObject[DefaultSlotCount];
-            SlotCount = DefaultSlotCount;
-            LayerCount = DefaultLayerCount;
-            LayerSize = DefaultLayerSize;
-            LayerDistance = DefaultLayerDistance;
-            RNG = new System.Random( );
         }
         
         public ItemData GetItem( int slot )
         {
-            if ( IsDestroyed( ) )
+            if ( IsDestroyed( ) || slot == -1 )
             {
                 return null;
             }
 
-            if ( slot > SlotCount )
+            if ( slot >= Slots.Length )
             {
                 LogManager.WriteWarning( "Ein Objekt soll aus einem Slot abgefragt werden der nicht existiert!", "StorageData", "AddItem" );
 
@@ -217,14 +136,16 @@ namespace ApplicationFacade
             return -1;
         }
 
-        internal void AddItem( ItemData item, int slot )
+        public void AddItem( ItemData item, int slot )
         {
+            LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
+
             if ( IsDestroyed( ) )
             {
                 return;
             }
 
-            if ( slot > SlotCount )
+            if ( slot >= Slots.Length )
             {
                 LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
 
@@ -232,13 +153,33 @@ namespace ApplicationFacade
             }
 
             Data[slot] = item;
+
+            item.SetID( Warehouse.GetUniqueID( Data ) );
+
             item.ChangeGameObject( Slots[slot] );
+            item.Object.name = item.Name;
+            item.ParentStorage = this;
+
             Data[slot].Object.SetActive( true );
-            
-            OnChange( this );
+
+            Data[slot].Position = Slots[slot].transform.position;
+            Data[slot].Rotation = Slots[slot].transform.rotation;
+            Data[slot].Scale    = Slots[slot].transform.localScale;
+
+            foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
+            {
+                if ( data.ID == GetID( ) )
+                {
+                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID(), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+
+                    break;
+                }
+            }
+
+            ObjectChanged( );
         }
 
-        internal bool RemoveItem( ItemData item )
+        public bool RemoveItem( ItemData item )
         {
             if ( IsDestroyed( ) )
             {
@@ -249,9 +190,12 @@ namespace ApplicationFacade
             {
                 if ( Data[i].GetID() == item.GetID() )
                 {
-                    Data[i].Object.SetActive( false );                    
+                    Data[i].Object.SetActive( false );
+                    Data[i] = null;
 
-                    OnChange( this );
+                    item.ParentStorage = null;
+
+                    ObjectChanged( );
 
                     return true;
                 }
@@ -260,7 +204,7 @@ namespace ApplicationFacade
             return false;
         }
 
-        internal bool ContainsItem( ItemData item )
+        public bool ContainsItem( ItemData item )
         {
             if ( IsDestroyed( ) )
             {
@@ -278,100 +222,124 @@ namespace ApplicationFacade
             return false;
         }
 
-        internal void Initialize( )
+        public new void Destroy()
         {
-            CalcSlots( );
+            base.Destroy( );
+
+            foreach( ItemData item in Data )
+            {
+                item.Destroy( );
+            }
         }
 
-        /*public void ChangeSlotCount( int slots )
+        internal void ChangeSlotCount( ISlotCalcStrategie strategie )
         {
             if ( IsDestroyed( ) )
             {
                 return;
             }
 
-            ItemData[] tmp = Data;
+            strategie.StartGeneration( );
 
-            SlotCount = slots;
+            SlotCount = strategie.GetSlotCount( );
 
-            Data = new ItemData[slots];
-
-            for( int i = 0; i < Data.Length; i++ )
+            if ( Data == null )
             {
-                if ( i < tmp.Length )
+                Data = new ItemData[SlotCount];
+            }
+
+            else
+            {
+                ItemData[] tmp = new ItemData[SlotCount];
+
+                Data.CopyTo( tmp, 0 );
+            }
+
+            bool change = false;
+
+            if ( Slots == null )
+            {
+                Slots = new GameObject[SlotCount];
+            }
+
+            else
+            {
+                foreach( GameObject obj in Slots )
                 {
-                    Data[i] = tmp[i];
+                    GameObject.Destroy( obj );
+                }
+
+                change = true;
+            }                
+
+            List<GameObject> layers = new List<GameObject>();
+
+            foreach( Transform data in Object.transform )
+            {
+                if ( data.gameObject.CompareTag( "StorageRackLayer" ) )
+                {
+                    layers.Add( data.gameObject );
                 }
             }
 
-            OnChange( );
-        } */
-        
-        protected virtual void OnChange( StorageData data )
-        {
-            base.OnChange( );
-            StorageChanged?.Invoke( data );
+            for ( int i = 0; i < SlotCount; i++ )
+            {
+                switch ( i % 3 )
+                {
+                    case 0:
+
+                        Slots[i] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageBoxOpen" ), layers[i / ( SlotCount / strategie.GetLayerCount())].transform );
+                        break;
+
+                    case 1:
+
+                        Slots[i] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageBoxPartialOpen" ), layers[i / ( SlotCount / strategie.GetLayerCount( ) )].transform );
+                        break;
+
+                    case 2:
+
+                        Slots[i] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageBoxClosed" ), layers[i / ( SlotCount / strategie.GetLayerCount( ) )].transform );
+                        break;
+                }
+
+                Slots[i].transform.localPosition = strategie.GetPositionData( )[i];
+                Slots[i].transform.localScale    = strategie.GetScaleData()[i];
+                Slots[i].SetActive( false );
+            }
+
+            if ( change )
+            {
+                for ( int i = 0; i < Slots.Length ; i++ )
+                {
+                    if ( Data[i] != null )
+                    {
+                        Data[i].Object = Slots[i];
+                    }
+                }
+            }
         }
 
-        private void CalcSlots( )
+        protected override void ObjectChanged()
         {
-            List<GameObject> layers = new List<GameObject>( );
-
-            int n = 0;
-            float xMargin = 0.1f;
-            float zInnerMargin = 0.1f;
-            float zOuterMargin = 0.05f;
-            float yMargin = 0.01f;
-
-            Vector3 slotScale = new Vector3( LayerSize.x - xMargin * 2, (LayerDistance / LayerSize.y) * ( 1 - ( LayerDistance - yMargin ) ), ( LayerSize.z / 2 - zOuterMargin * 2 - ( SlotsPerLayer - 1 ) * zInnerMargin ) / SlotsPerLayer );
-
-            foreach( Transform obj in Object.transform )
+            foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
             {
-                if ( obj.tag.Equals( "StorageRackLayer" ) )
+                if ( data.ID == GetID( ) )
                 {
-                    layers.Add( obj.gameObject );
-                }
-            }
+                    GameManager.GameWarehouse.Data.StorageRacks.Remove( data );
 
-            LayerCount = layers.Count;
+                    ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
 
-            for ( int i = 0; i < layers.Count; i++ )
-            {
-                for( int j = 0; j < SlotsPerLayer; j++, n++ )
-                {
-                    switch ( RNG.Next( 0, 3 ) )
+                    for( int i = 0; i < Data.Length; i++ )
                     {
-                        case 0:
-
-                            Slots[n] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageBoxOpen" ), layers[i].transform );
-                            Slots[n].transform.localScale = slotScale;
-                            break;
-
-                        case 1:
-
-                            Slots[n] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageBoxPartialOpen" ), layers[i].transform );
-                            Slots[n].transform.localScale = slotScale;
-                            break;
-
-                        case 2:
-
-                            Slots[n] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageBoxClosed" ), layers[i].transform );
-                            Slots[n].transform.localScale = slotScale;
-                            break;
-
-                        case 3:
-
-                            Slots[n] = GameObject.Instantiate( GameObject.FindGameObjectWithTag( "StorageContainer" ), layers[i].transform );
-                            Slots[n].transform.localScale = new Vector3( slotScale.x * 2.5f, slotScale.y * 5, slotScale.z * 5 );
-                            break;
-
-                        default:
-
-                            break;
+                        if ( Data[i] != null )
+                        {
+                            storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID(), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
+                        }
                     }
 
-                    Slots[n].SetActive( false );
-                    Slots[n].transform.localPosition = new Vector3( -slotScale.x / 2, ( LayerDistance - yMargin ), ( -slotScale.z / 2 * SlotsPerLayer + zOuterMargin - zInnerMargin * ( SlotsPerLayer / 2f ) ) + j * zInnerMargin + j * slotScale.z );
+                    GameManager.GameWarehouse.Data.StorageRacks.Add( storage );
+
+                    break;
                 }
             }
         }

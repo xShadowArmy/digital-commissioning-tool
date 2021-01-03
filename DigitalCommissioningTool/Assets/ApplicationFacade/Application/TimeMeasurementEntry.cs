@@ -5,7 +5,7 @@ using SystemTools;
 using  UnityEngine;
 
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Application
 {
     [System.Serializable]
     public class TimeMeasurementEntry: ISerialConfigData

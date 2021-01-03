@@ -6,8 +6,8 @@ namespace AppData.Warehouse
 {
     public interface IWarehouseStrategie 
     {
-        void StartGeneration();
-         
+        void StartGeneration();  
+        
         ObjectTransformation[] GetFloor();
         ObjectTransformation[] GetOuterWalls();
         ObjectTransformation[] GetInnerWalls();

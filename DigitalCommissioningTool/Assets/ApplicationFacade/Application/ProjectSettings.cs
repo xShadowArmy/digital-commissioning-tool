@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Application
 {
     public class ProjectSettings
     {

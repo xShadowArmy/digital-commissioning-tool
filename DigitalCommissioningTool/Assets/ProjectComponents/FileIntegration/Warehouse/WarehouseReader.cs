@@ -146,7 +146,7 @@ namespace ProjectComponents.FileIntegration
 
                 for ( int i = 0; i < count; i++ )
                 {
-                    data = new ProjectWindowData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), ReadTransformation( nav, xmlns ) );
+                    data = new ProjectWindowData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), nav.GetAttribute( "face", xmlns ), nav.GetAttribute( "class", xmlns ), ReadTransformation( nav, xmlns ) );
 
                     nav.MoveToNext( );
 
@@ -181,7 +181,7 @@ namespace ProjectComponents.FileIntegration
 
                 for ( int i = 0; i < count; i++ )
                 {
-                    data = new ProjectDoorData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), nav.GetAttribute( "type", xmlns ), ReadTransformation( nav, xmlns ) );
+                    data = new ProjectDoorData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), nav.GetAttribute( "face", xmlns ), nav.GetAttribute( "class", xmlns ), nav.GetAttribute( "type", xmlns ), ReadTransformation( nav, xmlns ) );
                     
                     nav.MoveToNext( );
 
@@ -249,15 +249,16 @@ namespace ProjectComponents.FileIntegration
                     for ( int j = 0; j < itemCount; j++ )
                     {
                         long idRef  = long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer );
+                        long iid  = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
                         string name = nav.GetAttribute( "itemName", xmlns );
                         double weight = double.Parse( nav.GetAttribute( "itemWeight", xmlns ), NumberStyles.Number );
                         int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ) );
 
-                        item = new ProjectItemData( idRef, count, weight, name, ReadTransformation( nav, xmlns ) );
+                        item = new ProjectItemData( idRef, iid, count, weight, name, ReadTransformation( nav, xmlns ) );
+
+                        data.Items[int.Parse( nav.GetAttribute( "slot", xmlns ), NumberStyles.Integer )] = item;
                         
                         nav.MoveToNext( );
-
-                        data.Items.Add( item );
                     }
 
                     nav.MoveToParent( );

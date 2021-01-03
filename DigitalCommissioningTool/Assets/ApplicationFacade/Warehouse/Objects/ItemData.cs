@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationFacade.Application;
 using ProjectComponents.Abstraction;
 using SystemFacade;
 using UnityEngine;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Warehouse
 {
     public class ItemData : GameObjectData
     {
@@ -26,6 +27,8 @@ namespace ApplicationFacade
         internal ItemData ParentItem { get; private set; }
 
         internal List<ItemData> ChildItems { get; private set; }
+
+        internal long IDRef { get; set; }
 
         internal static List<ItemData> ItemStock { get; set; }
 
@@ -63,7 +66,7 @@ namespace ApplicationFacade
             ItemStock = new List<ItemData>( );
         }
 
-        internal ItemData() : base( GameObjectDataType.Item )
+        internal ItemData() : base( )
         {
             Count = 0;
             Weight = 0;
@@ -73,7 +76,7 @@ namespace ApplicationFacade
             ChildItems = new List<ItemData>( );
         }
 
-        internal ItemData( long id ) : base( GameObjectDataType.Item, id )
+        internal ItemData( long id ) : base( id )
         {
             Count = 0;
             Weight = 0;
@@ -159,7 +162,6 @@ namespace ApplicationFacade
             }
 
             Name = itemName;
-            OnChange( this );
         }
 
         public void SetItemWeight( double itemWeight )
@@ -175,7 +177,6 @@ namespace ApplicationFacade
             }
 
             Weight = itemWeight;
-            OnChange( this );
         }
                 
         public ItemData RequestItem( int count )
@@ -198,12 +199,13 @@ namespace ApplicationFacade
                 return null;
             }
 
-            ItemData data = new ItemData( ID )
+            ItemData data = new ItemData(  )
             {
                 Count = count,
                 Name = Name,
                 Weight = Weight,
-                ParentItem = this
+                ParentItem = this,
+                IDRef = IDRef
             };
 
             Count -= count;
@@ -258,20 +260,24 @@ namespace ApplicationFacade
             {
                 Name = name,
                 Count = count,
-                Weight = weight,
+                Weight = weight
             };
+
+            item.IDRef = item.ID;
 
             ItemStock.Add( item );
         }
         
-        internal static void AddItemToStock( long idRef, string name, int count = 1, double weight = 0 )
+        internal static void AddItemToStock( long id, string name, int count = 1, double weight = 0 )
         {
-            ItemData item = new ItemData( idRef )
+            ItemData item = new ItemData( id )
             {
                 Name = name,
                 Count = count,
                 Weight = weight,
             };
+
+            item.IDRef = id;
 
             ItemStock.Add( item );
         }
@@ -288,11 +294,11 @@ namespace ApplicationFacade
             return ItemStock.Remove( item );
         }
 
-        public static bool RemoveItemFromStock( long id )
+        public static bool RemoveItemFromStock( long idRef )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
             {
-                if ( ItemStock[i].GetID( ) == id )
+                if ( ItemStock[i].IDRef == idRef )
                 {
                     RemoveStockItem( ItemStock[i] );
 
@@ -331,11 +337,11 @@ namespace ApplicationFacade
             return false;
         }
 
-        public static bool StockContainsItem( long id )
+        public static bool StockContainsItem( long idRef )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
             {
-                if ( ItemStock[i].GetID( ) == id )
+                if ( ItemStock[i].IDRef == idRef )
                 {
                     return true;
                 }
@@ -368,12 +374,6 @@ namespace ApplicationFacade
             }
 
             ParentStorage = storage;
-        }
-
-        protected virtual void OnChange( ItemData data )
-        {
-            base.OnChange( );
-            ItemChanged?.Invoke( data );
         }
 
         private static void RemoveStockItem( ItemData data )
@@ -463,6 +463,10 @@ namespace ApplicationFacade
             }
 
             UpdateItemData( item, null );
+        }
+
+        protected override void ObjectChanged()
+        {
         }
     }
 }

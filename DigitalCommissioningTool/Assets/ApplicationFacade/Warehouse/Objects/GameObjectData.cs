@@ -7,14 +7,10 @@ using ProjectComponents.Abstraction;
 using SystemFacade;
 using UnityEngine;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Warehouse
 {
-    public class GameObjectData : IDataIdentifier
+    public abstract class GameObjectData : IDataIdentifier
     {
-        public delegate void GameObjectChangedEventHandler( GameObjectData obj, GameObjectDataType type );
-
-        public event GameObjectChangedEventHandler GameObjectDataChanged;
-
         public Vector3 Position { get; internal set; }
 
         public Quaternion Rotation { get; internal set; }
@@ -27,48 +23,47 @@ namespace ApplicationFacade
 
         public bool Readonly { get; internal set; }
 
-        protected GameObjectDataType ObjType { get; set; }
-
         protected long ID { get; set; }
 
-        internal GameObjectData( GameObjectDataType type )
+        internal GameObjectData( )
         {
             Position = new Vector3( );
             Rotation = new Quaternion( );
             Scale    = new Vector3( );
             Object   = null;
             ID       = 0;
-            ObjType = type;
         }
 
-        internal GameObjectData( GameObjectDataType type, long id )
+        internal GameObjectData( long id )
         {
             Position = new Vector3( );
             Rotation = new Quaternion( );
             Scale    = new Vector3( );
             Object   = null;
             ID       = id;
-            ObjType = type;
         }
 
-        internal GameObjectData( GameObjectDataType type, long id, Vector3 position, Quaternion rotation, Vector3 scale )
+        internal GameObjectData( long id, Vector3 position, Quaternion rotation, Vector3 scale )
         {
             Position = position;
             Rotation = rotation;
             Scale    = scale;
             Object   = null;
             ID       = id;
-            ObjType = type;
         }
 
-        internal GameObjectData( GameObjectDataType type, long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj )
+        internal GameObjectData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj )
         {
             Position = position;
             Rotation = rotation;
             Scale    = scale;
             Object   = obj;
             ID       = id;
-            ObjType = type;
+        }
+
+        ~GameObjectData()
+        {
+            Destroy( );
         }
 
         public void SetPosition( Vector3 position )
@@ -90,7 +85,7 @@ namespace ApplicationFacade
                 Object.transform.position = position;
             }
 
-            OnChange( );
+            ObjectChanged( );
         }
 
         public void SetRotation( Quaternion rotation )
@@ -112,7 +107,7 @@ namespace ApplicationFacade
                 Object.transform.rotation = rotation;
             }
 
-            OnChange( );
+            ObjectChanged( );
         }
 
         public void SetScale( Vector3 scale )
@@ -134,7 +129,7 @@ namespace ApplicationFacade
                 Object.transform.localScale = scale;
             }
 
-            OnChange( );
+            ObjectChanged( );
         }
 
         public void SetTransform( Transform transform )
@@ -160,7 +155,7 @@ namespace ApplicationFacade
                 Object.transform.localScale = transform.localScale;
             }
 
-            OnChange( );
+            ObjectChanged( );
         }
 
         public void ChangeGameObject( GameObject obj )
@@ -213,10 +208,7 @@ namespace ApplicationFacade
             return ID;
         }
 
-        protected virtual void OnChange()
-        {
-            GameObjectDataChanged?.Invoke( this, ObjType );
-        }
+        protected abstract void ObjectChanged();
 
         protected bool IsReadonly()
         {

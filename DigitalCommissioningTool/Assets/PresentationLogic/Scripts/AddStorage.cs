@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using ApplicationFacade;
+using ApplicationFacade.Application;
 
 public class AddStorage : MonoBehaviour
 {

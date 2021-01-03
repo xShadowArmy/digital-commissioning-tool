@@ -51,41 +51,19 @@ namespace SystemFacade
         /// </summary>
         /// <param name="name">Der Name der StringResource.</param>
         /// <returns>Die StringResource oder <see cref="string.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
-        public static string LoadString( this string str, string name )
+        public static string LoadString( this string content, string name )
         {
             return Handler.LoadString( name );
         }
 
         /// <summary>
-        /// Lädt eine StringResource anhand ihrer ID.
-        /// </summary>
-        /// <param name="id">Die ID der StringResource.</param>
-        /// <returns>Die StringResource oder <see cref="string.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
-        public static string LoadString( this string str, long id )
-        {
-            return Handler.LoadString( id );
-        }
-
-        /// <summary>
         /// Speichert eine StringResource mit dem angegebenen Schluessel.
         /// </summary>
         /// <param name="name">Der Schluessel der Resource.</param>
         /// <param name="content">Die StringResource.</param>
         /// <param name="overwrite">Gibt an, ob vorhandene Daten ueberschrieben werden sollen.</param>
         /// <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
-        public static bool StoreString( string name, string content, bool overwrite = false )
-        {
-            return Handler.StoreString( name, content, overwrite );
-        }
-
-        /// <summary>
-        /// Speichert eine StringResource mit dem angegebenen Schluessel.
-        /// </summary>
-        /// <param name="name">Der Schluessel der Resource.</param>
-        /// <param name="content">Die StringResource.</param>
-        /// <param name="overwrite">Gibt an, ob vorhandene Daten ueberschrieben werden sollen.</param>
-        /// <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
-        public static bool StoreString( this string str, string name, string content, bool overwrite = false )
+        public static bool StoreString( this string content, string name, bool overwrite = false )
         {
             return Handler.StoreString( name, content, overwrite );
         }
@@ -114,26 +92,6 @@ namespace SystemFacade
         /// <param name="name">Der Name der zu suchenden Resource.</param>
         /// <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
         public static bool Exists( string name )
-        {
-            return Handler.Exists( name );
-        }
-
-        /// <summary>
-        /// Überprüft ob eine StringResource mit der angegebenen ID verfügbar ist.
-        /// </summary>
-        /// <param name="id">Die ID der zu suchenden Resource.</param>
-        /// <returns>Gibt true zurück falls die Suche erfolgreich war.</returns>
-        public static bool Exists( this string str, long id )
-        {
-            return Handler.Exists( id );
-        }
-
-        /// <summary>
-        /// Überprüft, ob eine StringResource mit dem angegebenen Namen verfügbar ist.
-        /// </summary>
-        /// <param name="name">Der Name der zu suchenden Resource.</param>
-        /// <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
-        public static bool Exists( this string str, string name )
         {
             return Handler.Exists( name );
         }

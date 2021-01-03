@@ -61,11 +61,11 @@ namespace ProjectComponents.FileIntegration
 
                         nav.InsertElementAfter( "xs", "Items", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "count", xmlns, data.Container[i].GetItems.Length.ToString() );
+                        nav.CreateAttribute( "xs", "count", xmlns, data.Container[i].Items.Length.ToString() );
 
-                        if ( data.Container[i].GetItems.Length > 0 )
+                        if ( data.Container[i].Items.Length > 0 )
                         {
-                            for( int j = 0; j < data.Container[i].GetItems.Length; j++ )
+                            for( int j = 0; j < data.Container[i].Items.Length; j++ )
                             {
                                 if ( j == 0 )
                                 {
@@ -79,11 +79,13 @@ namespace ProjectComponents.FileIntegration
                                     nav.MoveToNext( );
                                 }
 
-                                nav.CreateAttribute( "xs", "itemName", xmlns, data.Container[i].GetItems[j].Name );
-                                nav.CreateAttribute( "xs", "itemWeight", xmlns, data.Container[i].GetItems[j].Weight.ToString( ) );
-                                nav.CreateAttribute( "xs", "itemCount", xmlns, data.Container[i].GetItems[j].Count.ToString( ) );
-                                nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[ i ].GetItems[ j ].IDRef.ToString( ) );
-                                WriteTransformationData( nav, data.Container[ i ].GetItems[ j ].Transformation, xmlns );
+                                nav.CreateAttribute( "xs", "itemName", xmlns, data.Container[i].Items[j].Name );
+                                nav.CreateAttribute( "xs", "itemWeight", xmlns, data.Container[i].Items[j].Weight.ToString( ) );
+                                nav.CreateAttribute( "xs", "itemCount", xmlns, data.Container[i].Items[j].Count.ToString( ) );
+                                nav.CreateAttribute( "xs", "slot", xmlns, j.ToString( ) );
+                                nav.CreateAttribute( "xs", "id", xmlns, data.Container[i].Items[j].ID.ToString( ) );
+                                nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[ i ].Items[ j ].IDRef.ToString( ) );
+                                WriteTransformationData( nav, data.Container[ i ].Items[ j ].Transformation, xmlns );
                             }
 
                             nav.MoveToParent( );

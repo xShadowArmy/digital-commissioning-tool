@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using SystemFacade;
-using ApplicationFacade;
 using NUnit.Framework;
 using UnityEngine;
+using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
 
 namespace UnitTests.SystemFacade
 {
@@ -16,7 +17,7 @@ namespace UnitTests.SystemFacade
             string projectPath = Paths.ProjectsPath + projectName + ".prj";
             GameManager.CreateProject(projectName);
             //GameManager.GameWarehouse.CreateWall(new Vector3(1f, 2f, 3f), Quaternion.Euler(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
-            GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), Quaternion.Euler( 4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Gate);
+            //GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), Quaternion.Euler( 4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Door, );
             GameManager.GameWarehouse.CreateStorageRack();
             StorageData data0 = GameManager.GameWarehouse.CreateStorageRack();
             //GameManager.GameWarehouse.CreateStorageRackItem(new Vector3(0f, 0f, 0f), Quaternion.Euler( 0f, 0f, 0f), new Vector3(0f, 0f, 0f), data0);
@@ -40,7 +41,7 @@ namespace UnitTests.SystemFacade
             string projectPath = Paths.ProjectsPath + projectName + ".prj";
             GameManager.CreateProject(projectName);
             //GameManager.GameWarehouse.CreateWall(new Vector3(1f, 2f, 3f), Quaternion.Euler(4f, 5f, 6f), new Vector3(7f, 8f, 9f));
-            GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), Quaternion.Euler( 4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Gate);
+            //GameManager.GameWarehouse.CreateDoor(new Vector3(1f, 2f, 3f), Quaternion.Euler( 4f, 5f, 6f), new Vector3(77f, 88f, 99f), DoorType.Door);
             GameManager.GameWarehouse.CreateStorageRack();
             StorageData origData1 = GameManager.GameWarehouse.CreateStorageRack();
             //GameManager.GameWarehouse.CreateStorageRackItem(new Vector3(0f, 0f, 0f), Quaternion.Euler( 0f, 0f, 0f), new Vector3(0f, 0f, 0f), origData1);

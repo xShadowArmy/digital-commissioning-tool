@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationFacade.Warehouse;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Application
 {
     public static class GameManager
     {
@@ -16,7 +17,7 @@ namespace ApplicationFacade
             }
         }
         
-        public static Warehouse GameWarehouse { get; private set; }
+        public static Warehouse.Warehouse GameWarehouse { get; private set; }
 
         public static Container GameContainer { get; private set; }
 
@@ -24,13 +25,13 @@ namespace ApplicationFacade
 
         static GameManager()
         {
-            GameWarehouse = new Warehouse( );
+            GameWarehouse = new Warehouse.Warehouse( );
             PManager = new ProjectManager( );
         }
 
         public static bool LoadProject( string name )
         {
-            Warehouse wtmp = new Warehouse( );
+            Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
             Container ctmp = new Container( );
 
             PManager.LoadProject( name, ref wtmp, ref ctmp );
@@ -58,7 +59,7 @@ namespace ApplicationFacade
 
         public static bool CreateProject( string name, WarehouseSize size = WarehouseSize.Medium )
         {
-            Warehouse wtmp = new Warehouse( );
+            Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
             Container ctmp = new Container( );
 
             PManager.CreateProject( name, size, ref wtmp, ref ctmp );

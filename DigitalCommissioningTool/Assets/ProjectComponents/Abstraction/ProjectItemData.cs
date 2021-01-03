@@ -12,6 +12,7 @@ namespace ProjectComponents.Abstraction
         public int Count { get; set; }
         public double Weight { get; set; }
         public string Name { get; set; }
+        public long ID { get; set; }
         public long IDRef { get; set; }
         public ProjectTransformationData Transformation { get; private set; }
          
@@ -20,8 +21,9 @@ namespace ProjectComponents.Abstraction
 
         }
 
-        public ProjectItemData( long idRef, int count, double weight, string name, ProjectTransformationData transformation )
+        public ProjectItemData( long idRef, long id, int count, double weight, string name, ProjectTransformationData transformation )
         {
+            ID = id;
             Count = count;
             Weight = weight;
             Name = name;

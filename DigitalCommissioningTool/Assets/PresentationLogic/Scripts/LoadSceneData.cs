@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ApplicationFacade;
+using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
 
 public class LoadSceneData : MonoBehaviour
 {
@@ -11,19 +13,21 @@ public class LoadSceneData : MonoBehaviour
         //GameManager.CreateProject( "MediumWarehouse", WarehouseSize.Medium );
         //GameManager.CreateProject( "LargeWarehouse", WarehouseSize.Large );
 
-        GameManager.LoadProject( "MediumWarehouse" );
+        //GameManager.LoadProject( "MediumWarehouse" );
         
         //StorageData data = GameManager.GameWarehouse.CreateStorageRack( );
-        
-        //ItemData.AddItemToStock( "TestItem2", 300 );
-        
-        //ItemData test1stock = ItemData.RequestStockItem( "TestItem2" );
-        
+        //
+        //ItemData.AddItemToStock( "M3Schrauben", 300 );
+        //ItemData.AddItemToStock( "Zündkerzen", 50 );
+        //
+        //ItemData test1stock = ItemData.RequestStockItem( "M3Schrauben" );
+        //ItemData test2stock = ItemData.RequestStockItem( "Zündkerzen" );
+        //
         //ItemData test1 = test1stock.RequestItem( 150 );
-        
-        //GameManager.GameWarehouse.AddItemToStorageRack( data, test1, 12 );
-        //GameManager.GameWarehouse.AddItemToStorageRack( data, test2, 8 );
-        //GameManager.GameWarehouse.AddItemToStorageRack( data, test3, 9 );
+        //ItemData test2 = test2stock.RequestItem( 4 );
+        //
+        //data.AddItem( test1, 12 );
+        //data.AddItem( test2, 8  );
 
 
 

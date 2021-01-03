@@ -1,7 +1,7 @@
 ﻿using System;
 using ProjectComponents.Abstraction;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Application
 {
     public class ProjectData
     {

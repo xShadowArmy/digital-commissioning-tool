@@ -5,47 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectComponents.Abstraction;
 using SystemFacade;
+using ApplicationFacade.Application;
 using UnityEngine;
 
-namespace ApplicationFacade
+namespace ApplicationFacade.Warehouse
 {
-    public class WallData : GameObjectData
-    {
-        public delegate void WallChangedEventHandler( WallData wall );
-
-        public event WallChangedEventHandler WallChanged;
-
-        public WallFace Face { get; internal set; }
-
-        public WallClass Class { get; internal set; }
-
-        public static int NorthWallLength { get; internal set; }
-
-        public static int EastWallLength { get; internal set; }
-
-        public static int SouthWallLength { get; internal set; }
-
-        public static int WestWallLength { get; internal set; }
-        
-        internal WallData() : base( GameObjectDataType.Wall )
+    public class WallData : WallObjectData
+    {       
+        internal WallData() : base( )
         {
         }
 
-        internal WallData( long id ) : base( GameObjectDataType.Wall, id )
+        internal WallData( long id ) : base( id )
         {
         }
 
-        internal WallData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( GameObjectDataType.Wall, id, position, rotation, scale )
+        internal WallData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( id, position, rotation, scale )
         {
         }
 
-        internal WallData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( GameObjectDataType.Wall, id, position, rotation, scale, obj )
+        internal WallData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( id, position, rotation, scale, obj )
         {
         }
         
-        protected new virtual void OnChange()
+        protected override void ObjectChanged()
         {
-            base.OnChange( );
+            LogManager.WriteInfo( "Aktualisiere WallData.", "WallData", "ObjectChanged" );
+
+            for ( int i = 0; i < GameManager.GameWarehouse.Data.Walls.Count; i++ )
+            {
+                if ( GetID( ) == GameManager.GameWarehouse.Data.Walls[i].ID )
+                {
+                    GameManager.GameWarehouse.Data.Walls.Remove( GameManager.GameWarehouse.Data.Walls[i] );
+                    GameManager.GameWarehouse.Data.Walls.Insert( i, new ProjectWallData( GetID( ), Face.ToString( ), Class.ToString( ), new ProjectTransformationData( Position, Rotation, Scale ) ) );
+
+                    return;
+                }
+            }
         }
     }
 }
