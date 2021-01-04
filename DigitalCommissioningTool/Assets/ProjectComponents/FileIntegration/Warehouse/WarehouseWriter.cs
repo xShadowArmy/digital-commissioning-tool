@@ -128,19 +128,17 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.AppendChildElement( "xs", "Wall", xmlns, "" );
                         nav.MoveToChild( "Wall", xmlns );
-                        nav.CreateAttribute( "xs", "face", xmlns, data.Walls[i].Face );
-                        nav.CreateAttribute( "xs", "wallClass", xmlns, data.Walls[i].Class );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
                     }
 
                     else
                     {
                         nav.InsertElementAfter( "xs", "Wall", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "face", xmlns, data.Walls[i].Face );
-                        nav.CreateAttribute( "xs", "wallClass", xmlns, data.Walls[i].Class );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
                     }
+
+                    nav.CreateAttribute( "xs", "face", xmlns, data.Walls[i].Face );
+                    nav.CreateAttribute( "xs", "wallClass", xmlns, data.Walls[i].Class );
+                    nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
 
                     WriteTransformationData( nav, data.Walls[i].Transformation, xmlns );
                 }
@@ -171,19 +169,17 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.AppendChildElement( "xs", "Window", xmlns, "" );
                         nav.MoveToChild( "Window", xmlns );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.Windows[ i ].ID.ToString( ) );
-                        nav.CreateAttribute( "xs", "face", xmlns, data.Windows[i].Face );
-                        nav.CreateAttribute( "xs", "class", xmlns, data.Windows[i].Class );
                     }
 
                     else
                     {
                         nav.InsertElementAfter( "xs", "Window", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.Windows[ i ].ID.ToString( ) );
-                        nav.CreateAttribute( "xs", "face", xmlns, data.Windows[i].Face );
-                        nav.CreateAttribute( "xs", "class", xmlns, data.Windows[i].Class );
                     }
+
+                    nav.CreateAttribute( "xs", "id", xmlns, data.Windows[ i ].ID.ToString( ) );
+                    nav.CreateAttribute( "xs", "face", xmlns, data.Windows[i].Face );
+                    nav.CreateAttribute( "xs", "class", xmlns, data.Windows[i].Class );
 
                     WriteTransformationData( nav, data.Windows[ i ].Transformation, xmlns );
                 }
@@ -214,21 +210,18 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.AppendChildElement( "xs", "Door", xmlns, "" );
                         nav.MoveToChild( "Door", xmlns );
-                        nav.CreateAttribute( "xs", "type", xmlns, data.Doors[ i ].Type );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.Doors[ i ].ID.ToString( ) );
-                        nav.CreateAttribute( "xs", "face", xmlns, data.Doors[i].Face );
-                        nav.CreateAttribute( "xs", "class", xmlns, data.Doors[i].Class );
                     }
 
                     else
                     {
                         nav.InsertElementAfter( "xs", "Door", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "type", xmlns, data.Doors[ i ].Type );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.Doors[ i ].ID.ToString( ) );
-                        nav.CreateAttribute( "xs", "face", xmlns, data.Doors[i].Face );
-                        nav.CreateAttribute( "xs", "class", xmlns, data.Doors[i].Class );
                     }
+
+                    nav.CreateAttribute( "xs", "type", xmlns, data.Doors[ i ].Type );
+                    nav.CreateAttribute( "xs", "id", xmlns, data.Doors[ i ].ID.ToString( ) );
+                    nav.CreateAttribute( "xs", "face", xmlns, data.Doors[i].Face );
+                    nav.CreateAttribute( "xs", "class", xmlns, data.Doors[i].Class );
 
                     WriteTransformationData( nav, data.Doors[ i ].Transformation, xmlns );
                 }
@@ -259,17 +252,16 @@ namespace ProjectComponents.FileIntegration
                     {
                         nav.AppendChildElement( "xs", "Storage", xmlns, "" );
                         nav.MoveToChild( "Storage", xmlns );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
-                        nav.CreateAttribute( "xs", "slotCount", xmlns, data.StorageRacks[i].SlotCount.ToString() );
                     }
 
                     else
                     {
                         nav.InsertElementAfter( "xs", "Storage", xmlns, "" );
                         nav.MoveToNext( );
-                        nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
-                        nav.CreateAttribute( "xs", "slotCount", xmlns, data.StorageRacks[i].SlotCount.ToString( ) );
                     }
+
+                    nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[ i ].ID.ToString( ) );
+                    nav.CreateAttribute( "xs", "slotCount", xmlns, data.StorageRacks[i].SlotCount.ToString( ) );
 
                     nav.AppendChildElement( "xs", "Transform", xmlns, "" );
                     nav.MoveToChild( "Transform", xmlns );
@@ -286,27 +278,30 @@ namespace ProjectComponents.FileIntegration
                         {
                             nav.AppendChildElement( "xs", "Item", xmlns, "" );
                             nav.MoveToChild( "Item", xmlns );
-                            nav.CreateAttribute( "xs", "itemName", xmlns, data.StorageRacks[i].Items[j].Name );
-                            nav.CreateAttribute( "xs", "itemWeight", xmlns, data.StorageRacks[i].Items[j].Weight.ToString( ) );
-                            nav.CreateAttribute( "xs", "itemCount", xmlns, data.StorageRacks[i].Items[j].Count.ToString( ) );
-                            nav.CreateAttribute( "xs", "slot", xmlns, j.ToString( ) );
-                            nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[i].Items[j].ID.ToString( ) );
-                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].Items[ j ].IDRef.ToString( ) );
                         }
 
                         else
                         {
                             nav.InsertElementAfter( "xs", "Item", xmlns, "" );
                             nav.MoveToNext( );
+                        }
+
+                        if ( data.StorageRacks[i].Items[j] != null )
+                        {
                             nav.CreateAttribute( "xs", "itemName", xmlns, data.StorageRacks[i].Items[j].Name );
                             nav.CreateAttribute( "xs", "itemWeight", xmlns, data.StorageRacks[i].Items[j].Weight.ToString( ) );
                             nav.CreateAttribute( "xs", "itemCount", xmlns, data.StorageRacks[i].Items[j].Count.ToString( ) );
                             nav.CreateAttribute( "xs", "slot", xmlns, j.ToString( ) );
                             nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[i].Items[j].ID.ToString( ) );
-                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[ i ].Items[ j ].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[i].Items[j].IDRef.ToString( ) );
+
+                            WriteTransformationData( nav, data.StorageRacks[i].Items[j].Transformation, xmlns );
                         }
-                        
-                        WriteTransformationData( nav, data.StorageRacks[ i ].Items[j].Transformation, xmlns );
+
+                        else
+                        {
+                            nav.CreateAttribute( "xs", "itemName", xmlns, "null" );
+                        }
                     }
 
                     nav.MoveToParent( );

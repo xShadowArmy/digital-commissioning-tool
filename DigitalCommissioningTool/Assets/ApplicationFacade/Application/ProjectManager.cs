@@ -385,9 +385,12 @@ namespace ApplicationFacade.Application
 
                 for ( int j = 0; j < iwarehouse.StorageRacks[i].Items.Length; j++ )
                 {
-                    ItemData item = ItemData.RequestStockItem( iwarehouse.StorageRacks[i].Items[j].Name );
+                    if ( iwarehouse.StorageRacks[i].Items[j] != null )
+                    {
+                        ItemData item = ItemData.RequestStockItem( iwarehouse.StorageRacks[i].Items[j].Name );
 
-                    data.AddItem( item.RequestItem( iwarehouse.StorageRacks[i].Items[j].Count ), j );
+                        data.AddItem( item.RequestItem( iwarehouse.StorageRacks[i].Items[j].Count ), j );
+                    }
                 }
             }
         }

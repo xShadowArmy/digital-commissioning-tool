@@ -79,13 +79,21 @@ namespace ProjectComponents.FileIntegration
                                     nav.MoveToNext( );
                                 }
 
-                                nav.CreateAttribute( "xs", "itemName", xmlns, data.Container[i].Items[j].Name );
-                                nav.CreateAttribute( "xs", "itemWeight", xmlns, data.Container[i].Items[j].Weight.ToString( ) );
-                                nav.CreateAttribute( "xs", "itemCount", xmlns, data.Container[i].Items[j].Count.ToString( ) );
-                                nav.CreateAttribute( "xs", "slot", xmlns, j.ToString( ) );
-                                nav.CreateAttribute( "xs", "id", xmlns, data.Container[i].Items[j].ID.ToString( ) );
-                                nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[ i ].Items[ j ].IDRef.ToString( ) );
-                                WriteTransformationData( nav, data.Container[ i ].Items[ j ].Transformation, xmlns );
+                                if ( data.Container[i].Items[j] != null )
+                                {
+                                    nav.CreateAttribute( "xs", "itemName", xmlns, data.Container[i].Items[j].Name );
+                                    nav.CreateAttribute( "xs", "itemWeight", xmlns, data.Container[i].Items[j].Weight.ToString( ) );
+                                    nav.CreateAttribute( "xs", "itemCount", xmlns, data.Container[i].Items[j].Count.ToString( ) );
+                                    nav.CreateAttribute( "xs", "slot", xmlns, j.ToString( ) );
+                                    nav.CreateAttribute( "xs", "id", xmlns, data.Container[i].Items[j].ID.ToString( ) );
+                                    nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[i].Items[j].IDRef.ToString( ) );
+                                    WriteTransformationData( nav, data.Container[i].Items[j].Transformation, xmlns );
+                                }
+
+                                else
+                                {
+                                    nav.CreateAttribute( "xs", "itemName", xmlns, "null" );
+                                }
                             }
 
                             nav.MoveToParent( );

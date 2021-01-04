@@ -91,7 +91,7 @@ namespace ApplicationFacade.Warehouse
 
             for ( int i = 0; i < Data.Length; i++ )
             {
-                if ( Data[i].Object == obj )
+                if ( Data[i] != null && Data[i].Object == obj )
                 {
                     return Data[ i ];
                 }

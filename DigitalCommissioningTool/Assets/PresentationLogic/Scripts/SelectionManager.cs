@@ -144,13 +144,15 @@ public class SelectionManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
                 RaycastHit hit;
 
                 if (EventSystem.current.IsPointerOverGameObject(pointerID) == false)                    //checkt, ob Maus über Gui Element ist
                 {
-                    if (Physics.Raycast(ray, out hit, 90.0f) &&  hit.transform.tag.Contains("StorageBox") || hit.transform.tag == ("StorageContainer"))   //normaler physics ray cast, kann aber nicht UI elemente erkennen
-                    {
+                    bool rayhit = Physics.Raycast(ray, out hit, 90.0f);
 
+                    if ( rayhit && hit.transform.tag.Contains("StorageBox") || hit.transform.CompareTag( "StorageContainer") )   //normaler physics ray cast, kann aber nicht UI elemente erkennen
+                    {
                         GameObject g1 = hit.transform.gameObject;
                         OnShelveSelected(g1, true);
                     }

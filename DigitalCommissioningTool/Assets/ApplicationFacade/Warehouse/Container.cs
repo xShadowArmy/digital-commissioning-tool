@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppData.Warehouse;
 using ApplicationFacade.Application;
 using ProjectComponents.Abstraction;
 using SystemFacade;
@@ -34,11 +35,13 @@ namespace ApplicationFacade.Warehouse
             
             StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale );
             
-            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectsWithTag( "SelectableStorage" )[1], GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
             
             container.Object.name = "Container" + container.GetID( );
 
             ContainerData.Add( container );
+
+            container.ChangeSlotCount( new StorageSlotCalculation() );
 
             Data.Container.Add( new ProjectStorageData( container.GetID( ), container.GetItems.Length, new ProjectTransformationData( GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale ) ) );
 
@@ -58,6 +61,8 @@ namespace ApplicationFacade.Warehouse
             container.Object.name = "Container" + container.GetID( );
 
             ContainerData.Add( container );
+
+            container.ChangeSlotCount( new StorageSlotCalculation( ) );
 
             Data.Container.Add( new ProjectStorageData( container.GetID( ), container.GetItems.Length, new ProjectTransformationData( position, rotation, scale ) ) );
 
