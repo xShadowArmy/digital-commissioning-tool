@@ -109,7 +109,8 @@ public class WallEditor : MonoBehaviour
                 Collider[] colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                 foreach (Collider collider1 in colliders)
                 {
-                    if (collider1.gameObject != SelectedObjectTransform.gameObject && collider1.transform.rotation != SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall")  && GameManager.GameWarehouse.GetWall(collider1.gameObject).Class == WallClass.Outer)
+                    if (collider1.gameObject != SelectedObjectTransform.gameObject && collider1.transform.rotation != SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall") &&
+                        GameManager.GameWarehouse.GetWall(collider1.gameObject).Class == WallClass.Outer)
                     {
                         Transform invisibleWall = collider1.transform.Find("InvisibleWall").transform;
                         if (!objectsInRange.Contains(collider1))
@@ -181,7 +182,7 @@ public class WallEditor : MonoBehaviour
 
                     wall.Object.tag = "SelectableAttachedInnerWall";
                     wall.SetFace(wallFace);
-                    
+
                     foreach (Collider collider1 in objectsInRange)
                     {
                         Transform invisibleWall = collider1.transform.Find("InvisibleWall").transform;
@@ -243,7 +244,7 @@ public class WallEditor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
         {
-            wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner);
+            wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
         }
     }
 
@@ -593,8 +594,8 @@ public class WallEditor : MonoBehaviour
                 if (collider1.CompareTag("SelectableWall") || collider1.CompareTag("SelectableWindow") || collider1.CompareTag("SelectableDoor"))
                 {
                     WallData colliderWallData = GameManager.GameWarehouse.GetWall(collider1.gameObject);
-                    if (collider1.transform != SelectedObjectTransform && collider1.CompareTag("SelectableWall") 
-                                                                       && colliderWallData.Class == WallClass.Outer 
+                    if (collider1.transform != SelectedObjectTransform && collider1.CompareTag("SelectableWall")
+                                                                       && colliderWallData.Class == WallClass.Outer
                                                                        && colliderWallData.Face == wall.Face)
                     {
                         neighborWall = collider1.transform;
@@ -617,9 +618,32 @@ public class WallEditor : MonoBehaviour
                         colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
-                            if (collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent)
+                            if (collider1.transform.parent.parent.CompareTag("OuterWall"))
                             {
-                                foundOuterWall = true;
+                                if (collider1.CompareTag("SelectableWall"))
+                                {
+                                    WallData outerWalLData = GameManager.GameWarehouse.GetWall(collider1.gameObject);
+                                    if (wall.Face == outerWalLData.Face)
+                                    {
+                                        foundOuterWall = true;
+                                    }
+                                }
+                                else if (collider1.CompareTag("SelectableWindow"))
+                                {
+                                    WindowData outerWalLData = GameManager.GameWarehouse.GetWindow(collider1.gameObject);
+                                    if (wall.Face == outerWalLData.Face)
+                                    {
+                                        foundOuterWall = true;
+                                    }
+                                }
+                                else if (collider1.CompareTag("SelectableDoor"))
+                                {
+                                    DoorData outerWalLData = GameManager.GameWarehouse.GetDoor(collider1.gameObject);
+                                    if (wall.Face == outerWalLData.Face)
+                                    {
+                                        foundOuterWall = true;
+                                    }
+                                }
                             }
 
                             if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation)
@@ -672,6 +696,7 @@ public class WallEditor : MonoBehaviour
                                 }
                             }
 
+                            Debug.Log(hitsInnerWall + ", " + isEndPiece);
                             if (collider1.CompareTag("SelectableWall") && GameManager.GameWarehouse.GetWall(collider1.gameObject).Class == WallClass.Outer
                                                                        && GameManager.GameWarehouse.GetWall(collider1.gameObject).Face != wall.Face)
                             {
@@ -695,10 +720,10 @@ public class WallEditor : MonoBehaviour
                             WallData temp = GameManager.GameWarehouse.CreateWall(position, wall.Rotation, wall.Scale, wall.Face, wall.Class);
                             temp.Object.tag = "SelectableWall";
                             wall.SetPosition(wall.Position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction));
-                            
+
                             if (hitsInnerWall)
                             {
-                                if (hitInnerWall.CompareTag("SelectableWall"))
+                                if (hitInnerWall.CompareTag("SelectableWall") || hitInnerWall.CompareTag("SelectableAttachedInnerWall"))
                                 {
                                     WallData hitInnerWallData = GameManager.GameWarehouse.GetWall(hitInnerWall.gameObject);
 
@@ -1067,10 +1092,5 @@ public class WallEditor : MonoBehaviour
         }
 
         close(popUpScaleWall);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if(m_Started) Gizmos.DrawWireCube(wall.Position, wall.Scale);
     }
 }
