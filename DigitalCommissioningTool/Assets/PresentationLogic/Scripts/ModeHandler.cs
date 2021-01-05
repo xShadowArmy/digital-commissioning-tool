@@ -8,6 +8,7 @@ public class ModeHandler : MonoBehaviour
 {
     public GameObject EditorModeCamera;
     public GameObject MosimCamera;
+    public SelectionManager SelectionManager;
     public string Mode { get; private set; }
 
     public void SwitchMode()
@@ -23,24 +24,7 @@ public class ModeHandler : MonoBehaviour
         {
             Mode = "MosimMode";
         }
-    }
-    public void ChangeMode(string mode)
-    {
-        
-        if (mode.Equals("MosimMode"))
-        {
-            Mode = mode;
-            Debug.Log(mode);
-            MosimCamera.GetComponent<Camera>().enabled = true;
-            EditorModeCamera.GetComponent<Camera>().enabled = false;
-        }
-        else if (mode.Equals("EditorMode"))
-        {
-            Mode = mode;
-            Debug.Log(mode);
-            EditorModeCamera.GetComponent<Camera>().enabled = true;
-            MosimCamera.GetComponent<Camera>().enabled = false;
-        }
+        SelectionManager.ResetSelection();
     }
 
     // Start is called before the first frame update

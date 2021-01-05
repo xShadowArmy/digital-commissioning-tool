@@ -12,12 +12,19 @@
         <e p="AppData" t="Include">
           <e p="AppData.asmdef" t="Include" />
           <e p="Warehouse" t="Include">
-            <e p="IWarehouseStrategie.cs" t="Include" />
-            <e p="LargeWarehouseStrategie.cs" t="Include" />
-            <e p="MediumWarehouseStrategie.cs" t="Include" />
-            <e p="ObjectTransformation.cs" t="Include" />
-            <e p="SmallWarehouseStrategie.cs" t="Include" />
-            <e p="WarehouseStrategieBase.cs" t="Include" />
+            <e p="StorageSlotCalculation" t="Include">
+              <e p="ISlotCalcStrategie.cs" t="Include" />
+              <e p="SlotCalcBase.cs" t="Include" />
+              <e p="StorageSlotCalculation.cs" t="Include" />
+            </e>
+            <e p="WarehouseGeneration" t="Include">
+              <e p="IWarehouseStrategie.cs" t="Include" />
+              <e p="LargeWarehouseStrategie.cs" t="Include" />
+              <e p="MediumWarehouseStrategie.cs" t="Include" />
+              <e p="ObjectTransformation.cs" t="Include" />
+              <e p="SmallWarehouseStrategie.cs" t="Include" />
+              <e p="WarehouseStrategieBase.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="ApplicationFacade" t="Include">
@@ -28,13 +35,13 @@
             <e p="ProjectData.cs" t="Include" />
             <e p="ProjectManager.cs" t="Include" />
             <e p="ProjectSettings.cs" t="Include" />
+            <e p="TimeMeasurementEntry.cs" t="Include" />
           </e>
           <e p="ApplicationFacade.asmdef" t="Include" />
           <e p="Warehouse" t="Include">
             <e p="Container.cs" t="Include" />
             <e p="Definitions" t="Include">
               <e p="DoorType.cs" t="Include" />
-              <e p="GameObjectDataType.cs" t="Include" />
               <e p="IDataIdentifier.cs" t="Include" />
               <e p="WallClass.cs" t="Include" />
               <e p="WallFace.cs" t="Include" />
@@ -47,17 +54,12 @@
               <e p="ItemData.cs" t="Include" />
               <e p="StorageData.cs" t="Include" />
               <e p="WallData.cs" t="Include" />
+              <e p="WallObjectData.cs" t="Include" />
               <e p="WindowData.cs" t="Include" />
             </e>
             <e p="Warehouse.cs" t="Include" />
           </e>
-        </e>
-        <e p="DebugDrawingExtension" t="Include">
-          <e p="DebugExtension.cs" t="Include" />
-          <e p="Example" t="Include">
-            <e p="Example.cs" t="Include" />
-          </e>
-          <e p="Readme.txt" t="Include" />
+          <e p="WindowPosition.cs" t="Include" />
         </e>
         <e p="MMI" t="Include">
           <e p="Plugins" t="Include">
@@ -71,21 +73,25 @@
         <e p="PresentationLogic" t="Include">
           <e p="PresentationLogic.asmdef" t="Include" />
           <e p="Scripts" t="Include">
-            <e p="AddObjectsToWall.cs" t="Include" />
             <e p="AddStorage.cs" t="Include" />
             <e p="DebugExtension.cs" t="Include" />
+            <e p="DragItem.cs" t="Include" />
+            <e p="DragWindow.cs" t="Include" />
             <e p="EditorModeCamera.cs" t="Include" />
-            <e p="KeyBindMenu.cs" t="Include" />
             <e p="LoadSceneData.cs" t="Include" />
             <e p="MainCamera.cs" t="Include" />
-            <e p="MainMenu.cs" t="Include" />
+            <e p="MainMenu" t="Include">
+              <e p="KeyBindMenu.cs" t="Include" />
+              <e p="MainMenu.cs" t="Include" />
+              <e p="NewProjectMenu.cs" t="Include" />
+              <e p="OpenProjectMenu.cs" t="Include" />
+              <e p="SettingsMenu.cs" t="Include" />
+            </e>
             <e p="ModeHandler.cs" t="Include" />
-            <e p="NewProjectMenu.cs" t="Include" />
-            <e p="OpenProjectMenu.cs" t="Include" />
             <e p="PickAndPlaceNew.cs" t="Include" />
+            <e p="QueueMenu.cs" t="Include" />
             <e p="ResourceHandler.cs" t="Include" />
             <e p="SelectionManager.cs" t="Include" />
-            <e p="SettingsMenu.cs" t="Include" />
             <e p="SwitchWallModules.cs" t="Include" />
             <e p="TestPascal.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
@@ -352,8 +358,8 @@
           </e>
         </e>
         <e p="TimeMeasurement" t="Include">
+          <e p="InternalTimeMeasurementEntry.cs" t="Include" />
           <e p="TimeMeasurement.asmdef" t="Include" />
-          <e p="TimeMeasurementEntry.cs" t="Include" />
         </e>
         <e p="UnitTests" t="Include">
           <e p="SystemFacade" t="Include">
