@@ -105,11 +105,6 @@ namespace ApplicationFacade.Application
             ArchiveManager.ExtractArchive( Paths.ProjectsPath + name + ".prj", Paths.TempPath );
 
             StartLoad?.Invoke( );
-
-            Warehouse.Warehouse.NorthWallLength = 0;
-            Warehouse.Warehouse.EastWallLength  = 0;
-            Warehouse.Warehouse.SouthWallLength = 0;
-            Warehouse.Warehouse.WestWallLength  = 0;
             
             ItemData.ItemStock.Clear( );
 
@@ -198,11 +193,6 @@ namespace ApplicationFacade.Application
 
                 return;
             }
-
-            Warehouse.Warehouse.NorthWallLength = 0;
-            Warehouse.Warehouse.EastWallLength  = 0;
-            Warehouse.Warehouse.SouthWallLength = 0;
-            Warehouse.Warehouse.WestWallLength  = 0;
 
             DHandler = new DataHandler( );
             SHandler = new SettingsHandler( );
@@ -332,17 +322,8 @@ namespace ApplicationFacade.Application
                     Class = (WallClass)Enum.Parse( typeof( WallClass ), iwarehouse.Walls[i].Class )
                 };
                 
-                warehouse.AddWall( wall );
+                warehouse.AddWall( wall, iwarehouse.Walls[i].Tag );
             }
-            
-            warehouse.Walls[0].Object.tag = "LeftWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength - 1].Object.tag = "RightWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength].Object.tag = "LeftWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength + Warehouse.Warehouse.EastWallLength - 1].Object.tag = "RightWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength + Warehouse.Warehouse.EastWallLength].Object.tag = "LeftWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength + Warehouse.Warehouse.EastWallLength + Warehouse.Warehouse.SouthWallLength - 1].Object.tag = "RightWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength + Warehouse.Warehouse.EastWallLength + Warehouse.Warehouse.SouthWallLength].Object.tag = "LeftWallRim";
-            warehouse.Walls[Warehouse.Warehouse.NorthWallLength + Warehouse.Warehouse.EastWallLength + Warehouse.Warehouse.SouthWallLength + Warehouse.Warehouse.WestWallLength - 1].Object.tag = "RightWallRim";
 
             for ( int i = 0; i < iwarehouse.Windows.Count; i++ )
             {
@@ -437,37 +418,77 @@ namespace ApplicationFacade.Application
             ObjectTransformation[] s = size.GetSouthWalls();
             ObjectTransformation[] w = size.GetWestWalls();
 
-            foreach ( ObjectTransformation data in n )
+            for ( int i = 0; i < n.Length; i++ )
             {
-                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.North, WallClass.Outer );
+                if ( i == 0 )
+                {
+                    warehouse.CreateWall( n[i].Position, n[i].Rotation, n[i].Scale, WallFace.North, WallClass.Outer, "LeftWallRim" );
+                }
+
+                else if ( i == n.Length - 1 )
+                {
+                    warehouse.CreateWall( n[i].Position, n[i].Rotation, n[i].Scale, WallFace.North, WallClass.Outer, "RightWallRim" );
+                }
+
+                else
+                {
+                    warehouse.CreateWall( n[i].Position, n[i].Rotation, n[i].Scale, WallFace.North, WallClass.Outer );
+                }
             }
 
-            warehouse.Walls[0].Object.tag = "LeftWallRim";
-            warehouse.Walls[n.Length - 1].Object.tag = "RightWallRim";
-
-            foreach ( ObjectTransformation data in e )
+            for ( int i = 0; i < e.Length; i++ )
             {
-                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.East, WallClass.Outer );
+                if ( i == 0 )
+                {
+                    warehouse.CreateWall( e[i].Position, e[i].Rotation, e[i].Scale, WallFace.East, WallClass.Outer, "LeftWallRim" );
+                }
+
+                else if ( i == e.Length - 1 )
+                {
+                    warehouse.CreateWall( e[i].Position, e[i].Rotation, e[i].Scale, WallFace.East, WallClass.Outer, "RightWallRim" );
+                }
+
+                else
+                {
+                    warehouse.CreateWall( e[i].Position, e[i].Rotation, e[i].Scale, WallFace.East, WallClass.Outer );
+                }
             }
 
-            warehouse.Walls[n.Length].Object.tag = "LeftWallRim";
-            warehouse.Walls[e.Length + n.Length - 1].Object.tag = "RightWallRim";
-
-            foreach ( ObjectTransformation data in s )
+            for ( int i = 0; i < s.Length; i++ )
             {
-                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.South, WallClass.Outer );
+                if ( i == 0 )
+                {
+                    warehouse.CreateWall( s[i].Position, s[i].Rotation, s[i].Scale, WallFace.South, WallClass.Outer, "LeftWallRim" );
+                }
+
+                else if ( i == s.Length - 1 )
+                {
+                    warehouse.CreateWall( s[i].Position, s[i].Rotation, s[i].Scale, WallFace.South, WallClass.Outer, "RightWallRim" );
+                }
+
+                else
+                {
+                    warehouse.CreateWall( s[i].Position, s[i].Rotation, s[i].Scale, WallFace.South, WallClass.Outer );
+                }
             }
 
-            warehouse.Walls[e.Length + n.Length].Object.tag = "LeftWallRim";
-            warehouse.Walls[s.Length + e.Length + n.Length - 1].Object.tag = "RightWallRim";
-
-            foreach ( ObjectTransformation data in w )
+            for ( int i = 0; i < w.Length; i++ )
             {
-                warehouse.CreateWall( data.Position, data.Rotation, data.Scale, WallFace.West, WallClass.Outer );
-            }
+                if ( i == 0 )
+                {
+                    warehouse.CreateWall( w[i].Position, w[i].Rotation, w[i].Scale, WallFace.West, WallClass.Outer, "LeftWallRim" );
+                }
 
-            warehouse.Walls[s.Length + e.Length + n.Length].Object.tag = "LeftWallRim";
-            warehouse.Walls[w.Length + s.Length + e.Length + n.Length - 1].Object.tag = "RightWallRim";
+                else if ( i == w.Length - 1 )
+                {
+                    warehouse.CreateWall( w[i].Position, w[i].Rotation, w[i].Scale, WallFace.West, WallClass.Outer, "RightWallRim" );
+                }
+
+                else
+                {
+                    warehouse.CreateWall( w[i].Position, w[i].Rotation, w[i].Scale, WallFace.West, WallClass.Outer );
+                }
+            }
 
             //Windows
             foreach ( ObjectTransformation data in size.GetWindows( ) )

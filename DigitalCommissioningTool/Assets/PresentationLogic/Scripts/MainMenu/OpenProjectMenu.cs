@@ -65,7 +65,7 @@ public class OpenProjectMenu : MonoBehaviour
             item.SetActive(true);
         }
 
-        //SceneManager.UnloadSceneAsync("DefaultWarehouse");
+        SceneManager.UnloadSceneAsync("DefaultWarehouse");
         float newHeight = System.Math.Max(420, paths.Length * 105);
         RectTransform contentBox = template.transform.parent.GetComponent<RectTransform>();
         contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);

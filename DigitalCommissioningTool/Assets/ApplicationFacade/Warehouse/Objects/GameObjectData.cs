@@ -66,6 +66,26 @@ namespace ApplicationFacade.Warehouse
             Destroy( );
         }
 
+        public void SetTag( string tag )
+        {
+            if ( IsDestroyed( ) )
+            {
+                return;
+            }
+
+            if ( IsReadonly( ) )
+            {
+                return;
+            }
+
+            if ( Object != null )
+            {
+                Object.tag = tag;
+            }
+
+            ObjectChanged( );
+        }
+
         public void SetPosition( Vector3 position )
         {
             if ( IsDestroyed( ) )
@@ -185,6 +205,7 @@ namespace ApplicationFacade.Warehouse
             if ( Object != null )
             {
                 GameObject.Destroy( Object );
+                Object = null;
             }
         }
 

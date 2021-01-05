@@ -33,13 +33,13 @@ namespace ApplicationFacade.Warehouse
         /// </summary>
         public GameObject ObjectSpawn { get; internal set; }
 
-        public static int NorthWallLength { get; internal set; }
+        internal List<WallObjectData> NorthWall { get; set; }
 
-        public static int EastWallLength { get; internal set; }
+        internal List<WallObjectData> EastWall { get; set; }
 
-        public static int SouthWallLength { get; internal set; }
+        internal List<WallObjectData> SouthWall { get; set; }
 
-        public static int WestWallLength { get; internal set; }
+        internal List<WallObjectData> WestWall { get; set; }
 
         /// <summary>
         /// Enthält alle Böden die aktuell in der Umgebung dargestellt werden.
@@ -82,6 +82,38 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        public WallObjectData[] NorthWallObjects
+        {
+            get
+            {
+                return NorthWall.ToArray();
+            }
+        }
+
+        public WallObjectData[] EastWallObjects
+        {
+            get
+            {
+                return EastWall.ToArray( );
+            }
+        }
+
+        public WallObjectData[] SouthWallObjects
+        {
+            get
+            {
+                return SouthWall.ToArray( );
+            }
+        }
+
+        public WallObjectData[] WestWallObjects
+        {
+            get
+            {
+                return WestWall.ToArray( );
+            }
+        }
+
         /// <summary>
         /// Erstellt eine neue Instanz und initialisiert alle Objekte.
         /// </summary>
@@ -93,6 +125,11 @@ namespace ApplicationFacade.Warehouse
             Doors = new List<DoorData>( );
             StorageRackList = new List<StorageData>( );
             Data = new InternalProjectWarehouse( );
+
+            NorthWall = new List<WallObjectData>( );
+            EastWall  = new List<WallObjectData>( );
+            SouthWall = new List<WallObjectData>( );
+            WestWall  = new List<WallObjectData>( );
 
             ObjectSpawn = GameObject.FindGameObjectWithTag( "Respawn" );
         }
@@ -253,16 +290,46 @@ namespace ApplicationFacade.Warehouse
 
             return wall;
         }
-        
+
+        /// <summary>
+        /// Erstellt eine Wand mit den angegebenen Eigenschaften.
+        /// </summary>
+        /// <param name="position">Die Position der Wand.</param>
+        /// <param name="rotation">Die Rotation der Wand.</param>
+        /// <param name="scale">Die Skalierung der Wand.</param>
+        /// <param name="face">Die Ausrichtung der Wand.</param>
+        /// <param name="wClass">Gibt an ob die Wand das Lagerhaus oder einen internen Raum definiert.</param>
+        /// <param name="tag">Der Tag den das GameObjekt bekommen soll</param>
+        /// <returns>Das <see cref="WallData"/> Objekt das die Wand repräsentiert.</returns>
+        public WallData CreateWall( Vector3 position, Quaternion rotation, Vector3 scale, WallFace face, WallClass wClass, string tag )
+        {
+            LogManager.WriteInfo( "Lagehauswand wird erstellt.", "Warehouse", "CreateWall" );
+
+            WallData wall = new WallData( GetUniqueID( Walls.ToArray( ) ), position, rotation, scale )
+            {
+                Face = face,
+                Class = wClass
+            };
+
+            CreateWallObject( wall, tag );
+
+            return wall;
+        }
+
         /// <summary>
         /// Fügt ein Wandobjekt zur Lagerhalle hinzu.
         /// </summary>
         /// <param name="wall">Das Objekt das die Wand repräsentiert.</param>
-        internal void AddWall( WallData wall )
+        internal void AddWall( WallData wall, string tag )
         {
             LogManager.WriteInfo( "Lagerhauswand wird hinzugefuegt.", "Warehouse", "AddWall" );
 
-            CreateWallObject( wall );
+            if ( tag == null || tag.Equals( string.Empty ) )
+            {
+                tag = "SelectableWall";
+            }
+
+            CreateWallObject( wall, tag );
         }
 
         /// <summary>
@@ -760,38 +827,39 @@ namespace ApplicationFacade.Warehouse
         /// Erstellt ein Wand Objekt und lädt es in die Umgebung.
         /// </summary>
         /// <param name="data">Das Objekt das in die Umgebung geladen werden soll.</param>
-        private void CreateWallObject( WallData data )
+        private void CreateWallObject( WallData data, string tag = "SelectableWall" )
         {
             if ( data.Class == WallClass.Outer )
             {
                 data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( data.Face.ToString( ) + "Wall" ).transform ) );
 
                 data.Object.name = "Wall" + data.GetID( );
+                data.Object.tag  = tag;
 
                 Walls.Add( data );
 
-                Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
+                Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Object.tag, data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
 
                 switch ( data.Face )
                 {
                     case WallFace.North:
 
-                        NorthWallLength += 1;
+                        NorthWall.Add( data );
                         break;
 
                     case WallFace.East:
 
-                        EastWallLength += 1;
+                        EastWall.Add( data );
                         break;
 
                     case WallFace.South:
 
-                        SouthWallLength += 1;
+                        SouthWall.Add( data );
                         break;
 
                     case WallFace.West:
 
-                        WestWallLength += 1;
+                        WestWall.Add( data );
                         break;
 
                     case WallFace.Undefined:
@@ -806,11 +874,10 @@ namespace ApplicationFacade.Warehouse
                 data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( "InnerWall" ).transform ) );
 
                 data.Object.name = "Wall" + data.GetID( );
-                data.Object.tag = "SelectableInnerWall";
 
                 Walls.Add( data );
 
-                Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
+                Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Object.tag, data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
             }
         }
 
@@ -832,35 +899,37 @@ namespace ApplicationFacade.Warehouse
                 {
                     Data.Walls.Remove( Data.Walls[i] );
 
-                    switch ( data.Face )
+                    if ( data.Class == WallClass.Outer )
                     {
-                        case WallFace.North:
+                        switch ( data.Face )
+                        {
+                            case WallFace.North:
 
-                            NorthWallLength -= 1;
-                            break;
+                                NorthWall.Remove( data );
+                                break;
 
-                        case WallFace.East:
+                            case WallFace.East:
 
-                            EastWallLength -= 1;
-                            break;
+                                EastWall.Remove( data );
+                                break;
 
-                        case WallFace.South:
+                            case WallFace.South:
 
-                            SouthWallLength -= 1;
-                            break;
+                                SouthWall.Remove( data );
+                                break;
 
-                        case WallFace.West:
+                            case WallFace.West:
 
-                            WestWallLength -= 1;
-                            break;
+                                WestWall.Remove( data );
+                                break;
 
-                        case WallFace.Undefined:
+                            case WallFace.Undefined:
 
-                            LogManager.WriteWarning( "Es wird eine undefinierte Wandseite verwendet!", "Warehouse", "CreateWallObject" );
-                            break;
+                                LogManager.WriteWarning( "Es wird eine undefinierte Wandseite verwendet!", "Warehouse", "CreateWallObject" );
+                                break;
+                        }
                     }
 
-                    Object.Destroy( data.Object );
                     data.Destroy( );
 
                     return true;
@@ -881,6 +950,37 @@ namespace ApplicationFacade.Warehouse
             data.Object.name = "Window" + data.GetID( );
 
             Windows.Add( data );
+
+            if ( data.Class == WallClass.Outer )
+            {
+                switch ( data.Face )
+                {
+                    case WallFace.North:
+
+                        NorthWall.Add( data );
+                        break;
+
+                    case WallFace.East:
+
+                        EastWall.Add( data );
+                        break;
+
+                    case WallFace.South:
+
+                        SouthWall.Add( data );
+                        break;
+
+                    case WallFace.West:
+
+                        WestWall.Add( data );
+                        break;
+
+                    case WallFace.Undefined:
+
+                        LogManager.WriteWarning( "Es wird eine undefinierte Wandseite verwendet!", "Warehouse", "CreateWallObject" );
+                        break;
+                }
+            }
 
             Data.Windows.Add( new ProjectWindowData( data.GetID( ), data.Face.ToString(), data.Class.ToString(), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
         }
@@ -903,7 +1003,37 @@ namespace ApplicationFacade.Warehouse
                 {
                     Data.Windows.Remove( Data.Windows[i] );
 
-                    Object.Destroy( data.Object );
+                    if ( data.Class == WallClass.Outer )
+                    {
+                        switch ( data.Face )
+                        {
+                            case WallFace.North:
+
+                                NorthWall.Remove( data );
+                                break;
+
+                            case WallFace.East:
+
+                                EastWall.Remove( data );
+                                break;
+
+                            case WallFace.South:
+
+                                SouthWall.Remove( data );
+                                break;
+
+                            case WallFace.West:
+
+                                WestWall.Remove( data );
+                                break;
+
+                            case WallFace.Undefined:
+
+                                LogManager.WriteWarning( "Es wird eine undefinierte Wandseite verwendet!", "Warehouse", "CreateWallObject" );
+                                break;
+                        }
+                    }
+
                     data.Destroy( );
 
                     return true;
@@ -924,6 +1054,37 @@ namespace ApplicationFacade.Warehouse
             data.Object.name = "Door" + data.GetID( );
 
             Doors.Add( data );
+
+            if ( data.Class == WallClass.Outer )
+            {
+                switch ( data.Face )
+                {
+                    case WallFace.North:
+
+                        NorthWall.Add( data );
+                        break;
+
+                    case WallFace.East:
+
+                        EastWall.Add( data );
+                        break;
+
+                    case WallFace.South:
+
+                        SouthWall.Add( data );
+                        break;
+
+                    case WallFace.West:
+
+                        WestWall.Add( data );
+                        break;
+
+                    case WallFace.Undefined:
+
+                        LogManager.WriteWarning( "Es wird eine undefinierte Wandseite verwendet!", "Warehouse", "CreateWallObject" );
+                        break;
+                }
+            }
 
             Data.Doors.Add( new ProjectDoorData( data.GetID( ), data.Face.ToString( ), data.Class.ToString( ), data.Type.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
         }
@@ -946,7 +1107,37 @@ namespace ApplicationFacade.Warehouse
                 {
                     Data.Doors.Remove( Data.Doors[i] );
 
-                    Object.Destroy( data.Object );
+                    if ( data.Class == WallClass.Outer )
+                    {
+                        switch ( data.Face )
+                        {
+                            case WallFace.North:
+
+                                NorthWall.Remove( data );
+                                break;
+
+                            case WallFace.East:
+
+                                EastWall.Remove( data );
+                                break;
+
+                            case WallFace.South:
+
+                                SouthWall.Remove( data );
+                                break;
+
+                            case WallFace.West:
+
+                                WestWall.Remove( data );
+                                break;
+
+                            case WallFace.Undefined:
+
+                                LogManager.WriteWarning( "Es wird eine undefinierte Wandseite verwendet!", "Warehouse", "CreateWallObject" );
+                                break;
+                        }
+                    }
+
                     data.Destroy( );
 
                     return true;

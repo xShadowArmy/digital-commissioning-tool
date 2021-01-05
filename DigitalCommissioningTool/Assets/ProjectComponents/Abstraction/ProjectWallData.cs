@@ -11,14 +11,16 @@ namespace ProjectComponents.Abstraction
         public long ID { get; set; }
         public string Face { get; set; }
         public string Class { get; set; }
+        public string Tag { get; set; }
         public ProjectTransformationData Transformation { get; set; }
 
-        public ProjectWallData( long id, string face, string wClass, ProjectTransformationData transformation )
+        public ProjectWallData( long id, string tag, string face, string wClass, ProjectTransformationData transformation )
         {
+            Tag = tag;
             ID = id;
             Face = face;
             Class = wClass;
             Transformation = transformation;
-        }        
+        }
     }
 }

@@ -138,6 +138,7 @@ namespace ProjectComponents.FileIntegration
 
                     nav.CreateAttribute( "xs", "face", xmlns, data.Walls[i].Face );
                     nav.CreateAttribute( "xs", "wallClass", xmlns, data.Walls[i].Class );
+                    nav.CreateAttribute( "xs", "tag", xmlns, data.Walls[i].Tag );
                     nav.CreateAttribute( "xs", "id", xmlns, data.Walls[ i ].ID.ToString( ) );
 
                     WriteTransformationData( nav, data.Walls[i].Transformation, xmlns );

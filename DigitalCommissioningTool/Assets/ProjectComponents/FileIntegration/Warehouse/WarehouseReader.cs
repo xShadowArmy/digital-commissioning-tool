@@ -111,7 +111,7 @@ namespace ProjectComponents.FileIntegration
 
                 for( int i = 0; i < count; i++ )
                 {
-                    data = new ProjectWallData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), nav.GetAttribute( "face", xmlns ), nav.GetAttribute( "wallClass", xmlns ), ReadTransformation( nav, xmlns ) );
+                    data = new ProjectWallData( long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer ), nav.GetAttribute( "tag", xmlns ), nav.GetAttribute( "face", xmlns ), nav.GetAttribute( "wallClass", xmlns ), ReadTransformation( nav, xmlns ) );
                     
                     nav.MoveToNext( );
 

@@ -37,7 +37,7 @@ namespace ApplicationFacade.Warehouse
                 if ( GetID( ) == GameManager.GameWarehouse.Data.Walls[i].ID )
                 {
                     GameManager.GameWarehouse.Data.Walls.Remove( GameManager.GameWarehouse.Data.Walls[i] );
-                    GameManager.GameWarehouse.Data.Walls.Insert( i, new ProjectWallData( GetID( ), Face.ToString( ), Class.ToString( ), new ProjectTransformationData( Position, Rotation, Scale ) ) );
+                    GameManager.GameWarehouse.Data.Walls.Insert( i, new ProjectWallData( GetID( ), Object.tag, Face.ToString( ), Class.ToString( ), new ProjectTransformationData( Position, Rotation, Scale ) ) );
 
                     return;
                 }

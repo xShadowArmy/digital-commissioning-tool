@@ -228,7 +228,10 @@ namespace ApplicationFacade.Warehouse
 
             foreach( ItemData item in Data )
             {
-                item.Destroy( );
+                if ( item != null )
+                {
+                    item.Destroy( );
+                }
             }
         }
 

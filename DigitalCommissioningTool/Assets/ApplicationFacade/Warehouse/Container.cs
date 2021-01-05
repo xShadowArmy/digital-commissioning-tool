@@ -23,6 +23,17 @@ namespace ApplicationFacade.Warehouse
 
         internal InternalProjectContainer Data { get; private set; }
 
+        /// <summary>
+        /// Gibt alle mobilen Regale zurueck.
+        /// </summary>
+        public StorageData[] StorageRacks
+        {
+            get
+            {
+                return ContainerData.ToArray( );
+            }
+        }
+
         public Container()
         {
             ContainerData = new List<StorageData>( );

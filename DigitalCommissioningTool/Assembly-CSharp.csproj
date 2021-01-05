@@ -345,37 +345,37 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
  </Reference>
  <Reference Include="UnityLocomotionMMU">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/UnityLocomotionMMU.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/UnityLocomotionMMU.dll</HintPath>
  </Reference>
  <Reference Include="MMICoSimulation">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICoSimulation.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICoSimulation.dll</HintPath>
  </Reference>
  <Reference Include="MMICSharp">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICSharp.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMICSharp.dll</HintPath>
  </Reference>
  <Reference Include="MMIStandard">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIStandard.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIStandard.dll</HintPath>
  </Reference>
  <Reference Include="MMIUnity">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.dll</HintPath>
  </Reference>
  <Reference Include="MMIUnity.TargetEngine">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.dll</HintPath>
  </Reference>
  <Reference Include="MMIUnity.TargetEngine.Editor">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.Editor.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/MMIUnity.TargetEngine.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Newtonsoft.Json.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.Tasks.Extensions">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/System.Threading.Tasks.Extensions.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/System.Threading.Tasks.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Thrift">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Thrift.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Thrift.dll</HintPath>
  </Reference>
  <Reference Include="Utf8Json">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Utf8Json.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Assets/MMI/Plugins/Utf8Json.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -732,31 +732,31 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>F:/Git Hub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>G:/GitHub/digital-commissioning-tool/DigitalCommissioningTool/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
