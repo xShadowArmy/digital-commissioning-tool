@@ -7,7 +7,6 @@ using ApplicationFacade;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
 using ApplicationFacade.Application;
 using ApplicationFacade.Warehouse;
 
@@ -41,6 +40,7 @@ public class WallEditor : MonoBehaviour
     private bool mouseButtonPressed = false;
     private Vector3 oldMousePos = new Vector3(0, 0, 0);
     private Transform SelectedObjectTransform;
+    private WallData wall;
     private bool innerWallSelected = false;
     public Text myText;
     private ModeHandler ModeHandler;
@@ -49,6 +49,7 @@ public class WallEditor : MonoBehaviour
 
 
     private List<Collider> objectsInRange = new List<Collider>();
+    private bool m_Started;
 
     // Start is called before the first frame update
 
@@ -70,6 +71,7 @@ public class WallEditor : MonoBehaviour
         AddInnerWallButton = GameObject.Find("AddInnerWallButton");
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        m_Started = true;
     }
 
     /// <summary>
@@ -89,6 +91,7 @@ public class WallEditor : MonoBehaviour
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (innerWallSelected)
         {
+            wall = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
             Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -106,7 +109,7 @@ public class WallEditor : MonoBehaviour
                 Collider[] colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                 foreach (Collider collider1 in colliders)
                 {
-                    if (collider1.gameObject != SelectedObjectTransform.gameObject && collider1.transform.rotation != SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))
+                    if (collider1.gameObject != SelectedObjectTransform.gameObject && collider1.transform.rotation != SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall")  && GameManager.GameWarehouse.GetWall(collider1.gameObject).Class == WallClass.Outer)
                     {
                         Transform invisibleWall = collider1.transform.Find("InvisibleWall").transform;
                         if (!objectsInRange.Contains(collider1))
@@ -139,19 +142,46 @@ public class WallEditor : MonoBehaviour
                 //Snap to other Wall
                 if (objectsInRange.Count > 0)
                 {
+                    WallFace wallFace = WallFace.Undefined;
                     Transform snapObject = objectsInRange[0].transform;
-                    Vector3 direction = (SelectedObjectTransform.position - snapObject.position).normalized;
-                    if (SelectedObjectTransform.rotation.eulerAngles.y % 180.0f == 0)
+                    Vector3 direction = new Vector3();
+
+                    if (Math.Abs(SelectedObjectTransform.rotation.eulerAngles.y - 180.0f) < 1f || Math.Abs(SelectedObjectTransform.rotation.eulerAngles.y) < 1f)
                     {
-                        SelectedObjectTransform.position = snapObject.position + Vector3.Scale(new Vector3(SelectedObjectTransform.localScale.z / 2.0f + SelectedObjectTransform.localScale.x / 2.0f, 0, 0), direction);
+                        if (snapObject.parent.CompareTag("NorthWall"))
+                        {
+                            direction = Vector3.right;
+                            wallFace = WallFace.North;
+                        }
+                        else if (snapObject.parent.CompareTag("SouthWall"))
+                        {
+                            direction = Vector3.left;
+                            wallFace = WallFace.South;
+                        }
+
+                        wall.SetPosition(snapObject.position + Vector3.Scale(new Vector3(SelectedObjectTransform.localScale.z / 2.0f + SelectedObjectTransform.localScale.x / 2.0f, 0, 0), direction));
+                        wall.SetRotation(wall.Object.transform.rotation);
                     }
                     else
                     {
-                        SelectedObjectTransform.position = snapObject.position + Vector3.Scale(new Vector3(0, 0, SelectedObjectTransform.localScale.z / 2.0f + SelectedObjectTransform.localScale.x / 2.0f), direction);
+                        if (snapObject.parent.CompareTag("EastWall"))
+                        {
+                            direction = Vector3.back;
+                            wallFace = WallFace.East;
+                        }
+                        else if (snapObject.parent.CompareTag("WestWall"))
+                        {
+                            direction = Vector3.forward;
+                            wallFace = WallFace.West;
+                        }
+
+                        wall.SetPosition(snapObject.position + Vector3.Scale(new Vector3(0, 0, SelectedObjectTransform.localScale.z / 2.0f + SelectedObjectTransform.localScale.x / 2.0f), direction));
+                        wall.SetRotation(wall.Object.transform.rotation);
                     }
 
-                    SelectedObjectTransform.tag = "SelectableAttachedInnerWall";
-                    SelectedObjectTransform.parent = snapObject.parent.Find("InnerWall");
+                    wall.Object.tag = "SelectableAttachedInnerWall";
+                    wall.SetFace(wallFace);
+                    
                     foreach (Collider collider1 in objectsInRange)
                     {
                         Transform invisibleWall = collider1.transform.Find("InvisibleWall").transform;
@@ -166,11 +196,10 @@ public class WallEditor : MonoBehaviour
             //Rotate
             if (Input.GetKeyUp(KeyCode.R))
             {
-                SelectedObjectTransform.Rotate(Vector3.up * 90);
+                wall.Object.transform.Rotate(Vector3.up * 90);
             }
         }
     }
-
 
     private void OnInnerWallSelected(Transform selectedObject)
     {
@@ -214,7 +243,7 @@ public class WallEditor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
         {
-            WallData wall = GameManager.GameWarehouse.CreateWall( hit.point + new Vector3(0f,1.6f,0f), ObjectSpawn.transform.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner );
+            wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner);
         }
     }
 
@@ -228,10 +257,10 @@ public class WallEditor : MonoBehaviour
         {
             if (SelectedObjectTransform.gameObject.CompareTag("SelectableDoor"))
             {
-                DoorData door = GameManager.GameWarehouse.GetDoor( SelectedObjectTransform.gameObject );
+                DoorData door = GameManager.GameWarehouse.GetDoor(SelectedObjectTransform.gameObject);
 
-                GameManager.GameWarehouse.CreateWindow( door.Position, door.Rotation, door.Scale, door.Face, door.Class );
-                GameManager.GameWarehouse.RemoveDoor( door );
+                GameManager.GameWarehouse.CreateWindow(door.Position, door.Rotation, door.Scale, door.Face, door.Class);
+                GameManager.GameWarehouse.RemoveDoor(door);
             }
             else
             {
@@ -271,22 +300,22 @@ public class WallEditor : MonoBehaviour
                     WallData rw = GameManager.GameWarehouse.GetWall(rightWallElement);
                     WallData lw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
 
-                    GameManager.GameWarehouse.RemoveWall( rw );
-                    GameManager.GameWarehouse.RemoveWall( lw );
+                    GameManager.GameWarehouse.RemoveWall(rw);
+                    GameManager.GameWarehouse.RemoveWall(lw);
 
                     GameManager.GameWarehouse.CreateWindow(SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale, rw.Face, rw.Class );
+                        SelectedObjectTransform.localScale, rw.Face, rw.Class);
                 }
                 else if (foundLeftWallElement)
                 {
                     WallData lw = GameManager.GameWarehouse.GetWall(leftWallElement);
                     WallData rw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
 
-                    GameManager.GameWarehouse.RemoveWall( rw );
-                    GameManager.GameWarehouse.RemoveWall( lw );
+                    GameManager.GameWarehouse.RemoveWall(rw);
+                    GameManager.GameWarehouse.RemoveWall(lw);
 
                     GameManager.GameWarehouse.CreateWindow(leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale, rw.Face, rw.Class );
+                        SelectedObjectTransform.localScale, rw.Face, rw.Class);
                 }
                 else
                 {
@@ -308,10 +337,10 @@ public class WallEditor : MonoBehaviour
         {
             if (SelectedObjectTransform.gameObject.CompareTag("SelectableWindow"))
             {
-                WindowData window = GameManager.GameWarehouse.GetWindow( SelectedObjectTransform.gameObject );
+                WindowData window = GameManager.GameWarehouse.GetWindow(SelectedObjectTransform.gameObject);
 
-                GameManager.GameWarehouse.CreateDoor( window.Position, window.Rotation, window.Scale, DoorType.Door, window.Face, window.Class );
-                GameManager.GameWarehouse.RemoveWindow( window );
+                GameManager.GameWarehouse.CreateDoor(window.Position, window.Rotation, window.Scale, DoorType.Door, window.Face, window.Class);
+                GameManager.GameWarehouse.RemoveWindow(window);
             }
             else
             {
@@ -351,19 +380,19 @@ public class WallEditor : MonoBehaviour
                     WallData rw = GameManager.GameWarehouse.GetWall(rightWallElement);
                     WallData lw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
 
-                    GameManager.GameWarehouse.RemoveWall( rw );
-                    GameManager.GameWarehouse.RemoveWall( lw );
+                    GameManager.GameWarehouse.RemoveWall(rw);
+                    GameManager.GameWarehouse.RemoveWall(lw);
 
                     GameManager.GameWarehouse.CreateDoor(SelectedObjectTransform.position + SelectedObjectTransform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
-                        SelectedObjectTransform.localScale, DoorType.Door, rw.Face, rw.Class );
+                        SelectedObjectTransform.localScale, DoorType.Door, rw.Face, rw.Class);
                 }
                 else if (foundLeftWallElement)
                 {
                     WallData lw = GameManager.GameWarehouse.GetWall(leftWallElement);
                     WallData rw = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
 
-                    GameManager.GameWarehouse.RemoveWall( rw );
-                    GameManager.GameWarehouse.RemoveWall( lw );
+                    GameManager.GameWarehouse.RemoveWall(rw);
+                    GameManager.GameWarehouse.RemoveWall(lw);
 
                     GameManager.GameWarehouse.CreateDoor(leftWallElement.transform.position + leftWallElement.transform.TransformDirection(Vector3.left * (SelectedObjectTransform.localScale.x / 2.0f)), SelectedObjectTransform.rotation,
                         SelectedObjectTransform.localScale, DoorType.Door, rw.Face, rw.Class);
@@ -387,38 +416,30 @@ public class WallEditor : MonoBehaviour
         if (!SelectedObjectTransform.gameObject.CompareTag("SelectableWall"))
         {
             Transform parent = SelectedObjectTransform.parent;
-            if ( SelectedObjectTransform.CompareTag("SelectableWindow") )
+            if (SelectedObjectTransform.CompareTag("SelectableWindow"))
             {
-                WindowData window = GameManager.GameWarehouse.GetWindow( SelectedObjectTransform.gameObject );
-                GameManager.GameWarehouse.RemoveWindow( window );
+                WindowData window = GameManager.GameWarehouse.GetWindow(SelectedObjectTransform.gameObject);
+                GameManager.GameWarehouse.RemoveWindow(window);
 
                 Vector3 position = window.Position;
                 Vector3 localScale = window.Scale;
                 Quaternion rotation = window.Rotation;
 
-                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class );
-                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class );
-                      
+                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class);
+                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class);
             }
 
-            else if( SelectedObjectTransform.CompareTag( "SelectableDoor" ) )
+            else if (SelectedObjectTransform.CompareTag("SelectableDoor"))
             {
-                DoorData door = GameManager.GameWarehouse.GetDoor( SelectedObjectTransform.gameObject );
-                GameManager.GameWarehouse.RemoveDoor( door );
+                DoorData door = GameManager.GameWarehouse.GetDoor(SelectedObjectTransform.gameObject);
+                GameManager.GameWarehouse.RemoveDoor(door);
 
                 Vector3 position = door.Position;
                 Vector3 localScale = door.Scale;
                 Quaternion rotation = door.Rotation;
 
-                GameManager.GameWarehouse.CreateWall( position - SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, door.Face, door.Class );
-                GameManager.GameWarehouse.CreateWall( position + SelectedObjectTransform.TransformDirection( Vector3.left * ( localScale.x / 2.0f ) ), rotation, SelectedObjectTransform.localScale, door.Face, door.Class );
-
-            }
-
-            else
-            {
-                //Destroy(SelectedObjectTransform.gameObject);
-                //Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, parent);
+                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, door.Face, door.Class);
+                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, door.Face, door.Class);
             }
         }
 
@@ -521,7 +542,7 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     public void OnScaleWallButtonClicked()
     {
-        if (!string.IsNullOrEmpty(inputNumberOfWalls.text))
+        if (!string.IsNullOrEmpty(inputNumberOfWalls.text) && !inputNumberOfWalls.text.Equals("0"))
         {
             SelectedObjectTransform = selectionManager.SelectedObject;
             int length = Convert.ToInt32(inputNumberOfWalls.text);
@@ -536,24 +557,58 @@ public class WallEditor : MonoBehaviour
     /// <param name="length"> Länge um die Wand verlängert(+) oder verkürzt(-) werden soll</param>
     private void ScaleWall(int length)
     {
-        if (SelectedObjectTransform.CompareTag("SelectableAttachedInnerWall"))
+        wall = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
+        if (wall.Object.CompareTag("SelectableAttachedInnerWall"))
         {
-            Collider[] colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
+            Vector3 direction = new Vector3();
+            switch (wall.Face)
+            {
+                case WallFace.East:
+                    direction = Vector3.back;
+                    break;
+                case WallFace.North:
+                    direction = Vector3.right;
+                    break;
+                case WallFace.South:
+                    direction = Vector3.left;
+                    break;
+                case WallFace.West:
+                    direction = Vector3.forward;
+                    break;
+            }
+
+            // Wenn das Wandelement nicht die Ursprungsgröße hat, wird diese wiederhergestellt.
+            if (SelectedObjectTransform.localScale.x < 0.99f)
+            {
+                wall.SetScale(new Vector3(1.0f, 3.2f, 0.2f));
+                wall.SetPosition(wall.Position + Vector3.Scale(new Vector3(0.2f, 0, 0.2f), direction));
+            }
+
+            var scale = SelectedObjectTransform.localScale;
+            Vector3 overlapBox = new Vector3(scale.x * 1.1f, scale.y, scale.z);
+            Collider[] colliders = Physics.OverlapBox(wall.Position, overlapBox / 2f, wall.Rotation);
             Transform neighborWall = null;
             foreach (Collider collider1 in colliders)
             {
-                if (collider1.transform != SelectedObjectTransform &&
-                    ((collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent) ||
-                     (collider1.transform.rotation == SelectedObjectTransform.rotation && collider1.CompareTag("SelectableWall"))))
+                if (collider1.CompareTag("SelectableWall") || collider1.CompareTag("SelectableWindow") || collider1.CompareTag("SelectableDoor"))
                 {
-                    neighborWall = collider1.transform;
+                    WallData colliderWallData = GameManager.GameWarehouse.GetWall(collider1.gameObject);
+                    if (collider1.transform != SelectedObjectTransform && collider1.CompareTag("SelectableWall") 
+                                                                       && colliderWallData.Class == WallClass.Outer 
+                                                                       && colliderWallData.Face == wall.Face)
+                    {
+                        neighborWall = collider1.transform;
+                    }
+                    else if (collider1.transform.rotation == SelectedObjectTransform.rotation)
+                    {
+                        neighborWall = collider1.transform;
+                    }
                 }
             }
 
-
+            Debug.Log(neighborWall.name);
             if (neighborWall != null)
             {
-                Vector3 direction = (SelectedObjectTransform.position - neighborWall.position).normalized;
                 for (int i = 0; i < Math.Abs(length); i++)
                 {
                     if (length < 0)
@@ -562,26 +617,36 @@ public class WallEditor : MonoBehaviour
                         colliders = Physics.OverlapBox(SelectedObjectTransform.position, SelectedObjectTransform.localScale / 2, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
-                            if (collider1.transform.parent.parent.CompareTag("OuterWall"))
+                            if (collider1.transform.parent.parent.CompareTag("OuterWall") && collider1.transform.parent == SelectedObjectTransform.parent.parent)
                             {
                                 foundOuterWall = true;
                             }
 
-                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation &&
-                                (collider1.CompareTag("SelectableWall") || collider1.CompareTag("SelectableWindow") || collider1.CompareTag("SelectableDoor")))
+                            if (collider1.transform != SelectedObjectTransform && collider1.transform.rotation == SelectedObjectTransform.rotation)
                             {
-                                Destroy(collider1.gameObject);
+                                if (collider1.CompareTag("SelectableWall"))
+                                {
+                                    GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(collider1.gameObject));
+                                }
+                                else if (collider1.CompareTag("SelectableWindow"))
+                                {
+                                    GameManager.GameWarehouse.RemoveWindow(GameManager.GameWarehouse.GetWindow(collider1.gameObject));
+                                }
+                                else if (collider1.CompareTag("SelectableDoor"))
+                                {
+                                    GameManager.GameWarehouse.RemoveDoor(GameManager.GameWarehouse.GetDoor(collider1.gameObject));
+                                }
                             }
                         }
 
                         if (!foundOuterWall)
                         {
                             Vector3 localScale = SelectedObjectTransform.localScale;
-                            SelectedObjectTransform.position -= Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction);
+                            wall.SetPosition(wall.Position - Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction));
                         }
                         else
                         {
-                            Destroy(SelectedObjectTransform.gameObject);
+                            GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject));
                             break;
                         }
                     }
@@ -589,12 +654,36 @@ public class WallEditor : MonoBehaviour
                     {
                         Vector3 position = SelectedObjectTransform.position;
                         Vector3 localScale = SelectedObjectTransform.localScale;
+                        Transform hitInnerWall = null;
                         bool foundOuterWall = false;
+                        bool hitsInnerWall = false;
+                        bool isEndPiece = false;
 
-                        colliders = Physics.OverlapBox(position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction), localScale / 2, SelectedObjectTransform.rotation);
+                        colliders = Physics.OverlapBox(position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction), localScale / 2.1f, SelectedObjectTransform.rotation);
                         foreach (Collider collider1 in colliders)
                         {
-                            if (collider1.transform.parent.parent.CompareTag("OuterWall") && SelectedObjectTransform.parent.parent != collider1.transform.parent)
+                            if (i == length - 1 && collider1.transform.parent.name.Equals("InnerWall"))
+                            {
+                                hitsInnerWall = true;
+                                hitInnerWall = collider1.transform;
+                                if (collider1.CompareTag("SelectableAttachedInnerWall"))
+                                {
+                                    isEndPiece = true;
+                                }
+                            }
+
+                            if (collider1.CompareTag("SelectableWall") && GameManager.GameWarehouse.GetWall(collider1.gameObject).Class == WallClass.Outer
+                                                                       && GameManager.GameWarehouse.GetWall(collider1.gameObject).Face != wall.Face)
+                            {
+                                foundOuterWall = true;
+                            }
+                            else if (collider1.CompareTag("SelectableWindow") && GameManager.GameWarehouse.GetWindow(collider1.gameObject).Class == WallClass.Outer
+                                                                              && GameManager.GameWarehouse.GetWindow(collider1.gameObject).Face != wall.Face)
+                            {
+                                foundOuterWall = true;
+                            }
+                            else if (collider1.CompareTag("SelectableDoor") && GameManager.GameWarehouse.GetDoor(collider1.gameObject).Class == WallClass.Outer
+                                                                            && GameManager.GameWarehouse.GetDoor(collider1.gameObject).Face != wall.Face)
                             {
                                 foundOuterWall = true;
                             }
@@ -602,9 +691,90 @@ public class WallEditor : MonoBehaviour
 
                         if (!foundOuterWall)
                         {
-                            Instantiate(WallPrefab, position, SelectedObjectTransform.rotation, SelectedObjectTransform.parent);
-                            position += Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction);
-                            SelectedObjectTransform.position = position;
+                            Vector3 dirHitInnerWall = new Vector3();
+                            WallData temp = GameManager.GameWarehouse.CreateWall(position, wall.Rotation, wall.Scale, wall.Face, wall.Class);
+                            temp.Object.tag = "SelectableWall";
+                            wall.SetPosition(wall.Position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction));
+                            
+                            if (hitsInnerWall)
+                            {
+                                if (hitInnerWall.CompareTag("SelectableWall"))
+                                {
+                                    WallData hitInnerWallData = GameManager.GameWarehouse.GetWall(hitInnerWall.gameObject);
+
+                                    switch (hitInnerWallData.Face)
+                                    {
+                                        case WallFace.North:
+                                            dirHitInnerWall = Vector3.right;
+                                            break;
+                                        case WallFace.East:
+                                            dirHitInnerWall = Vector3.back;
+                                            break;
+                                        case WallFace.South:
+                                            dirHitInnerWall = Vector3.left;
+                                            break;
+                                        case WallFace.West:
+                                            dirHitInnerWall = Vector3.forward;
+                                            break;
+                                    }
+
+                                    wall.SetScale(new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z));
+                                    wall.SetPosition(wall.Position - Vector3.Scale(new Vector3(0.2f, 0, 0.2f), direction));
+
+                                    if (isEndPiece)
+                                    {
+                                        hitInnerWallData.SetScale(new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z));
+                                        hitInnerWallData.SetPosition(hitInnerWallData.Position - Vector3.Scale(new Vector3(0.2f, 0, 0.2f), dirHitInnerWall));
+                                    }
+                                }
+                                else if (hitInnerWall.CompareTag("SelectableWindow"))
+                                {
+                                    WindowData hitInnerWallData = GameManager.GameWarehouse.GetWindow(hitInnerWall.gameObject);
+
+                                    switch (hitInnerWallData.Face)
+                                    {
+                                        case WallFace.North:
+                                            dirHitInnerWall = Vector3.right;
+                                            break;
+                                        case WallFace.East:
+                                            dirHitInnerWall = Vector3.back;
+                                            break;
+                                        case WallFace.South:
+                                            dirHitInnerWall = Vector3.left;
+                                            break;
+                                        case WallFace.West:
+                                            dirHitInnerWall = Vector3.forward;
+                                            break;
+                                    }
+
+                                    wall.SetScale(new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z));
+                                    wall.SetPosition(wall.Position - Vector3.Scale(new Vector3(0.2f, 0, 0.2f), direction));
+
+                                    if (isEndPiece)
+                                    {
+                                        hitInnerWallData.SetScale(new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z));
+                                        hitInnerWallData.SetPosition(hitInnerWallData.Position - Vector3.Scale(new Vector3(0.2f, 0, 0.2f), dirHitInnerWall));
+                                    }
+                                }
+                                else if (hitInnerWall.CompareTag("SelectableDoor"))
+                                {
+                                    DoorData hitInnerWallData = GameManager.GameWarehouse.GetDoor(hitInnerWall.gameObject);
+
+                                    if (hitInnerWallData.Face == WallFace.North) dirHitInnerWall = Vector3.right;
+                                    else if (hitInnerWallData.Face == WallFace.East) dirHitInnerWall = Vector3.back;
+                                    else if (hitInnerWallData.Face == WallFace.South) dirHitInnerWall = Vector3.left;
+                                    else if (hitInnerWallData.Face == WallFace.West) dirHitInnerWall = Vector3.forward;
+
+                                    wall.SetScale(new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z));
+                                    wall.SetPosition(wall.Position - Vector3.Scale(new Vector3(0.2f, 0, 0.2f), direction));
+
+                                    if (isEndPiece)
+                                    {
+                                        hitInnerWallData.SetScale(new Vector3(localScale.x / 2.0f + localScale.z / 2.0f, localScale.y, localScale.z));
+                                        hitInnerWallData.SetPosition(hitInnerWallData.Position - Vector3.Scale(new Vector3(0.2f, 0, 0.2f), dirHitInnerWall));
+                                    }
+                                }
+                            }
                         }
                         else
                         {
@@ -624,8 +794,7 @@ public class WallEditor : MonoBehaviour
 
             GameObject oppositeWall = null;
             Transform oppositeWallRim = null;
-            GameObject temp;
-            GameObject parentWall = SelectedObjectTransform.parent.gameObject;
+            WallData temp;
             Transform connectingWall = null;
             Vector3 selectedWallLocalScale = SelectedObjectTransform.localScale;
             Transform neighborWall = null;
@@ -643,19 +812,18 @@ public class WallEditor : MonoBehaviour
                 }
             }
 
-            string parentWallTag = parentWall.tag;
-            switch (parentWallTag)
+            switch (wall.Face)
             {
-                case "NorthWall":
+                case WallFace.North:
                     oppositeWall = GameObject.FindGameObjectWithTag("SouthWall");
                     break;
-                case "EastWall":
+                case WallFace.East:
                     oppositeWall = GameObject.FindGameObjectWithTag("WestWall");
                     break;
-                case "SouthWall":
+                case WallFace.South:
                     oppositeWall = GameObject.FindGameObjectWithTag("NorthWall");
                     break;
-                case "WestWall":
+                case WallFace.West:
                     oppositeWall = GameObject.FindGameObjectWithTag("EastWall");
                     break;
             }
@@ -680,16 +848,46 @@ public class WallEditor : MonoBehaviour
                         {
                             if (length < 0)
                             {
-                                SelectedObjectTransform.position = SelectedObjectTransform.position + direction * selectedWallLocalScale.x;
-                                oppositeWallRim.position = oppositeWallRim.position + direction * oppositeWallRim.localScale.x;
-                                connectingWall.position = connectingWall.position + direction * selectedWallLocalScale.x;
+                                WallData oppositeWallRimData = GameManager.GameWarehouse.GetWall(oppositeWallRim.gameObject);
+                                WallData connectingWallData = GameManager.GameWarehouse.GetWall(connectingWall.gameObject);
+                                wall.SetPosition(wall.Position + direction * wall.Scale.x);
+                                oppositeWallRimData.SetPosition(oppositeWallRimData.Position + direction * oppositeWallRimData.Scale.x);
+                                foreach (Transform child in connectingWall.transform)
+                                {
+                                    if (child.CompareTag("SelectableWall") || child.CompareTag("RightWallRim") || child.CompareTag("LeftWallRim"))
+                                    {
+                                        WallData childData = GameManager.GameWarehouse.GetWall(child.gameObject);
+                                        childData.SetPosition(childData.Position + direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableWindow"))
+                                    {
+                                        WindowData childData = GameManager.GameWarehouse.GetWindow(child.gameObject);
+                                        childData.SetPosition(childData.Position + direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableDoor"))
+                                    {
+                                        DoorData childData = GameManager.GameWarehouse.GetDoor(child.gameObject);
+                                        childData.SetPosition(childData.Position + direction * wall.Scale.x);
+                                    }
+                                }
 
                                 colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x / 4);
                                 foreach (var collider in colliders)
                                 {
                                     if (collider.gameObject != SelectedObjectTransform.gameObject)
                                     {
-                                        Destroy(collider.gameObject);
+                                        if (collider.CompareTag("SelectableWall"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableWindow"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWindow(GameManager.GameWarehouse.GetWindow(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableDoor"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveDoor(GameManager.GameWarehouse.GetDoor(collider.gameObject));
+                                        }
                                     }
                                 }
 
@@ -698,24 +896,53 @@ public class WallEditor : MonoBehaviour
                                 {
                                     if (collider.gameObject != oppositeWallRim.gameObject)
                                     {
-                                        Destroy(collider.gameObject);
+                                        if (collider.CompareTag("SelectableWall"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableWindow"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWindow(GameManager.GameWarehouse.GetWindow(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableDoor"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveDoor(GameManager.GameWarehouse.GetDoor(collider.gameObject));
+                                        }
                                     }
                                 }
                             }
                             else
                             {
                                 //Extend Selected Wall
-                                temp = Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, SelectedObjectTransform.parent);
-                                temp.tag = "SelectableWall";
-                                SelectedObjectTransform.position = SelectedObjectTransform.position - direction * selectedWallLocalScale.x;
+                                temp = GameManager.GameWarehouse.CreateWall(wall.Position, wall.Rotation, wall.Scale, wall.Face, wall.Class);
+                                temp.Object.tag = "SelectableWall";
+                                wall.SetPosition(wall.Position - direction * wall.Scale.x);
 
                                 //Extend Opposite Wall
-                                temp = Instantiate(WallPrefab, oppositeWallRim.position, oppositeWallRim.rotation, oppositeWallRim.parent);
-                                temp.tag = "SelectableWall";
-                                oppositeWallRim.position = oppositeWallRim.position - direction * oppositeWallRim.localScale.x;
+                                WallData oppositeWallRimData = GameManager.GameWarehouse.GetWall(oppositeWallRim.gameObject);
+                                temp = GameManager.GameWarehouse.CreateWall(oppositeWallRimData.Position, oppositeWallRimData.Rotation, oppositeWallRimData.Scale, oppositeWallRimData.Face, oppositeWallRimData.Class);
+                                temp.Object.tag = "SelectableWall";
+                                oppositeWallRimData.SetPosition(oppositeWallRimData.Position - direction * oppositeWallRimData.Scale.x);
 
                                 //Move Connecting Wall
-                                connectingWall.position = connectingWall.position - direction * selectedWallLocalScale.x;
+                                foreach (Transform child in connectingWall.transform)
+                                {
+                                    if (child.CompareTag("SelectableWall") || child.CompareTag("RightWallRim") || child.CompareTag("LeftWallRim"))
+                                    {
+                                        WallData childData = GameManager.GameWarehouse.GetWall(child.gameObject);
+                                        childData.SetPosition(childData.Position - direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableWindow"))
+                                    {
+                                        WindowData childData = GameManager.GameWarehouse.GetWindow(child.gameObject);
+                                        childData.SetPosition(childData.Position - direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableDoor"))
+                                    {
+                                        DoorData childData = GameManager.GameWarehouse.GetDoor(child.gameObject);
+                                        childData.SetPosition(childData.Position - direction * wall.Scale.x);
+                                    }
+                                }
                             }
                         }
                     }
@@ -737,16 +964,46 @@ public class WallEditor : MonoBehaviour
                         {
                             if (length < 0)
                             {
-                                SelectedObjectTransform.position = SelectedObjectTransform.position + direction * selectedWallLocalScale.x;
-                                oppositeWallRim.position = oppositeWallRim.position + direction * oppositeWallRim.localScale.x;
-                                connectingWall.position = connectingWall.position + direction * selectedWallLocalScale.x;
+                                WallData oppositeWallRimData = GameManager.GameWarehouse.GetWall(oppositeWallRim.gameObject);
+                                WallData connectingWallData = GameManager.GameWarehouse.GetWall(connectingWall.gameObject);
+                                wall.SetPosition(wall.Position + direction * wall.Scale.x);
+                                oppositeWallRimData.SetPosition(oppositeWallRimData.Position + direction * oppositeWallRimData.Scale.x);
+                                foreach (Transform child in connectingWall.transform)
+                                {
+                                    if (child.CompareTag("SelectableWall") || child.CompareTag("RightWallRim") || child.CompareTag("LeftWallRim"))
+                                    {
+                                        WallData childData = GameManager.GameWarehouse.GetWall(child.gameObject);
+                                        childData.SetPosition(childData.Position + direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableWindow"))
+                                    {
+                                        WindowData childData = GameManager.GameWarehouse.GetWindow(child.gameObject);
+                                        childData.SetPosition(childData.Position + direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableDoor"))
+                                    {
+                                        DoorData childData = GameManager.GameWarehouse.GetDoor(child.gameObject);
+                                        childData.SetPosition(childData.Position + direction * wall.Scale.x);
+                                    }
+                                }
 
                                 colliders = Physics.OverlapSphere(SelectedObjectTransform.position, SelectedObjectTransform.localScale.x / 4);
                                 foreach (var collider in colliders)
                                 {
                                     if (collider.gameObject != SelectedObjectTransform.gameObject)
                                     {
-                                        Destroy(collider.gameObject);
+                                        if (collider.CompareTag("SelectableWall"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableWindow"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWindow(GameManager.GameWarehouse.GetWindow(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableDoor"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveDoor(GameManager.GameWarehouse.GetDoor(collider.gameObject));
+                                        }
                                     }
                                 }
 
@@ -755,24 +1012,53 @@ public class WallEditor : MonoBehaviour
                                 {
                                     if (collider.gameObject != oppositeWallRim.gameObject)
                                     {
-                                        Destroy(collider.gameObject);
+                                        if (collider.CompareTag("SelectableWall"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWall(GameManager.GameWarehouse.GetWall(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableWindow"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveWindow(GameManager.GameWarehouse.GetWindow(collider.gameObject));
+                                        }
+                                        else if (collider.CompareTag("SelectableDoor"))
+                                        {
+                                            GameManager.GameWarehouse.RemoveDoor(GameManager.GameWarehouse.GetDoor(collider.gameObject));
+                                        }
                                     }
                                 }
                             }
                             else
                             {
                                 //Extend Selected Wall
-                                temp = Instantiate(WallPrefab, SelectedObjectTransform.position, SelectedObjectTransform.rotation, SelectedObjectTransform.parent);
-                                temp.tag = "SelectableWall";
-                                SelectedObjectTransform.position = SelectedObjectTransform.position - direction * selectedWallLocalScale.x;
+                                temp = GameManager.GameWarehouse.CreateWall(wall.Position, wall.Rotation, wall.Scale, wall.Face, wall.Class);
+                                temp.Object.tag = "SelectableWall";
+                                wall.SetPosition(wall.Position - direction * wall.Scale.x);
 
                                 //Extend Opposite Wall
-                                temp = Instantiate(WallPrefab, oppositeWallRim.position, oppositeWallRim.rotation, oppositeWallRim.parent);
-                                temp.tag = "SelectableWall";
-                                oppositeWallRim.position = oppositeWallRim.position - direction * oppositeWallRim.localScale.x;
+                                WallData oppositeWallRimData = GameManager.GameWarehouse.GetWall(oppositeWallRim.gameObject);
+                                temp = GameManager.GameWarehouse.CreateWall(oppositeWallRimData.Position, oppositeWallRimData.Rotation, oppositeWallRimData.Scale, oppositeWallRimData.Face, oppositeWallRimData.Class);
+                                temp.Object.tag = "SelectableWall";
+                                oppositeWallRimData.SetPosition(oppositeWallRimData.Position - direction * oppositeWallRimData.Scale.x);
 
                                 //Move Connecting Wall
-                                connectingWall.position = connectingWall.position - direction * selectedWallLocalScale.x;
+                                foreach (Transform child in connectingWall.transform)
+                                {
+                                    if (child.CompareTag("SelectableWall") || child.CompareTag("RightWallRim") || child.CompareTag("LeftWallRim"))
+                                    {
+                                        WallData childData = GameManager.GameWarehouse.GetWall(child.gameObject);
+                                        childData.SetPosition(childData.Position - direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableWindow"))
+                                    {
+                                        WindowData childData = GameManager.GameWarehouse.GetWindow(child.gameObject);
+                                        childData.SetPosition(childData.Position - direction * wall.Scale.x);
+                                    }
+                                    else if (child.CompareTag("SelectableDoor"))
+                                    {
+                                        DoorData childData = GameManager.GameWarehouse.GetDoor(child.gameObject);
+                                        childData.SetPosition(childData.Position - direction * wall.Scale.x);
+                                    }
+                                }
                             }
                         }
                     }
@@ -780,7 +1066,11 @@ public class WallEditor : MonoBehaviour
             }
         }
 
-
         close(popUpScaleWall);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(m_Started) Gizmos.DrawWireCube(wall.Position, wall.Scale);
     }
 }
