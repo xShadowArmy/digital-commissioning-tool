@@ -32,17 +32,17 @@ namespace ApplicationFacade.Warehouse
         public void SetFace( WallFace face )
         {
             Face = face;
-            
+
             ObjectChanged( );
         }
 
         public void SetClass( WallClass wClass )
         {
             Class = wClass;
-            
+
             ObjectChanged( );
         }
-        
+
         protected abstract override void ObjectChanged();
     }
 }
