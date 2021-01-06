@@ -18,22 +18,22 @@ public class WarehouseItemMenu : MonoBehaviour
     void Start()
     {
         replaceResources();
-        ItemData.AddItemToStock("M5 Schraube", 2000, 0.01);
-        ItemData.AddItemToStock("M5 Mutter", 1500, 0.002);
-        ItemData.AddItemToStock("Zündkerze", 50, 0.05);
-        ItemData.AddItemToStock("Ölwanne", 2, 6.2);
-        ItemData.AddItemToStock("Zahnriemen", 12, 0.6);
-        ItemData.AddItemToStock("Zylinderkopf", 36, 1.2);
-        ItemData.AddItemToStock("Antriebswelle", 1, 1.7);
-        ItemData.AddItemToStock("Bremsschiebe", 87, 1.0);
-        ItemData.AddItemToStock("Stoßdämpfer", 63, 2.2);
-        ItemData.AddItemToStock("Luftfilter", 134, 0.8);
-        ItemData.AddItemToStock("Radlager", 21, 2.7);
-        ItemData.AddItemToStock("Katalysator", 6, 5.3);
-        ItemData.AddItemToStock("Anlasser", 15, 0.9);
-        ItemData.AddItemToStock("Turbolader", 2, 2.4);
-        ItemData.AddItemToStock("Getriebe", 8, 6.2);
-        ItemData.AddItemToStock("Reifen", 24, 4);
+        ItemData.AddItemToStock("M5 Schraube", 0.01);
+        ItemData.AddItemToStock("M5 Mutter", 0.002);
+        ItemData.AddItemToStock("Zündkerze", 0.05);
+        ItemData.AddItemToStock("Ölwanne", 6.2);
+        ItemData.AddItemToStock("Zahnriemen",  0.6);
+        ItemData.AddItemToStock("Zylinderkopf",  1.2);
+        ItemData.AddItemToStock("Antriebswelle", 1.7);
+        ItemData.AddItemToStock("Bremsschiebe",  1.0);
+        ItemData.AddItemToStock("Stoßdämpfer",  2.2);
+        ItemData.AddItemToStock("Luftfilter",  0.8);
+        ItemData.AddItemToStock("Radlager", 2.7);
+        ItemData.AddItemToStock("Katalysator", 5.3);
+        ItemData.AddItemToStock("Anlasser",  0.9);
+        ItemData.AddItemToStock("Turbolader", 2.4);
+        ItemData.AddItemToStock("Getriebe", 6.2);
+        ItemData.AddItemToStock("Reifen", 4);
         Stock = ItemData.GetStock;
         foreach (ItemData item in Stock)
         {

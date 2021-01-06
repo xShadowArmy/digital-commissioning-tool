@@ -243,7 +243,7 @@ public class WallEditor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 20))
         {
-            wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner);
+            wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
         }
     }
 
@@ -1067,10 +1067,5 @@ public class WallEditor : MonoBehaviour
         }
 
         close(popUpScaleWall);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if(m_Started) Gizmos.DrawWireCube(wall.Position, wall.Scale);
     }
 }

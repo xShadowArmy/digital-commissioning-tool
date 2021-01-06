@@ -136,7 +136,7 @@ namespace ApplicationFacade.Warehouse
             return -1;
         }
 
-        public void AddItem( ItemData item, int slot )
+        public void AddItem( ItemData item, int slot = -1 )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
 
@@ -145,11 +145,37 @@ namespace ApplicationFacade.Warehouse
                 return;
             }
 
-            if ( slot >= Slots.Length )
+            if ( slot < 0 )
             {
-                LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
+                for ( int i = 0; i < SlotCount; i++ )
+                {
+                    if ( Data[i] == null )
+                    {
+                        slot = i;
+                        break;
+                    }
+                }
 
-                return;
+                if ( slot < 0 )
+                {
+                    return;
+                }
+            }
+
+            else
+            {
+                if ( slot >= Slots.Length )
+                {
+                    LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
+
+                    return;
+                }
+            }
+
+            if ( item.Object != null )
+            {
+                GameObject.Destroy( Slots[slot] );
+                Slots[slot] = item.Object;
             }
 
             Data[slot] = item;
@@ -320,6 +346,8 @@ namespace ApplicationFacade.Warehouse
                     }
                 }
             }
+
+            ObjectChanged( );
         }
 
         protected override void ObjectChanged()

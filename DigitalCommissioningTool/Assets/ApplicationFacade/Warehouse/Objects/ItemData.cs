@@ -12,9 +12,9 @@ namespace ApplicationFacade.Warehouse
 {
     public class ItemData : GameObjectData
     {
-        public delegate void ItemChangedEventHandler( ItemData item );
+        public delegate void StockChangedEventHandler( ItemData item );
 
-        public event ItemChangedEventHandler ItemChanged;
+        public static event StockChangedEventHandler StockChanged;
 
         public int Count { get; internal set; }
 
@@ -23,6 +23,8 @@ namespace ApplicationFacade.Warehouse
         public string Name { get; internal set; }
 
         public StorageData ParentStorage { get; internal set; }
+
+        internal bool IsRoot { get; set; }
 
         internal ItemData ParentItem { get; private set; }
 
@@ -44,7 +46,14 @@ namespace ApplicationFacade.Warehouse
         {
             get
             {
-                return GetStockCount( this );
+                ItemData tmp = this;
+
+                while( tmp.ParentItem != null )
+                {
+                    tmp = tmp.ParentItem;
+                }
+
+                return tmp.Count;
             }
         }
 
@@ -98,25 +107,16 @@ namespace ApplicationFacade.Warehouse
                 return false;
             }
 
-            if ( ParentItem == null )
+            if ( ParentItem != null )
             {
-                Count += itemCount;
+                ItemData data = this;
 
-                return true;
-            }
-
-            else
-            {
-                if ( ParentItem.Count > itemCount )
+                while( data.ParentItem != null )
                 {
-                    ParentItem.Count -= itemCount;
-                    Count += itemCount;
+                    data = data.ParentItem;
                 }
 
-                else
-                {
-                    return false;
-                }
+                data.Count += itemCount;
             }
                         
             return true;
@@ -134,17 +134,17 @@ namespace ApplicationFacade.Warehouse
                 return false;
             }
 
-            if ( itemCount >= Count )
-            {
-                return false;
-            }
-
             if ( ParentItem != null )
             {
-                ParentItem.Count += Count;
-            }
+                ItemData data = this;
 
-            Count -= itemCount;
+                while ( data.ParentItem != null )
+                {
+                    data = data.ParentItem;
+                }
+
+                data.Count -= itemCount;
+            }
 
             return true;
         }
@@ -162,6 +162,8 @@ namespace ApplicationFacade.Warehouse
             }
 
             Name = itemName;
+
+            ObjectChanged( );
         }
 
         public void SetItemWeight( double itemWeight )
@@ -177,6 +179,8 @@ namespace ApplicationFacade.Warehouse
             }
 
             Weight = itemWeight;
+
+            ObjectChanged( );
         }
                 
         public ItemData RequestItem( int count )
@@ -191,11 +195,35 @@ namespace ApplicationFacade.Warehouse
                 return null;
             }
 
+            ItemData data = new ItemData(  )
+            {
+                Count = count,
+                Name = Name,
+                Weight = Weight,
+                ParentItem = this,
+                IDRef = IDRef
+            };
+
+            Count += count;
+            ChildItems.Add( data );
+
+            return data;
+        }
+
+        public ItemData RequestCopyItem( int count )
+        {
+            if ( IsDestroyed( ) )
+            {
+                return null;
+            }
+
+            if ( IsReadonly( ) )
+            {
+                return null;
+            }
+
             if ( count > Count )
             {
-                LogManager.WriteWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!", "ItemData", "GetStockItem" );
-                Debug.LogWarning( "Es werden mehr kopien eines Objekts angefordert als vorhanden sind!" );
-
                 return null;
             }
 
@@ -209,9 +237,10 @@ namespace ApplicationFacade.Warehouse
             };
 
             Count -= count;
-            ChildItems.Add( data );
 
-            data.ItemChanged += ItemDataChanged;
+            data.ChangeGameObject( GameObject.Instantiate( Object ) );
+
+            ChildItems.Add( data );
 
             return data;
         }
@@ -233,39 +262,35 @@ namespace ApplicationFacade.Warehouse
                 return false;
             }
 
-            ParentItem.Count += Count;
-
-            if ( ChildItems.Count > 0 )
+            if ( ParentItem.ParentItem == null )
             {
-                for( int i = 0; i < ChildItems.Count; i++ )
-                {
-                    ParentItem.ChildItems.Add( ChildItems[i] );
-                }
+                ParentItem.ParentItem.Count -= Count;
             }
 
-            ParentItem.ChildItems.Remove( this );
-
-            ParentItem = null;
-
-            ItemChanged -= ItemDataChanged;
+            else
+            {
+                ParentItem.ParentItem.Count += Count;
+            }
 
             Destroy( );
 
             return true;
         }
 
-        public static void AddItemToStock( string name, int count = 1, double weight = 0 )
+        public static void AddItemToStock( string name, double weight = 0 )
         {
             ItemData item = new ItemData( Warehouse.GetUniqueID( ItemStock.ToArray( ) ) )
             {
-                Name = name,
-                Count = count,
+                Name   = name,
+                Count  = 0,
                 Weight = weight
             };
 
             item.IDRef = item.ID;
 
             ItemStock.Add( item );
+
+            StockChanged?.Invoke( item );
         }
         
         internal static void AddItemToStock( long id, string name, int count = 1, double weight = 0 )
@@ -280,6 +305,8 @@ namespace ApplicationFacade.Warehouse
             item.IDRef = id;
 
             ItemStock.Add( item );
+
+            StockChanged?.Invoke( item );
         }
 
         public static bool RemoveItemFromStock( ItemData item )
@@ -291,7 +318,11 @@ namespace ApplicationFacade.Warehouse
 
             RemoveStockItem( item );
 
-            return ItemStock.Remove( item );
+            bool res = ItemStock.Remove( item );
+
+            StockChanged?.Invoke( item );
+
+            return res;
         }
 
         public static bool RemoveItemFromStock( long idRef )
@@ -302,7 +333,11 @@ namespace ApplicationFacade.Warehouse
                 {
                     RemoveStockItem( ItemStock[i] );
 
-                    return ItemStock.Remove( ItemStock[i] );
+                    bool res = ItemStock.Remove( ItemStock[i] );
+
+                    StockChanged?.Invoke( ItemStock[i] );
+
+                    return res;
                 }
             }
 
@@ -317,7 +352,11 @@ namespace ApplicationFacade.Warehouse
                 {
                     RemoveStockItem( ItemStock[i] );
 
-                    return ItemStock.Remove( ItemStock[i] );
+                    bool res = ItemStock.Remove( ItemStock[i] );
+
+                    StockChanged?.Invoke( ItemStock[i] );
+
+                    return res;
                 }
             }
 
@@ -365,11 +404,8 @@ namespace ApplicationFacade.Warehouse
         
         internal void SetParentStorage( StorageData storage )
         {
-            if ( Destroyed )
+            if ( IsDestroyed() )
             {
-                LogManager.WriteWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!", "ItemData", "SetParent" );
-                Debug.LogWarning( "Es wird auf ein Objekt zugegriffen das bereits Zerstört ist!" );
-
                 return;
             }
 
@@ -395,78 +431,34 @@ namespace ApplicationFacade.Warehouse
                 }
             }
         }
-
-        private static int GetStockCount( ItemData data )
-        {
-            int count = 0;
-
-            if ( data.ChildItems.Count == 0 )
-            {
-                count = data.Count;
-            }
-
-            else
-            {
-                foreach ( ItemData item in data.ChildItems )
-                {
-                    count += GetStockCount( item );
-
-                    count += item.Count;
-                }
-            }
-
-            return count;
-        } 
         
-        private void UpdateItemData( ItemData changed, ItemData data )
+        private void ObjectChanged( ItemData src, ItemData item )
         {
-            if ( data == null )
+            if ( item.ChildItems.Count == 0 )
             {
-                if ( changed.ChildItems != null )
-                {
-                    foreach( ItemData item in changed.ChildItems )
-                    {
-                        UpdateItemData( changed, item );
-                    }
-                }
-
-                else
-                {
-                    data.Name   = changed.Name;
-                    data.Weight = changed.Weight;
-                }
+                item.Name   = src.Name;
+                item.Weight = src.Weight;
             }
 
             else
             {
-                if ( data.ChildItems != null )
+                foreach( ItemData child in item.ChildItems )
                 {
-                    foreach ( ItemData item in data.ChildItems )
-                    {
-                        UpdateItemData( changed, item );
-                    }
-                }
-
-                else
-                {
-                    data.Name   = changed.Name;
-                    data.Weight = changed.Weight;
+                    ObjectChanged( src, child );
                 }
             }
-        }
-
-        private void ItemDataChanged( ItemData item )
-        {
-            if ( item.ParentItem != null )
-            {
-                ItemDataChanged( item.ParentItem );
-            }
-
-            UpdateItemData( item, null );
         }
 
         protected override void ObjectChanged()
         {
+            ItemData tmp = this;
+
+            while ( tmp.ParentItem != null )
+            {
+                tmp = tmp.ParentItem;
+            }
+
+            ObjectChanged( this, tmp );
         }
     }
 }

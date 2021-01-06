@@ -833,13 +833,6 @@ namespace ApplicationFacade.Warehouse
             {
                 data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( data.Face.ToString( ) + "Wall" ).transform ) );
 
-                data.Object.name = "Wall" + data.GetID( );
-                data.Object.tag  = tag;
-
-                Walls.Add( data );
-
-                Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Object.tag, data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
-
                 switch ( data.Face )
                 {
                     case WallFace.North:
@@ -872,13 +865,14 @@ namespace ApplicationFacade.Warehouse
             else
             {
                 data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( "InnerWall" ).transform ) );
-
-                data.Object.name = "Wall" + data.GetID( );
-
-                Walls.Add( data );
-
-                Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Object.tag, data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
             }
+
+            data.Object.name = "Wall" + data.GetID( );
+            data.Object.tag = tag;
+
+            Walls.Add( data );
+
+            Data.Walls.Add( new ProjectWallData( data.GetID( ), data.Object.tag, data.Face.ToString( ), data.Class.ToString( ), new ProjectTransformationData( data.Position, data.Rotation, data.Scale ) ) );
         }
 
         /// <summary>

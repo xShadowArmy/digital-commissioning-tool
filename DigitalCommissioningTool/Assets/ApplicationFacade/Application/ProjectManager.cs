@@ -39,7 +39,7 @@ namespace ApplicationFacade.Application
         {
             get
             {
-                ProjectData[] data = new ProjectData[Directory.GetFiles(Paths.ProjectsPath).Length];
+                ProjectData[] data = new ProjectData[Directory.GetFiles(Paths.ProjectsPath, "*.prj").Length];
 
                 for ( int i = 0; i < data.Length; i++ )
                 {
@@ -280,7 +280,7 @@ namespace ApplicationFacade.Application
         {
             foreach( ProjectItemData item in IHandler.LoadFile() )
             {
-                ItemData.AddItemToStock( item.Name, item.Count, item.Weight );
+                ItemData.AddItemToStock( item.Name, item.Weight );
             }
         }
 
