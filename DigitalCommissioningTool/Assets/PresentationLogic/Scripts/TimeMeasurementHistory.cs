@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using SystemFacade;
-using ApplicationFacade;
 using TimeMeasurement;
 using UnityEngine;
-using ApplicationFacade.Application;
+
+
+
 
 public class TimeMeasurementHistory : MonoBehaviour
 {
+    
     private List<TimeMeasurementEntry> timeMeasurementEntries = new List<TimeMeasurementEntry>();
     private ConfigManager cman = new ConfigManager();
-
 
     // Start is called before the first frame update
     void Start()

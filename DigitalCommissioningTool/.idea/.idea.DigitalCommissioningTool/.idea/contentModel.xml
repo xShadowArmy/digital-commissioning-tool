@@ -35,7 +35,6 @@
             <e p="ProjectData.cs" t="Include" />
             <e p="ProjectManager.cs" t="Include" />
             <e p="ProjectSettings.cs" t="Include" />
-            <e p="TimeMeasurementEntry.cs" t="Include" />
           </e>
           <e p="ApplicationFacade.asmdef" t="Include" />
           <e p="Warehouse" t="Include">
@@ -75,6 +74,7 @@
           <e p="Scripts" t="Include">
             <e p="AddStorage.cs" t="Include" />
             <e p="DebugExtension.cs" t="Include" />
+            <e p="DialogMenu.cs" t="Include" />
             <e p="DragItem.cs" t="Include" />
             <e p="DragWindow.cs" t="Include" />
             <e p="EditorModeCamera.cs" t="Include" />
@@ -358,8 +358,8 @@
           </e>
         </e>
         <e p="TimeMeasurement" t="Include">
-          <e p="InternalTimeMeasurementEntry.cs" t="Include" />
           <e p="TimeMeasurement.asmdef" t="Include" />
+          <e p="TimeMeasurementEntry.cs" t="Include" />
         </e>
         <e p="UnitTests" t="Include">
           <e p="SystemFacade" t="Include">
