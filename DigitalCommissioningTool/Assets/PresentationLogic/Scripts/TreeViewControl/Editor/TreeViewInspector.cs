@@ -1,3 +1,4 @@
+#if (UNITY_EDITOR)
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class TreeViewInspector : Editor
         AddTreeView(go);
     }
 
-    [MenuItem("TreeView/Add Tree View to Selected", validate=true)]
+    [MenuItem("TreeView/Add Tree View to Selected", validate = true)]
     public static bool CheckAddTreeView()
     {
         if (null == Selection.activeGameObject ||
@@ -115,7 +116,7 @@ public class TreeViewInspector : Editor
             GUISkin skinHover = (GUISkin)Object.Instantiate(item.m_skinHover);
             GUISkin skinSelected = (GUISkin)Object.Instantiate(item.m_skinSelected);
             GUISkin skinUnselected = (GUISkin)Object.Instantiate(item.m_skinUnselected);
-            
+
             // name the skins
             skinHover.name = "Hover";
             skinSelected.name = "Selected";
@@ -149,89 +150,89 @@ public class TreeViewInspector : Editor
         skinHover.name = "Hover";
         skinSelected.name = "Selected";
         skinUnselected.name = "Unselected";
-		
-		foreach (TreeViewControl item in items)
-		{
-			if (null == item)
-			{
-				continue;
-			}
 
-	        item.m_textureBlank = GetTexture("Assets/TreeViewControl/blank.png");
-			item.m_textureGuide = GetTexture("Assets/TreeViewControl/guide.png");
-	        item.m_textureLastSiblingCollapsed = GetTexture("Assets/TreeViewControl/last_sibling_collapsed.png");
-	        item.m_textureLastSiblingExpanded = GetTexture("Assets/TreeViewControl/last_sibling_expanded.png");
-	        item.m_textureLastSiblingNoChild = GetTexture("Assets/TreeViewControl/last_sibling_nochild.png");
-	        item.m_textureMiddleSiblingCollapsed = GetTexture("Assets/TreeViewControl/middle_sibling_collapsed.png");
-	        item.m_textureMiddleSiblingExpanded = GetTexture("Assets/TreeViewControl/middle_sibling_expanded.png");
-	        item.m_textureMiddleSiblingNoChild = GetTexture("Assets/TreeViewControl/middle_sibling_nochild.png");
-			item.m_textureNormalChecked = GetTexture("Assets/TreeViewControl/normal_checked.png");
-			item.m_textureNormalUnchecked = GetTexture("Assets/TreeViewControl/normal_unchecked.png");
-			item.m_textureSelectedBackground = GetTexture("Assets/TreeViewControl/selected_background_color.png");
+        foreach (TreeViewControl item in items)
+        {
+            if (null == item)
+            {
+                continue;
+            }
+
+            item.m_textureBlank = GetTexture("Assets/TreeViewControl/blank.png");
+            item.m_textureGuide = GetTexture("Assets/TreeViewControl/guide.png");
+            item.m_textureLastSiblingCollapsed = GetTexture("Assets/TreeViewControl/last_sibling_collapsed.png");
+            item.m_textureLastSiblingExpanded = GetTexture("Assets/TreeViewControl/last_sibling_expanded.png");
+            item.m_textureLastSiblingNoChild = GetTexture("Assets/TreeViewControl/last_sibling_nochild.png");
+            item.m_textureMiddleSiblingCollapsed = GetTexture("Assets/TreeViewControl/middle_sibling_collapsed.png");
+            item.m_textureMiddleSiblingExpanded = GetTexture("Assets/TreeViewControl/middle_sibling_expanded.png");
+            item.m_textureMiddleSiblingNoChild = GetTexture("Assets/TreeViewControl/middle_sibling_nochild.png");
+            item.m_textureNormalChecked = GetTexture("Assets/TreeViewControl/normal_checked.png");
+            item.m_textureNormalUnchecked = GetTexture("Assets/TreeViewControl/normal_unchecked.png");
+            item.m_textureSelectedBackground = GetTexture("Assets/TreeViewControl/selected_background_color.png");
             item.m_skinHover = skinHover;
             item.m_skinSelected = skinSelected;
             item.m_skinUnselected = skinUnselected;
-	
-	        SetBackground(item.m_skinHover.button, null);
-	        SetBackground(item.m_skinHover.toggle, null);
-	        SetButtonFontSize(item.m_skinHover.button);
-	        SetButtonFontSize(item.m_skinHover.toggle);
-	        RemoveMargins(item.m_skinHover.button);
-	        RemoveMargins(item.m_skinHover.toggle);
-	        SetTextColor(item.m_skinHover.button, Color.yellow);
-	        SetTextColor(item.m_skinHover.toggle, Color.yellow);
-	
-	        SetBackground(item.m_skinSelected.button, item.m_textureSelectedBackground);
-	        SetBackground(item.m_skinSelected.toggle, item.m_textureSelectedBackground);
-	        SetButtonFontSize(item.m_skinSelected.button);
-	        SetButtonFontSize(item.m_skinSelected.toggle);
-	        RemoveMargins(item.m_skinSelected.button);
-	        RemoveMargins(item.m_skinSelected.toggle);
-	        SetTextColor(item.m_skinSelected.button, Color.yellow);
-	        SetTextColor(item.m_skinSelected.toggle, Color.yellow);
-	
-	        SetBackground(item.m_skinUnselected.button, null);
-	        SetBackground(item.m_skinUnselected.toggle, null);
-	        SetButtonFontSize(item.m_skinUnselected.button);
-	        SetButtonFontSize(item.m_skinUnselected.toggle);
-	        RemoveMargins(item.m_skinUnselected.button);
-	        RemoveMargins(item.m_skinUnselected.toggle);
-	        SetTextColor(item.m_skinUnselected.button, Color.white);
-	        SetTextColor(item.m_skinUnselected.toggle, Color.white);
-    	}
+
+            SetBackground(item.m_skinHover.button, null);
+            SetBackground(item.m_skinHover.toggle, null);
+            SetButtonFontSize(item.m_skinHover.button);
+            SetButtonFontSize(item.m_skinHover.toggle);
+            RemoveMargins(item.m_skinHover.button);
+            RemoveMargins(item.m_skinHover.toggle);
+            SetTextColor(item.m_skinHover.button, Color.yellow);
+            SetTextColor(item.m_skinHover.toggle, Color.yellow);
+
+            SetBackground(item.m_skinSelected.button, item.m_textureSelectedBackground);
+            SetBackground(item.m_skinSelected.toggle, item.m_textureSelectedBackground);
+            SetButtonFontSize(item.m_skinSelected.button);
+            SetButtonFontSize(item.m_skinSelected.toggle);
+            RemoveMargins(item.m_skinSelected.button);
+            RemoveMargins(item.m_skinSelected.toggle);
+            SetTextColor(item.m_skinSelected.button, Color.yellow);
+            SetTextColor(item.m_skinSelected.toggle, Color.yellow);
+
+            SetBackground(item.m_skinUnselected.button, null);
+            SetBackground(item.m_skinUnselected.toggle, null);
+            SetButtonFontSize(item.m_skinUnselected.button);
+            SetButtonFontSize(item.m_skinUnselected.toggle);
+            RemoveMargins(item.m_skinUnselected.button);
+            RemoveMargins(item.m_skinUnselected.toggle);
+            SetTextColor(item.m_skinUnselected.button, Color.white);
+            SetTextColor(item.m_skinUnselected.toggle, Color.white);
+        }
     }
 
-	static void SetBackground(GUIStyle style, Texture2D texture)
-	{
-		style.active.background = texture;
-		style.focused.background = texture;
-		style.hover.background = texture;
-		style.normal.background = texture;
-		style.onActive.background = texture;
-		style.onFocused.background = texture;
-		style.onHover.background = texture;
-		style.onNormal.background = texture;
-	}
-	
-	static void SetTextColor(GUIStyle style, Color color)
-	{
-		style.active.textColor = color;
-		style.focused.textColor = color;
-		style.hover.textColor = color;
-		style.normal.textColor = color;
-		style.onActive.textColor = color;
-		style.onFocused.textColor = color;
-		style.onHover.textColor = color;
-		style.onNormal.textColor = color;
-	}
-	
-	static void RemoveMargins(GUIStyle style)
-	{
-		style.margin.bottom = 0;
-		style.margin.left = 0;
-		style.margin.right = 0;
-		style.margin.top = 0;
-	}
+    static void SetBackground(GUIStyle style, Texture2D texture)
+    {
+        style.active.background = texture;
+        style.focused.background = texture;
+        style.hover.background = texture;
+        style.normal.background = texture;
+        style.onActive.background = texture;
+        style.onFocused.background = texture;
+        style.onHover.background = texture;
+        style.onNormal.background = texture;
+    }
+
+    static void SetTextColor(GUIStyle style, Color color)
+    {
+        style.active.textColor = color;
+        style.focused.textColor = color;
+        style.hover.textColor = color;
+        style.normal.textColor = color;
+        style.onActive.textColor = color;
+        style.onFocused.textColor = color;
+        style.onHover.textColor = color;
+        style.onNormal.textColor = color;
+    }
+
+    static void RemoveMargins(GUIStyle style)
+    {
+        style.margin.bottom = 0;
+        style.margin.left = 0;
+        style.margin.right = 0;
+        style.margin.top = 0;
+    }
 
     static void SetButtonFontSize(GUIStyle style)
     {
@@ -383,7 +384,7 @@ public class TreeViewInspector : Editor
         {
             needsRepainted = true;
         }
-        
+
         if (item.SelectedItem != m_lastSelectedItem)
         {
             m_lastSelectedItem = item.SelectedItem;
@@ -495,13 +496,13 @@ public class TreeViewInspector : Editor
                 item.SelectedItem.IsExpanded = isExpanded;
                 needsRepainted = true;
             }
-			bool isCheckBox = EditorGUILayout.Toggle("IsCheckBox:", item.SelectedItem.IsCheckBox);
+            bool isCheckBox = EditorGUILayout.Toggle("IsCheckBox:", item.SelectedItem.IsCheckBox);
             if (isCheckBox != item.SelectedItem.IsCheckBox)
             {
                 item.SelectedItem.IsCheckBox = isCheckBox;
                 needsRepainted = true;
             }
-			bool isChecked = EditorGUILayout.Toggle("IsChecked:", item.SelectedItem.IsChecked);
+            bool isChecked = EditorGUILayout.Toggle("IsChecked:", item.SelectedItem.IsChecked);
             if (isChecked != item.SelectedItem.IsChecked)
             {
                 item.SelectedItem.IsChecked = isChecked;
@@ -515,13 +516,14 @@ public class TreeViewInspector : Editor
             SceneView.RepaintAll();
         }
 
-		base.OnInspectorGUI();
+        base.OnInspectorGUI();
 
         if (item.DisplayInInspector)
-		{
-			EditorGUILayout.Separator();
+        {
+            EditorGUILayout.Separator();
             item.DisplayTreeView(TreeViewControl.DisplayTypes.NONE);
-			EditorGUILayout.Separator();
-		}
+            EditorGUILayout.Separator();
+        }
     }
 }
+#endif

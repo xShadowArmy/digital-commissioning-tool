@@ -7,6 +7,7 @@ using ApplicationFacade;
 using UnityEngine.UI;
 using ApplicationFacade.Warehouse;
 using ApplicationFacade.Application;
+using SystemFacade;
 
 public class QueueMenu : MonoBehaviour
 {
@@ -16,10 +17,12 @@ public class QueueMenu : MonoBehaviour
     public GameObject CanvasWarehouseItems;
     public Transform WalkTargets;
     public TestPascal Avatar;
+    public TextMeshProUGUI ButtonText;
     [HideInInspector]
     public DragItem ActiveItem;
     public GameObject DraggedItem;
     public ItemData SelectedItem;
+    public DialogMenu dialogMenu;
 
     private List<DragItem> QueueItems = new List<DragItem>();
 
@@ -35,6 +38,7 @@ public class QueueMenu : MonoBehaviour
     void Start()
     {
         selectionManager.ShelveSelected += SelectionManager_ShelveSelected;
+        dialogMenu.AmountConfirmedEvent += DialogEvent;
     }
     public void AddItemToQueue(ItemData itemData)
     {
@@ -55,6 +59,7 @@ public class QueueMenu : MonoBehaviour
     }
     public void ChangeQueueOrder()
     {
+        /*
         Avatar.WalkTrajectoryPoints.Clear();
         foreach (DragItem item in QueueItems)
         { 
@@ -62,21 +67,25 @@ public class QueueMenu : MonoBehaviour
             Avatar.WalkTrajectoryPoints.Add(walkTarget);
         }
         Avatar.UpdatePath();
+        */
     }
     public void OnClick()
     {
         if (ActiveItem != null)
         {
             Destroy(ActiveItem.gameObject);
+            ActiveItem.LinkedItem.ReturnItem();
             QueueItems.Remove(ActiveItem);
         }
         else
         {
             if (SelectedItem != null && !QueueItems.Exists(x => x.LinkedItem == SelectedItem))
             {
-                AddItemToQueue(SelectedItem);
+                dialogMenu.SelectedItem = SelectedItem;
+                dialogMenu.gameObject.SetActive(true);
             }
         }
+        ButtonText.transform.parent.gameObject.SetActive(false);
     }
     private void SelectionManager_ShelveSelected(GameObject selectedObject, bool active)
     {
@@ -84,15 +93,23 @@ public class QueueMenu : MonoBehaviour
         {
             ActiveItem.transform.GetComponentInChildren<Image>().color = Color.white;
             ActiveItem = null;
+            ButtonText.transform.parent.gameObject.SetActive(false);
         }
         if (active)
         {
             SelectedItem = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
+            ButtonText.text = StringResourceManager.LoadString("@AddItem");
+            ButtonText.transform.parent.gameObject.SetActive(true);
         }
         else
         {
             SelectedItem = null;
+            ButtonText.transform.parent.gameObject.SetActive(false);
         }
+    }
+    private void DialogEvent(DialogMenu dialog) 
+    {
+        AddItemToQueue(dialog.SelectedItem.RequestItem(dialog.Amount));
     }
     // Update is called once per frame
     void Update()

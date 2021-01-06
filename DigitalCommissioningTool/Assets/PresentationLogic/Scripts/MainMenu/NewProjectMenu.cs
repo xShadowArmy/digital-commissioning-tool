@@ -19,9 +19,21 @@ public class NewProjectMenu : MonoBehaviour
     }
     public void Continue()
     {
-        GameManager.CreateProject(InputField.GetComponent<TMP_InputField>().text);  
+        string input = InputField.GetComponent<TMP_InputField>().text;
+        foreach (ProjectData data in ProjectManager.ProjectList)
+        {
+            if (data.ProjectName.Equals(input))
+            {
+                Debug.Log("Projekt mit diesem Namen existiert bereits");
+                input = "";
+            }
+        }
+        if (!input.Equals(""))
+        {
+            GameManager.CreateProject(input);
+        }        
         gameObject.SetActive(false);
-        gameObject.transform.parent.Find("MainPanel").gameObject.SetActive(false);
+        gameObject.transform.parent.gameObject.SetActive(false);
         gameObject.transform.parent.Find("Background").gameObject.SetActive(false);
     }
 }

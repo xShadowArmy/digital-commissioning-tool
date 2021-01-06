@@ -29,18 +29,11 @@ public class OpenProjectMenu : MonoBehaviour
 
     void loadProjects()
     {
-        //Manually add prebuild example scene
-        projectName.GetComponent<TextMeshProUGUI>().text = "Example scene";
-        projects.Add("Example scene");
-        GameObject exampleScene = Instantiate(template);
-        exampleScene.transform.SetParent(template.transform.parent);
-        exampleScene.SetActive(true);
-
         string[] paths = Directory.GetFiles(Paths.ProjectsPath, "*.prj");
 
-        foreach( ProjectData data in ProjectManager.ProjectList )
+        foreach (ProjectData data in ProjectManager.ProjectList)
         {
-            projects.Add( data.ProjectName );
+            projects.Add(data.ProjectName);
             projectName.GetComponent<TextMeshProUGUI>().text = data.ProjectName;
             projectPath.GetComponent<TextMeshProUGUI>().text = data.ProjectPath;
             projectCreated.GetComponent<TextMeshProUGUI>().text = data.DateCreated.ToString("dd/MM/yyyy");
@@ -73,19 +66,13 @@ public class OpenProjectMenu : MonoBehaviour
     }
     public void OnClick(GameObject sender)
     {
-        int index = sender.transform.GetSiblingIndex() - 1;
+        int index = sender.transform.GetSiblingIndex()-1;
         UnloadScenes();
-        //prebuild example scene
-        if (index == 0)
-        {
-            SceneManager.LoadScene("WarehouseWithMOSIM", LoadSceneMode.Additive);
-        }
-        else
-        {
-            GameManager.CloseProject();
-            QueuedScene = index;
-            SceneManager.LoadScene("DefaultWarehouse", LoadSceneMode.Additive);
-        }
+
+        GameManager.CloseProject();
+        QueuedScene = index;
+        SceneManager.LoadScene("DefaultWarehouse", LoadSceneMode.Additive);
+
         GameObject[] gameObjects = SceneManager.GetSceneByName("MainMenu").GetRootGameObjects();
         foreach (GameObject g in gameObjects)
         {

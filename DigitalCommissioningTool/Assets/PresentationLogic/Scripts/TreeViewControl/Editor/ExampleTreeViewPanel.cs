@@ -1,3 +1,4 @@
+#if (UNITY_EDITOR)
 using UnityEditor;
 using UnityEngine;
 
@@ -75,3 +76,4 @@ public class ExampleTreeViewPanel : EditorWindow
         m_treeViewControl.DisplayTreeView(TreeViewControl.DisplayTypes.USE_SCROLL_VIEW);
     }
 }
+#endif

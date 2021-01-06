@@ -99,4 +99,13 @@
     <xs:string xs:name="Queue" xs:id="33">
         <xs:value>Queue</xs:value>
     </xs:string>
+    <xs:string xs:name="Confirm" xs:id="34">
+        <xs:value>Bestätigen</xs:value>
+    </xs:string>
+    <xs:string xs:name="EnterAmount" xs:id="35">
+        <xs:value>Menge eingeben:</xs:value>
+    </xs:string>
+    <xs:string xs:name="Amount" xs:id="36">
+        <xs:value>Menge</xs:value>
+    </xs:string>
 </xs:StringResources>

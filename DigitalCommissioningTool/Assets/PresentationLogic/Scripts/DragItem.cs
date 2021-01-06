@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using ApplicationFacade.Warehouse;
+using SystemFacade;
+
 public class DragItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler,IPointerEnterHandler
 {
     public QueueMenu QueueMenu;
@@ -23,7 +25,7 @@ public class DragItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        LinkedItem.Object.transform.SetSiblingIndex(transform.GetSiblingIndex()-1);
+        //LinkedItem.Object.transform.SetSiblingIndex(transform.GetSiblingIndex()-1);
         QueueMenu.ChangeQueueOrder();
         transform.GetComponentInChildren<Image>().color = Color.white;
         QueueMenu.DraggedItem = null;
@@ -43,6 +45,8 @@ public class DragItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
             QueueMenu.ActiveItem.transform.GetComponentInChildren<Image>().color = Color.white;
         }
         QueueMenu.ActiveItem = this;
+        QueueMenu.ButtonText.text = StringResourceManager.LoadString("@RemoveItem");
+        QueueMenu.ButtonText.transform.parent.gameObject.SetActive(true);
         transform.GetComponentInChildren<Image>().color = Color.gray;
     }
     // Start is called before the first frame update

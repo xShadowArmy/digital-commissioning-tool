@@ -5,49 +5,84 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class WarehouseItemMenu : MonoBehaviour
 {
     public GameObject ItemTemplate;
     public GameObject PanelEditItem;
     public GameObject PanelListItem;
-    private ItemData[] Stock;
-    private ItemData SelectedItem; 
+    private List<ItemData> Stock;
+    private ItemData SelectedItem;
     private ModeHandler ModeHandler;
     private GameObject SwitchModeButton;
+    void OnDestroy()
+    {
+        ItemData.StockChanged -= StockHasChanged;
+    }
     void Start()
     {
+        ItemData.StockChanged += StockHasChanged;
         replaceResources();
-        ItemData.AddItemToStock("M5 Schraube", 0.01);
-        ItemData.AddItemToStock("M5 Mutter", 0.002);
-        ItemData.AddItemToStock("Zündkerze", 0.05);
-        ItemData.AddItemToStock("Ölwanne", 6.2);
-        ItemData.AddItemToStock("Zahnriemen",  0.6);
-        ItemData.AddItemToStock("Zylinderkopf",  1.2);
-        ItemData.AddItemToStock("Antriebswelle", 1.7);
-        ItemData.AddItemToStock("Bremsschiebe",  1.0);
-        ItemData.AddItemToStock("Stoßdämpfer",  2.2);
-        ItemData.AddItemToStock("Luftfilter",  0.8);
-        ItemData.AddItemToStock("Radlager", 2.7);
-        ItemData.AddItemToStock("Katalysator", 5.3);
-        ItemData.AddItemToStock("Anlasser",  0.9);
-        ItemData.AddItemToStock("Turbolader", 2.4);
-        ItemData.AddItemToStock("Getriebe", 6.2);
-        ItemData.AddItemToStock("Reifen", 4);
-        Stock = ItemData.GetStock;
+        //ItemData.AddItemToStock("M5 Schraube", 0.01);
+        //ItemData.AddItemToStock("M5 Mutter", 0.002);
+        //ItemData.AddItemToStock("Zündkerze", 0.05);
+        //ItemData.AddItemToStock("Ölwanne", 6.2);
+        //ItemData.AddItemToStock("Zahnriemen",  0.6);
+        //ItemData.AddItemToStock("Zylinderkopf",  1.2);
+        //ItemData.AddItemToStock("Antriebswelle", 1.7);
+        //ItemData.AddItemToStock("Bremsschiebe",  1.0);
+        //ItemData.AddItemToStock("Stoßdämpfer",  2.2);
+        //ItemData.AddItemToStock("Luftfilter",  0.8);
+        //ItemData.AddItemToStock("Radlager", 2.7);
+        //ItemData.AddItemToStock("Katalysator", 5.3);
+        //ItemData.AddItemToStock("Anlasser",  0.9);
+        //ItemData.AddItemToStock("Turbolader", 2.4);
+        //ItemData.AddItemToStock("Getriebe", 6.2);
+        //ItemData.AddItemToStock("Reifen", 4);
+        Stock = ItemData.GetStock.OfType<ItemData>().ToList();
         foreach (ItemData item in Stock)
         {
-            ItemTemplate.transform.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
-            ItemTemplate.transform.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
-            ItemTemplate.transform.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
-            GameObject field = Instantiate(ItemTemplate, ItemTemplate.transform.parent);
-            field.SetActive(true);
+            AddItemToList(item);
             //item.ItemChanged += ItemHasChanged;
         }
         updateSize();
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
     }
+    private void AddItemToList(ItemData item)
+    {
+        ItemTemplate.transform.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
+        ItemTemplate.transform.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
+        ItemTemplate.transform.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
+        GameObject field = Instantiate(ItemTemplate, ItemTemplate.transform.parent);
+        field.SetActive(true);
+    }
+    private void StockHasChanged(ItemData item)
+    {
+        int index = Stock.IndexOf(item);
+        if (index >= 0)
+        {
+            Transform field = ItemTemplate.transform.parent.GetChild(index + 1);
+            if (item.IsStockItem)
+            {
+                field.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
+                field.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
+                field.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
+            }
+            else
+            {
+                Stock.RemoveAt(index);
+                Destroy(field);
+            }
+        }
+        else
+        {
+            Stock.Add(item);
+            AddItemToList(item);
+        }
+    }
+
     private string weightToString(double weight)
     {
         if (weight >= 1)
@@ -59,9 +94,9 @@ public class WarehouseItemMenu : MonoBehaviour
             return Math.Round(weight * 1000, 0).ToString() + "g";
         }
     }
-    private void updateSize() 
+    private void updateSize()
     {
-        float newHeight = System.Math.Max(161, 1+(Stock.Length+1) * 16);
+        float newHeight = System.Math.Max(161, 1 + (Stock.Count + 1) * 16);
         RectTransform contentBox = ItemTemplate.transform.parent.GetComponent<RectTransform>();
         contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
     }
@@ -113,11 +148,9 @@ public class WarehouseItemMenu : MonoBehaviour
         PanelListItem.SetActive(true);
         if (SelectedItem == null)
         {
-            ItemData.AddItemToStock( "." );
-
-            SelectedItem = ItemData.RequestStockItem( "." );
-            Array.Resize(ref Stock, Stock.Length + 1);
-            Stock[Stock.Length - 1] = SelectedItem;
+            ItemData.AddItemToStock(".");
+            SelectedItem = ItemData.RequestStockItem(".");
+            Stock[Stock.Count - 1] = SelectedItem;
             Instantiate(ItemTemplate, ItemTemplate.transform.parent).SetActive(true);
             updateSize();
         }
@@ -144,7 +177,7 @@ public class WarehouseItemMenu : MonoBehaviour
         {
             Debug.LogWarning("Eingabe ist nicht zulässig");
         }
-        Transform field = ItemTemplate.transform.parent.GetChild(Array.IndexOf(Stock, SelectedItem) + 1);
+        Transform field = ItemTemplate.transform.parent.GetChild(Stock.IndexOf(SelectedItem) + 1);
         field.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = SelectedItem.Name;
         field.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + SelectedItem.Count.ToString();
         field.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(SelectedItem.Weight);
