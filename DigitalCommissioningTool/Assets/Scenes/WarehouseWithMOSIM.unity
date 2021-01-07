@@ -2726,7 +2726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade73678985d7e74490a05934bd38e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUp: {fileID: 625379451}
   addWindowText: {fileID: 711382086}
   addDoorText: {fileID: 125062067}
   addWallText: {fileID: 289976448}
@@ -2744,10 +2743,11 @@ MonoBehaviour:
     type: 3}
   EditorModeCamera: {fileID: 306542203}
   ObjectSpawn: {fileID: 1649776375}
+  popUp: {fileID: 625379451}
+  myText: {fileID: 2028524090}
   mask:
     serializedVersion: 2
     m_Bits: 512
-  myText: {fileID: 2028524090}
 --- !u!4 &81356351
 Transform:
   m_ObjectHideFlags: 0
@@ -12769,7 +12769,7 @@ GameObject:
   - component: {fileID: 580274405}
   - component: {fileID: 580274404}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextEditorModeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14218,6 +14218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorModeCamera: {fileID: 306542200}
   MosimCamera: {fileID: 2009497078}
+  SelectionManager: {fileID: 0}
 --- !u!114 &632686007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20837,7 +20838,7 @@ GameObject:
   - component: {fileID: 909122731}
   - component: {fileID: 909122730}
   m_Layer: 5
-  m_Name: Button
+  m_Name: AddStorageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22401,6 +22402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorModeCamera: {fileID: 306542200}
   MosimCamera: {fileID: 2009497078}
+  SelectionManager: {fileID: 0}
 --- !u!1001 &969444690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24341,7 +24343,7 @@ GameObject:
   - component: {fileID: 1112047374}
   - component: {fileID: 1112047373}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextMOSIMModeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27385,6 +27387,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796248801612656462, guid: 509f7967403ea1f4f91eadb138dded4e,
+        type: 3}
+      propertyPath: m_Name
+      value: TextAddInnerWallButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 509f7967403ea1f4f91eadb138dded4e, type: 3}
@@ -36525,7 +36532,7 @@ GameObject:
   - component: {fileID: 1683388530}
   - component: {fileID: 1683388529}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextSwitchModeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37070,7 +37077,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkTrajectory: {fileID: 0}
   WalkTrajectoryTarget: {fileID: 0}
-  WalkTrajectoryPoints: {fileID: 0}
+  WalkTrajectoryPoints:
+  - {fileID: 0}
   StorageRack: {fileID: 1739668042}
 --- !u!114 &1699543463
 MonoBehaviour:
@@ -42379,7 +42387,7 @@ GameObject:
   - component: {fileID: 2016557229}
   - component: {fileID: 2016557231}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextAddStorageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44557,6 +44565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorModeCamera: {fileID: 306542200}
   MosimCamera: {fileID: 2009497078}
+  SelectionManager: {fileID: 0}
 --- !u!1001 &2077508773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45093,15 +45102,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 0}
-  isDragging: 0
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 0
   mask:
     serializedVersion: 2
     m_Bits: 0
-  collision: 0
-  onObject: 0
   material1: {fileID: 0}
   material2: {fileID: 0}
 --- !u!65 &2111836331
@@ -46086,15 +46092,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 0}
-  isDragging: 0
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 0
   mask:
     serializedVersion: 2
     m_Bits: 0
-  collision: 0
-  onObject: 0
   material1: {fileID: 0}
   material2: {fileID: 0}
 --- !u!65 &2145446676

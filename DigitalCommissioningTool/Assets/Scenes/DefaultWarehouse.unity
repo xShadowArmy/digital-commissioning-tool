@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 11852765}
   - component: {fileID: 11852764}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 48101959}
   - component: {fileID: 48101958}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextAddWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 49259619}
   - component: {fileID: 49259618}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCloseQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -808,7 +808,7 @@ GameObject:
   - component: {fileID: 58434816}
   - component: {fileID: 58434815}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: ScrollViewListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,7 +914,7 @@ GameObject:
   - component: {fileID: 66245154}
   - component: {fileID: 66245153}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: PlaceholderIFWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 68558324}
   - component: {fileID: 68558323}
   m_Layer: 5
-  m_Name: Header
+  m_Name: HeaderQueue
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1146,7 +1146,7 @@ GameObject:
   - component: {fileID: 88147699}
   - component: {fileID: 88147698}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextSaveItemButton
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1279,7 +1279,7 @@ GameObject:
   - component: {fileID: 107709018}
   - component: {fileID: 107709017}
   m_Layer: 5
-  m_Name: Items
+  m_Name: ItemsQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1494,7 +1494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144851590}
   m_Layer: 5
-  m_Name: CloseHeader
+  m_Name: CloseHeaderDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1533,7 +1533,7 @@ GameObject:
   - component: {fileID: 147107258}
   - component: {fileID: 147107257}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1668,7 +1668,7 @@ GameObject:
   - component: {fileID: 167556275}
   - component: {fileID: 167556274}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Text_AddWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1887,7 +1887,7 @@ GameObject:
   - component: {fileID: 204063706}
   - component: {fileID: 204063705}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCloseEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2020,7 +2020,7 @@ GameObject:
   - component: {fileID: 206796488}
   - component: {fileID: 206796487}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCloseTreeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2099,7 +2099,7 @@ GameObject:
   - component: {fileID: 225275389}
   - component: {fileID: 225275388}
   m_Layer: 5
-  m_Name: NameText
+  m_Name: NameTextFieldEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2273,7 +2273,7 @@ GameObject:
   - component: {fileID: 236811118}
   - component: {fileID: 236811117}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2422,7 +2422,7 @@ GameObject:
   - component: {fileID: 239371500}
   - component: {fileID: 239371499}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP)EditItem
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2593,7 +2593,7 @@ GameObject:
   - component: {fileID: 262817063}
   - component: {fileID: 262817062}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextAddStorageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2672,7 +2672,7 @@ GameObject:
   - component: {fileID: 274395322}
   - component: {fileID: 274395321}
   m_Layer: 5
-  m_Name: Header
+  m_Name: HeaderListItem
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2826,7 +2826,7 @@ GameObject:
   - component: {fileID: 276518988}
   - component: {fileID: 276518986}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: InputFieldDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3005,7 +3005,7 @@ GameObject:
   - component: {fileID: 287959379}
   - component: {fileID: 287959378}
   m_Layer: 5
-  m_Name: WeightText
+  m_Name: WeightTextFieldEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3268,7 +3268,7 @@ GameObject:
   - component: {fileID: 323879299}
   - component: {fileID: 323879300}
   m_Layer: 5
-  m_Name: Text Area
+  m_Name: TextAreaWeightEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3319,7 +3319,7 @@ GameObject:
   - component: {fileID: 324820605}
   - component: {fileID: 324820604}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCloseWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3477,7 +3477,7 @@ GameObject:
   - component: {fileID: 329804413}
   - component: {fileID: 329804412}
   m_Layer: 5
-  m_Name: WeightText
+  m_Name: WeightItemText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3610,7 +3610,7 @@ GameObject:
   - component: {fileID: 344959680}
   - component: {fileID: 344959679}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCloseDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3741,7 +3741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 358926368}
   m_Layer: 5
-  m_Name: Sliding Area
+  m_Name: SlidingAreaQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4015,7 +4015,7 @@ GameObject:
   - component: {fileID: 384816710}
   - component: {fileID: 384816709}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextWeightEditItem
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4166,7 +4166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 390193869}
   m_Layer: 5
-  m_Name: Name
+  m_Name: NameItemQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4240,7 +4240,7 @@ GameObject:
   - component: {fileID: 398523789}
   - component: {fileID: 398523788}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4387,7 +4387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 399529370}
   m_Layer: 5
-  m_Name: Name
+  m_Name: NameItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4425,7 +4425,7 @@ GameObject:
   - component: {fileID: 401292927}
   - component: {fileID: 401292926}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextNameTextfieldEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4703,7 +4703,7 @@ GameObject:
   - component: {fileID: 404528415}
   - component: {fileID: 404528416}
   m_Layer: 5
-  m_Name: Text Area
+  m_Name: TextAreaDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4749,6 +4749,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 256267710}
     m_Modifications:
+    - target: {fileID: 8514242607450242869, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: TextHeadingScaleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242607624462056, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: PanelScaleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242608276206621, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: InputFieldScaleWall
+      objectReference: {fileID: 0}
     - target: {fileID: 8514242608543160120, guid: 99a80f998b86df84faeae8a8b26c11e1,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4758,6 +4773,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnScaleWallButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242608552152788, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: HeadingPanelScaleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242608613050616, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: TextOkScaleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242608845230171, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: TextInputFieldScaleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242609348701125, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: TextScaleWall
       objectReference: {fileID: 0}
     - target: {fileID: 8514242609414893131, guid: 99a80f998b86df84faeae8a8b26c11e1,
         type: 3}
@@ -4869,6 +4904,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasScaleWall
       objectReference: {fileID: 0}
+    - target: {fileID: 8514242609416754157, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: CloseScaleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514242609449077799, guid: 99a80f998b86df84faeae8a8b26c11e1,
+        type: 3}
+      propertyPath: m_Name
+      value: PlaceholderScaleWall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99a80f998b86df84faeae8a8b26c11e1, type: 3}
 --- !u!1 &413774660
@@ -4944,7 +4989,7 @@ GameObject:
   - component: {fileID: 426292960}
   - component: {fileID: 426292961}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: PlaceholderIFDialog
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5097,7 +5142,7 @@ GameObject:
   - component: {fileID: 448801597}
   - component: {fileID: 448801596}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelTreeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5294,7 +5339,7 @@ GameObject:
   - component: {fileID: 559955369}
   - component: {fileID: 559955368}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP)QueueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5428,7 +5473,7 @@ GameObject:
   - component: {fileID: 561962111}
   - component: {fileID: 561962110}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: ViewportQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5517,7 +5562,7 @@ GameObject:
   - component: {fileID: 563206024}
   - component: {fileID: 563206023}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: PlaceholderNameEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5669,7 +5714,7 @@ GameObject:
   - component: {fileID: 571259381}
   - component: {fileID: 571259382}
   m_Layer: 5
-  m_Name: Text Area
+  m_Name: TextAreaCountEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5854,7 +5899,7 @@ GameObject:
   - component: {fileID: 597320210}
   - component: {fileID: 597320209}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextIFDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5987,7 +6032,7 @@ GameObject:
   - component: {fileID: 604650268}
   - component: {fileID: 604650267}
   m_Layer: 5
-  m_Name: CountText
+  m_Name: CountItemQueueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6151,7 +6196,7 @@ GameObject:
   - component: {fileID: 655421743}
   - component: {fileID: 655421742}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: PlaceholderWeightEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6558,7 +6603,7 @@ GameObject:
   - component: {fileID: 739468205}
   - component: {fileID: 739468204}
   m_Layer: 5
-  m_Name: Items
+  m_Name: ItemsListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6653,7 +6698,7 @@ GameObject:
   - component: {fileID: 760771429}
   - component: {fileID: 760771430}
   m_Layer: 5
-  m_Name: Count
+  m_Name: CountEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6729,7 +6774,7 @@ GameObject:
   - component: {fileID: 776924026}
   - component: {fileID: 776924025}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP)CButton
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6943,7 +6988,7 @@ GameObject:
   - component: {fileID: 797337488}
   - component: {fileID: 797337487}
   m_Layer: 5
-  m_Name: Scrollbar Vertical
+  m_Name: ScrollbarVerticalQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7011,7 +7056,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2095818128}
   m_HandleRect: {fileID: 2095818127}
   m_Direction: 2
-  m_Value: 0.9999992
+  m_Value: 1.0000007
   m_Size: 0.8888889
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7064,7 +7109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 809535046}
   m_Layer: 5
-  m_Name: Count
+  m_Name: CountItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7102,7 +7147,7 @@ GameObject:
   - component: {fileID: 842231728}
   - component: {fileID: 842231727}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextIFWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7247,7 +7292,7 @@ GameObject:
   - component: {fileID: 849094258}
   - component: {fileID: 849094257}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCountEditItem
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7401,7 +7446,7 @@ GameObject:
   - component: {fileID: 860347637}
   - component: {fileID: 860347636}
   m_Layer: 5
-  m_Name: EditButton
+  m_Name: EditItemButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7645,6 +7690,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1796248801612656462, guid: 509f7967403ea1f4f91eadb138dded4e,
+        type: 3}
+      propertyPath: m_Name
+      value: TextAddInnerWallButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 509f7967403ea1f4f91eadb138dded4e, type: 3}
 --- !u!1 &903965452
@@ -7657,7 +7707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 903965453}
   m_Layer: 5
-  m_Name: Count
+  m_Name: CountItemQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7696,7 +7746,7 @@ GameObject:
   - component: {fileID: 953142883}
   - component: {fileID: 953142882}
   m_Layer: 5
-  m_Name: Content
+  m_Name: ContentListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7795,7 +7845,7 @@ GameObject:
   - component: {fileID: 959204042}
   - component: {fileID: 959204043}
   m_Layer: 5
-  m_Name: Projects
+  m_Name: ProjectsListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7851,7 +7901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963737958}
   m_Layer: 5
-  m_Name: CloseHeader
+  m_Name: CloseHeaderQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8204,7 +8254,7 @@ GameObject:
   - component: {fileID: 979873471}
   - component: {fileID: 979873470}
   m_Layer: 5
-  m_Name: CountText
+  m_Name: CountItemText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8357,7 +8407,7 @@ GameObject:
   - component: {fileID: 1020288640}
   - component: {fileID: 1020288639}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8575,7 +8625,7 @@ GameObject:
   - component: {fileID: 1026960945}
   - component: {fileID: 1026960944}
   m_Layer: 5
-  m_Name: Ok
+  m_Name: OkWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8693,7 +8743,7 @@ GameObject:
   - component: {fileID: 1030623880}
   - component: {fileID: 1030623879}
   m_Layer: 5
-  m_Name: Header
+  m_Name: HeaderWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8866,35 +8916,70 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6003319288637385503, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Icon_Title0_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6003319288726500776, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003319288726500776, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Icon_Title2_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6003319289631142355, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6003319289631142355, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Icon_Title1_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6003624120351807427, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003624120351807427, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Column_Title0_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6003624120430430580, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6003624120430430580, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Column_Title2_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6003624121538497807, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003624121538497807, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Column_Title1_TimeMessurement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004066476174506421, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6004066476174506421, guid: bf46598a93826954a827338951359ed6,
         type: 3}
-      propertyPath: m_Layer
-      value: 5
+      propertyPath: m_Name
+      value: Text_Title1_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6004066477445735289, guid: bf46598a93826954a827338951359ed6,
         type: 3}
@@ -8906,55 +8991,110 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6004066477445735289, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Text_Title0_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6004066477484522958, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004066477484522958, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Text_Title2_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6004165208709330989, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6004165208709330989, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Outline_Title1_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6004165209879297110, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004165209879297110, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Outline_Title2_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6004165209922298593, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6004165209922298593, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Outline_Title0_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6004328604067291854, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004328604067291854, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: SortModeIcon_Title2_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6004328604158508153, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6004328604158508153, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: SortModeIcon_Title0_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6004328605110773429, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004328605110773429, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: SortModeIcon_Title1_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6004372837957983412, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6004372837957983412, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Content_Title2_TimeMessurement
+      objectReference: {fileID: 0}
     - target: {fileID: 6004372838013534723, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004372838013534723, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: Content_Title0_TimeMessurement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004372838989994191, guid: bf46598a93826954a827338951359ed6,
         type: 3}
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6004372838989994191, guid: bf46598a93826954a827338951359ed6,
         type: 3}
-      propertyPath: m_Layer
-      value: 5
+      propertyPath: m_Name
+      value: Content_Title1_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6005049770020802192, guid: bf46598a93826954a827338951359ed6,
         type: 3}
@@ -9110,6 +9250,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005049771190036246, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: HeaderRow_TimeMessurement
       objectReference: {fileID: 0}
     - target: {fileID: 6005049771190036247, guid: bf46598a93826954a827338951359ed6,
         type: 3}
@@ -9319,6 +9464,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6005049771325663417, guid: bf46598a93826954a827338951359ed6,
+        type: 3}
+      propertyPath: m_Name
+      value: TableTimeMessurements
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf46598a93826954a827338951359ed6, type: 3}
 --- !u!1 &1042423522
@@ -9333,7 +9483,7 @@ GameObject:
   - component: {fileID: 1042423525}
   - component: {fileID: 1042423524}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCountTextfieldEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9580,7 +9730,7 @@ GameObject:
   - component: {fileID: 1053533034}
   - component: {fileID: 1053533033}
   m_Layer: 5
-  m_Name: NameText
+  m_Name: NameItemTextQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9741,7 +9891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066468307}
   m_Layer: 5
-  m_Name: Weight
+  m_Name: WeightItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9916,7 +10066,7 @@ GameObject:
   - component: {fileID: 1111773887}
   - component: {fileID: 1111773886}
   m_Layer: 5
-  m_Name: CountText
+  m_Name: CountTextFieldEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10117,7 +10267,7 @@ GameObject:
   - component: {fileID: 1137715183}
   - component: {fileID: 1137715184}
   m_Layer: 5
-  m_Name: Input
+  m_Name: InputDialog
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10210,7 +10360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1171689380}
   m_Layer: 5
-  m_Name: CloseHeader
+  m_Name: CloseHeaderEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10542,7 +10692,7 @@ GameObject:
   - component: {fileID: 1195202747}
   - component: {fileID: 1195202746}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: ScrollViewQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10649,7 +10799,7 @@ GameObject:
   - component: {fileID: 1198199895}
   - component: {fileID: 1198199894}
   m_Layer: 5
-  m_Name: Scrollbar Vertical
+  m_Name: ScrollbarVerticalListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10717,7 +10867,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1905456114}
   m_HandleRect: {fileID: 1905456113}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -10772,7 +10922,7 @@ GameObject:
   - component: {fileID: 1205863015}
   - component: {fileID: 1205863014}
   m_Layer: 5
-  m_Name: NameText
+  m_Name: NameItemText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11053,7 +11203,7 @@ GameObject:
   - component: {fileID: 1236428945}
   - component: {fileID: 1236428944}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ARButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11405,7 +11555,7 @@ GameObject:
   - component: {fileID: 1280794769}
   - component: {fileID: 1280794770}
   m_Layer: 5
-  m_Name: Name
+  m_Name: NameEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11469,7 +11619,7 @@ GameObject:
   - component: {fileID: 1285515228}
   - component: {fileID: 1285515227}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextWeightTextfieldEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11719,7 +11869,7 @@ GameObject:
   - component: {fileID: 1340003185}
   - component: {fileID: 1340003184}
   m_Layer: 5
-  m_Name: Header
+  m_Name: HeaderEditItem
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12117,7 +12267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade73678985d7e74490a05934bd38e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUp: {fileID: 1247279067}
   addWindowText: {fileID: 48101958}
   addDoorText: {fileID: 1450561520}
   addWallText: {fileID: 167556274}
@@ -12135,10 +12284,11 @@ MonoBehaviour:
     type: 3}
   EditorModeCamera: {fileID: 1021631627}
   ObjectSpawn: {fileID: 1061017907}
+  popUp: {fileID: 1247279067}
+  myText: {fileID: 11852764}
   mask:
     serializedVersion: 2
     m_Bits: 512
-  myText: {fileID: 11852764}
 --- !u!4 &1393590794
 Transform:
   m_ObjectHideFlags: 0
@@ -12215,7 +12365,7 @@ GameObject:
   - component: {fileID: 1450561521}
   - component: {fileID: 1450561520}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextAddDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12294,7 +12444,7 @@ GameObject:
   - component: {fileID: 1481893433}
   - component: {fileID: 1481893432}
   m_Layer: 5
-  m_Name: Content
+  m_Name: ContentQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12428,7 +12578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1493134420}
   m_Layer: 5
-  m_Name: AdditionalInfo
+  m_Name: AdditionalInfoItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12469,7 +12619,7 @@ GameObject:
   - component: {fileID: 1500352311}
   - component: {fileID: 1500352310}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: ViewportListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12660,7 +12810,7 @@ GameObject:
   - component: {fileID: 1542329531}
   - component: {fileID: 1542329530}
   m_Layer: 5
-  m_Name: Item Background
+  m_Name: ItemBackgroundQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12740,7 +12890,7 @@ GameObject:
   - component: {fileID: 1583422581}
   - component: {fileID: 1583422580}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCloseListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13224,7 +13374,7 @@ GameObject:
   - component: {fileID: 1616604366}
   - component: {fileID: 1616604365}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text (TMP)ARButton
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13465,7 +13615,7 @@ GameObject:
   - component: {fileID: 1694743688}
   - component: {fileID: 1694743689}
   m_Layer: 5
-  m_Name: Text Area
+  m_Name: TextAreaNameEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13560,7 +13710,7 @@ GameObject:
   - component: {fileID: 1724764765}
   - component: {fileID: 1724764764}
   m_Layer: 5
-  m_Name: Item
+  m_Name: ItemQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13929,7 +14079,7 @@ GameObject:
   - component: {fileID: 1753428080}
   - component: {fileID: 1753428081}
   m_Layer: 5
-  m_Name: Projects
+  m_Name: ProjectsQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14018,7 +14168,7 @@ GameObject:
   - component: {fileID: 1817100425}
   - component: {fileID: 1817100424}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: PlaceholderCountEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14172,7 +14322,7 @@ GameObject:
   - component: {fileID: 1863076893}
   - component: {fileID: 1863076895}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14277,7 +14427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1893726972}
   m_Layer: 5
-  m_Name: CloseHeader
+  m_Name: CloseHeaderListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14315,7 +14465,7 @@ GameObject:
   - component: {fileID: 1905456115}
   - component: {fileID: 1905456114}
   m_Layer: 5
-  m_Name: Handle
+  m_Name: HandleListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14619,7 +14769,7 @@ GameObject:
   - component: {fileID: 1969042983}
   - component: {fileID: 1969042982}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextNameEditItem
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15147,7 +15297,7 @@ GameObject:
   - component: {fileID: 2014848983}
   - component: {fileID: 2014848982}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: InputFieldWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15286,7 +15436,7 @@ GameObject:
   - component: {fileID: 2024512449}
   - component: {fileID: 2024512448}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextOkWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15397,7 +15547,7 @@ GameObject:
   - component: {fileID: 2043770398}
   - component: {fileID: 2043770397}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15544,7 +15694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049253171}
   m_Layer: 5
-  m_Name: Sliding Area
+  m_Name: SlidingAreaListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15583,7 +15733,7 @@ GameObject:
   - component: {fileID: 2065023535}
   - component: {fileID: 2065023534}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseTreeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15712,7 +15862,7 @@ GameObject:
   - component: {fileID: 2073010407}
   - component: {fileID: 2073010406}
   m_Layer: 5
-  m_Name: EnterAmount
+  m_Name: EnterAmountDialog
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15845,7 +15995,7 @@ GameObject:
   - component: {fileID: 2095818129}
   - component: {fileID: 2095818128}
   m_Layer: 5
-  m_Name: Handle
+  m_Name: HandleQueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15921,7 +16071,7 @@ GameObject:
   - component: {fileID: 2097019710}
   - component: {fileID: 2097019709}
   m_Layer: 5
-  m_Name: Button
+  m_Name: AddStorageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16064,7 +16214,7 @@ GameObject:
   - component: {fileID: 2108093840}
   - component: {fileID: 2108093839}
   m_Layer: 5
-  m_Name: Button
+  m_Name: SaveItemButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16215,7 +16365,7 @@ GameObject:
   - component: {fileID: 2114696299}
   - component: {fileID: 2114696298}
   m_Layer: 5
-  m_Name: Close
+  m_Name: CloseDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16364,7 +16514,7 @@ GameObject:
   - component: {fileID: 2119704397}
   - component: {fileID: 2119704396}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextSwitchModeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16441,7 +16591,7 @@ GameObject:
   - component: {fileID: 2127199226}
   - component: {fileID: 2127199227}
   m_Layer: 5
-  m_Name: Weight
+  m_Name: WeightEditItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
