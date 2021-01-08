@@ -20,49 +20,73 @@ public class TimeMeasurementHistory : MonoBehaviour
     {
         Timer.TimerReset -= OnTimerReset;
         Timer.TimerStopped -= OnTimerStopped;
-        projectManager.FinishLoad -= ProjectManagerOnFinishLoad;
-        projectManager.StartClose -= ProjectManagerOnStartClose;
+        GameManager.PManager.FinishLoad -= ProjectManagerOnFinishLoad;
+        GameManager.PManager.StartClose -= ProjectManagerOnStartClose;
+        GameManager.PManager.StartSave -= ProjectManagerOnStartSave;
+        GameManager.PManager.ProjectCreated -= ProjectManagerOnProjectCreated;
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
         ResourceHandler.ReplaceResources();
-        configManager = new ConfigManager();
-        configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
-
         Timer.TimerStopped += OnTimerStopped;
         Timer.TimerReset += OnTimerReset;
-        projectManager.FinishLoad += ProjectManagerOnFinishLoad;
-        projectManager.StartClose += ProjectManagerOnStartClose;
+        GameManager.PManager.FinishLoad += ProjectManagerOnFinishLoad;
+        GameManager.PManager.StartClose += ProjectManagerOnStartClose;
+        GameManager.PManager.StartSave += ProjectManagerOnStartSave;
+        GameManager.PManager.ProjectCreated += ProjectManagerOnProjectCreated;
+    }
+
+    private void ProjectManagerOnStartSave()
+    {
+        if (configManager != null)
+        {
+            configManager.Flush();
+        }
+    }
+
+    private void ProjectManagerOnProjectCreated()
+    {
+        Debug.Log("OnprojectCreated called");
+        configManager = new ConfigManager();
+        configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
     }
 
     private void ProjectManagerOnStartClose()
     {
-        configManager.CloseConfigFile();
+        Debug.Log("OnStartClose called");
+        if (configManager != null)
+        {
+            configManager.AutoFlush = false;
+            configManager.CloseConfigFile();
+        }
     }
 
     private void ProjectManagerOnFinishLoad()
     {
-        for (int i = 0; i < 1000; i++)
+        Debug.Log("OnFinishLoad called");
+        configManager = new ConfigManager();
+        configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
+
+        for (int i = 1; i < 1000; i++)
         {
-            
             string key = "TimeMeasurement" + i;
             TimeMeasurementEntry temp = new TimeMeasurementEntry();
             if (configManager.LoadData(key) == null)
             {
                 break;
             }
-            
+
             configManager.LoadData(key, temp);
             timeMeasurementEntries.Add(temp);
             Debug.Log("OnFinishLoad, Index: " + temp.Index);
             AddItemToList(temp);
             currentIndex++;
         }
+
         UpdateSize();
         currentIndex++;
-        
     }
 
 
@@ -90,7 +114,6 @@ public class TimeMeasurementHistory : MonoBehaviour
         }
 
         configManager.StoreData("TimeMeasurement" + currentIndex, timeMeasurementEntry, true);
-
     }
 
     private void AddItemToList(TimeMeasurementEntry item)
@@ -101,7 +124,7 @@ public class TimeMeasurementHistory : MonoBehaviour
         GameObject field = Instantiate(TimeMeasurementRowTemplate, TimeMeasurementRowTemplate.transform.parent);
         field.SetActive(true);
     }
-    
+
     private void ChangeItemInList(TimeMeasurementEntry item)
     {
         Transform field = TimeMeasurementRowTemplate.transform.parent.GetChild(item.Index + 1);
@@ -116,10 +139,9 @@ public class TimeMeasurementHistory : MonoBehaviour
         RectTransform contentBox = TimeMeasurementRowTemplate.transform.parent.GetComponent<RectTransform>();
         contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
     }
-    
+
     // Update is called once per frame
     void Update()
     {
     }
-    
 }
