@@ -39,10 +39,30 @@ namespace ProjectComponents.FileIntegration
                 data.FullPath = nav.Value;
                 nav.MoveToNext( );
 
-                data.DateCreated = DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture );
-                nav.MoveToNext( );
+                try
+                {
+                    data.DateCreated = DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture );
+                    nav.MoveToNext( );
 
-                data.DateModified = DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture );
+                    data.DateModified = DateTime.ParseExact( nav.Value, "dd/MM/yyyy", CultureInfo.CurrentCulture );
+                }
+                
+                catch( Exception )
+                {
+                    try
+                    {
+                        data.DateCreated = DateTime.ParseExact( nav.Value, "dd.MM.yyyy", CultureInfo.CurrentCulture );
+                        nav.MoveToNext( );
+
+                        data.DateModified = DateTime.ParseExact( nav.Value, "dd.MM.yyyy", CultureInfo.CurrentCulture );
+                    }
+
+                    catch( Exception )
+                    {
+                        data.DateCreated  = DateTime.Now;
+                        data.DateModified = DateTime.Now;
+                    }
+                }
             }
 
             catch ( Exception e )

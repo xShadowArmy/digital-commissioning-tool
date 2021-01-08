@@ -41,6 +41,11 @@ namespace ApplicationFacade.Application
             {
                 ProjectData[] data = new ProjectData[Directory.GetFiles(Paths.ProjectsPath, "*.prj").Length];
 
+                if ( data.Length == 0 )
+                {
+                    return null;
+                }
+
                 for ( int i = 0; i < data.Length; i++ )
                 {
                     ArchiveManager.ExtractArchive( Directory.GetFiles(Paths.ProjectsPath)[i], Paths.TempPath );
@@ -173,8 +178,6 @@ namespace ApplicationFacade.Application
             SHandler = new SettingsHandler( );
             CHandler = new ContainerHandler( );
             IHandler = new StockHandler( );
-
-            Paths.ClearTempPath( );
 
             FinishClose?.Invoke( );
         }

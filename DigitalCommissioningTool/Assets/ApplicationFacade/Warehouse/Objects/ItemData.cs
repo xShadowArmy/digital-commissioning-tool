@@ -117,6 +117,7 @@ namespace ApplicationFacade.Warehouse
                 }
 
                 data.Count += itemCount;
+                Count      += itemCount;
             }
                         
             return true;
@@ -144,6 +145,7 @@ namespace ApplicationFacade.Warehouse
                 }
 
                 data.Count -= itemCount;
+                Count      -= itemCount;
             }
 
             return true;
@@ -204,7 +206,16 @@ namespace ApplicationFacade.Warehouse
                 IDRef = IDRef
             };
 
-            Count += count;
+            if ( ParentItem == null )
+            {
+                Count += count;
+            }
+
+            else
+            {
+                Count -= count;
+            }
+
             ChildItems.Add( data );
 
             return data;
@@ -236,9 +247,17 @@ namespace ApplicationFacade.Warehouse
                 IDRef = IDRef
             };
 
-            Count -= count;
+            if ( ParentItem == null )
+            {
+                Count += count;
+            }
 
-            data.ChangeGameObject( GameObject.Instantiate( Object ) );
+            else
+            {
+                Count -= count;
+            }
+
+            data.ChangeGameObject( GameObject.Instantiate( Object, Object.transform.parent ) );
 
             ChildItems.Add( data );
 
