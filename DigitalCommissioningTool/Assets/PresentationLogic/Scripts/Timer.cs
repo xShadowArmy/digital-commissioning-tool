@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private GameObject panelTimer;
     [SerializeField] private GameObject panelTimeMeasure;
 
-    public delegate void TimerEventHandler(float currentTime);
+    public delegate void TimerEventHandler(float currentTime, string buttonText);
 
     public static event TimerEventHandler TimerStopped;
     
@@ -81,14 +81,14 @@ public class Timer : MonoBehaviour
         timerBtn.text = clicked ? "Stop" : "Resume";
         if (timerBtn.text.Equals("Resume") && currentTime > 0)
         {
-            TimerStopped?.Invoke(currentTime);
+            TimerStopped?.Invoke(currentTime, timerBtn.text);
         }
     }
 
     //Wird von Rest Button referenziert
     public void Reset()
     {
-        TimerReset?.Invoke(currentTime);
+        TimerReset?.Invoke(currentTime, timerBtn.text);
         currentTime = 0;
         textBox.text = currentTime.ToString("F2");
         timerBtn.text = "Start";

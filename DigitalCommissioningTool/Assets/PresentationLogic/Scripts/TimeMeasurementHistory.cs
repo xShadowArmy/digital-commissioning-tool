@@ -27,7 +27,7 @@ public class TimeMeasurementHistory : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnValidate()
     {
         ResourceHandler.ReplaceResources();
         Timer.TimerStopped += OnTimerStopped;
@@ -48,14 +48,12 @@ public class TimeMeasurementHistory : MonoBehaviour
 
     private void ProjectManagerOnProjectCreated()
     {
-        Debug.Log("OnprojectCreated called");
         configManager = new ConfigManager();
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
     }
 
     private void ProjectManagerOnStartClose()
     {
-        Debug.Log("OnStartClose called");
         if (configManager != null)
         {
             configManager.AutoFlush = false;
@@ -65,7 +63,6 @@ public class TimeMeasurementHistory : MonoBehaviour
 
     private void ProjectManagerOnFinishLoad()
     {
-        Debug.Log("OnFinishLoad called");
         configManager = new ConfigManager();
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
 
@@ -90,15 +87,20 @@ public class TimeMeasurementHistory : MonoBehaviour
     }
 
 
-    private void OnTimerReset(float currentTime)
+    private void OnTimerReset(float currentTime, string buttonText)
     {
         if (currentTime > 0)
         {
+            if (buttonText.Equals("Stop"))
+            {
+                OnTimerStopped(currentTime, buttonText);
+            }
+            
             currentIndex++;
         }
     }
 
-    private void OnTimerStopped(float currentTime)
+    private void OnTimerStopped(float currentTime, string buttonText)
     {
         TimeMeasurementEntry timeMeasurementEntry = new TimeMeasurementEntry(currentIndex, DateTime.Now.ToString(), currentTime);
         if (currentIndex >= timeMeasurementEntries.Count)
