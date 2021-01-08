@@ -1,12 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:Config xs:dataCount="1" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
+<xs:Config xs:dataCount="2" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
     <xs:ComplexData xs:name="WarehouseItemListPosition" xs:id="1" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
             <xs:Property xs:type="Single" xs:value="0">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="328.03">
+            <xs:Property xs:type="Single" xs:value="206.53">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="1022">
+            <xs:Property xs:type="Single" xs:value="587.9999">
+            </xs:Property>
+        </xs:Values>
+    </xs:ComplexData>
+    <xs:ComplexData xs:name="TimeMeasurementHistoryListPosition" xs:id="2" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
+        <xs:Values xs:propertyCount="3">
+            <xs:Property xs:type="Single" xs:value="0">
+            </xs:Property>
+            <xs:Property xs:type="Single" xs:value="314,2314">
+            </xs:Property>
+            <xs:Property xs:type="Single" xs:value="158,9754">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>
