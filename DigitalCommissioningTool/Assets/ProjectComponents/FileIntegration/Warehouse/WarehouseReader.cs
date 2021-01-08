@@ -299,7 +299,7 @@ namespace ProjectComponents.FileIntegration
                     position = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
                 }
 
-                catch( Exception e )
+                catch( Exception )
                 {
                     x = x.Replace( ',', '.' );
                     y = y.Replace( ',', '.' );
@@ -319,7 +319,7 @@ namespace ProjectComponents.FileIntegration
                     rotation = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
                 }
 
-                catch ( Exception e )
+                catch ( Exception )
                 {
                     x = x.Replace( ',', '.' );
                     y = y.Replace( ',', '.' );
@@ -339,7 +339,7 @@ namespace ProjectComponents.FileIntegration
                     scale = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
                 }
 
-                catch ( Exception e )
+                catch ( Exception )
                 {
                     x = x.Replace( ',', '.' );
                     y = y.Replace( ',', '.' );

@@ -151,15 +151,18 @@ public class SelectionManager : MonoBehaviour
                 {
                     bool rayhit = Physics.Raycast(ray, out hit, 90.0f);
 
-                    if ( rayhit && hit.transform.tag.Contains("StorageBox") || hit.transform.CompareTag( "StorageContainer") )   //normaler physics ray cast, kann aber nicht UI elemente erkennen
+                    if ( rayhit && hit.transform != null )
                     {
-                        GameObject g1 = hit.transform.gameObject;
-                        OnShelveSelected(g1, true);
-                    }
-                    else
-                    {
-                        GameObject g1 = null;
-                        OnShelveSelected(g1, false);
+                        if ( hit.transform.tag.Contains("StorageBox") || hit.transform.CompareTag( "StorageContainer") )   //normaler physics ray cast, kann aber nicht UI elemente erkennen
+                        {
+                            GameObject g1 = hit.transform.gameObject;
+                            OnShelveSelected(g1, true);
+                        }
+                        else
+                        {
+                            GameObject g1 = null;
+                            OnShelveSelected(g1, false);
+                        }
                     }
                 }
 
