@@ -27,7 +27,7 @@ public class TimeMeasurementHistory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ResourceHandler.ReplaceResources();
+        ResourceHandler.ReplaceResources();
         configManager = new ConfigManager();
         projectManager = new ProjectManager();
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
