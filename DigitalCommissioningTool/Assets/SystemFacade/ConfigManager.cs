@@ -41,6 +41,11 @@ namespace SystemFacade
             {
                 return Handler.AutoFlush;
             }
+
+            set
+            {
+                Handler.AutoFlush = value;
+            }
         }
 
         /// <summary>

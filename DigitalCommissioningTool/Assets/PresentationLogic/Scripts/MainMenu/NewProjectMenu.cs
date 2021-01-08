@@ -20,14 +20,19 @@ public class NewProjectMenu : MonoBehaviour
     public void Continue()
     {
         string input = InputField.GetComponent<TMP_InputField>().text;
-        foreach (ProjectData data in ProjectManager.ProjectList)
+
+        if ( ProjectManager.ProjectList != null )
         {
-            if (data.ProjectName.Equals(input))
+            foreach (ProjectData data in ProjectManager.ProjectList)
             {
-                Debug.Log("Projekt mit diesem Namen existiert bereits");
-                input = "";
+                if (data.ProjectName.Equals(input))
+                {
+                    Debug.Log("Projekt mit diesem Namen existiert bereits");
+                    input = "";
+                }
             }
         }
+
         if (!input.Equals(""))
         {
             GameManager.CreateProject(input);

@@ -108,16 +108,16 @@
     <xs:string xs:name="Amount" xs:id="36">
         <xs:value>Amount</xs:value>
     </xs:string>
-	<xs:string xs:name="TimeMeasurements" xs:id="37">
+    <xs:string xs:name="TimeMeasurements" xs:id="37">
         <xs:value>Time Measurements</xs:value>
     </xs:string>
-	<xs:string xs:name="Index" xs:id="38">
+    <xs:string xs:name="Index" xs:id="38">
         <xs:value>Index</xs:value>
     </xs:string>
-	<xs:string xs:name="Date" xs:id="39">
+    <xs:string xs:name="Date" xs:id="39">
         <xs:value>Date</xs:value>
     </xs:string>
-	<xs:string xs:name="Duration" xs:id="40">
+    <xs:string xs:name="Duration" xs:id="40">
         <xs:value>Duration</xs:value>
     </xs:string>
 </xs:StringResources>

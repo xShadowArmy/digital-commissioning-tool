@@ -29,7 +29,6 @@ public class TimeMeasurementHistory : MonoBehaviour
     {
         ResourceHandler.ReplaceResources();
         configManager = new ConfigManager();
-        projectManager = new ProjectManager();
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
 
         Timer.TimerStopped += OnTimerStopped;

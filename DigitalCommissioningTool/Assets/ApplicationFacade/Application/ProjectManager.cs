@@ -26,8 +26,8 @@ namespace ApplicationFacade.Application
         public event ProjectSaveEventHandler StartSave;
         public event ProjectSaveEventHandler FinishSave;
 
-        public ProjectData Data { get; private set; }
-        public ProjectSettings Settings { get; private set; }
+        internal ProjectData Data { get; private set; }
+        internal ProjectSettings Settings { get; private set; }
         
         internal DataHandler      DHandler { get; set; }
         internal SettingsHandler  SHandler { get; set; }
@@ -80,7 +80,7 @@ namespace ApplicationFacade.Application
             }
         }
 
-        public ProjectManager()
+        internal ProjectManager()
         {
             Paths.ClearTempPath( );
         }
@@ -95,7 +95,7 @@ namespace ApplicationFacade.Application
             Paths.ClearTempPath( );
         }
 
-        public void LoadProject( string name, ref Warehouse.Warehouse warehouse, ref Container container )
+        internal void LoadProject( string name, ref Warehouse.Warehouse warehouse, ref Container container )
         {
             if ( !File.Exists( Paths.ProjectsPath + name + ".prj" ) )
             {
@@ -138,7 +138,7 @@ namespace ApplicationFacade.Application
             FinishLoad?.Invoke( );
         }
 
-        public void SaveProject( string name, Warehouse.Warehouse warehouse, Container container )
+        internal void SaveProject( string name, Warehouse.Warehouse warehouse, Container container )
         {
             if ( name != null )
             {
@@ -166,7 +166,7 @@ namespace ApplicationFacade.Application
             FinishSave?.Invoke( );
         }
 
-        public void CloseProject()
+        internal void CloseProject()
         {
             StartClose?.Invoke( );
 
@@ -182,7 +182,7 @@ namespace ApplicationFacade.Application
             FinishClose?.Invoke( );
         }
 
-        public void CreateProject( string name, WarehouseSize size, ref Warehouse.Warehouse warehouse, ref Container container )
+        internal void CreateProject( string name, WarehouseSize size, ref Warehouse.Warehouse warehouse, ref Container container )
         {
             if ( ProjectName != null )
             {
@@ -234,7 +234,7 @@ namespace ApplicationFacade.Application
             ProjectCreated?.Invoke( );
         }
 
-        public void DeleteProject( string name )
+        internal void DeleteProject( string name )
         {
             if( ProjectName != null && ProjectName.Equals( name ) )
             {

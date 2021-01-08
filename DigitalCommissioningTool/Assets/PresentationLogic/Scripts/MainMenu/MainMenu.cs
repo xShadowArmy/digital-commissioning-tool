@@ -50,8 +50,4 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Application.Quit() called");
         Application.Quit();
     }
-    void OnApplicationQuit()
-    {
-        Paths.ClearTempPath( );
-    }
 }

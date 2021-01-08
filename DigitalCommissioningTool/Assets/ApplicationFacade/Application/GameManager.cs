@@ -21,7 +21,7 @@ namespace ApplicationFacade.Application
 
         public static Container GameContainer { get; private set; }
 
-        private static ProjectManager PManager { get; set; }
+        public static ProjectManager PManager { get; set; }
 
         static GameManager()
         {

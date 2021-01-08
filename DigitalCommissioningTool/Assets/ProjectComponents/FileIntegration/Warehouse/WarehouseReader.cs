@@ -70,7 +70,7 @@ namespace ProjectComponents.FileIntegration
                     return;
                 }
 
-                nav.MoveToFirstChild( );
+                nav.MoveToChild( "Floor", xmlns );
 
                 ProjectFloorData data;
 
@@ -88,7 +88,7 @@ namespace ProjectComponents.FileIntegration
 
             catch ( Exception e )
             {
-                LogManager.WriteLog( e.Message, LogLevel.Error, true, "WarehouseReader", "ReadFloor" );
+                LogManager.WriteLog( "Der Boden konnte nicht gelesen werden! " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadFloor" );
             }
         }
 
@@ -282,29 +282,82 @@ namespace ProjectComponents.FileIntegration
         private ProjectTransformationData ReadTransformation( XPathNavigator nav, string xmlns )
         {
             ProjectTransformationData data;
+            Vector3 position;
+            Vector3 rotation;
+            Vector3 scale;
 
             try
             {
                 nav.MoveToChild( "Position", xmlns );
 
-                Vector3 position = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
+                string x = nav.GetAttribute( "x", xmlns );
+                string y = nav.GetAttribute( "y", xmlns );
+                string z = nav.GetAttribute( "z", xmlns );
+
+                try
+                {
+                    position = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
+
+                catch( Exception e )
+                {
+                    x = x.Replace( ',', '.' );
+                    y = y.Replace( ',', '.' );
+                    z = z.Replace( ',', '.' );
+
+                    position = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
 
                 nav.MoveToNext( );
-                Vector3 rotation = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
+
+                x = nav.GetAttribute( "x", xmlns );
+                y = nav.GetAttribute( "y", xmlns );
+                z = nav.GetAttribute( "z", xmlns );
+
+                try
+                {
+                    rotation = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
+
+                catch ( Exception e )
+                {
+                    x = x.Replace( ',', '.' );
+                    y = y.Replace( ',', '.' );
+                    z = z.Replace( ',', '.' );
+
+                    rotation = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
 
                 nav.MoveToNext( );
-                Vector3 scale = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
 
-                data = new ProjectTransformationData( position, Quaternion.Euler( rotation ), scale );
+                x = nav.GetAttribute( "x", xmlns );
+                y = nav.GetAttribute( "y", xmlns );
+                z = nav.GetAttribute( "z", xmlns );
+
+                try
+                {
+                    scale = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
+
+                catch ( Exception e )
+                {
+                    x = x.Replace( ',', '.' );
+                    y = y.Replace( ',', '.' );
+                    z = z.Replace( ',', '.' );
+
+                    scale = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
 
                 nav.MoveToParent( );
+
+                data = new ProjectTransformationData( position, Quaternion.Euler( rotation ), scale );
 
                 return data;
             }
 
             catch( Exception e )
             {
-                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadTransformation" );
+                LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht gelesen werden! Fehlerhafte Transformationsdaten! Fehler: " + e.Message, LogLevel.Error, true, "WarehouseReader", "ReadTransformation" );
 
                 return new ProjectTransformationData( );
             }
