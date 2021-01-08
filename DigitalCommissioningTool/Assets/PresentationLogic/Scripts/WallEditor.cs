@@ -22,9 +22,6 @@ public class WallEditor : MonoBehaviour
     [SerializeField] private Material transparentMaterial;
     [SerializeField] private InputField inputNumberOfWalls;
     [SerializeField] private GameObject popUpScaleWall;
-    [SerializeField] private GameObject DoorPrefab;
-    [SerializeField] private GameObject WallPrefab;
-    [SerializeField] private GameObject WindowPrefab;
     [SerializeField] private Camera EditorModeCamera;
     [SerializeField] private GameObject ObjectSpawn;
 

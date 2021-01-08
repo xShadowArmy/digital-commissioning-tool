@@ -88,11 +88,11 @@ public class Timer : MonoBehaviour
     //Wird von Rest Button referenziert
     public void Reset()
     {
+        TimerReset?.Invoke(currentTime);
         currentTime = 0;
         textBox.text = currentTime.ToString("F2");
         timerBtn.text = "Start";
         clicked = false;
-        TimerReset?.Invoke(currentTime);
     }
 
     //Macht Buttons sichtbar
