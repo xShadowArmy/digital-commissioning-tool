@@ -42,7 +42,10 @@ public class PickAndPlaceNew : MonoBehaviour
 
     }
 
-    //Gibt zurück ob Objekt getroffen:
+    /// <summary>
+    /// Gibt zurück ob Objekt(e) getroffen werden 
+    /// </summary>
+    /// <returns></returns>
     private bool HitSomething()
     {
         BoxCollider c = selected.GetComponent<BoxCollider>();
@@ -58,7 +61,10 @@ public class PickAndPlaceNew : MonoBehaviour
         return collisonDetected;
     }
 
-    //Übergebenes Objekt rotieren
+    /// <summary>
+    /// rotiert Objekt
+    /// </summary>
+    /// <param name="selected"> Objekt das rotiert wird </param>
     private void Rotate(GameObject selected)
     {
         //rotation im Uhrzeigersinn berechnen:
@@ -102,7 +108,10 @@ public class PickAndPlaceNew : MonoBehaviour
         if (rotation == 3) { selected.transform.rotation = Quaternion.Euler(0, 270, 0); }
     }
 
-    //Bewegen mit Maus
+    /// <summary>
+    /// Bewegung mit Maus
+    /// </summary>
+    /// <param name="selected">Objekt das Bewegt werden soll</param>
     private void MoveAnywhere(GameObject selected)
     {
         //um die Mausposition zu finden
@@ -129,8 +138,10 @@ public class PickAndPlaceNew : MonoBehaviour
         }
 
     }
-
-    //Regal Platzieren 
+    
+    /// <summary>
+    /// Regal platzieren  
+    /// </summary>
     private void PlaceObject()
     {
         if (Input.GetKeyDown("return"))
@@ -154,7 +165,10 @@ public class PickAndPlaceNew : MonoBehaviour
         }
     }
 
-    //In X-Richtung Bewegen
+    /// <summary>
+    /// in X Achse bewegen
+    /// </summary>
+    /// <param name="selected">Regal das bewegt werden soll</param>
     private void MoveInXAxis(GameObject selected)
     {
 
@@ -183,7 +197,10 @@ public class PickAndPlaceNew : MonoBehaviour
 
     }
 
-    //In Y-Richtung Bewegen
+    /// <summary>
+    /// in Y Achse bewegen
+    /// </summary>
+    /// <param name="selected">Regal das bewegt wird</param>
     private void MoveInYAxis(GameObject selected)
     {
         //Ähnlich wie MoveInXAxis nur mit der anderen Achse: 
@@ -211,8 +228,10 @@ public class PickAndPlaceNew : MonoBehaviour
 
     }
 
-    //Übergebenes Regal löschen
-    private void DeleteObject(GameObject selected)
+    /// <summary>
+    /// löscht Regal
+    /// </summary>
+    private void DeleteObject()
     {
         //Debug.Log("Delete " + selected.name);
         GameManager.GameWarehouse.RemoveStorageRack(GameManager.GameWarehouse.GetStorageRack(selected));
@@ -228,11 +247,11 @@ public class PickAndPlaceNew : MonoBehaviour
             rend = invisibleWall.GetComponent<Renderer>();                          //renderer um später das Material zu ändern
             if (HitSomething())
             {
-                rend.material = material2;          //material ändern wenn es sich auf einem Objekt befindet
+                rend.material = material2;                                          //material ändern wenn es sich auf einem Objekt befindet
             }
             else
             {
-                rend.material = material1;          //material ändern wenn nicht mehr auf einem anderen Objekt ist    
+                rend.material = material1;                                          //material ändern wenn nicht mehr auf einem anderen Objekt ist    
             }
             Rotate(selected);
             if (!moveX && !moveZ)                                                   //Wenn keine gewünschte Achse Angegeben erfolgt die Bewegung durch die Mausposition
@@ -253,8 +272,7 @@ public class PickAndPlaceNew : MonoBehaviour
                 moveX = false;
                 moveZ = true;
             }
-            if (moveZ)
-            {
+            if (moveZ){                                                             //wenn y ausgewählt soll es nur möglich sein das Regal in y-Achse zu bewegen 
                 MoveInYAxis(selected);
             }
             if (Input.GetKeyDown(KeyCode.Z))                                        //Z Taste wenn wieder mit Maus Bewegt werden soll 
@@ -264,7 +282,7 @@ public class PickAndPlaceNew : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace))
             {  //Mit entf oder backspace ausgewähltes Regal entfernen
-                DeleteObject(selected);
+                DeleteObject();
             }
             PlaceObject();
         }
