@@ -114,6 +114,8 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        private bool Destroyed;
+
         /// <summary>
         /// Erstellt eine neue Instanz und initialisiert alle Objekte.
         /// </summary>
@@ -131,35 +133,14 @@ namespace ApplicationFacade.Warehouse
             SouthWall = new List<WallObjectData>( );
             WestWall  = new List<WallObjectData>( );
 
+            Destroyed = false;
+
             ObjectSpawn = GameObject.FindGameObjectWithTag( "Respawn" );
         }
 
         ~Warehouse()
         {
-            foreach( var data in Floor )
-            {
-                data.Destroy( );
-            }
-
-            foreach ( var data in Walls )
-            {
-                data.Destroy( );
-            }
-
-            foreach ( var data in Windows )
-            {
-                data.Destroy( );
-            }
-
-            foreach ( var data in Doors )
-            {
-                data.Destroy( );
-            }
-
-            foreach ( var data in StorageRacks )
-            {
-                data.Destroy( );
-            }
+            DestroyWarehouse( );
         }
 
         // --- Floor ---
@@ -747,6 +728,39 @@ namespace ApplicationFacade.Warehouse
             }
 
             return null;
+        }
+
+        public void DestroyWarehouse()
+        {
+            if ( !Destroyed )
+            {
+                foreach ( var data in Floor )
+                {
+                    data.Destroy( );
+                }
+
+                foreach ( var data in Walls )
+                {
+                    data.Destroy( );
+                }
+
+                foreach ( var data in Windows )
+                {
+                    data.Destroy( );
+                }
+
+                foreach ( var data in Doors )
+                {
+                    data.Destroy( );
+                }
+
+                foreach ( var data in StorageRacks )
+                {
+                    data.Destroy( );
+                }
+
+                Destroyed = true;
+            }
         }
 
         // --- Implementierungen ---

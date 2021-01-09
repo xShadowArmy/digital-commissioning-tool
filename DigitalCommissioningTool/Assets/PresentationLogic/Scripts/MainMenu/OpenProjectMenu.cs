@@ -16,37 +16,16 @@ public class OpenProjectMenu : MonoBehaviour
     public GameObject projectPath;
     public GameObject projectCreated;
     public GameObject projectModified;
-    private List<string> projects = new List<string>();
+    private static List<string> projects = new List<string>();
     private int QueuedScene = -1;
+    private int Frames = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        loadProjects();
+        UpdateProjects();
         //SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-    }
-
-    void loadProjects()
-    {
-        string[] paths = Directory.GetFiles(Paths.ProjectsPath, "*.prj");
-
-        foreach (ProjectData data in ProjectManager.ProjectList)
-        {
-            projects.Add(data.ProjectName);
-            projectName.GetComponent<TextMeshProUGUI>().text = data.ProjectName;
-            projectPath.GetComponent<TextMeshProUGUI>().text = data.ProjectPath;
-            projectCreated.GetComponent<TextMeshProUGUI>().text = data.DateCreated.ToString("dd/MM/yyyy");
-            projectModified.GetComponent<TextMeshProUGUI>().text = data.DateModified.ToString("dd/MM/yyyy");
-            GameObject item = Instantiate(template);
-            item.transform.SetParent(template.transform.parent);
-            item.SetActive(true);
-        }
-
-        float newHeight = System.Math.Max(420, paths.Length * 105);
-        RectTransform contentBox = template.transform.parent.GetComponent<RectTransform>();
-        contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
-        ResourceHandler.ReplaceResources();
     }
     public void Back()
     {
@@ -90,6 +69,45 @@ public class OpenProjectMenu : MonoBehaviour
         {
             GameManager.LoadProject(projects[QueuedScene]);
             QueuedScene = -1;
+        }
+    }
+
+    void Update()
+    {
+        Frames += 1;
+
+        if ( Frames == 120 )
+        {
+            UpdateProjects( );
+
+            Frames = 0;
+        }
+    }
+
+    private void UpdateProjects()
+    {
+        if ( ProjectManager.ProjectList != null && ProjectManager.ProjectList.Length != projects.Count )
+        {
+            foreach ( ProjectData data in ProjectManager.ProjectList )
+            {
+                if ( !projects.Contains( data.ProjectName ) )
+                {
+                    projects.Add( data.ProjectName );
+                    projectName.GetComponent<TextMeshProUGUI>( ).text = data.ProjectName;
+                    projectPath.GetComponent<TextMeshProUGUI>( ).text = data.ProjectPath;
+                    projectCreated.GetComponent<TextMeshProUGUI>( ).text = data.DateCreated.ToString( "dd/MM/yyyy" );
+                    projectModified.GetComponent<TextMeshProUGUI>( ).text = data.DateModified.ToString( "dd/MM/yyyy" );
+                    GameObject item = Instantiate(template);
+                    item.transform.SetParent( template.transform.parent );
+                    item.SetActive( true );
+
+                    float newHeight = System.Math.Max(420, ProjectManager.ProjectList.Length * 105);
+                    RectTransform contentBox = template.transform.parent.GetComponent<RectTransform>();
+                    contentBox.SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, newHeight );
+                }
+            }
+
+            ResourceHandler.ReplaceResources( );
         }
     }
 }

@@ -31,6 +31,11 @@ namespace ApplicationFacade.Application
 
         public static bool LoadProject( string name )
         {
+            if ( GameWarehouse != null )
+            {
+                GameWarehouse.DestroyWarehouse( );
+            }
+
             Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
             Container ctmp = new Container( );
 
@@ -54,11 +59,21 @@ namespace ApplicationFacade.Application
         
         public static void CloseProject()
         {
+            if ( GameWarehouse != null )
+            {
+                GameWarehouse.DestroyWarehouse( );
+            }
+
             PManager.CloseProject( );
         }
 
         public static bool CreateProject( string name, WarehouseSize size = WarehouseSize.Medium )
         {
+            if ( GameWarehouse != null )
+            {
+                GameWarehouse.DestroyWarehouse( );
+            }
+
             Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
             Container ctmp = new Container( );
 

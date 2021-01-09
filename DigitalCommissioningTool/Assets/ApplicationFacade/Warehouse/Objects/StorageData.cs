@@ -136,13 +136,13 @@ namespace ApplicationFacade.Warehouse
             return -1;
         }
 
-        public void AddItem( ItemData item, int slot = -1 )
+        public bool AddItem( ItemData item, int slot = -1 )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
 
             if ( IsDestroyed( ) )
             {
-                return;
+                return false;
             }
 
             if ( slot < 0 )
@@ -158,7 +158,7 @@ namespace ApplicationFacade.Warehouse
 
                 if ( slot < 0 )
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -168,7 +168,7 @@ namespace ApplicationFacade.Warehouse
                 {
                     LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
 
-                    return;
+                    return false;
                 }
             }
 
@@ -203,6 +203,8 @@ namespace ApplicationFacade.Warehouse
             }
 
             ObjectChanged( );
+
+            return true;
         }
 
         public bool RemoveItem( ItemData item )

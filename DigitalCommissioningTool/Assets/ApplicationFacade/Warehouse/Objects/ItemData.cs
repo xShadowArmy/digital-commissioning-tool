@@ -264,6 +264,49 @@ namespace ApplicationFacade.Warehouse
             return data;
         }
 
+        public ItemData RequestCopyItem( int count, Vector3 position, Quaternion rotation )
+        {
+            if ( IsDestroyed( ) )
+            {
+                return null;
+            }
+
+            if ( IsReadonly( ) )
+            {
+                return null;
+            }
+
+            if ( count > Count )
+            {
+                return null;
+            }
+
+            ItemData data = new ItemData(  )
+            {
+                Count = count,
+                Name = Name,
+                Weight = Weight,
+                ParentItem = this,
+                IDRef = IDRef
+            };
+
+            if ( ParentItem == null )
+            {
+                Count += count;
+            }
+
+            else
+            {
+                Count -= count;
+            }
+
+            data.ChangeGameObject( GameObject.Instantiate( Object, position, rotation, Object.transform.parent ) );
+
+            ChildItems.Add( data );
+
+            return data;
+        }
+
         public bool ReturnItem( )
         {
             if ( IsDestroyed( ) )
