@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,24 +12,63 @@ public class TreeView : MonoBehaviour
     public Material defaultMaterial;
     public Material selectedMaterial;
     public GameObject avatar;
+    TreeViewItem TVStorageRacks;
+    TreeViewItem TVMoveableStorageRacks;
     TreeViewControl treeView;
     GameObject currentMoveableStorage;
-
+    void OnDestroy()
+    {
+        GameManager.GameContainer.ContainerCreated -= GameContainer_ContainerCreated;
+        GameManager.GameContainer.ContainerDeleted -= GameContainer_ContainerDeleted;
+        GameManager.GameWarehouse.StorageRackCreated -= GameWarehouse_StorageRackCreated;
+        GameManager.GameWarehouse.StorageRackDeleted -= GameWarehouse_StorageRackDeleted;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.GameContainer.ContainerCreated += GameContainer_ContainerCreated;
+        GameManager.GameContainer.ContainerDeleted += GameContainer_ContainerDeleted;
+        GameManager.GameWarehouse.StorageRackCreated += GameWarehouse_StorageRackCreated;
+        GameManager.GameWarehouse.StorageRackDeleted += GameWarehouse_StorageRackDeleted;
+
         treeView = gameObject.GetComponent<TreeViewControl>();
         AddEvents(treeView.RootItem);
         treeView.RootItem.Items.Clear();
         treeView.RootItem.IsExpanded = true;
-        TreeViewItem storageRacks = treeView.RootItem.AddItem("Storage Racks");
-        AddEvents(storageRacks);
-        PopulateData(storageRacks, StorageRacks.transform);
-        TreeViewItem moveableStorageRacks = treeView.RootItem.AddItem("Moveable Storage Racks");
-        AddEvents(moveableStorageRacks);
-        PopulateData(moveableStorageRacks, MoveableStorageRacks.transform);
+        TVStorageRacks = treeView.RootItem.AddItem("Storage Racks");
+        AddEvents(TVStorageRacks);
+        PopulateData(TVStorageRacks, StorageRacks.transform);
+        TVMoveableStorageRacks = treeView.RootItem.AddItem("Moveable Storage Racks");
+        AddEvents(TVMoveableStorageRacks);
+        PopulateData(TVMoveableStorageRacks, MoveableStorageRacks.transform);
         float newHeight = System.Math.Min(45 + calcHeight(treeView.RootItem), 450);
         gameObject.transform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
+    }
+
+    private void GameWarehouse_StorageRackCreated(StorageData data)
+    {
+        GameObject rack = data.Object;
+        TreeViewItem item = TVStorageRacks.AddItem(rack.name);
+        item.Data = rack;
+        AddEvents(item);
+    }
+
+    private void GameWarehouse_StorageRackDeleted(StorageData data)
+    {
+        //TODO
+    }  
+
+    private void GameContainer_ContainerCreated(StorageData storage)
+    {
+        GameObject container = storage.Object;
+        TreeViewItem item = TVMoveableStorageRacks.AddItem(container.name);
+        item.Data = container;
+        AddEvents(item);
+    }
+
+    private void GameContainer_ContainerDeleted(StorageData storage)
+    {
+        //TODO
     }
 
     void PopulateData(TreeViewItem root, Transform t)
@@ -58,7 +99,7 @@ public class TreeView : MonoBehaviour
     }
     public void Handler(object sender, System.EventArgs args)
     {
-        Debug.Log(string.Format("{0} detected: {1}", args.GetType().Name, (sender as TreeViewItem).Header));
+        //Debug.Log(string.Format("{0} detected: {1}", args.GetType().Name, (sender as TreeViewItem).Header));
     }
     public void ExpandHandler(object sender, System.EventArgs args)
     {
@@ -89,8 +130,17 @@ public class TreeView : MonoBehaviour
     }
     public void ClickHandler(object sender, System.EventArgs args)
     {
-        GameObject senderGameobject = (sender as TreeViewItem).Data;
-        if (senderGameobject != null && senderGameobject.transform.parent.gameObject == MoveableStorageRacks)
+        TreeViewItem TVItem = (sender as TreeViewItem);
+        GameObject senderGameobject = TVItem.Data;
+        if (TVItem.Header.Equals("Storage Racks"))
+        {
+            GameManager.GameWarehouse.CreateStorageRack();
+        }
+        else if(TVItem.Header.Equals("Moveable Storage Racks"))
+        {
+            GameManager.GameContainer.CreateContainer( );
+        }
+        else if (senderGameobject != null && senderGameobject.transform.parent.gameObject == MoveableStorageRacks)
         {
             GameObject newMoveableStorage = (sender as TreeViewItem).Data;
             if (currentMoveableStorage != null && currentMoveableStorage != newMoveableStorage)

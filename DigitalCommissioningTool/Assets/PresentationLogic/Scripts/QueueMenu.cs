@@ -24,7 +24,7 @@ public class QueueMenu : MonoBehaviour
     public ItemData SelectedItem;
     public DialogMenu dialogMenu;
 
-    private List<DragItem> QueueItems = new List<DragItem>();
+    public List<DragItem> QueueItems = new List<DragItem>();
 
     // Start is called before the first frame update
 
@@ -42,8 +42,8 @@ public class QueueMenu : MonoBehaviour
     }
     public void AddItemToQueue(ItemData itemData)
     {
-        ItemTemplate.transform.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = itemData.Name;
-        ItemTemplate.transform.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + itemData.Count;
+        ItemTemplate.transform.Find("NameItemQueue/NameItemTextQueue").GetComponent<TextMeshProUGUI>().text = itemData.Name;
+        ItemTemplate.transform.Find("CountItemQueue/CountItemQueueText").GetComponent<TextMeshProUGUI>().text = "x" + itemData.Count;
         GameObject field = Instantiate(ItemTemplate, ItemTemplate.transform.parent);
         field.SetActive(true);
         DragItem dragItem = field.GetComponent<DragItem>();
@@ -109,7 +109,7 @@ public class QueueMenu : MonoBehaviour
     }
     private void DialogEvent(DialogMenu dialog) 
     {
-        AddItemToQueue(dialog.SelectedItem.RequestItem(dialog.Amount));
+        AddItemToQueue(dialog.SelectedItem.RequestCopyItem(dialog.Amount));
     }
     // Update is called once per frame
     void Update()

@@ -18,34 +18,7 @@ public class MainCamera : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetButtonDown("Menu"))
-        {
-            if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
-            {
-                SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
-            }
-            GameObject[] gameObjects = SceneManager.GetSceneByName("MainMenu").GetRootGameObjects();
-            foreach (GameObject g in gameObjects)
-            {
-                if (g.name.Equals("Canvas"))
-                {
-                    g.SetActive(!g.activeSelf);
-                }
-                if (g.name.Equals("Main Camera"))
-                {
-                    g.SetActive(false);
-                }
-            }            
-            gameObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-            foreach (GameObject g in gameObjects)
-            {
-                if (g.name.Equals("CanvasTreeView"))
-                {
-                    g.SetActive(!g.activeSelf);
-                }
-            }
-        }
+    {      
 
         _rightClicked = Input.GetMouseButton(1);
 

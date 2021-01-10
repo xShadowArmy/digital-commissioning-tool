@@ -1,4 +1,5 @@
-﻿using MMICoSimulation;
+﻿using ApplicationFacade.Application;
+using MMICoSimulation;
 using MMICSharp.MMIStandard.Utils;
 using MMIStandard;
 using MMIUnity.TargetEngine;
@@ -11,6 +12,7 @@ public class TestPascal : AvatarBehavior
     public WalkTrajectory WalkTrajectory;
     public MMISceneObject WalkTrajectoryTarget;
     public List<Transform> WalkTrajectoryPoints = new List<Transform>();
+    public QueueMenu queueMenu;
 
     private string carryID;
     public GameObject StorageRack;
@@ -92,10 +94,16 @@ public class TestPascal : AvatarBehavior
     {
         this.WalkTrajectory.Points.Clear();
         this.WalkTrajectory.Points.Add(this.transform);
-        foreach (Transform child in WalkTrajectoryPoints)
+        foreach (DragItem dragItem in queueMenu.QueueItems)
         {
-            this.WalkTrajectory.Points.Add(child);
+            Transform walkTarget = dragItem.LinkedItem.Object.transform.Find("BoxWalkTarget");
+            this.WalkTrajectory.Points.Add(walkTarget);
+            this.WalkTrajectory.Points.Add(GameManager.GameContainer.StorageRacks[0].Object.transform);
         }
+        //foreach (Transform child in WalkTrajectoryPoints)
+        //{
+        //    this.WalkTrajectory.Points.Add(child);
+        //}
         WalkTrajectoryTarget = this.WalkTrajectory.Points[this.WalkTrajectory.Points.Count - 1].GetComponent<MMISceneObject>();
         MMICSharp.Access.MMUAccess mmuAccess = this.avatar.MMUAccess;
         this.WalkTrajectory.GetPathConstraintCollision(mmuAccess, 1.0f);
