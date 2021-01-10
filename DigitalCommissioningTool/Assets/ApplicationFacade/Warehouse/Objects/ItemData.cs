@@ -13,8 +13,10 @@ namespace ApplicationFacade.Warehouse
     public class ItemData : GameObjectData
     {
         public delegate void StockChangedEventHandler( ItemData item );
+        public delegate void ItemChangedEventHandler(ItemData item);
 
         public static event StockChangedEventHandler StockChanged;
+        public static event ItemChangedEventHandler ItemChanged;
 
         public int Count { get; internal set; }
 
@@ -28,7 +30,7 @@ namespace ApplicationFacade.Warehouse
 
         internal ItemData ParentItem { get; private set; }
 
-        internal List<ItemData> ChildItems { get; private set; }
+        public List<ItemData> ChildItems { get; private set; }
 
         internal long IDRef { get; set; }
 
@@ -118,6 +120,8 @@ namespace ApplicationFacade.Warehouse
 
                 data.Count += itemCount;
                 Count      += itemCount;
+                ItemChanged?.Invoke(this);
+                ItemChanged?.Invoke(data);
             }
                         
             return true;
@@ -146,6 +150,8 @@ namespace ApplicationFacade.Warehouse
 
                 data.Count -= itemCount;
                 Count      -= itemCount;
+                ItemChanged?.Invoke(this);
+                ItemChanged?.Invoke(data);
             }
 
             return true;
@@ -164,6 +170,7 @@ namespace ApplicationFacade.Warehouse
             }
 
             Name = itemName;
+            ItemChanged?.Invoke(this);
 
             ObjectChanged( );
         }
@@ -181,6 +188,7 @@ namespace ApplicationFacade.Warehouse
             }
 
             Weight = itemWeight;
+            ItemChanged?.Invoke(this);
 
             ObjectChanged( );
         }
@@ -217,6 +225,8 @@ namespace ApplicationFacade.Warehouse
             }
 
             ChildItems.Add( data );
+            ItemChanged?.Invoke(data);
+            ItemChanged?.Invoke(this);
 
             return data;
         }
@@ -260,6 +270,8 @@ namespace ApplicationFacade.Warehouse
             data.ChangeGameObject( GameObject.Instantiate( Object, Object.transform.parent ) );
 
             ChildItems.Add( data );
+            ItemChanged?.Invoke(data);
+            ItemChanged?.Invoke(this);
 
             return data;
         }
@@ -303,6 +315,8 @@ namespace ApplicationFacade.Warehouse
             data.ChangeGameObject( GameObject.Instantiate( Object, position, rotation, Object.transform.parent ) );
 
             ChildItems.Add( data );
+            ItemChanged?.Invoke(data);
+            ItemChanged?.Invoke(this);
 
             return data;
         }
@@ -333,6 +347,7 @@ namespace ApplicationFacade.Warehouse
             {
                 ParentItem.ParentItem.Count += Count;
             }
+            ItemChanged?.Invoke(ParentItem.ParentItem);
 
             Destroy( );
 
