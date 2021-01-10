@@ -30,13 +30,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MoveableStorageRack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MoveableStorageRack.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Environment/Launcher/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Environment/Launcher/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/asdfg.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/mmm.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/nnn.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/test.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/test123.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/test1234.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/test6789.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Projects/zxc.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Resources/Strings/English.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Strings/English.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Output/Resources/Strings/German.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Strings/German.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,8 +84,6 @@
         <option value="$PROJECT_DIR$/Assets/MMI/Scripts/TestAvatarBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/FloorData.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse/Objects/StorageData.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
         <option value="$PROJECT_DIR$/Assets/AppData/Warehouse/MediumWarehouseStrategie.cs" />
         <option value="$PROJECT_DIR$/Assets/AppData/Warehouse/LargeWarehouseStrategie.cs" />
         <option value="$PROJECT_DIR$/Assets/AppData/Warehouse/SmallWarehouseStrategie.cs" />
@@ -79,9 +93,13 @@
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Application/TimeMeasurementHistory.cs" />
         <option value="$PROJECT_DIR$/Assets/TimeMeasurement/TimeMeasurementEntry.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/LoadSceneData.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/AddStorage.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" />
       </list>
     </option>
   </component>
@@ -150,6 +168,8 @@
       <workItem from="1609844530636" duration="1623000" />
       <workItem from="1609933987648" duration="21007000" />
       <workItem from="1610111866075" duration="3896000" />
+      <workItem from="1610193953972" duration="16266000" />
+      <workItem from="1610277068323" duration="2964000" />
     </task>
     <servers />
   </component>
@@ -316,15 +336,16 @@
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1360.121.1360.728@0.0.1920.1040" timestamp="1607042029128" />
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1606528739679" />
     <state x="492" y="176" key="SettingsEditor/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1609806588977" />
-    <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog" timestamp="1606681532600">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="98" y="98" width="1852" height="916" key="VCS.FileHistoryDialog" timestamp="1610212145897">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606681532600" />
-    <state x="2580" y="-13" width="1716" height="1099" maximized="true" key="dock-window-1" timestamp="1610112125944">
+    <state x="98" y="98" width="1852" height="916" key="VCS.FileHistoryDialog/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1610212145897" />
+    <state x="2985" y="113" width="1215" height="763" key="dock-window-1" timestamp="1610194034768">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
     <state x="2580" y="-13" width="1716" height="1099" maximized="true" key="dock-window-1/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1610112125944" />
-    <state x="2985" y="113" width="1215" height="763" key="dock-window-1/0.0.2048.1112/2560.0.1920.1040@2560.0.1920.1040" timestamp="1609595622448" />
+    <state x="2985" y="113" width="1215" height="763" key="dock-window-1/0.0.2048.1112/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610194034768" />
     <state x="656" y="-21" width="1620" height="1027" key="dock-window-1/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1609421702657" />
     <state x="-1360" y="1" width="1376" height="815" key="dock-window-2" timestamp="1608069373149">
       <screen x="-1360" y="1" width="1360" height="728" />
@@ -334,16 +355,16 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="681" y="259" key="run.anything.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1609806602197" />
-    <state x="665" y="241" width="717" height="727" key="search.everywhere.popup" timestamp="1610111943191">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state x="831" y="303" width="896" height="913" key="search.everywhere.popup" timestamp="1610278198904">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1989" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1609263977039" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1360.1.1360.728@0.0.1920.1040" timestamp="1608065890274" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1360.121.1360.728@0.0.1920.1040" timestamp="1607046332784" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606528642519" />
-    <state x="665" y="241" width="717" height="727" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1610111943191" />
-    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@2560.0.1920.1040" timestamp="1609709686886" />
-    <state x="831" y="303" width="896" height="913" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1609266965450" />
+    <state x="665" y="241" width="717" height="727" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1610227551999" />
+    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610197471803" />
+    <state x="831" y="303" width="896" height="913" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1610278198904" />
     <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1609416537201" />
   </component>
 </project>

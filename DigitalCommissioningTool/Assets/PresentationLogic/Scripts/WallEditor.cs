@@ -240,6 +240,7 @@ public class WallEditor : MonoBehaviour
         {
             wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
         }
+        GameManager.SaveProject(GameManager.OpenProjectData.ProjectName);
     }
 
     /// <summary>
@@ -281,7 +282,7 @@ public class WallEditor : MonoBehaviour
                                 foundRightWallElement = true;
                                 rightWallElement = collider.gameObject;
                             }
-                            else if (!collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim"))
+                            else if (!collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim") && !collider.gameObject.CompareTag("SelectableAttachedInnerWall"))
                             {
                                 foundLeftWallElement = true;
                                 leftWallElement = collider.gameObject;
@@ -361,7 +362,7 @@ public class WallEditor : MonoBehaviour
                                 foundRightWallElement = true;
                                 rightWallElement = collider.gameObject;
                             }
-                            else if (!collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim"))
+                            else if (!collider.gameObject.CompareTag("LeftWallRim") && !collider.gameObject.CompareTag("RightWallRim") && !collider.gameObject.CompareTag("SelectableAttachedInnerWall"))
                             {
                                 foundLeftWallElement = true;
                                 leftWallElement = collider.gameObject;
@@ -537,7 +538,9 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     public void OnScaleWallButtonClicked()
     {
-        if (!string.IsNullOrEmpty(inputNumberOfWalls.text) && !inputNumberOfWalls.text.Equals("0"))
+        string scaleLengthText = inputNumberOfWalls.text;
+        bool isNumeric = int.TryParse(scaleLengthText, out int scaleLength);
+        if (!string.IsNullOrEmpty(scaleLengthText) && isNumeric && scaleLength > 0)
         {
             SelectedObjectTransform = selectionManager.SelectedObject;
             int length = Convert.ToInt32(inputNumberOfWalls.text);
@@ -600,8 +603,7 @@ public class WallEditor : MonoBehaviour
                     }
                 }
             }
-
-            Debug.Log(neighborWall.name);
+            
             if (neighborWall != null)
             {
                 for (int i = 0; i < Math.Abs(length); i++)
@@ -656,8 +658,7 @@ public class WallEditor : MonoBehaviour
                                 }
                             }
                         }
-
-                        Debug.Log(foundOuterWall);
+                        
                         if (!foundOuterWall)
                         {
                             Vector3 localScale = SelectedObjectTransform.localScale;
@@ -690,8 +691,7 @@ public class WallEditor : MonoBehaviour
                                     isEndPiece = true;
                                 }
                             }
-
-                            Debug.Log(hitsInnerWall + ", " + isEndPiece);
+                            
                             if (collider1.CompareTag("SelectableWall") && GameManager.GameWarehouse.GetWall(collider1.gameObject).Class == WallClass.Outer
                                                                        && GameManager.GameWarehouse.GetWall(collider1.gameObject).Face != wall.Face)
                             {

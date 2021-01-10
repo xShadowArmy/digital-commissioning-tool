@@ -27,6 +27,8 @@ public class SelectionManager : MonoBehaviour
     public static event ObjectSelectedEventHandler WallSelected;
 
     public static event ObjectSelectedEventHandler StorageSelected;
+    
+    public static event ObjectSelectedEventHandler MovableStorageSelected;
 
     public static event ObjectSelectedEventHandler LeftWallRimSelected;
 
@@ -45,6 +47,7 @@ public class SelectionManager : MonoBehaviour
     {
         WallSelected = null;
         StorageSelected = null;
+        MovableStorageSelected = null;
         LeftWallRimSelected = null;
         RightWallRimSelected = null;
         InnerWallSelected = null;
@@ -118,6 +121,9 @@ public class SelectionManager : MonoBehaviour
                             case "SelectableStorage":
                                 OnStorageSelected(SelectedObject);
                                 break;
+                            case "SelectableContainer":
+                                OnMovableStorageSelected(SelectedObject);
+                                break;
                         }
 
                         SetPopUps();
@@ -150,13 +156,18 @@ public class SelectionManager : MonoBehaviour
                 if (EventSystem.current.IsPointerOverGameObject(pointerID) == false)                    //checkt, ob Maus über Gui Element ist
                 {
                     bool rayhit = Physics.Raycast(ray, out hit, 90.0f);
-
+            
                     if ( rayhit && hit.transform != null )
                     {
+                        Transform temp = hit.transform;
                         if ( hit.transform.tag.Contains("StorageBox") || hit.transform.CompareTag( "StorageContainer") )   //normaler physics ray cast, kann aber nicht UI elemente erkennen
                         {
                             GameObject g1 = hit.transform.gameObject;
                             OnShelveSelected(g1, true);
+                        }
+                        else if(temp.CompareTag("SelectableStorage") || FindParentWithTag(ref temp, "SelectableStorage") != null)
+                        {
+                            OnStorageSelected(temp);
                         }
                         else
                         {
@@ -231,7 +242,12 @@ public class SelectionManager : MonoBehaviour
 
     protected virtual void OnStorageSelected(Transform selectedObject)
     {
-        StorageSelected?.Invoke(SelectedObject);
+        StorageSelected?.Invoke(selectedObject);
+    }
+    
+    protected virtual void OnMovableStorageSelected(Transform selectedObject)
+    {
+        MovableStorageSelected?.Invoke(SelectedObject);
     }
 
     protected virtual void OnWallSelected(Transform selectedObject)

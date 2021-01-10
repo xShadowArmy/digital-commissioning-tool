@@ -29,7 +29,7 @@ public class TimeMeasurementHistory : MonoBehaviour
     // Start is called before the first frame update
     void OnValidate()
     {
-        ResourceHandler.ReplaceResources();
+        //ResourceHandler.ReplaceResources();
         Timer.TimerStopped += OnTimerStopped;
         Timer.TimerReset += OnTimerReset;
         GameManager.PManager.FinishLoad += ProjectManagerOnFinishLoad;

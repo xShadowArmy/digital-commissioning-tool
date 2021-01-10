@@ -36,6 +36,7 @@ TagManager:
   - SelectableAttachedInnerWall
   - SelectableInnerWall
   - InnerWall
+  - SelectableContainer
   layers:
   - Default
   - TransparentFX

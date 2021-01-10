@@ -6,24 +6,34 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using ApplicationFacade.Application;
 
 public class WarehouseItemMenu : MonoBehaviour
 {
     public GameObject ItemTemplate;
     public GameObject PanelEditItem;
+    public GameObject PanelDistributeItem;
     public GameObject PanelListItem;
     private List<ItemData> Stock;
     private ItemData SelectedItem;
     private ModeHandler ModeHandler;
     private GameObject SwitchModeButton;
+
+    private ItemData distributeItemData = null;
+    private int countDistributeItem = 0;
+    private StorageData storageDistributeItem = null;
+    
     void OnDestroy()
     {
         ItemData.StockChanged -= StockHasChanged;
+        SelectionManager.StorageSelected -= SelectionManagerOnStorageSelected;
     }
     void Start()
     {
         ItemData.StockChanged += StockHasChanged;
+        SelectionManager.StorageSelected += SelectionManagerOnStorageSelected;
         replaceResources();
+        //replaceResources();
         //ItemData.AddItemToStock("M5 Schraube", 0.01);
         //ItemData.AddItemToStock("M5 Mutter", 0.002);
         //ItemData.AddItemToStock("Zündkerze", 0.05);
@@ -50,6 +60,12 @@ public class WarehouseItemMenu : MonoBehaviour
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
     }
+
+    private void OnValidate()
+    {
+        
+    }
+
     private void AddItemToList(ItemData item)
     {
         ItemTemplate.transform.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
@@ -102,13 +118,16 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     private void replaceResources()
     {
+        PanelListItem.SetActive(true);
         PanelEditItem.SetActive(true);
+        PanelDistributeItem.SetActive(true);
         ItemTemplate.SetActive(true);
-        ItemTemplate.transform.Find("AdditionalInfo").gameObject.SetActive(true);
+        ItemTemplate.transform.Find("AdditionalInfoItem").gameObject.SetActive(true);
         ResourceHandler.ReplaceResources();
-        ItemTemplate.transform.Find("AdditionalInfo").gameObject.SetActive(false);
+        ItemTemplate.transform.Find("AdditionalInfoItem").gameObject.SetActive(false);
         ItemTemplate.SetActive(false);
         PanelEditItem.SetActive(false);
+        PanelDistributeItem.SetActive(false);
     }
     public void OnClick(GameObject sender)
     {
@@ -184,7 +203,11 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     public void AddCloseClick()
     {
+        distributeItemData = null;
+        countDistributeItem = 0;
+        storageDistributeItem = null;
         PanelEditItem.SetActive(false);
+        PanelDistributeItem.SetActive(false);
         PanelListItem.SetActive(true);
     }
     public void ListCloseClick()
@@ -192,6 +215,40 @@ public class WarehouseItemMenu : MonoBehaviour
         PanelListItem.SetActive(false);
         PanelListItem.transform.parent.gameObject.SetActive(true);
     }
+
+    public void DistributeItemClick(GameObject sender)
+    {
+        distributeItemData = ItemData.RequestStockItem(sender.transform.Find("NameItem/NameItemText").GetComponent<TextMeshProUGUI>().text);
+        PanelListItem.SetActive(false);
+        PanelDistributeItem.SetActive(true);
+        PanelDistributeItem.transform.Find("NameDistributeItem/NameTextFieldDistributeItem/TextAreaNameDistributeItem/TextNameTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText(distributeItemData.Name);
+
+    }
+    
+    private void SelectionManagerOnStorageSelected(Transform selectedObject)
+    {
+        if (PanelDistributeItem.activeInHierarchy)
+        {
+            storageDistributeItem = GameManager.GameWarehouse.GetStorageRack(selectedObject.gameObject);
+            PanelDistributeItem.transform.Find("SelectedStorageRackDistributeItem/SelectedStorageRackTextFieldDistributeItem/TextAreaSelectedStorageRackDistributeItem/TextSelectedStorageRackTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText(storageDistributeItem.Object.name);
+        }
+    }
+
+    public void OnDistributeItemSaveClick()
+    {
+        string count = PanelDistributeItem.transform.Find("CountDistributeItem/CountTextFieldDistributeItem/TextAreaCountDistributeItem/TextCountTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().text;
+        bool isNumeric = int.TryParse(count, out countDistributeItem);
+        if (distributeItemData != null && isNumeric && countDistributeItem > 0 && storageDistributeItem != null)
+        {
+            ItemData itemData = distributeItemData.RequestItem(countDistributeItem);
+            if (storageDistributeItem.AddItem(itemData))
+            {
+                AddCloseClick();
+            }
+            
+        }
+    }
+    
     //private void ItemHasChanged(ItemData item)
     //{
     //    Transform field = ItemTemplate.transform.parent.GetChild(Array.IndexOf(Stock, item)+1);
@@ -203,6 +260,7 @@ public class WarehouseItemMenu : MonoBehaviour
     {
         if (ModeHandler.Mode.Equals("EditorMode"))
         {
+            PanelDistributeItem.SetActive(false);
             PanelEditItem.SetActive(false);
             PanelListItem.SetActive(false);
         }
