@@ -27,8 +27,8 @@ public class AddStorage : MonoBehaviour
     //Wird ausgeführt wenn Button geklickt:
     void TaskOnClick()
     {
-        GameManager.GameContainer.CreateContainer( );
-        //GameManager.GameWarehouse.CreateStorageRack()
+        //GameManager.GameContainer.CreateContainer( );
+        //GameManager.GameWarehouse.CreateStorageRack();
     }
 
     void Start()

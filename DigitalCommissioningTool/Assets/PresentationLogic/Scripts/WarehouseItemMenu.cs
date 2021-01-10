@@ -222,6 +222,7 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     public void AddCloseClick()
     {
+        ResetTextFields();
         distributeItemData = null;
         countDistributeItem = 0;
         storageDistributeItem = null;
@@ -246,7 +247,7 @@ public class WarehouseItemMenu : MonoBehaviour
 
     private void SelectionManagerOnStorageSelected(Transform selectedObject)
     {
-        if (PanelDistributeItem.activeInHierarchy)
+        if (PanelDistributeItem.activeInHierarchy && selectedObject != null)
         {
             storageDistributeItem = GameManager.GameWarehouse.GetStorageRack(selectedObject.gameObject);
             PanelDistributeItem.transform.Find("SelectedStorageRackDistributeItem/SelectedStorageRackTextFieldDistributeItem/TextAreaSelectedStorageRackDistributeItem/TextSelectedStorageRackTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText(storageDistributeItem.Object.name);
@@ -256,6 +257,7 @@ public class WarehouseItemMenu : MonoBehaviour
     public void OnDistributeItemSaveClick()
     {
         string count = PanelDistributeItem.transform.Find("CountDistributeItem/CountTextFieldDistributeItem/TextAreaCountDistributeItem/TextCountTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().text;
+        count = count.Replace("\u200B", "");
         bool isNumeric = int.TryParse(count, out countDistributeItem);
         if (distributeItemData != null && isNumeric && countDistributeItem > 0 && storageDistributeItem != null)
         {
@@ -286,5 +288,12 @@ public class WarehouseItemMenu : MonoBehaviour
             PanelListItem.transform.parent.gameObject.SetActive(true);
             PanelListItem.SetActive(true);
         }
+    }
+
+    private void ResetTextFields()
+    {
+        PanelDistributeItem.transform.Find("NameDistributeItem/NameTextFieldDistributeItem/TextAreaNameDistributeItem/TextNameTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText("");
+        PanelDistributeItem.transform.Find("CountDistributeItem/CountTextFieldDistributeItem/TextAreaCountDistributeItem/TextCountTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText("");
+        PanelDistributeItem.transform.Find("SelectedStorageRackDistributeItem/SelectedStorageRackTextFieldDistributeItem/TextAreaSelectedStorageRackDistributeItem/TextSelectedStorageRackTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText("");
     }
 }

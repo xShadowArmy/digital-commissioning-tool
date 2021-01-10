@@ -4329,7 +4329,7 @@ PrefabInstance:
     - target: {fileID: 6248030483091726405, guid: 6ee3ea1a018654642860c66fa9ab0426,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ListCloseClick
+      value: AddCloseClick
       objectReference: {fileID: 0}
     - target: {fileID: 6248030483147993242, guid: 6ee3ea1a018654642860c66fa9ab0426,
         type: 3}
@@ -13839,7 +13839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StorageRacks: {fileID: 176537664}
-  MoveableStorageRacks: {fileID: 1132897849}
+  MovableStorageRacks: {fileID: 0}
   defaultMaterial: {fileID: 2100000, guid: 911c06f14ceaf3845af0dcac3192b0a4, type: 2}
   selectedMaterial: {fileID: 2100000, guid: ea04aa4db010f5e41a16a087b9b55fd9, type: 2}
   avatar: {fileID: 0}
@@ -14256,7 +14256,7 @@ PrefabInstance:
     - target: {fileID: 2304405364752126303, guid: 37d911717f98b2349a3e6f19693f8504,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 2304405364873134187, guid: 37d911717f98b2349a3e6f19693f8504,
         type: 3}
