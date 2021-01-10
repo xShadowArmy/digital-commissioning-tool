@@ -131,7 +131,7 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     public void OnClick(GameObject sender)
     {
-        GameObject additionalInfo = sender.transform.Find("AdditionalInfo").gameObject;
+        GameObject additionalInfo = sender.transform.Find("AdditionalInfoItem").gameObject;
         RectTransform rectTransform = sender.GetComponent<RectTransform>();
         additionalInfo.SetActive(!additionalInfo.activeSelf);
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 45 - rectTransform.rect.height);

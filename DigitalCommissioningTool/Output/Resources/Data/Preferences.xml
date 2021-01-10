@@ -4,9 +4,9 @@
         <xs:Values xs:propertyCount="3">
             <xs:Property xs:type="Single" xs:value="0">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="206.53">
+            <xs:Property xs:type="Single" xs:value="334,53">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="587.9999">
+            <xs:Property xs:type="Single" xs:value="1038">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>

@@ -30,13 +30,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +81,8 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/AddStorage.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" />
       </list>
     </option>
   </component>
@@ -153,7 +152,7 @@
       <workItem from="1609933987648" duration="21007000" />
       <workItem from="1610111866075" duration="3896000" />
       <workItem from="1610193953972" duration="16266000" />
-      <workItem from="1610277068323" duration="3911000" />
+      <workItem from="1610277068323" duration="5281000" />
     </task>
     <servers />
   </component>
