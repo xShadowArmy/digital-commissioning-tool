@@ -100,6 +100,11 @@ namespace ApplicationFacade.Application
         public static KeyData ToogleTimer { get; set; }
 
         /// <summary>
+        /// Taste um Menü zu Öffnen/Schließen.
+        /// </summary>
+        public static KeyData ToogleMenu { get; set; }
+
+        /// <summary>
         /// Laedt die standard Tastenbelegung.
         /// </summary>
         static KeyManager()
@@ -114,7 +119,7 @@ namespace ApplicationFacade.Application
         {
             get
             {
-                KeyData[] data = new KeyData[17];
+                KeyData[] data = new KeyData[18];
                 
                 data[0]  = Rotate;
                 data[1]  = RotateLeft;
@@ -133,6 +138,7 @@ namespace ApplicationFacade.Application
                 data[14] = RemoveSelected;
                 data[15] = MoveSelected;
                 data[16] = ToogleTimer;
+                data[17] = ToogleMenu;
 
                 return data;
             }
@@ -165,6 +171,7 @@ namespace ApplicationFacade.Application
                 man.LoadData( "RemoveSelected", RemoveSelected );
                 man.LoadData( "MoveSelected", MoveSelected );
                 man.LoadData( "ToogleTimer", ToogleTimer );
+                man.LoadData("ToogleMenu", ToogleMenu);
 
                 man.CloseConfigFile( );
             }
@@ -197,6 +204,7 @@ namespace ApplicationFacade.Application
             ChangeMode = new KeyData( KeyCode.M, true );
             RemoveSelected = new KeyData( KeyCode.Delete, false );
             MoveSelected = new KeyData( KeyCode.M, false );
+            ToogleMenu = new KeyData(KeyCode.Escape, false);
         }
 
         /// <summary>
@@ -225,6 +233,7 @@ namespace ApplicationFacade.Application
                 man.StoreData( "RemoveSelected", RemoveSelected, true);
                 man.StoreData( "MoveSelected", MoveSelected, true);
                 man.StoreData( "ToggleTimer", ToogleTimer, true);
+                man.StoreData("ToogleMenu", ToogleMenu, true);
 
                 man.CloseConfigFile( );
             }
