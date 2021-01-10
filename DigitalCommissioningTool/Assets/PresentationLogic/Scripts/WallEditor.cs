@@ -246,7 +246,6 @@ public class WallEditor : MonoBehaviour
         {
             wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
         }
-        GameManager.SaveProject(GameManager.OpenProjectData.ProjectName);
     }
 
     /// <summary>
@@ -509,7 +508,7 @@ public class WallEditor : MonoBehaviour
     {
         string scaleLengthText = inputNumberOfWalls.text;
         bool isNumeric = int.TryParse(scaleLengthText, out int scaleLength);
-        if (!string.IsNullOrEmpty(scaleLengthText) && isNumeric && scaleLength > 0)
+        if (!string.IsNullOrEmpty(scaleLengthText) && isNumeric && scaleLength != 0)
         {
             SelectedObjectTransform = selectionManager.SelectedObject;
             int length = Convert.ToInt32(inputNumberOfWalls.text);
