@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:Config xs:dataCount="3" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
+<xs:Config xs:dataCount="4" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
     <xs:ComplexData xs:name="WarehouseItemListPosition" xs:id="1" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
             <xs:Property xs:type="Single" xs:value="0">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="320,53">
+            <xs:Property xs:type="Single" xs:value="206.53">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="1053">
+            <xs:Property xs:type="Single" xs:value="587.9999">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>
@@ -20,13 +20,23 @@
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>
-    <xs:ComplexData xs:name="WarehouseEditItemPosition" xs:id="3" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
+    <xs:ComplexData xs:name="ScaleWallPosition" xs:id="3" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
             <xs:Property xs:type="Single" xs:value="0">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="325,47">
+            <xs:Property xs:type="Single" xs:value="280.45">
             </xs:Property>
-            <xs:Property xs:type="Single" xs:value="820">
+            <xs:Property xs:type="Single" xs:value="311.95">
+            </xs:Property>
+        </xs:Values>
+    </xs:ComplexData>
+    <xs:ComplexData xs:name="WallEditorPosition" xs:id="4" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
+        <xs:Values xs:propertyCount="3">
+            <xs:Property xs:type="Single" xs:value="0">
+            </xs:Property>
+            <xs:Property xs:type="Single" xs:value="177.73">
+            </xs:Property>
+            <xs:Property xs:type="Single" xs:value="452.9799">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>

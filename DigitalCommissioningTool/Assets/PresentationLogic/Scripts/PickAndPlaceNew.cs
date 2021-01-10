@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ApplicationFacade.Application;
-using ApplicationFacade.Warehouse;
 
 
 public class PickAndPlaceNew : MonoBehaviour
 {
-    public GameObject selected; //= ausgewähltes Regal
-    bool isDragging; //= true wenn ein Regal ausgewählt
-    float lastPosX; //= letzte MausPosition (X)
-    float lastPosZ; //= letzte MausPosition (Z)
+    public GameObject selected;                 //= ausgewähltes Regal
+    bool isDragging;                            //= true wenn ein Regal ausgewählt
+    float lastPosX;                             //= letzte MausPosition (X)
+    float lastPosZ;                             //= letzte MausPosition (Z)
     public LayerMask m_LayerMask, mask;
-    bool moveX, moveZ; //=true wenn jeweilige Achse ausgewählt     
-    public Material material1, material2; //material bei Kollision ändern (material1 = ok(blau), material2 = Kollision(rot))
+    bool moveX, moveZ;                          //=true wenn jeweilige Achse ausgewählt     
+    public Material material1, material2;       //material bei Kollision ändern (material1 = ok(blau), material2 = Kollision(rot))
     Renderer rend;
-    Transform invisibleWall; //zum färben (Kindelement von Regal: "Überzug" ohne Kollider)            
-    int rotation; //gesamt Rotation       
-    int rotationRight; //Rotation im Uhrzeigersinn
-    int rotationLeft; //Rotation gen den Uhrzeigersinn
-
-    private GameObject SwitchModeButton;
-    private ModeHandler ModeHandler;
+    Transform invisibleWall;                    //zum färben (Kindelement von Regal: "Überzug" ohne Kollider)            
+    int rotation;                               //gesamt Rotation       
+    int rotationRight;                          //Rotation im Uhrzeigersinn
+    int rotationLeft;                           //Rotation gen den Uhrzeigersinn
 
     // Start is called before the first frame update
     void Start()
@@ -35,22 +31,21 @@ public class PickAndPlaceNew : MonoBehaviour
         rotation = 0;
         rotationRight = 0;
         rotationLeft = 0;
-        SwitchModeButton = GameObject.Find("SwitchModeButton");
-        ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
         SelectionManager.StorageSelected += OnStorageSelected;
     }
 
     //Auswahl Regal :
     private void OnStorageSelected(Transform storage)
     {
-        if (ModeHandler.Mode.Equals("EditorMode"))
-        {
-            selected = storage.gameObject;
-            isDragging = true;
-        }
+        selected = storage.gameObject;
+        isDragging = true;
+
     }
 
-    //Gibt zurück ob Objekt getroffen:
+    /// <summary>
+    /// Gibt zurück ob Objekt(e) getroffen werden 
+    /// </summary>
+    /// <returns></returns>
     private bool HitSomething()
     {
         BoxCollider c = selected.GetComponent<BoxCollider>();
@@ -58,17 +53,18 @@ public class PickAndPlaceNew : MonoBehaviour
         bool collisonDetected = false;
         foreach (Collider collider in hitColliders)
         {
-            if ((collider.gameObject != selected && collider.transform.parent != selected.transform && collider.transform.parent.parent != selected.transform && !collider.CompareTag("SelectableFloor"))
-            ) //keine Kollision mit sich selber oder dem Boden 
+            if ((collider.gameObject != selected && collider.transform.parent != selected.transform && collider.transform.parent.parent != selected.transform && !collider.CompareTag("SelectableFloor")))         //keine Kollision mit sich selber oder dem Boden 
             {
                 collisonDetected = true;
             }
         }
-
         return collisonDetected;
     }
 
-    //Übergebenes Objekt rotieren
+    /// <summary>
+    /// rotiert Objekt
+    /// </summary>
+    /// <param name="selected"> Objekt das rotiert wird </param>
     private void Rotate(GameObject selected)
     {
         //rotation im Uhrzeigersinn berechnen:
@@ -76,7 +72,7 @@ public class PickAndPlaceNew : MonoBehaviour
         {
             //Debug.Log("x: " + selected.transform.eulerAngles.x + " y: " + selected.transform.eulerAngles.y + " z : " + selected.transform.eulerAngles.z);
 
-            if (rotationRight < 4) //ermitteln wie oft im Uhrzeigersinn rotiert wurde da nur 4 möglich sind => bei 4 = 0
+            if (rotationRight < 4)                      //ermitteln wie oft im Uhrzeigersinn rotiert wurde da nur 4 möglich sind => bei 4 = 0
             {
                 rotationRight++;
             }
@@ -86,7 +82,6 @@ public class PickAndPlaceNew : MonoBehaviour
                 rotationRight = 0;
             }
         }
-
         //Rotation gegen den Uhrzeigersinn berechnen (beinahe identisch wie im Uhrzeiger sinn nur die Rotationswerte werden vertauscht)
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -100,37 +95,23 @@ public class PickAndPlaceNew : MonoBehaviour
                 rotationLeft = 0;
             }
         }
-
         //Gesamte Rotation:
-        rotation = rotationRight - rotationLeft; //Rotation gegenden Uhrzeigersinn abziehen um einen Wert für die gemeinsame rotation zu erhalten
+        rotation = rotationRight - rotationLeft;   //Rotation gegenden Uhrzeigersinn abziehen um einen Wert für die gemeinsame rotation zu erhalten
         if (rotation < 0)
         {
-            rotation = rotation + 4; //Um nicht zwichen positiven und negativen Werten unterscheiden zu müssen, wird der gesamtwert mit 4 (Rotationsmöglichkeiten) addiert
+            rotation = rotation + 4;               //Um nicht zwichen positiven und negativen Werten unterscheiden zu müssen, wird der gesamtwert mit 4 (Rotationsmöglichkeiten) addiert
         }
-
         //die einzelnen Rotationsmöglichkeiten:
-        if (rotation == 0)
-        {
-            selected.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-
-        if (rotation == 1)
-        {
-            selected.transform.rotation = Quaternion.Euler(0, 90, 0);
-        }
-
-        if (rotation == 2)
-        {
-            selected.transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-
-        if (rotation == 3)
-        {
-            selected.transform.rotation = Quaternion.Euler(0, 270, 0);
-        }
+        if (rotation == 0) { selected.transform.rotation = Quaternion.Euler(0, 0, 0); }
+        if (rotation == 1) { selected.transform.rotation = Quaternion.Euler(0, 90, 0); }
+        if (rotation == 2) { selected.transform.rotation = Quaternion.Euler(0, 180, 0); }
+        if (rotation == 3) { selected.transform.rotation = Quaternion.Euler(0, 270, 0); }
     }
 
-    //Bewegen mit Maus
+    /// <summary>
+    /// Bewegung mit Maus
+    /// </summary>
+    /// <param name="selected">Objekt das Bewegt werden soll</param>
     private void MoveAnywhere(GameObject selected)
     {
         //um die Mausposition zu finden
@@ -155,20 +136,18 @@ public class PickAndPlaceNew : MonoBehaviour
                 //(Wenn Objekt auf kamera zu fliegen => add layer floor -> boden hinzufügen und am würfel entfernen)
             }
         }
-    }
 
-    //Regal Platzieren 
+    }
+    
+    /// <summary>
+    /// Regal platzieren  
+    /// </summary>
     private void PlaceObject()
     {
         if (Input.GetKeyDown("return"))
         {
-            if (HitSomething() == false) //Platzieren (mit enter taste) nur zulassen wenn das Objekt nicht auf (bzw. sich in) einem anderen Objekt steht
+            if (HitSomething() == false)                         //Platzieren (mit enter taste) nur zulassen wenn das Objekt nicht auf (bzw. sich in) einem anderen Objekt steht
             {
-                //Position speichern
-                StorageData temp = GameManager.GameWarehouse.GetStorageRack(selected);
-                temp.SetPosition(selected.transform.position);
-                temp.SetScale(selected.transform.localScale);
-                temp.SetRotation(selected.transform.rotation);
                 //Werte wieder auf Anfangswerte setzten:
                 moveX = false;
                 moveZ = false;
@@ -179,7 +158,6 @@ public class PickAndPlaceNew : MonoBehaviour
                 invisibleWall = null;
                 selected = null;
             }
-
             /*else
             {   
                 Debug.Log("Cant Place on Object");
@@ -187,40 +165,47 @@ public class PickAndPlaceNew : MonoBehaviour
         }
     }
 
-    //In X-Richtung Bewegen
+    /// <summary>
+    /// in X Achse bewegen
+    /// </summary>
+    /// <param name="selected">Regal das bewegt werden soll</param>
     private void MoveInXAxis(GameObject selected)
     {
+
         //da die Achsenbewegung abhängig von der Kamera ist (Editormodus Kamera im Modehandler):
         ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();
-        Vector3 cameraRight = modeHandler.EditorModeCamera.transform.right; //camera right vector         
+        Vector3 cameraRight = modeHandler.EditorModeCamera.transform.right;                         //camera right vector         
         float x = 0;
         float speed = 2f;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
         {
-            x = Input.GetAxis("Horizontal") * speed; //neue x position je nachdem welche taste gedrückt 
+            x = Input.GetAxis("Horizontal") * speed;                                                //neue x position je nachdem welche taste gedrückt 
         }
         else
         {
-            x = Input.GetAxis("Mouse X") * speed; //x wert nach maus position (falls statt taste maus horizontal bewegt wird)
+            x = Input.GetAxis("Mouse X") * speed;                                                   //x wert nach maus position (falls statt taste maus horizontal bewegt wird)
         }
+        Vector3 pos = selected.transform.position;                                                  //pos = position des ausgweählten Objekts 
 
-        Vector3 pos = selected.transform.position; //pos = position des ausgweählten Objekts 
-
-        Vector3 cR = cameraRight; //cR = X-Achse (aus Kamera)
+        Vector3 cR = cameraRight;                                                                   //cR = X-Achse (aus Kamera)
         cR.y = 0;
         cR = cameraRight.normalized;
-        pos = new Vector3(pos.x, 0, (x * Time.deltaTime)); //aktualisiere pos mit neuem wert für pos.z
-        pos = cR * pos.z; //berechne pos mit camera.transform
+        pos = new Vector3(pos.x, 0, (x * Time.deltaTime));                                          //aktualisiere pos mit neuem wert für pos.z
+        pos = cR * pos.z;                                                                           //berechne pos mit camera.transform
 
-        selected.transform.Translate(pos, Space.World); //bewege Regal nach pos, Space.World damit unabhängig von rotation 
+        selected.transform.Translate(pos, Space.World);                                             //bewege Regal nach pos, Space.World damit unabhängig von rotation 
+
     }
 
-    //In Y-Richtung Bewegen
+    /// <summary>
+    /// in Y Achse bewegen
+    /// </summary>
+    /// <param name="selected">Regal das bewegt wird</param>
     private void MoveInYAxis(GameObject selected)
     {
         //Ähnlich wie MoveInXAxis nur mit der anderen Achse: 
         ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();
-        Vector3 cameraForward = modeHandler.EditorModeCamera.transform.forward; //camera.transform.forward für vertikale position
+        Vector3 cameraForward = modeHandler.EditorModeCamera.transform.forward;                          //camera.transform.forward für vertikale position
 
         float z = 0;
         float speed = 2f;
@@ -232,7 +217,6 @@ public class PickAndPlaceNew : MonoBehaviour
         {
             z = Input.GetAxis("Mouse Y") * speed;
         }
-
         Vector3 pos = selected.transform.position;
 
         Vector3 cF = cameraForward;
@@ -241,73 +225,72 @@ public class PickAndPlaceNew : MonoBehaviour
         pos = new Vector3((z * Time.deltaTime), 0, 0);
         pos = cF * pos.x;
         selected.transform.Translate(pos, Space.World);
+
     }
 
-    //Übergebenes Regal löschen
-    private void DeleteObject(GameObject selected)
+    /// <summary>
+    /// löscht Regal
+    /// </summary>
+    private void DeleteObject()
     {
         //Debug.Log("Delete " + selected.name);
         GameManager.GameWarehouse.RemoveStorageRack(GameManager.GameWarehouse.GetStorageRack(selected));
-        isDragging = false; //= false da kein Objekt mehr ausgewählt 
+        isDragging = false;     //= false da kein Objekt mehr ausgewählt 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isDragging && ModeHandler.Mode.Equals("EditorMode"))
+        if (isDragging)
         {
-            invisibleWall = selected.transform.Find("InvisibleWall"); //aus ausgwähltem Regal das Kindelement "invisibleWall" finden
-            rend = invisibleWall.GetComponent<Renderer>(); //renderer um später das Material zu ändern
+            invisibleWall = selected.transform.Find("InvisibleWall");               //aus ausgwähltem Regal das Kindelement "invisibleWall" finden
+            rend = invisibleWall.GetComponent<Renderer>();                          //renderer um später das Material zu ändern
             if (HitSomething())
             {
-                rend.material = material2; //material ändern wenn es sich auf einem Objekt befindet
+                rend.material = material2;                                          //material ändern wenn es sich auf einem Objekt befindet
             }
             else
             {
-                rend.material = material1; //material ändern wenn nicht mehr auf einem anderen Objekt ist    
+                rend.material = material1;                                          //material ändern wenn nicht mehr auf einem anderen Objekt ist    
             }
-
             Rotate(selected);
-            if (!moveX && !moveZ) //Wenn keine gewünschte Achse Angegeben erfolgt die Bewegung durch die Mausposition
+            if (!moveX && !moveZ)                                                   //Wenn keine gewünschte Achse Angegeben erfolgt die Bewegung durch die Mausposition
             {
                 MoveAnywhere(selected);
             }
-
             if (Input.GetKeyDown(KeyCode.X))
             {
                 moveX = true;
                 moveZ = false;
             }
-
-            if (moveX) //wenn x ausgewählt soll es nur möglich sein das Regal in X-Achse zu bewegen 
+            if (moveX)                                                              //wenn x ausgewählt soll es nur möglich sein das Regal in X-Achse zu bewegen 
             {
                 MoveInXAxis(selected);
             }
-
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 moveX = false;
                 moveZ = true;
             }
-
-            if (moveZ)
-            {
+            if (moveZ){                                                             //wenn y ausgewählt soll es nur möglich sein das Regal in y-Achse zu bewegen 
                 MoveInYAxis(selected);
             }
-
-            if (Input.GetKeyDown(KeyCode.Z)) //Z Taste wenn wieder mit Maus Bewegt werden soll 
+            if (Input.GetKeyDown(KeyCode.Z))                                        //Z Taste wenn wieder mit Maus Bewegt werden soll 
             {
                 moveX = false;
                 moveZ = false;
             }
-
             if (Input.GetKey(KeyCode.Delete) || Input.GetKey(KeyCode.Backspace))
-            {
-                //Mit entf oder backspace ausgewähltes Regal entfernen
-                DeleteObject(selected);
+            {  //Mit entf oder backspace ausgewähltes Regal entfernen
+                DeleteObject();
             }
-
             PlaceObject();
         }
     }
 }
+
+
+
+
+
+
