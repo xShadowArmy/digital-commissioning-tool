@@ -91,6 +91,7 @@
             <e p="PickAndPlaceNew.cs" t="Include" />
             <e p="QueueMenu.cs" t="Include" />
             <e p="ResourceHandler.cs" t="Include" />
+            <e p="SaveProject.cs" t="Include" />
             <e p="SelectionManager.cs" t="Include" />
             <e p="SwitchWallModules.cs" t="Include" />
             <e p="TestPascal.cs" t="Include" />

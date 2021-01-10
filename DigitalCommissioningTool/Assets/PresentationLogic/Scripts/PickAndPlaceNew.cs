@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
 
 
 public class PickAndPlaceNew : MonoBehaviour
@@ -18,6 +19,9 @@ public class PickAndPlaceNew : MonoBehaviour
     int rotation;                               //gesamt Rotation       
     int rotationRight;                          //Rotation im Uhrzeigersinn
     int rotationLeft;                           //Rotation gen den Uhrzeigersinn
+    
+    private GameObject SwitchModeButton;
+    private ModeHandler ModeHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +35,20 @@ public class PickAndPlaceNew : MonoBehaviour
         rotation = 0;
         rotationRight = 0;
         rotationLeft = 0;
+        
+        SwitchModeButton = GameObject.Find("SwitchModeButton");
+        ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
         SelectionManager.StorageSelected += OnStorageSelected;
     }
 
     //Auswahl Regal :
     private void OnStorageSelected(Transform storage)
     {
-        selected = storage.gameObject;
-        isDragging = true;
+        if (ModeHandler.Mode.Equals("EditorMode"))
+        {
+            selected = storage.gameObject;
+            isDragging = true;
+        }
 
     }
 
@@ -148,6 +158,11 @@ public class PickAndPlaceNew : MonoBehaviour
         {
             if (HitSomething() == false)                         //Platzieren (mit enter taste) nur zulassen wenn das Objekt nicht auf (bzw. sich in) einem anderen Objekt steht
             {
+                //Position speichern
+                StorageData temp = GameManager.GameWarehouse.GetStorageRack(selected);
+                temp.SetPosition(selected.transform.position);
+                temp.SetScale(selected.transform.localScale);
+                temp.SetRotation(selected.transform.rotation);
                 //Werte wieder auf Anfangswerte setzten:
                 moveX = false;
                 moveZ = false;
@@ -241,7 +256,7 @@ public class PickAndPlaceNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDragging)
+        if (isDragging && ModeHandler.Mode.Equals("EditorMode"))
         {
             invisibleWall = selected.transform.Find("InvisibleWall");               //aus ausgwähltem Regal das Kindelement "invisibleWall" finden
             rend = invisibleWall.GetComponent<Renderer>();                          //renderer um später das Material zu ändern

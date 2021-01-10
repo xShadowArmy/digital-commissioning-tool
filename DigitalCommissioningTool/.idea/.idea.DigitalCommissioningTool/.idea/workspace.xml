@@ -30,29 +30,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MoveableStorageRack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MoveableStorageRack.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DefaultWarehouse.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Environment/Launcher/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Environment/Launcher/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/asdfg.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/mmm.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/nnn.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/test.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/test123.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/test1234.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/test6789.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/zxc.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Resources/Strings/English.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Strings/English.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Resources/Strings/German.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Strings/German.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,11 +79,11 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/LoadSceneData.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/AddStorage.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
       </list>
     </option>
   </component>
@@ -169,7 +153,7 @@
       <workItem from="1609933987648" duration="21007000" />
       <workItem from="1610111866075" duration="3896000" />
       <workItem from="1610193953972" duration="16266000" />
-      <workItem from="1610277068323" duration="2964000" />
+      <workItem from="1610277068323" duration="3911000" />
     </task>
     <servers />
   </component>
