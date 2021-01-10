@@ -110,6 +110,7 @@ namespace ProjectComponents.FileIntegration
                     container.Container.Add( data );
 
                     nav.MoveToParent( );
+                    nav.MoveToNext( "Container", xmlns);
                 } 
             }
 

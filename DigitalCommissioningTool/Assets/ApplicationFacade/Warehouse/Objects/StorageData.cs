@@ -354,25 +354,53 @@ namespace ApplicationFacade.Warehouse
 
         protected override void ObjectChanged()
         {
-            foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
+            if ( !IsContainer )
             {
-                if ( data.ID == GetID( ) )
+                foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
                 {
-                    GameManager.GameWarehouse.Data.StorageRacks.Remove( data );
-
-                    ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
-
-                    for( int i = 0; i < Data.Length; i++ )
+                    if ( data.ID == GetID( ) )
                     {
-                        if ( Data[i] != null )
+                        GameManager.GameWarehouse.Data.StorageRacks.Remove( data );
+
+                        ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
+
+                        for( int i = 0; i < Data.Length; i++ )
                         {
-                            storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID(), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
+                            if ( Data[i] != null )
+                            {
+                                storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID(), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
+                            }
                         }
+
+                        GameManager.GameWarehouse.Data.StorageRacks.Add( storage );
+
+                        break;
                     }
+                }
+            }
 
-                    GameManager.GameWarehouse.Data.StorageRacks.Add( storage );
+            else
+            {
+                foreach ( ProjectStorageData data in GameManager.GameContainer.Data.Container )
+                {
+                    if ( data.ID == GetID( ) )
+                    {
+                        GameManager.GameContainer.Data.Container.Remove( data );
 
-                    break;
+                        ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
+
+                        for ( int i = 0; i < Data.Length; i++ )
+                        {
+                            if ( Data[i] != null )
+                            {
+                                storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID( ), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
+                            }
+                        }
+
+                        GameManager.GameContainer.Data.Container.Add( storage );
+
+                        break;
+                    }
                 }
             }
         }

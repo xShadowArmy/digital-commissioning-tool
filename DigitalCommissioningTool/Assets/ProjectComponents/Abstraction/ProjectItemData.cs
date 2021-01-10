@@ -7,20 +7,58 @@ using SystemTools;
 
 namespace ProjectComponents.Abstraction
 {
+    /// <summary>
+    /// Darstellung eines Items in den Projektdateien.
+    /// </summary>
     public class ProjectItemData : ISerialConfigData
     {
+        /// <summary>
+        /// Die Anzahl des Items.
+        /// </summary>
         public int Count { get; set; }
+
+        /// <summary>
+        /// Das Gewicht des Items.
+        /// </summary>
         public double Weight { get; set; }
+
+        /// <summary>
+        /// Der Name des Items.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Die ID des Items.
+        /// </summary>
         public long ID { get; set; }
+
+        /// <summary>
+        /// Die ID Referenz des Parent Items.
+        /// </summary>
         public long IDRef { get; set; }
+
+        /// <summary>
+        /// Die Transformationsdaten des Items.
+        /// </summary>
         public ProjectTransformationData Transformation { get; private set; }
          
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         public ProjectItemData()
         {
 
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="idRef">Die ID Referenz des Parent Items.</param>
+        /// <param name="id">Die ID des Items.</param>
+        /// <param name="count">Die Anzahl des Items.</param>
+        /// <param name="weight">Das Gewicht des Items.</param>
+        /// <param name="name">Der Name des Items.</param>
+        /// <param name="transformation">Die Transformationsdaten des Items.</param>
         public ProjectItemData( long idRef, long id, int count, double weight, string name, ProjectTransformationData transformation )
         {
             ID = id;
@@ -31,6 +69,10 @@ namespace ProjectComponents.Abstraction
             Transformation = transformation;
         }
         
+        /// <summary>
+        /// Serialisiert das Objekt.
+        /// </summary>
+        /// <param name="storage">Wird zum Speichern der Werte verwendet.</param>
         public void Serialize( SerialConfigData storage )
         {
             storage.AddData( Name );
@@ -39,6 +81,10 @@ namespace ProjectComponents.Abstraction
             storage.AddData( IDRef );
         }
 
+        /// <summary>
+        /// Stellt die Werte wieder her.
+        /// </summary>
+        /// <param name="storage">Wird zum wiederherstellen der Items verwendet.</param>
         public void Restore( SerialConfigData storage )
         {
             Name   = storage.GetValueAsString( );

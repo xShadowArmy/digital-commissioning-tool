@@ -240,12 +240,13 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     public void OnAddInnerWallButtonClicked()
     {
-        Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 20))
-        {
-            wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
-        }
+        //Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit hit;
+        //if (Physics.Raycast(ray, out hit, 20))
+        //{
+        //    wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
+        // }
+        GameManager.GameWarehouse.CreateWall( ObjectSpawn.transform.position, ObjectSpawn.transform.rotation, new Vector3(1f,1f,1f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
     }
 
     /// <summary>
@@ -426,8 +427,8 @@ public class WallEditor : MonoBehaviour
                 Vector3 localScale = window.Scale;
                 Quaternion rotation = window.Rotation;
 
-                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class);
-                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, window.Face, window.Class);
+                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, new Vector3( 1f, 3.2f, 0.2f ), window.Face, window.Class);
+                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, new Vector3( 1f, 3.2f, 0.2f ), window.Face, window.Class);
             }
 
             else if (SelectedObjectTransform.CompareTag("SelectableDoor"))
@@ -439,8 +440,8 @@ public class WallEditor : MonoBehaviour
                 Vector3 localScale = door.Scale;
                 Quaternion rotation = door.Rotation;
 
-                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, door.Face, door.Class);
-                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, SelectedObjectTransform.localScale, door.Face, door.Class);
+                GameManager.GameWarehouse.CreateWall(position - SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, new Vector3( 1f, 3.2f, 0.2f ), door.Face, door.Class);
+                GameManager.GameWarehouse.CreateWall(position + SelectedObjectTransform.TransformDirection(Vector3.left * (localScale.x / 2.0f)), rotation, new Vector3( 1f, 3.2f, 0.2f ), door.Face, door.Class);
             }
         }
 
@@ -453,7 +454,7 @@ public class WallEditor : MonoBehaviour
     public void SetPopUp()
     {
         SelectedObjectTransform = selectionManager.SelectedObject;
-        string wand = null;
+
         string s = "";
         if (SelectedObjectTransform.parent != null)
         {
@@ -680,7 +681,7 @@ public class WallEditor : MonoBehaviour
                         if (!foundOuterWall)
                         {
                             Vector3 dirHitInnerWall = new Vector3();
-                            GameManager.GameWarehouse.CreateWall(position, wall.Rotation, wall.Scale, wall.Face, wall.Class, "SelectableWall");
+                            GameManager.GameWarehouse.CreateWall(position, wall.Rotation, new Vector3( 1f, 3.2f, 0.2f ), wall.Face, wall.Class, "SelectableWall");
                             wall.SetPosition(wall.Position + Vector3.Scale(new Vector3(localScale.x, 0, localScale.x), direction));
 
                             if (hitsInnerWall)

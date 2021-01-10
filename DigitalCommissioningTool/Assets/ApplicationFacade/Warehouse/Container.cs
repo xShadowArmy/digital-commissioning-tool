@@ -44,7 +44,10 @@ namespace ApplicationFacade.Warehouse
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
             
-            StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale );
+            StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale )
+            {
+                IsContainer = true
+            };
             
             container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
             
@@ -65,7 +68,10 @@ namespace ApplicationFacade.Warehouse
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
 
-            StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), position, rotation, scale );
+            StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), position, rotation, scale )
+            {
+                IsContainer = true
+            };
 
             container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), position, rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
 
@@ -86,14 +92,7 @@ namespace ApplicationFacade.Warehouse
         {
             LogManager.WriteInfo( "Mobiles Regal wird hinzugefuegt.", "Warehouse", "AddContainer" );
 
-            GameObject objSpawn = GameManager.GameWarehouse.ObjectSpawn;
-
-            if ( objSpawn == null )
-            {
-                objSpawn = GameObject.FindWithTag( "Respawn" );
-            }
-
-            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), objSpawn.transform.position, objSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), container.Position, container.Rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
 
             container.Object.name = "Container" + container.GetID( );
 
@@ -101,7 +100,7 @@ namespace ApplicationFacade.Warehouse
 
             container.ChangeSlotCount( new StorageSlotCalculation() );
 
-            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.GetItems.Length, new ProjectTransformationData( objSpawn.transform.position, objSpawn.transform.rotation, objSpawn.transform.localScale ) ) );
+            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.GetItems.Length, new ProjectTransformationData( container.Position, container.Rotation, container.Scale ) ) );
 
             OnSContainerCreated( container );
         }

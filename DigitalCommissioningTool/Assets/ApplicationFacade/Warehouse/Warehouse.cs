@@ -311,6 +311,11 @@ namespace ApplicationFacade.Warehouse
             }
 
             CreateWallObject( wall, tag );
+
+            if ( wall.Class == WallClass.Inner )
+            {
+                wall.Object.transform.localScale = wall.Scale;
+            }
         }
 
         /// <summary>

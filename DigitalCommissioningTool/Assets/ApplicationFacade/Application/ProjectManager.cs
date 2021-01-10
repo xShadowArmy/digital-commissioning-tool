@@ -130,10 +130,10 @@ namespace ApplicationFacade.Application
             ReadProjectStock( );
 
             InternalProjectWarehouse iwarehouse = WHandler.LoadFile( );
-            ReadProjectWarehouse( iwarehouse, warehouse );
+            ReadProjectWarehouse( ref iwarehouse, ref warehouse );
             
             InternalProjectContainer icontainer = CHandler.LoadFile( );
-            ReadProjectContainer( icontainer, container );
+            ReadProjectContainer( ref icontainer, ref container );
 
             FinishLoad?.Invoke( );
         }
@@ -300,7 +300,7 @@ namespace ApplicationFacade.Application
 
         }
 
-        private static void ReadProjectWarehouse( InternalProjectWarehouse iwarehouse, Warehouse.Warehouse warehouse )
+        private static void ReadProjectWarehouse( ref InternalProjectWarehouse iwarehouse, ref Warehouse.Warehouse warehouse )
         {
             for( int i = 0; i < iwarehouse.Floor.Count; i++ )
             {
@@ -365,8 +365,6 @@ namespace ApplicationFacade.Application
 
                 warehouse.AddStorageRack( data );
 
-                data.ChangeSlotCount( new StorageSlotCalculation( data.SlotCount, 4, new Vector3(0.8f, 0.04f, 2f ), 0.5f ) );
-
                 for ( int j = 0; j < iwarehouse.StorageRacks[i].Items.Length; j++ )
                 {
                     if ( iwarehouse.StorageRacks[i].Items[j] != null )
@@ -379,7 +377,7 @@ namespace ApplicationFacade.Application
             }
         }
 
-        private static void ReadProjectContainer( InternalProjectContainer icontainer, Container container )
+        private static void ReadProjectContainer( ref InternalProjectContainer icontainer, ref Container container )
         {
             for( int i = 0; i < icontainer.Container.Count; i++ )
             {
@@ -388,7 +386,8 @@ namespace ApplicationFacade.Application
                     Position = icontainer.Container[i].Transformation.Position,
                     Rotation = icontainer.Container[i].Transformation.Rotation,
                     Scale = icontainer.Container[i].Transformation.Scale,
-                    SlotCount = icontainer.Container[i].SlotCount
+                    SlotCount = icontainer.Container[i].SlotCount,
+                    IsContainer = true
                 };
 
                 container.AddContainer( data );

@@ -44,6 +44,7 @@ namespace ApplicationFacade.Application
         static GameManager()
         {
             GameWarehouse = new Warehouse.Warehouse( );
+            GameContainer = new Container( );
             PManager = new ProjectManager( );
         }
 
