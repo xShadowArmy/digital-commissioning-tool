@@ -133,6 +133,6 @@
         <xs:value>Name</xs:value>
     </xs:string>
     <xs:string xs:name="DistributeItemConfirm" xs:id="45">
-        <xs:value>Hinzufügen</xs:value>
+        <xs:value>Bestätigen</xs:value>
     </xs:string>
 </xs:StringResources>
