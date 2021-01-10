@@ -501,7 +501,7 @@ public class WallEditor : MonoBehaviour
     {
         string scaleLengthText = inputNumberOfWalls.text;
         bool isNumeric = int.TryParse(scaleLengthText, out int scaleLength);
-        if (!string.IsNullOrEmpty(scaleLengthText) && isNumeric && scaleLength > 0)
+        if (!string.IsNullOrEmpty(scaleLengthText) && isNumeric && scaleLength != 0)
         {
             SelectedObjectTransform = selectionManager.SelectedObject;
             int length = Convert.ToInt32(inputNumberOfWalls.text);
