@@ -26,7 +26,6 @@ public class WallEditor : MonoBehaviour
     [SerializeField] private GameObject ObjectSpawn;
 
     public GameObject popUp;
-    public Text myText;
     public LayerMask mask;
 
     private Vector3 oldMousePos = new Vector3(0, 0, 0);
@@ -454,27 +453,9 @@ public class WallEditor : MonoBehaviour
             s = SelectedObjectTransform.parent.name;
         }
 
-        switch (s)
-        {
-            case "WallNorth":
-                wand = "Nordwand";
-                break;
-            case "WallEast":
-                wand = "Ostwand";
-                break;
-            case "WallSouth":
-                wand = "Südwand";
-                break;
-            case "WallWest":
-                wand = "Westwand";
-                break;
-            default:
-                wand = "Wand";
-                break;
-        }
+      
 
-        myText.text = "Geben Sie die gewünschte Länge von der " + wand + " ein";
-
+        
         if (selectionManager != null && !selectionManager.selected)
         {
             popUp.SetActive(selectionManager.selected);
@@ -495,26 +476,7 @@ public class WallEditor : MonoBehaviour
             s = SelectedObjectTransform.parent.name;
         }
 
-        switch (s)
-        {
-            case "WallNorth":
-                wand = "Nordwand";
-                break;
-            case "WallEast":
-                wand = "Ostwand";
-                break;
-            case "WallSouth":
-                wand = "Südwand";
-                break;
-            case "WallWest":
-                wand = "Westwand";
-                break;
-            default:
-                wand = "Wand";
-                break;
-        }
-
-        myText.text = "Geben Sie die gewünschte Länge zum Erweitern der " + wand + " ein";
+       
 
         if (selectionManager != null && !selectionManager.selected)
         {
