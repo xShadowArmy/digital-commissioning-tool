@@ -395,9 +395,12 @@ namespace ApplicationFacade.Application
 
                 for ( int j = 0; j < icontainer.Container[ i ].Items.Length; j++ )
                 {
-                    ItemData item = ItemData.RequestStockItem( icontainer.Container[i].Items[j].Name );
+                    if ( icontainer.Container[i].Items[j] != null )
+                    {
+                        ItemData item = ItemData.RequestStockItem( icontainer.Container[i].Items[j].Name );
 
-                    data.AddItem(  item.RequestItem( icontainer.Container[i].Items[j].Count ), j );
+                        data.AddItem( item.RequestItem( icontainer.Container[i].Items[j].Count ), j );
+                    }
                 }
             }
         }

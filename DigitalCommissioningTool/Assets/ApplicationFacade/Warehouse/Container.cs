@@ -46,7 +46,7 @@ namespace ApplicationFacade.Warehouse
             
             StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale );
             
-            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectsWithTag( "SelectableStorage" )[1], GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
             
             container.Object.name = "Container" + container.GetID( );
 
@@ -67,7 +67,7 @@ namespace ApplicationFacade.Warehouse
 
             StorageData container = new StorageData( Warehouse.GetUniqueID( ContainerData.ToArray( ) ), position, rotation, scale );
 
-            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), position, rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), position, rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
 
             container.Object.name = "Container" + container.GetID( );
 
@@ -86,13 +86,22 @@ namespace ApplicationFacade.Warehouse
         {
             LogManager.WriteInfo( "Mobiles Regal wird hinzugefuegt.", "Warehouse", "AddContainer" );
 
-            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableStorage" ), GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "StorageRackDefinition" ).transform ) );
+            GameObject objSpawn = GameManager.GameWarehouse.ObjectSpawn;
+
+            if ( objSpawn == null )
+            {
+                objSpawn = GameObject.FindWithTag( "Respawn" );
+            }
+
+            container.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableContainer" ), objSpawn.transform.position, objSpawn.transform.rotation, GameObject.FindGameObjectWithTag( "ContainerDefinition" ).transform ) );
 
             container.Object.name = "Container" + container.GetID( );
 
             ContainerData.Add( container );
 
-            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.GetItems.Length, new ProjectTransformationData( GameManager.GameWarehouse.ObjectSpawn.transform.position, GameManager.GameWarehouse.ObjectSpawn.transform.rotation, GameManager.GameWarehouse.ObjectSpawn.transform.localScale ) ) );
+            container.ChangeSlotCount( new StorageSlotCalculation() );
+
+            Data.Container.Add( new ProjectStorageData( container.GetID( ), container.GetItems.Length, new ProjectTransformationData( objSpawn.transform.position, objSpawn.transform.rotation, objSpawn.transform.localScale ) ) );
 
             OnSContainerCreated( container );
         }

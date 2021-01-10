@@ -82,7 +82,8 @@ public class SelectionManager : MonoBehaviour
                     Transform tempObject = hit.transform;
                     if (tempObject.CompareTag("SelectableWall") || tempObject.CompareTag("SelectableWindow") || tempObject.CompareTag("SelectableDoor") || tempObject.CompareTag("LeftWallRim") ||
                         tempObject.CompareTag("RightWallRim") || tempObject.CompareTag("SelectableInnerWall") || tempObject.CompareTag("SelectableAttachedInnerWall") ||
-                        tempObject.CompareTag("SelectableStorage") || FindParentWithTag(ref tempObject, "SelectableStorage") != null
+                        tempObject.CompareTag("SelectableStorage") || tempObject.CompareTag( "SelectableContainer" ) || FindParentWithTag(ref tempObject, "SelectableStorage") != null ||
+                        FindParentWithTag( ref tempObject, "SelectableContainer" ) != null
                     )
                     {
                         if (SelectedObject != null)
@@ -113,15 +114,18 @@ public class SelectionManager : MonoBehaviour
                                 OnRightWallRimSelected(SelectedObject);
                                 break;
                             case "SelectableInnerWall":
+                                OnStorageSelected( null );
                                 OnInnerWallSelected(SelectedObject);
                                 break;
                             case "SelectableAttachedInnerWall":
                                 OnAttachedInnerWallSelected(SelectedObject);
+                                OnStorageSelected( null );
                                 break;
                             case "SelectableStorage":
                                 OnStorageSelected(SelectedObject);
                                 break;
                             case "SelectableContainer":
+                                OnStorageSelected( null );
                                 OnMovableStorageSelected(SelectedObject);
                                 break;
                         }

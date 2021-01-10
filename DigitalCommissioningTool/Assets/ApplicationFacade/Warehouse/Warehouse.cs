@@ -845,7 +845,7 @@ namespace ApplicationFacade.Warehouse
         {
             if ( data.Class == WallClass.Outer )
             {
-                data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectWithTag( "SelectableWall" ), data.Position, data.Rotation, GameObject.FindGameObjectWithTag( data.Face.ToString( ) + "Wall" ).transform ) );
+                data.ChangeGameObject( GameObject.Instantiate( GameObject.FindGameObjectsWithTag( "SelectableWall" )[0], data.Position, data.Rotation, GameObject.FindGameObjectWithTag( data.Face.ToString( ) + "Wall" ).transform ) );
 
                 switch ( data.Face )
                 {
@@ -1194,7 +1194,6 @@ namespace ApplicationFacade.Warehouse
 
                     OnStorageRackModified( 1, data );
 
-                    Object.Destroy( data.Object );
                     data.Destroy( );
 
                     return true;

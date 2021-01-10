@@ -10,15 +10,29 @@ using UnityEngine;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Ließt Container Daten aus einer Xml Datei.
+    /// </summary>
     internal class ContainerReader
     {
+        /// <summary>
+        /// Die Datei aus der die Daten gelesen werden.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="doc">Die Datei aus der gelesen werden soll.</param>
         internal ContainerReader( XmlDocument doc )
         {
             Doc = doc;
         }
 
+        /// <summary>
+        /// Ließt die Daten aus der Datei.
+        /// </summary>
+        /// <returns>Objekt das die gelesenen Daten enthält.</returns>
         internal InternalProjectContainer ReadFile()
         {
             LogManager.WriteInfo( "Datei \"Container.xml\" wird gelesen.", "ContainerReader", "ReadFile" );
@@ -74,15 +88,19 @@ namespace ProjectComponents.FileIntegration
 
                     for ( int j = 0; j < itemCount; j++ )
                     {
-                        long idRef = long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer );
-                        long iid = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
-                        string itemName = nav.GetAttribute( "itemName", xmlns );
-                        double weight = double.Parse( nav.GetAttribute( "itemWeight", xmlns ), NumberStyles.Number );
-                        int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ), NumberStyles.Integer );
+                        string name = nav.GetAttribute( "itemName", xmlns );
 
-                        item = new ProjectItemData( idRef, iid, count, weight, itemName, ReadTransformation( nav, xmlns ) );
-                        
-                        data.Items[int.Parse( nav.GetAttribute( "slot", xmlns ), NumberStyles.Integer )] = item;
+                        if ( !name.Equals( "null" ) )
+                        {
+                            long idRef  = long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer );
+                            long iid  = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
+                            double weight = double.Parse( nav.GetAttribute( "itemWeight", xmlns ), NumberStyles.Number );
+                            int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ) );
+
+                            item = new ProjectItemData( idRef, iid, count, weight, name, ReadTransformation( nav, xmlns ) );
+
+                            data.Items[int.Parse( nav.GetAttribute( "slot", xmlns ), NumberStyles.Integer )] = item;
+                        }
 
                         nav.MoveToNext( );
                     }
@@ -103,25 +121,84 @@ namespace ProjectComponents.FileIntegration
             return container;
         }
         
+        /// <summary>
+        /// Ließt die Transformationsdaten aus der Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit passender Position.</param>
+        /// <param name="xmlns">Xml Namespace der verwendet werden soll.</param>
+        /// <returns>Die gelesenen Transformationsdaten.</returns>
         private ProjectTransformationData ReadTransformation( XPathNavigator nav, string xmlns )
         {
             ProjectTransformationData data;
+            Vector3 position;
+            Vector3 rotation;
+            Vector3 scale;
 
             try
             {
                 nav.MoveToChild( "Position", xmlns );
 
-                Vector3 position = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
+                string x = nav.GetAttribute( "x", xmlns );
+                string y = nav.GetAttribute( "y", xmlns );
+                string z = nav.GetAttribute( "z", xmlns );
+
+                try
+                {
+                    position = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
+
+                catch ( Exception )
+                {
+                    x = x.Replace( ',', '.' );
+                    y = y.Replace( ',', '.' );
+                    z = z.Replace( ',', '.' );
+
+                    position = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
 
                 nav.MoveToNext( );
-                Vector3 rotation =  new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
+
+                x = nav.GetAttribute( "x", xmlns );
+                y = nav.GetAttribute( "y", xmlns );
+                z = nav.GetAttribute( "z", xmlns );
+
+                try
+                {
+                    rotation = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
+
+                catch ( Exception )
+                {
+                    x = x.Replace( ',', '.' );
+                    y = y.Replace( ',', '.' );
+                    z = z.Replace( ',', '.' );
+
+                    rotation = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
 
                 nav.MoveToNext( );
-                Vector3 scale = new Vector3( float.Parse( nav.GetAttribute( "x", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "y", xmlns ), NumberStyles.Float ), float.Parse( nav.GetAttribute( "z", xmlns ), NumberStyles.Float ) );
 
-                data = new ProjectTransformationData( position, Quaternion.Euler( rotation ), scale );
+                x = nav.GetAttribute( "x", xmlns );
+                y = nav.GetAttribute( "y", xmlns );
+                z = nav.GetAttribute( "z", xmlns );
+
+                try
+                {
+                    scale = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
+
+                catch ( Exception )
+                {
+                    x = x.Replace( ',', '.' );
+                    y = y.Replace( ',', '.' );
+                    z = z.Replace( ',', '.' );
+
+                    scale = new Vector3( float.Parse( x, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( y, NumberStyles.Float, new CultureInfo( "en-US" ) ), float.Parse( z, NumberStyles.Float, new CultureInfo( "en-US" ) ) );
+                }
 
                 nav.MoveToParent( );
+
+                data = new ProjectTransformationData( position, Quaternion.Euler( rotation ), scale );
 
                 return data;
             }

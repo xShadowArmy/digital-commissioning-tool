@@ -8,11 +8,24 @@ using UnityEngine;
 
 namespace SystemTools.Handler
 {
+    /// <summary>
+    /// Uebernimmt das Speichern und Laden fuer die verwendeten Pfade.
+    /// </summary>
     public class PathHandler
     {
+        /// <summary>
+        /// Tabelle mit den Pfaden und den passenden Namen als Schluessel.
+        /// </summary>
         private Dictionary<string,string> Table;
+
+        /// <summary>
+        /// Objekt fuer das Schreiben von Logs.
+        /// </summary>
         private LogHandler Logger;
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         public PathHandler()
         {
             Logger = new LogHandler( );
@@ -24,6 +37,11 @@ namespace SystemTools.Handler
             ReadPaths( );
         }
 
+        /// <summary>
+        /// Gibt den Pfad mit dem angegebenen Schluessel zurueck.
+        /// </summary>
+        /// <param name="name">Der Schluessel des Pfads.</param>
+        /// <returns>Der gespeicherte Pfad.</returns>
         public string RetrievePath( string name )
         {
             foreach ( KeyValuePair<string,string> tmp in Table )
@@ -37,6 +55,12 @@ namespace SystemTools.Handler
             return string.Empty;
         }
 
+        /// <summary>
+        /// Fuegt einen neuen Pfad der Tabelle hinzu.
+        /// </summary>
+        /// <param name="name">Der Key unter dem der Pfad gespeichert werden soll.</param>
+        /// <param name="path">Der Pfad der gespeichert werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool AddPath( string name, string path )
         {
             Logger.WriteInfo( "Pfad wird honzugefuegt", "PathHandler", "AddPath" );
@@ -51,6 +75,11 @@ namespace SystemTools.Handler
             }
         }
 
+        /// <summary>
+        /// Entfernt einen Pfad aus der Tabelle.
+        /// </summary>
+        /// <param name="name">Der Key des Pfads der entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemovePath( string name )
         {
             Logger.WriteInfo( "Pfad wird entfernt", "PathHandler", "RemovePath" );
@@ -65,6 +94,9 @@ namespace SystemTools.Handler
             }
         }
 
+        /// <summary>
+        /// Löscht alle Datein aus dem Temp Verzeichnis.
+        /// </summary>
         public void ClearTempPath()
         {
 #if DEBUG
@@ -86,6 +118,9 @@ namespace SystemTools.Handler
             }
         }
 
+        /// <summary>
+        /// Liest die Pfade aus der Datei.
+        /// </summary>
         private void ReadPaths()
         {
             string[ ] keys;

@@ -120,19 +120,19 @@
     <xs:string xs:name="Duration" xs:id="40">
         <xs:value>Duration</xs:value>
     </xs:string>
-	<xs:string xs:name="SelectedStorage" xs:id="41">
+    <xs:string xs:name="SelectedStorage" xs:id="41">
         <xs:value>Storage</xs:value>
     </xs:string>
-	<xs:string xs:name="CountDistributeItem" xs:id="42">
+    <xs:string xs:name="CountDistributeItem" xs:id="42">
         <xs:value>Count</xs:value>
     </xs:string>
-	<xs:string xs:name="DistributeItem" xs:id="43">
+    <xs:string xs:name="DistributeItem" xs:id="43">
         <xs:value>Add</xs:value>
     </xs:string>
-	<xs:string xs:name="NameDistributeItem" xs:id="44">
+    <xs:string xs:name="NameDistributeItem" xs:id="44">
         <xs:value>Name</xs:value>
     </xs:string>
-	<xs:string xs:name="DistributeItemConfirm" xs:id="45">
+    <xs:string xs:name="DistributeItemConfirm" xs:id="45">
         <xs:value>Add</xs:value>
     </xs:string>
 </xs:StringResources>

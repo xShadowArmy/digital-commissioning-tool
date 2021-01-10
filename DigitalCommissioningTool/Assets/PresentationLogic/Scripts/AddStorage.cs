@@ -27,7 +27,9 @@ public class AddStorage : MonoBehaviour
     //Wird ausgeführt wenn Button geklickt:
     void TaskOnClick()
     {
-        GameManager.SaveProject( GameManager.OpenProjectData.ProjectName );             //Erstellt Regal
+        //GameManager.GameContainer.CreateContainer( );
+        GameManager.GameWarehouse.CreateStorageRack( );
+        //GameManager.SaveProject( GameManager.OpenProjectData.ProjectName );             //Erstellt Regal
     }
 
     void Start()

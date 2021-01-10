@@ -8,15 +8,29 @@ using UnityEngine;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Ließt Projekt Lagerhaus Daten aus einer Xml Datei.
+    /// </summary>
     internal class WarehouseReader
     {
+        /// <summary>
+        /// Datei aus der gelesen wird.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="doc">Die Datei aus der die Daten gelesen werden.</param>
         internal WarehouseReader( XmlDocument doc )
         {
             Doc = doc;
         }
         
+        /// <summary>
+        /// Ließt die Daten aus der Datei.
+        /// </summary>
+        /// <returns>Objekt das die gelesenen Daten enthält.</returns>
         internal InternalProjectWarehouse ReadFile( )
         {
             LogManager.WriteInfo( "Datei \"Warehouse.xml\" wird gelesen.", "WarehouseReader", "ReadFile" );
@@ -57,6 +71,12 @@ namespace ProjectComponents.FileIntegration
             return warehouse;
         }
 
+        /// <summary>
+        /// Ließt die Daten über die Böden aus der Datei.
+        /// </summary>
+        /// <param name="nav">Der Navigator mit passender Position.</param>
+        /// <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void ReadFloor( XPathNavigator nav, InternalProjectWarehouse warehouse, string xmlns )
         {
             LogManager.WriteInfo( "Der Boden wird gelesen.", "WarehouseReader", "ReadFloor" );
@@ -92,6 +112,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Ließt die Daten über die Wände aus der Datei.
+        /// </summary>
+        /// <param name="nav">Der Navigator mit passender Position.</param>
+        /// <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void ReadWalls( XPathNavigator nav, InternalProjectWarehouse warehouse, string xmlns )
         {
             LogManager.WriteInfo( "Die Waende werden gelesen.", "WarehouseReader", "ReadWalls" );
@@ -127,6 +153,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Ließt die Daten über die Fenster aus der Datei.
+        /// </summary>
+        /// <param name="nav">Der Navigator mit passender Position.</param>
+        /// <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void ReadWindows( XPathNavigator nav, InternalProjectWarehouse warehouse, string xmlns )
         {
             LogManager.WriteInfo( "Die Fenster werden gelesen.", "WarehouseReader", "ReadWindows" );
@@ -162,6 +194,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Ließt die Daten über die Türen aus der Datei.
+        /// </summary>
+        /// <param name="nav">Der Navigator mit passender Position.</param>
+        /// <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void ReadDoors( XPathNavigator nav, InternalProjectWarehouse warehouse, string xmlns )
         {
             LogManager.WriteInfo( "Die Tueren werden gelesen.", "WarehouseReader", "ReadDoors" );
@@ -197,6 +235,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Ließt die Daten über die Regale aus der Datei.
+        /// </summary>
+        /// <param name="nav">Der Navigator mit passender Position.</param>
+        /// <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void ReadStorageRecks( XPathNavigator nav, InternalProjectWarehouse warehouse, string xmlns )
         {
             LogManager.WriteInfo( "Die Regale werden gelesen.", "WarehouseReader", "ReadStorageRecks" );
@@ -279,6 +323,11 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Ließt die Transformationsdaten aus der Datei.
+        /// </summary>
+        /// <param name="nav">Der Navigator mit passender Position.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private ProjectTransformationData ReadTransformation( XPathNavigator nav, string xmlns )
         {
             ProjectTransformationData data;

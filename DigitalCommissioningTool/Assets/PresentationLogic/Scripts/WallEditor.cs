@@ -31,6 +31,7 @@ public class WallEditor : MonoBehaviour
     private Vector3 oldMousePos = new Vector3(0, 0, 0);
     private Transform SelectedObjectTransform;
     private WallData wall;
+    private bool moveObject = false;
     private bool innerWallSelected = false;
     private ModeHandler ModeHandler;
     private GameObject SwitchModeButton;
@@ -80,8 +81,13 @@ public class WallEditor : MonoBehaviour
             Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
+            if ( Input.GetKeyDown( KeyManager.MoveSelected.Code ) )
+            {
+                moveObject = true;
+            }
+
             //Drag
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+            if ( moveObject && Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
             {
                 Vector3 mousePos = new Vector3(hit.point.x, SelectedObjectTransform.localScale.y / 2, hit.point.z);
 
@@ -123,7 +129,7 @@ public class WallEditor : MonoBehaviour
             }
 
             //Place
-            if (Input.GetKeyUp(KeyCode.Return))
+            if ( moveObject && Input.GetMouseButtonDown(0) || Input.GetKeyDown( KeyCode.Return ) )
             {
                 //Snap to other Wall
                 if (objectsInRange.Count > 0)
@@ -176,6 +182,7 @@ public class WallEditor : MonoBehaviour
                 }
 
                 innerWallSelected = false;
+                moveObject = false;
                 selectionManager.ResetSelection();
             }
 

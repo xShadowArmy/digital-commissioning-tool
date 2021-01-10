@@ -10,15 +10,28 @@ using UnityEngine;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Schreibt die Daten des Projekt Lagerhauses in die Datei.
+    /// </summary>
     internal class WarehouseWriter
     {
+        /// <summary>
+        /// Die Datei in die geschrieben werden soll.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Initialisiert das Objekt.
+        /// </summary>
+        /// <param name="doc">Die Datei die verwendet werden soll.</param>
         internal WarehouseWriter( XmlDocument doc )
         {
             Doc = doc;
         }
-
+        /// <summary>
+        /// Schreibt die Datei.
+        /// </summary>
+        /// <param name="data">Enthält alle Daten die in die Datei geschrieben werden sollen.</param>
         internal void WriteFile( InternalProjectWarehouse data )
         {
             LogManager.WriteInfo( "Datei \"Warehouse.xml\" wird erstellt.", "WarehouseWriter", "WriteFile" );
@@ -72,6 +85,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Schreibt die Böden in die Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit Passender Position.</param>
+        /// <param name="data">Die Daten die Geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteFloor( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
         {
             if ( nav.LocalName.Equals( "Floor" ) )
@@ -111,6 +130,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Schreibt die Wände in die Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit Passender Position.</param>
+        /// <param name="data">Die Daten die Geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteWalls( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
         {
             if ( nav.LocalName.Equals( "Walls" ) )
@@ -153,6 +178,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Schreibt die Fenster in die Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit Passender Position.</param>
+        /// <param name="data">Die Daten die Geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteWindows( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
         {
             if ( nav.LocalName.Equals( "Windows" ) )
@@ -193,7 +224,13 @@ namespace ProjectComponents.FileIntegration
                 LogManager.WriteLog( "Datei \"Warehouse.xml\" konnte nicht erstellt werden! \"<Windows>\" Element wurde nicht gefunden!", LogLevel.Error, true, "WarehouseWriter", "WriteWindows" );
             }
         }
-
+        
+        /// <summary>
+        /// Schreibt die Türen in die Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit Passender Position.</param>
+        /// <param name="data">Die Daten die Geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteDoors( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
         {
             if ( nav.LocalName.Equals( "Doors" ) )
@@ -236,6 +273,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Schreibt die Regale in die Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit Passender Position.</param>
+        /// <param name="data">Die Daten die Geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteStorageRecks( XPathNavigator nav, InternalProjectWarehouse data, string xmlns )
         {
             if ( nav.LocalName.Equals( "StorageRacks" ) )
@@ -317,6 +360,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Schreibt die Transformationsdaten in die Datei.
+        /// </summary>
+        /// <param name="nav">Navigator mit Passender Position.</param>
+        /// <param name="data">Die Daten die Geschrieben werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteTransformationData( XPathNavigator nav, ProjectTransformationData data, string xmlns )
         {
             nav.AppendChildElement( "xs", "Position", xmlns, "" );
@@ -340,6 +389,9 @@ namespace ProjectComponents.FileIntegration
             nav.MoveToParent( );
         }
 
+        /// <summary>
+        /// Erstellt die Datei neu.
+        /// </summary>
         private void ReCreateFile()
         {
             try

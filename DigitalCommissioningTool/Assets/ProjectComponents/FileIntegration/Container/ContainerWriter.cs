@@ -10,15 +10,29 @@ using UnityEngine;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Schreibt Container Daten in eine Xml Datei.
+    /// </summary>
     internal class ContainerWriter
     {
+        /// <summary>
+        /// Die Datei in die geschrieben wird.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="doc">Die Datei in die geschrieben werden soll.</param>
         internal ContainerWriter( XmlDocument doc )
         {
             Doc = doc;
         }
         
+        /// <summary>
+        /// Schreibt die Daten in die Datei.
+        /// </summary>
+        /// <param name="data">Die Daten die gespeichert werden sollen.</param>
         internal void WriteFile( InternalProjectContainer data )
         {
             LogManager.WriteInfo( "Datei \"Container.xml\" wird erstellt.", "ContainerWriter", "WriteFile" );
@@ -120,6 +134,12 @@ namespace ProjectComponents.FileIntegration
             }
         }
         
+        /// <summary>
+        /// Schreibt Transformationsdaten in die Daeti.
+        /// </summary>
+        /// <param name="nav">Navigator mit passender Position.</param>
+        /// <param name="data">Daten die gespeichert werden sollen.</param>
+        /// <param name="xmlns">Der zu verwendende Xml Namespace.</param>
         private void WriteTransformationData( XPathNavigator nav, ProjectTransformationData data, string xmlns )
         {
             nav.AppendChildElement( "xs", "Position", xmlns, "" );
@@ -143,6 +163,9 @@ namespace ProjectComponents.FileIntegration
             nav.MoveToParent( );
         }
 
+        /// <summary>
+        /// Erstellt die Datei neu.
+        /// </summary>
         private void ReCreateFile()
         {
             try

@@ -9714,6 +9714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveableStorageRack
       objectReference: {fileID: 0}
+    - target: {fileID: 2114561045709557848, guid: f5eb5de138cd6b24b886aca5d1954313,
+        type: 3}
+      propertyPath: m_TagString
+      value: SelectableContainer
+      objectReference: {fileID: 0}
     - target: {fileID: 8134746215934325111, guid: f5eb5de138cd6b24b886aca5d1954313,
         type: 3}
       propertyPath: m_LocalPosition.x

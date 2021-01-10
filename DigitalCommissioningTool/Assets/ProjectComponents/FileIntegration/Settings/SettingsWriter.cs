@@ -10,15 +10,29 @@ using UnityEngine;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Schreibt Projekteinstellungen in eine Xml Datei.
+    /// </summary>
     internal class SettingsWriter
     {
+        /// <summary>
+        /// Die Datei in die geschrieben wird.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="doc">Die Datei in die geschrieben werden soll.</param>
         internal SettingsWriter( XmlDocument doc )
         {
             Doc = doc;
         }
 
+        /// <summary>
+        /// Schreibt die Datei.
+        /// </summary>
+        /// <param name="settings">Die Daten die gespeichert werden sollen.</param>
         internal void WriteFile( InternalProjectSettings settings )
         {
             LogManager.WriteInfo( "Datei \"Settings.xml\" wird erstellt.", "SettingsWriter", "WriteFile" );
@@ -53,6 +67,9 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Erstellt die Datei neu.
+        /// </summary>
         private void ReCreateFile()
         {
             try

@@ -9,31 +9,107 @@ using System.Reflection;
 
 namespace ApplicationFacade.Application
 {
+    /// <summary>
+    /// Verwaltet die Daten ueber belegte Tastenkombinationen.
+    /// </summary>
     public static class KeyManager
     {
+        /// <summary>
+        /// Taste fuer Objekt Rotation.
+        /// </summary>
         public static KeyData Rotate { get; set; }
+
+        /// <summary>
+        /// Taste fuer Objekt Rotation nach Links.
+        /// </summary>
         public static KeyData RotateLeft { get; set; }
+
+        /// <summary>
+        /// Taste fuer Objekt Rotation nach Rechts.
+        /// </summary>
         public static KeyData RotateRight { get; set; }
+
+        /// <summary>
+        /// Taste um die Kamera nach oben zu Bewegen.
+        /// </summary>
         public static KeyData MoveCameraUp { get; set; }
+
+        /// <summary>
+        /// Taste um die Kamera nach unten zu Bewegen.
+        /// </summary>
         public static KeyData MoveCameraDown { get; set; }
+
+        /// <summary>
+        /// Taste um Objekt an der X Achse zu Bewegen.
+        /// </summary>
         public static KeyData MoveXAxis { get; set; }
+
+        /// <summary>
+        /// Taste um Objekt an der Z Achse zu Bewegen.
+        /// </summary>
         public static KeyData MoveZAxis { get; set; }
+
+        /// <summary>
+        /// Taste um zwischen den Modi durchzuwaechseln.
+        /// </summary>
         public static KeyData ChangeMode { get; set; }
+
+        /// <summary>
+        /// Taste um ein Regal zu erstellen.
+        /// </summary>
         public static KeyData InsertStorageReck { get; set; }
+
+        /// <summary>
+        /// Taste um eine Waend einzufuegen.
+        /// </summary>
         public static KeyData InsertWall { get; set; }
+
+        /// <summary>
+        /// Taste um ein Fenster einzufuegen.
+        /// </summary>
         public static KeyData InsertWindow { get; set; }
+
+        /// <summary>
+        /// Taste um eine Tuer einzufuegen.
+        /// </summary>
         public static KeyData InsertDoor { get; set; }
+
+        /// <summary>
+        /// Taste um ein Tor einzufuegen.
+        /// </summary>
         public static KeyData InsertGate { get; set; }
+
+        /// <summary>
+        /// Taste um ein Item einzufuegen.
+        /// </summary>
         public static KeyData InsertItem { get; set; }
+
+        /// <summary>
+        /// Taste um das ausgewaehlte Objekt zu entfernen.
+        /// </summary>
         public static KeyData RemoveSelected { get; set; }
+
+        /// <summary>
+        /// Taste um das ausgewaehlte Objekt zu bewegen.
+        /// </summary>
         public static KeyData MoveSelected { get; set; }
+
+        /// <summary>
+        /// Taste um den Timer zu zu starten/stoppen.
+        /// </summary>
         public static KeyData ToogleTimer { get; set; }
 
+        /// <summary>
+        /// Laedt die standard Tastenbelegung.
+        /// </summary>
         static KeyManager()
         {
             SetDefault( );
         }
 
+        /// <summary>
+        /// Gibt die Daten ueber alle verfuegbaren Tastenkombinationen zurueck.
+        /// </summary>
         public static KeyData[] Keys
         {
             get
@@ -62,6 +138,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Laedt eine gespeicherte Tastenbelegung.
+        /// </summary>
         public static void LoadKeyConfiguration()
         {
             using ( ConfigManager man = new ConfigManager( ) )
@@ -91,6 +170,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Setzt die standard Tastenbelegung.
+        /// </summary>
         public static void SetDefault()
         {
             Rotate = new KeyData( KeyCode.R, false );
@@ -117,6 +199,9 @@ namespace ApplicationFacade.Application
             MoveSelected = new KeyData( KeyCode.M, false );
         }
 
+        /// <summary>
+        /// Speichert die aktuelle Tastenbelegung.
+        /// </summary>
         public static void SaveKeyConfiguration()
         {
             using ( ConfigManager man = new ConfigManager( ) )

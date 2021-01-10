@@ -3,8 +3,14 @@ using ProjectComponents.Abstraction;
 
 namespace ApplicationFacade.Application
 {
+    /// <summary>
+    /// Enthaelt allgemeine Daten ueber ein Projekt.
+    /// </summary>
     public class ProjectData
     {
+        /// <summary>
+        /// Der Name des Projekts.
+        /// </summary>
         public string ProjectName
         {
             get
@@ -18,6 +24,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Der Pfad des Projekts.
+        /// </summary>
         public string ProjectPath
         {
             get
@@ -31,6 +40,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Das Datum an dem das Projekt erstellt wurde.
+        /// </summary>
         public DateTime DateCreated
         {
             get
@@ -44,6 +56,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Das Datum an dem das Projekt zuletzt geaendert wurde.
+        /// </summary>
         public DateTime DateModified
         {
             get
@@ -57,8 +72,14 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Objekt das von der Facade ueberdeckt wird.
+        /// </summary>
         internal InternalProjectData Data { get; private set; }
-               
+             
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         internal ProjectData()
         {
             Data = new InternalProjectData( );

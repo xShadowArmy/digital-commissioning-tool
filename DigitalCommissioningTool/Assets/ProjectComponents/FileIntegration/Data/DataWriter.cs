@@ -8,15 +8,29 @@ using SystemFacade;
 
 namespace ProjectComponents.FileIntegration
 {
+    /// <summary>
+    /// Schreibt allgemeine Projektdaten in eine Xml Datei.
+    /// </summary>
     internal class DataWriter
     {
+        /// <summary>
+        /// Die Datei in die geschrieben werden soll.
+        /// </summary>
         private XmlDocument Doc { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="doc">Die Datei in die geschrieben werden soll.</param>
         internal DataWriter( XmlDocument doc )
         {
             Doc = doc;
         }
 
+        /// <summary>
+        /// Schreibt die Daten in die Datei.
+        /// </summary>
+        /// <param name="data">Die Daten die gespeichert werden sollen.</param>
         internal void WriteFile( InternalProjectData data )
         {
             LogManager.WriteInfo( "Datei \"Data.xml\" wird erstellt.", "DataWriter", "WriteFile" );
@@ -54,6 +68,9 @@ namespace ProjectComponents.FileIntegration
             }
         }
 
+        /// <summary>
+        /// Erstellt die Datei neu.
+        /// </summary>
         private void ReCreateFile()
         {
             try

@@ -7,12 +7,21 @@ using UnityEngine;
 
 namespace AppData.Warehouse
 {
+    /// <summary>
+    /// Algorithmus fuer die Generierung eines kleinen Lagerhauses.
+    /// </summary>
     public class SmallWarehouseStrategie : WarehouseStrategieBase
     {
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         public SmallWarehouseStrategie()
         {
         }
 
+        /// <summary>
+        /// Berechnet die Boeden.
+        /// </summary>
         public void GenerateFloor()
         {
             int j = 0;
@@ -21,6 +30,9 @@ namespace AppData.Warehouse
             Floor[j]   = new ObjectTransformation( new Vector3( 10.0f, 0, 0.5f ), Quaternion.Euler( 0, 90, 0 ), new Vector3( 3, 1f, 2.2f ) );
         }
 
+        /// <summary>
+        /// Berechnet die Waende.
+        /// </summary>
         public void GenerateWall()
         {
             Vector3 wallScale = new Vector3( 1f, 3.2f, 0.2f );
@@ -42,18 +54,30 @@ namespace AppData.Warehouse
             }
         }
 
+        /// <summary>
+        /// Berechnet die Tueren.
+        /// </summary>
         public void GenerateDoors()
         {
         }
 
+        /// <summary>
+        /// Berechnet die Regale.
+        /// </summary>
         public void GenerateStorageRacks()
         {
         }
-        
+
+        /// <summary>
+        /// Berechnet die Fenster.
+        /// </summary>
         public void GenerateWindows()
         {
         }
 
+        /// <summary>
+        /// Startet den Algorithmus.
+        /// </summary>
         public override void StartGeneration()
         {
             Floor = new ObjectTransformation[2];

@@ -9,16 +9,30 @@ using SystemTools.Handler;
 
 namespace SystemTools.Handler
 {
+    /// <summary>
+    /// Helper Methoden für das Archivieren und Entpacken von .Zip Verzeichnissen.
+    /// </summary>
     public class ArchiveHandler
     {
+        /// <summary>
+        /// Objekt zum Schreiben von Log Dateien.
+        /// </summary>
         private LogHandler Logger;
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         public ArchiveHandler()
         {
             Logger = new LogHandler( );
             Logger.WriteInfo( "ArchiveHandler wird initialisiert.", "ArchiveHandler", "ArchiveHandler" );
         }
 
+        /// <summary>
+        /// Archiviert alle Dateien eines Pfads.
+        /// </summary>
+        /// <param name="src">Der Pfad der Archiviert werden soll.</param>
+        /// <param name="dst">Der Zielpfad unter dem das Archiv gespeichert werden soll.</param>
         public void ArchiveDirectory( string src, string dst )
         {
             try
@@ -33,6 +47,11 @@ namespace SystemTools.Handler
             }
         }
 
+        /// <summary>
+        /// Entpackt ein Archiv.
+        /// </summary>
+        /// <param name="src">Der Pfad des Archivs.</param>
+        /// <param name="dst">Der Pfad in dem das Archiv entpackt werden soll.</param>
         public void ExtractArchive( string src, string dst )
         {
             try
