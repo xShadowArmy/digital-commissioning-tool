@@ -22,16 +22,18 @@ public class WarehouseItemMenu : MonoBehaviour
     private ItemData distributeItemData = null;
     private int countDistributeItem = 0;
     private StorageData storageDistributeItem = null;
-    
+
     void OnDestroy()
     {
         ItemData.StockChanged -= StockHasChanged;
         SelectionManager.StorageSelected -= SelectionManagerOnStorageSelected;
+        ItemData.ItemChanged -= ItemHasChanged;
     }
     void Start()
     {
         ItemData.StockChanged += StockHasChanged;
         SelectionManager.StorageSelected += SelectionManagerOnStorageSelected;
+        ItemData.ItemChanged += ItemHasChanged;
         replaceResources();
         //replaceResources();
         //ItemData.AddItemToStock("M5 Schraube", 0.01);
@@ -56,40 +58,47 @@ public class WarehouseItemMenu : MonoBehaviour
             AddItemToList(item);
             //item.ItemChanged += ItemHasChanged;
         }
-        updateSize();
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
     }
 
     private void OnValidate()
     {
-        
+
     }
 
     private void AddItemToList(ItemData item)
     {
-        ItemTemplate.transform.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
-        ItemTemplate.transform.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
-        ItemTemplate.transform.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
+        ItemTemplate.transform.Find("NameItem/NameItemText").GetComponent<TextMeshProUGUI>().text = item.Name;
+        ItemTemplate.transform.Find("CountItem/CountItemText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
+        ItemTemplate.transform.Find("AdditionalInfoItem/WeightItem/WeightItemText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
         GameObject field = Instantiate(ItemTemplate, ItemTemplate.transform.parent);
         field.SetActive(true);
+        updateSize();
     }
+    private void ItemHasChanged(ItemData item)
+    {
+        StockHasChanged(item);
+    }
+
     private void StockHasChanged(ItemData item)
     {
-        int index = Stock.IndexOf(item);
+        int index = Stock.FindIndex(x => x.Name.Equals(item.Name));
         if (index >= 0)
         {
             Transform field = ItemTemplate.transform.parent.GetChild(index + 1);
-            if (item.IsStockItem)
+            if (ItemData.StockContainsItem(item.Name))
             {
-                field.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
-                field.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
-                field.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
+                Stock[index] = item;
+                field.Find("NameItem/NameItemText").GetComponent<TextMeshProUGUI>().text = item.Name;
+                field.Find("CountItem/CountItemText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
+                field.Find("AdditionalInfoItem/WeightItem/WeightItemText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
             }
             else
             {
                 Stock.RemoveAt(index);
-                Destroy(field);
+                Destroy(field.gameObject);
+                updateSize();
             }
         }
         else
@@ -139,9 +148,9 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     public void AddItemClick()
     {
-        TMP_InputField textName = PanelEditItem.transform.Find("Name/NameText").GetComponent<TMP_InputField>();
-        TMP_InputField textWeight = PanelEditItem.transform.Find("Weight/WeightText").GetComponent<TMP_InputField>();
-        TMP_InputField textCount = PanelEditItem.transform.Find("Count/CountText").GetComponent<TMP_InputField>();
+        TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
         textName.text = textCount.text = textWeight.text = "";
         SelectedItem = null;
 
@@ -152,9 +161,9 @@ public class WarehouseItemMenu : MonoBehaviour
     {
         PanelEditItem.SetActive(true);
         PanelListItem.SetActive(false);
-        TMP_InputField textName = PanelEditItem.transform.Find("Name/NameText").GetComponent<TMP_InputField>();
-        TMP_InputField textWeight = PanelEditItem.transform.Find("Weight/WeightText").GetComponent<TMP_InputField>();
-        TMP_InputField textCount = PanelEditItem.transform.Find("Count/CountText").GetComponent<TMP_InputField>();
+        TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
         ItemData item = Stock[sender.transform.GetSiblingIndex() - 1];
         SelectedItem = item;
         textName.text = item.Name;
@@ -163,20 +172,28 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     public void SaveItemClick()
     {
+        bool failed = false;
+        bool newItem = false;
         PanelEditItem.SetActive(false);
         PanelListItem.SetActive(true);
         if (SelectedItem == null)
         {
+            newItem = true;
             ItemData.AddItemToStock(".");
             SelectedItem = ItemData.RequestStockItem(".");
-            Stock[Stock.Count - 1] = SelectedItem;
-            Instantiate(ItemTemplate, ItemTemplate.transform.parent).SetActive(true);
-            updateSize();
         }
-        TMP_InputField textName = PanelEditItem.transform.Find("Name/NameText").GetComponent<TMP_InputField>();
-        TMP_InputField textWeight = PanelEditItem.transform.Find("Weight/WeightText").GetComponent<TMP_InputField>();
-        TMP_InputField textCount = PanelEditItem.transform.Find("Count/CountText").GetComponent<TMP_InputField>();
-        SelectedItem.SetItemName(textName.text);
+        TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
+        if (!textName.text.Equals("") && !(ItemData.StockContainsItem(textName.text) && newItem))
+        {
+            SelectedItem.SetItemName(textName.text);
+        }
+        else
+        {
+            Debug.LogWarning("Eingabe ist nicht zulässig");
+            failed = true;
+        }
         try
         {
             int result = Int32.Parse(textCount.text);
@@ -186,6 +203,7 @@ public class WarehouseItemMenu : MonoBehaviour
         catch (FormatException)
         {
             Debug.LogWarning("Eingabe ist nicht zulässig");
+            failed = true;
         }
         try
         {
@@ -195,11 +213,12 @@ public class WarehouseItemMenu : MonoBehaviour
         catch (FormatException)
         {
             Debug.LogWarning("Eingabe ist nicht zulässig");
+            failed = true;
         }
-        Transform field = ItemTemplate.transform.parent.GetChild(Stock.IndexOf(SelectedItem) + 1);
-        field.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = SelectedItem.Name;
-        field.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + SelectedItem.Count.ToString();
-        field.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(SelectedItem.Weight);
+        if (failed && newItem)
+        {
+            ItemData.RemoveItemFromStock(SelectedItem);
+        }
     }
     public void AddCloseClick()
     {
@@ -224,7 +243,7 @@ public class WarehouseItemMenu : MonoBehaviour
         PanelDistributeItem.transform.Find("NameDistributeItem/NameTextFieldDistributeItem/TextAreaNameDistributeItem/TextNameTextfieldDistributeItem").GetComponent<TextMeshProUGUI>().SetText(distributeItemData.Name);
 
     }
-    
+
     private void SelectionManagerOnStorageSelected(Transform selectedObject)
     {
         if (PanelDistributeItem.activeInHierarchy)
@@ -245,17 +264,15 @@ public class WarehouseItemMenu : MonoBehaviour
             {
                 AddCloseClick();
             }
-            
+
         }
     }
-    
-    //private void ItemHasChanged(ItemData item)
-    //{
-    //    Transform field = ItemTemplate.transform.parent.GetChild(Array.IndexOf(Stock, item)+1);
-    //    field.Find("Name/NameText").GetComponent<TextMeshProUGUI>().text = item.Name;
-    //    field.Find("Count/CountText").GetComponent<TextMeshProUGUI>().text = "x" + item.Count.ToString();
-    //    field.Find("AdditionalInfo/Weight/WeightText").GetComponent<TextMeshProUGUI>().text = weightToString(item.Weight);
-    //}
+
+    public ItemData GetStockItem(int index)
+    {
+        return Stock[index];
+    }
+
     public void ChangeMode()
     {
         if (ModeHandler.Mode.Equals("EditorMode"))
