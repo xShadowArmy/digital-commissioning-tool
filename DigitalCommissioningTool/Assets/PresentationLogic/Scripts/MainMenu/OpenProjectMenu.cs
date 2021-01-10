@@ -45,7 +45,7 @@ public class OpenProjectMenu : MonoBehaviour
     }
     public void OnClick(GameObject sender)
     {
-        int index = sender.transform.GetSiblingIndex()-1;
+        int index = sender.transform.GetSiblingIndex() - 1;
         UnloadScenes();
 
         GameManager.CloseProject();
@@ -63,6 +63,11 @@ public class OpenProjectMenu : MonoBehaviour
         }
     }
 
+    public void OnClickDelete(Transform sender)
+    {
+        GameManager.DeleteProject(sender.Find("Name/Text").GetComponent<TextMeshProUGUI>().text);
+    }
+
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         if (arg0.name.Equals("DefaultWarehouse") && QueuedScene != -1)
@@ -76,9 +81,9 @@ public class OpenProjectMenu : MonoBehaviour
     {
         Frames += 1;
 
-        if ( Frames == 120 )
+        if (Frames == 120)
         {
-            UpdateProjects( );
+            UpdateProjects();
 
             Frames = 0;
         }
@@ -86,28 +91,28 @@ public class OpenProjectMenu : MonoBehaviour
 
     private void UpdateProjects()
     {
-        if ( ProjectManager.ProjectList != null && ProjectManager.ProjectList.Length != projects.Count )
+        if (ProjectManager.ProjectList != null && ProjectManager.ProjectList.Length != projects.Count)
         {
-            foreach ( ProjectData data in ProjectManager.ProjectList )
+            foreach (ProjectData data in ProjectManager.ProjectList)
             {
-                if ( !projects.Contains( data.ProjectName ) )
+                if (!projects.Contains(data.ProjectName))
                 {
-                    projects.Add( data.ProjectName );
-                    projectName.GetComponent<TextMeshProUGUI>( ).text = data.ProjectName;
-                    projectPath.GetComponent<TextMeshProUGUI>( ).text = data.ProjectPath;
-                    projectCreated.GetComponent<TextMeshProUGUI>( ).text = data.DateCreated.ToString( "dd/MM/yyyy" );
-                    projectModified.GetComponent<TextMeshProUGUI>( ).text = data.DateModified.ToString( "dd/MM/yyyy" );
+                    projects.Add(data.ProjectName);
+                    projectName.GetComponent<TextMeshProUGUI>().text = data.ProjectName;
+                    projectPath.GetComponent<TextMeshProUGUI>().text = data.ProjectPath;
+                    projectCreated.GetComponent<TextMeshProUGUI>().text = data.DateCreated.ToString("dd/MM/yyyy");
+                    projectModified.GetComponent<TextMeshProUGUI>().text = data.DateModified.ToString("dd/MM/yyyy");
                     GameObject item = Instantiate(template);
-                    item.transform.SetParent( template.transform.parent );
-                    item.SetActive( true );
+                    item.transform.SetParent(template.transform.parent);
+                    item.SetActive(true);
 
                     float newHeight = System.Math.Max(420, ProjectManager.ProjectList.Length * 105);
                     RectTransform contentBox = template.transform.parent.GetComponent<RectTransform>();
-                    contentBox.SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, newHeight );
+                    contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
                 }
             }
 
-            ResourceHandler.ReplaceResources( );
+            ResourceHandler.ReplaceResources();
         }
     }
 }

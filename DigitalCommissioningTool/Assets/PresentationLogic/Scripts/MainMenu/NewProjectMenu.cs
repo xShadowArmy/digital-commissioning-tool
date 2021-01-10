@@ -19,26 +19,27 @@ public class NewProjectMenu : MonoBehaviour
     }
     public void Continue()
     {
-        string input = InputField.GetComponent<TMP_InputField>().text;
+        TMP_InputField input = InputField.GetComponent<TMP_InputField>();
 
         if ( ProjectManager.ProjectList != null )
         {
             foreach (ProjectData data in ProjectManager.ProjectList)
             {
-                if (data.ProjectName.Equals(input))
+                if (data.ProjectName.Equals(input.text))
                 {
                     Debug.Log("Projekt mit diesem Namen existiert bereits");
-                    input = "";
+                    input.text = "";
                 }
             }
         }
 
-        if (!input.Equals(""))
+        if (!input.text.Equals(""))
         {
-            GameManager.CreateProject(input);
-        }        
-        gameObject.SetActive(false);
-        gameObject.transform.parent.gameObject.SetActive(false);
-        gameObject.transform.parent.Find("Background").gameObject.SetActive(false);
+            GameManager.CreateProject(input.text);
+            input.text = "";
+            gameObject.SetActive(false);
+            gameObject.transform.parent.gameObject.SetActive(false);
+            gameObject.transform.parent.Find("Background").gameObject.SetActive(false);
+        }
     }
 }
