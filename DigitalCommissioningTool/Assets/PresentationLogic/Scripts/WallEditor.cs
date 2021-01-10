@@ -239,7 +239,6 @@ public class WallEditor : MonoBehaviour
         {
             wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
         }
-        GameManager.SaveProject(GameManager.OpenProjectData.ProjectName);
     }
 
     /// <summary>
