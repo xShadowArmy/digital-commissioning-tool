@@ -45,14 +45,6 @@ namespace ApplicationFacade.Warehouse
             DestroyContainer( );
         }
 
-        private void DestroyContainer()
-        {
-            foreach( StorageData container in ContainerData )
-            {
-                container.Destroy( );
-            }
-        }
-
         public StorageData CreateContainer( )
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
@@ -173,7 +165,15 @@ namespace ApplicationFacade.Warehouse
 
             return null;
         }
-                        
+
+        internal void DestroyContainer()
+        {
+            foreach ( StorageData container in ContainerData )
+            {
+                container.Destroy( );
+            }
+        }
+
         protected virtual void OnSContainerCreated( StorageData data )
         {
             ContainerCreated?.Invoke( data );

@@ -26,22 +26,6 @@ public class EditorModeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if ( Physics.Raycast( ray, out hit, Mathf.Infinity ) )
-        {
-            if ( hit.transform != null )
-            {
-                spawn = hit.transform;
-            }
-        }
-
-        else
-        {
-            spawn = GameManager.GameWarehouse.ObjectSpawn.transform;
-        }
-
         Frame += 1;
 
         if ( Frame == 30 )

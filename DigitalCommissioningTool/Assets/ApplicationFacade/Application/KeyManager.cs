@@ -201,7 +201,7 @@ namespace ApplicationFacade.Application
 
             ToogleTimer = new KeyData( KeyCode.P, false );
 
-            ChangeMode = new KeyData( KeyCode.M, true );
+            ChangeMode = new KeyData( KeyCode.Tab, false );
             RemoveSelected = new KeyData( KeyCode.Delete, false );
             MoveSelected = new KeyData( KeyCode.M, false );
             ToogleMenu = new KeyData(KeyCode.Escape, false);

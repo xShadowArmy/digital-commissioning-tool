@@ -735,7 +735,7 @@ namespace ApplicationFacade.Warehouse
             return null;
         }
 
-        public void DestroyWarehouse()
+        internal void DestroyWarehouse()
         {
             if ( !Destroyed )
             {

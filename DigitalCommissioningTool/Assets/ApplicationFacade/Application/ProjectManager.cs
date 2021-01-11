@@ -179,6 +179,8 @@ namespace ApplicationFacade.Application
             IHandler = new StockHandler( );
             
             ItemData.ItemStock.Clear();
+            GameManager.GameContainer.DestroyContainer( );
+            GameManager.GameWarehouse.DestroyWarehouse( );
 
             FinishClose?.Invoke( );
         }
