@@ -240,49 +240,48 @@ public class PickAndPlaceNew : MonoBehaviour
     private void MoveInXAxis(GameObject selected)
     {
         //um die Mausposition zu finden
-        Ray ray2 = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit2;
-        //                  (ray, hit, range, mask)
-        if ( Physics.Raycast( ray2, out hit2, Mathf.Infinity, mask ) )
-        {
-            //erhalte koordinaten x und z durch die Maus Position (y = 0 da nicht nach oben bzw. unten bewegt werden soll)
-            float posX = hit2.point.x;
+       // Ray ray2 = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+       // RaycastHit hit2;
+       // //                  (ray, hit, range, mask)
+       // if ( Physics.Raycast( ray2, out hit2, Mathf.Infinity, mask ) )
+       // {
+       //     //erhalte koordinaten x und z durch die Maus Position (y = 0 da nicht nach oben bzw. unten bewegt werden soll)
+       //     float posX = hit2.point.x;
+       //
+       //     //aktualisierte maus position (wenn Mauszeiger bewegt wird)
+       //     if ( lastPosX != posX )
+       //     {
+       //         lastPosX = posX;
+       //
+       //         //Cursor = Regal (Maus position dem Regal übergeben)
+       //         selected.transform.position = new Vector3( posX, 0f, selected.transform.position.z );
+       //
+       //         //(Wenn Objekt auf kamera zu fliegen => add layer floor -> boden hinzufügen und am würfel entfernen)
+       //     }
+       // }
 
-            //aktualisierte maus position (wenn Mauszeiger bewegt wird)
-            if ( lastPosX != posX )
-            {
-                lastPosX = posX;
-
-                //Cursor = Regal (Maus position dem Regal übergeben)
-                selected.transform.position = new Vector3( posX, 0f, selected.transform.position.z );
-
-                //(Wenn Objekt auf kamera zu fliegen => add layer floor -> boden hinzufügen und am würfel entfernen)
-            }
-        }
-
-        ////da die Achsenbewegung abhängig von der Kamera ist (Editormodus Kamera im Modehandler):
-        //ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();
-        //Vector3 cameraRight = modeHandler.EditorModeCamera.transform.right;                         //camera right vector         
-        //float x = 0;
-        //float speed = 2f;
-        //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    x = Input.GetAxis("Horizontal") * speed;                                                //neue x position je nachdem welche taste gedrückt 
-        //}
-        //else
-        //{
-        //    x = Input.GetAxis("Mouse X") * speed;                                                   //x wert nach maus position (falls statt taste maus horizontal bewegt wird)
-        //}
-        //Vector3 pos = selected.transform.position;                                                  //pos = position des ausgweählten Objekts 
-        //
-        //Vector3 cR = cameraRight;                                                                   //cR = X-Achse (aus Kamera)
-        //cR.y = 0;
-        //cR = cameraRight.normalized;
-        //pos = new Vector3(pos.x, pos.y, (x * Time.deltaTime));                                          //aktualisiere pos mit neuem wert für pos.z
-        //pos = cR * pos.z;                                                                           //berechne pos mit camera.transform
-        //
-        //selected.transform.position = pos;
-        ////selected.transform.Translate(pos, Space.World);                                             //bewege Regal nach pos, Space.World damit unabhängig von rotation 
+       //da die Achsenbewegung abhängig von der Kamera ist (Editormodus Kamera im Modehandler):
+       ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();
+       Vector3 cameraRight = modeHandler.EditorModeCamera.transform.right;                         //camera right vector         
+       float x = 0;
+       float speed = 2f;
+       if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
+       {
+           x = Input.GetAxis("Horizontal") * speed;                                                //neue x position je nachdem welche taste gedrückt 
+       }
+       else
+       {
+           x = Input.GetAxis("Mouse X") * speed;                                                   //x wert nach maus position (falls statt taste maus horizontal bewegt wird)
+       }
+       Vector3 pos = selected.transform.position;                                                  //pos = position des ausgweählten Objekts 
+       
+       Vector3 cR = cameraRight;                                                                   //cR = X-Achse (aus Kamera)
+       cR.y = 0;
+       cR = cameraRight.normalized;
+       pos = new Vector3(pos.x, pos.y, (x * Time.deltaTime));                                          //aktualisiere pos mit neuem wert für pos.z
+       pos = cR * pos.z;                                                                           //berechne pos mit camera.transform
+       
+      selected.transform.Translate(pos, Space.World);                                             //bewege Regal nach pos, Space.World damit unabhängig von rotation 
 
     }
 

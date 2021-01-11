@@ -246,7 +246,7 @@ public class WallEditor : MonoBehaviour
         //{
         //    wall = GameManager.GameWarehouse.CreateWall(hit.point + new Vector3(0f, 1.6f, 0f), ObjectSpawn.transform.rotation, new Vector3(1f, 3.2f, 0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall");
         // }
-        GameManager.GameWarehouse.CreateWall( ObjectSpawn.transform.position, ObjectSpawn.transform.rotation, new Vector3(1f,1f,1f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
+        GameManager.GameWarehouse.CreateWall( new Vector3( ObjectSpawn.transform.position.z, 1.6f, ObjectSpawn.transform.position.z ), ObjectSpawn.transform.rotation, new Vector3(1f,3.2f,0.2f), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
     }
 
     /// <summary>

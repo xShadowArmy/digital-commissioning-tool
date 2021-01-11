@@ -13,7 +13,7 @@ namespace ApplicationFacade.Warehouse
     public class ItemData : GameObjectData
     {
         public delegate void StockChangedEventHandler( ItemData item );
-        public delegate void ItemChangedEventHandler(ItemData item);
+        public delegate void ItemChangedEventHandler( ItemData item );
 
         public static event StockChangedEventHandler StockChanged;
         public static event ItemChangedEventHandler ItemChanged;
@@ -50,7 +50,7 @@ namespace ApplicationFacade.Warehouse
             {
                 ItemData tmp = this;
 
-                while( tmp.ParentItem != null )
+                while ( tmp.ParentItem != null )
                 {
                     tmp = tmp.ParentItem;
                 }
@@ -75,6 +75,11 @@ namespace ApplicationFacade.Warehouse
         static ItemData()
         {
             ItemStock = new List<ItemData>( );
+        }
+
+        ~ItemData()
+        {
+            Destroy( );
         }
 
         internal ItemData() : base( )

@@ -61,7 +61,7 @@ namespace ApplicationFacade.Application
             }
 
             Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
-            Container ctmp = new Container( );
+            Container ctmp = GameContainer = new Container( );
 
             PManager.LoadProject( name, ref wtmp, ref ctmp );
 

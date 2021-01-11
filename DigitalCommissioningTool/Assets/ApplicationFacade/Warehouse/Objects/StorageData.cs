@@ -174,8 +174,7 @@ namespace ApplicationFacade.Warehouse
 
             if ( item.Object != null )
             {
-                GameObject.Destroy( Slots[slot] );
-                Slots[slot] = item.Object;
+                GameObject.Destroy( item.Object );
             }
 
             Data[slot] = item;
@@ -202,7 +201,73 @@ namespace ApplicationFacade.Warehouse
                 }
             }
 
-            ObjectChanged( );
+            return true;
+        }
+
+        internal bool AddItem( ItemData item, ref Warehouse warehouse, int slot = -1 )
+        {
+            LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
+
+            if ( IsDestroyed( ) )
+            {
+                return false;
+            }
+
+            if ( slot < 0 )
+            {
+                for ( int i = 0; i < SlotCount; i++ )
+                {
+                    if ( Data[i] == null )
+                    {
+                        slot = i;
+                        break;
+                    }
+                }
+
+                if ( slot < 0 )
+                {
+                    return false;
+                }
+            }
+
+            else
+            {
+                if ( slot >= Slots.Length )
+                {
+                    LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
+
+                    return false;
+                }
+            }
+
+            if ( item.Object != null )
+            {
+                GameObject.Destroy( item.Object );
+            }
+
+            Data[slot] = item;
+
+            item.SetID( Warehouse.GetUniqueID( Data ) );
+
+            item.ChangeGameObject( Slots[slot] );
+            item.Object.name = item.Name;
+            item.ParentStorage = this;
+
+            Data[slot].Object.SetActive( true );
+
+            Data[slot].Position = Slots[slot].transform.position;
+            Data[slot].Rotation = Slots[slot].transform.rotation;
+            Data[slot].Scale = Slots[slot].transform.localScale;
+
+            foreach ( ProjectStorageData data in warehouse.Data.StorageRacks )
+            {
+                if ( data.ID == GetID( ) )
+                {
+                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+
+                    break;
+                }
+            }
 
             return true;
         }
@@ -223,7 +288,23 @@ namespace ApplicationFacade.Warehouse
 
                     item.ParentStorage = null;
 
-                    ObjectChanged( );
+                    foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
+                    {
+                        if ( data.ID == GetID( ) )
+                        {
+                            for( int j = 0; j < data.Items.Length; j++ )
+                            {
+                                if ( data.Items != null && data.Items[j].ID == item.GetID() )
+                                {
+                                    data.Items[j] = null;
+
+                                    break;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
 
                     return true;
                 }
@@ -354,55 +435,55 @@ namespace ApplicationFacade.Warehouse
 
         protected override void ObjectChanged()
         {
-            if ( !IsContainer )
-            {
-                foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
-                {
-                    if ( data.ID == GetID( ) )
-                    {
-                        GameManager.GameWarehouse.Data.StorageRacks.Remove( data );
-
-                        ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
-
-                        for( int i = 0; i < Data.Length; i++ )
-                        {
-                            if ( Data[i] != null )
-                            {
-                                storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID(), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
-                            }
-                        }
-
-                        GameManager.GameWarehouse.Data.StorageRacks.Add( storage );
-
-                        break;
-                    }
-                }
-            }
-
-            else
-            {
-                foreach ( ProjectStorageData data in GameManager.GameContainer.Data.Container )
-                {
-                    if ( data.ID == GetID( ) )
-                    {
-                        GameManager.GameContainer.Data.Container.Remove( data );
-
-                        ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
-
-                        for ( int i = 0; i < Data.Length; i++ )
-                        {
-                            if ( Data[i] != null )
-                            {
-                                storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID( ), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
-                            }
-                        }
-
-                        GameManager.GameContainer.Data.Container.Add( storage );
-
-                        break;
-                    }
-                }
-            }
+           if ( !IsContainer )
+           {
+               for ( int i = 0; i < GameManager.GameWarehouse.Data.StorageRacks.Count; i++ )
+               {
+                   if ( GameManager.GameWarehouse.Data.StorageRacks[i].ID == GetID( ) )
+                   {
+                       GameManager.GameWarehouse.Data.StorageRacks.Remove( GameManager.GameWarehouse.Data.StorageRacks[i] );
+           
+                       ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
+           
+                       for( int j = 0; j < Data.Length; j++ )
+                       {
+                           if ( Data[j] != null )
+                           {
+                               storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID(), Data[j].Count, Data[j].Weight, Data[j].Name, new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
+                           }
+                       }
+           
+                       GameManager.GameWarehouse.Data.StorageRacks.Insert( i, storage );
+           
+                       break;
+                   }
+               }
+           }
+           
+           else
+           {
+               foreach ( ProjectStorageData data in GameManager.GameContainer.Data.Container )
+               {
+                   if ( data.ID == GetID( ) )
+                   {
+                       GameManager.GameContainer.Data.Container.Remove( data );
+           
+                       ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
+           
+                       for ( int i = 0; i < Data.Length; i++ )
+                       {
+                           if ( Data[i] != null )
+                           {
+                               storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID( ), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
+                           }
+                       }
+           
+                       GameManager.GameContainer.Data.Container.Add( storage );
+           
+                       break;
+                   }
+               }
+           }
         }
     }
 }

@@ -110,8 +110,6 @@ namespace ApplicationFacade.Application
             ArchiveManager.ExtractArchive( Paths.ProjectsPath + name + ".prj", Paths.TempPath );
 
             StartLoad?.Invoke( );
-            
-            ItemData.ItemStock.Clear( );
 
             DHandler = new DataHandler( );
             SHandler = new SettingsHandler( );
@@ -233,6 +231,8 @@ namespace ApplicationFacade.Application
             }
 
             SaveProject( name, warehouse, GetDefaultContainer( ) );
+
+            ItemData.ItemStock.Clear( );
 
             ProjectCreated?.Invoke( );
         }
@@ -374,7 +374,7 @@ namespace ApplicationFacade.Application
                     {
                         ItemData item = ItemData.RequestStockItem( iwarehouse.StorageRacks[i].Items[j].Name );
 
-                        data.AddItem( item.RequestItem( iwarehouse.StorageRacks[i].Items[j].Count ), j );
+                        data.AddItem( item.RequestItem( iwarehouse.StorageRacks[i].Items[j].Count ), ref warehouse, j );
                     }
                 }
             }
