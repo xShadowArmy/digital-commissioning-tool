@@ -58,9 +58,9 @@
     </xs:ComplexData>
     <xs:ComplexData xs:name="ChangeMode" xs:id="8" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="2">
-            <xs:Property xs:type="Boolean" xs:value="True">
+            <xs:Property xs:type="Boolean" xs:value="False">
             </xs:Property>
-            <xs:Property xs:type="KeyCode" xs:value="M">
+            <xs:Property xs:type="KeyCode" xs:value="Tab">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>
