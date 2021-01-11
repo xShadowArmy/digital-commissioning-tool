@@ -349,6 +349,7 @@ namespace ProjectComponents.FileIntegration
                     }
 
                     nav.MoveToParent( );
+                    nav.MoveToParent( );
                 }
 
                 nav.MoveToParent( );

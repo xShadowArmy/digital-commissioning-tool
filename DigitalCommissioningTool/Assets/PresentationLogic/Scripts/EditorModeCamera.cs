@@ -15,15 +15,33 @@ public class EditorModeCamera : MonoBehaviour
     private bool WallKeyPressed = false;
     private bool ShiftPressed = false;
     private int Frame = 0;
+    Transform spawn;
 
     // Start is called before the first frame update
     void Start()
     {
+        spawn = GameManager.GameWarehouse.ObjectSpawn.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Ray ray = GameObject.FindGameObjectWithTag("EditorModeCamera").GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if ( Physics.Raycast( ray, out hit, Mathf.Infinity ) )
+        {
+            if ( hit.transform != null )
+            {
+                spawn = hit.transform;
+            }
+        }
+
+        else
+        {
+            spawn = GameManager.GameWarehouse.ObjectSpawn.transform;
+        }
+
         Frame += 1;
 
         if ( Frame == 30 )
@@ -36,13 +54,13 @@ public class EditorModeCamera : MonoBehaviour
                 {
                     if ( ShiftPressed )
                     {
-                        GameManager.GameWarehouse.CreateStorageRack( );
+                        GameManager.GameWarehouse.CreateStorageRack( spawn.position, spawn.rotation, spawn.localScale );
                     }
                 }
 
                 else
                 {
-                    GameManager.GameWarehouse.CreateStorageRack( );
+                    GameManager.GameWarehouse.CreateStorageRack( spawn.position, spawn.rotation, spawn.localScale );
                 }
 
                 StorageKeyPressed = false;
@@ -55,13 +73,13 @@ public class EditorModeCamera : MonoBehaviour
                 {
                     if ( ShiftPressed )
                     {
-                        GameManager.GameWarehouse.CreateWall( new Vector3( GameManager.GameWarehouse.ObjectSpawn.transform.position.z, 1.6f, GameManager.GameWarehouse.ObjectSpawn.transform.position.z ), GameManager.GameWarehouse.ObjectSpawn.transform.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
+                        GameManager.GameWarehouse.CreateWall( new Vector3( spawn.position.z, 1.6f, spawn.position.z ), spawn.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
                     }
                 }
 
                 else
                 {
-                    GameManager.GameWarehouse.CreateWall( new Vector3( GameManager.GameWarehouse.ObjectSpawn.transform.position.z, 1.6f, GameManager.GameWarehouse.ObjectSpawn.transform.position.z ), GameManager.GameWarehouse.ObjectSpawn.transform.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
+                    GameManager.GameWarehouse.CreateWall( new Vector3( spawn.position.z, 1.6f, spawn.position.z ), spawn.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
                 }
 
                 WallKeyPressed = false;

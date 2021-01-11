@@ -310,6 +310,7 @@ namespace ProjectComponents.FileIntegration
                     }
 
                     nav.MoveToParent( );
+                    nav.MoveToParent( );
 
                     warehouse.StorageRacks.Add( data );
                 }
