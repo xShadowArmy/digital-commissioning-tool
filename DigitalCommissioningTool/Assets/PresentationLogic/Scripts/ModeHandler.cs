@@ -11,7 +11,8 @@ public class ModeHandler : MonoBehaviour
     public SelectionManager SelectionManager;
     [SerializeField]private Sprite ModiSwitchBuild;
     [SerializeField] private Sprite ModiSwitchMosim;
-    
+    private int Frame = 0;
+
     public string Mode { get; private set; }
 
     
@@ -46,6 +47,6 @@ public class ModeHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if ( )
     }
 }
