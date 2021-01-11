@@ -111,8 +111,10 @@
               <e p="TreeViewControl.cs" t="Include" />
               <e p="TreeViewItem.cs" t="Include" />
             </e>
+            <e p="TreeViewToggle.cs" t="Include" />
             <e p="WalkTrajectory.cs" t="Include" />
             <e p="WallEditor.cs" t="Include" />
+            <e p="WarehouseItem.cs" t="Include" />
             <e p="WarehouseItemMenu.cs" t="Include" />
           </e>
         </e>

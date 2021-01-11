@@ -66,7 +66,7 @@ public class TimeMeasurementHistory : MonoBehaviour
         configManager = new ConfigManager();
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
 
-        for (int i = 1; i < 1000; i++)
+        for (int i = 0; i < 1000; i++)
         {
             string key = "TimeMeasurement" + i;
             TimeMeasurementEntry temp = new TimeMeasurementEntry();
@@ -83,7 +83,6 @@ public class TimeMeasurementHistory : MonoBehaviour
         }
 
         UpdateSize();
-        currentIndex++;
     }
 
 
