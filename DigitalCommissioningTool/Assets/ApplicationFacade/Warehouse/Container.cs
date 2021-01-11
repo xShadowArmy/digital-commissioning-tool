@@ -40,6 +40,19 @@ namespace ApplicationFacade.Warehouse
             Data = new InternalProjectContainer( );
         }
 
+        ~Container()
+        {
+            DestroyContainer( );
+        }
+
+        private void DestroyContainer()
+        {
+            foreach( StorageData container in ContainerData )
+            {
+                container.Destroy( );
+            }
+        }
+
         public StorageData CreateContainer( )
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );

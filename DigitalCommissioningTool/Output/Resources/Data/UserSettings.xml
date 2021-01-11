@@ -28,7 +28,7 @@
         <xs:Values xs:propertyCount="2">
             <xs:Property xs:type="Boolean" xs:value="False">
             </xs:Property>
-            <xs:Property xs:type="KeyCode" xs:value="Q">
+            <xs:Property xs:type="KeyCode" xs:value="E">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>
@@ -36,7 +36,7 @@
         <xs:Values xs:propertyCount="2">
             <xs:Property xs:type="Boolean" xs:value="False">
             </xs:Property>
-            <xs:Property xs:type="KeyCode" xs:value="E">
+            <xs:Property xs:type="KeyCode" xs:value="Q">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>

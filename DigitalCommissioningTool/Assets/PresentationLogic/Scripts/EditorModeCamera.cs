@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
 using UnityEngine;
 
 public class EditorModeCamera : MonoBehaviour
@@ -10,6 +11,10 @@ public class EditorModeCamera : MonoBehaviour
     private float HorizontalAxis { get; set; }
     private static bool _rightClicked;
     private static float _speed;
+    private bool StorageKeyPressed = false;
+    private bool WallKeyPressed = false;
+    private bool ShiftPressed = false;
+    private int Frame = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,69 @@ public class EditorModeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Frame += 1;
+
+        if ( Frame == 30 )
+        {
+            Frame = 0;
+
+            if ( StorageKeyPressed )
+            {
+                if ( KeyManager.InsertStorageReck.ShiftNeeded )
+                {
+                    if ( ShiftPressed )
+                    {
+                        GameManager.GameWarehouse.CreateStorageRack( );
+                    }
+                }
+
+                else
+                {
+                    GameManager.GameWarehouse.CreateStorageRack( );
+                }
+
+                StorageKeyPressed = false;
+                ShiftPressed = false;
+            }            
+            
+            if ( WallKeyPressed )
+            {
+                if ( KeyManager.InsertStorageReck.ShiftNeeded )
+                {
+                    if ( ShiftPressed )
+                    {
+                        GameManager.GameWarehouse.CreateWall( new Vector3( GameManager.GameWarehouse.ObjectSpawn.transform.position.z, 1.6f, GameManager.GameWarehouse.ObjectSpawn.transform.position.z ), GameManager.GameWarehouse.ObjectSpawn.transform.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
+                    }
+                }
+
+                else
+                {
+                    GameManager.GameWarehouse.CreateWall( new Vector3( GameManager.GameWarehouse.ObjectSpawn.transform.position.z, 1.6f, GameManager.GameWarehouse.ObjectSpawn.transform.position.z ), GameManager.GameWarehouse.ObjectSpawn.transform.rotation, new Vector3( 1f, 3.2f, 0.2f ), WallFace.Undefined, WallClass.Inner, "SelectableInnerWall" );
+                }
+
+                WallKeyPressed = false;
+                ShiftPressed = false;
+            }
+        }
+
+        else
+        {
+            if ( Input.GetKeyDown( KeyManager.InsertStorageReck.Code ) )
+            {
+                StorageKeyPressed = true;
+            }
+
+            if ( Input.GetKeyDown( KeyManager.InsertWall.Code ) )
+            {
+                WallKeyPressed = true;
+            }
+
+            if ( Input.GetKeyDown( KeyCode.LeftShift ) || Input.GetKey( KeyCode.RightShift ) )
+            {
+                ShiftPressed = true;
+            }
+        }
+
         _rightClicked = Input.GetMouseButton(1);
 
         if (_rightClicked)

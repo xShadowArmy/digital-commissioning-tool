@@ -330,10 +330,6 @@ namespace SystemTools.Handler
             {
                 if ( AutoFlush )
                 {
-                    File.Delete( FileName );
-
-                    CreateFile( FileName );
-
                     Flush( );
                 }
 
@@ -348,7 +344,14 @@ namespace SystemTools.Handler
         {
             Logger.WriteInfo( "Config Datei wird geschrieben.", "ConfigHandler", "Flush" );
 
-            Writer.WriteConfigFile( Buffer, FileName );
+            if ( OpenStream )
+            {
+                File.Delete( FileName );
+
+                CreateFile( FileName );
+
+                Writer.WriteConfigFile( Buffer, FileName );
+            }
         }
 
         /// <summary>

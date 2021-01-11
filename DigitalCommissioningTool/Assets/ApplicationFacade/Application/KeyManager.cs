@@ -186,8 +186,8 @@ namespace ApplicationFacade.Application
             RotateLeft = new KeyData( KeyCode.Q, false );
             RotateRight = new KeyData( KeyCode.E, false );
 
-            MoveCameraUp = new KeyData( KeyCode.Q, false );
-            MoveCameraDown = new KeyData( KeyCode.E, false );
+            MoveCameraUp = new KeyData( KeyCode.E, false );
+            MoveCameraDown = new KeyData( KeyCode.Q, false );
 
             MoveXAxis = new KeyData( KeyCode.X, false );
             MoveZAxis = new KeyData( KeyCode.Z, false );
