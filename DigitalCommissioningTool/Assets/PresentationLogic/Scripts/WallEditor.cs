@@ -75,7 +75,7 @@ public class WallEditor : MonoBehaviour
         }
 
         SelectedObjectTransform = selectionManager.SelectedObject;
-        if (innerWallSelected)
+        if (innerWallSelected && SelectedObjectTransform != null)
         {
             wall = GameManager.GameWarehouse.GetWall(SelectedObjectTransform.gameObject);
             Ray ray = EditorModeCamera.ScreenPointToRay(Input.mousePosition);

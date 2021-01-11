@@ -33,9 +33,222 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/ModeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/ModeHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles Templates.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles Templates/Add_Button_Template.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles Templates/Add_Button_Template.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles Templates/Delete_Button_Template.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles Templates/Delete_Button_Template.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_Add_Button_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_Add_Button_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_Delete_Button_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_Delete_Button_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_Method_ButtonCell_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_Method_ButtonCell_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_canSwim_ToggleCell_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_canSwim_ToggleCell_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_hp_InputCell_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_hp_InputCell_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_icon_ImageCell_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_icon_ImageCell_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_name_TextCell_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_name_TextCell_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_power_SliderCell_Style.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Cell Styles/Table_power_SliderCell_Style.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Fonts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Fonts/PoppinsLatin-Black.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Fonts/PoppinsLatin-Black.ttf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scenes/ExampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scenes/ExampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scripts/EnemiesManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scripts/EnemiesManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scripts/Enemy.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Scripts/Enemy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/enemy 4.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/paper.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Examples/Textures/paper.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Manual.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Manual.pdf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Add Button Cell Container.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Add Button Cell Container.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Add Row Button Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Add Row Button Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Button Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Button Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Column Title.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Column Title.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Dropdown Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Dropdown Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Empty Cell Container.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Empty Cell Container.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Image Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Image Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Input Cell - Expandable.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Input Cell - Expandable.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Input Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Input Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Remove Row Button Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Remove Row Button Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/ScrollTableContainer.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/ScrollTableContainer.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Slider Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Slider Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/TMPro Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/TMPro Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Table Cell Container.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Table Cell Container.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Text Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Text Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Toggle Cell.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Prefabs/Toggle Cell.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/AddRow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/AddRow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/CellContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/CellContainer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/HeaderCellContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/HeaderCellContainer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/SpecialCellContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/SpecialCellContainer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/TableCellContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/CellContainers/TableCellContainer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/AddRowButtonCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/AddRowButtonCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/ButtonCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/ButtonCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/ButtonCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/ButtonCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/RemoveRowButtonCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Button/RemoveRowButtonCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Dropdown.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Dropdown/DropdownCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Dropdown/DropdownCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Dropdown/DropdownCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Dropdown/DropdownCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Image.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Image/ImageCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Image/ImageCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Image/ImageCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Image/ImageCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Input.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Input/InputCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Input/InputCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Input/InputCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Input/InputCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/InteractableCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/InteractableCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/InteractableCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/InteractableCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Label.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Label/LabelCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Label/LabelCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Label/LabelCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Label/LabelCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Slider.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Slider/SliderCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Slider/SliderCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Slider/SliderCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Slider/SliderCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/StyleableTableCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/StyleableTableCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/TableCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/TableCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/TableCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/TableCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Toggle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Toggle/ToggleCell.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Toggle/ToggleCell.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Toggle/ToggleCellStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Cells/Toggle/ToggleCellStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns/AddCellInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns/AddCellInfo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns/DeleteColumnInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns/DeleteColumnInfo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns/TableColumnInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Columns/TableColumnInfo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/MyFontData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/MyFontData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/PropertyOrFieldInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/PropertyOrFieldInfo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/SortingState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/SortingState.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/UnityMemberInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Data/UnityMemberInfo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/CellStyleWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/CellStyleWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/FontDataDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/FontDataDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/SettingDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/SettingDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableColumnInfoDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableColumnInfoDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableMenuOptions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableMenuOptions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableStyleEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/TableStyleEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/UnityMemberInfoDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Editor/UnityMemberInfoDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/HeaderRow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/HeaderRow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/ScrollTableContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/ScrollTableContainer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Table.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Table.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/TableRow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/TableRow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/TableStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/TableStyle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/CollectionUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/CollectionUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/Editor/EditorUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/Editor/EditorUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/Editor/ReflectionUtilsEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/Editor/ReflectionUtilsEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/ExpandableInputField.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/ExpandableInputField.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/GameObjectUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/GameObjectUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/ReflectionUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/ReflectionUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/TransformUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Scripts/Utils/TransformUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/Checkmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/Checkmark.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/Triangle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/Triangle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/WhiteSquare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/WhiteSquare.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/WhiteSquareOutline1px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/WhiteSquareOutline1px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/WhiteSquareOutline2px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RuntimeGUITable/Textures/WhiteSquareOutline2px.png.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Output/Resources/Data/Preferences.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +283,6 @@
         <option value="$PROJECT_DIR$/Assets/AppData/Warehouse/MediumWarehouseStrategie.cs" />
         <option value="$PROJECT_DIR$/Assets/AppData/Warehouse/LargeWarehouseStrategie.cs" />
         <option value="$PROJECT_DIR$/Assets/AppData/Warehouse/SmallWarehouseStrategie.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/ModeHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse/Objects/WallObjectData.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Warehouse/Warehouse.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Application/TimeMeasurementHistory.cs" />
@@ -79,11 +291,12 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/Timer.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/SelectionManager.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/PickAndPlaceNew.cs" />
-        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/AddStorage.cs" />
         <option value="$PROJECT_DIR$/Assets/ApplicationFacade/Application/ProjectManager.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WarehouseItemMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TimeMeasurementHistory.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/WallEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/ModeHandler.cs" />
       </list>
     </option>
   </component>
@@ -155,7 +368,7 @@
       <workItem from="1610111866075" duration="3896000" />
       <workItem from="1610193953972" duration="16266000" />
       <workItem from="1610277068323" duration="6575000" />
-      <workItem from="1610376019427" duration="3099000" />
+      <workItem from="1610376019427" duration="4741000" />
     </task>
     <servers />
   </component>
@@ -350,7 +563,7 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="681" y="259" key="run.anything.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1609806602197" />
-    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup" timestamp="1610321736838">
+    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup" timestamp="1610398860987">
       <screen x="2560" y="0" width="1920" height="1040" />
     </state>
     <state x="1989" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1609263977039" />
@@ -360,7 +573,7 @@
     <state x="665" y="241" width="717" height="727" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1610227551999" />
     <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610197471803" />
     <state x="831" y="303" width="896" height="913" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1610315255118" />
-    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610321736838" />
+    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610398860987" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

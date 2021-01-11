@@ -6,7 +6,6 @@
     <e p="D:\GitHub\digital-commissioning-tool\DigitalCommissioningTool" t="IncludeRecursive">
       <e p="AppData.csproj" t="IncludeRecursive" />
       <e p="ApplicationFacade.csproj" t="IncludeRecursive" />
-      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="AppData" t="Include">
@@ -78,7 +77,6 @@
             <e p="DragItem.cs" t="Include" />
             <e p="DragWindow.cs" t="Include" />
             <e p="EditorModeCamera.cs" t="Include" />
-            <e p="LoadSceneData.cs" t="Include" />
             <e p="MainCamera.cs" t="Include" />
             <e p="MainMenu" t="Include">
               <e p="KeyBindMenu.cs" t="Include" />
@@ -163,97 +161,6 @@
             </e>
           </e>
           <e p="ProjectComponents.asmdef" t="Include" />
-        </e>
-        <e p="RuntimeGUITable" t="Include">
-          <e p="Examples" t="Include">
-            <e p="Scripts" t="Include">
-              <e p="EnemiesManager.cs" t="Include" />
-              <e p="Enemy.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Scripts" t="Include">
-            <e p="AddRow.cs" t="Include" />
-            <e p="CellContainers" t="Include">
-              <e p="CellContainer.cs" t="Include" />
-              <e p="HeaderCellContainer.cs" t="Include" />
-              <e p="SpecialCellContainer.cs" t="Include" />
-              <e p="TableCellContainer.cs" t="Include" />
-            </e>
-            <e p="Cells" t="Include">
-              <e p="Button" t="Include">
-                <e p="AddRowButtonCell.cs" t="Include" />
-                <e p="ButtonCell.cs" t="Include" />
-                <e p="ButtonCellStyle.cs" t="Include" />
-                <e p="RemoveRowButtonCell.cs" t="Include" />
-              </e>
-              <e p="Dropdown" t="Include">
-                <e p="DropdownCell.cs" t="Include" />
-                <e p="DropdownCellStyle.cs" t="Include" />
-              </e>
-              <e p="Image" t="Include">
-                <e p="ImageCell.cs" t="Include" />
-                <e p="ImageCellStyle.cs" t="Include" />
-              </e>
-              <e p="Input" t="Include">
-                <e p="InputCell.cs" t="Include" />
-                <e p="InputCellStyle.cs" t="Include" />
-              </e>
-              <e p="InteractableCell.cs" t="Include" />
-              <e p="InteractableCellStyle.cs" t="Include" />
-              <e p="Label" t="Include">
-                <e p="LabelCell.cs" t="Include" />
-                <e p="LabelCellStyle.cs" t="Include" />
-              </e>
-              <e p="Slider" t="Include">
-                <e p="SliderCell.cs" t="Include" />
-                <e p="SliderCellStyle.cs" t="Include" />
-              </e>
-              <e p="StyleableTableCell.cs" t="Include" />
-              <e p="TableCell.cs" t="Include" />
-              <e p="TableCellStyle.cs" t="Include" />
-              <e p="Toggle" t="Include">
-                <e p="ToggleCell.cs" t="Include" />
-                <e p="ToggleCellStyle.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Columns" t="Include">
-              <e p="AddCellInfo.cs" t="Include" />
-              <e p="DeleteColumnInfo.cs" t="Include" />
-              <e p="TableColumnInfo.cs" t="Include" />
-            </e>
-            <e p="Data" t="Include">
-              <e p="MyFontData.cs" t="Include" />
-              <e p="PropertyOrFieldInfo.cs" t="Include" />
-              <e p="SortingState.cs" t="Include" />
-              <e p="UnityMemberInfo.cs" t="Include" />
-            </e>
-            <e p="Editor" t="Include">
-              <e p="CellStyleWindow.cs" t="Include" />
-              <e p="FontDataDrawer.cs" t="Include" />
-              <e p="SettingDrawer.cs" t="Include" />
-              <e p="TableColumnInfoDrawer.cs" t="Include" />
-              <e p="TableEditor.cs" t="Include" />
-              <e p="TableMenuOptions.cs" t="Include" />
-              <e p="TableStyleEditor.cs" t="Include" />
-              <e p="UnityMemberInfoDrawer.cs" t="Include" />
-            </e>
-            <e p="HeaderRow.cs" t="Include" />
-            <e p="ScrollTableContainer.cs" t="Include" />
-            <e p="Table.cs" t="Include" />
-            <e p="TableRow.cs" t="Include" />
-            <e p="TableStyle.cs" t="Include" />
-            <e p="Utils" t="Include">
-              <e p="CollectionUtils.cs" t="Include" />
-              <e p="Editor" t="Include">
-                <e p="EditorUtils.cs" t="Include" />
-                <e p="ReflectionUtilsEditor.cs" t="Include" />
-              </e>
-              <e p="ExpandableInputField.cs" t="Include" />
-              <e p="GameObjectUtils.cs" t="Include" />
-              <e p="ReflectionUtils.cs" t="Include" />
-              <e p="TransformUtils.cs" t="Include" />
-            </e>
-          </e>
         </e>
         <e p="SystemFacade" t="Include">
           <e p="ArchiveManager.cs" t="Include" />

@@ -9,13 +9,13 @@ public class ModeHandler : MonoBehaviour
     public GameObject EditorModeCamera;
     public GameObject MosimCamera;
     public SelectionManager SelectionManager;
-    [SerializeField]private Sprite ModiSwitchBuild;
+    [SerializeField] private Sprite ModiSwitchBuild;
     [SerializeField] private Sprite ModiSwitchMosim;
-    
+
     public string Mode { get; private set; }
 
-    
-        public void SwitchMode()
+
+    public void SwitchMode()
     {
         EditorModeCamera.GetComponent<Camera>().enabled = !EditorModeCamera.GetComponent<Camera>().enabled;
         MosimCamera.GetComponent<Camera>().enabled = !MosimCamera.GetComponent<Camera>().enabled;
@@ -23,7 +23,7 @@ public class ModeHandler : MonoBehaviour
         if (EditorModeCamera.GetComponent<Camera>().enabled)
         {
             Mode = "EditorMode";
-            this.GetComponent<Image>().sprite  = ModiSwitchBuild;
+            this.GetComponent<Image>().sprite = ModiSwitchBuild;
             Debug.Log("EditorMode");
         }
         else
@@ -32,6 +32,7 @@ public class ModeHandler : MonoBehaviour
             this.GetComponent<Image>().sprite = ModiSwitchMosim;
             Debug.Log("MosimMode");
         }
+
         SelectionManager.ResetSelection();
     }
 
@@ -46,6 +47,5 @@ public class ModeHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
