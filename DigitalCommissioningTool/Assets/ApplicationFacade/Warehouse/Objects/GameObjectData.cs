@@ -9,22 +9,49 @@ using UnityEngine;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Stellt ein Objekt in der Umgebung dar.
+    /// </summary>
     public abstract class GameObjectData : IDataIdentifier
     {
+        /// <summary>
+        /// Die Position des Objekts.
+        /// </summary>
         public Vector3 Position { get; internal set; }
 
+        /// <summary>
+        /// Die Rotation des Objekts.
+        /// </summary>
         public Quaternion Rotation { get; internal set; }
 
+        /// <summary>
+        /// Die Skalierung des Objekts.
+        /// </summary>
         public Vector3 Scale { get; internal set; }
         
+        /// <summary>
+        /// Das GameObjekt das repräsentiert wird.
+        /// </summary>
         public GameObject Object { get; internal set; }
 
+        /// <summary>
+        /// Gibt an ob das Objekt zerstört wurde.
+        /// </summary>
         public bool Destroyed { get; private set; }
 
+        /// <summary>
+        /// Gibt an ob das Objekt Schreibgeschützt ist.
+        /// </summary>
         public bool Readonly { get; internal set; }
 
+        /// <summary>
+        /// Die ID des Objekts.
+        /// </summary>
         protected long ID { get; set; }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         internal GameObjectData( )
         {
             Position = new Vector3( );
@@ -34,6 +61,10 @@ namespace ApplicationFacade.Warehouse
             ID       = 0;
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Objekts.</param>
         internal GameObjectData( long id )
         {
             Position = new Vector3( );
@@ -43,6 +74,13 @@ namespace ApplicationFacade.Warehouse
             ID       = id;
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Objekts.</param>
+        /// <param name="position">Die Position des Objekts.</param>
+        /// <param name="rotation">Die Rotation des Objekts.</param>
+        /// <param name="scale">Die Skalierung des Objekts.</param>
         internal GameObjectData( long id, Vector3 position, Quaternion rotation, Vector3 scale )
         {
             Position = position;
@@ -52,6 +90,14 @@ namespace ApplicationFacade.Warehouse
             ID       = id;
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Objekts.</param>
+        /// <param name="position">Die Position des Objekts.</param>
+        /// <param name="rotation">Die Rotation des Objekts.</param>
+        /// <param name="scale">Die Skalierung des Objekts.</param>
+        /// <param name="obj">Das GameObjekt das repräsentiert wird.</param>
         internal GameObjectData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj )
         {
             Position = position;
@@ -66,6 +112,10 @@ namespace ApplicationFacade.Warehouse
             Destroy( );
         }
 
+        /// <summary>
+        /// Ändert den Tag des GameObjects.
+        /// </summary>
+        /// <param name="tag">Der neue Tag.</param>
         public void SetTag( string tag )
         {
             if ( IsDestroyed( ) )
@@ -86,6 +136,10 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Ändert die Position des GameObjects.
+        /// </summary>
+        /// <param name="position">Die neue Position.</param>
         public void SetPosition( Vector3 position )
         {
             if ( IsDestroyed( ) )
@@ -108,6 +162,10 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Ändert die Rotation des GameObjects.
+        /// </summary>
+        /// <param name="rotation">Die Rotation des Objekts.</param>
         public void SetRotation( Quaternion rotation )
         {
             if ( IsDestroyed( ) )
@@ -130,6 +188,10 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Ändert die Skalierung des GameObjekcs.
+        /// </summary>
+        /// <param name="scale">Die neue Skalierung.</param>
         public void SetScale( Vector3 scale )
         {
             if ( IsDestroyed( ) )
@@ -152,6 +214,10 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Ändert die Transformationsdaten des GameObjects.
+        /// </summary>
+        /// <param name="transform">Die neuen Transformationsdaten.</param>
         public void SetTransform( Transform transform )
         {
             if ( IsDestroyed( ) )
@@ -178,6 +244,10 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Änder das GameObject.
+        /// </summary>
+        /// <param name="obj">Das neue GameObject.</param>
         public void ChangeGameObject( GameObject obj )
         {
             if ( IsDestroyed( ) )
@@ -193,6 +263,9 @@ namespace ApplicationFacade.Warehouse
             Object = obj;
         }
         
+        /// <summary>
+        /// Zerstört das GameObject.
+        /// </summary>
         public void Destroy()
         {
             if ( Destroyed )
@@ -209,6 +282,10 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Speichert eine neue ID.
+        /// </summary>
+        /// <param name="id">Die neue ID.</param>
         public void SetID( long id )
         {
             if ( IsDestroyed( ) )
@@ -219,6 +296,10 @@ namespace ApplicationFacade.Warehouse
             ID = id;
         }
 
+        /// <summary>
+        /// Gibt die gespeicherte ID zurück.
+        /// </summary>
+        /// <returns>Die gespeicherte ID.</returns>
         public long GetID()
         {
             if ( IsDestroyed( ) )
@@ -229,8 +310,15 @@ namespace ApplicationFacade.Warehouse
             return ID;
         }
 
+        /// <summary>
+        /// Wird aufgerufen wenn das Objekt verändert wurde.
+        /// </summary>
         protected abstract void ObjectChanged();
 
+        /// <summary>
+        /// Überprüft ob das Objekt schreibgeschützt ist.
+        /// </summary>
+        /// <returns>True wenn Schreibgeschützt.</returns>
         protected bool IsReadonly()
         {
             if ( Destroyed )
@@ -244,6 +332,10 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Überprüft ob das Objekt bereits Zerstört wurde.
+        /// </summary>
+        /// <returns>True wenn das Objekt bereits Zerstört ist.</returns>
         protected bool IsDestroyed()
         {
             if ( Destroyed )

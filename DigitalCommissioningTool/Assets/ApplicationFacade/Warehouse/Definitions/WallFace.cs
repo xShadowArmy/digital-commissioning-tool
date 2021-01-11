@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Gibt die Ausrichtung eines Wandobjekts an.
+    /// </summary>
     public enum WallFace
     {
         Undefined = 0,

@@ -11,22 +11,41 @@ using UnityEngine;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Speichert Informationen über alle Container in der Umgebung.
+    /// </summary>
     public class Container
     {
+        /// <summary>
+        /// Eventhandler für Create und Delete Events.
+        /// </summary>
+        /// <param name="storage">Das Regal welches mit dem Event in Verbindung gebracht werden kann.</param>
         public delegate void ContainerChangedEventHandler( StorageData storage );
 
+        /// <summary>
+        /// Wird ausgelöst wenn ein neues mobiles Regal erstellt wurde.
+        /// </summary>
         public event ContainerChangedEventHandler ContainerCreated;
 
+        /// <summary>
+        /// Wird ausgeläst wenn ein mobiles Regal gelöscht wurde.
+        /// </summary>
         public event ContainerChangedEventHandler ContainerDeleted;
 
-        public List<StorageData> ContainerData { get; private set; }
+        /// <summary>
+        /// Liste mit allen mobilen Regalen.
+        /// </summary>
+        internal List<StorageData> ContainerData { get; private set; }
 
+        /// <summary>
+        /// Internes Projektobjekt das für das Speichern der Container verantwortlich ist.
+        /// </summary>
         internal InternalProjectContainer Data { get; private set; }
 
         /// <summary>
         /// Gibt alle mobilen Regale zurueck.
         /// </summary>
-        public StorageData[] StorageRacks
+        public StorageData[] StorageContainer
         {
             get
             {
@@ -34,6 +53,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         public Container()
         {
             ContainerData = new List<StorageData>( );
@@ -45,6 +67,10 @@ namespace ApplicationFacade.Warehouse
             DestroyContainer( );
         }
 
+        /// <summary>
+        /// Erstellt einen neuen Container am default Spawnpunkt.
+        /// </summary>
+        /// <returns>Objekt das den Container repräsentiert.</returns>
         public StorageData CreateContainer( )
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
@@ -69,6 +95,13 @@ namespace ApplicationFacade.Warehouse
             return container;
         }
         
+        /// <summary>
+        /// Erstellt einen neuen Container.
+        /// </summary>
+        /// <param name="position">Die Position des Containers.</param>
+        /// <param name="rotation">Die Rotation des Containers.</param>
+        /// <param name="scale">Die Skalierung des Containres.</param>
+        /// <returns>Objekt das den Container repräsentiert.</returns>
         public StorageData CreateContainer( Vector3 position, Quaternion rotation, Vector3 scale )
         {
             LogManager.WriteInfo( "Mobiles Regal wird erstellt.", "ContainerData", "CreateContainer" );
@@ -93,6 +126,10 @@ namespace ApplicationFacade.Warehouse
             return container;
         }
 
+        /// <summary>
+        /// Fügt einen geladenen Container zur Containerverwaltung hinzu.
+        /// </summary>
+        /// <param name="container">Der geladene Container der Verwaltet werden soll.</param>
         internal void AddContainer( StorageData container )
         {
             LogManager.WriteInfo( "Mobiles Regal wird hinzugefuegt.", "Warehouse", "AddContainer" );
@@ -110,6 +147,11 @@ namespace ApplicationFacade.Warehouse
             OnSContainerCreated( container );
         }
 
+        /// <summary>
+        /// Entfernt einen Container aus der Liste und der Umgebung.
+        /// </summary>
+        /// <param name="container">Der Container der Entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemoveContainer( StorageData container )
         {
             LogManager.WriteInfo( "Mobiles Regal wird entfernt.", "ContainerData", "RemoveContainer" );
@@ -136,6 +178,11 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Gibt den Container mit der angegebenen ID zurück.
+        /// </summary>
+        /// <param name="id">Die ID des Containers.</param>
+        /// <returns>Gibt den Container oder null zurück.</returns>
         public StorageData GetContainer( long id )
         {
             LogManager.WriteInfo( "Mobiles Regal wird abgefragt.", "ContainerData", "GetContainer" );
@@ -151,6 +198,11 @@ namespace ApplicationFacade.Warehouse
             return null;
         }
 
+        /// <summary>
+        /// Gibt den Container mit dem angegebenen GameObject zurück.
+        /// </summary>
+        /// <param name="obj">Das GameObject des Containers..</param>
+        /// <returns>Gibt den Container oder null zurück.</returns>
         public StorageData GetContainer( GameObject obj )
         {
             LogManager.WriteInfo( "Mobiles Regal wird abgefragt.", "ContainerData", "GetContainer" );
@@ -166,6 +218,9 @@ namespace ApplicationFacade.Warehouse
             return null;
         }
 
+        /// <summary>
+        /// Zerstört alle Container in der Umgebung.
+        /// </summary>
         internal void DestroyContainer()
         {
             foreach ( StorageData container in ContainerData )
@@ -174,11 +229,19 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Löst das ContainerCreated Event aus.
+        /// </summary>
+        /// <param name="data">Der Container der erstellt wurde.</param>
         protected virtual void OnSContainerCreated( StorageData data )
         {
             ContainerCreated?.Invoke( data );
         }
 
+        /// <summary>
+        /// Löst das ContainerDeleted Event aus.
+        /// </summary>
+        /// <param name="data">Der Container der gelöscht wurde.</param>
         protected virtual void OnContainerDeleted( StorageData data )
         {
             ContainerDeleted?.Invoke( data );

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Bestimmt den Typ einer Tür.
+    /// </summary>
     public enum DoorType
     {
         Door = 1,

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Gibt die Kategorie eines Wandobjekts an.
+    /// </summary>
     public enum WallClass
     {
         Undefined = 0,
