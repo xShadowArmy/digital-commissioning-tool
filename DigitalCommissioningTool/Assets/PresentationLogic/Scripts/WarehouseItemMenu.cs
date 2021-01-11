@@ -112,16 +112,16 @@ public class WarehouseItemMenu : MonoBehaviour
     {
         if (weight >= 1)
         {
-            return Math.Round(weight, 2).ToString() + "Kg";
+            return Math.Round(weight, 3).ToString() + "Kg";
         }
         else
         {
-            return Math.Round(weight * 1000, 0).ToString() + "g";
+            return Math.Round(weight * 1000, 3).ToString() + "g";
         }
     }
     private void updateSize()
     {
-        float newHeight = System.Math.Max(161, 1 + (Stock.Count + 1) * 16);
+        float newHeight = System.Math.Max(161, 1 + (Stock.Count + 1) * 32);
         RectTransform contentBox = ItemTemplate.transform.parent.GetComponent<RectTransform>();
         contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
     }
@@ -207,7 +207,18 @@ public class WarehouseItemMenu : MonoBehaviour
         }
         try
         {
-            double result = Double.Parse(textWeight.text);
+            double result = 0;
+
+            try
+            {
+                result = Double.Parse(textWeight.text.Replace( ',','.' ), System.Globalization.NumberStyles.Float );
+            }
+
+            catch( Exception )
+            {
+                result = Double.Parse( textWeight.text.Replace( '.', ',' ), System.Globalization.NumberStyles.Float );
+            }
+
             SelectedItem.SetItemWeight(result);
         }
         catch (FormatException)

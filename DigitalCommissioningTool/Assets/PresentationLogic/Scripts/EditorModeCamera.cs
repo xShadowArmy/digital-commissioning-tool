@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ApplicationFacade.Application;
 using UnityEngine;
 
 public class EditorModeCamera : MonoBehaviour
@@ -42,6 +43,24 @@ public class EditorModeCamera : MonoBehaviour
             }
 
             this.transform.Translate(new Vector3(HorizontalAxis, 0, VerticalAxis) * (Time.deltaTime * _speed));
+
+            if ( transform.position.y <= 2 )
+            {
+                transform.position = new Vector3( transform.position.x, 2f, transform.position.z );
+            }
+        }
+
+        if ( Input.GetKey( KeyManager.MoveCameraUp.Code ) )
+        {
+            transform.Translate( new Vector3( 0, 5f, 0 ) * Time.deltaTime );
+        }
+
+        else if ( Input.GetKey( KeyManager.MoveCameraDown.Code ) )
+        {
+            if ( transform.position.y >= 2.5f )
+            {
+                transform.Translate( new Vector3( 0, -5f, 0 ) * Time.deltaTime );
+            }
         }
     }
 }
