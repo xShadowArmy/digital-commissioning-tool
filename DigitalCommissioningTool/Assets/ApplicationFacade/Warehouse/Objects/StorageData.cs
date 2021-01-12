@@ -8,16 +8,34 @@ using UnityEngine;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Repräsentiert ein Regal in der Umgebung.
+    /// </summary>
     public class StorageData : GameObjectData
     {
+        /// <summary>
+        /// Gibt an ob das Regal ein Container ist.
+        /// </summary>
         public bool IsContainer { get; internal set; }
 
+        /// <summary>
+        /// Die Anzahl der Slots.
+        /// </summary>
         public int SlotCount { get; internal set; }
 
+        /// <summary>
+        /// Die Items von dem Container.
+        /// </summary>
         private ItemData[] Data { get; set; }
 
+        /// <summary>
+        /// Die Kisten Objekte von dem Regal.
+        /// </summary>
         private GameObject[] Slots { get; set; }
 
+        /// <summary>
+        /// Gibt die Items von dem Regal zurück.
+        /// </summary>
         public ItemData[] GetItems
         {
             get
@@ -26,22 +44,49 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         internal StorageData( ) : base( )
         {
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Regals.</param>
         internal StorageData( long id ) : base( id )
         {
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Regals.</param>
+        /// <param name="position">Die Position des Regals.</param>
+        /// <param name="rotation">Die Rotation des Regals.</param>
+        /// <param name="scale">Die Skalierung des Regals.</param>
         internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale ) : base( id, position, rotation, scale )
         {
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Regals.</param>
+        /// <param name="position">Die Position des Regals.</param>
+        /// <param name="rotation">Die Rotation des Regals.</param>
+        /// <param name="scale">Die Skalierung des Regals.</param>
+        /// <param name="obj">Das GameObject des Regals.</param>
         internal StorageData( long id, Vector3 position, Quaternion rotation, Vector3 scale, GameObject obj ) : base( id, position, rotation, scale, obj )
         {
         }
-        
+
+        /// <summary>
+        /// Gibt das Item aus dem angegebenen Slot zurück.
+        /// </summary>
+        /// <param name="slot">Der Slot des Items.</param>
+        /// <returns>Gibt das Item zurück.</returns>
         public ItemData GetItem( int slot )
         {
             if ( IsDestroyed( ) || slot == -1 )
@@ -64,6 +109,11 @@ namespace ApplicationFacade.Warehouse
             return Data[slot];
         }
 
+        /// <summary>
+        /// Gibt das Item zurück mit der angegebenen ID.
+        /// </summary>
+        /// <param name="id">Die ID des Items.</param>
+        /// <returns>Gibt das Item mit der passenden ID zurück.</returns>
         public ItemData GetItem( long id )
         {
             if ( IsDestroyed( ) )
@@ -82,6 +132,11 @@ namespace ApplicationFacade.Warehouse
             return null;
         }
 
+        /// <summary>
+        /// Gibt das Item zurück mit dem angegebenen GameObject.
+        /// </summary>
+        /// <param name="obj">Das GameObject nach dem gesucht werden soll.</param>
+        /// <returns>Gibt das Item mit dem passenden GameObject zurück.</returns>
         public ItemData GetItem( GameObject obj )
         {
             if ( IsDestroyed( ) )
@@ -99,7 +154,12 @@ namespace ApplicationFacade.Warehouse
 
             return null;
         }
-        
+
+        /// <summary>
+        /// Gibt den Slot zurück auf dem das Item mit dem passenden GameObject abgelegt wurde.
+        /// </summary>
+        /// <param name="obj">Das GameObject das gesucht werden soll.</param>
+        /// <returns>Gibt die Nummer des Slots zurück.</returns>
         public int GetSlot( GameObject obj )
         {
             if ( IsDestroyed( ) )
@@ -118,6 +178,11 @@ namespace ApplicationFacade.Warehouse
             return -1;
         }
 
+        /// <summary>
+        /// Gibt den Slot zurück auf dem das Item abgelegt wurde.
+        /// </summary>
+        /// <param name="item">Das Item dessen Slot gesucht werden soll.</param>
+        /// <returns>Gibt die Nummer des Slots zurück.</returns>
         public int GetSlot( ItemData item )
         {
             if ( IsDestroyed( ) )
@@ -136,6 +201,12 @@ namespace ApplicationFacade.Warehouse
             return -1;
         }
 
+        /// <summary>
+        /// Legt ein Item auf das Regal.
+        /// </summary>
+        /// <param name="item">Das Item das auf das Regal gelegt werden soll.</param>
+        /// <param name="slot">Der Slot auf dem das Item abgelegt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool AddItem( ItemData item, int slot = -1 )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
@@ -204,6 +275,13 @@ namespace ApplicationFacade.Warehouse
             return true;
         }
 
+        /// <summary>
+        /// Legt ein Item auf das Regal.
+        /// </summary>
+        /// <param name="item">Das Item das auf das Regal gelegt werden soll.</param>
+        /// <param name="warehouse">Das Lager in dem die änderungen gespeichert werden sollen.</param>
+        /// <param name="slot">Der Slot auf dem das Item gelegt wird.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         internal bool AddItem( ItemData item, ref Warehouse warehouse, int slot = -1 )
         {
             LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
@@ -272,6 +350,11 @@ namespace ApplicationFacade.Warehouse
             return true;
         }
 
+        /// <summary>
+        /// Entfernt ein Item von dem Regal.
+        /// </summary>
+        /// <param name="item">Das Item das Entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool RemoveItem( ItemData item )
         {
             if ( IsDestroyed( ) )
@@ -313,6 +396,11 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Überprüft ob ein Item auf dem Regal liegt.
+        /// </summary>
+        /// <param name="item">Das Item nach dem gesucht werden soll.</param>
+        /// <returns>Gibt true zurück wenn das Regal das Item enthält.</returns>
         public bool ContainsItem( ItemData item )
         {
             if ( IsDestroyed( ) )
@@ -331,6 +419,9 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Zerstört das Objekt.
+        /// </summary>
         public new void Destroy()
         {
             base.Destroy( );
@@ -344,6 +435,10 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Ändert die Anzahl der Slots.
+        /// </summary>
+        /// <param name="strategie">Der Algorithmus der für die Berechnung der Slots verwendet werden soll.</param>
         internal void ChangeSlotCount( ISlotCalcStrategie strategie )
         {
             if ( IsDestroyed( ) )
@@ -433,6 +528,9 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Wird aufgerufen wenn das Objekt verändert wurde um die Änderungen zu Speichern.
+        /// </summary>
         protected override void ObjectChanged()
         {
            if ( !IsContainer )

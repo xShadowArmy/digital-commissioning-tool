@@ -11,30 +11,104 @@ using ApplicationFacade.Warehouse;
 
 namespace ApplicationFacade.Application
 {
+    /// <summary>
+    /// Bietet Methoden zur Verwaltung von Projekten.
+    /// </summary>
     public class ProjectManager
     {
+        /// <summary>
+        /// Eventhandler für das Erstell Ereigniss.
+        /// </summary>
         public delegate void ProjectCreateEventHandler();
+
+        /// <summary>
+        /// Eventhandler für Laden Ereignisse.
+        /// </summary>
         public delegate void ProjectLoadEventHandler();
+
+        /// <summary>
+        /// Eventhandler für Schließ Ereignisse.
+        /// </summary>
         public delegate void ProjectCloseEventHandler();
+
+        /// <summary>
+        /// Eventhandler für Speicher Ereignisse.
+        /// </summary>
         public delegate void ProjectSaveEventHandler();
 
+        /// <summary>
+        /// Wird ausgelöst wenn ein neues Projekt erstellt wurde.
+        /// </summary>
         public event ProjectCreateEventHandler ProjectCreated;
+
+        /// <summary>
+        /// Wird ausgelöst wenn ein Projekt geladen wird.
+        /// </summary>
         public event ProjectLoadEventHandler StartLoad;
+
+        /// <summary>
+        /// Wird ausgelöst wenn ein Projekt fertig geladen wurde.
+        /// </summary>
         public event ProjectLoadEventHandler FinishLoad;
+
+        /// <summary>
+        /// Wird ausgelöst wenn ein Projekt geschlossen wird.
+        /// </summary>
         public event ProjectCloseEventHandler StartClose;
+
+        /// <summary>
+        /// Wird ausgelöst wenn ein Projekt geschlossen wurde.
+        /// </summary>
         public event ProjectCloseEventHandler FinishClose;
+
+        /// <summary>
+        /// Wird ausgelöst wemm ein Projekt gespeichert wird.
+        /// </summary>
         public event ProjectSaveEventHandler StartSave;
+
+        /// <summary>
+        /// Wird ausgelöst wenn ein Projekt fertig gespeichert wurde.
+        /// </summary>
         public event ProjectSaveEventHandler FinishSave;
 
+        /// <summary>
+        /// Enthält die allgemeinen Daten des aktuell geöffneten Projekts.
+        /// </summary>
         internal ProjectData Data { get; private set; }
+
+        /// <summary>
+        /// Enthält die Einstellungen des aktuell geöffneten Projekts.
+        /// </summary>
         internal ProjectSettings Settings { get; private set; }
         
-        internal DataHandler      DHandler { get; set; }
-        internal SettingsHandler  SHandler { get; set; }
-        internal WarehouseHandler WHandler { get; set; }
-        internal ContainerHandler CHandler { get; set; }
-        internal StockHandler     IHandler { get; set; }
+        /// <summary>
+        /// Objekt das zum Speiuchern und Lesen der allgemeinen Projektdaten verwendet wird.
+        /// </summary>
+        internal DataHandler DHandler { get; set; }
 
+        /// <summary>
+        /// Objekt das zum Speichern und Lesen der Projekt Einstellungen verwendet wird.
+        /// </summary>
+        internal SettingsHandler SHandler { get; set; }
+
+        /// <summary>
+        /// Objekt das zum Speichern und Lesen des Lagerhauses verwendet wird.
+        /// </summary>
+        internal WarehouseHandler WHandler { get; set; }
+
+        /// <summary>
+        /// Objekt das zum Speichern und Lesen der Container verwendet wird.
+        /// </summary>
+        internal ContainerHandler CHandler { get; set; }
+
+        /// <summary>
+        /// Objekt das zum Speichern und Lesen des Lagerbestandes verwendet wird.
+        /// </summary>
+        internal StockHandler IHandler { get; set; }
+
+        /// <summary>
+        /// Gibt die allgemeinen Daten aller vorhandenen Projekte zurück.
+        /// </summary>
         public static ProjectData[] ProjectList
         {
             get
@@ -62,6 +136,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Gibt den Namen des aktuell geöffneten Projekts zurück.
+        /// </summary>
         public string ProjectName
         {
             get
@@ -79,7 +156,10 @@ namespace ApplicationFacade.Application
                 Data.ProjectName = value;
             }
         }
-
+        
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         internal ProjectManager()
         {
             Paths.ClearTempPath( );
@@ -95,6 +175,12 @@ namespace ApplicationFacade.Application
             Paths.ClearTempPath( );
         }
 
+        /// <summary>
+        /// Lädt ein Projekt.
+        /// </summary>
+        /// <param name="name">Der Name des Projekts das geladen werden soll.</param>
+        /// <param name="warehouse">Lagerhaus Objekt in das die Daten gelesen werden.</param>
+        /// <param name="container">Container Objekt in das die</param>
         internal void LoadProject( string name, ref Warehouse.Warehouse warehouse, ref Container container )
         {
             if ( !File.Exists( Paths.ProjectsPath + name + ".prj" ) )
@@ -137,6 +223,12 @@ namespace ApplicationFacade.Application
             FinishLoad?.Invoke( );
         }
 
+        /// <summary>
+        /// Speichert das aktuell geöffnete Projekt.
+        /// </summary>
+        /// <param name="name">Der Name unter dem das Projekt gespeichert werden soll.</param>
+        /// <param name="warehouse">Das Lagerhaus das gespeichert werden soll.</param>
+        /// <param name="container">Die Container die gespeichert werden sollen.</param>
         internal void SaveProject( string name, Warehouse.Warehouse warehouse, Container container )
         {
             if ( name != null )
@@ -165,6 +257,9 @@ namespace ApplicationFacade.Application
             FinishSave?.Invoke( );
         }
 
+        /// <summary>
+        /// Schließt das aktuell geöffnete Projekt.
+        /// </summary>
         internal void CloseProject()
         {
             StartClose?.Invoke( );
@@ -185,6 +280,13 @@ namespace ApplicationFacade.Application
             FinishClose?.Invoke( );
         }
 
+        /// <summary>
+        /// Erstellt ein neues Projekt.
+        /// </summary>
+        /// <param name="name">Der Name des Projekts.</param>
+        /// <param name="size">Die Größe des zu generierenden Lagerhauses.</param>
+        /// <param name="warehouse">Das Lagerhaus das generiert wird.</param>
+        /// <param name="container">Die Container die generiert werden.</param>
         internal void CreateProject( string name, WarehouseSize size, ref Warehouse.Warehouse warehouse, ref Container container )
         {
             if ( ProjectName != null )
@@ -239,6 +341,10 @@ namespace ApplicationFacade.Application
             ProjectCreated?.Invoke( );
         }
 
+        /// <summary>
+        /// Löscht das Projekt mit dem gegebenen Namen
+        /// </summary>
+        /// <param name="name"></param>
         internal void DeleteProject( string name )
         {
             if( ProjectName != null && ProjectName.Equals( name ) )
@@ -252,6 +358,9 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Speichert den aktuellen Lagerbestand.
+        /// </summary>
         private void WriteProjectStock()
         {
             ProjectItemData[] data = new ProjectItemData[ItemData.GetStock.Length];
@@ -264,26 +373,43 @@ namespace ApplicationFacade.Application
             IHandler.SaveFile( data );
         }
 
+        /// <summary>
+        /// Speichert die allgemeinen Projektdaten.
+        /// </summary>
         private void WriteProjectData( )
         {
             DHandler.SaveFile( Data.Data );
         }
 
+        /// <summary>
+        /// Speichert die Projekteinstellungen.
+        /// </summary>
         private void WriteProjectSettings( )
         {
             SHandler.SaveFile( Settings.Data );
         }
 
+        /// <summary>
+        /// Speichert das Lagerhaus.
+        /// </summary>
+        /// <param name="warehouse">Objekt das alles aus dem Lagerhaus enthält was gespeichert werden soll.</param>
         private void WriteProjectWarehouse( Warehouse.Warehouse warehouse )
         {
             WHandler.SaveFile( warehouse.Data );
         }
 
+        /// <summary>
+        /// Speichert die Container.
+        /// </summary>
+        /// <param name="container">Objekt das die Container enthält die gespeichert werden sollen.</param>
         private void WriteProjectContainer( Container container )
         {
             CHandler.SaveFile( container.Data );
         }
 
+        /// <summary>
+        /// Ließt den Lagerbestand aus der Projektdatei.
+        /// </summary>
         private void ReadProjectStock()
         {
             foreach( ProjectItemData item in IHandler.LoadFile() )
@@ -292,6 +418,11 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Ließt die allgemeinen Projektdaten aus der Datei.
+        /// </summary>
+        /// <param name="pData">Objekt in das die Daten gespeichert werden.</param>
+        /// <param name="data">Objekt das gelesen wird.</param>
         private static void ReadProjectData( ProjectData pData, InternalProjectData data )
         {
             pData.DateCreated  = data.DateCreated;
@@ -300,11 +431,20 @@ namespace ApplicationFacade.Application
             pData.ProjectPath  = data.FullPath;
         }
 
+        /// <summary>
+        /// Ließt die Projekt Einstellungen aus der Projektdatei.
+        /// </summary>
+        /// <param name="settings">Die Einstellungen die gelesen werden sollen.</param>
         private static void ReadProjectSettings( InternalProjectSettings settings )
         {
 
         }
 
+        /// <summary>
+        /// Ließt das Lagerhaus aus der Projektdatei.
+        /// </summary>
+        /// <param name="iwarehouse">Internes Objekt aus dem gelesen wird.</param>
+        /// <param name="warehouse">Lagerhaus dem die gelesenen Daten hinzugefügt werden.</param>
         private static void ReadProjectWarehouse( ref InternalProjectWarehouse iwarehouse, ref Warehouse.Warehouse warehouse )
         {
             for( int i = 0; i < iwarehouse.Floor.Count; i++ )
@@ -382,6 +522,11 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Ließt alle Container aus der Projektdatei.
+        /// </summary>
+        /// <param name="icontainer">Internes Objekt das gelesen wird.</param>
+        /// <param name="container">Objekt in das die Container gespeichert werden.</param>
         private static void ReadProjectContainer( ref InternalProjectContainer icontainer, ref Container container )
         {
             for( int i = 0; i < icontainer.Container.Count; i++ )
@@ -409,6 +554,11 @@ namespace ApplicationFacade.Application
             }
         }
 
+        /// <summary>
+        /// Generiert das standard Lagerhaus.
+        /// </summary>
+        /// <param name="size">Das Objekt für die Generierung des Lagerhauses.</param>
+        /// <returns>Das generierte Lagerhaus.</returns>
         private Warehouse.Warehouse GetDefaultWarehouse( IWarehouseStrategie size )
         {
             Warehouse.Warehouse warehouse = new Warehouse.Warehouse( );
@@ -521,9 +671,15 @@ namespace ApplicationFacade.Application
             return warehouse;
         }
 
+        /// <summary>
+        /// Erstellt die mobilen Regale für ein neues Projekt.
+        /// </summary>
+        /// <returns>Objekt mit den erstellten Containern.</returns>
         private Container GetDefaultContainer()
         {
             Container container = new Container( );
+
+            container.CreateContainer( );
 
             return container;
         }

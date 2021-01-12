@@ -33,12 +33,24 @@ namespace ApplicationFacade.Warehouse
         /// </summary>
         public GameObject ObjectSpawn { get; internal set; }
 
+        /// <summary>
+        /// Enthält alle Objekte aus der Nordwand.
+        /// </summary>
         internal List<WallObjectData> NorthWall { get; set; }
 
+        /// <summary>
+        /// Enthält alle Objekte aus der Ostwand.
+        /// </summary>
         internal List<WallObjectData> EastWall { get; set; }
 
+        /// <summary>
+        /// Enthält alle Objekte aus der Südwand.
+        /// </summary>
         internal List<WallObjectData> SouthWall { get; set; }
 
+        /// <summary>
+        /// Enthält alle Objekte aus der Westwand.
+        /// </summary>
         internal List<WallObjectData> WestWall { get; set; }
 
         /// <summary>
@@ -82,6 +94,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt alle Objekte aus der Nordwand zurück.
+        /// </summary>
         public WallObjectData[] NorthWallObjects
         {
             get
@@ -90,6 +105,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt alle Objekte aus der Ostwand zurück.
+        /// </summary>
         public WallObjectData[] EastWallObjects
         {
             get
@@ -98,6 +116,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt alle Objekte aus der Südwand zurück.
+        /// </summary>
         public WallObjectData[] SouthWallObjects
         {
             get
@@ -106,6 +127,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt alle Objekte aus der Westwand zuück.
+        /// </summary>
         public WallObjectData[] WestWallObjects
         {
             get
@@ -114,6 +138,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt an ob das Lager zerstört wurde.
+        /// </summary>
         private bool Destroyed;
 
         /// <summary>
@@ -735,6 +762,9 @@ namespace ApplicationFacade.Warehouse
             return null;
         }
 
+        /// <summary>
+        /// Zerstört alle Lagerhaus Objekte in der Umgebung.
+        /// </summary>
         internal void DestroyWarehouse()
         {
             if ( !Destroyed )

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Gibt an welche Lagerhaus größe generiert werden soll.
+    /// </summary>
     public enum WarehouseSize
     {
         Small  = 0,

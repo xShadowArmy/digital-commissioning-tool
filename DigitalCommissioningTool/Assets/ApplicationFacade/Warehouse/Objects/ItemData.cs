@@ -10,32 +10,72 @@ using UnityEngine;
 
 namespace ApplicationFacade.Warehouse
 {
+    /// <summary>
+    /// Stellt ein Item auf einem Regal in der Umgebung dar.
+    /// </summary>
     public class ItemData : GameObjectData
     {
         public delegate void StockChangedEventHandler( ItemData item );
         public delegate void ItemChangedEventHandler( ItemData item );
 
+        /// <summary>
+        /// Wird ausgelöst wenn der Lagerbestand veändert wurde.
+        /// </summary>
         public static event StockChangedEventHandler StockChanged;
+
+        /// <summary>
+        /// Wird ausgelöst wenn ein Item veändert wurde.
+        /// </summary>
         public static event ItemChangedEventHandler ItemChanged;
 
+        /// <summary>
+        /// Die Anzahl des Items.
+        /// </summary>
         public int Count { get; internal set; }
 
+        /// <summary>
+        /// Das Gewicht des Items.
+        /// </summary>
         public double Weight { get; internal set; }
 
+        /// <summary>
+        /// Der Name des Items.
+        /// </summary>
         public string Name { get; internal set; }
 
+        /// <summary>
+        /// Das Regal auf dem das Item liegt.
+        /// </summary>
         public StorageData ParentStorage { get; internal set; }
 
+        /// <summary>
+        /// Gibt an ob die Item Instanz die Wurzel des Baumes ist.
+        /// </summary>
         internal bool IsRoot { get; set; }
 
+        /// <summary>
+        /// Das Item von dem dieses Item eine Teilmenge ist.
+        /// </summary>
         internal ItemData ParentItem { get; private set; }
 
+        /// <summary>
+        /// Die Kinder des aktuellen Items.
+        /// </summary>
         public List<ItemData> ChildItems { get; private set; }
 
+        /// <summary>
+        /// Die ID Referenz des Items.
+        /// </summary>
         internal long IDRef { get; set; }
 
+        /// <summary>
+        /// Eine Liste mit dem Lagerbestand.
+        /// </summary>
         internal static List<ItemData> ItemStock { get; set; }
 
+        /// <summary>
+        /// Gibt den Lagerbestand zurück.
+        /// </summary>
         public static ItemData[] GetStock
         {
             get
@@ -44,6 +84,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt den kompletten Lagerbestand des Items zurück.
+        /// </summary>
         public int StockCount
         {
             get
@@ -59,6 +102,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Gibt an ob das Objekt eine Wurzel im Baum ist.
+        /// </summary>
         public bool IsStockItem
         {
             get
@@ -72,6 +118,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Erstellt den Lagerbestand.
+        /// </summary>
         static ItemData()
         {
             ItemStock = new List<ItemData>( );
@@ -82,6 +131,9 @@ namespace ApplicationFacade.Warehouse
             Destroy( );
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
         internal ItemData() : base( )
         {
             Count = 0;
@@ -92,6 +144,10 @@ namespace ApplicationFacade.Warehouse
             ChildItems = new List<ItemData>( );
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="id">Die ID des Items.</param>
         internal ItemData( long id ) : base( id )
         {
             Count = 0;
@@ -102,6 +158,11 @@ namespace ApplicationFacade.Warehouse
             ChildItems = new List<ItemData>( );
         }
         
+        /// <summary>
+        /// Erhöt die Anzahl des Items.
+        /// </summary>
+        /// <param name="itemCount">Die Anzahl um die die Teilmenge erhöt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool IncreaseItemCount( int itemCount )
         {
             if ( IsDestroyed() )
@@ -132,6 +193,11 @@ namespace ApplicationFacade.Warehouse
             return true;
         }
 
+        /// <summary>
+        /// Verringert die Anzahl des Items.
+        /// </summary>
+        /// <param name="itemCount">Die Anzahl um die die Teilmenge verringert werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool DecreaseItemCount( int itemCount )
         {
             if ( IsDestroyed( ) )
@@ -162,6 +228,10 @@ namespace ApplicationFacade.Warehouse
             return true;
         }
 
+        /// <summary>
+        /// Ändert den Namen des Items.
+        /// </summary>
+        /// <param name="itemName">Der neue Name.</param>
         public void SetItemName( string itemName )
         {
             if ( IsDestroyed( ) )
@@ -180,6 +250,10 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
 
+        /// <summary>
+        /// Verändert das Gewicht des Items.
+        /// </summary>
+        /// <param name="itemWeight">Das neue Gewicht.</param>
         public void SetItemWeight( double itemWeight )
         {
             if ( IsDestroyed( ) )
@@ -198,6 +272,11 @@ namespace ApplicationFacade.Warehouse
             ObjectChanged( );
         }
                 
+        /// <summary>
+        /// Frägt eine Teilmenge aus dem Item ab.
+        /// </summary>
+        /// <param name="count">Die Anzahl der Teilmenge die Abgefragt werden soll.</param>
+        /// <returns>Ein Item mit der Teilmenge.</returns>
         public ItemData RequestItem( int count )
         {
             if ( IsDestroyed( ) )
@@ -236,6 +315,11 @@ namespace ApplicationFacade.Warehouse
             return data;
         }
 
+        /// <summary>
+        /// Frägt eine Teilmenge aus dem Item ab und klont das GameObject.
+        /// </summary>
+        /// <param name="count">Die Anzahl der Teilmenge die Abgefragt werden soll.</param>
+        /// <returns>Ein Item mit der Teilmenge.</returns>
         public ItemData RequestCopyItem( int count )
         {
             if ( IsDestroyed( ) )
@@ -281,6 +365,13 @@ namespace ApplicationFacade.Warehouse
             return data;
         }
 
+        /// <summary>
+        /// Frägt eine Teilmenge aus dem Item ab und klont das GameObject.
+        /// </summary>
+        /// <param name="count">Die Anzahl der Teilmenge die Abgefragt werden soll.</param>
+        /// <param name="position">Die Position des geklonten Objekts.</param>
+        /// <param name="rotation">Die Rotation des geklonten Objekts.</param>
+        /// <returns>Ein Item mit der Teilmenge.</returns>
         public ItemData RequestCopyItem( int count, Vector3 position, Quaternion rotation )
         {
             if ( IsDestroyed( ) )
@@ -326,6 +417,10 @@ namespace ApplicationFacade.Warehouse
             return data;
         }
 
+        /// <summary>
+        /// Die Teilmenge wird wieder zum Parent hinzugefügt.
+        /// </summary>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public bool ReturnItem( )
         {
             if ( IsDestroyed( ) )
@@ -359,6 +454,11 @@ namespace ApplicationFacade.Warehouse
             return true;
         }
 
+        /// <summary>
+        /// Fügt ein Item zum Lagerbestand hinzu.
+        /// </summary>
+        /// <param name="name">Der Name des Items.</param>
+        /// <param name="weight">Das Gewicht des Items.</param>
         public static void AddItemToStock( string name, double weight = 0 )
         {
             ItemData item = new ItemData( Warehouse.GetUniqueID( ItemStock.ToArray( ) ) )
@@ -374,7 +474,14 @@ namespace ApplicationFacade.Warehouse
 
             StockChanged?.Invoke( item );
         }
-        
+
+        /// <summary>
+        /// Fügt ein Item zum Lagerbestand hinzu.
+        /// </summary>
+        /// <param name="id">Die ID des Items.</param>
+        /// <param name="name">Der Name des Items.</param>
+        /// <param name="count">Die Anzahl des Items.</param>
+        /// <param name="weight">Das Gewicht des Items.</param>
         internal static void AddItemToStock( long id, string name, int count = 1, double weight = 0 )
         {
             ItemData item = new ItemData( id )
@@ -391,6 +498,11 @@ namespace ApplicationFacade.Warehouse
             StockChanged?.Invoke( item );
         }
 
+        /// <summary>
+        /// Entfernt das Item vom Lagerbestand.
+        /// </summary>
+        /// <param name="item">Das Item das Entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public static bool RemoveItemFromStock( ItemData item )
         {
             if ( !item.IsStockItem )
@@ -407,6 +519,11 @@ namespace ApplicationFacade.Warehouse
             return res;
         }
 
+        /// <summary>
+        /// Entfernt das Item vom Lagerbestand.
+        /// </summary>
+        /// <param name="idRef">Die ID des Items das entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public static bool RemoveItemFromStock( long idRef )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
@@ -426,6 +543,11 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Entfernt das Item vom Lagerbestand.
+        /// </summary>
+        /// <param name="name">Der Name des Items das Entfernt werden soll.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
         public static bool RemoveItemFromStock( string name )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
@@ -445,6 +567,11 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Überprüft ob der Lagerbestand ein Item enthält.
+        /// </summary>
+        /// <param name="name">Der Name des Items das gesucht werden soll.</param>
+        /// <returns>Gibt true zurück wenn das Item existiert.</returns>
         public static bool StockContainsItem( string name )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
@@ -458,6 +585,11 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
 
+        /// <summary>
+        /// Überprüft ob der Lagerbestand ein Item enthält.
+        /// </summary>
+        /// <param name="idRef">Die IDReferenz des Items das gesucht werden soll.</param>
+        /// <returns>Gibt true zurück wenn das Item existiert.</returns>
         public static bool StockContainsItem( long idRef )
         {
             for ( int i = 0; i < ItemStock.Count; i++ )
@@ -471,6 +603,11 @@ namespace ApplicationFacade.Warehouse
             return false;
         }
         
+        /// <summary>
+        /// Frägt ein Item aus dem Lagerbestand ab.
+        /// </summary>
+        /// <param name="Name">Der Name des Items das abgefragt werden soll.</param>
+        /// <returns>Gibt das Item zurück oder null.</returns>
         public static ItemData RequestStockItem( string Name )
         {
             foreach( ItemData item in ItemStock )
@@ -484,6 +621,10 @@ namespace ApplicationFacade.Warehouse
             return null;
         }
         
+        /// <summary>
+        /// Ändert das Eltern Regal dem das Item zugewiesen ist.
+        /// </summary>
+        /// <param name="storage">Das Regal das als Parent gesetzt werden soll.</param>
         internal void SetParentStorage( StorageData storage )
         {
             if ( IsDestroyed() )
@@ -494,6 +635,10 @@ namespace ApplicationFacade.Warehouse
             ParentStorage = storage;
         }
 
+        /// <summary>
+        /// Entfernt ein Item aus dem Lagerbestand rekursiv.
+        /// </summary>
+        /// <param name="data">Das Item das entfernt werden soll.</param>
         private static void RemoveStockItem( ItemData data )
         {
             if ( data.ChildItems.Count == 0 )
@@ -514,6 +659,11 @@ namespace ApplicationFacade.Warehouse
             }
         }
         
+        /// <summary>
+        /// Wird aufgerufen wenn ein Item geändert wurde und ändert den kompletten hierarchie Baum rekursiv ab.
+        /// </summary>
+        /// <param name="src">Das Item mit den änderungen.</param>
+        /// <param name="item">Das Item das geändert wird.</param>
         private void ObjectChanged( ItemData src, ItemData item )
         {
             if ( item.ChildItems.Count == 0 )
@@ -531,6 +681,9 @@ namespace ApplicationFacade.Warehouse
             }
         }
 
+        /// <summary>
+        /// Wird aufgerufen wenn ein Item geändert wird.
+        /// </summary>
         protected override void ObjectChanged()
         {
             ItemData tmp = this;
