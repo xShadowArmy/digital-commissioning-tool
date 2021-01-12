@@ -127,6 +127,7 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     private void replaceResources()
     {
+        EnableCount(true);
         PanelListItem.SetActive(true);
         PanelEditItem.SetActive(true);
         PanelDistributeItem.SetActive(true);
@@ -137,6 +138,7 @@ public class WarehouseItemMenu : MonoBehaviour
         ItemTemplate.SetActive(false);
         PanelEditItem.SetActive(false);
         PanelDistributeItem.SetActive(false);
+        EnableCount(false);
     }
     public void OnClick(GameObject sender)
     {
@@ -148,10 +150,10 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     public void AddItemClick()
     {
+        EnableCount(false);
         TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();
         TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
-        TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
-        textName.text = textCount.text = textWeight.text = "";
+        textName.text = textWeight.text = "";
         SelectedItem = null;
 
         PanelEditItem.SetActive(true);
@@ -161,6 +163,7 @@ public class WarehouseItemMenu : MonoBehaviour
     {
         PanelEditItem.SetActive(true);
         PanelListItem.SetActive(false);
+        EnableCount(true);
         TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();
         TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
         TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
@@ -182,9 +185,7 @@ public class WarehouseItemMenu : MonoBehaviour
             ItemData.AddItemToStock(".");
             SelectedItem = ItemData.RequestStockItem(".");
         }
-        TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();
-        TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
-        TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
+        TMP_InputField textName = PanelEditItem.transform.Find("NameEditItem/NameTextFieldEditItem").GetComponent<TMP_InputField>();     
         if (!textName.text.Equals("") && !(ItemData.StockContainsItem(textName.text) && newItem))
         {
             SelectedItem.SetItemName(textName.text);
@@ -194,17 +195,22 @@ public class WarehouseItemMenu : MonoBehaviour
             Debug.LogWarning("Eingabe ist nicht zulässig");
             failed = true;
         }
-        try
+        if (!newItem)
         {
-            int result = Int32.Parse(textCount.text);
-            //SelectedItem.SetItemCount(result);
-            SelectedItem.IncreaseItemCount(result - SelectedItem.Count);
-        }
-        catch (FormatException)
-        {
-            Debug.LogWarning("Eingabe ist nicht zulässig");
-            failed = true;
-        }
+            TMP_InputField textCount = PanelEditItem.transform.Find("CountEditItem/CountTextFieldEditItem").GetComponent<TMP_InputField>();
+            try
+            {
+                int result = Int32.Parse(textCount.text);
+                //SelectedItem.SetItemCount(result);
+                SelectedItem.IncreaseItemCount(result - SelectedItem.Count);
+            }
+            catch (FormatException)
+            {
+                Debug.LogWarning("Eingabe ist nicht zulässig");
+                failed = true;
+            }
+        }        
+        TMP_InputField textWeight = PanelEditItem.transform.Find("WeightEditItem/WeightTextFieldEditItem").GetComponent<TMP_InputField>();
         try
         {
             double result = 0;
@@ -230,6 +236,7 @@ public class WarehouseItemMenu : MonoBehaviour
         {
             ItemData.RemoveItemFromStock(SelectedItem);
         }
+        EnableCount(false);
     }
     public void AddCloseClick()
     {
@@ -279,6 +286,16 @@ public class WarehouseItemMenu : MonoBehaviour
             }
 
         }
+    }
+    private void EnableCount(bool enable) {
+        PanelEditItem.transform.Find("CountEditItem").gameObject.SetActive(enable);
+        int newSize = 140;
+        if (enable)
+        {
+            newSize = 170;
+        }        
+        PanelEditItem.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(PanelEditItem.GetComponent<RectTransform>());
     }
 
     public ItemData GetStockItem(int index)

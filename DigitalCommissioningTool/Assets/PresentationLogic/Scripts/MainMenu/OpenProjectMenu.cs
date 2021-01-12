@@ -65,7 +65,11 @@ public class OpenProjectMenu : MonoBehaviour
 
     public void OnClickDelete(Transform sender)
     {
-        GameManager.DeleteProject(sender.Find("Name/Text").GetComponent<TextMeshProUGUI>().text);
+        string projectName = sender.Find("Name/Text").GetComponent<TextMeshProUGUI>().text;
+        GameManager.DeleteProject(projectName);
+        projects.Remove(projectName);
+        Destroy(sender.gameObject);
+        UpdateProjects();
     }
 
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)

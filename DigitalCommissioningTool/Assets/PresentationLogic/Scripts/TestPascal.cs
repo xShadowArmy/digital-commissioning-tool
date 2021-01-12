@@ -92,14 +92,14 @@ public class TestPascal : AvatarBehavior
     }
     public void UpdatePath()
     {
-        this.WalkTrajectory.Points.Clear();
-        this.WalkTrajectory.Points.Add(this.transform);
-        foreach (DragItem dragItem in queueMenu.QueueItems)
-        {
-            Transform walkTarget = dragItem.LinkedItem.Object.transform.Find("BoxWalkTarget");
-            this.WalkTrajectory.Points.Add(walkTarget);
-            this.WalkTrajectory.Points.Add(GameManager.GameContainer.StorageContainer[0].Object.transform);
-        }
+        //this.WalkTrajectory.Points.Clear();
+        //this.WalkTrajectory.Points.Add(this.transform);
+        //foreach (DragItem dragItem in queueMenu.QueueItems)
+        //{
+        //    Transform walkTarget = dragItem.LinkedItem.Object.transform.Find("BoxWalkTarget");
+        //    this.WalkTrajectory.Points.Add(walkTarget);
+        //    this.WalkTrajectory.Points.Add(GameManager.GameContainer.StorageRacks[0].Object.transform);
+        //}
         //foreach (Transform child in WalkTrajectoryPoints)
         //{
         //    this.WalkTrajectory.Points.Add(child);
