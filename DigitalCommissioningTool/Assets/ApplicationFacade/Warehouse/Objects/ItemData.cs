@@ -368,10 +368,11 @@ namespace ApplicationFacade.Warehouse
                 Count -= count;
             }
 
-            data.ChangeGameObject( GameObject.Instantiate( Object, Object.transform.parent ) );
+            data.ChangeGameObject( GameObject.Instantiate( Object, null ) );
+            data.Object.transform.SetParent( GameObject.FindWithTag( "Player" ).transform );
 
             ChildItems.Add( data );
-            ItemChanged?.Invoke(data);
+
             ItemChanged?.Invoke(this);
 
             return data;
@@ -423,7 +424,6 @@ namespace ApplicationFacade.Warehouse
             data.ChangeGameObject( GameObject.Instantiate( Object, position, rotation, Object.transform.parent ) );
 
             ChildItems.Add( data );
-            ItemChanged?.Invoke(data);
             ItemChanged?.Invoke(this);
 
             return data;

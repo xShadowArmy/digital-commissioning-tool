@@ -57,6 +57,7 @@ namespace SystemTools.Handler
             try
             {
                 Logger.WriteInfo( "Extrahiere " + src + " nach: " + dst + " ", "ArchiveHandler", "ExtractArchive" );
+                
                 ZipFile.ExtractToDirectory( src, dst );
             }
 

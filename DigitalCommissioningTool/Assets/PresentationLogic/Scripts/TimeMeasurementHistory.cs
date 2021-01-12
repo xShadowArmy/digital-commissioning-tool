@@ -41,6 +41,20 @@ public class TimeMeasurementHistory : MonoBehaviour
         GameManager.PManager.StartClose += ProjectManagerOnStartClose;
         GameManager.PManager.StartSave += ProjectManagerOnStartSave;
         GameManager.PManager.ProjectCreated += ProjectManagerOnProjectCreated;
+        configManager = new ConfigManager( );
+    }
+
+    
+    void OnStart()
+    {
+        //ResourceHandler.ReplaceResources();
+        Timer.TimerStopped += OnTimerStopped;
+        Timer.TimerReset += OnTimerReset;
+        GameManager.PManager.FinishLoad += ProjectManagerOnFinishLoad;
+        GameManager.PManager.StartClose += ProjectManagerOnStartClose;
+        GameManager.PManager.StartSave += ProjectManagerOnStartSave;
+        GameManager.PManager.ProjectCreated += ProjectManagerOnProjectCreated;
+        configManager = new ConfigManager( );
     }
 
     /// <summary>
@@ -59,7 +73,7 @@ public class TimeMeasurementHistory : MonoBehaviour
     /// </summary>
     private void ProjectManagerOnProjectCreated()
     {
-        configManager = new ConfigManager();
+        LogManager.WriteError( "OnProjectCreatedCalled" );
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
     }
 
@@ -80,7 +94,8 @@ public class TimeMeasurementHistory : MonoBehaviour
     /// </summary>
     private void ProjectManagerOnFinishLoad()
     {
-        configManager = new ConfigManager();
+        LogManager.WriteError( "OnFinishLoadCalled" );
+
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
 
         for (int i = 0; i < 1000; i++)
