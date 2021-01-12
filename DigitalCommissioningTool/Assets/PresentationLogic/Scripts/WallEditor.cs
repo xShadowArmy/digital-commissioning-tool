@@ -62,6 +62,7 @@ public class WallEditor : MonoBehaviour
         AddInnerWallButton = GameObject.Find("ButtonAddInnerWall");
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        AddInnerWallButton.SetActive(false);
         PanelDropDownMenue.SetActive(false);
     }
 
