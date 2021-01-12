@@ -8,15 +8,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using ApplicationFacade.Application;
+using TMPro;
 using ApplicationFacade.Warehouse;
 
 public class WallEditor : MonoBehaviour
 {
     private int numberOfWalls;
-    [SerializeField] private Text addWindowText;
-    [SerializeField] private Text addDoorText;
-    [SerializeField] private Text addWallText;
-    [SerializeField] private Text addInnerWallText;
+    [SerializeField] private TMP_Text addWindowText;
+    [SerializeField] private TMP_Text addDoorText;
+    [SerializeField] private TMP_Text addWallText;
+    [SerializeField] private TMP_Text addInnerWallText;
     [SerializeField] private SelectionManager selectionManager;
     [SerializeField] private Material greenMaterial;
     [SerializeField] private Material transparentMaterial;
@@ -24,6 +25,7 @@ public class WallEditor : MonoBehaviour
     [SerializeField] private GameObject popUpScaleWall;
     [SerializeField] private Camera EditorModeCamera;
     [SerializeField] private GameObject ObjectSpawn;
+    [SerializeField] private GameObject PanelDropDownMenue;
 
     public GameObject popUp;
     public LayerMask mask;
@@ -60,6 +62,7 @@ public class WallEditor : MonoBehaviour
         AddInnerWallButton = GameObject.Find("AddInnerWallButton");
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
+        PanelDropDownMenue.SetActive(false);
     }
 
     /// <summary>
@@ -67,15 +70,7 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (ModeHandler.Mode.Equals("EditorMode"))
-        {
-            AddInnerWallButton.SetActive(true);
-        }
-        else
-        {
-            AddInnerWallButton.SetActive(false);
-        }
-
+        
         SelectedObjectTransform = selectionManager.SelectedObject;
         if (innerWallSelected && SelectedObjectTransform != null)
         {
@@ -1111,5 +1106,20 @@ public class WallEditor : MonoBehaviour
         }
 
         close(popUpScaleWall);
+    }
+
+
+    public void ToggleAddInnerWall()
+    {
+
+        if (ModeHandler.Mode.Equals("EditorMode"))
+        {
+            AddInnerWallButton.SetActive(true);
+        }
+        else
+        {
+            AddInnerWallButton.SetActive(false);
+        }
+
     }
 }

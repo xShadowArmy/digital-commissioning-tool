@@ -233,41 +233,67 @@ public class SelectionManager : MonoBehaviour
         }
         return null;
     }
-
+    /// <summary>
+    /// Wird ausgelöst, wenn ein innere Wand ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählten inneren Wand</param>
     private void OnInnerWallSelected(Transform selectedObject)
     {
         InnerWallSelected?.Invoke(SelectedObject);
     }
-
+    /// <summary>
+    /// Wird ausgelöst, wenn eine innere Wand, die an eine äußere angebracht ist ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählten inneren Wand</param>
     private void OnAttachedInnerWallSelected(Transform selectedObject)
     {
         AttachedInnerWallSelected?.Invoke(SelectedObject);
     }
-
+    /// <summary>
+    /// Wird ausgelöst, wenn ein Regal ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählte Regal</param>
     protected virtual void OnStorageSelected(Transform selectedObject)
     {
         StorageSelected?.Invoke(selectedObject);
     }
-    
+    /// <summary>
+    /// Wird ausgelöst, wenn ein bewegbares Regal ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählte bewegbare Regal</param>
     protected virtual void OnMovableStorageSelected(Transform selectedObject)
     {
         MovableStorageSelected?.Invoke(SelectedObject);
     }
-
+    /// <summary>
+    /// Wird ausgelöst, wenn ein Wandendstück ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählten Wand</param>
     protected virtual void OnWallSelected(Transform selectedObject)
     {
         WallSelected?.Invoke(SelectedObject);
     }
-
+    /// <summary>
+    /// Wird ausgelöst, wenn linkes Wandendstück ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählten Wand</param>
     protected virtual void OnLeftWallRimSelected(Transform selectedObject)
     {
         LeftWallRimSelected?.Invoke(SelectedObject);
     }
-
+    /// <summary>
+    /// Wird ausgelöst, wenn rechtes Wandendstück ausgewählt wird
+    /// </summary>
+    /// <param name="selectedObject">Referenz der ausgewählten Wand</param>
     protected virtual void OnRightWallRimSelected(Transform selectedObject)
     {
         RightWallRimSelected?.Invoke(SelectedObject);
     }
+    /// <summary>
+    /// Wird aufgerufen, wenn ein Kiste angeklickt wird
+    /// </summary>
+    /// <param name="source">Objektreferenz der ausgewählten Kiste, oder Null-Referenz bei Deaktivierung</param>
+    /// <param name="active">Gib an, ob Tooltip aktiviert oder deaktiviert werden soll </param>
     protected void OnShelveSelected(GameObject source, bool active)
     {
 
