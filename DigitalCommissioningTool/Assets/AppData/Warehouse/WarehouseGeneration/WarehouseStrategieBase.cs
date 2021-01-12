@@ -57,6 +57,16 @@ namespace AppData.Warehouse
         protected ObjectTransformation[] StorageRacks { get; set; }
 
         /// <summary>
+        /// Anzahl der Boeden auf der X Achse.
+        /// </summary>
+        protected int MaxJ = 20;
+
+        /// <summary>
+        /// Anzahl der Boeden auf der Z Achse.
+        /// </summary>
+        protected int MaxI = 30;
+
+        /// <summary>
         /// X Offset fuer die Positionierung des Lagerhauses.
         /// </summary>
         protected readonly float xOffset;

@@ -20,16 +20,6 @@ namespace AppData.Warehouse
         }
 
         /// <summary>
-        /// Anzahl der Boeden auf der X Achse.
-        /// </summary>
-        private int MaxJ = 20;
-
-        /// <summary>
-        /// Anzahl der Boeden auf der Z Achse.
-        /// </summary>
-        private int MaxI = 30;
-
-        /// <summary>
         /// Berechnet die Boeden.
         /// </summary>
         public void GenerateFloor()

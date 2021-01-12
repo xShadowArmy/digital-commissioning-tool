@@ -24,10 +24,13 @@ namespace AppData.Warehouse
         /// </summary>
         public void GenerateFloor()
         {
-            int j = 0;
-
-            Floor[j++] = new ObjectTransformation( new Vector3( -10.0f, 0, 0.5f ), Quaternion.Euler( 0, 90, 0 ), new Vector3( 3, 1f, 2.2f ) );
-            Floor[j]   = new ObjectTransformation( new Vector3( 10.0f, 0, 0.5f ), Quaternion.Euler( 0, 90, 0 ), new Vector3( 3, 1f, 2.2f ) );
+            for ( int i = 0; i < MaxI; i++ )
+            {
+                for ( int j = 0; j < MaxJ; j++ )
+                {
+                    Floor[i * MaxJ + j] = new ObjectTransformation( new Vector3( -30f * ( MaxJ / 2 ) + j * 30f, 0f, -20f * ( MaxI / 2 ) + i * 20f ), Quaternion.Euler( 0, 0, 0 ), new Vector3( 3, 1f, 2.2f ) );
+                }
+            }
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace AppData.Warehouse
         /// </summary>
         public override void StartGeneration()
         {
-            Floor = new ObjectTransformation[2];
+            Floor = new ObjectTransformation[MaxI * MaxJ];
             WallsNorth = new ObjectTransformation[20];
             WallsEast = new ObjectTransformation[30];
             WallsSouth = new ObjectTransformation[20];

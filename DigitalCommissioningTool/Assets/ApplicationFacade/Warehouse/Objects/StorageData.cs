@@ -87,9 +87,9 @@ namespace ApplicationFacade.Warehouse
         /// </summary>
         /// <param name="slot">Der Slot des Items.</param>
         /// <returns>Gibt das Item zurück.</returns>
-        public ItemData GetItem( int slot )
+        public GameObject GetItem( int slot = -1 )
         {
-            if ( IsDestroyed( ) || slot == -1 )
+            if ( IsDestroyed( ) )
             {
                 return null;
             }
@@ -101,12 +101,18 @@ namespace ApplicationFacade.Warehouse
                 return null;
             }
 
-            if ( Data[slot] == null )
+            if ( slot <= -1 )
             {
-                return null;
+                for( int i = 0; i < Data.Length; i++ )
+                {
+                    if ( Data[i] != null )
+                    {
+                        return Slots[i];
+                    }
+                }
             }
 
-            return Data[slot];
+            return Slots[slot];
         }
 
         /// <summary>
