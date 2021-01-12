@@ -21,7 +21,7 @@ public class WallEditor : MonoBehaviour
     [SerializeField] private SelectionManager selectionManager;
     [SerializeField] private Material greenMaterial;
     [SerializeField] private Material transparentMaterial;
-    [SerializeField] private InputField inputNumberOfWalls;
+    [SerializeField] private TMP_InputField inputNumberOfWalls;
     [SerializeField] private GameObject popUpScaleWall;
     [SerializeField] private Camera EditorModeCamera;
     [SerializeField] private GameObject ObjectSpawn;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:Config xs:dataCount="4" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
+<xs:Config xs:dataCount="5" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ ConfigSchema.xsd">
     <xs:ComplexData xs:name="WarehouseItemListPosition" xs:id="1" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
         <xs:Values xs:propertyCount="3">
             <xs:Property xs:type="Single" xs:value="0">
@@ -37,6 +37,16 @@
             <xs:Property xs:type="Single" xs:value="177.73">
             </xs:Property>
             <xs:Property xs:type="Single" xs:value="452.9799">
+            </xs:Property>
+        </xs:Values>
+    </xs:ComplexData>
+    <xs:ComplexData xs:name="Position" xs:id="5" xs:type="objectData" xs:isArray="false" xs:elementCount="1">
+        <xs:Values xs:propertyCount="3">
+            <xs:Property xs:type="Single" xs:value="0">
+            </xs:Property>
+            <xs:Property xs:type="Single" xs:value="232.4376">
+            </xs:Property>
+            <xs:Property xs:type="Single" xs:value="617.7501">
             </xs:Property>
         </xs:Values>
     </xs:ComplexData>

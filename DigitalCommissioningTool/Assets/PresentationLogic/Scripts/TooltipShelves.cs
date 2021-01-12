@@ -19,6 +19,8 @@ public class TooltipShelves : MonoBehaviour
     private Tooltip tooltip;
     private string headerMessage = "New Text";
     private string contentMessage = "New Text";
+    private ItemData item;
+    private GameObject selectedObject;
 
 
     void Start()
@@ -35,12 +37,14 @@ public class TooltipShelves : MonoBehaviour
     /// <param name="active">Parameter zum aktivieren oder deaktivieren von dem Tooltip</param>
     private void SelectionManager_ShelveSelected(GameObject selectedObject, bool active)
     {
+        this.selectedObject = selectedObject;
+
         if (active)
         {
-            ItemData item = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
+            item = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
 
             headerMessage = item.Name;
-            getMessages(selectedObject, item );
+            getMessages();
             activate();
         }
         else
@@ -89,14 +93,36 @@ public class TooltipShelves : MonoBehaviour
     /// <summary>
     /// Weist der Variable Content Massage die Parameter des selectedObjects, die in IdemData gespeichert sind zu
     /// </summary>
-    /// <param name="selectedObject">Referenz auf das Object, dass das Tooltip event ausgelöst hat</param>
-    /// <param name="item">Referenz der Instanz des ItemData Objektes, das die Parameter der Kisten verwaltet</param>
-    private void getMessages(GameObject selectedObject, ItemData item)
+    private void getMessages()
     {
         contentMessage = "Anzahl: " + item.Count + "\n";
         contentMessage += "Gewicht: " + item.Weight + " kg";
 
     }
+    private void updateTooltip()
+    {
+        getMessages();
+        tooltip.SetTooltip(headerMessage, contentMessage);
+
+    }
+
+    public void removeItems()
+    {
+        Debug.Log("clickedremoved");
+        item.DecreaseItemCount(1);
+        updateTooltip();
+
+    }
+
+    public void addItems()
+    {
+        Debug.Log("clickedadd");
+        item.IncreaseItemCount(1);
+        updateTooltip();
+    }
+
+
+
 
 
 }
