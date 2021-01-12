@@ -34,6 +34,7 @@ public class TimeMeasurementHistory : MonoBehaviour
     /// </summary>
     void OnValidate()
     {
+        LogManager.WriteError( "testValidate" );
         //ResourceHandler.ReplaceResources();
         Timer.TimerStopped += OnTimerStopped;
         Timer.TimerReset += OnTimerReset;
@@ -47,6 +48,7 @@ public class TimeMeasurementHistory : MonoBehaviour
     
     void OnStart()
     {
+        LogManager.WriteError( "test" );
         //ResourceHandler.ReplaceResources();
         Timer.TimerStopped += OnTimerStopped;
         Timer.TimerReset += OnTimerReset;

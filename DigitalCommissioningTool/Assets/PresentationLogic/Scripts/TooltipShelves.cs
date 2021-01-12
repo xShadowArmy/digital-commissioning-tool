@@ -6,6 +6,7 @@ using System;
 using TMPro;
 using ApplicationFacade.Application;
 using ApplicationFacade.Warehouse;
+using SystemFacade;
 
 public class TooltipShelves : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class TooltipShelves : MonoBehaviour
 
     void Start()
     {
+        LogManager.WriteError( "ToolTipShelves Called" );
         selectionManager.ShelveSelected += SelectionManager_ShelveSelected;
         tooltip = current.GetComponent<Tooltip>();
     }

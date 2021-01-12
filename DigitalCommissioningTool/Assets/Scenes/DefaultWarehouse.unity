@@ -8106,7 +8106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveProjectButton: {fileID: 1023988221}
-  saveProjectText: {fileID: 0}
+  saveProjectText: {fileID: 1559041554}
 --- !u!114 &1023988221
 MonoBehaviour:
   m_ObjectHideFlags: 0

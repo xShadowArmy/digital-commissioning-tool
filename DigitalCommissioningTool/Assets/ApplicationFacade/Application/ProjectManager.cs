@@ -220,6 +220,7 @@ namespace ApplicationFacade.Application
             InternalProjectContainer icontainer = CHandler.LoadFile( );
             ReadProjectContainer( ref icontainer, ref container );
 
+            LogManager.WriteError( "Project finished load" );
             FinishLoad?.Invoke( );
         }
 
@@ -239,6 +240,7 @@ namespace ApplicationFacade.Application
                 }
             }
 
+            LogManager.WriteError( "Project start save" );
             StartSave?.Invoke( );
 
             WriteProjectData( );
@@ -338,6 +340,7 @@ namespace ApplicationFacade.Application
 
             ItemData.ItemStock.Clear( );
 
+            LogManager.WriteError( "Project created" );
             ProjectCreated?.Invoke( );
         }
 

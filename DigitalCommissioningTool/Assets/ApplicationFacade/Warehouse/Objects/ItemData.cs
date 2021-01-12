@@ -368,7 +368,7 @@ namespace ApplicationFacade.Warehouse
                 Count -= count;
             }
 
-            data.ChangeGameObject( GameObject.Instantiate( Object, null ) );
+            data.ChangeGameObject( GameObject.Instantiate( Object, Object.transform.parent ) );
             data.Object.transform.SetParent( GameObject.FindWithTag( "Player" ).transform );
 
             ChildItems.Add( data );

@@ -49,6 +49,15 @@ namespace ApplicationFacade.Warehouse
         }
 
         /// <summary>
+        /// Gibt die Laenge des Objekts zurueck.
+        /// </summary>
+        /// <returns>Die Laenge des Objekts.</returns>
+        protected override float GetLength()
+        {
+            return 1f;
+        }
+
+        /// <summary>
         /// Wird aufgerufen wenn sich das Objekt ändert und speichert die Änderungen.
         /// </summary>
         protected override void ObjectChanged()

@@ -240,8 +240,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Der Boden mit der ID oder null.</returns>
         public FloorData GetFloor( long id )
         {
-            LogManager.WriteInfo( "Lagerhausboden wird abgefragt.", "Warehouse", "GetFloor" );
-
             for ( int i = 0; i < Floor.Count; i++ )
             {
                 if ( Floor[ i ].GetID( ) == id )
@@ -260,8 +258,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Der Boden mit dem GameObjekt oder null.</returns>
         public FloorData GetFloor( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhausboden wird abgefragt.", "Warehouse", "GetFloor" );
-
             for ( int i = 0; i < Walls.Count; i++ )
             {
                 if ( Floor[ i ].Object == obj )
@@ -364,8 +360,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="WallData"/> Objekt das die Wand repräsentiert zurück oder null.</returns>
         public WallData GetWall( long id )
         {
-            LogManager.WriteInfo( "Lagehauswand wird abgefragt.", "Warehouse", "GetWall" );
-
             for ( int i = 0; i < Walls.Count; i++ )
             {
                 if ( Walls[ i ].GetID() == id )
@@ -384,8 +378,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="WallData"/> Objekt das die Wand repräsentiert zurück oder null.</returns>
         public WallData GetWall( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagehauswand wird abgefragt.", "Warehouse", "GetWall" );
-
             for ( int i = 0; i < Walls.Count; i++ )
             {
                 if ( Walls[ i ].Object == obj )
@@ -471,8 +463,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="WindowData"/> Objekt das das Fenster repräsentiert zurück oder null.</returns>
         public WindowData GetWindow( long id )
         {
-            LogManager.WriteInfo( "Lagerhaufenster wird abgefragt.", "Warehouse", "GetWindow" );
-
             for ( int i = 0; i < Windows.Count; i++ )
             {
                 if ( Windows[ i ].GetID( ) == id )
@@ -491,8 +481,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="WindowData"/> Objekt das das Fenster repräsentiert zurück oder null.</returns>
         public WindowData GetWindow( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhaufenster wird abgefragt.", "Warehouse", "GetWindow" );
-
             for ( int i = 0; i < Windows.Count; i++ )
             {
                 if ( Windows[ i ].Object == obj )
@@ -584,8 +572,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="DoorData"/> Objekt das die Tür repräsentiert zurück oder null.</returns>
         public DoorData GetDoor( long id )
         {
-            LogManager.WriteInfo( "Lagerhaustuer wird abgefragt.", "Warehouse", "GetDoor" );
-
             for ( int i = 0; i < Doors.Count; i++ )
             {
                 if ( Doors[ i ].GetID( ) == id )
@@ -604,8 +590,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="DoorData"/> Objekt das die Tür repräsentiert zurück oder null.</returns>
         public DoorData GetDoor( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhaustuer wird abgefragt.", "Warehouse", "GetDoor" );
-
             for ( int i = 0; i < Doors.Count; i++ )
             {
                 if ( Doors[ i ].Object == obj )
@@ -690,8 +674,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="StorageData"/> Objekt das das Regal repräsentiert zurück oder null.</returns>
         public StorageData GetStorageRack( long id )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
-
             for ( int i = 0; i < StorageRackList.Count; i++ )
             {
                 if ( StorageRacks[ i ].GetID( ) == id )
@@ -710,8 +692,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das <see cref="StorageData"/> Objekt das das Regal repräsentiert zurück oder null.</returns>
         public StorageData GetStorageRack( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
-
             for ( int i = 0; i < StorageRackList.Count; i++ )
             {
                 if ( StorageRacks[ i ].Object == obj )
@@ -733,8 +713,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das passende Item oder null zurück.</returns>
         public ItemData GetStorageRackItem( StorageData storage, GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
-
             ItemData data = storage.GetItem( obj );
 
             return null;
@@ -747,8 +725,6 @@ namespace ApplicationFacade.Warehouse
         /// <returns>Gibt das passende Item oder null zurück.</returns>
         public ItemData GetStorageRackItem( GameObject obj )
         {
-            LogManager.WriteInfo( "Lagerhausregal wird abgefragt.", "Warehouse", "GetStorageRack" );
-
             for ( int i = 0; i < StorageRackList.Count; i++ )
             {
                 ItemData data = StorageRackList[i].GetItem( obj );
