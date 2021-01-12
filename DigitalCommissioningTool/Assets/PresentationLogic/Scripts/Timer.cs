@@ -40,7 +40,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         //Modusbedingte Verfügbarkeit
-        if (mode.Mode.Equals("EditorMode"))
+        if (ModeHandler.Mode.Equals("EditorMode"))
         {
 
             panelTimer.SetActive(false);

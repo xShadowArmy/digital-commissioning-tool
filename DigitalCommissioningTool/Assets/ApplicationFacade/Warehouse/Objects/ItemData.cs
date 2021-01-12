@@ -15,7 +15,16 @@ namespace ApplicationFacade.Warehouse
     /// </summary>
     public class ItemData : GameObjectData
     {
+        /// <summary>
+        /// EventHandler für das StockChanged Event.
+        /// </summary>
+        /// <param name="item">Das betroffene Item.</param>
         public delegate void StockChangedEventHandler( ItemData item );
+
+        /// <summary>
+        /// EventHandler für das ItemChanged Event.
+        /// </summary>
+        /// <param name="item">Das betroffene Item.</param>
         public delegate void ItemChangedEventHandler( ItemData item );
 
         /// <summary>
@@ -125,7 +134,10 @@ namespace ApplicationFacade.Warehouse
         {
             ItemStock = new List<ItemData>( );
         }
-
+        
+        /// <summary>
+        /// Zerstört das Objekt.
+        /// </summary>
         ~ItemData()
         {
             Destroy( );

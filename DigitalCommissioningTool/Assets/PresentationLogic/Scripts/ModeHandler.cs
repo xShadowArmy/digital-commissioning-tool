@@ -19,7 +19,7 @@ public class ModeHandler : MonoBehaviour
     /// <summary>
     /// Stellt den aktuellen Modus ("EditorMode" oder "MosimMode") dar. 
     /// </summary>
-    public string Mode { get; private set; }
+    public static string Mode { get; private set; }
 
     
         public void SwitchMode()

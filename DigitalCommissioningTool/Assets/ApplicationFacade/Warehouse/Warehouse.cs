@@ -791,6 +791,7 @@ namespace ApplicationFacade.Warehouse
 
                 foreach ( var data in StorageRacks )
                 {
+                    OnStorageRackModified( 1, data );
                     data.Destroy( );
                 }
 

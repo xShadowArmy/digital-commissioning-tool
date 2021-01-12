@@ -53,7 +53,7 @@ public class TreeViewToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyManager.ToogleMenu.Code))
+        if (Input.GetKeyDown(KeyManager.ToogleMenu.Code) && GameManager.OpenProjectData != null)
         {
             if (!SceneManager.GetSceneByName("MainMenu").isLoaded)
             {

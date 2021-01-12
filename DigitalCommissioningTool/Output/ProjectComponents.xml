@@ -1,0 +1,788 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProjectComponents</name>
+    </assembly>
+    <members>
+        <member name="T:ProjectComponents.Abstraction.InternalProjectContainer">
+            <summary>
+            Stellt die Xml Dateistruktur für die Container eines Projekts dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectContainer.Container">
+            <summary>
+            Eine Liste mit allen gespeicherten Containern.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.InternalProjectContainer.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.InternalProjectData">
+            <summary>
+            Stellt die Interne Xml Dateistruktur für allgemeine Projektdaten dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectData.Name">
+            <summary>
+            Der Name des Projekts.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectData.FullPath">
+            <summary>
+            Der Pfad des Projekts.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectData.DateCreated">
+            <summary>
+            Das Datum an dem das Projekt erstellt wurde.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectData.DateModified">
+            <summary>
+            Das Datum an dem das Projekt zuletzt geändert wurde.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectData.Extension">
+            <summary>
+            Die Datei Extension für Projekte (".prj").
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.InternalProjectData.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.InternalProjectSettings">
+            <summary>
+            Stellt die Xml Dateistruktur für Projekteinstellungen dar.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.InternalProjectSettings.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.InternalProjectWarehouse">
+            <summary>
+            Stellt das Lagerhaus in der internen Projekt Dateistruktur dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectWarehouse.Floor">
+            <summary>
+            Liste mit allen Böden aus dem Lagerhaus.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectWarehouse.Walls">
+            <summary>
+            Liste mit allen Wänden aus dem Lagerhaus.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectWarehouse.Windows">
+            <summary>
+            Liste mit allen Fenstern aus dem Lagerhaus.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectWarehouse.Doors">
+            <summary>
+            Liste mit allen Türen aus dem Lagerhaus.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.InternalProjectWarehouse.StorageRacks">
+            <summary>
+            Liste mit allen Regalen aus dem Lagerhaus.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.InternalProjectWarehouse.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectDoorData">
+            <summary>
+            Stellt eine Tür in der Xml Dateistruktur eines Projekts dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectDoorData.ID">
+            <summary>
+            Die ID der Tür.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectDoorData.Type">
+            <summary>
+            Die Art der Tür.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectDoorData.Face">
+            <summary>
+            Die Ausrichtung der Tür.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectDoorData.Class">
+            <summary>
+            Die Kategorie der Tür.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectDoorData.Transformation">
+            <summary>
+            Die Transformationsdaten der Tür.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectDoorData.#ctor(System.Int64,System.String,System.String,System.String,ProjectComponents.Abstraction.ProjectTransformationData)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="id">Die ID der Tür.</param>
+            <param name="face">Die Ausrichtung der Tür.</param>
+            <param name="wClass">Die Kategorie der Tür.</param>
+            <param name="type">Die Art der Tür.</param>
+            <param name="transformation">Die Transformationsdaten der Tür.</param>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectFloorData">
+            <summary>
+            Stellt einen Boden in der internen Projekt Xml Dateistruktur dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectFloorData.ID">
+            <summary>
+            Die ID des Bodens.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectFloorData.Transformation">
+            <summary>
+            Die Transformationsdaten des Bodens.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectFloorData.#ctor(System.Int64,ProjectComponents.Abstraction.ProjectTransformationData)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="id">Die ID des Objekts.</param>
+            <param name="transformation">Die Transformationsdaten des Objekts.</param>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectItemData">
+            <summary>
+            Darstellung eines Items in den Projektdateien.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectItemData.Count">
+            <summary>
+            Die Anzahl des Items.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectItemData.Weight">
+            <summary>
+            Das Gewicht des Items.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectItemData.Name">
+            <summary>
+            Der Name des Items.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectItemData.ID">
+            <summary>
+            Die ID des Items.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectItemData.IDRef">
+            <summary>
+            Die ID Referenz des Parent Items.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectItemData.Transformation">
+            <summary>
+            Die Transformationsdaten des Items.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectItemData.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectItemData.#ctor(System.Int64,System.Int64,System.Int32,System.Double,System.String,ProjectComponents.Abstraction.ProjectTransformationData)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="idRef">Die ID Referenz des Parent Items.</param>
+            <param name="id">Die ID des Items.</param>
+            <param name="count">Die Anzahl des Items.</param>
+            <param name="weight">Das Gewicht des Items.</param>
+            <param name="name">Der Name des Items.</param>
+            <param name="transformation">Die Transformationsdaten des Items.</param>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectItemData.Serialize(SystemTools.SerialConfigData)">
+            <summary>
+            Serialisiert das Objekt.
+            </summary>
+            <param name="storage">Wird zum Speichern der Werte verwendet.</param>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectItemData.Restore(SystemTools.SerialConfigData)">
+            <summary>
+            Stellt die Werte wieder her.
+            </summary>
+            <param name="storage">Wird zum wiederherstellen der Items verwendet.</param>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectStorageData">
+            <summary>
+            Stellt ein Regal in den Projekt Dateien dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectStorageData.ID">
+            <summary>
+            Die ID des Regals.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectStorageData.SlotCount">
+            <summary>
+            Die Anzahl der Slots des Regals.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectStorageData.Transformation">
+            <summary>
+            Die Transformationsdaten des Regals.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectStorageData.Items">
+            <summary>
+            Gibt die Items des Regals zurueck.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectStorageData.#ctor(System.Int64,System.Int32,ProjectComponents.Abstraction.ProjectTransformationData)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="id">Die ID des Regals.</param>
+            <param name="slotCount">Die Anzahl der Slots.</param>
+            <param name="transformation">Die Transformationsdaten.</param>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectTransformationData">
+            <summary>
+            Stellt die Transformationendaten dar die in den XMl Projektdateien verwendet werden.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectTransformationData.Position">
+            <summary>
+            Die Position eines Objekts.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectTransformationData.Rotation">
+            <summary>
+            Die Rotation eines Objekts.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectTransformationData.Scale">
+            <summary>
+            Die Skalierung eines Objekts.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectTransformationData.#ctor(UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="position">Die Positionsdaten des Objekts.</param>
+            <param name="rotation">Die Rotationsdaten des Objekts.</param>
+            <param name="scale">Die Skalierung des Objekts.</param>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectWallData">
+            <summary>
+            Stellt eine Wand in der internen Xml Projekt Dateistruktur dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWallData.ID">
+            <summary>
+            Die ID der Wand.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWallData.Face">
+            <summary>
+            Die Ausrichtung der Wand.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWallData.Class">
+            <summary>
+            Die Kategorie der Wand.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWallData.Tag">
+            <summary>
+            Der Tag der Wand.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWallData.Transformation">
+            <summary>
+            Die Transformationsdaten der Wand.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectWallData.#ctor(System.Int64,System.String,System.String,System.String,ProjectComponents.Abstraction.ProjectTransformationData)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="id">Die ID der Wand.</param>
+            <param name="tag"></param>
+            <param name="face"></param>
+            <param name="wClass"></param>
+            <param name="transformation"></param>
+        </member>
+        <member name="T:ProjectComponents.Abstraction.ProjectWindowData">
+            <summary>
+            Stellt ein Fenster in der internen Projekt Dateistruktur dar.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWindowData.ID">
+            <summary>
+            Die ID des Fensters.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWindowData.Face">
+            <summary>
+            Die Ausrichtung des Fensters.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWindowData.Class">
+            <summary>
+            Die Kategorie des Fensters.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.Abstraction.ProjectWindowData.Transformation">
+            <summary>
+            Die Transformationsdaten des Fenster.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.Abstraction.ProjectWindowData.#ctor(System.Int64,System.String,System.String,ProjectComponents.Abstraction.ProjectTransformationData)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="id">Die ID des Fenster.</param>
+            <param name="face">Die Ausrichtung des Fensters.</param>
+            <param name="wClass">Die Kategorie des Fensters.</param>
+            <param name="transformation">Die Transformationsdaten des Fensters.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.ContainerReader">
+            <summary>
+            Ließt Container Daten aus einer Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.ContainerReader.Doc">
+            <summary>
+            Die Datei aus der die Daten gelesen werden.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerReader.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei aus der gelesen werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerReader.ReadFile">
+            <summary>
+            Ließt die Daten aus der Datei.
+            </summary>
+            <returns>Objekt das die gelesenen Daten enthält.</returns>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerReader.ReadTransformation(System.Xml.XPath.XPathNavigator,System.String)">
+            <summary>
+            Ließt die Transformationsdaten aus der Datei.
+            </summary>
+            <param name="nav">Navigator mit passender Position.</param>
+            <param name="xmlns">Xml Namespace der verwendet werden soll.</param>
+            <returns>Die gelesenen Transformationsdaten.</returns>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.ContainerWriter">
+            <summary>
+            Schreibt Container Daten in eine Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.ContainerWriter.Doc">
+            <summary>
+            Die Datei in die geschrieben wird.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerWriter.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei in die geschrieben werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerWriter.WriteFile(ProjectComponents.Abstraction.InternalProjectContainer)">
+            <summary>
+            Schreibt die Daten in die Datei.
+            </summary>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerWriter.WriteTransformationData(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.ProjectTransformationData,System.String)">
+            <summary>
+            Schreibt Transformationsdaten in die Daeti.
+            </summary>
+            <param name="nav">Navigator mit passender Position.</param>
+            <param name="data">Daten die gespeichert werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.ContainerWriter.ReCreateFile">
+            <summary>
+            Erstellt die Datei neu.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.DataHandler">
+            <summary>
+            Enthält Operationen zum Speichern und Laden von Allgemeinen Projektdaten.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.DataHandler.Reader">
+            <summary>
+            Objekt zum Lesen der Daten aus der Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.DataHandler.Writer">
+            <summary>
+            Objekt zum Speichern der Daten in die Xml Datei.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataHandler.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataHandler.LoadFile">
+            <summary>
+            Ließt die Daten aus der Datei.
+            </summary>
+            <returns>Objekt das die Daten enthält.</returns>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataHandler.SaveFile(ProjectComponents.Abstraction.InternalProjectData)">
+            <summary>
+            Speichert die Daten in die Datei.
+            </summary>
+            <param name="data">Objekt das die zu speichernden Daten enthält.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.DataReader">
+            <summary>
+            Ließt allgemeine Projektdaten aus einer Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.DataReader.Doc">
+            <summary>
+            Die Datei aus der gelesen werden soll.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataReader.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei aus der gelesen werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataReader.ReadFile(ProjectComponents.Abstraction.InternalProjectData)">
+            <summary>
+            Ließt die Daten aus der Datei.
+            </summary>
+            <param name="data">Objekt das zum Speichern der Daten verwendet wird.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.DataWriter">
+            <summary>
+            Schreibt allgemeine Projektdaten in eine Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.DataWriter.Doc">
+            <summary>
+            Die Datei in die geschrieben werden soll.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataWriter.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei in die geschrieben werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataWriter.WriteFile(ProjectComponents.Abstraction.InternalProjectData)">
+            <summary>
+            Schreibt die Daten in die Datei.
+            </summary>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.DataWriter.ReCreateFile">
+            <summary>
+            Erstellt die Datei neu.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.SettingsHandler">
+            <summary>
+            Enthält Methoden zum Schreiben und Lesen von Projekteinstellungen.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.SettingsHandler.Reader">
+            <summary>
+            Objekt zum Lesen der Dateien.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.SettingsHandler.Writer">
+            <summary>
+            Objekt zum Schreiben der Dateien.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsHandler.#ctor">
+            <summary>
+            Initialisiert das Objekt.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsHandler.LoadFile">
+            <summary>
+            Ließt die Daten aus der Datei.
+            </summary>
+            <returns>Objekt das alle Daten enthält-</returns>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsHandler.SaveFile(ProjectComponents.Abstraction.InternalProjectSettings)">
+            <summary>
+            Schreibt die Daten in die Datei.
+            </summary>
+            <param name="settings">Die Daten die Gespeichert werden sollen.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.SettingsReader">
+            <summary>
+            Ließt die Projekteinstellungen aus der Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.SettingsReader.Doc">
+            <summary>
+            Die Datei aus der die Daten gelesen werden.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsReader.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei aus der gelesen werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsReader.ReadFile(ProjectComponents.Abstraction.InternalProjectSettings)">
+            <summary>
+            Ließt die Daten aus der Datei.
+            </summary>
+            <param name="settings">Objekt das zum Speichern der Daten verwendet wird.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.SettingsWriter">
+            <summary>
+            Schreibt Projekteinstellungen in eine Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.SettingsWriter.Doc">
+            <summary>
+            Die Datei in die geschrieben wird.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsWriter.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei in die geschrieben werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsWriter.WriteFile(ProjectComponents.Abstraction.InternalProjectSettings)">
+            <summary>
+            Schreibt die Datei.
+            </summary>
+            <param name="settings">Die Daten die gespeichert werden sollen.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.SettingsWriter.ReCreateFile">
+            <summary>
+            Erstellt die Datei neu.
+            </summary>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.StockHandler">
+            <summary>
+            Schreibt und Ließt die Daten des kompletten Lagerbestandes für ein Projekt.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.StockHandler.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.StockHandler.LoadFile">
+            <summary>
+            Ließt die Lagerdaten aus der Datei.
+            </summary>
+            <returns>Gibt Informationen über alle gespeicherten Items zurück.</returns>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.StockHandler.SaveFile(ProjectComponents.Abstraction.ProjectItemData[])">
+            <summary>
+            Speichert die Lagerdaten in die Datei.
+            </summary>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.WarehouseHandler">
+            <summary>
+            Enthält Methoden zum Schreiben und Lesen von dem Projekt Lagerhaus.
+            </summary>
+        </member>
+        <member name="F:ProjectComponents.FileIntegration.WarehouseHandler.Reader">
+            <summary>
+            Objekt das zum Lesen der Datei verwendet wird.
+            </summary>
+        </member>
+        <member name="F:ProjectComponents.FileIntegration.WarehouseHandler.Writer">
+            <summary>
+            Objekt das zum Schreiben der Datei verwendet wird.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseHandler.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseHandler.SaveFile(ProjectComponents.Abstraction.InternalProjectWarehouse)">
+            <summary>
+            Schreibt die Daten in die Datei.
+            </summary>
+            <param name="warehouse">Die Daten die Gespeichert werden sollen.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseHandler.LoadFile">
+            <summary>
+            L#dt die Daten aus der Datei.
+            </summary>
+            <returns>Objekt das die geladenen Daten enthält.</returns>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.WarehouseReader">
+            <summary>
+            Ließt Projekt Lagerhaus Daten aus einer Xml Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.WarehouseReader.Doc">
+            <summary>
+            Datei aus der gelesen wird.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Datei aus der die Daten gelesen werden.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadFile">
+            <summary>
+            Ließt die Daten aus der Datei.
+            </summary>
+            <returns>Objekt das die gelesenen Daten enthält.</returns>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadFloor(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Ließt die Daten über die Böden aus der Datei.
+            </summary>
+            <param name="nav">Der Navigator mit passender Position.</param>
+            <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadWalls(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Ließt die Daten über die Wände aus der Datei.
+            </summary>
+            <param name="nav">Der Navigator mit passender Position.</param>
+            <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadWindows(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Ließt die Daten über die Fenster aus der Datei.
+            </summary>
+            <param name="nav">Der Navigator mit passender Position.</param>
+            <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadDoors(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Ließt die Daten über die Türen aus der Datei.
+            </summary>
+            <param name="nav">Der Navigator mit passender Position.</param>
+            <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadStorageRecks(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Ließt die Daten über die Regale aus der Datei.
+            </summary>
+            <param name="nav">Der Navigator mit passender Position.</param>
+            <param name="warehouse">Objekt in das die gelesenen Daten gespeichert werden.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseReader.ReadTransformation(System.Xml.XPath.XPathNavigator,System.String)">
+            <summary>
+            Ließt die Transformationsdaten aus der Datei.
+            </summary>
+            <param name="nav">Der Navigator mit passender Position.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="T:ProjectComponents.FileIntegration.WarehouseWriter">
+            <summary>
+            Schreibt die Daten des Projekt Lagerhauses in die Datei.
+            </summary>
+        </member>
+        <member name="P:ProjectComponents.FileIntegration.WarehouseWriter.Doc">
+            <summary>
+            Die Datei in die geschrieben werden soll.
+            </summary>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Initialisiert das Objekt.
+            </summary>
+            <param name="doc">Die Datei die verwendet werden soll.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteFile(ProjectComponents.Abstraction.InternalProjectWarehouse)">
+            <summary>
+            Schreibt die Datei.
+            </summary>
+            <param name="data">Enthält alle Daten die in die Datei geschrieben werden sollen.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteFloor(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Schreibt die Böden in die Datei.
+            </summary>
+            <param name="nav">Navigator mit Passender Position.</param>
+            <param name="data">Die Daten die Geschrieben werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteWalls(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Schreibt die Wände in die Datei.
+            </summary>
+            <param name="nav">Navigator mit Passender Position.</param>
+            <param name="data">Die Daten die Geschrieben werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteWindows(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Schreibt die Fenster in die Datei.
+            </summary>
+            <param name="nav">Navigator mit Passender Position.</param>
+            <param name="data">Die Daten die Geschrieben werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteDoors(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Schreibt die Türen in die Datei.
+            </summary>
+            <param name="nav">Navigator mit Passender Position.</param>
+            <param name="data">Die Daten die Geschrieben werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteStorageRecks(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.InternalProjectWarehouse,System.String)">
+            <summary>
+            Schreibt die Regale in die Datei.
+            </summary>
+            <param name="nav">Navigator mit Passender Position.</param>
+            <param name="data">Die Daten die Geschrieben werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.WriteTransformationData(System.Xml.XPath.XPathNavigator,ProjectComponents.Abstraction.ProjectTransformationData,System.String)">
+            <summary>
+            Schreibt die Transformationsdaten in die Datei.
+            </summary>
+            <param name="nav">Navigator mit Passender Position.</param>
+            <param name="data">Die Daten die Geschrieben werden sollen.</param>
+            <param name="xmlns">Der zu verwendende Xml Namespace.</param>
+        </member>
+        <member name="M:ProjectComponents.FileIntegration.WarehouseWriter.ReCreateFile">
+            <summary>
+            Erstellt die Datei neu.
+            </summary>
+        </member>
+    </members>
+</doc>

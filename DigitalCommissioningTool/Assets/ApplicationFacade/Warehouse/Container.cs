@@ -225,6 +225,7 @@ namespace ApplicationFacade.Warehouse
         {
             foreach ( StorageData container in ContainerData )
             {
+                OnContainerDeleted( container );
                 container.Destroy( );
             }
         }

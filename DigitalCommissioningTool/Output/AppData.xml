@@ -1,0 +1,562 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AppData</name>
+    </assembly>
+    <members>
+        <member name="T:AppData.Warehouse.ISlotCalcStrategie">
+            <summary>
+            Strategie fuer den Slot algorithmus.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.ISlotCalcStrategie.StartGeneration">
+            <summary>
+            Startet den Algorithmus. 
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.ISlotCalcStrategie.GetPositionData">
+            <summary>
+            Gibt die Positions Daten aller Slots zurueck.
+            </summary>
+            <returns>Positionen der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.ISlotCalcStrategie.GetRotationData">
+            <summary>
+            Gibt die Rotations Daten aller Slots zurueck,
+            </summary>
+            <returns>Rotationen der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.ISlotCalcStrategie.GetScaleData">
+            <summary>
+            Gibt die Skalierungs Daten aller Slots zurueck.
+            </summary>
+            <returns>Skalierungen der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.ISlotCalcStrategie.GetSlotCount">
+            <summary>
+            Gibt die Anzahl der berechneten Slots zurueck,
+            </summary>
+            <returns>Die Anzahl der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.ISlotCalcStrategie.GetLayerCount">
+            <summary>
+            Gibt die Anzahl der Regak Ebenen zurueck.
+            </summary>
+            <returns>Die Anzahl der Ebenen,</returns>
+        </member>
+        <member name="T:AppData.Warehouse.SlotCalcBase">
+            <summary>
+            Basisklasse fuer die Berechnung der Regal Slots.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.SlotCalcBase.SlotPositionData">
+            <summary>
+            Die Positionen der einzelnen Slots.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.SlotCalcBase.SlotRotationData">
+            <summary>
+            Die Rotationen der einzelnen Slots.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.SlotCalcBase.SlotScaleData">
+            <summary>
+            Die Skalierung der einzelnen Slots.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.SlotCalcBase.SlotCount">
+            <summary>
+            Die Anzahl der Slots.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.SlotCalcBase.LayerCount">
+            <summary>
+            Die Anzahl der Ebenen.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.SlotCalcBase.LayerSize">
+            <summary>
+            Die Groesse einer Ebene.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.SlotCalcBase.LayerDistance">
+            <summary>
+            Der Abstand zwischen zwei Ebenen.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.#ctor">
+            <summary>
+            Erstellt eine neue Instanz mit den default Werten.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.#ctor(System.Int32,System.Int32,UnityEngine.Vector3,System.Single)">
+            <summary>
+            Erstellt eine neue Instanz mit custom Regalwerten
+            </summary>
+            <param name="slotCount">Die Anzahl der zu berechnenden Slots. Sollte ein vielfaches der Ebenen sein</param>
+            <param name="layerCount">Die Anzahl der Ebenen.</param>
+            <param name="layerSize">Die Groesse einer Ebene.</param>
+            <param name="layerDistance">Der Abstand zwischen zwei Ebenen.</param>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.GetPositionData">
+            <summary>
+            Gibt die Positions Daten aller Slots zurueck.
+            </summary>
+            <returns>Positionen der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.GetRotationData">
+            <summary>
+            Gibt die Rotations Daten aller Slots zurueck,
+            </summary>
+            <returns>Rotationen der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.GetScaleData">
+            <summary>
+            Gibt die Skalierungs Daten aller Slots zurueck.
+            </summary>
+            <returns>Skalierungen der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.GetSlotCount">
+            <summary>
+            Gibt die Anzahl der berechneten Slots zurueck,
+            </summary>
+            <returns>Die Anzahl der Slots.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.GetLayerCount">
+            <summary>
+            Gibt die Anzahl der Regak Ebenen zurueck.
+            </summary>
+            <returns>Die Anzahl der Ebenen,</returns>
+        </member>
+        <member name="M:AppData.Warehouse.SlotCalcBase.StartGeneration">
+            <summary>
+            Startet den Algorithmus. 
+            </summary>
+        </member>
+        <member name="T:AppData.Warehouse.StorageSlotCalculation">
+            <summary>
+            Standard Algorithmus fuer das einfache Berechnen von Regalslots.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.StorageSlotCalculation.XMargin">
+            <summary>
+            Der X Abstand der Kisten zum Rand der Ebene.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.StorageSlotCalculation.YMargin">
+            <summary>
+            Der Y Abstand der Kisten zu den Ebenen.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.StorageSlotCalculation.ZInnerMargin">
+            <summary>
+            Der Z Abstand zwischen den Kisten.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.StorageSlotCalculation.ZOuterMargin">
+            <summary>
+            Der Z Abstand der Kisten zum Rand der Ebene.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.StorageSlotCalculation.#ctor">
+            <summary>
+            Erstellt eine neue Instanz mit default Werten.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.StorageSlotCalculation.#ctor(System.Int32,System.Int32,UnityEngine.Vector3,System.Single)">
+            <summary>
+            Erstellt eine neue Instanz mit custom Regal werten.
+            </summary>
+            <param name="slotCount">Die Anzahl der Slots - sollte ein vielfaches der Ebenen sein.</param>
+            <param name="layerCount">Due Anzahl der Ebenen.</param>
+            <param name="layerSize">Die Groesse einer Ebene.</param>
+            <param name="layerDistance">Der Abstand zwischen den Ebenen.</param>
+        </member>
+        <member name="M:AppData.Warehouse.StorageSlotCalculation.StartGeneration">
+            <summary>
+            Startet den Algorithmus.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.StorageSlotCalculation.CalculateScale">
+            <summary>
+            Berechnet die Skalierung der Slots.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.StorageSlotCalculation.CalculatePosition">
+            <summary>
+            Berechnet die Positionen der SLots.
+            </summary>
+        </member>
+        <member name="T:AppData.Warehouse.IWarehouseStrategie">
+            <summary>
+            Strategie fuer den Lagerhaus generierungs Algorithmus.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.StartGeneration">
+            <summary>
+            Startet den Algorithmus.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetFloor">
+            <summary>
+            Gibt die Transformations Daten der Boeden zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Boeden.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetOuterWalls">
+            <summary>
+            Gibt die Transformations Daten der äusseren Waende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der äusseren Waende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetInnerWalls">
+            <summary>
+            Gibt die Transformations Daten der inneren Waende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der inneren Waende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetNorthWalls">
+            <summary>
+            Gibt die Transformations Daten der Nordwand zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Nordwand.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetEastWalls">
+            <summary>
+            Gibt die Transformations Daten der Ostwand zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Ostwand.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetSouthWalls">
+            <summary>
+            Gibt die Transformations Daten der Suedwand zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Suedwand.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetWestWalls">
+            <summary>
+            Gibt die Transformations Daten der Westwand zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Westwand.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetWindows">
+            <summary>
+            Gibt die Transformations Daten der Fenster zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Fenster.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetDoors">
+            <summary>
+            Gibt die Transformations Daten der Tueren zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Tueren.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.IWarehouseStrategie.GetStorageRacks">
+            <summary>
+            Gibt die Transformations Daten der Regale zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Regale.</returns>
+        </member>
+        <member name="T:AppData.Warehouse.LargeWarehouseStrategie">
+            <summary>
+            Algorithmus fuer die Generierung eines grossen Lagerhauses.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.GenerateFloor">
+            <summary>
+            Berechnet die Boeden.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.GenerateWall">
+            <summary>
+            Berechnet die Waende.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.GenerateDoors">
+            <summary>
+            Berechnet die Tueren.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.GenerateStorageRacks">
+            <summary>
+            Berechnet die Regale.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.GenerateWindows">
+            <summary>
+            Berechnet die Fenster
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.LargeWarehouseStrategie.StartGeneration">
+            <summary>
+            Startet den Algorithmus.
+            </summary>
+        </member>
+        <member name="T:AppData.Warehouse.MediumWarehouseStrategie">
+            <summary>
+            Algorithmus fuer die Generierung eines mittelgroessen Lagerhauses.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.MediumWarehouseStrategie.MaxJ">
+            <summary>
+            Anzahl der Boeden auf der X Achse.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.MediumWarehouseStrategie.MaxI">
+            <summary>
+            Anzahl der Boeden auf der Z Achse.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.GenerateFloor">
+            <summary>
+            Berechnet die Boeden.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.GenerateWall">
+            <summary>
+            Berechnet die Waende.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.GenerateDoors">
+            <summary>
+            Berechnet die Tueren.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.GenerateStorageRacks">
+            <summary>
+            Berechnet die Regale.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.GenerateWindows">
+            <summary>
+            Berechnet die Fenster.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.MediumWarehouseStrategie.StartGeneration">
+            <summary>
+            Startet den Algorithmus.
+            </summary>
+        </member>
+        <member name="T:AppData.Warehouse.ObjectTransformation">
+            <summary>
+            Transformationensdaten die fuer die Lagerhaus berechnen verwendet werden.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.ObjectTransformation.Position">
+            <summary>
+            Die Position eines Objekts.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.ObjectTransformation.Rotation">
+            <summary>
+            Die Rotation eines Objekts.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.ObjectTransformation.Scale">
+            <summary>
+            Die Skalierung eines Objekts.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.ObjectTransformation.#ctor(UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="position">Die Position des Objekts.</param>
+            <param name="rotation">Die Rotation des Objekts.</param>
+            <param name="scale">Die Skalierung des Objekts.</param>
+        </member>
+        <member name="T:AppData.Warehouse.SmallWarehouseStrategie">
+            <summary>
+            Algorithmus fuer die Generierung eines kleinen Lagerhauses.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.GenerateFloor">
+            <summary>
+            Berechnet die Boeden.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.GenerateWall">
+            <summary>
+            Berechnet die Waende.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.GenerateDoors">
+            <summary>
+            Berechnet die Tueren.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.GenerateStorageRacks">
+            <summary>
+            Berechnet die Regale.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.GenerateWindows">
+            <summary>
+            Berechnet die Fenster.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.SmallWarehouseStrategie.StartGeneration">
+            <summary>
+            Startet den Algorithmus.
+            </summary>
+        </member>
+        <member name="T:AppData.Warehouse.WarehouseStrategieBase">
+            <summary>
+            Basisklasse fuer die Erstellung der Lagerhaueser.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.Floor">
+            <summary>
+            Die Transformations Daten der Boeden.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.WallsNorth">
+            <summary>
+            Die Transformations Daten der Nordwaende.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.WallsEast">
+            <summary>
+            Die Transformations Daten der Ostwaende.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.WallsSouth">
+            <summary>
+            Die Transformations Daten der Suedwande.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.WallsWest">
+            <summary>
+            Die Transformations Daten der Westwaende.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.WallsInner">
+            <summary>
+            Die Transformations Daten der inneren Waende.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.Windows">
+            <summary>
+            Die Transformations Daten der Fenster.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.Doors">
+            <summary>
+            Die Transformations Daten der Tueren.
+            </summary>
+        </member>
+        <member name="P:AppData.Warehouse.WarehouseStrategieBase.StorageRacks">
+            <summary>
+            Die Transformations Daten der Regale.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.WarehouseStrategieBase.xOffset">
+            <summary>
+            X Offset fuer die Positionierung des Lagerhauses.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.WarehouseStrategieBase.yOffset">
+            <summary>
+            Y Offset fuer die Positionierung des Lagerhauses.
+            </summary>
+        </member>
+        <member name="F:AppData.Warehouse.WarehouseStrategieBase.zOffset">
+            <summary>
+            Z Offset fuer die Positionierung des Lagerhauses.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.#ctor">
+            <summary>
+            Erstellt eine neue Instanz mit default Werten.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Erstellt eine neue Instanz mit custom Offset.
+            </summary>
+            <param name="xOff">X Offset fuer die Positionierung.</param>
+            <param name="yOff">Y Offset fuer die Positionierung.</param>
+            <param name="zOff">Z Offset fuer die Positionierung.</param>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.StartGeneration">
+            <summary>
+            Startet den Algorithmus.
+            </summary>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetFloor">
+            <summary>
+            Gibt die Transformations Daten der Boeden zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Boeden.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetOuterWalls">
+            <summary>
+            Gibt die Transformations Daten der äusseren Wände zurueck.
+            </summary>
+            <returns>Die Transformations Daten der äusseren Wände.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetInnerWalls">
+            <summary>
+            Gibt die Transformations Daten der inneren Waende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der inneren Waende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetNorthWalls">
+            <summary>
+            Gibt die Transformations Daten der Nordwaende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Nordwaende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetEastWalls">
+            <summary>
+            Gibt die Transformations Daten der Ostwaende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Ostwaende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetSouthWalls">
+            <summary>
+            Gibt die Transformations Daten der Suedwaende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Suedwaende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetWestWalls">
+            <summary>
+            Gibt die Transformations Daten der Westwaende zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Westwaende.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetWindows">
+            <summary>
+            Gibt die Transformations Daten der Fenster zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Fenster.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetDoors">
+            <summary>
+            Gibt die Transformations Daten der Tueren zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Tueren.</returns>
+        </member>
+        <member name="M:AppData.Warehouse.WarehouseStrategieBase.GetStorageRacks">
+            <summary>
+            Gibt die Transformations Daten der Regale zurueck.
+            </summary>
+            <returns>Die Transformations Daten der Regale.</returns>
+        </member>
+    </members>
+</doc>

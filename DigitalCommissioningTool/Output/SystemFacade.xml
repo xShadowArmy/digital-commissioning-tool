@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SystemFacade</name>
+    </assembly>
+    <members>
+        <member name="T:SystemFacade.ArchiveManager">
+            <summary>
+            Facade für Archiv Operationen.
+            </summary>
+        </member>
+        <member name="F:SystemFacade.ArchiveManager.Handler">
+            <summary>
+            Objekt das überdeckt wird.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ArchiveManager.#cctor">
+            <summary>
+            Initialisiert die Facade.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ArchiveManager.ArchiveDirectory(System.String,System.String)">
+            <summary>
+            ARchiviert ein Verzeichnis.
+            </summary>
+            <param name="src">Der Pfad des Verzeichnisses das Archiviert werden soll.</param>
+            <param name="dst">Pfad unter dem das Archiv gespeichert werden soll.</param>
+        </member>
+        <member name="M:SystemFacade.ArchiveManager.ExtractArchive(System.String,System.String)">
+            <summary>
+            Entpackt ein Archiv.
+            </summary>
+            <param name="src">Der Pfad des Archivs.</param>
+            <param name="dst">Der Pfad unter dem das Archiv entpackt werden soll.</param>
+        </member>
+        <member name="T:SystemFacade.ConfigManager">
+            <summary>
+            Bietet Möglichkeiten zum Erstellen, speichern und laden von Configurations Daten.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.ConfigManager.FileName">
+            <summary>
+            Der Name der aktuell geöffneten Konfigurations Datei.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.ConfigManager.OpenStream">
+            <summary>
+            Gibt an ob ein offener Datenstream vorliegt.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.ConfigManager.AutoFlush">
+            <summary>
+            Gibt an ob die Daten automatisch in die Datei geschrieben werden sollen.
+            </summary>
+        </member>
+        <member name="F:SystemFacade.ConfigManager.Handler">
+            <summary>
+            Objekt das von der Facade verdeckt wird.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.ConfigManager._disposed">
+            <summary>
+            Gibt an ob das Objekt bereits freigegeben wurde.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.Finalize">
+            <summary>
+            Schließt bei Bedarf den noch geöffneten DatenStream.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.StoreData(System.String,System.Array,System.Boolean)">
+            <summary>
+            Speichert ein Array mit einem eindeutigen Schlüssel.
+            </summary>
+            <param name="key">Ein eindeutiger Schlüssel.</param>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+            <param name="overwrite">Gibt an, ob die Daten überschrieben werden sollen, wenn der Schlüssel bereits verwendet wird.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich gespeichert oder überschrieben wurden.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SystemFacade.ConfigManager.StoreData(System.String,System.Object,System.Boolean)" -->
+        <member name="M:SystemFacade.ConfigManager.StoreData(System.String,SystemTools.ISerialConfigData,System.Boolean)">
+            <summary>
+            Speichert ein Objekt mit eindeutigen Schlüssel.
+            </summary>
+            <param name="key">Ein eindeutiger Schlüssel.</param>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+            <param name="overwrite"> Gibt an, ob die Daten überschrieben werden sollen, wenn der Schlüssel bereits verwendet wird.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich gespeichert oder überschrieben wurden.</returns>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.LoadData(System.String)">
+            <summary>
+            Lädt die Daten mit dem angegebenen Schlüssel.
+            </summary>
+            <param name="key">Der Schlüssel der Daten.</param>
+            <returns>Gibt die geladenen Daten oder null zurück.</returns>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.LoadData(System.Int64)">
+            <summary>
+            Lädt die Daten mit der angegebenen ID.
+            </summary>
+            <param name="id">Die ID der Daten.</param>
+            <returns>Gibt die geladenen Daten oder null zurück.</returns>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.LoadData(System.String,SystemTools.ISerialConfigData)">
+            <summary>
+            Lädt das Objekt mit dem angegebenen Schlüssel.
+            </summary>
+            <param name="key">Der Schlüssel der Daten.</param>
+            <param name="data">Das Objekt, in das die Daten geladen werden sollen.</param>         
+            <returns>Gibt die geladenen Daten oder null zurück.</returns>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.RemoveData(System.String)">
+            <summary>
+            Entfernt die Daten mit dem angegebenen Schlüssel.
+            </summary>
+            <param name="key">Der Schlüssel der Daten.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich entfernt werden konnten.</returns>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.RemoveData(System.Int64)">
+            <summary>
+            Entfernt die Daten mit der angegebenen ID.
+            </summary>
+            <param name="id">Die ID der Daten.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich entfernt werden konnten.</returns>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.OpenConfigFile(System.String,System.Boolean)">
+            <summary>
+            Öffnet eine Konfigurations Datei.
+            </summary>
+            <param name="name">Der Name der Konfigurationsdatei.</param>
+            <param name="create">Gibt an ob die Konfigurations Datei erstellt werden soll.</param>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.OpenConfigFile(System.String,System.String,System.Boolean)">
+            <summary>
+            Öffnet eine Konfigurations Datei.
+            </summary>
+            <param name="name">Der Name der Konfigurationsdatei.</param>
+            <param name="create">Gibt an ob die Konfigurations Datei erstellt werden soll.</param>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.CloseConfigFile">
+            <summary>
+            Schließt und Schreibt den Stream in die Datei.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.Flush">
+            <summary>
+            Schreibt den Stream in die Datei.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.Dispose">
+            <summary>
+            Gibt Ressourcen wieder frei.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.ConfigManager.Dispose(System.Boolean)">
+            <summary>
+            Gibt Ressourcen wieder frei.
+            </summary>
+        </member>
+        <member name="T:SystemFacade.LogLevel">
+            <summary>
+            Definiert die Priorität einer Log Nachricht.
+            </summary>
+        </member>
+        <member name="T:SystemFacade.LogManager">
+            <summary>
+            Ermöglicht das Schreiben von LogDateien.
+            </summary>
+        </member>
+        <member name="F:SystemFacade.LogManager.Handler">
+            <summary>
+            Objekt das die Facade überdeckt.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.LogManager.#cctor">
+            <summary>
+            Initialisiert den LogHandler.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.LogManager.WriteInfo(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Info Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemFacade.LogManager.WriteWarning(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Warn Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemFacade.LogManager.WriteError(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Error Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemFacade.LogManager.WriteLog(System.String,SystemFacade.LogLevel,System.Boolean,System.String,System.String)">
+            <summary>
+            Schreibt eine Log Nachricht und bietet die Möglichkeit, gleichzeitig eine Exception zu werfen.
+            </summary>
+            <param name="msg">Die Nachricht die geloggt werden soll.</param>
+            <param name="lvl">Die Priorität der Nachricht.</param>
+            <param name="throwException">Gibt an ob mit der angegebenen Nachricht eine Exception geworfen werden soll.</param>
+            <param name="className">Name der Klasse die eine Lognachricht schreibt.</param>
+            <param name="methodName">Name der MEthode die eine Lognachricht schreibt.</param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:SystemFacade.Paths">
+            <summary>
+            Facade für die vom Programm verwendeten Pfade.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.Paths.LogPath">
+            <summary>
+            Pfad in dem die LogDateien liegen.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.Paths.StringResourcePath">
+            <summary>
+            Pfad in dem die String Ressourcen liegen.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.Paths.ProjectsPath">
+            <summary>
+            Pfad in dem die Projekte gespeichert werden.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.Paths.DataResourcePath">
+            <summary>
+            Pfad in dem die Konfigurations Dateien gespeichert werden.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.Paths.ResourcePath">
+            <summary>
+            Pfad in dem die Xml Schemata liegen.
+            </summary>
+        </member>
+        <member name="P:SystemFacade.Paths.TempPath">
+            <summary>
+            Pfad in dem temporäre Dateien für die Projekte liegen.
+            </summary>
+        </member>
+        <member name="F:SystemFacade.Paths.Handler">
+            <summary>
+            Helper Objekt das von der Facade überdeckt wird.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.Paths.#cctor">
+            <summary>
+            Initialisiert das helper Objekt.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.Paths.AddPath(System.String,System.String)">
+            <summary>
+            Fügt einen neuen Pfad hinzu.
+            </summary>
+            <param name="name">Der Schlüssel des neuen Pfads.</param>
+            <param name="path">Der Pfad.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemFacade.Paths.RetrievePath(System.String)">
+            <summary>
+            Frägt einen vorhandenen Pfad ab.
+            </summary>
+            <param name="name">Der Schlüssel des Pfads.</param>
+            <returns>Gibt den Pfad zurück wenn Erfolgreich oder einen leeren String.</returns>
+        </member>
+        <member name="M:SystemFacade.Paths.RemovePath(System.String)">
+            <summary>
+            Entfernt einen vorhandenen Pfad.
+            </summary>
+            <param name="name">Der Schlüssel des Pfads der entfernt werden soll.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemFacade.Paths.ClearTempPath">
+            <summary>
+            Löscht alle Dateien aus dem Temp verzeichnis.
+            </summary>
+        </member>
+        <member name="T:SystemFacade.StringResourceManager">
+            <summary>
+            Verwaltet String Resourcen und bietet Load and Store Architektur.
+            </summary>
+        </member>
+        <member name="F:SystemFacade.StringResourceManager.Handler">
+            <summary>
+            Objekt das die Facade verdeckt.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.#cctor">
+            <summary>
+            Initialisiert den StringRessourceHandler und lädt die Strings in den Speicher.
+            </summary>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.LoadString(System.String)">
+            <summary>
+            Lädt eine StringResource anhand ihres Namens.
+            </summary>
+            <param name="name">Der Name der StringResource.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.LoadString(System.Int64)">
+            <summary>
+            Lädt eine StringResource anhand ihrer ID.
+            </summary>
+            <param name="id">Die ID der StringResource.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.LoadString(System.String,System.String)">
+            <summary>
+            Lädt eine StringResource anhand ihres Namens.
+            </summary>
+            <param name="name">Der Name der StringResource.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.StoreString(System.String,System.String,System.Boolean)">
+            <summary>
+            Speichert eine StringResource mit dem angegebenen Schluessel.
+            </summary>
+            <param name="name">Der Schluessel der Resource.</param>
+            <param name="content">Die StringResource.</param>
+            <param name="overwrite">Gibt an, ob vorhandene Daten ueberschrieben werden sollen.</param>
+            <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.WriteFile">
+            <summary>
+            Schreibt hinzugefügte StringResourcen in die Datei. Darf nicht nach jedem StoreData aufgerufen werden!
+            </summary>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.Exists(System.Int64)">
+            <summary>
+            Überprüft ob eine StringResource mit der angegebenen ID verfügbar ist.
+            </summary>
+            <param name="id">Die ID der zu suchenden Resource.</param>
+            <returns>Gibt true zurück falls die Suche erfolgreich war.</returns>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.Exists(System.String)">
+            <summary>
+            Überprüft, ob eine StringResource mit dem angegebenen Namen verfügbar ist.
+            </summary>
+            <param name="name">Der Name der zu suchenden Resource.</param>
+            <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
+        </member>
+        <member name="M:SystemFacade.StringResourceManager.SelectLanguage(UnityEngine.SystemLanguage)">
+            <summary>
+            Wählt die passenden StringResourcen für die jeweilige Sprache aus.
+            </summary>
+            <param name="lang">Die Sprache die verwendet werden soll.</param>
+        </member>
+    </members>
+</doc>

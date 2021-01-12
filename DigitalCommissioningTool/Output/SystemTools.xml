@@ -1,0 +1,1088 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SystemTools</name>
+    </assembly>
+    <members>
+        <member name="T:SystemTools.Handler.ArchiveHandler">
+            <summary>
+            Helper Methoden für das Archivieren und Entpacken von .Zip Verzeichnissen.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Handler.ArchiveHandler.Logger">
+            <summary>
+            Objekt zum Schreiben von Log Dateien.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ArchiveHandler.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ArchiveHandler.ArchiveDirectory(System.String,System.String)">
+            <summary>
+            Archiviert alle Dateien eines Pfads.
+            </summary>
+            <param name="src">Der Pfad der Archiviert werden soll.</param>
+            <param name="dst">Der Zielpfad unter dem das Archiv gespeichert werden soll.</param>
+        </member>
+        <member name="M:SystemTools.Handler.ArchiveHandler.ExtractArchive(System.String,System.String)">
+            <summary>
+            Entpackt ein Archiv.
+            </summary>
+            <param name="src">Der Pfad des Archivs.</param>
+            <param name="dst">Der Pfad in dem das Archiv entpackt werden soll.</param>
+        </member>
+        <member name="T:SystemTools.Handler.ConfigHandler">
+            <summary>
+            Bietet Möglichkeiten zum Erstellen, speichern und laden von Configurations Daten.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler._disposed">
+            <summary>
+            Gibt an ob das Objekt bereits freigegeben wurde.
+            </summary>
+        </member>
+        <member name="T:SystemTools.Handler.ConfigHandler.ConfigBuffer">
+            <summary>
+            Die gepufferten Daten einer Configurations Datei.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.FileName">
+            <summary>
+            Der Name der aktuell geöffneten Konfigurations Datei.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.OpenStream">
+            <summary>
+            Gibt an ob ein offener Datenstream vorliegt.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.AutoFlush">
+            <summary>
+            Gibt an ob die Daten automatisch in die Datei geschrieben werden sollen.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.Writer">
+            <summary>
+            Wird verwendet um Daten zu speichern.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.Reader">
+            <summary>
+            Wird verwendet um Daten zu lessen.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.Buffer">
+            <summary>
+            Enthält die Datenelemente einer Konfigurationsdatei.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.ConfigHandler.ConfigFile">
+            <summary>
+            Die aktuell geöffnete Konfigurations Datei.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Handler.ConfigHandler.PATH">
+            <summary>
+            Der Systempfad an dem die Konfigurations Dateien gespeichert werden.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Handler.ConfigHandler.Logger">
+            <summary>
+            Wird fuer das Schreiben von LogDateien verwendet.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.Finalize">
+            <summary>
+            Schließt bei Bedarf den noch geöffneten DatenStream.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.StoreData(System.String,System.Array,System.Boolean)">
+            <summary>
+            Speichert ein Array mit einem eindeutigen Schlüssel.
+            </summary>
+            <param name="key">Ein eindeutiger Schlüssel.</param>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+            <param name="overwrite">Gibt an, ob die Daten überschrieben werden sollen, wenn der Schlüssel bereits verwendet wird.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich gespeichert oder überschrieben wurden.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SystemTools.Handler.ConfigHandler.StoreData(System.String,System.Object,System.Boolean)" -->
+        <member name="M:SystemTools.Handler.ConfigHandler.StoreData(System.String,SystemTools.ISerialConfigData,System.Boolean)">
+            <summary>
+            Speicher ein Objekt mit eindeutigen Schlüssel.
+            </summary>
+            <param name="key">Ein eindeutiger Schlüssel.</param>
+            <param name="data">Die Daten die gespeichert werden sollen.</param>
+            <param name="overwrite"> Gibt an, ob die Daten überschrieben werden sollen, wenn der Schlüssel bereits verwendet wird.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich gespeichert oder überschrieben wurden.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.LoadData(System.String)">
+            <summary>
+            Lädt die Daten mit dem angegebenen Schlüssel.
+            </summary>
+            <param name="key">Der Schlüssel der Daten.</param>
+            <returns>Gibt die geladenen Daten oder null zurück.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.LoadData(System.Int64)">
+            <summary>
+            Lädt die Daten mit der angegebenen ID.
+            </summary>
+            <param name="id">Die ID der Daten.</param>
+            <returns>Gibt die geladenen Daten oder null zurück.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.LoadData(System.String,SystemTools.ISerialConfigData)">
+            <summary>
+            Lädt das Objekt mit dem angegebenen Schlüssel.
+            </summary>
+            <param name="key">Der Schlüssel der Daten.</param>
+            <param name="data">Das Objekt, in das die Daten geladen werden sollen.</param>         
+            <returns>Gibt die geladenen Daten oder null zurück.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.RemoveData(System.String)">
+            <summary>
+            Entfernt die Daten mit dem angegebenen Schlüssel.
+            </summary>
+            <param name="key">Der Schlüssel der Daten.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich entfernt werden konnten.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.RemoveData(System.Int64)">
+            <summary>
+            Entfernt die Daten mit der angegebenen ID.
+            </summary>
+            <param name="id">Die ID der Daten.</param>
+            <returns>Gibt true zurück, wenn die Daten erfolgreich entfernt werden konnten.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.OpenConfigFile(System.String,System.Boolean)">
+            <summary>
+            Öffnet eine Konfigurations Datei.
+            </summary>
+            <param name="name">Der Name der Konfigurationsdatei.</param>
+            <param name="create">Gibt an ob die Konfigurations Datei erstellt werden soll.</param>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.OpenConfigFile(System.String,System.String,System.Boolean)">
+            <summary>
+            Öffnet eine Konfigurations Datei.
+            </summary>
+            <param name="name">Der Name der Konfigurationsdatei.</param>
+            <param name="create">Gibt an ob die Konfigurations Datei erstellt werden soll.</param>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.CloseConfigFile">
+            <summary>
+            Schließt und Schreibt den Stream in die Datei.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.Flush">
+            <summary>
+            Schreibt den Stream in die Datei.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.CreateFile(System.String)">
+            <summary>
+            Erstellt eine neue Konfigurations Datei.
+            </summary>
+            <param name="file">Der Name der Datei die erstellt werden soll.</param>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.CreateDir">
+            <summary>
+            Erstellt die Verzeichnisstruktur für die Konfigurations Dateien.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.InitializeConfigFile(System.Boolean,System.String)">
+            <summary>
+            Lädt die Daten einer Konfigurations Datei.
+            </summary>
+            <param name="newConfig">Gibt an ob die Konfigurations Datei gelesen werden muss.</param>
+            <param name="file">Der Pfad der Konfigurationsdatei.</param>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.Dispose">
+            <summary>
+            Gibt Ressourcen wieder frei.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.ConfigHandler.Dispose(System.Boolean)">
+            <summary>
+            Gibt Ressourcen wieder frei.
+            </summary>
+        </member>
+        <member name="T:SystemTools.Handler.LogHandler">
+            <summary>
+            Ermöglicht das Schreiben von LogDateien.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.LogHandler.Writer">
+            <summary>
+            Ermöglicht das Schreiben von LogDateien.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.LogHandler.#ctor">
+            <summary>
+            Initialisiert den LogHandler.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.LogHandler.WriteInfo(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Info Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Handler.LogHandler.WriteWarning(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Warn Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Handler.LogHandler.WriteError(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Error Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Handler.LogHandler.WriteLog(System.String,System.Int32,System.Boolean,System.String,System.String)">
+            <summary>
+            Schreibt eine Log Nachricht und bietet die Möglichkeit, gleichzeitig eine Exception zu werfen.
+            </summary>
+            <param name="msg">Die Nachricht die geloggt werden soll.</param>
+            <param name="lvl">Die Priorität der Nachricht.</param>
+            <param name="throwException">Gibt an ob mit der angegebenen Nachricht eine Exception geworfen werden soll.</param>
+            <param name="className">Name der Klasse die eine Lognachricht schreibt.</param>
+            <param name="methodName">Name der MEthode die eine Lognachricht schreibt.</param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:SystemTools.Handler.PathHandler">
+            <summary>
+            Uebernimmt das Speichern und Laden fuer die verwendeten Pfade.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Handler.PathHandler.Table">
+            <summary>
+            Tabelle mit den Pfaden und den passenden Namen als Schluessel.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Handler.PathHandler.Logger">
+            <summary>
+            Objekt fuer das Schreiben von Logs.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.PathHandler.#ctor">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.PathHandler.RetrievePath(System.String)">
+            <summary>
+            Gibt den Pfad mit dem angegebenen Schluessel zurueck.
+            </summary>
+            <param name="name">Der Schluessel des Pfads.</param>
+            <returns>Der gespeicherte Pfad.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.PathHandler.AddPath(System.String,System.String)">
+            <summary>
+            Fuegt einen neuen Pfad der Tabelle hinzu.
+            </summary>
+            <param name="name">Der Key unter dem der Pfad gespeichert werden soll.</param>
+            <param name="path">Der Pfad der gespeichert werden soll.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.PathHandler.RemovePath(System.String)">
+            <summary>
+            Entfernt einen Pfad aus der Tabelle.
+            </summary>
+            <param name="name">Der Key des Pfads der entfernt werden soll.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.PathHandler.ClearTempPath">
+            <summary>
+            Löscht alle Datein aus dem Temp Verzeichnis.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.PathHandler.ReadPaths">
+            <summary>
+            Liest die Pfade aus der Datei.
+            </summary>
+        </member>
+        <member name="T:SystemTools.Handler.StringResourceHandler">
+            <summary>
+            Verwaltet String Resourcen und bietet Load and Store Architektur.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.StringResourceHandler.Reader">
+            <summary>
+            StringResourceReader Objekt mit dem die StringResourcen gelesen werden.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.StringResourceHandler.Writer">
+            <summary>
+            StringResourceWriter Objekt mit dem die StringResourcen geschrieben werden.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.StringResourceHandler.StringResources">
+            <summary>
+            Die Eingelesenen StringResource Daten.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Handler.StringResourceHandler.Doc">
+            <summary>
+            Repräsentiert die StringResource Xml Datei.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Handler.StringResourceHandler.Logger">
+            <summary>
+            Wird fuer das Schreiben von LogDateien verwendet.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.#ctor(UnityEngine.SystemLanguage)">
+            <summary>
+            Initialisiert den StringRessourceHandler und lädt die Strings in den Speicher.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.LoadString(System.String)">
+            <summary>
+            Lädt eine StringResource anhand ihres Namens.
+            </summary>
+            <param name="name">Der Name der StringResource.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.LoadString(System.Int64)">
+            <summary>
+            Lädt eine StringResource anhand ihrer ID.
+            </summary>
+            <param name="id">Die ID der StringResource.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.StoreString(System.String,System.String,System.Boolean)">
+            <summary>
+            Speichert eine StringResource mit dem angegebenen Schluessel.
+            </summary>
+            <param name="name">Der Schluessel der Resource.</param>
+            <param name="content">Die StringResource.</param>
+            <param name="overwrite">Gibt an, ob vorhandene Daten ueberschrieben werden sollen.</param>
+            <returns>Gibt true zurueck, wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.WriteFile">
+            <summary>
+            Schreibt hinzugefügte StringResourcen in die Datei. Darf nicht nach jedem StoreData aufgerufen werden!
+            </summary>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.Exists(System.Int64)">
+            <summary>
+            Überprüft ob eine StringResource mit der angegebenen ID verfügbar ist.
+            </summary>
+            <param name="id">Die ID der zu suchenden Resource.</param>
+            <returns>Gibt true zurück falls die Suche erfolgreich war.</returns>
+        </member>
+        <member name="M:SystemTools.Handler.StringResourceHandler.Exists(System.String)">
+            <summary>
+            Überprüft, ob eine StringResource mit dem angegebenen Namen verfügbar ist.
+            </summary>
+            <param name="name">Der Name der zu suchenden Resource.</param>
+            <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
+        </member>
+        <member name="T:SystemTools.Logging.LogWriter">
+            <summary>
+            Erstellt und Schreibt LogDateien.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Logging.LogWriter.Buffer">
+            <summary>
+            Text der in die LogDatei geschrieben werden soll.
+            </summary>
+        </member>
+        <member name="F:SystemTools.Logging.LogWriter.RefCnt">
+            <summary>
+            Gibt an wie viele Objekte der Klasse vorhanden sind.
+            </summary>
+        </member>
+        <member name="P:SystemTools.Logging.LogWriter.LogPath">
+            <summary>
+            Der Pfad, an dem die LogDateien erstellt werden.               
+            </summary>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.#ctor">
+            <summary>
+            Initialisiert den LogWriter und erstellt eine neue LogDatei mit Header.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.Finalize">
+            <summary>
+            Schreibt den Puffer in die Datei.
+            </summary>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.WriteInfo(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Info Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.WriteWarning(System.String,System.String,System.String)">
+            <summary>
+            Schreibt eine Warn Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.WriteError(System.String,System.String,System.String)">
+            <summary>
+            WSchreibt eine Error Nachricht in die LogDatei.
+            </summary>
+            <param name="message">Die Nachricht die geschrieben werden soll.</param>
+            <param name="className">Der Name der Klasse für die etwas dokumentiert werden soll.</param>
+            <param name="methodName">Der Name der Methode in der etwas dokumentiert werden soll.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht geöffnet und beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.PrintToFile">
+            <summary>
+            Schreibt den Buffer in die LogDatei.
+            </summary>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht beschrieben werden kann.</exception>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.AddToBuffer(System.String,System.String)">
+            <summary>
+            Schreibt die Daten in den Buffer.
+            </summary>
+            <param name="tag">Priorität der Nachricht.</param>
+            <param name="message">Die Nachricht.</param>
+        </member>
+        <member name="M:SystemTools.Logging.LogWriter.PrintFileHeader(System.IO.StreamWriter)">
+            <summary>
+            Schreibt den Header in die LogDatei.
+            </summary>
+            <param name="writer">StreamWriter objekt mit verfügbarem FileStream.</param>
+            <exception cref="T:System.IO.IOException">Wird geworfen wenn die Datei nicht beschrieben werden kann.</exception>
+        </member>
+        <member name="T:SystemTools.ConfigData">
+            <summary>
+            Repräsentiert gespeicherte Configurations Daten.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.Name">
+            <summary>
+            Der gespeicherte Schlüssel.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.ID">
+            <summary>
+            Die ID der Daten.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.IsArray">
+            <summary>
+            Gibt an ob die gespeicherten Daten ein Array von Daten sind.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.IsObject">
+            <summary>
+            Gibt an ob die gespeicherten Daten ein Objekt sind.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.ArrayLength">
+            <summary>
+            Gibt die Anzahl der gespeicherten Daten zurück.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.IsBuffered">
+            <summary>
+            Gibt an ob die gespeicherten Daten neu hinzugefügt wurden.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.Types">
+            <summary>
+            Gibt die Typnamen der einzelnen Daten zurück.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ConfigData.Data">
+            <summary>
+            Die gespeicherten Daten.
+            </summary>
+        </member>
+        <member name="F:SystemTools.ConfigData.Logger">
+            <summary>
+            Wird fuer das Schreiben von Logdateien verwendet.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ConfigData.#ctor">
+            <summary>
+            Erstellt eine neue leere Instanz.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsString">
+            <summary>
+            Gibt den gespeicherten Wert als String zurück.
+            </summary>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsShort">
+            <summary>
+            Gibt den gespeicherten Wert als Short zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsLong">
+            <summary>
+            Gibt den gespeicherten Wert als Long zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsInt">
+            <summary>
+            Gibt den gespeicherten Wert als Int zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsFloat">
+            <summary>
+            Gibt den gespeicherten Wert als Float zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsDouble">
+            <summary>
+            Gibt den gespeicherten Wert als Double zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValueAsBool">
+            <summary>
+            Gibt den gespeicherten Wert als Bool zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Der gespeicherte Wert.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsString">
+            <summary>
+            Gibt die gespeicherten Werte als StringArray zurück.
+            </summary>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsShort">
+            <summary>
+            Gibt die gespeicherten Werte als ShortArray zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsLong">
+            <summary>
+            Gibt die gespeicherten Werte als LongArray zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsInt">
+            <summary>
+            Gibt die gespeicherten Werte als IntArray zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsFloat">
+            <summary>
+            Gibt die gespeicherten Werte als FloatArray zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsDouble">
+            <summary>
+            Gibt die gespeicherten Werte als DoubleArray zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.GetValuesAsBool">
+            <summary>
+            Gibt die gespeicherten Werte als BoolArray zurück.
+            </summary>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ nicht mit dem Typ der gespeicherten Daten übereinstimmt.</exception>
+            <returns>Die gespeicherten Werte.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.Initialize">
+            <summary>
+            Gibt eine neue Instanz zurück.
+            </summary>
+            <returns>Eine neue Instanz der ConfigDaten.</returns>
+        </member>
+        <member name="M:SystemTools.ConfigData.AddData(System.String,System.Int64,System.String,System.Boolean,System.Boolean,System.String[])">
+            <summary>
+            Speichert die angegebenen Daten (SimpleData).
+            </summary>
+            <param name="name">Der verwendete Schlüssel.</param>
+            <param name="id">Die eindeutige ID der Daten</param>
+            <param name="type">Der Typ der Daten.</param>
+            <param name="isArray">Gibt an ob die Daten ein Array sind.</param>
+            <param name="isNew">Gibt an ob die Daten neu hinzugefügt wurden.</param>
+            <param name="data">Die zu speichernden Daten.</param>
+        </member>
+        <member name="M:SystemTools.ConfigData.AddData(System.String,System.Int64,System.String[],System.Boolean,System.String[])">
+            <summary>
+            Speichert die angegebenen Daten (ComplexData).
+            </summary>
+            <param name="name">Der verwendete Schlüssel.</param>
+            <param name="id">Die eindeutige ID der Daten.</param>
+            <param name="types">Die Typen der einzelnen Daten.</param>
+            <param name="isNew">Gibt an ob die Daten neu hinzugefügt wurden.</param>
+            <param name="data">Die Daten des zu speichernden Objekts.</param>
+        </member>
+        <member name="M:SystemTools.ConfigData.CheckType(System.String)">
+            <summary>
+            Überprüft den Typ der gespeicherten Daten mit dem angegebenen Typ.
+            </summary>
+            <param name="typeName">Der Name des Types in den die Daten umgewandelt werden sollen.</param>
+            <exception cref="T:System.InvalidCastException">Wird geworfen wenn der Typ der Daten nicht mit dem angegebenen Typ übereinstimmt.</exception>
+        </member>
+        <member name="T:SystemTools.ManagingResources.ConfigReader">
+            <summary>
+            Ermöglicht das Lesen von Konfigurations Dateien.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.ConfigReader.Doc">
+            <summary>
+            Die Konfigurationsdatei.
+            </summary>
+        </member>
+        <member name="F:SystemTools.ManagingResources.ConfigReader.Logger">
+            <summary>
+            Wird fuer das Schreiben von LogDateien verwendet.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.#ctor(System.Xml.XmlDocument,SystemTools.Handler.ConfigHandler.ConfigBuffer,System.Boolean)">
+            <summary>
+            Erstellt eine neue Instanz und ließt die Daten in den Puffer.
+            </summary>
+            <param name="doc">Die Konfigurationsdatei.</param>
+            <param name="buffer">Der Datenpuffer.</param>
+            <param name="newFile">Gibt an ob die Datei neu erstellt wurde.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.LoadData(SystemTools.Handler.ConfigHandler.ConfigBuffer,System.String)">
+            <summary>
+            Ließt Daten aus dem Puffer.
+            </summary>
+            <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
+            <param name="name">Der Schlüssel der Daten die gelesen werden sollen.</param>
+            <returns>Die gelesenen Daten.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.LoadData(SystemTools.Handler.ConfigHandler.ConfigBuffer,System.Int64)">
+            <summary>
+            Ließt Daten aus dem Puffer.
+            </summary>
+            <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
+            <param name="id">Die ID der Daten die gelesen werden sollen.</param>
+            <returns>Die gelesenen Daten.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.LoadData(SystemTools.Handler.ConfigHandler.ConfigBuffer,System.String,SystemTools.ISerialConfigData)">
+            <summary>
+            Ließt Daten aus dem Puffer.
+            </summary>
+            <param name="buffer">Der Puffer aus dem gelesen werden soll.</param>
+            <param name="name">Der Schlüssel der gelesen werden soll.</param>
+            <param name="data">Das Objekt das wiederhergestellt werden soll.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.FillBuffer(SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Füllt den Puffer mit den Daten der Konfigurations Datei.
+            </summary>
+            <param name="buffer">Der Puffer der gefüllt werden soll.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.ReadSimpleElement(System.Xml.XPath.XPathNavigator,SystemTools.Handler.ConfigHandler.ConfigBuffer,System.String)">
+            <summary>
+            Ließt ein einfaches Datenelement in den Puffer-
+            </summary>
+            <param name="nav">Der Navigator an Position des einfachen Datenelements.</param>
+            <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+            <param name="xmlns">Der Xml namespace.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigReader.ReadComplexElement(System.Xml.XPath.XPathNavigator,SystemTools.Handler.ConfigHandler.ConfigBuffer,System.String)">
+            <summary>
+            Ließt ein complexes Datenelement in den Puffer-
+            </summary>
+            <param name="nav">Der Navigator an Position des complexen Datenelements.</param>
+            <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+            <param name="xmlns">Der Xml namespace.</param>
+        </member>
+        <member name="T:SystemTools.ManagingResources.ConfigWriter">
+            <summary>
+            Ermöglicht das Schreiben von Konfigurations Dateien.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.ConfigWriter.Doc">
+            <summary>
+            Die Konfigurationsdatei.
+            </summary>
+        </member>
+        <member name="F:SystemTools.ManagingResources.ConfigWriter.Logger">
+            <summary>
+            Wird fuer das Schreiben von LogDateien verwendet.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <param name="doc">Die Konfigurationsdatei.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.StoreData(System.String,System.Object,System.Boolean,SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Speichert Daten in den Puffer.
+            </summary>
+            <param name="key">Der Schlüssel unter dem die Daten gespeichert werden sollen.</param>
+            <param name="data">Die Daten die Gespeichert werden sollen.</param>
+            <param name="overwrite">Gibt an ob die Daten überschrieben werden sollen.</param>
+            <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.StoreData(System.String,System.Array,System.Boolean,SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Speichert Daten in den Puffer.
+            </summary>
+            <param name="key">Der Schlüssel unter dem die Daten gespeichert werden sollen.</param>
+            <param name="data">Die Daten die Gespeichert werden sollen.</param>
+            <param name="overwrite">Gibt an ob die Daten überschrieben werden sollen.</param>
+            <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.StoreData(System.String,SystemTools.ISerialConfigData,System.Boolean,SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Speichert Daten in den Puffer.
+            </summary>
+            <param name="key">Der Schlüssel unter dem die Daten gespeichert werden sollen.</param>
+            <param name="data">Die Daten die Gespeichert werden sollen.</param>
+            <param name="overwrite">Gibt an ob die Daten überschrieben werden sollen.</param>
+            <param name="buffer">Der Puffer in den die Daten geschrieben werden sollen.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.RemoveData(System.String,SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Entfernt Daten aus dem Puffer.
+            </summary>
+            <param name="key">Der Schlüssel der Daten die Entfernt werden sollen.</param>
+            <param name="buffer">Der Datenpuffer.</param>
+            <returns>Gibt true zurück wenn erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.RemoveData(System.Int64,SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Entfernt Daten aus dem Puffer.
+            </summary>
+            <param name="id">Die ID der Daten die Entfernt werden sollen.</param>
+            <param name="buffer">Der Datenpuffer.</param>
+            <returns>Gibt true zurück wenn erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.WriteConfigFile(SystemTools.Handler.ConfigHandler.ConfigBuffer,System.String)">
+            <summary>
+            Schreibt Daten in die Konfigurations Datei.
+            </summary>
+            <param name="buffer">Der Puffer der in die Datei geschrieben werden soll.</param>
+            <param name="path">Der Pfad der Konfigurations Datei.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.WriteData(System.Xml.XPath.XPathNavigator,SystemTools.ConfigData,System.String,System.Boolean)">
+            <summary>
+            Schreibt einfache Daten in die Konfigurations Datei.
+            </summary>
+            <param name="nav">Ein positionierter Navigator.</param>
+            <param name="data">Die Daten die geschrieben werden sollen.</param>
+            <param name="xmlns">Der Xml Namespace.</param>
+            <param name="isFirst">Gibt an ob es die ersten Daten sind die Geschrieben werden.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.WriteArray(System.Xml.XPath.XPathNavigator,SystemTools.ConfigData,System.String,System.Boolean)">
+            <summary>
+            Schreibt ein Array als einfaches Datenelement in die Konfigurations Datei.
+            </summary>
+            <param name="nav">Ein positionierter Navigator.</param>
+            <param name="data">Die Daten die geschrieben werden sollen.</param>
+            <param name="xmlns">Der Xml Namespace.</param>
+            <param name="isFirst">Gibt an ob es die ersten Daten sind die Geschrieben werden.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.WriteObject(System.Xml.XPath.XPathNavigator,SystemTools.ConfigData,System.String,System.Boolean)">
+            <summary>
+            Schreibt complexe Daten in die Konfigurations Datei.
+            </summary>
+            <param name="nav">Ein positionierter Navigator.</param>
+            <param name="data">Die Daten die geschrieben werden sollen.</param>
+            <param name="xmlns">Der Xml Namespace.</param>
+            <param name="isFirst">Gibt an ob es die ersten Daten sind die Geschrieben werden.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.IsUniqueName(System.String,SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Testet ein Schlüssel auf verfügbarkeit.
+            </summary>
+            <param name="key">Der Schlüssel der getestet werden soll.</param>
+            <param name="buffer">Der Puffer mit verwendeten Schlüsseln.</param>
+            <returns>Gibt true zurück wenn der Schlüssel verfügbar ist.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.ConfigWriter.GetNextID(SystemTools.Handler.ConfigHandler.ConfigBuffer)">
+            <summary>
+            Gibt die nächste freie ID zurück.
+            </summary>
+            <param name="buffer">Der Puffer mit verwendeten IDs.</param>
+            <returns>Gibt die nächste ID zurück.</returns>
+        </member>
+        <member name="T:SystemTools.ManagingResources.StringResourceReader">
+            <summary>
+            Wird zum Lesen von StringResource Dateien verwendet.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.StringResourceReader.Doc">
+            <summary>
+            Repräsentiert die StringResource Xml Datei.
+            </summary>
+        </member>
+        <member name="F:SystemTools.ManagingResources.StringResourceReader.Logger">
+            <summary>
+            Wird fuer das Schreiben von LogDateien verwendet.
+            </summary>
+        </member>
+        <member name="T:SystemTools.ManagingResources.StringResourceReader.StringResourceData">
+            <summary>
+            Repräsentiert einen Eintrag in einer StringResourceDatei.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.StringResourceReader.LangInfo">
+            <summary>
+            Informationen zur aktuellen Systemsprache.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.StringResourceReader.Path">
+            <summary>
+            Der Pfad an dem die StringResourcen liegen.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.#ctor(System.String,System.Xml.XmlDocument,UnityEngine.SystemLanguage,System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Initialisiert den StringResourceReader und ließt die Resourcen für die aktuelle Systemsprache in den Speicher.
+            </summary>
+            <param name="path">Pfad an dem die StringResourcen liegen.</param>
+            <param name="info">Informationen über die Systemsprache.</param>
+            <param name="stringResources">Das Pufferobjekt.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.LoadString(System.String,System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Lädt eine StringResource anhand ihres Namens.
+            </summary>
+            <param name="name">Der Name der StringResource.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.LoadString(System.Int64,System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Lädt eine StringResource anhand ihrer ID.
+            </summary>
+            <param name="id">Die ID der StringResource.</param>
+            <param name="stringResources">Das Pufferobjekt.</param>
+            <returns>Die StringResource oder <see cref="F:System.String.Empty"> wenn die Resource nicht gefunden wurde</see>/></returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.Exists(System.Int64,System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Überprüft ob eine StringResource mit der angegebenen ID verfügbar ist.
+            </summary>
+            <param name="id">Die ID der zu suchenden Resource.</param>
+            <param name="stringResources">Das Pufferobjekt.</param>
+            <returns>Gibt true zurück falls die Suche erfolgreich war.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.Exists(System.String,System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Überprüft, ob eine StringResource mit dem angegebenen Namen verfügbar ist.
+            </summary>
+            <param name="name">Der Name der zu suchenden Resource.</param>
+            <param name="stringResources">Das Pufferobjekt.</param>
+            <returns>Gibt true zurücl falls die Suche erfolgreich war.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.ReadStringResources(System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Lädt die StringResourcen in den Speicher.
+            </summary>
+            <param name="stringResources">Das Pufferobjekt in das Geschrieben wird.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceReader.RemoveQualifier(System.String)">
+            <summary>
+            Entfernt das @ bei den StringIDs.
+            </summary>
+            <param name="name">Der name der StringIDs von dem der Qualifier entfernt werden soll.</param>
+            <returns>Die StringID ohne Qualifier.</returns>
+        </member>
+        <member name="T:SystemTools.ManagingResources.StringResourceWriter">
+            <summary>
+            Ermöglicht das Speichern von StringRessourcen.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.StringResourceWriter.Doc">
+            <summary>
+            Repräsentiert die StringRessource Xml Datei.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.StringResourceWriter.LangInfo">
+            <summary>
+            Informationen zur aktuellen Systemsprache.
+            </summary>
+        </member>
+        <member name="P:SystemTools.ManagingResources.StringResourceWriter.Path">
+            <summary>
+            Der Pfad an dem die StringRessourcen liegen.
+            </summary>
+        </member>
+        <member name="F:SystemTools.ManagingResources.StringResourceWriter.Logger">
+            <summary>
+            Wird fuer das Schreiben von LogDateien verwendet.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceWriter.#ctor(System.String,System.Xml.XmlDocument,UnityEngine.SystemLanguage)">
+            <summary>
+            Initialisiert den StringResourceWriter.
+            </summary>
+            <param name="path">Pfad an dem die StringRessourcen liegen.</param>
+            <param name="info">Informationen über die Systemsprache.</param>
+            <param name="doc">Die StringRessource Datei.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceWriter.StoreString(System.String,System.String,System.Boolean,System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Speichert eine StringRessource in den Puffer.
+            </summary>
+            <param name="name">Der Schlüssel der StringRessource.</param>
+            <param name="content">Der String.</param>
+            <param name="overwrite">Gibt an ob die Ressource überschrieben werden soll.</param>
+            <param name="stringResources">Der Datenpuffer.</param>
+            <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceWriter.WriteResourceFile(System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Schreibt den Puffer in die Datei.
+            </summary>
+            <param name="stringResources">Der Datenpuffer.</param>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceWriter.GetNextID(System.Collections.Generic.List{SystemTools.ManagingResources.StringResourceReader.StringResourceData})">
+            <summary>
+            Gibt die nächste freie ID zurück.
+            </summary>
+            <param name="buffer">Der Puffer mit verwendeten IDs.</param>
+            <returns>Gibt die nächste ID zurück.</returns>
+        </member>
+        <member name="M:SystemTools.ManagingResources.StringResourceWriter.CreateStringRessource(System.Xml.XPath.XPathNavigator,SystemTools.ManagingResources.StringResourceReader.StringResourceData,System.String)">
+            <summary>
+            Schreibt einen String in die Datei.
+            </summary>
+            <param name="nav">Ein Positioniertes Navigator objekt.</param>
+            <param name="data">Die StringRessource.</param>
+            <param name="xmlns">Der Xml Namespace.</param>
+        </member>
+        <member name="T:SystemTools.ISerialConfigData">
+            <summary>
+            Bietet die Möglichkeit für eine einfache Obektserialisierung für die Konfigurations Daten.
+            </summary>
+        </member>
+        <member name="M:SystemTools.ISerialConfigData.Serialize(SystemTools.SerialConfigData)">
+            <summary>
+            Wird implementiert um Daten zu serialisieren.
+            </summary>
+            <param name="storage">Kann dazu verwendet werden um Daten zu serialisieren.</param>
+        </member>
+        <member name="M:SystemTools.ISerialConfigData.Restore(SystemTools.SerialConfigData)">
+            <summary>
+            Wird implementiert um Daten wiederherzustellen.
+            </summary>
+            <param name="storage">Kann dazu verwendet werden um die Daten wiederherzustellen.</param>
+        </member>
+        <member name="T:SystemTools.SerialConfigData">
+            <summary>
+            Enthält Daten über ein serialisiertes Objekt.
+            </summary>
+        </member>
+        <member name="P:SystemTools.SerialConfigData.Data">
+            <summary>
+            Die "serialisierten" Daten.
+            </summary>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.#ctor">
+            <summary>
+            Erstellt eine neue leere Instanz.
+            </summary>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.AddData(System.Object)">
+            <summary>
+            Fügt ein Wert zu den Serialisierten Daten hinzu.
+            </summary>
+            <param name="data">Die Daten die serialisiert werden sollen.</param>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsString">
+            <summary>
+            Gibt einen serialisierten Wert als String zurück.
+            </summary>
+            <returns>Der Wert als string.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsShort">
+            <summary>
+            Gibt einen serialisierten Wert als Short zurück.
+            </summary>
+            <returns>Der Wert als short.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsLong">
+            <summary>
+            Gibt einen serialisierten Wert als Long zurück.
+            </summary>
+            <returns>Der Wert als long.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsInt">
+            <summary>
+            Gibt einen serialisierten Wert als Int zurück.
+            </summary>
+            <returns>Der Wert als int.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsFloat">
+            <summary>
+            Gibt einen serialisierten Wert als Float zurück.
+            </summary>
+            <returns>Der Wert als Float.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsDouble">
+            <summary>
+            Gibt einen serialisierten Wert als Double zurück.
+            </summary>
+            <returns>Der Wert als Double.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.GetValueAsBool">
+            <summary>
+            Gibt einen serialisierten Wert als Bool zurück.
+            </summary>
+            <returns>Der Wert als bool.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.AddData(SystemTools.SerialConfigData,System.Object,System.String)">
+            <summary>
+            Gibt einen serialisierten Wert als Long zurück.
+            </summary>
+            <returns>Der Wert als long.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.RetrieveSerialData(SystemTools.SerialConfigData)">
+            <summary>
+            Gibt die serialisierten Daten zurück.
+            </summary>
+            <param name="data">Das Objekt dessen serialisierte Daten abgefragt werden sollen.</param>
+            <returns>Die "serialisierten" Daten.</returns>
+        </member>
+        <member name="M:SystemTools.SerialConfigData.Initialize">
+            <summary>
+            Erstellt eine neue Instanz.
+            </summary>
+            <returns>Die neue Instanz.</returns>
+        </member>
+    </members>
+</doc>

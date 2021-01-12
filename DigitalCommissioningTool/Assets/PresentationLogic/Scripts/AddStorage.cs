@@ -13,7 +13,7 @@ public class AddStorage : MonoBehaviour
 
         //Button soll nur interagierbar sein wenn im editormodus ist:
         ModeHandler modeHandler = GameObject.Find("SwitchModeButton").GetComponent<ModeHandler>();              //Durch Modehandler herausfinden ob im Editormodus oder nicht
-        if (modeHandler.Mode.Equals("EditorMode"))
+        if (ModeHandler.Mode.Equals("EditorMode"))
         {
             addStorageButton.interactable = true;                                                               //wenn ja => Button = interagierbar ansonstem nicht
         }

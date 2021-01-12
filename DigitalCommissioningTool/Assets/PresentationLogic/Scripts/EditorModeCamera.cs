@@ -35,7 +35,7 @@ public class EditorModeCamera : MonoBehaviour
         {
             Frame = 0;
 
-            if ( StorageKeyPressed )
+            if ( StorageKeyPressed && ModeHandler.Mode.Equals( "EditorMode" ) )
             {
                 if ( KeyManager.InsertStorageReck.ShiftNeeded )
                 {
@@ -54,7 +54,7 @@ public class EditorModeCamera : MonoBehaviour
                 ShiftPressed = false;
             }            
             
-            if ( WallKeyPressed )
+            if ( WallKeyPressed && ModeHandler.Mode.Equals( "EditorMode" ) )
             {
                 if ( KeyManager.InsertStorageReck.ShiftNeeded )
                 {

@@ -48,7 +48,10 @@ public class PickAndPlaceNew : MonoBehaviour
         isDragging = false;
     }
 
-    //Auswahl Regal :
+    /// <summary>
+    /// Wird aufgerufen wenn Regal ausgewählt.
+    /// </summary>
+    /// <param name="storage">Das ausgewählte Regal</param>
     private void OnStorageSelected(Transform storage)
     {
         if (ModeHandler.Mode.Equals("EditorMode"))

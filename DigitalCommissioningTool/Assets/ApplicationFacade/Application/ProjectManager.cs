@@ -334,7 +334,7 @@ namespace ApplicationFacade.Application
                     break;
             }
 
-            SaveProject( name, warehouse, GetDefaultContainer( ) );
+            SaveProject( name, warehouse, container );
 
             ItemData.ItemStock.Clear( );
 
