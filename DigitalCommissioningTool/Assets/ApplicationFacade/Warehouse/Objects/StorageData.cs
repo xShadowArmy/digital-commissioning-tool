@@ -110,6 +110,8 @@ namespace ApplicationFacade.Warehouse
                         return Slots[i];
                     }
                 }
+
+                return null;
             }
 
             return Slots[slot];
