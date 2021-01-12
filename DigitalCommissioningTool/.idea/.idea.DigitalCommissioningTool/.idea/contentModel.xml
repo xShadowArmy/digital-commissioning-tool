@@ -72,7 +72,6 @@
           <e p="PresentationLogic.asmdef" t="Include" />
           <e p="Scripts" t="Include">
             <e p="AddStorage.cs" t="Include" />
-            <e p="DebugExtension.cs" t="Include" />
             <e p="DialogMenu.cs" t="Include" />
             <e p="DragItem.cs" t="Include" />
             <e p="DragWindow.cs" t="Include" />
@@ -91,7 +90,6 @@
             <e p="ResourceHandler.cs" t="Include" />
             <e p="SaveProject.cs" t="Include" />
             <e p="SelectionManager.cs" t="Include" />
-            <e p="SwitchWallModules.cs" t="Include" />
             <e p="TestPascal.cs" t="Include" />
             <e p="TestScript.cs" t="Include" />
             <e p="TimeMeasurementHistory.cs" t="Include" />

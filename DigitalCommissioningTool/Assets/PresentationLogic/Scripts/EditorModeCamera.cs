@@ -23,7 +23,10 @@ public class EditorModeCamera : MonoBehaviour
         spawn = GameManager.GameWarehouse.ObjectSpawn.transform;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Erstellt Objekte über Tastatur Shoortcuts in der Scene, lässt die Bewegung der Kamera per Maus zu wenn die rechte Maustaste gedrückt gehalten wird
+    /// und bewegt die Kamera nach oben und unten wenn entsprechende Taste gedrückt wird.
+    /// </summary>
     void Update()
     {
         Frame += 1;

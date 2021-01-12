@@ -16,6 +16,9 @@ public class ModeHandler : MonoBehaviour
     private bool ShiftPressed = false;
     private int Frame = 0;
 
+    /// <summary>
+    /// Stellt den aktuellen Modus ("EditorMode" oder "MosimMode") dar. 
+    /// </summary>
     public string Mode { get; private set; }
 
     
@@ -47,7 +50,7 @@ public class ModeHandler : MonoBehaviour
         EditorModeCamera.GetComponent<Camera>().enabled = false;
     }
 
-    // Update is called once per frame
+    // Wechselt den M
     void Update()
     {
         Frame += 1;

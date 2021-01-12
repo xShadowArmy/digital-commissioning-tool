@@ -38,8 +38,10 @@ public class WallEditor : MonoBehaviour
     private GameObject AddInnerWallButton;
     private List<Collider> objectsInRange = new List<Collider>();
 
-    // Start is called before the first frame update
-
+    
+    /// <summary>
+    /// Setzt Texte für UI Buttons, weist Eventfunktionen zu und initialisiert Objekte
+    /// </summary>
     void Start()
     {
         addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
@@ -202,11 +204,19 @@ public class WallEditor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wird ausgefüht wenn eine noch nicht angedockte Innenwand ausgewöhlt wird und setzt Selected auf true, damit diese verschoben werden kann.
+    /// </summary>
+    /// <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
     private void OnInnerWallSelected(Transform selectedObject)
     {
         innerWallSelected = true;
     }
 
+    /// <summary>
+    /// Wird ausgeführt wenn das Randelement einer Innenwand ausgewählt wird und öffnet das UI Panel zum Anpassen der Länge
+    /// </summary>
+    /// <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
     private void OnAttachedInnerWallSelected(Transform selectedObject)
     {
         popUp.SetActive(false);
@@ -214,6 +224,10 @@ public class WallEditor : MonoBehaviour
         innerWallSelected = false;
     }
 
+    /// <summary>
+    /// Wird ausgeführt wenn rechtes Randelement einer Außenwand ausgewählt wird und öffnet das UI Panel zum Anpassen der Länge
+    /// </summary>
+    /// <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
     private void OnRightWallRimSelected(Transform selectedObject)
     {
         popUp.SetActive(false);
@@ -221,6 +235,10 @@ public class WallEditor : MonoBehaviour
         innerWallSelected = false;
     }
 
+    /// <summary>
+    /// Wird ausgeführt wenn linkes Randelement einer Außenwand ausgewählt wird und öffnet das UI Panel zum Anpassen der Länge
+    /// </summary>
+    /// <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
     private void OnLeftWallRimSelected(Transform selectedObject)
     {
         popUp.SetActive(false);
@@ -228,6 +246,10 @@ public class WallEditor : MonoBehaviour
         innerWallSelected = false;
     }
 
+    /// <summary>
+    /// Wird ausgeführt wenn ein Wandelement (nicht Randelemente) ausgewählt wird und öffnet das WallEditor UI Panel zum Anpassen des Wandelements
+    /// </summary>
+    /// <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
     private void OnWallSelected(Transform selectedObject)
     {
         popUp.SetActive(true);
@@ -236,7 +258,7 @@ public class WallEditor : MonoBehaviour
     }
 
     /// <summary>
-    /// Fügt Innenwand hinzu und passt den Tag entsprechend an.
+    /// Fügt Innenwand hinzu wenn der Button gedrückt wurde und passt den Tag entsprechend an.
     /// </summary>
     public void OnAddInnerWallButtonClicked()
     {

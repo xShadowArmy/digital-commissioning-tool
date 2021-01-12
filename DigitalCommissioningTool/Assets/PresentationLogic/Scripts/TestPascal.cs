@@ -98,7 +98,7 @@ public class TestPascal : AvatarBehavior
         {
             Transform walkTarget = dragItem.LinkedItem.Object.transform.Find("BoxWalkTarget");
             this.WalkTrajectory.Points.Add(walkTarget);
-            this.WalkTrajectory.Points.Add(GameManager.GameContainer.StorageRacks[0].Object.transform);
+            this.WalkTrajectory.Points.Add(GameManager.GameContainer.StorageContainer[0].Object.transform);
         }
         //foreach (Transform child in WalkTrajectoryPoints)
         //{

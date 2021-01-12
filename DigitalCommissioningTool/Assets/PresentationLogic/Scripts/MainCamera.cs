@@ -16,7 +16,7 @@ public class MainCamera : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
+    // Steuert das Schwenken der Kamera per Mausbewegung wenn rechte Maustaste gedrückt wird 
     void Update()
     {      
 

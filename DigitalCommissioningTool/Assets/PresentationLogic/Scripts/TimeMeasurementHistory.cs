@@ -16,6 +16,9 @@ public class TimeMeasurementHistory : MonoBehaviour
     private ProjectManager projectManager;
     private int currentIndex = 0;
 
+    /// <summary>
+    /// Emtdfernt alle Eventfunktionen, wenn Objekt zerstört wird
+    /// </summary>
     void OnDestroy()
     {
         Timer.TimerReset -= OnTimerReset;
@@ -26,7 +29,9 @@ public class TimeMeasurementHistory : MonoBehaviour
         GameManager.PManager.ProjectCreated -= ProjectManagerOnProjectCreated;
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Setzt alle Eventfunktionen, wenn das Skript geladen wird
+    /// </summary>
     void OnValidate()
     {
         //ResourceHandler.ReplaceResources();
@@ -38,6 +43,9 @@ public class TimeMeasurementHistory : MonoBehaviour
         GameManager.PManager.ProjectCreated += ProjectManagerOnProjectCreated;
     }
 
+    /// <summary>
+    /// Schreibt die Änderungen in die XML Datei wenn Projekt gespeichert wird
+    /// </summary>
     private void ProjectManagerOnStartSave()
     {
         if (configManager != null)
@@ -46,12 +54,18 @@ public class TimeMeasurementHistory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Erstellt ConfigManager Instanz wenn Projekt erstellt wird
+    /// </summary>
     private void ProjectManagerOnProjectCreated()
     {
         configManager = new ConfigManager();
         configManager.OpenConfigFile(Paths.TempPath, "TimeMeasurements.xml", true);
     }
 
+    /// <summary>
+    /// Schließt die Config Datei wenn Projekt geschlossen wird.
+    /// </summary>
     private void ProjectManagerOnStartClose()
     {
         if (configManager != null)
@@ -61,6 +75,9 @@ public class TimeMeasurementHistory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Lädt eventuell vorhandene Zeitmessungseinträge und schreibt sie in die UI Tabelle
+    /// </summary>
     private void ProjectManagerOnFinishLoad()
     {
         configManager = new ConfigManager();
@@ -77,7 +94,6 @@ public class TimeMeasurementHistory : MonoBehaviour
 
             configManager.LoadData(key, temp);
             timeMeasurementEntries.Add(temp);
-            Debug.Log("OnFinishLoad, Index: " + temp.Index);
             AddItemToList(temp);
             currentIndex++;
         }
@@ -86,6 +102,11 @@ public class TimeMeasurementHistory : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Wird aufgerufen wenn der Timer Reset ausgeführt wird und passt den Eintrag in der Tabelle entsprechend an 
+    /// </summary>
+    /// <param name="currentTime">Aktuelle Zeit des Timers</param>
+    /// <param name="buttonText">Text der auf dem Play/Pause/Resume Button aktuell angezeigt wird</param>
     private void OnTimerReset(float currentTime, string buttonText)
     {
         if (currentTime > 0)
@@ -94,11 +115,16 @@ public class TimeMeasurementHistory : MonoBehaviour
             {
                 OnTimerStopped(currentTime, buttonText);
             }
-            
+
             currentIndex++;
         }
     }
 
+    /// <summary>
+    /// Wird aufgerufen wenn Timer gestoppt wird und trägt aktuelle Zeit in die Tabelle ein
+    /// </summary>
+    /// <param name="currentTime">Aktuelle Zeit des Timers</param>
+    /// <param name="buttonText">Text der auf dem Play/Pause/Resume Button aktuell angezeigt wird</param>
     private void OnTimerStopped(float currentTime, string buttonText)
     {
         TimeMeasurementEntry timeMeasurementEntry = new TimeMeasurementEntry(currentIndex, DateTime.Now.ToString(), currentTime);
@@ -117,6 +143,10 @@ public class TimeMeasurementHistory : MonoBehaviour
         configManager.StoreData("TimeMeasurement" + currentIndex, timeMeasurementEntry, true);
     }
 
+    /// <summary>
+    /// Trägt Zeitmessung in die UI Tabelle ein
+    /// </summary>
+    /// <param name="item">Zeitmessung die eingetragen werden soll</param>
     private void AddItemToList(TimeMeasurementEntry item)
     {
         TimeMeasurementRowTemplate.transform.Find("Index/IndexText").GetComponent<TextMeshProUGUI>().text = item.Index.ToString();
@@ -126,6 +156,10 @@ public class TimeMeasurementHistory : MonoBehaviour
         field.SetActive(true);
     }
 
+    /// <summary>
+    /// Ändert den angegebenen Zeitmessungseintrag in der UI Tabelle ab
+    /// </summary>
+    /// <param name="item">Zeitmessung die angepasst werden soll</param>
     private void ChangeItemInList(TimeMeasurementEntry item)
     {
         Transform field = TimeMeasurementRowTemplate.transform.parent.GetChild(item.Index + 1);
