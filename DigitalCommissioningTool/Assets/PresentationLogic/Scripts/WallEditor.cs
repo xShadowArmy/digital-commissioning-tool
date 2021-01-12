@@ -59,7 +59,7 @@ public class WallEditor : MonoBehaviour
         SelectionManager.AttachedInnerWallSelected += OnAttachedInnerWallSelected;
         Physics.autoSyncTransforms = true;
 
-        AddInnerWallButton = GameObject.Find("AddInnerWallButton");
+        AddInnerWallButton = GameObject.Find("ButtonAddInnerWall");
         SwitchModeButton = GameObject.Find("SwitchModeButton");
         ModeHandler = SwitchModeButton.GetComponent<ModeHandler>();
         PanelDropDownMenue.SetActive(false);
