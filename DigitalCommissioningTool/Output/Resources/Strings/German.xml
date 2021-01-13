@@ -138,7 +138,4 @@
     <xs:string xs:name="Save" xs:id="46">
         <xs:value>Speichern</xs:value>
     </xs:string>
-    <xs:string xs:name="WallLengthText" xs:id="47">
-        <xs:value>Länge der Wand:</xs:value>
-    </xs:string>
 </xs:StringResources>

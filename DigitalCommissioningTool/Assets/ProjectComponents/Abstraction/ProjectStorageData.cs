@@ -9,7 +9,7 @@ namespace ProjectComponents.Abstraction
     /// <summary>
     /// Stellt ein Regal in den Projekt Dateien dar.
     /// </summary>
-    public struct ProjectStorageData
+    public class ProjectStorageData
     {
         /// <summary>
         /// Die ID des Regals.
