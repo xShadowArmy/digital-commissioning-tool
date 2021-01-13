@@ -6852,8 +6852,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2095818128}
   m_HandleRect: {fileID: 2095818127}
   m_Direction: 2
-  m_Value: 0.9999992
-  m_Size: 0.88888884
+  m_Value: 1.0000015
+  m_Size: 0.88888896
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7823,7 +7823,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16.799988, y: -12.200012}
+  m_AnchoredPosition: {x: -16.800049, y: -12.200012}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1023988220
@@ -10542,9 +10542,13 @@ MonoBehaviour:
   ObjectSpawn: {fileID: 1061017907}
   PanelDropDownMenue: {fileID: 8914920175608177901}
   popUp: {fileID: 1606584327763488281}
-  mask:
+  layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
+  defaultStorageRack: {fileID: 1929505028}
 --- !u!4 &1393590794
 Transform:
   m_ObjectHideFlags: 0
@@ -11171,7 +11175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeMeasurementRowTemplate: {fileID: 1787709957}
-  PanelTimeMeasurementHistory: {fileID: 1858758244}
 --- !u!1 &1542329528
 GameObject:
   m_ObjectHideFlags: 0
@@ -12809,6 +12812,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 038359bd8dc4ba74dbdffb303e15ac26, type: 3}
+--- !u!1 &1929505028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2903369500346441671, guid: 038359bd8dc4ba74dbdffb303e15ac26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1929505027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1932688899
 GameObject:
   m_ObjectHideFlags: 0

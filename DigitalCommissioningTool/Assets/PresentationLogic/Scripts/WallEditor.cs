@@ -29,13 +29,15 @@ public class WallEditor : MonoBehaviour
     [SerializeField] private GameObject PanelDropDownMenue;
 
     public GameObject popUp;
-    public LayerMask mask;
-
+    public GameObject defaultStorageRack;
     private Vector3 oldMousePos = new Vector3(0, 0, 0);
     private Transform SelectedObjectTransform;
     private WallData wall;
     private bool moveObject = false;
     private bool innerWallSelected = false;
+    private PickAndPlaceNew pickAndPlaceNew;
+    private LayerMask layer;
+    
     private ModeHandler ModeHandler;
     private GameObject SwitchModeButton;
     private GameObject AddInnerWallButton;
@@ -61,6 +63,8 @@ public class WallEditor : MonoBehaviour
         SelectionManager.InnerWallSelected += OnInnerWallSelected;
         SelectionManager.AttachedInnerWallSelected += OnAttachedInnerWallSelected;
         Physics.autoSyncTransforms = true;
+
+        layer = defaultStorageRack.GetComponent<PickAndPlaceNew>().mask;
 
         AddInnerWallButton = GameObject.Find("ButtonAddInnerWall");
         SwitchModeButton = GameObject.Find("SwitchModeButton");
@@ -88,7 +92,7 @@ public class WallEditor : MonoBehaviour
             }
 
             //Drag
-            if ( moveObject && Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+            if ( moveObject && Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
             {
                 Vector3 mousePos = new Vector3(hit.point.x, SelectedObjectTransform.localScale.y / 2, hit.point.z);
 
