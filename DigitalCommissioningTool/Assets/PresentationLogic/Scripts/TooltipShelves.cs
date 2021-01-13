@@ -118,7 +118,7 @@ public class TooltipShelves : MonoBehaviour
         }
         else
         {
-            Destroy(selectedObject);
+            //Destroy(selectedObject);
             item.ParentStorage.RemoveItem(item);
             deactivate();
 

@@ -12,10 +12,11 @@ public class TreeView : MonoBehaviour
     public Material defaultMaterial;
     public Material selectedMaterial;
     public GameObject avatar;
+    public GameObject currentMovableStorage;
     TreeViewItem TVStorageRacks;
     TreeViewItem TVMovableStorageRacks;
     TreeViewControl treeView;
-    GameObject currentMovableStorage;
+    
     void OnDestroy()
     {
         GameManager.GameContainer.ContainerCreated -= GameContainer_ContainerCreated;
@@ -41,6 +42,11 @@ public class TreeView : MonoBehaviour
         TVMovableStorageRacks = treeView.RootItem.AddItem("Movable Storage Racks");
         AddEvents(TVMovableStorageRacks);
         PopulateData(TVMovableStorageRacks, MovableStorageRacks.transform);
+        if (MovableStorageRacks.transform.GetChild(0) != null)
+        {
+            currentMovableStorage = MovableStorageRacks.transform.GetChild(0).gameObject;
+            ShowContainer(currentMovableStorage);
+        }
         updateSize();
     }
 
@@ -76,6 +82,10 @@ public class TreeView : MonoBehaviour
         TreeViewItem item = TVMovableStorageRacks.AddItem(container.name);
         item.Data = container;
         AddEvents(item);
+        if (currentMovableStorage == null)
+        {
+            currentMovableStorage = container;
+        }
         updateSize();
     }
 
@@ -106,9 +116,23 @@ public class TreeView : MonoBehaviour
             AddEvents(item);
         }
     }
+    void ShowContainer(GameObject container) 
+    {
+        foreach (TreeViewItem item in TVMovableStorageRacks.Items)
+        {
+            if (item.Data == container)
+            {
+                item.Data.SetActive(true);
+            }
+            else
+            {
+                 item.Data .SetActive(false);
+            }
+        }
+    }
     float calcHeight(TreeViewItem root)
     {
-        float height = 23;
+        float height = 13;
         foreach (TreeViewItem item in root.Items)
         {
             if (item.IsExpanded)
@@ -117,14 +141,14 @@ public class TreeView : MonoBehaviour
             }
             else
             {
-                height += 23;
+                height += 20;
             }
         }
         return height;
     }
     private void updateSize()
     {
-        float newHeight = System.Math.Min(45 + calcHeight(treeView.RootItem), 450);
+        float newHeight = System.Math.Min(25+calcHeight(treeView.RootItem), 250);
         gameObject.transform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
     }
     public void Handler(object sender, System.EventArgs args)
@@ -168,18 +192,18 @@ public class TreeView : MonoBehaviour
         }
         else if (TVItem.Header.Equals("Movable Storage Racks"))
         {
-            GameManager.GameContainer.CreateContainer();
+            StorageData container = GameManager.GameContainer.CreateContainer();
+            ShowContainer(container.Object);
         }
         else if (senderGameobject != null && senderGameobject.transform.parent.gameObject == MovableStorageRacks)
         {
             GameObject newMovableStorage = (sender as TreeViewItem).Data;
             if (currentMovableStorage != null && currentMovableStorage != newMovableStorage)
             {
-                currentMovableStorage.SetActive(false);
+                ShowContainer(newMovableStorage);
             }
             currentMovableStorage = newMovableStorage;
-            newMovableStorage.SetActive(!newMovableStorage.activeSelf);
-            avatar.GetComponent<TestPascal>().StorageRack = currentMovableStorage.transform.Find("StorageRackFilling").gameObject;
+            avatar.GetComponent<TestPascal>().StorageRack = newMovableStorage;            
         }
     }
     void AddHandlerEvent(out System.EventHandler handler)

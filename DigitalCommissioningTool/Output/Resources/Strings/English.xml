@@ -141,4 +141,13 @@
     <xs:string xs:name="WallLengthText" xs:id="47">
         <xs:value>Wall Length:</xs:value>
     </xs:string>
+    <xs:string xs:name="Idle" xs:id="48">
+        <xs:value>Idle</xs:value>
+    </xs:string>
+    <xs:string xs:name="WalkTo" xs:id="49">
+        <xs:value>Walk To</xs:value>
+    </xs:string>
+    <xs:string xs:name="Execute" xs:id="50">
+        <xs:value>Execute</xs:value>
+    </xs:string>
 </xs:StringResources>
