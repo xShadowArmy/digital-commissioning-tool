@@ -74,7 +74,10 @@ public class Timer : MonoBehaviour
 
 
     }
-    //Wird von Play Button referenziert
+    /// <summary>
+    /// Wird von Play Button referenziert und steuert ´die Bennenung des Buttons
+    /// löst TimerStopped Event aus
+    /// </summary>
     public void onClick()
     {
         clicked = !clicked;
@@ -84,8 +87,10 @@ public class Timer : MonoBehaviour
             TimerStopped?.Invoke(currentTime, timerBtn.text);
         }
     }
-
-    //Wird von Rest Button referenziert
+    /// <summary>
+    /// Wird von Reset Button referenziert und setzt den Timer wieder auf Null
+    /// löst das TimerReset event aus
+    /// </summary>
     public void Reset()
     {
         TimerReset?.Invoke(currentTime, timerBtn.text);
@@ -94,18 +99,20 @@ public class Timer : MonoBehaviour
         timerBtn.text = "Start";
         clicked = false;
     }
-
-    //Macht Buttons sichtbar
+    /// <summary>
+    /// Macht Buttons sichtbar
+    /// </summary>
     public void setVisible()
     {
         textBox.text = currentTime.ToString("F2");
         resetBtn.gameObject.SetActive(true);
         timerBtn.transform.parent.gameObject.SetActive(true);
         isHovered = !isHovered;                                     //bool Value für den Taste P
-        //panelTimeMeasure.SetActive(true);
+        
     }
-
-    //Deaktiviert und macht Button unsichtbar
+    /// <summary>
+    /// Deaktiviert und macht Button unsichtbar
+    /// </summary>
     public void setInisible()
     {
         if (textBox.text.Equals("0.00"))
@@ -116,10 +123,7 @@ public class Timer : MonoBehaviour
         resetBtn.gameObject.SetActive(false);
         timerBtn.transform.parent.gameObject.SetActive(false);
         isHovered = !isHovered;                                     //bool Value für den Taste P
-        if (currentTime == 0)
-        {
-            //panelTimeMeasure.SetActive(false);
-        }
+       
 
     }
 }

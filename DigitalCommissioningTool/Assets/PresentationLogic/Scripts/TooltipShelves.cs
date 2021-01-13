@@ -106,6 +106,9 @@ public class TooltipShelves : MonoBehaviour
         contentMessage += "Gewicht: " + item.Weight + " kg";
 
     }
+    /// <summary>
+    /// Aktualisiert den Inhalt des Tooltips
+    /// </summary>
     private void updateTooltip()
     {
         getMessages();
@@ -113,6 +116,9 @@ public class TooltipShelves : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Vermindert die Anzahl an Items in den Kisten um 1 oder löscht sie ggf.
+    /// </summary>
     public void removeItems()
     {
         Debug.Log("clickedremoved");
@@ -123,7 +129,6 @@ public class TooltipShelves : MonoBehaviour
         }
         else
         {
-            //Destroy(selectedObject);
             item.ParentStorage.RemoveItem(item);
             deactivate();
 
@@ -131,7 +136,9 @@ public class TooltipShelves : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// Erhöht die Anzahl an Items in den Kisten um 1
+    /// </summary>
     public void addItems()
     {
         Debug.Log("clickedadd");
