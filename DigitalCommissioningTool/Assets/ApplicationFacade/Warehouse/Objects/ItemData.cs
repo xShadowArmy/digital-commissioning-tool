@@ -150,7 +150,7 @@ namespace ApplicationFacade.Warehouse
         /// </summary>
         ~ItemData()
         {
-            Destroy( );
+            base.Destroy( );
         }
 
         /// <summary>
@@ -472,15 +472,17 @@ namespace ApplicationFacade.Warehouse
 
             if ( ParentItem.ParentItem == null )
             {
-                ParentItem.ParentItem.Count -= Count;
+                ParentItem.Count -= Count;
+
+                ItemChanged?.Invoke( ParentItem );
             }
 
             else
             {
                 ParentItem.ParentItem.Count += Count;
-            }
 
-            ItemChanged?.Invoke(ParentItem.ParentItem);
+                ItemChanged?.Invoke( ParentItem );
+            }
 
             Destroy( );
 

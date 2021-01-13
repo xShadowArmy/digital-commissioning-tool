@@ -454,7 +454,7 @@ namespace ApplicationFacade.Warehouse
             {
                 if ( item != null )
                 {
-                    item.Destroy( );
+                    item.ReturnItem( );
                 }
             }
         }
