@@ -256,25 +256,71 @@ public class WallEditor : MonoBehaviour
     private void OnWallSelected(Transform selectedObject)
     {
         int wallLength = 0;
-        WallObjectData[] wallObjects;
-        switch (GameManager.GameWarehouse.GetWall(selectedObject.gameObject).Face)
+        WallObjectData[] wallObjects = null;
+        if (selectedObject.CompareTag("SelectableWall"))
         {
-            case WallFace.North:
-                wallObjects = GameManager.GameWarehouse.NorthWallObjects;
-                break;
-            case WallFace.East:
-                wallObjects = GameManager.GameWarehouse.EastWallObjects;
-                break;
-            case WallFace.South:
-                wallObjects = GameManager.GameWarehouse.SouthWallObjects;
-                break;
-            case WallFace.West:
-                wallObjects = GameManager.GameWarehouse.WestWallObjects;
-                break;
-            default:
-                wallObjects = GameManager.GameWarehouse.NorthWallObjects;
-                break;
+            switch (GameManager.GameWarehouse.GetWall(selectedObject.gameObject).Face)
+            {
+                case WallFace.North:
+                    wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                    break;
+                case WallFace.East:
+                    wallObjects = GameManager.GameWarehouse.EastWallObjects;
+                    break;
+                case WallFace.South:
+                    wallObjects = GameManager.GameWarehouse.SouthWallObjects;
+                    break;
+                case WallFace.West:
+                    wallObjects = GameManager.GameWarehouse.WestWallObjects;
+                    break;
+                default:
+                    wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                    break;
+            }
         }
+        else if (selectedObject.CompareTag("SelectableDoor"))
+        {
+            switch (GameManager.GameWarehouse.GetDoor(selectedObject.gameObject).Face)
+            {
+                case WallFace.North:
+                    wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                    break;
+                case WallFace.East:
+                    wallObjects = GameManager.GameWarehouse.EastWallObjects;
+                    break;
+                case WallFace.South:
+                    wallObjects = GameManager.GameWarehouse.SouthWallObjects;
+                    break;
+                case WallFace.West:
+                    wallObjects = GameManager.GameWarehouse.WestWallObjects;
+                    break;
+                default:
+                    wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                    break;
+            }
+        }
+        else if (selectedObject.CompareTag("SelectableWindow"))
+        {
+            switch (GameManager.GameWarehouse.GetWindow(selectedObject.gameObject).Face)
+            {
+                case WallFace.North:
+                    wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                    break;
+                case WallFace.East:
+                    wallObjects = GameManager.GameWarehouse.EastWallObjects;
+                    break;
+                case WallFace.South:
+                    wallObjects = GameManager.GameWarehouse.SouthWallObjects;
+                    break;
+                case WallFace.West:
+                    wallObjects = GameManager.GameWarehouse.WestWallObjects;
+                    break;
+                default:
+                    wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                    break;
+            }
+        }
+        
         foreach (WallObjectData child in wallObjects)
         {
             wallLength += (int) child.GetLength();
