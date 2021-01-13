@@ -81,7 +81,7 @@ public class TooltipShelves : MonoBehaviour
     /// </summary>
     public void activate()
     {
-        tooltip.SetTooltip(headerMessage, contentMessage);
+        tooltip.SetTooltip(contentMessage, headerMessage, false);
     }
 
 
@@ -104,15 +104,26 @@ public class TooltipShelves : MonoBehaviour
     private void updateTooltip()
     {
         getMessages();
-        tooltip.SetTooltip(headerMessage, contentMessage);
+        tooltip.SetTooltip(contentMessage, headerMessage, true);
 
     }
 
     public void removeItems()
     {
         Debug.Log("clickedremoved");
-        item.DecreaseItemCount(1);
-        updateTooltip();
+        if (item.Count > 1)
+        {
+            item.DecreaseItemCount(1);
+            updateTooltip();
+        }
+        else
+        {
+            Destroy(selectedObject);
+            item.ParentStorage.RemoveItem(item);
+            deactivate();
+
+        }
+
 
     }
 
