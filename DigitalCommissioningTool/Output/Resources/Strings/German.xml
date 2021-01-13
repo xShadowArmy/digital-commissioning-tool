@@ -94,7 +94,7 @@
         <xs:value>Bearbeiten</xs:value>
     </xs:string>
     <xs:string xs:name="RemoveItem" xs:id="32">
-        <xs:value>Objekt entfernen</xs:value>
+        <xs:value>Entfernen</xs:value>
     </xs:string>
     <xs:string xs:name="Queue" xs:id="33">
         <xs:value>Queue</xs:value>
@@ -140,5 +140,14 @@
     </xs:string>
     <xs:string xs:name="WallLengthText" xs:id="47">
         <xs:value>Länge der Wand:</xs:value>
+    </xs:string>
+    <xs:string xs:name="Idle" xs:id="48">
+        <xs:value>Ruhezustand</xs:value>
+    </xs:string>
+    <xs:string xs:name="WalkTo" xs:id="49">
+        <xs:value>Laufen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Execute" xs:id="50">
+        <xs:value>Ausführen</xs:value>
     </xs:string>
 </xs:StringResources>
