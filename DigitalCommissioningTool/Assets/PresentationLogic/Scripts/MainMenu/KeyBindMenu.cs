@@ -14,7 +14,9 @@ public class KeyBindMenu : MonoBehaviour
     public GameObject Key;
     private List<PropertyInfo> Keys = new List<PropertyInfo>();
     private int activeKey = -1;
-    // Start is called before the first frame update
+    /// <summary>
+    /// Lädt alle gespeicherten Tasten und fügt sie in die Bearbeitungsliste ein.
+    /// </summary>
     void Start()
     {
         KeyManager.LoadKeyConfiguration();
@@ -38,6 +40,10 @@ public class KeyBindMenu : MonoBehaviour
         contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
         ResourceHandler.ReplaceResources();
     }
+    /// <summary>
+    /// Click Event welches die Bearbeitung einer Taste aktiviert.
+    /// </summary>
+    /// <param name="sender">Identifiziert betroffene Taste.</param>
     public void OnClick(GameObject sender)
     {
         int keyIndex = sender.transform.GetSiblingIndex() - 1;
@@ -60,6 +66,9 @@ public class KeyBindMenu : MonoBehaviour
             activeKey = keyIndex;
         }
     }
+    /// <summary>
+    /// Fängt Tasteneingaben ab und Speichert sie, wenn die Bearbeitung aktiviert ist.
+    /// </summary>
     void OnGUI()
     {
         Event e = Event.current;
@@ -73,6 +82,9 @@ public class KeyBindMenu : MonoBehaviour
             activeKey = -1;
         }
     }
+    /// <summary>
+    /// Event für Zurücktaste. Öffnet das Einstellungsfenster.
+    /// </summary>
     public void Back()
     {
         gameObject.transform.parent.Find("SettingsPanel").gameObject.SetActive(true);

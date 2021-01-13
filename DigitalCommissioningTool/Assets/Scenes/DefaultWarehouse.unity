@@ -10781,7 +10781,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1381316901
 GameObject:
@@ -13449,7 +13449,7 @@ MonoBehaviour:
   MovableStorageRacks: {fileID: 1132897849}
   defaultMaterial: {fileID: 2100000, guid: 911c06f14ceaf3845af0dcac3192b0a4, type: 2}
   selectedMaterial: {fileID: 2100000, guid: ea04aa4db010f5e41a16a087b9b55fd9, type: 2}
-  avatar: {fileID: 0}
+  avatar: {fileID: 365669548}
   currentMovableStorage: {fileID: 0}
 --- !u!114 &1972793576
 MonoBehaviour:

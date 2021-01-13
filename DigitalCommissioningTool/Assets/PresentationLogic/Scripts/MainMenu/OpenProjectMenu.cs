@@ -23,18 +23,23 @@ public class OpenProjectMenu : MonoBehaviour
     private Image selectedBackgroundImage = null;
     private Color selectedColor;
 
-    // Start is called before the first frame update
     void Start()
     {
         UpdateProjects();
         //SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
+    /// <summary>
+    /// Event für Zurücktaste. Öffnet das Hauptmenü.
+    /// </summary>
     public void Back()
     {
         gameObject.transform.parent.Find("MainPanel").gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Entlädt
+    /// </summary>
     private void UnloadScenes()
     {
         if (SceneManager.GetSceneByName("WarehouseWithMOSIM").isLoaded)

@@ -13,16 +13,21 @@ public class NewProjectMenu : MonoBehaviour
 
     private OpenProjectMenu openProjectMenu;
     
-    // Start is called before the first frame update
     void Start()
     {
         ResourceHandler.ReplaceResources();
         openProjectMenu = OpenProjectPanel.GetComponent<OpenProjectMenu>();
     }
+    /// <summary>
+    /// Event für Zurücktaste. Schließt das aktuelle Fenster.
+    /// </summary>
     public void Back()
     {
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Liest Projektnamen aus und überprüft Gültigkeit. Erstellt Projekt wenn Gültig.
+    /// </summary>
     public void Continue()
     {
         TMP_InputField input = InputField.GetComponent<TMP_InputField>();

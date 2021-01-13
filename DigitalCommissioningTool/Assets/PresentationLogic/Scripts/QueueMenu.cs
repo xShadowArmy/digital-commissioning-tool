@@ -50,9 +50,17 @@ public class QueueMenu : MonoBehaviour
         DragItem dragItem = field.GetComponent<DragItem>();
         dragItem.LinkedItem = itemData;        
         QueueItems.Add(dragItem);
-        ItemData parentItemData = ItemData.RequestStockItem(itemData.Name);
-        parentItemData.SetQueueStatus(true);
-        parentItemData.SetQueuePosition(QueueItems.IndexOf(dragItem));
+        //foreach (StorageData storage in GameManager.GameWarehouse.StorageRacks)
+        //{
+        //    foreach (ItemData item in storage.GetItems)
+        //    {
+        //        if (item != null && item.Name.Equals(itemData.Name))
+        //        {
+        //            item.SetQueueStatus(true);
+        //            item.SetQueuePosition(QueueItems.IndexOf(dragItem));
+        //        }
+        //    }            
+        //}
         updateSize();
     }
 
@@ -75,7 +83,7 @@ public class QueueMenu : MonoBehaviour
     }
     public void RemoveItem(int v)
     {
-        QueueItems[v].LinkedItem.SetQueueStatus(false);
+        //QueueItems[v].LinkedItem.SetQueueStatus(false);
         Destroy(QueueItems[v].gameObject);
         QueueItems.RemoveAt(v);
         updateSize();

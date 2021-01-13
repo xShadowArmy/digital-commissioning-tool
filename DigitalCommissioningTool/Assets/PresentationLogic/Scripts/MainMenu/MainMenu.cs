@@ -12,7 +12,9 @@ public class MainMenu : MonoBehaviour
     public GameObject NewProjectPanel;
     public GameObject OpenProjectPanel;
     public GameObject KeyBindPanel;
-    // Start is called before the first frame update
+    /// <summary>
+    /// Lädt "DefaultWarehouse" Szene, Einstellungen und lokalisierte Ressourcen.
+    /// </summary>
     void Start()
     {
         if (!SceneManager.GetSceneByName("DefaultWarehouse").isLoaded)
@@ -30,21 +32,32 @@ public class MainMenu : MonoBehaviour
         SettingsPanel.GetComponent<SettingsMenu>().LoadSettings();
         ResourceHandler.ReplaceResources(); 
     }
-    
+    /// <summary>
+    /// Öffnet Fenster zum Erstellen eines neuen Projektes.
+    /// </summary>
     public void NewProject()
     {
         NewProjectPanel.SetActive(true);
     }
+    /// <summary>
+    /// Öffnet Fenster zum Laden bestehender Projekte.
+    /// </summary>
     public void OpenProject()
     {
         OpenProjectPanel.SetActive(true);
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Öffnet Fenster zum Bearbeiten der Einstellungen.
+    /// </summary>
     public void Settings()
     {
         SettingsPanel.SetActive(true);
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Schließt die Anwendung.
+    /// </summary>
     public void Exit()
     {
         Debug.Log("Application.Quit() called");
