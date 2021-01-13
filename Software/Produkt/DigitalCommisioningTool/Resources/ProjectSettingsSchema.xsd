@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output" 
+           targetNamespace="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output"
+           elementFormDefault="qualified" attributeFormDefault="qualified">
+
+<!-- definition of Simple Elements -->
+  
+<!-- definition of Attributes -->
+	
+<!-- definition of Complex elements -->
+  <xs:element name="ProjectSettings">
+    <xs:complexType>
+      <xs:sequence>0
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+</xs:schema>

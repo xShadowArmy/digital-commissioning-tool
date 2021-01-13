@@ -5,30 +5,16 @@
            elementFormDefault="qualified" attributeFormDefault="qualified">
 
 <!-- definition of Simple Elements -->
-<xs:element name="Value" type="xs:string"/>
-   
-<!-- definition of Attributes -->
-<xs:attribute name="name" type="xs:string"/>
-<xs:attribute name="id" type="xs:long"/>
-<xs:attribute name="lang" type="xs:string"/>
   
+<!-- definition of Attributes -->
+	
 <!-- definition of Complex elements -->
-  <xs:element name="String">
+  <xs:element name="MosimData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="Value" maxOccurs="1" minOccurs="1"/>
       </xs:sequence>
-      <xs:attribute ref="name" use="required"/>
-      <xs:attribute ref="id" use="required"/>
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="StringResources">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="String" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attribute ref="lang" use="required"/>
-    </xs:complexType>
-  </xs:element>
+
 </xs:schema>

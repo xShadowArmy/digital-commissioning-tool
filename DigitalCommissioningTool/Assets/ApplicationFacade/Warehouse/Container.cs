@@ -219,6 +219,26 @@ namespace ApplicationFacade.Warehouse
         }
 
         /// <summary>
+        /// Sucht ein Item auf einem Container.
+        /// </summary>
+        /// <param name="obj">Das Objekt das gesucht werden soll.</param>
+        /// <returns>Gibt das Objekt oder null zurueck.</returns>
+        public ItemData GetContainerItem( GameObject obj )
+        {
+            for ( int i = 0; i < ContainerData.Count; i++ )
+            {
+                ItemData data = ContainerData[i].GetItem( obj );
+
+                if ( data != null )
+                {
+                    return data;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Zerstört alle Container in der Umgebung.
         /// </summary>
         internal void DestroyContainer()

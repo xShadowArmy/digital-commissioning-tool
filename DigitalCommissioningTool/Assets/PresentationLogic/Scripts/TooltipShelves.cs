@@ -42,8 +42,13 @@ public class TooltipShelves : MonoBehaviour
         this.selectedObject = selectedObject;
 
         if (active)
-        {
+        {            
             item = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
+            
+            if ( item == null )
+            {
+                item = GameManager.GameContainer.GetContainerItem( selectedObject );
+            }
 
             headerMessage = item.Name;
             getMessages();
