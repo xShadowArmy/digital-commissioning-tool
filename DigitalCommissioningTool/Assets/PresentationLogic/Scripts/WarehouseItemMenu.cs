@@ -16,6 +16,8 @@ public class WarehouseItemMenu : MonoBehaviour
     public GameObject PanelListItem;
     public GameObject PanelTimeMeasurement;
     public GameObject PanelQueue;
+    public GameObject PanelCanvasDialog;
+    
     private List<ItemData> Stock;
     private ItemData SelectedItem;
     private ModeHandler ModeHandler;
@@ -129,6 +131,7 @@ public class WarehouseItemMenu : MonoBehaviour
     }
     private void replaceResources()
     {
+        PanelCanvasDialog.SetActive(true);
         PanelQueue.SetActive(true);
         PanelTimeMeasurement.SetActive(true);
         PanelListItem.SetActive(true);
@@ -143,6 +146,7 @@ public class WarehouseItemMenu : MonoBehaviour
         PanelDistributeItem.SetActive(false);
         PanelQueue.SetActive(false);
         PanelTimeMeasurement.SetActive(false);
+        PanelCanvasDialog.SetActive(false);
     }
     public void OnClick(GameObject sender)
     {

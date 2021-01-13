@@ -18,6 +18,7 @@ public class ResourceHandler : MonoBehaviour
             if (tmpText == null)
             {
                 UnityEngine.UI.Text uiText = g.GetComponent<UnityEngine.UI.Text>();
+                Debug.Log(g.name);
                 text = uiText.text;
             }
             else

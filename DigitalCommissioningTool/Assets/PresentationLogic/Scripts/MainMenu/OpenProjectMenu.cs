@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading;
 using ApplicationFacade.Application;
+using UnityEngine.UI;
 
 public class OpenProjectMenu : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class OpenProjectMenu : MonoBehaviour
     private static List<string> projects = new List<string>();
     private int QueuedScene = -1;
     private int Frames = 0;
+    private Image selectedBackgroundImage = null;
+    private Color selectedColor;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +48,10 @@ public class OpenProjectMenu : MonoBehaviour
     }
     public void OnClick(GameObject sender)
     {
+        if (selectedBackgroundImage != null)
+        {
+            selectedBackgroundImage.color = new Color(0.960784f,0.960784f,0.960784f,1);
+        }
         int index = sender.transform.GetSiblingIndex() - 1;
         UnloadScenes();
 
@@ -93,7 +100,7 @@ public class OpenProjectMenu : MonoBehaviour
         }
     }
 
-    private void UpdateProjects()
+    public void UpdateProjects()
     {
         if (ProjectManager.ProjectList != null && ProjectManager.ProjectList.Length != projects.Count)
         {
@@ -118,5 +125,13 @@ public class OpenProjectMenu : MonoBehaviour
 
             ResourceHandler.ReplaceResources();
         }
+    }
+
+    public void HighlightNewProject(string projectName)
+    {
+        selectedColor = Color.cyan;
+        selectedColor.a = 0.4f;
+        selectedBackgroundImage = template.transform.parent.GetChild(projects.IndexOf(projectName) + 1).Find("Item Background").GetComponent<Image>();
+        selectedBackgroundImage.color = selectedColor;
     }
 }

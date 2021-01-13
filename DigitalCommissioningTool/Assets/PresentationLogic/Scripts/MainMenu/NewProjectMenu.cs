@@ -7,11 +7,17 @@ using ApplicationFacade.Application;
 
 public class NewProjectMenu : MonoBehaviour
 {
+
+    public GameObject OpenProjectPanel;
     public GameObject InputField;
+
+    private OpenProjectMenu openProjectMenu;
+    
     // Start is called before the first frame update
     void Start()
     {
         ResourceHandler.ReplaceResources();
+        openProjectMenu = OpenProjectPanel.GetComponent<OpenProjectMenu>();
     }
     public void Back()
     {
@@ -35,11 +41,26 @@ public class NewProjectMenu : MonoBehaviour
 
         if (!input.text.Equals(""))
         {
-            GameManager.CreateProject(input.text);
-            input.text = "";
-            gameObject.SetActive(false);
-            gameObject.transform.parent.gameObject.SetActive(false);
-            gameObject.transform.parent.Find("Background").gameObject.SetActive(false);
+            Debug.Log("Project Name: " + GameManager.PManager.ProjectName);
+            if (string.IsNullOrEmpty(GameManager.PManager.ProjectName))
+            {
+                GameManager.CreateProject(input.text);
+                input.text = "";
+                gameObject.SetActive(false);
+                gameObject.transform.parent.gameObject.SetActive(false);
+                gameObject.transform.parent.Find("Background").gameObject.SetActive(false);
+            }
+            else
+            {
+                GameManager.CloseProject();
+                GameManager.CreateProject(input.text);
+                openProjectMenu.UpdateProjects();
+                gameObject.SetActive(false);
+                OpenProjectPanel.SetActive(true);
+                ResourceHandler.ReplaceResources();
+                openProjectMenu.HighlightNewProject(input.text);
+            }
+            
         }
     }
 }
