@@ -11,7 +11,7 @@
 <!-- definition of Complex elements -->
   <xs:element name="ProjectSettings">
     <xs:complexType>
-      <xs:sequence>0
+      <xs:sequence>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -14,6 +14,8 @@
   <xs:attribute name="itemWeight" type="xs:double"/>  
   <xs:attribute name="itemCount" type="xs:unsignedLong"/>
   <xs:attribute name="slotCount" type="xs:unsignedLong"/>    
+  <xs:attribute name="inQueue" type="xs:bool"/>
+  <xs:attribute name="posQueue" type="xs:int"/>
   <xs:attribute name="x" type="xs:double"/>
   <xs:attribute name="y" type="xs:double"/>
   <xs:attribute name="z" type="xs:double"/>
@@ -64,6 +66,8 @@
       <xs:attribute ref="itemWeight" use="required"/>  
       <xs:attribute ref="itemCount" use="required"/> 
       <xs:attribute ref="idRef" use="required"/>
+      <xs:attribute ref="inQueue" use="required"/>
+      <xs:attribute ref="posQueue" use="required"/>
     </xs:complexType>
   </xs:element>
 

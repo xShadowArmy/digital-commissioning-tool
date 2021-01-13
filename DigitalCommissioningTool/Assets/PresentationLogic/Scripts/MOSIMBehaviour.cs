@@ -82,14 +82,20 @@ public class MOSIMBehaviour : AvatarBehavior
     {
         GameObject toItem = null;
         StorageData container = GameManager.GameContainer.GetContainer(treeView.currentMovableStorage);
-        DragItem item = queueMenu.QueueItems[0];
-        toItem = container.GetItem(-1);
-        if (toItem != null)
+        if (container == null)
         {
-            instructionQueue.Add(new Tuple<GameObject, GameObject>(item.LinkedItem.Object, toItem));
-            currentStartCondition = MoveBox(instructionQueue[0].Item1, instructionQueue[0].Item2, currentStartCondition);
+            container = GameManager.GameContainer.StorageContainer[0];
         }
-
+        if (container == null)
+        {
+            DragItem item = queueMenu.QueueItems[0];
+            toItem = container.GetItem(-1);
+            if (toItem != null)
+            {
+                instructionQueue.Add(new Tuple<GameObject, GameObject>(item.LinkedItem.Object, toItem));
+                currentStartCondition = MoveBox(instructionQueue[0].Item1, instructionQueue[0].Item2, currentStartCondition);
+            }
+        }
     }
     public void UpdatePath()
     {

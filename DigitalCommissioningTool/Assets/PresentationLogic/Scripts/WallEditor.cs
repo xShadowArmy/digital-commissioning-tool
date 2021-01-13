@@ -1189,7 +1189,9 @@ public class WallEditor : MonoBehaviour
         close(popUpScaleWall);
     }
 
-
+    /// <summary>
+    /// Aktiviert und desaktiviert das Anzeigen des AddWallButtons je nach Modus
+    /// </summary>
     public void ToggleAddInnerWall()
     {
 
