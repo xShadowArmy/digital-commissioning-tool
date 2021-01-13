@@ -203,7 +203,7 @@ public class TreeView : MonoBehaviour
                 ShowContainer(newMovableStorage);
             }
             currentMovableStorage = newMovableStorage;
-            avatar.GetComponent<TestPascal>().StorageRack = newMovableStorage;            
+            avatar.GetComponent<MOSIMBehaviour>().StorageRack = newMovableStorage;            
         }
     }
     void AddHandlerEvent(out System.EventHandler handler)

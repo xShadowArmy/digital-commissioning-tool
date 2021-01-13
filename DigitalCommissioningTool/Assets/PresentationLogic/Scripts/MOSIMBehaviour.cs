@@ -9,14 +9,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestPascal : AvatarBehavior
+public class MOSIMBehaviour : AvatarBehavior
 {
     public WalkTrajectory WalkTrajectory;
     public MMISceneObject WalkTrajectoryTarget;
     public List<Transform> WalkTrajectoryPoints = new List<Transform>();
     public QueueMenu queueMenu;
     public TreeView treeView;
-    public GameObject testObject;
+    public Timer timer;
 
     private List<Tuple<GameObject, GameObject>> instructionQueue = new List<Tuple<GameObject, GameObject>>();
     private MInstruction currentStartCondition = null;
@@ -57,8 +57,12 @@ public class TestPascal : AvatarBehavior
     }
     public void OnClickExecute()
     {
-        queueDone = false;
-        addNextInstruction();
+        if (queueMenu.QueueItems.Count > 0)
+        {
+            queueDone = false;
+            timer.onClick();
+            addNextInstruction();
+        }
     }
     protected override void GUIBehaviorInput()
     {        
@@ -278,7 +282,10 @@ public class TestPascal : AvatarBehavior
             Properties = PropertiesCreator.Create("Hand", "Left", CoSimTopic.OnStart, carryID + ":" + CoSimAction.EndInstruction),
             StartCondition = moveInstruction.ID + ":" + mmiConstants.MSimulationEvent_End
         };
-
+        MInstruction idleInstruction3 = new MInstruction(MInstructionFactory.GenerateID(), "Idle", "Pose/Idle")
+        {
+            StartCondition = releaseLeft.ID + ":" + mmiConstants.MSimulationEvent_End
+        };
         this.CoSimulator.MSimulationEventHandler += this.CoSimulator_MSimulationEventHandler;
         this.CoSimulator.AssignInstruction(idleInstruction1, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.AssignInstruction(walkInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
@@ -290,6 +297,7 @@ public class TestPascal : AvatarBehavior
         this.CoSimulator.AssignInstruction(moveInstruction, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.AssignInstruction(releaseLeft, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         this.CoSimulator.AssignInstruction(releaseRight, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
+        this.CoSimulator.AssignInstruction(idleInstruction3, new MSimulationState() { Initial = this.avatar.GetPosture(), Current = this.avatar.GetPosture() });
         return releaseRight;
     }
 
@@ -302,7 +310,7 @@ public class TestPascal : AvatarBehavior
     private void CoSimulator_MSimulationEventHandler(object sender, MSimulationEvent e)
     {
         Debug.Log(e.Reference + " " + e.Name + " " + e.Type);
-        if (e.Reference.Equals(currentStartCondition.ID))
+        if (currentStartCondition != null && e.Reference.Equals(currentStartCondition.ID))
         {
             if (!queueDone)
             {
@@ -318,6 +326,7 @@ public class TestPascal : AvatarBehavior
                 }
                 else
                 {
+                    timer.onClick();
                     queueDone = true;
                 }
             }            
