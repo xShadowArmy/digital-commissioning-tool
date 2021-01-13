@@ -384,6 +384,7 @@ namespace ApplicationFacade.Warehouse
 
             data.ChangeGameObject( GameObject.Instantiate( Object, Object.transform.parent ) );
             data.Object.transform.SetParent( GameObject.FindWithTag( "Player" ).transform );
+            data.Object.GetComponent<BoxCollider>( ).enabled = false;
 
             ChildItems.Add( data );
 
