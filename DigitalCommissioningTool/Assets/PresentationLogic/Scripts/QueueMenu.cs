@@ -69,6 +69,12 @@ public class QueueMenu : MonoBehaviour
         Avatar.UpdatePath();
         */
     }
+    public void RemoveItem(int v)
+    {
+        Destroy(QueueItems[v].gameObject);
+        QueueItems.RemoveAt(v);
+        updateSize();
+    }
     public void OnClick()
     {
         if (ActiveItem != null)
@@ -83,6 +89,7 @@ public class QueueMenu : MonoBehaviour
             {
                 dialogMenu.SelectedItem = SelectedItem;
                 dialogMenu.gameObject.SetActive(true);
+                dialogMenu.transform.GetChild(0).gameObject.SetActive(true);
             }
         }
         ButtonText.transform.parent.gameObject.SetActive(false);
@@ -116,5 +123,6 @@ public class QueueMenu : MonoBehaviour
     {
 
     }
+
 }
 

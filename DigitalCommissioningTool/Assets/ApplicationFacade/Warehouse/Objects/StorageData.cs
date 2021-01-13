@@ -105,7 +105,7 @@ namespace ApplicationFacade.Warehouse
             {
                 for( int i = 0; i < Data.Length; i++ )
                 {
-                    if ( Data[i] != null )
+                    if ( Data[i] == null )
                     {
                         return Slots[i];
                     }
