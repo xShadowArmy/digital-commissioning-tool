@@ -10,7 +10,7 @@ public class ModeHandler : MonoBehaviour
     public GameObject EditorModeCamera;
     public GameObject MosimCamera;
     public SelectionManager SelectionManager;
-    [SerializeField]private Sprite ModiSwitchBuild;
+    [SerializeField] private Sprite ModiSwitchBuild;
     [SerializeField] private Sprite ModiSwitchMosim;
     private bool ModeSwitchButton = false;
     private bool ShiftPressed = false;
@@ -21,8 +21,11 @@ public class ModeHandler : MonoBehaviour
     /// </summary>
     public static string Mode { get; private set; }
 
-    
-        public void SwitchMode()
+
+    /// <summary>
+    /// Wechselt den Modus
+    /// </summary>
+    public void SwitchMode()
     {
         EditorModeCamera.GetComponent<Camera>().enabled = !EditorModeCamera.GetComponent<Camera>().enabled;
         MosimCamera.GetComponent<Camera>().enabled = !MosimCamera.GetComponent<Camera>().enabled;
@@ -30,7 +33,7 @@ public class ModeHandler : MonoBehaviour
         if (EditorModeCamera.GetComponent<Camera>().enabled)
         {
             Mode = "EditorMode";
-            this.GetComponent<Image>().sprite  = ModiSwitchBuild;
+            this.GetComponent<Image>().sprite = ModiSwitchBuild;
             Debug.Log("EditorMode");
         }
         else
@@ -39,6 +42,7 @@ public class ModeHandler : MonoBehaviour
             this.GetComponent<Image>().sprite = ModiSwitchMosim;
             Debug.Log("MosimMode");
         }
+
         SelectionManager.ResetSelection();
     }
 
@@ -50,28 +54,28 @@ public class ModeHandler : MonoBehaviour
         EditorModeCamera.GetComponent<Camera>().enabled = false;
     }
 
-    // Wechselt den M
+    // Wechselt den Modus wenn die Modus wechseln Taste (Standard: Tabulator) gedrückt wurde
     void Update()
     {
         Frame += 1;
 
-        if ( Frame == 30 )
+        if (Frame == 30)
         {
             Frame = 0;
 
-            if ( ModeSwitchButton )
+            if (ModeSwitchButton)
             {
-                if ( KeyManager.ChangeMode.ShiftNeeded )
+                if (KeyManager.ChangeMode.ShiftNeeded)
                 {
-                    if ( ShiftPressed )
+                    if (ShiftPressed)
                     {
-                        SwitchMode( );
+                        SwitchMode();
                     }
                 }
 
                 else
                 {
-                    SwitchMode( );
+                    SwitchMode();
                 }
 
                 ModeSwitchButton = false;
@@ -81,12 +85,12 @@ public class ModeHandler : MonoBehaviour
 
         else
         {
-            if ( Input.GetKeyDown( KeyManager.ChangeMode.Code ) )
+            if (Input.GetKeyDown(KeyManager.ChangeMode.Code))
             {
                 ModeSwitchButton = true;
             }
 
-            if ( Input.GetKeyDown( KeyCode.LeftShift ) || Input.GetKey( KeyCode.RightShift ) )
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 ShiftPressed = true;
             }
