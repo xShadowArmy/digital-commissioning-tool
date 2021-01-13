@@ -16,7 +16,7 @@ public class QueueMenu : MonoBehaviour
     public GameObject PanelQueue;
     public GameObject CanvasWarehouseItems;
     public Transform WalkTargets;
-    public TestPascal Avatar;
+    public MOSIMBehaviour Avatar;
     public TextMeshProUGUI ButtonText;
     [HideInInspector]
     public DragItem ActiveItem;
@@ -39,6 +39,7 @@ public class QueueMenu : MonoBehaviour
     {
         selectionManager.ShelveSelected += SelectionManager_ShelveSelected;
         dialogMenu.AmountConfirmedEvent += DialogEvent;
+        List<ItemData> taskQueue = GameManager.TaskQueue;
     }
     public void AddItemToQueue(ItemData itemData)
     {
@@ -47,8 +48,11 @@ public class QueueMenu : MonoBehaviour
         GameObject field = Instantiate(ItemTemplate, ItemTemplate.transform.parent);
         field.SetActive(true);
         DragItem dragItem = field.GetComponent<DragItem>();
-        dragItem.LinkedItem = itemData;
+        dragItem.LinkedItem = itemData;        
         QueueItems.Add(dragItem);
+        ItemData parentItemData = ItemData.RequestStockItem(itemData.Name);
+        parentItemData.SetQueueStatus(true);
+        parentItemData.SetQueuePosition(QueueItems.IndexOf(dragItem));
         updateSize();
     }
 
@@ -71,6 +75,7 @@ public class QueueMenu : MonoBehaviour
     }
     public void RemoveItem(int v)
     {
+        QueueItems[v].LinkedItem.SetQueueStatus(false);
         Destroy(QueueItems[v].gameObject);
         QueueItems.RemoveAt(v);
         updateSize();

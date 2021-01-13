@@ -8500,6 +8500,11 @@ PrefabInstance:
       propertyPath: treeView
       value: 
       objectReference: {fileID: 1972793575}
+    - target: {fileID: 5335881366624977934, guid: a6f6fd4e45434ff42b2b9e03963af11c,
+        type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 1393590797}
     - target: {fileID: 5335881366624977935, guid: a6f6fd4e45434ff42b2b9e03963af11c,
         type: 3}
       propertyPath: UseSkeletonVisualization
@@ -13989,7 +13994,7 @@ PrefabInstance:
     - target: {fileID: 2304405364752126303, guid: 37d911717f98b2349a3e6f19693f8504,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000076293945
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 2304405364873134187, guid: 37d911717f98b2349a3e6f19693f8504,
         type: 3}
@@ -14111,6 +14116,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2023058098}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2023058102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023058101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f331ae337d8934fa9b2b9a084e4f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WarehouseItemMenu: {fileID: 1228854475}
+  SelectionMaterial: {fileID: 2100000, guid: ea04aa4db010f5e41a16a087b9b55fd9, type: 2}
+  TransparentMaterial: {fileID: 2100000, guid: 911c06f14ceaf3845af0dcac3192b0a4, type: 2}
 --- !u!1 &2032491338
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class DialogMenu : MonoBehaviour
 
     public delegate void AmountConfirmed(DialogMenu dialog);
     public event AmountConfirmed AmountConfirmedEvent;
+    /// <summary>
+    /// Überprüft, ob genügend Items verfügbar sind und gibt ein Event aus, falls dies der Fall ist
+    /// </summary>
     public void OnClick()
     {
         try
@@ -35,17 +38,5 @@ public class DialogMenu : MonoBehaviour
         {
             Debug.LogWarning("Eingabe ist nicht zulässig");
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //replaceResources();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
