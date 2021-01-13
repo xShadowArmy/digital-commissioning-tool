@@ -39,6 +39,11 @@ namespace ApplicationFacade.Application
         public static ProjectManager PManager { get; set; }
 
         /// <summary>
+        /// Enthaelt die Items die sich aktuell in der Queue befinden.
+        /// </summary>
+        public static List<ItemData> TaskQueue { get; private set; }
+
+        /// <summary>
         /// Initiallisiert den GameManager.
         /// </summary>
         static GameManager()
@@ -59,6 +64,8 @@ namespace ApplicationFacade.Application
             {
                 GameWarehouse.DestroyWarehouse( );
             }
+
+            TaskQueue = new List<ItemData>( );
 
             Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
             Container ctmp = GameContainer = new Container( );
@@ -110,6 +117,8 @@ namespace ApplicationFacade.Application
             {
                 GameWarehouse.DestroyWarehouse( );
             }
+
+            TaskQueue = new List<ItemData>( );
 
             Warehouse.Warehouse wtmp = new Warehouse.Warehouse( );
             Container ctmp = new Container( );

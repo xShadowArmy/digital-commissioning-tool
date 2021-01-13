@@ -53,6 +53,16 @@ namespace ApplicationFacade.Warehouse
         public string Name { get; internal set; }
 
         /// <summary>
+        /// Gibt an ob sich das Objekt in der Queue befindet.
+        /// </summary>
+        internal bool InQueue { get ; set; }
+
+        /// <summary>
+        /// Gibt die Position in der Queue an.
+        /// </summary>
+        internal int QueuePosition { get; set; }
+
+        /// <summary>
         /// Das Regal auf dem das Item liegt.
         /// </summary>
         public StorageData ParentStorage { get; internal set; }
@@ -154,6 +164,8 @@ namespace ApplicationFacade.Warehouse
             ParentStorage = null;
             ParentItem = null;
             ChildItems = new List<ItemData>( );
+            QueuePosition = 0;
+            InQueue = false;
         }
 
         /// <summary>
@@ -168,6 +180,8 @@ namespace ApplicationFacade.Warehouse
             ParentStorage = null;
             ParentItem = null;
             ChildItems = new List<ItemData>( );
+            QueuePosition = 0;
+            InQueue = false;
         }
         
         /// <summary>
@@ -467,6 +481,114 @@ namespace ApplicationFacade.Warehouse
         }
 
         /// <summary>
+        /// Aendert den Status ob sich das Item in der Queue befindet.
+        /// </summary>
+        /// <param name="value">Der neue Wert.</param>
+        public void SetQueueStatus( bool value )
+        {
+            InQueue = value;
+
+            if ( ParentStorage != null )
+            {
+                if ( ParentStorage.IsContainer )
+                {
+                    foreach( ProjectStorageData storage in GameManager.GameContainer.Data.Container )
+                    {
+                        if ( storage.ID == ParentStorage.GetID() )
+                        {
+                            for( int i = 0; i < storage.Items.Length; i++ )
+                            {
+                                if ( storage.Items[i].ID == GetID() )
+                                {
+                                    storage.Items[i].InQueue = value;
+
+                                    break;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+
+                else
+                {
+                    foreach ( ProjectStorageData storage in GameManager.GameWarehouse.Data.StorageRacks )
+                    {
+                        if ( storage.ID == ParentStorage.GetID( ) )
+                        {
+                            for ( int i = 0; i < storage.Items.Length; i++ )
+                            {
+                                if ( storage.Items[i].ID == GetID( ) )
+                                {
+                                    storage.Items[i].InQueue = value;
+
+                                    break;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Aendert die Queue Position.
+        /// </summary>
+        /// <param name="position">Die neue Position des Items.</param>
+        public void SetQueuePosition( int position )
+        {
+            QueuePosition = position;
+
+            if ( ParentStorage != null )
+            {
+                if ( ParentStorage.IsContainer )
+                {
+                    foreach ( ProjectStorageData storage in GameManager.GameContainer.Data.Container )
+                    {
+                        if ( storage.ID == ParentStorage.GetID( ) )
+                        {
+                            for ( int i = 0; i < storage.Items.Length; i++ )
+                            {
+                                if ( storage.Items[i].ID == GetID( ) )
+                                {
+                                    storage.Items[i].QueuePosition = position;
+
+                                    break;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+
+                else
+                {
+                    foreach ( ProjectStorageData storage in GameManager.GameWarehouse.Data.StorageRacks )
+                    {
+                        if ( storage.ID == ParentStorage.GetID( ) )
+                        {
+                            for ( int i = 0; i < storage.Items.Length; i++ )
+                            {
+                                if ( storage.Items[i].ID == GetID( ) )
+                                {
+                                    storage.Items[i].QueuePosition = position;
+
+                                    break;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Fügt ein Item zum Lagerbestand hinzu.
         /// </summary>
         /// <param name="name">Der Name des Items.</param>
@@ -682,6 +804,59 @@ namespace ApplicationFacade.Warehouse
             {
                 item.Name   = src.Name;
                 item.Weight = src.Weight;
+
+                if ( item.ParentStorage != null )
+                {
+                    if ( item.ParentStorage.IsContainer )
+                    {
+                        for ( int i = 0; i < GameManager.GameContainer.Data.Container.Count; i++ )
+                        {
+                            if ( item.ParentStorage.GetID( ) == GameManager.GameContainer.Data.Container[i].ID )
+                            {
+                                GameManager.GameContainer.Data.Container.Remove( GameManager.GameContainer.Data.Container[i] );
+
+                                ProjectStorageData storage = new ProjectStorageData( GetID(), item.ParentStorage.SlotCount, new ProjectTransformationData( item.ParentStorage.Position, item.ParentStorage.Rotation, item.ParentStorage.Scale ) );
+
+                                for ( int j = 0; j < item.ParentStorage.GetItems.Length; j++ )
+                                {
+                                    if ( item.ParentStorage.GetItems[j] != null )
+                                    {
+                                        storage.Items[j] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                                    }
+                                }
+
+                                GameManager.GameContainer.Data.Container.Insert( i, storage );
+
+                                break;
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        for ( int i = 0; i < GameManager.GameWarehouse.Data.StorageRacks.Count; i++ )
+                        {
+                            if ( item.ParentStorage.GetID( ) == GameManager.GameWarehouse.Data.StorageRacks[i].ID )
+                            {
+                                GameManager.GameWarehouse.Data.StorageRacks.Remove( GameManager.GameWarehouse.Data.StorageRacks[i] );
+
+                                ProjectStorageData storage = new ProjectStorageData( GetID(), item.ParentStorage.SlotCount, new ProjectTransformationData( item.ParentStorage.Position, item.ParentStorage.Rotation, item.ParentStorage.Scale ) );
+
+                                for ( int j = 0; j < item.ParentStorage.GetItems.Length; j++ )
+                                {
+                                    if ( item.ParentStorage.GetItems[j] != null )
+                                    {
+                                        storage.Items[j] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                                    }
+                                }
+
+                                GameManager.GameWarehouse.Data.StorageRacks.Insert( i, storage );
+
+                                break;
+                            }
+                        }
+                    }
+                }
             }
 
             else

@@ -338,6 +338,8 @@ namespace ProjectComponents.FileIntegration
                             nav.CreateAttribute( "xs", "slot", xmlns, j.ToString( ) );
                             nav.CreateAttribute( "xs", "id", xmlns, data.StorageRacks[i].Items[j].ID.ToString( ) );
                             nav.CreateAttribute( "xs", "idRef", xmlns, data.StorageRacks[i].Items[j].IDRef.ToString( ) );
+                            nav.CreateAttribute( "xs", "inQueue", xmlns, data.StorageRacks[i].Items[j].InQueue.ToString() );
+                            nav.CreateAttribute( "xs", "posQueue", xmlns, data.StorageRacks[i].Items[j].QueuePosition.ToString( ) );
 
                             WriteTransformationData( nav, data.StorageRacks[i].Items[j].Transformation, xmlns );
                         }

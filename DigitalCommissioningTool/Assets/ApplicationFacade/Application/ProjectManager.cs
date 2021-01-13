@@ -122,14 +122,13 @@ namespace ApplicationFacade.Application
 
                 for ( int i = 0; i < data.Length; i++ )
                 {
+                    Paths.ClearTempPath( );
                     ArchiveManager.ExtractArchive( Directory.GetFiles(Paths.ProjectsPath)[i], Paths.TempPath );
 
                     DataHandler dhandler = new DataHandler( );
                     data[i] = new ProjectData( );
 
                     ReadProjectData( data[i], dhandler.LoadFile() );
-
-                    Paths.ClearTempPath( );
                 }
 
                 return data;
@@ -220,7 +219,6 @@ namespace ApplicationFacade.Application
             InternalProjectContainer icontainer = CHandler.LoadFile( );
             ReadProjectContainer( ref icontainer, ref container );
 
-            LogManager.WriteError( "Project finished load" );
             FinishLoad?.Invoke( );
         }
 
@@ -240,7 +238,6 @@ namespace ApplicationFacade.Application
                 }
             }
 
-            LogManager.WriteError( "Project start save" );
             StartSave?.Invoke( );
 
             WriteProjectData( );
@@ -336,11 +333,15 @@ namespace ApplicationFacade.Application
                     break;
             }
 
+            using ( ConfigManager cman = new ConfigManager( ) )
+            {
+                cman.OpenConfigFile( Paths.TempPath, "TimeMeasurements.xml", true );
+            }
+
             SaveProject( name, warehouse, container );
 
             ItemData.ItemStock.Clear( );
 
-            LogManager.WriteError( "Project created" );
             ProjectCreated?.Invoke( );
         }
 
@@ -370,7 +371,7 @@ namespace ApplicationFacade.Application
 
             for( int i = 0; i < data.Length; i++ )
             {
-                data[i] = new ProjectItemData( ItemData.GetStock[i].IDRef, ItemData.GetStock[i].GetID(), ItemData.GetStock[i].StockCount, ItemData.GetStock[i].Weight, ItemData.GetStock[i].Name, new ProjectTransformationData() );
+                data[i] = new ProjectItemData( ItemData.GetStock[i].IDRef, ItemData.GetStock[i].GetID(), ItemData.GetStock[i].StockCount, ItemData.GetStock[i].Weight, ItemData.GetStock[i].Name, false, 0, new ProjectTransformationData() );
             }
 
             IHandler.SaveFile( data );
@@ -520,6 +521,11 @@ namespace ApplicationFacade.Application
                         ItemData item = ItemData.RequestStockItem( iwarehouse.StorageRacks[i].Items[j].Name );
 
                         data.AddItem( item.RequestItem( iwarehouse.StorageRacks[i].Items[j].Count ), ref warehouse, j );
+
+                        if ( item.InQueue )
+                        {
+                            GameManager.TaskQueue.Insert( item.QueuePosition, item );
+                        }
                     }
                 }
             }
@@ -552,6 +558,16 @@ namespace ApplicationFacade.Application
                         ItemData item = ItemData.RequestStockItem( icontainer.Container[i].Items[j].Name );
 
                         data.AddItem( item.RequestItem( icontainer.Container[i].Items[j].Count ), j );
+
+                        if ( item.InQueue )
+                        {
+                            GameManager.TaskQueue.Add( item );
+                        }
+
+                        if ( item.InQueue )
+                        {
+                            GameManager.TaskQueue.Insert( item.QueuePosition, item );
+                        }
                     }
                 }
             }

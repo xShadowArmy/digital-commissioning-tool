@@ -38,6 +38,16 @@ namespace ProjectComponents.Abstraction
         public long IDRef { get; set; }
 
         /// <summary>
+        /// Gibt an ob sich das Item gerade in der Queue befindet.
+        /// </summary>
+        public bool InQueue { get; set; }
+
+        /// <summary>
+        /// Gibt die Position in der Queue an.
+        /// </summary>
+        public int QueuePosition { get; set; }
+
+        /// <summary>
         /// Die Transformationsdaten des Items.
         /// </summary>
         public ProjectTransformationData Transformation { get; private set; }
@@ -59,7 +69,7 @@ namespace ProjectComponents.Abstraction
         /// <param name="weight">Das Gewicht des Items.</param>
         /// <param name="name">Der Name des Items.</param>
         /// <param name="transformation">Die Transformationsdaten des Items.</param>
-        public ProjectItemData( long idRef, long id, int count, double weight, string name, ProjectTransformationData transformation )
+        public ProjectItemData( long idRef, long id, int count, double weight, string name, bool inQueue, int queuePosition, ProjectTransformationData transformation )
         {
             ID = id;
             Count = count;
@@ -67,6 +77,8 @@ namespace ProjectComponents.Abstraction
             Name = name;
             IDRef = idRef;
             Transformation = transformation;
+            InQueue = inQueue;
+            QueuePosition = queuePosition;
         }
         
         /// <summary>

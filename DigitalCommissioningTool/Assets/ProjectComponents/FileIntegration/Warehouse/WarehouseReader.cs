@@ -299,9 +299,11 @@ namespace ProjectComponents.FileIntegration
                             long idRef  = long.Parse( nav.GetAttribute( "idRef", xmlns ), NumberStyles.Integer );
                             long iid  = long.Parse( nav.GetAttribute( "id", xmlns ), NumberStyles.Integer );
                             double weight = double.Parse( nav.GetAttribute( "itemWeight", xmlns ), NumberStyles.Number );
-                            int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ) );
-
-                            item = new ProjectItemData( idRef, iid, count, weight, name, ReadTransformation( nav, xmlns ) );
+                            int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ), NumberStyles.Integer );
+                            bool inQueue = bool.Parse( nav.GetAttribute( "inQueue", xmlns ) );
+                            int posQueue = int.Parse( nav.GetAttribute( "posQueue", xmlns ), NumberStyles.Integer );
+                            
+                            item = new ProjectItemData( idRef, iid, count, weight, name, inQueue, posQueue, ReadTransformation( nav, xmlns ) );
 
                             data.Items[int.Parse( nav.GetAttribute( "slot", xmlns ), NumberStyles.Integer )] = item;
                         }

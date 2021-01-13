@@ -274,7 +274,7 @@ namespace ApplicationFacade.Warehouse
             {
                 if ( data.ID == GetID( ) )
                 {
-                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID(), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID(), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
 
                     break;
                 }
@@ -349,7 +349,7 @@ namespace ApplicationFacade.Warehouse
             {
                 if ( data.ID == GetID( ) )
                 {
-                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
 
                     break;
                 }
@@ -541,55 +541,55 @@ namespace ApplicationFacade.Warehouse
         /// </summary>
         protected override void ObjectChanged()
         {
-           if ( !IsContainer )
-           {
-               for ( int i = 0; i < GameManager.GameWarehouse.Data.StorageRacks.Count; i++ )
-               {
-                   if ( GameManager.GameWarehouse.Data.StorageRacks[i].ID == GetID( ) )
-                   {
-                       GameManager.GameWarehouse.Data.StorageRacks.Remove( GameManager.GameWarehouse.Data.StorageRacks[i] );
-           
-                       ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
-           
-                       for( int j = 0; j < Data.Length; j++ )
-                       {
-                           if ( Data[j] != null )
-                           {
-                               storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID(), Data[j].Count, Data[j].Weight, Data[j].Name, new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
-                           }
-                       }
-           
-                       GameManager.GameWarehouse.Data.StorageRacks.Insert( i, storage );
-           
-                       break;
-                   }
-               }
-           }
-           
-           else
-           {
-               foreach ( ProjectStorageData data in GameManager.GameContainer.Data.Container )
-               {
-                   if ( data.ID == GetID( ) )
-                   {
-                       GameManager.GameContainer.Data.Container.Remove( data );
-           
-                       ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
-           
-                       for ( int i = 0; i < Data.Length; i++ )
-                       {
-                           if ( Data[i] != null )
-                           {
-                               storage.Items[i] = new ProjectItemData( Data[i].IDRef, Data[i].GetID( ), Data[i].Count, Data[i].Weight, Data[i].Name, new ProjectTransformationData( Data[i].Position, Data[i].Rotation, Data[i].Scale ) );
-                           }
-                       }
-           
-                       GameManager.GameContainer.Data.Container.Add( storage );
-           
-                       break;
-                   }
-               }
-           }
+            if ( !IsContainer )
+            {
+                for ( int i = 0; i < GameManager.GameWarehouse.Data.StorageRacks.Count; i++ )
+                {
+                    if ( GameManager.GameWarehouse.Data.StorageRacks[i].ID == GetID( ) )
+                    {
+                        GameManager.GameWarehouse.Data.StorageRacks.Remove( GameManager.GameWarehouse.Data.StorageRacks[i] );
+
+                        ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
+
+                        for ( int j = 0; j < Data.Length; j++ )
+                        {
+                            if ( Data[j] != null )
+                            {
+                                storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID( ), Data[j].Count, Data[j].Weight, Data[j].Name, Data[j].InQueue, Data[j].QueuePosition, new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
+                            }
+                        }
+
+                        GameManager.GameWarehouse.Data.StorageRacks.Insert( i, storage );
+
+                        break;
+                    }
+                }
+            }
+
+            else
+            {
+                for ( int i = 0; i < GameManager.GameContainer.Data.Container.Count; i++ )
+                {
+                    if ( GameManager.GameContainer.Data.Container[i].ID == GetID( ) )
+                    {
+                        GameManager.GameContainer.Data.Container.Remove( GameManager.GameContainer.Data.Container[i] );
+
+                        ProjectStorageData storage = new ProjectStorageData( GetID(), SlotCount, new ProjectTransformationData( Position, Rotation, Scale ) );
+
+                        for ( int j = 0; j < Data.Length; j++ )
+                        {
+                            if ( Data[j] != null )
+                            {
+                                storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID( ), Data[j].Count, Data[j].Weight, Data[j].Name, Data[j].InQueue, Data[j].QueuePosition, new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
+                            }
+                        }
+
+                        GameManager.GameContainer.Data.Container.Insert( i, storage );
+
+                        break;
+                    }
+                }
+            }
         }
     }
 }
