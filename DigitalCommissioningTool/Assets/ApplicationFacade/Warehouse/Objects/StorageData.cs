@@ -372,10 +372,26 @@ namespace ApplicationFacade.Warehouse
 
             for ( int i = 0; i < Data.Length; i++ )
             {
-                if ( Data[i].GetID() == item.GetID() )
+                if ( Data[i] != null && Data[i].GetID() == item.GetID() )
                 {
-                    Data[i].Object.SetActive( false );
+                    item.ChangeGameObject( null );
+
+                    Slots[i].SetActive( false );
+
                     Data[i] = null;
+
+                    if ( item.ParentItem != null )
+                    {
+                        if ( item.ParentItem.IsRoot )
+                        {
+                            item.DecreaseItemCount( 1 );
+                        }
+
+                        else
+                        {
+                            item.IncreaseItemCount( 1 );
+                        }
+                    }
 
                     item.ParentStorage = null;
 
@@ -385,7 +401,7 @@ namespace ApplicationFacade.Warehouse
                         {
                             for( int j = 0; j < data.Items.Length; j++ )
                             {
-                                if ( data.Items != null && data.Items[j].ID == item.GetID() )
+                                if ( data.Items[j] != null && data.Items[j].ID == item.GetID() )
                                 {
                                     data.Items[j] = null;
 
