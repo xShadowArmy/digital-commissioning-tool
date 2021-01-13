@@ -102,7 +102,7 @@ public class Timer : MonoBehaviour
         resetBtn.gameObject.SetActive(true);
         timerBtn.transform.parent.gameObject.SetActive(true);
         isHovered = !isHovered;                                     //bool Value für den Taste P
-        panelTimeMeasure.SetActive(true);
+        //panelTimeMeasure.SetActive(true);
     }
 
     //Deaktiviert und macht Button unsichtbar
@@ -118,7 +118,7 @@ public class Timer : MonoBehaviour
         isHovered = !isHovered;                                     //bool Value für den Taste P
         if (currentTime == 0)
         {
-            panelTimeMeasure.SetActive(false);
+            //panelTimeMeasure.SetActive(false);
         }
 
     }

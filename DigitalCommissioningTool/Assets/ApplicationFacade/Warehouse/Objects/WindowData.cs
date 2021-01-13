@@ -57,7 +57,7 @@ namespace ApplicationFacade.Warehouse
         /// Gibt die Laenge des Objekts zurueck.
         /// </summary>
         /// <returns>Die Laenge des Objekts.</returns>
-        protected override float GetLength()
+        public override float GetLength()
         {
             return 2f;
         }

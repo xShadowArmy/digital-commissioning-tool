@@ -86,7 +86,7 @@ namespace ApplicationFacade.Warehouse
         /// Gibt die Laenge des Objekts zurueck.
         /// </summary>
         /// <returns>Die Laenge des Objekts.</returns>
-        protected abstract float GetLength();
+        public abstract float GetLength();
 
         /// <summary>
         /// Wird aufgerufen wenn sich das Objekt ändert und speichert die Änderungen.

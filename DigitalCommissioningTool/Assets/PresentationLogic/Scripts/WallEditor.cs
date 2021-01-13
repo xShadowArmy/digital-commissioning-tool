@@ -14,6 +14,7 @@ using ApplicationFacade.Warehouse;
 public class WallEditor : MonoBehaviour
 {
     private int numberOfWalls;
+    [SerializeField] private TMP_Text wallLengthText;
     [SerializeField] private TMP_Text addWindowText;
     [SerializeField] private TMP_Text addDoorText;
     [SerializeField] private TMP_Text addWallText;
@@ -39,6 +40,7 @@ public class WallEditor : MonoBehaviour
     private GameObject SwitchModeButton;
     private GameObject AddInnerWallButton;
     private List<Collider> objectsInRange = new List<Collider>();
+    private string wallLengthTextTemplate = "";
 
     
     /// <summary>
@@ -46,6 +48,7 @@ public class WallEditor : MonoBehaviour
     /// </summary>
     void Start()
     {
+        wallLengthTextTemplate = StringResourceManager.LoadString("@WallLengthText");
         addWindowText.text = StringResourceManager.LoadString("@AddWindowText");
         addDoorText.text = StringResourceManager.LoadString("@AddDoorText");
         addWallText.text = StringResourceManager.LoadString("@AddWallText");
@@ -248,9 +251,36 @@ public class WallEditor : MonoBehaviour
     /// <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
     private void OnWallSelected(Transform selectedObject)
     {
+        int wallLength = 0;
+        WallObjectData[] wallObjects;
+        switch (GameManager.GameWarehouse.GetWall(selectedObject.gameObject).Face)
+        {
+            case WallFace.North:
+                wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                break;
+            case WallFace.East:
+                wallObjects = GameManager.GameWarehouse.EastWallObjects;
+                break;
+            case WallFace.South:
+                wallObjects = GameManager.GameWarehouse.SouthWallObjects;
+                break;
+            case WallFace.West:
+                wallObjects = GameManager.GameWarehouse.WestWallObjects;
+                break;
+            default:
+                wallObjects = GameManager.GameWarehouse.NorthWallObjects;
+                break;
+        }
+        foreach (WallObjectData child in wallObjects)
+        {
+            wallLength += (int) child.GetLength();
+        }
+        
         popUp.SetActive(true);
         popUpScaleWall.SetActive(false);
         innerWallSelected = false;
+
+        wallLengthText.SetText(wallLengthTextTemplate + " " + wallLength + "m");
     }
 
     /// <summary>
