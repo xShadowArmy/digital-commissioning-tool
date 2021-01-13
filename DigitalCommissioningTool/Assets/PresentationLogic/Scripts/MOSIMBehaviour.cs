@@ -86,7 +86,7 @@ public class MOSIMBehaviour : AvatarBehavior
         {
             container = GameManager.GameContainer.StorageContainer[0];
         }
-        if (container == null)
+        if (container != null)
         {
             DragItem item = queueMenu.QueueItems[0];
             toItem = container.GetItem(-1);

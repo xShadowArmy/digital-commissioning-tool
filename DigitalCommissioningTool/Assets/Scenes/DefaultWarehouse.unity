@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1600700949}
+      - m_Target: {fileID: 365669551}
         m_MethodName: OnClickIdle
         m_Mode: 1
         m_Arguments:
@@ -4048,6 +4048,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: []
   Color: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &365669551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365669548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5024a2d70ec99634d9da3f40b67f97f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WalkTrajectory: {fileID: 365669550}
+  WalkTrajectoryTarget: {fileID: 0}
+  WalkTrajectoryPoints: []
+  queueMenu: {fileID: 1191441633}
+  treeView: {fileID: 1972793575}
+  timer: {fileID: 1393590797}
+  StorageRack: {fileID: 0}
 --- !u!1 &375831559
 GameObject:
   m_ObjectHideFlags: 0
@@ -6478,7 +6497,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1600700949}
+      - m_Target: {fileID: 365669551}
         m_MethodName: OnClickExecute
         m_Mode: 1
         m_Arguments:
@@ -8897,7 +8916,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5335881366624977934, guid: a6f6fd4e45434ff42b2b9e03963af11c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6f6fd4e45434ff42b2b9e03963af11c, type: 3}
 --- !u!1 &1048129267
 GameObject:
@@ -8981,7 +9001,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1600700949}
+      - m_Target: {fileID: 365669551}
         m_MethodName: OnClickWalkTo
         m_Mode: 1
         m_Arguments:
@@ -9394,7 +9414,7 @@ MonoBehaviour:
   PanelQueue: {fileID: 375831559}
   CanvasWarehouseItems: {fileID: 1228854474}
   WalkTargets: {fileID: 149666601}
-  Avatar: {fileID: 1600700949}
+  Avatar: {fileID: 0}
   ButtonText: {fileID: 1616604365}
   ActiveItem: {fileID: 0}
   DraggedItem: {fileID: 0}
@@ -12450,18 +12470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb089a1772296764a98073626e04894e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1600700949 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5335881366624977934, guid: a6f6fd4e45434ff42b2b9e03963af11c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1046717365}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365669548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d1f8658657854643a1e83aa02a402b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1601532396
 GameObject:
   m_ObjectHideFlags: 0
@@ -14513,7 +14521,7 @@ PrefabInstance:
     - target: {fileID: 2304405364752126303, guid: 37d911717f98b2349a3e6f19693f8504,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000091552734
+      value: 0.000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 2304405364873134187, guid: 37d911717f98b2349a3e6f19693f8504,
         type: 3}
