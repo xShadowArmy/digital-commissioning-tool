@@ -209,8 +209,8 @@ namespace ApplicationFacade.Application
             InternalProjectSettings isettings = SHandler.LoadFile( );
             Settings = new ProjectSettings( );
             ReadProjectSettings( isettings );
-            
-            ItemData.ItemStock.Clear();
+
+            ItemData.ClearStock( );
             ReadProjectStock( );
 
             InternalProjectWarehouse iwarehouse = WHandler.LoadFile( );
@@ -340,7 +340,7 @@ namespace ApplicationFacade.Application
 
             SaveProject( name, warehouse, container );
 
-            ItemData.ItemStock.Clear( );
+            ItemData.ClearStock( );
 
             ProjectCreated?.Invoke( );
         }

@@ -132,6 +132,22 @@ public class OpenProjectMenu : MonoBehaviour
         }
     }
 
+    private void DisableCurrentProject()
+    {
+        for ( int i = 0; i < projects.Count; i++ )
+        {
+            Transform element = template.transform.parent.GetChild(i);
+            if ( GameManager.OpenProjectData != null && GameManager.OpenProjectData.ProjectName != null )
+            {
+                if ( GameManager.OpenProjectData.ProjectName.Equals( projects[i] ) )
+                {
+                    element.Find( "Delete" ).GetComponent<Button>( ).interactable = false;
+                }
+            }
+            element.Find( "Delete" ).GetComponent<Button>( ).interactable = true;
+        }
+    }
+
     public void HighlightNewProject(string projectName)
     {
         selectedColor = Color.cyan;

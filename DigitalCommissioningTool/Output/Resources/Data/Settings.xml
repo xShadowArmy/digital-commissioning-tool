@@ -7,6 +7,6 @@
         <xs:Value>0</xs:Value>
     </xs:SimpleData>
     <xs:SimpleData xs:name="fullscreen" xs:id="3" xs:type="Boolean" xs:isArray="false" xs:elementCount="1">
-        <xs:Value>False</xs:Value>
+        <xs:Value>True</xs:Value>
     </xs:SimpleData>
 </xs:Config>

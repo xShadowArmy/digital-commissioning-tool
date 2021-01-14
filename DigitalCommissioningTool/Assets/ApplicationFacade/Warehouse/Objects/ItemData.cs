@@ -377,15 +377,12 @@ namespace ApplicationFacade.Warehouse
                 IDRef = IDRef
             };
 
-            if ( ParentItem == null )
+            if ( ParentItem != null )
             {
-                Count += count;
+                ParentItem.Count -= count;
             }
 
-            else
-            {
-                Count -= count;
-            }
+            Count -= count;
 
             data.ChangeGameObject( GameObject.Instantiate( Object, Object.transform.parent ) );
             data.Object.transform.SetParent( GameObject.FindWithTag( "Player" ).transform );
@@ -393,7 +390,7 @@ namespace ApplicationFacade.Warehouse
 
             ChildItems.Add( data );
 
-            ItemChanged?.Invoke(this);
+            ItemChanged?.Invoke(ParentItem);
 
             return data;
         }
@@ -479,9 +476,10 @@ namespace ApplicationFacade.Warehouse
 
             else
             {
+                ParentItem.Count += Count;
                 ParentItem.ParentItem.Count += Count;
 
-                ItemChanged?.Invoke( ParentItem );
+                ItemChanged?.Invoke( ParentItem.ParentItem );
             }
 
             Destroy( );
@@ -778,6 +776,18 @@ namespace ApplicationFacade.Warehouse
             }
 
             ParentStorage = storage;
+        }
+
+        /// <summary>
+        /// Löscht alle Einträge aus dem Lagerbestand.
+        /// </summary>
+        internal static void ClearStock()
+        {
+            foreach( ItemData item in ItemStock )
+            {
+                ItemData.ItemStock.Remove( item );
+                ItemData.StockChanged?.Invoke( item );
+            }
         }
 
         /// <summary>
