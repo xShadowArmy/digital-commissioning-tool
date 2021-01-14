@@ -37,6 +37,8 @@ TagManager:
   - SelectableInnerWall
   - InnerWall
   - SelectableContainer
+  - AddItemsButton
+  - RemoveItemButton
   layers:
   - Default
   - TransparentFX

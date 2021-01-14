@@ -7609,7 +7609,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2095818127}
   m_Direction: 2
   m_Value: 1.0000015
-  m_Size: 0.8888889
+  m_Size: 0.88888896
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17703,7 +17703,7 @@ GameObject:
   - component: {fileID: 6828925603356262569}
   m_Layer: 5
   m_Name: AddItemsButton
-  m_TagString: Untagged
+  m_TagString: AddItemsButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17839,6 +17839,8 @@ MonoBehaviour:
   tooltipHeader: {fileID: 6828925602612533619}
   tooltipContent: {fileID: 6828925602916821802}
   tooltip: {fileID: 6828925603622246749}
+  AddButton: {fileID: 0}
+  RemoveButton: {fileID: 0}
 --- !u!114 &6828925603622246744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18102,7 +18104,7 @@ GameObject:
   - component: {fileID: 6828925604597357637}
   m_Layer: 5
   m_Name: RemoveItemsButton
-  m_TagString: Untagged
+  m_TagString: RemoveItemButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,6 +11,8 @@ public class Tooltip : MonoBehaviour
     public TextMeshProUGUI tooltipHeader;
     public TextMeshProUGUI tooltipContent;
     public Image tooltip;
+    [SerializeField] public Button AddButton;
+    [SerializeField] public Button RemoveButton;
 
 
     private void Start()

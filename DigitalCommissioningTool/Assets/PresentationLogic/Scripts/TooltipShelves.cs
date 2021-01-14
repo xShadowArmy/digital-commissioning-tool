@@ -21,7 +21,6 @@ public class TooltipShelves : MonoBehaviour
     private string headerMessage = "New Text";
     private string contentMessage = "New Text";
     private ItemData item;
-    private GameObject selectedObject;
 
 
     void Start()
@@ -39,8 +38,6 @@ public class TooltipShelves : MonoBehaviour
     /// <param name="active">Parameter zum aktivieren oder deaktivieren von dem Tooltip</param>
     private void SelectionManager_ShelveSelected(GameObject selectedObject, bool active)
     {
-        this.selectedObject = selectedObject;
-
         if (active)
         {            
             item = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
@@ -53,9 +50,22 @@ public class TooltipShelves : MonoBehaviour
             headerMessage = item.Name;
             getMessages();
             activate();
+
+            if ( item.ParentStorage.IsContainer )
+            {
+                GameObject.FindWithTag( "AddItemsButton" ).SetActive( false );
+                GameObject.FindWithTag( "RemoveItemButton" ).SetActive( false );
+            }
+
+            else
+            {
+                GameObject.FindWithTag( "AddItemsButton" ).SetActive( true );
+                GameObject.FindWithTag( "RemoveItemButton" ).SetActive( true );
+            }
         }
         else
         {
+            item = null;
             deactivate();
         }
     }
@@ -65,6 +75,14 @@ public class TooltipShelves : MonoBehaviour
 
     void Update()
     {
+        if ( item != null )
+        {
+            if ( Input.GetKeyDown( KeyManager.RemoveSelected.Code ) && !item.ParentStorage.IsContainer )
+            {
+                item.ReturnItem( );
+            }
+        }
+
         if (Application.isEditor)
         {
             int headerLenght = header.text.Length;
@@ -87,6 +105,8 @@ public class TooltipShelves : MonoBehaviour
     public void activate()
     {
         tooltip.SetTooltip(contentMessage, headerMessage, false);
+
+        
     }
 
 
