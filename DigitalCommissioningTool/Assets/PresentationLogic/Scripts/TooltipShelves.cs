@@ -25,7 +25,7 @@ public class TooltipShelves : MonoBehaviour
 
     void Start()
     {
-        LogManager.WriteError( "ToolTipShelves Called" );
+        LogManager.WriteError("ToolTipShelves Called");
         selectionManager.ShelveSelected += SelectionManager_ShelveSelected;
         tooltip = current.GetComponent<Tooltip>();
     }
@@ -39,28 +39,28 @@ public class TooltipShelves : MonoBehaviour
     private void SelectionManager_ShelveSelected(GameObject selectedObject, bool active)
     {
         if (active)
-        {            
+        {
             item = GameManager.GameWarehouse.GetStorageRackItem(selectedObject);
-            
-            if ( item == null )
+
+            if (item == null)
             {
-                item = GameManager.GameContainer.GetContainerItem( selectedObject );
+                item = GameManager.GameContainer.GetContainerItem(selectedObject);
             }
 
             headerMessage = item.Name;
             getMessages();
             activate();
 
-            if ( item.ParentStorage.IsContainer )
+            if (item.ParentStorage.IsContainer)
             {
-                GameObject.FindWithTag( "AddItemsButton" ).SetActive( false );
-                GameObject.FindWithTag( "RemoveItemButton" ).SetActive( false );
+                GameObject.FindWithTag("AddItemsButton").GetComponent<Button>().interactable = false;
+                GameObject.FindWithTag("RemoveItemButton").GetComponent<Button>().interactable = false;
             }
 
             else
             {
-                GameObject.FindWithTag( "AddItemsButton" ).SetActive( true );
-                GameObject.FindWithTag( "RemoveItemButton" ).SetActive( true );
+                GameObject.FindWithTag("AddItemsButton").GetComponent<Button>().interactable = true;
+                GameObject.FindWithTag("RemoveItemButton").GetComponent<Button>().interactable = true;
             }
         }
         else
@@ -71,15 +71,13 @@ public class TooltipShelves : MonoBehaviour
     }
 
 
-
-
     void Update()
     {
-        if ( item != null )
+        if (item != null)
         {
-            if ( Input.GetKeyDown( KeyManager.RemoveSelected.Code ) && !item.ParentStorage.IsContainer )
+            if (Input.GetKeyDown(KeyManager.RemoveSelected.Code) && !item.ParentStorage.IsContainer)
             {
-                item.ReturnItem( );
+                item.ReturnItem();
             }
         }
 
@@ -94,19 +92,19 @@ public class TooltipShelves : MonoBehaviour
             else
                 layoutElement.enabled = false;
         }
+
         if (Input.GetMouseButtonDown(1))
         {
             deactivate();
         }
     }
+
     /// <summary>
     /// Ruft Set Tooltip auf
     /// </summary>
     public void activate()
     {
         tooltip.SetTooltip(contentMessage, headerMessage, false);
-
-        
     }
 
 
@@ -117,6 +115,7 @@ public class TooltipShelves : MonoBehaviour
     {
         tooltip.RemoveTooltip();
     }
+
     /// <summary>
     /// Weist der Variable Content Massage die Parameter des selectedObjects, die in IdemData gespeichert sind zu
     /// </summary>
@@ -124,8 +123,8 @@ public class TooltipShelves : MonoBehaviour
     {
         contentMessage = "Anzahl: " + item.Count + "\n";
         contentMessage += "Gewicht: " + item.Weight + " kg";
-
     }
+
     /// <summary>
     /// Aktualisiert den Inhalt des Tooltips
     /// </summary>
@@ -133,7 +132,6 @@ public class TooltipShelves : MonoBehaviour
     {
         getMessages();
         tooltip.SetTooltip(contentMessage, headerMessage, true);
-
     }
 
     /// <summary>
@@ -151,11 +149,9 @@ public class TooltipShelves : MonoBehaviour
         {
             item.ParentStorage.RemoveItem(item);
             deactivate();
-
         }
-
-
     }
+
     /// <summary>
     /// Erhöht die Anzahl an Items in den Kisten um 1
     /// </summary>
@@ -165,9 +161,4 @@ public class TooltipShelves : MonoBehaviour
         item.IncreaseItemCount(1);
         updateTooltip();
     }
-
-
-
-
-
 }

@@ -31,12 +31,8 @@
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/MainMenu/NewProjectMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/MainMenu/NewProjectMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/MainMenu/OpenProjectMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/MainMenu/OpenProjectMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TooltipShelves.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TooltipShelves.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/test2.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output/Projects/test22.prj" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +90,7 @@
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TreeViewControl/TreeViewItem.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/MainMenu/NewProjectMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/MainMenu/OpenProjectMenu.cs" />
+        <option value="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TooltipShelves.cs" />
       </list>
     </option>
   </component>
@@ -106,12 +103,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.47144008" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.40426388" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.47128928" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.40411702" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="XThreadsFramesViewSplitterKey" value="0.500427" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.6059979" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys_rider" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -126,10 +123,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="22760">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="22760" />
+      <option name="pid" />
       <option name="selectedOptions">
         <set />
       </option>
