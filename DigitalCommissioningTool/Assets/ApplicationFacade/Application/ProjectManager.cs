@@ -520,6 +520,8 @@ namespace ApplicationFacade.Application
                     {
                         ItemData item = ItemData.RequestStockItem( iwarehouse.StorageRacks[i].Items[j].Name );
 
+
+
                         data.AddItem( item.RequestItem( iwarehouse.StorageRacks[i].Items[j].Count ), ref warehouse, j );
 
                         if ( item.InQueue )

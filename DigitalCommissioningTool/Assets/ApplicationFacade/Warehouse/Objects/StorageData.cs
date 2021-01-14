@@ -270,13 +270,29 @@ namespace ApplicationFacade.Warehouse
             Data[slot].Rotation = Slots[slot].transform.rotation;
             Data[slot].Scale    = Slots[slot].transform.localScale;
 
-            foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
+            if ( !IsContainer )
             {
-                if ( data.ID == GetID( ) )
+                foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
                 {
-                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID(), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                    if ( data.ID == GetID( ) )
+                    {
+                        data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
 
-                    break;
+                        break;
+                    }
+                }
+            }
+
+            else
+            {
+                foreach ( ProjectStorageData data in GameManager.GameContainer.Data.Container )
+                {
+                    if ( data.ID == GetID( ) )
+                    {
+                        data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, item.ParentItem.GetID( ), item.ParentItem.ParentStorage.GetID( ), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+
+                        break;
+                    }
                 }
             }
 
@@ -345,13 +361,94 @@ namespace ApplicationFacade.Warehouse
             Data[slot].Rotation = Slots[slot].transform.rotation;
             Data[slot].Scale = Slots[slot].transform.localScale;
 
-            foreach ( ProjectStorageData data in warehouse.Data.StorageRacks )
+            if ( !IsContainer )
             {
-                if ( data.ID == GetID( ) )
+                foreach ( ProjectStorageData data in warehouse.Data.StorageRacks )
                 {
-                    data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                    if ( data.ID == GetID( ) )
+                    {
+                        data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
 
-                    break;
+                        break;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Legt ein Item auf das Regal.
+        /// </summary>
+        /// <param name="item">Das Item das auf das Regal gelegt werden soll.</param>
+        /// <param name="container">Das Lager in dem die änderungen gespeichert werden sollen.</param>
+        /// <param name="slot">Der Slot auf dem das Item gelegt wird.</param>
+        /// <returns>Gibt true zurück wenn Erfolgreich.</returns>
+        internal bool AddItem( ItemData item, ref Container container, int slot = -1 )
+        {
+            LogManager.WriteInfo( "Ein RegalItem wird hinzugefuegt.", "Warehouse", "AddItemToStorageRack" );
+
+            if ( IsDestroyed( ) )
+            {
+                return false;
+            }
+
+            if ( slot < 0 )
+            {
+                for ( int i = 0; i < SlotCount; i++ )
+                {
+                    if ( Data[i] == null )
+                    {
+                        slot = i;
+                        break;
+                    }
+                }
+
+                if ( slot < 0 )
+                {
+                    return false;
+                }
+            }
+
+            else
+            {
+                if ( slot >= Slots.Length )
+                {
+                    LogManager.WriteWarning( "Ein Objekt soll auf ein Slot abgelegt werden der nicht existiert!", "StorageData", "AddItem" );
+
+                    return false;
+                }
+            }
+
+            if ( item.Object != null )
+            {
+                GameObject.Destroy( item.Object );
+            }
+
+            Data[slot] = item;
+
+            item.SetID( Warehouse.GetUniqueID( Data ) );
+
+            item.ChangeGameObject( Slots[slot] );
+            item.Object.name = item.Name;
+            item.ParentStorage = this;
+
+            Data[slot].Object.SetActive( true );
+
+            Data[slot].Position = Slots[slot].transform.position;
+            Data[slot].Rotation = Slots[slot].transform.rotation;
+            Data[slot].Scale = Slots[slot].transform.localScale;
+
+            if ( IsContainer )
+            {    
+                foreach ( ProjectStorageData data in container.Data.Container )
+                {
+                    if ( data.ID == GetID( ) )
+                    {
+                        data.Items[slot] = new ProjectItemData( item.IDRef, item.GetID( ), item.Count, item.Weight, item.Name, item.InQueue, item.QueuePosition, item.ParentItem.GetID( ), item.ParentItem.ParentStorage.GetID( ), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+
+                        break;
+                    }
                 }
             }
 
@@ -395,21 +492,45 @@ namespace ApplicationFacade.Warehouse
 
                     item.ParentStorage = null;
 
-                    foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
+                    if ( !IsContainer )
                     {
-                        if ( data.ID == GetID( ) )
+                        foreach ( ProjectStorageData data in GameManager.GameWarehouse.Data.StorageRacks )
                         {
-                            for( int j = 0; j < data.Items.Length; j++ )
+                            if ( data.ID == GetID( ) )
                             {
-                                if ( data.Items[j] != null && data.Items[j].ID == item.GetID() )
+                                for( int j = 0; j < data.Items.Length; j++ )
                                 {
-                                    data.Items[j] = null;
+                                    if ( data.Items[j] != null && data.Items[j].ID == item.GetID() )
+                                    {
+                                        data.Items[j] = null;
 
-                                    break;
+                                        break;
+                                    }
                                 }
-                            }
 
-                            break;
+                                break;
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        foreach ( ProjectStorageData data in GameManager.GameContainer.Data.Container )
+                        {
+                            if ( data.ID == GetID( ) )
+                            {
+                                for ( int j = 0; j < data.Items.Length; j++ )
+                                {
+                                    if ( data.Items[j] != null && data.Items[j].ID == item.GetID( ) )
+                                    {
+                                        data.Items[j] = null;
+
+                                        break;
+                                    }
+                                }
+
+                                break;
+                            }
                         }
                     }
 
