@@ -33,6 +33,16 @@ namespace ProjectComponents.Abstraction
         public long ID { get; set; }
 
         /// <summary>
+        /// Die ID des Parent Items.
+        /// </summary>
+        public long ParentItemID { get; set; }
+
+        /// <summary>
+        /// Die ID des Regals vom Parent Item.
+        /// </summary>
+        public long ParentStorageID { get; set; }
+
+        /// <summary>
         /// Die ID Referenz des Parent Items.
         /// </summary>
         public long IDRef { get; set; }
@@ -79,6 +89,35 @@ namespace ProjectComponents.Abstraction
             Transformation = transformation;
             InQueue = inQueue;
             QueuePosition = queuePosition;
+            ParentItemID = 0;
+            ParentStorageID = 0;
+        }
+
+        /// <summary>
+        /// Erstellt eine neue Instanz.
+        /// </summary>
+        /// <param name="idRef">Die ID Referenz des Parent Items.</param>
+        /// <param name="id">Die ID des Items.</param>
+        /// <param name="count">Die Anzahl des Items.</param>
+        /// <param name="weight">Das Gewicht des Items.</param>
+        /// <param name="name">Der Name des Items.</param>
+        /// <param name="transformation">Die Transformationsdaten des Items.</param>
+        /// <param name="inQueue">Gibe an ob sich das Item in der Queue befindet.</param>
+        /// <param name="queuePosition">Gibt die Position des Items in der Queue an.</param>
+        /// <param name="parentItemID">Die ID des Parents.</param>
+        /// <param name="parentStorageID">Die ID des Parent Regals.</param>
+        public ProjectItemData( long idRef, long id, int count, double weight, string name, bool inQueue, int queuePosition, long parentItemID, long parentStorageID, ProjectTransformationData transformation )
+        {
+            ID = id;
+            Count = count;
+            Weight = weight;
+            Name = name;
+            IDRef = idRef;
+            Transformation = transformation;
+            InQueue = inQueue;
+            QueuePosition = queuePosition;
+            ParentItemID = parentItemID;
+            ParentStorageID = parentStorageID;
         }
         
         /// <summary>

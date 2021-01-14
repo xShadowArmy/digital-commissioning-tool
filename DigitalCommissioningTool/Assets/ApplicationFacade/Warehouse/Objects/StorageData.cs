@@ -571,7 +571,7 @@ namespace ApplicationFacade.Warehouse
                         {
                             if ( Data[j] != null )
                             {
-                                storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID( ), Data[j].Count, Data[j].Weight, Data[j].Name, Data[j].InQueue, Data[j].QueuePosition, new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
+                                storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID( ), Data[j].Count, Data[j].Weight, Data[j].Name, Data[j].InQueue, Data[j].QueuePosition, Data[j].ParentItem.GetID(), Data[j].ParentStorage.GetID(), new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
                             }
                         }
 
@@ -596,7 +596,7 @@ namespace ApplicationFacade.Warehouse
                         {
                             if ( Data[j] != null )
                             {
-                                storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID( ), Data[j].Count, Data[j].Weight, Data[j].Name, Data[j].InQueue, Data[j].QueuePosition, new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
+                                storage.Items[j] = new ProjectItemData( Data[j].IDRef, Data[j].GetID( ), Data[j].Count, Data[j].Weight, Data[j].Name, Data[j].InQueue, Data[j].QueuePosition, Data[j].ParentItem.GetID( ), Data[j].ParentStorage.GetID( ), new ProjectTransformationData( Data[j].Position, Data[j].Rotation, Data[j].Scale ) );
                             }
                         }
 

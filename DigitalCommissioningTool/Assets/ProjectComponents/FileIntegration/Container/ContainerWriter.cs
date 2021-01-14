@@ -103,6 +103,8 @@ namespace ProjectComponents.FileIntegration
                                     nav.CreateAttribute( "xs", "idRef", xmlns, data.Container[i].Items[j].IDRef.ToString( ) );
                                     nav.CreateAttribute( "xs", "inQueue", xmlns, data.Container[i].Items[j].InQueue.ToString( ) );
                                     nav.CreateAttribute( "xs", "posQueue", xmlns, data.Container[i].Items[j].QueuePosition.ToString( ) );
+                                    nav.CreateAttribute( "xs", "parentItemID", xmlns, data.Container[i].Items[j].ParentItemID.ToString( ) );
+                                    nav.CreateAttribute( "xs", "parentStorageID", xmlns, data.Container[i].Items[j].ParentStorageID.ToString( ) );
 
                                     WriteTransformationData( nav, data.Container[i].Items[j].Transformation, xmlns );
                                 }

@@ -217,7 +217,7 @@ namespace ApplicationFacade.Application
             ReadProjectWarehouse( ref iwarehouse, ref warehouse );
             
             InternalProjectContainer icontainer = CHandler.LoadFile( );
-            ReadProjectContainer( ref icontainer, ref container );
+            ReadProjectContainer( ref icontainer, ref warehouse, ref container );
 
             FinishLoad?.Invoke( );
         }
@@ -536,7 +536,7 @@ namespace ApplicationFacade.Application
         /// </summary>
         /// <param name="icontainer">Internes Objekt das gelesen wird.</param>
         /// <param name="container">Objekt in das die Container gespeichert werden.</param>
-        private static void ReadProjectContainer( ref InternalProjectContainer icontainer, ref Container container )
+        private static void ReadProjectContainer( ref InternalProjectContainer icontainer, ref Warehouse.Warehouse iwarehouse, ref Container container )
         {
             for( int i = 0; i < icontainer.Container.Count; i++ )
             {
@@ -555,7 +555,7 @@ namespace ApplicationFacade.Application
                 {
                     if ( icontainer.Container[i].Items[j] != null )
                     {
-                        ItemData item = ItemData.RequestStockItem( icontainer.Container[i].Items[j].Name );
+                        ItemData item = iwarehouse.GetStorageRack( icontainer.Container[i].Items[j].ParentStorageID ).GetItem( icontainer.Container[i].Items[j].ParentItemID );
 
                         data.AddItem( item.RequestItem( icontainer.Container[i].Items[j].Count ), j );
 

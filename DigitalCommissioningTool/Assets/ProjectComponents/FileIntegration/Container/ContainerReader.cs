@@ -98,8 +98,10 @@ namespace ProjectComponents.FileIntegration
                             int count = int.Parse( nav.GetAttribute( "itemCount", xmlns ) );
                             bool inQueue = bool.Parse( nav.GetAttribute( "inQueue", xmlns ) );
                             int posQueue = int.Parse( nav.GetAttribute( "posQueue", xmlns ), NumberStyles.Integer );
+                            long parentItemID = long.Parse( nav.GetAttribute( "parentItemID", xmlns ), NumberStyles.Integer );
+                            long parentStorageID = long.Parse( nav.GetAttribute( "parentStorageID", xmlns ), NumberStyles.Integer );
 
-                            item = new ProjectItemData( idRef, iid, count, weight, name, inQueue, posQueue, ReadTransformation( nav, xmlns ) );
+                            item = new ProjectItemData( idRef, iid, count, weight, name, inQueue, posQueue, parentItemID, parentStorageID, ReadTransformation( nav, xmlns ) );
 
                             data.Items[int.Parse( nav.GetAttribute( "slot", xmlns ), NumberStyles.Integer )] = item;
                         }

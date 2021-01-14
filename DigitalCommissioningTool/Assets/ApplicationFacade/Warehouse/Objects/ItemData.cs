@@ -340,7 +340,6 @@ namespace ApplicationFacade.Warehouse
             }
 
             ChildItems.Add( data );
-            ItemChanged?.Invoke(data);
             ItemChanged?.Invoke(this);
 
             return data;
@@ -838,7 +837,7 @@ namespace ApplicationFacade.Warehouse
                                 {
                                     if ( item.ParentStorage.GetItems[j] != null )
                                     {
-                                        GameManager.GameContainer.Data.Container[i].Items[j] = new ProjectItemData( item.ParentStorage.GetItems[j].IDRef, item.ParentStorage.GetItems[j].GetID( ), item.ParentStorage.GetItems[j].Count, item.Weight, item.Name, item.ParentStorage.GetItems[j].InQueue, item.ParentStorage.GetItems[j].QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                                        GameManager.GameContainer.Data.Container[i].Items[j] = new ProjectItemData( item.ParentStorage.GetItems[j].IDRef, item.ParentStorage.GetItems[j].GetID( ), item.ParentStorage.GetItems[j].Count, item.Weight, item.Name, item.ParentStorage.GetItems[j].InQueue, item.ParentStorage.GetItems[j].QueuePosition, item.ParentItem.GetID(), item.ParentStorage.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
                                     }
                                 }
 
