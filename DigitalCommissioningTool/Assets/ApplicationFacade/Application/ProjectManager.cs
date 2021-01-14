@@ -557,7 +557,7 @@ namespace ApplicationFacade.Application
                     {
                         ItemData item = iwarehouse.GetStorageRack( icontainer.Container[i].Items[j].ParentStorageID ).GetItem( icontainer.Container[i].Items[j].ParentItemID );
 
-                        data.AddItem( item.RequestItem( icontainer.Container[i].Items[j].Count ), j );
+                        data.AddItem( item.RequestCopyItem( icontainer.Container[i].Items[j].Count ), j );
 
                         if ( item.InQueue )
                         {
