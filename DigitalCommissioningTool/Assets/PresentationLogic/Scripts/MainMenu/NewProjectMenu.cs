@@ -46,7 +46,6 @@ public class NewProjectMenu : MonoBehaviour
 
         if (!input.text.Equals(""))
         {
-            Debug.Log("Project Name: " + GameManager.PManager.ProjectName);
             if (string.IsNullOrEmpty(GameManager.PManager.ProjectName))
             {
                 GameManager.CreateProject(input.text);

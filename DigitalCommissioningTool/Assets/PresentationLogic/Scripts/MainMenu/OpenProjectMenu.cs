@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading;
 using ApplicationFacade.Application;
+using ApplicationFacade.Warehouse;
 using UnityEngine.UI;
 
 public class OpenProjectMenu : MonoBehaviour
@@ -22,6 +23,7 @@ public class OpenProjectMenu : MonoBehaviour
     private int Frames = 0;
     private Image selectedBackgroundImage = null;
     private Color selectedColor;
+    private int openedProjectIndex;
 
     void Start()
     {
@@ -97,7 +99,7 @@ public class OpenProjectMenu : MonoBehaviour
     {
         Frames += 1;
 
-        if (Frames == 120)
+        if (Frames == 60)
         {
             UpdateProjects();
 
@@ -109,6 +111,7 @@ public class OpenProjectMenu : MonoBehaviour
     {
         if (ProjectManager.ProjectList != null && ProjectManager.ProjectList.Length != projects.Count)
         {
+            int i = 0;
             foreach (ProjectData data in ProjectManager.ProjectList)
             {
                 if (!projects.Contains(data.ProjectName))
@@ -126,25 +129,28 @@ public class OpenProjectMenu : MonoBehaviour
                     RectTransform contentBox = template.transform.parent.GetComponent<RectTransform>();
                     contentBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
                 }
+                i++;
             }
-
             ResourceHandler.ReplaceResources();
         }
+        DisableCurrentProject();
     }
 
     private void DisableCurrentProject()
     {
         for ( int i = 0; i < projects.Count; i++ )
         {
-            Transform element = template.transform.parent.GetChild(i);
-            if ( GameManager.OpenProjectData != null && GameManager.OpenProjectData.ProjectName != null )
+            Transform element = template.transform.parent.GetChild(i+1);
+            Debug.Log(projects[i]);
+            Debug.Log("Index: " + i + "Elementname: " + element.name);
+            if ( GameManager.OpenProjectData != null &&  GameManager.OpenProjectData.ProjectName.Equals( projects[i] ))
             {
-                if ( GameManager.OpenProjectData.ProjectName.Equals( projects[i] ) )
-                {
-                    element.Find( "Delete" ).GetComponent<Button>( ).interactable = false;
-                }
+                element.Find( "Delete" ).GetComponent<Button>( ).interactable = false;
             }
-            element.Find( "Delete" ).GetComponent<Button>( ).interactable = true;
+            else
+            {
+                element.Find( "Delete" ).GetComponent<Button>( ).interactable = true;
+            }
         }
     }
 
