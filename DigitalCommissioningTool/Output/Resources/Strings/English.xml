@@ -150,7 +150,7 @@
     <xs:string xs:name="Execute" xs:id="50">
         <xs:value>Execute</xs:value>
     </xs:string>
-  <xs:string xs:name="SuccessfullySavedText" xs:id="51">
-    <xs:value>Project was saved</xs:value>
-  </xs:string>
+    <xs:string xs:name="SuccessfullySavedText" xs:id="51">
+        <xs:value>Project was saved</xs:value>
+    </xs:string>
 </xs:StringResources>
