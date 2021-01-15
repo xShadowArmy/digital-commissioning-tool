@@ -30,7 +30,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25723624-8c56-490b-b98e-ec9ed85b307e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DigitalCommissioningTool/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TooltipShelves.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PresentationLogic/Scripts/TooltipShelves.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
     </list>
@@ -358,8 +357,8 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="681" y="259" key="run.anything.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1609806602197" />
-    <state x="831" y="303" width="896" height="913" key="search.everywhere.popup" timestamp="1610513467036">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup" timestamp="1610670936847">
+      <screen x="2560" y="0" width="1920" height="1040" />
     </state>
     <state x="1989" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1609263977039" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1360.1.1360.728@0.0.1920.1040" timestamp="1608065890274" />
@@ -368,6 +367,6 @@
     <state x="665" y="241" width="717" height="727" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@0.0.2048.1112" timestamp="1610227551999" />
     <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2048.1112/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610197471803" />
     <state x="831" y="303" width="896" height="913" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1610513467036" />
-    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610491309757" />
+    <state x="3183" y="225" width="672" height="679" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1610670936847" />
   </component>
 </project>

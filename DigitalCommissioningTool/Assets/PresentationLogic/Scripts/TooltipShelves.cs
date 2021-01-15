@@ -51,7 +51,7 @@ public class TooltipShelves : MonoBehaviour
             getMessages();
             activate();
 
-            if (item.ParentStorage.IsContainer)
+            if (item.ParentStorage.IsContainer || item.Count == 0)
             {
                 GameObject.FindWithTag("AddItemsButton").GetComponent<Button>().interactable = false;
                 GameObject.FindWithTag("RemoveItemButton").GetComponent<Button>().interactable = false;
