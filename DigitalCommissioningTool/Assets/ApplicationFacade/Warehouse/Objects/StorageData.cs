@@ -486,7 +486,10 @@ namespace ApplicationFacade.Warehouse
 
                         else
                         {
-                            item.IncreaseItemCount( item.Count );
+                            item.ParentItem.Count += item.Count;
+                            item.ParentItem.ParentItem.Count += item.Count;
+
+                            item.TriggerEvents( item.ParentItem.ParentItem );
                         }
                     }
 

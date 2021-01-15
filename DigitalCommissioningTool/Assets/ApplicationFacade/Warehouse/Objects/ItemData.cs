@@ -184,6 +184,12 @@ namespace ApplicationFacade.Warehouse
             InQueue = false;
         }
         
+        internal void TriggerEvents( ItemData data )
+        {
+            ItemChanged?.Invoke( this );
+            ItemChanged?.Invoke( data );
+        }
+
         /// <summary>
         /// Erhöt die Anzahl des Items.
         /// </summary>
