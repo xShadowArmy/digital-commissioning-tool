@@ -481,12 +481,12 @@ namespace ApplicationFacade.Warehouse
                     {
                         if ( item.ParentItem.IsRoot )
                         {
-                            item.DecreaseItemCount( 1 );
+                            item.DecreaseItemCount( item.Count );
                         }
 
                         else
                         {
-                            item.IncreaseItemCount( 1 );
+                            item.IncreaseItemCount( item.Count );
                         }
                     }
 

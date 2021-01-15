@@ -247,7 +247,7 @@ public class PickAndPlaceNew : MonoBehaviour
                 isDragging = true;
             }
 
-            if (Input.GetKeyDown(KeyManager.RemoveSelected.Code))
+            if (Input.GetKeyDown(KeyManager.RemoveSelected.Code) && ModeHandler.Mode.Equals( "EditorMode" ))
             {
                 DeleteObject();
             }

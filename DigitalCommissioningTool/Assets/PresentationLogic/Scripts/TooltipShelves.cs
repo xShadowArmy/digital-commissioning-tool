@@ -75,9 +75,10 @@ public class TooltipShelves : MonoBehaviour
     {
         if (item != null)
         {
-            if (Input.GetKeyDown(KeyManager.RemoveSelected.Code) && !item.ParentStorage.IsContainer)
+            if (Input.GetKeyDown(KeyManager.RemoveSelected.Code) && ModeHandler.Mode.Equals( "MosimMode" ) )
             {
-                item.ReturnItem();
+                item.ParentStorage.RemoveItem( item );
+                item.ReturnItem( );
             }
         }
 

@@ -820,7 +820,7 @@ namespace ApplicationFacade.Warehouse
         /// <param name="item">Das Item das geändert wird.</param>
         private void ObjectChanged( ItemData src, ItemData item )
         {
-            if ( item.ChildItems.Count == 0 )
+            if ( item.ChildItems.Count == 0 && src.IDRef == item.IDRef )
             {
                 item.Name   = src.Name;
                 item.Weight = src.Weight;
@@ -837,7 +837,7 @@ namespace ApplicationFacade.Warehouse
                                 {
                                     if ( item.ParentStorage.GetItems[j] != null )
                                     {
-                                        GameManager.GameContainer.Data.Container[i].Items[j] = new ProjectItemData( item.ParentStorage.GetItems[j].IDRef, item.ParentStorage.GetItems[j].GetID( ), item.ParentStorage.GetItems[j].Count, item.Weight, item.Name, item.ParentStorage.GetItems[j].InQueue, item.ParentStorage.GetItems[j].QueuePosition, item.ParentItem.GetID(), item.ParentItem.ParentStorage.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                                        GameManager.GameContainer.Data.Container[i].Items[j] = new ProjectItemData( item.ParentStorage.GetItems[j].IDRef, item.ParentStorage.GetItems[j].GetID( ), item.ParentStorage.GetItems[j].Count, item.ParentStorage.GetItems[j].Weight, item.ParentStorage.GetItems[j].Name, item.ParentStorage.GetItems[j].InQueue, item.ParentStorage.GetItems[j].QueuePosition, item.ParentItem.GetID(), item.ParentItem.ParentStorage.GetID(), new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
                                     }
                                 }
 
@@ -856,7 +856,7 @@ namespace ApplicationFacade.Warehouse
                                 {
                                     if ( item.ParentStorage.GetItems[j] != null )
                                     {
-                                        GameManager.GameWarehouse.Data.StorageRacks[i].Items[j] = new ProjectItemData( item.ParentStorage.GetItems[j].IDRef, item.ParentStorage.GetItems[j].GetID( ), item.ParentStorage.GetItems[j].Count, item.Weight, item.Name, item.ParentStorage.GetItems[j].InQueue, item.ParentStorage.GetItems[j].QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
+                                        GameManager.GameWarehouse.Data.StorageRacks[i].Items[j] = new ProjectItemData( item.ParentStorage.GetItems[j].IDRef, item.ParentStorage.GetItems[j].GetID( ), item.ParentStorage.GetItems[j].Count, item.ParentStorage.GetItems[j].Weight, item.ParentStorage.GetItems[j].Name, item.ParentStorage.GetItems[j].InQueue, item.ParentStorage.GetItems[j].QueuePosition, new ProjectTransformationData( item.Position, item.Rotation, item.Scale ) );
                                     }
                                 }
 
