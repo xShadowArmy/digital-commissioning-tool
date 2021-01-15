@@ -95,7 +95,7 @@ namespace SystemFacade
         /// </summary>
         /// <param name="key">Ein eindeutiger Schlüssel.</param>
         /// <param name="data">Die Daten die gespeichert werden sollen.
-        /// </param>Gibt an, ob die Daten überschrieben werden sollen, wenn der Schlüssel bereits verwendet wird.</param>
+        /// <param>Gibt an, ob die Daten überschrieben werden sollen, wenn der Schlüssel bereits verwendet wird.</param>
         /// <returns>Gibt true zurück, wenn die Daten erfolgreich gespeichert oder überschrieben wurden.</returns>
         public bool StoreData( string key, object data, bool overwrite = true )
         {

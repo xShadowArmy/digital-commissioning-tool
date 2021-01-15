@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TimeMeasurement</name>
+    </assembly>
+    <members>
+        <member name="P:TimeMeasurement.TimeMeasurementEntry.Index">
+            <summary>
+            Index des Zeitmessungseintrags
+            </summary>
+        </member>
+        <member name="P:TimeMeasurement.TimeMeasurementEntry.CreatedAt">
+            <summary>
+            Zeitstempel wann der Einrag erstellt wurde
+            </summary>
+        </member>
+        <member name="P:TimeMeasurement.TimeMeasurementEntry.Duration">
+            <summary>
+            Dauer der Zeitmessung in Sekunden
+            </summary>
+        </member>
+        <member name="M:TimeMeasurement.TimeMeasurementEntry.#ctor">
+            <summary>
+            Erstellt eine Instanz mit Defaultwerten
+            </summary>
+        </member>
+        <member name="M:TimeMeasurement.TimeMeasurementEntry.#ctor(System.Int32,System.String,System.Single)">
+            <summary>
+            Erstellt eine Instanz und initialisiert das Objekt mit den übergebenen Werten
+            </summary>
+            <param name="index">Index der Zeitmessung</param>
+            <param name="createdAt">Zeitstempel des Erstellungszeitpunkts</param>
+            <param name="duration">Dauer der Zeitmessung in Sekunden</param>
+        </member>
+        <member name="M:TimeMeasurement.TimeMeasurementEntry.Serialize(SystemTools.SerialConfigData)">
+            <summary>
+            Serialisiert das Objekt für die Speicherung in der Config Datei
+            </summary>
+            <param name="storage"></param>
+        </member>
+        <member name="M:TimeMeasurement.TimeMeasurementEntry.Restore(SystemTools.SerialConfigData)">
+            <summary>
+            Stellt aus Config Datei geladenen Eintrag wieder her
+            </summary>
+            <param name="storage"></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,542 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PresentationLogic</name>
+    </assembly>
+    <members>
+        <member name="M:DialogMenu.OnClick">
+            <summary>
+            Überprüft, ob genügend Items verfügbar sind und gibt ein Event aus, falls dies der Fall ist
+            </summary>
+        </member>
+        <member name="M:EditorModeCamera.Update">
+            <summary>
+            Erstellt Objekte über Tastatur Shoortcuts in der Scene, lässt die Bewegung der Kamera per Maus zu wenn die rechte Maustaste gedrückt gehalten wird
+            und bewegt die Kamera nach oben und unten wenn entsprechende Taste gedrückt wird.
+            </summary>
+        </member>
+        <member name="M:MOSIMBehaviour.CoSimulator_MSimulationEventHandler(System.Object,MMIStandard.MSimulationEvent)">
+            <summary>
+            Callback for the co-simulation event handler
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyBindMenu.Start">
+            <summary>
+            Lädt alle gespeicherten Tasten und fügt sie in die Bearbeitungsliste ein.
+            </summary>
+        </member>
+        <member name="M:KeyBindMenu.OnClick(UnityEngine.GameObject)">
+            <summary>
+            Click Event welches die Bearbeitung einer Taste aktiviert.
+            </summary>
+            <param name="sender">Identifiziert betroffene Taste.</param>
+        </member>
+        <member name="M:KeyBindMenu.OnGUI">
+            <summary>
+            Fängt Tasteneingaben ab und Speichert sie, wenn die Bearbeitung aktiviert ist.
+            </summary>
+        </member>
+        <member name="M:KeyBindMenu.Back">
+            <summary>
+            Event für Zurücktaste. Öffnet das Einstellungsfenster.
+            </summary>
+        </member>
+        <member name="M:MainMenu.Start">
+            <summary>
+            Lädt "DefaultWarehouse" Szene, Einstellungen und lokalisierte Ressourcen.
+            </summary>
+        </member>
+        <member name="M:MainMenu.NewProject">
+            <summary>
+            Öffnet Fenster zum Erstellen eines neuen Projektes.
+            </summary>
+        </member>
+        <member name="M:MainMenu.OpenProject">
+            <summary>
+            Öffnet Fenster zum Laden bestehender Projekte.
+            </summary>
+        </member>
+        <member name="M:MainMenu.Settings">
+            <summary>
+            Öffnet Fenster zum Bearbeiten der Einstellungen.
+            </summary>
+        </member>
+        <member name="M:MainMenu.Exit">
+            <summary>
+            Schließt die Anwendung.
+            </summary>
+        </member>
+        <member name="M:NewProjectMenu.Back">
+            <summary>
+            Event für Zurücktaste. Schließt das aktuelle Fenster.
+            </summary>
+        </member>
+        <member name="M:NewProjectMenu.Continue">
+            <summary>
+            Liest Projektnamen aus und überprüft Gültigkeit. Erstellt Projekt wenn Gültig.
+            </summary>
+        </member>
+        <member name="M:OpenProjectMenu.Back">
+            <summary>
+            Event für Zurücktaste. Öffnet das Hauptmenü.
+            </summary>
+        </member>
+        <member name="M:OpenProjectMenu.UnloadScenes">
+            <summary>
+            Entlädt
+            </summary>
+        </member>
+        <member name="P:ModeHandler.Mode">
+            <summary>
+            Stellt den aktuellen Modus ("EditorMode" oder "MosimMode") dar. 
+            </summary>
+        </member>
+        <member name="M:ModeHandler.SwitchMode">
+            <summary>
+            Wechselt den Modus
+            </summary>
+        </member>
+        <member name="M:PickAndPlaceNew.OnStorageSelected(UnityEngine.Transform)">
+            <summary>
+            Wird aufgerufen wenn Regal ausgewählt.
+            </summary>
+            <param name="storage">Das ausgewählte Regal</param>
+        </member>
+        <member name="M:PickAndPlaceNew.HitSomething">
+            <summary>
+            Gibt zurück ob Objekt(e) getroffen werden 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PickAndPlaceNew.Rotate(UnityEngine.GameObject)">
+            <summary>
+            rotiert Objekt
+            </summary>
+            <param name="selected"> Objekt das rotiert wird </param>
+        </member>
+        <member name="M:PickAndPlaceNew.MoveAnywhere(UnityEngine.GameObject)">
+            <summary>
+            Bewegung mit Maus
+            </summary>
+            <param name="selected">Objekt das Bewegt werden soll</param>
+        </member>
+        <member name="M:PickAndPlaceNew.PlaceObject">
+            <summary>
+            Regal platzieren  
+            </summary>
+        </member>
+        <member name="M:PickAndPlaceNew.MoveInXAxis(UnityEngine.GameObject)">
+            <summary>
+            in X Achse bewegen
+            </summary>
+            <param name="selected">Regal das bewegt werden soll</param>
+        </member>
+        <member name="M:PickAndPlaceNew.MoveInZAxis(UnityEngine.GameObject)">
+            <summary>
+            in Z Achse bewegen
+            </summary>
+            <param name="selected">Regal das bewegt wird</param>
+        </member>
+        <member name="M:PickAndPlaceNew.DeleteObject">
+            <summary>
+            löscht Regal
+            </summary>
+        </member>
+        <member name="M:SaveProject.close(UnityEngine.GameObject)">
+            <summary>
+            Entfernt das UI Popup
+            </summary>
+            <param name="popUp"> Das Popup das geschlossen werden soll</param>
+        </member>
+        <member name="M:SelectionManager.Awake">
+            <summary>
+            Setzt vor Ausführung alle Selected Variablen auf null. 
+            </summary>
+        </member>
+        <member name="M:SelectionManager.Update">
+            <summary>
+            Prüft anhand eines Raycasts ob ein auswählbares Objekt angeklickt wurde und löst in diesem Fall das entsprechende Event aus.
+            </summary>
+        </member>
+        <member name="M:SelectionManager.SetPopUps">
+            <summary>
+            Aktiviert bzw. deaktiviert die UI Popups
+            </summary>
+        </member>
+        <member name="M:SelectionManager.ResetSelection">
+            <summary>
+            Entfernt die Auswahl des Objekts und setzt das Material zurück
+            </summary>
+        </member>
+        <member name="M:SelectionManager.FindParentWithTag(UnityEngine.Transform@,System.String)">
+            <summary>
+            Sucht in allen Elternelementen ein GameObject mit dem entsprechenden Tag und gibt dessen Transform zurück 
+            </summary>
+            <param name="child">
+               Objekt dessen Elternelemente durchsucht werden sollen
+            </param>
+            <param name="searchTag">
+               Tag nach dem gesucht werden soll
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:SelectionManager.OnInnerWallSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn ein innere Wand ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählten inneren Wand</param>
+        </member>
+        <member name="M:SelectionManager.OnAttachedInnerWallSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn eine innere Wand, die an eine äußere angebracht ist ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählten inneren Wand</param>
+        </member>
+        <member name="M:SelectionManager.OnStorageSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn ein Regal ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählte Regal</param>
+        </member>
+        <member name="M:SelectionManager.OnMovableStorageSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn ein bewegbares Regal ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählte bewegbare Regal</param>
+        </member>
+        <member name="M:SelectionManager.OnWallSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn ein Wandendstück ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählten Wand</param>
+        </member>
+        <member name="M:SelectionManager.OnLeftWallRimSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn linkes Wandendstück ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählten Wand</param>
+        </member>
+        <member name="M:SelectionManager.OnRightWallRimSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgelöst, wenn rechtes Wandendstück ausgewählt wird
+            </summary>
+            <param name="selectedObject">Referenz der ausgewählten Wand</param>
+        </member>
+        <member name="M:SelectionManager.OnShelveSelected(UnityEngine.GameObject,System.Boolean)">
+            <summary>
+            Wird aufgerufen, wenn ein Kiste angeklickt wird
+            </summary>
+            <param name="source">Objektreferenz der ausgewählten Kiste, oder Null-Referenz bei Deaktivierung</param>
+            <param name="active">Gib an, ob Tooltip aktiviert oder deaktiviert werden soll </param>
+        </member>
+        <member name="M:TimeMeasurementHistory.OnDestroy">
+            <summary>
+            Emtdfernt alle Eventfunktionen, wenn Objekt zerstört wird
+            </summary>
+        </member>
+        <member name="M:TimeMeasurementHistory.ProjectManagerOnStartSave">
+            <summary>
+            Schreibt die Änderungen in die XML Datei wenn Projekt gespeichert wird
+            </summary>
+        </member>
+        <member name="M:TimeMeasurementHistory.OnTimerReset(System.Single,System.String)">
+            <summary>
+            Wird aufgerufen wenn der Timer Reset ausgeführt wird und passt den Eintrag in der Tabelle entsprechend an 
+            </summary>
+            <param name="currentTime">Aktuelle Zeit des Timers</param>
+            <param name="buttonText">Text der auf dem Play/Pause/Resume Button aktuell angezeigt wird</param>
+        </member>
+        <member name="M:TimeMeasurementHistory.OnTimerStopped(System.Single,System.String)">
+            <summary>
+            Wird aufgerufen wenn Timer gestoppt wird und trägt aktuelle Zeit in die Tabelle ein
+            </summary>
+            <param name="currentTime">Aktuelle Zeit des Timers</param>
+            <param name="buttonText">Text der auf dem Play/Pause/Resume Button aktuell angezeigt wird</param>
+        </member>
+        <member name="M:TimeMeasurementHistory.AddItemToList(TimeMeasurement.TimeMeasurementEntry)">
+            <summary>
+            Trägt Zeitmessung in die UI Tabelle ein
+            </summary>
+            <param name="item">Zeitmessung die eingetragen werden soll</param>
+        </member>
+        <member name="M:TimeMeasurementHistory.ChangeItemInList(TimeMeasurement.TimeMeasurementEntry)">
+            <summary>
+            Ändert den angegebenen Zeitmessungseintrag in der UI Tabelle ab
+            </summary>
+            <param name="item">Zeitmessung die angepasst werden soll</param>
+        </member>
+        <member name="M:Timer.onClick">
+            <summary>
+            Wird von Play Button referenziert und steuert ´die Bennenung des Buttons
+            löst TimerStopped Event aus
+            </summary>
+        </member>
+        <member name="M:Timer.Reset">
+            <summary>
+            Wird von Reset Button referenziert und setzt den Timer wieder auf Null
+            löst das TimerReset event aus
+            </summary>
+        </member>
+        <member name="M:Timer.setVisible">
+            <summary>
+            Macht Buttons sichtbar
+            </summary>
+        </member>
+        <member name="M:Timer.setInisible">
+            <summary>
+            Deaktiviert und macht Button unsichtbar
+            </summary>
+        </member>
+        <member name="M:Tooltip.SetTooltip(System.String,System.String,System.Boolean)">
+            <summary>
+            Setzten der TextFelder Im Tooltip 
+            </summary>
+            <param name="content">Inhalt des Textkörpers im Tooltip, wie Anzahl und Gewicht der Items im ReferenzObjekt, welches das Tooltip beschreibt </param>
+            <param name="header">Art der Kiste, die von Tooltip beschrieben wird </param>
+             <param name="updated">wird gesetzt, wenn nur die anzahl in den Kisten verringert wird </param>
+        </member>
+        <member name="M:Tooltip.RemoveTooltip">
+            <summary>
+            Deaktiviert Tooltip
+            </summary>
+        </member>
+        <member name="M:Tooltip.SetText(System.String,System.String)">
+             <summary>
+            Aktiviert Tooltip und setzt den Inhalt 
+             </summary>
+             <param name="content">Informationen über die Itemsin Kisten(Referenzobjekt)</param>
+             <param name="header">Art der Kiste</param>
+        </member>
+        <member name="M:TooltipShelves.SelectionManager_ShelveSelected(UnityEngine.GameObject,System.Boolean)">
+            <summary>
+            
+            
+            </summary>
+            <param name="selectedObject">Referenz auf das Object, dass das Tooltip event ausgelöst hat</param>
+            <param name="active">Parameter zum aktivieren oder deaktivieren von dem Tooltip</param>
+        </member>
+        <member name="M:TooltipShelves.activate">
+            <summary>
+            Ruft Set Tooltip auf
+            </summary>
+        </member>
+        <member name="M:TooltipShelves.deactivate">
+            <summary>
+            Ruft RemoveTooltip auf
+            </summary>
+        </member>
+        <member name="M:TooltipShelves.getMessages">
+            <summary>
+            Weist der Variable Content Massage die Parameter des selectedObjects, die in IdemData gespeichert sind zu
+            </summary>
+        </member>
+        <member name="M:TooltipShelves.updateTooltip">
+            <summary>
+            Aktualisiert den Inhalt des Tooltips
+            </summary>
+        </member>
+        <member name="M:TooltipShelves.removeItems">
+            <summary>
+            Vermindert die Anzahl an Items in den Kisten um 1 oder löscht sie ggf.
+            </summary>
+        </member>
+        <member name="M:TooltipShelves.addItems">
+            <summary>
+            Erhöht die Anzahl an Items in den Kisten um 1
+            </summary>
+        </member>
+        <member name="M:TreeViewInspector.AddTreeView(UnityEngine.GameObject)">
+            <summary>
+            Add a tree view control to the game object
+            </summary>
+            <param name="go"></param>
+        </member>
+        <member name="F:TreeViewControl.X">
+            <summary>
+            Public properties
+            </summary>
+        </member>
+        <member name="F:TreeViewControl.m_roomItem">
+            <summary>
+            The root item
+            </summary>
+        </member>
+        <member name="P:TreeViewControl.Header">
+            <summary>
+            Accesses the root item header
+            </summary>
+        </member>
+        <member name="P:TreeViewControl.DataContext">
+            <summary>
+            Accesses the root data context
+            </summary>
+        </member>
+        <member name="P:TreeViewControl.Items">
+            <summary>
+            Accessor to the root items
+            </summary>
+        </member>
+        <member name="F:TreeViewControl.m_skinDefault">
+            <summary>
+            Skin used by the tree view
+            </summary>
+        </member>
+        <member name="F:TreeViewControl.m_textureBlank">
+            <summary>
+            Texture skin references
+            </summary>
+        </member>
+        <member name="F:TreeViewControl.m_forceButtonText">
+            <summary>
+            Force to use the button text
+            </summary>
+        </member>
+        <member name="F:TreeViewControl.m_forceDefaultSkin">
+            <summary>
+            Use the default skin
+            </summary>
+        </member>
+        <member name="F:TreeViewControl.HoverItem">
+            <summary>
+            The selected item
+            </summary>
+        </member>
+        <member name="M:TreeViewControl.ShowButtonTexture(UnityEngine.Texture2D)">
+            <summary>
+            Show the button texture 
+            </summary>
+            <param name="texture">
+            A <see cref="T:UnityEngine.Texture2D"/>
+            </param>
+            <returns>
+            A <see cref="T:System.Boolean"/>
+            </returns>
+        </member>
+        <member name="M:TreeViewControl.Button(TreeViewItem.TextureIcons)">
+            <summary>
+            Find the button texture/text by enum
+            </summary>
+            <param name="item"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <returns></returns>
+        </member>
+        <member name="F:TreeViewControl.m_scrollView">
+            <summary>
+            Handle the unity scrolling vector
+            </summary>
+        </member>
+        <member name="M:TreeViewControl.DisplayTreeView(TreeViewControl.DisplayTypes)">
+            <summary>
+            Called from OnGUI or EditorWindow.OnGUI
+            </summary>
+        </member>
+        <member name="F:TreeViewItem.m_hoverTime">
+            <summary>
+            The distance to the hover item
+            </summary>
+        </member>
+        <member name="M:WalkTrajectory.GetPathConstraint">
+            <summary>
+            Returns a trajectory constraint describing the 2D positions (x-z)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WallEditor.Start">
+            <summary>
+            Setzt Texte für UI Buttons, weist Eventfunktionen zu und initialisiert Objekte
+            </summary>
+        </member>
+        <member name="M:WallEditor.Update">
+            <summary>
+            Sorgt dafür, dass Innenwände per Maus ausgewählt und verschoben/gedreht werden können. Während dem Bewegen wird nach einer Außenwand gesucht, an die die Wand angedockt werden kann.
+            </summary>
+        </member>
+        <member name="M:WallEditor.OnInnerWallSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgefüht wenn eine noch nicht angedockte Innenwand ausgewöhlt wird und setzt Selected auf true, damit diese verschoben werden kann.
+            </summary>
+            <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
+        </member>
+        <member name="M:WallEditor.OnAttachedInnerWallSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgeführt wenn das Randelement einer Innenwand ausgewählt wird und öffnet das UI Panel zum Anpassen der Länge
+            </summary>
+            <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
+        </member>
+        <member name="M:WallEditor.OnRightWallRimSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgeführt wenn rechtes Randelement einer Außenwand ausgewählt wird und öffnet das UI Panel zum Anpassen der Länge
+            </summary>
+            <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
+        </member>
+        <member name="M:WallEditor.OnLeftWallRimSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgeführt wenn linkes Randelement einer Außenwand ausgewählt wird und öffnet das UI Panel zum Anpassen der Länge
+            </summary>
+            <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
+        </member>
+        <member name="M:WallEditor.OnWallSelected(UnityEngine.Transform)">
+            <summary>
+            Wird ausgeführt wenn ein Wandelement (nicht Randelemente) ausgewählt wird und öffnet das WallEditor UI Panel zum Anpassen des Wandelements
+            </summary>
+            <param name="selectedObject">Der Transform des GameObjects das ausgewählt wurde</param>
+        </member>
+        <member name="M:WallEditor.OnAddInnerWallButtonClicked">
+            <summary>
+            Fügt Innenwand hinzu wenn der Button gedrückt wurde und passt den Tag entsprechend an.
+            </summary>
+        </member>
+        <member name="M:WallEditor.OnAddWindowClick">
+            <summary>
+            Ersetzt das ausgewählte Wandelement durch ein Fensterelement
+            </summary>
+        </member>
+        <member name="M:WallEditor.OnAddDoorClick">
+            <summary>
+            Ersetzt das ausgewählte Wandelement durch ein Türelement
+            </summary>
+        </member>
+        <member name="M:WallEditor.OnAddWallClick">
+            <summary>
+            Ersetzt das ausgewählte Wandelement durch ein Wandelement
+            </summary>
+        </member>
+        <member name="M:WallEditor.SetPopUp">
+            <summary>
+            Setzt den Text für das UI Popup zur Anpassung der Wandelemente
+            </summary>
+        </member>
+        <member name="M:WallEditor.SetPopUpScaleWall">
+            <summary>
+            Setzt den Text für das UI Popup zur Anpassung der Wandlänge
+            </summary>
+        </member>
+        <member name="M:WallEditor.close(UnityEngine.GameObject)">
+            <summary>
+            Entfernt das UI Popup
+            </summary>
+            <param name="popUp"> Das Popup das geschlossen werden soll</param>
+        </member>
+        <member name="M:WallEditor.OnScaleWallButtonClicked">
+            <summary>
+            Prüft ob Eingabe gültig ist und ruft entsprechende Methode auf
+            </summary>
+        </member>
+        <member name="M:WallEditor.ScaleWall(System.Int32)">
+            <summary>
+            Passt die Wand um die übergebene Länge an
+            </summary>
+            <param name="length"> Länge um die Wand verlängert(+) oder verkürzt(-) werden soll</param>
+        </member>
+        <member name="M:WallEditor.ToggleAddInnerWall">
+            <summary>
+            Aktiviert und desaktiviert das Anzeigen des AddWallButtons je nach Modus
+            </summary>
+        </member>
+    </members>
+</doc>
