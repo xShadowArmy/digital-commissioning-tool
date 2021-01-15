@@ -1,0 +1,5 @@
+1. ReleaseVersion.zip in beliebigen Pfad entpacken.
+2. Entpackten "DigitalCommisioningTool" Ordner öffnen.
+3. DigitalCommisioningTool.exe starten.
+
+Hinweis: Um die MOSIM Funktionalitäten zu verwenden muss vor dem Starten der Anwendung der MMILauncher des MOSIM Frameworks ausgeführt werden!
