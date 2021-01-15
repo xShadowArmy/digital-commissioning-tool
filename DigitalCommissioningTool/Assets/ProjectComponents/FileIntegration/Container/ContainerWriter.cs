@@ -155,9 +155,9 @@ namespace ProjectComponents.FileIntegration
 
             nav.InsertElementAfter( "xs", "Rotation", xmlns, "" );
             nav.MoveToNext( );
-            nav.CreateAttribute( "xs", "x", xmlns, data.Rotation.x.ToString( ) );
-            nav.CreateAttribute( "xs", "y", xmlns, data.Rotation.y.ToString( ) );
-            nav.CreateAttribute( "xs", "z", xmlns, data.Rotation.z.ToString( ) );
+            nav.CreateAttribute( "xs", "x", xmlns, data.Rotation.eulerAngles.x.ToString( ) );
+            nav.CreateAttribute( "xs", "y", xmlns, data.Rotation.eulerAngles.y.ToString( ) );
+            nav.CreateAttribute( "xs", "z", xmlns, data.Rotation.eulerAngles.z.ToString( ) );
 
             nav.InsertElementAfter( "xs", "Scale", xmlns, "" );
             nav.MoveToNext( );
