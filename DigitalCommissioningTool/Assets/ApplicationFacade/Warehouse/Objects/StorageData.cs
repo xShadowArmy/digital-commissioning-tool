@@ -477,23 +477,21 @@ namespace ApplicationFacade.Warehouse
 
                     Data[i] = null;
 
-                    if ( item.ParentItem != null )
-                    {
-                        if ( item.ParentItem.IsRoot )
-                        {
-                            item.DecreaseItemCount( item.Count );
-                        }
-
-                        else
-                        {
-                            item.ParentItem.Count += item.Count;
-                            item.ParentItem.ParentItem.Count += item.Count;
-
-                            item.TriggerEvents( item.ParentItem.ParentItem );
-                        }
-                    }
-
-                    item.ParentStorage = null;
+                    //if ( item.ParentItem != null )
+                    //{
+                    //    if ( item.ParentItem.IsRoot )
+                    //    {
+                    //        item.DecreaseItemCount( item.Count );
+                    //    }
+                    //
+                    //    else
+                    //    {
+                    //        item.ParentItem.Count += item.Count;
+                    //        item.ParentItem.ParentItem.Count += item.Count;
+                    //
+                    //        item.TriggerEvents( item.ParentItem.ParentItem );
+                    //    }
+                    //}
 
                     if ( !IsContainer )
                     {
@@ -536,6 +534,8 @@ namespace ApplicationFacade.Warehouse
                             }
                         }
                     }
+
+                    item.ReturnItem( );
 
                     return true;
                 }
