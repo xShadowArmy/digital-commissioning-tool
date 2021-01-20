@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:StringResources xs:lang="German" xmlns:xs="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/xShadowArmy/digital-commissioning-tool/tree/main/DigitalCommissioningTool/Output/Resources/ StringResourceSchema.xsd">
+    <xs:String xs:name="DefaultProjectName" xs:id="1">
+        <xs:Value>NeuesProject</xs:Value>
+    </xs:String>
+    <xs:string xs:name="NewProject" xs:id="2">
+        <xs:value>Neues Projekt</xs:value>
+    </xs:string>
+    <xs:string xs:name="OpenProject" xs:id="3">
+        <xs:value>Projekt Öffnen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Settings" xs:id="4">
+        <xs:value>Einstellungen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Exit" xs:id="5">
+        <xs:value>Beenden</xs:value>
+    </xs:string>
+    <xs:string xs:name="Fullscreen" xs:id="6">
+        <xs:value>Vollbildschirm</xs:value>
+    </xs:string>
+    <xs:string xs:name="Resolution" xs:id="7">
+        <xs:value>Auflösung</xs:value>
+    </xs:string>
+    <xs:string xs:name="Language" xs:id="8">
+        <xs:value>Sprache</xs:value>
+    </xs:string>
+    <xs:string xs:name="Back" xs:id="9">
+        <xs:value>Zurück</xs:value>
+    </xs:string>
+    <xs:string xs:name="German" xs:id="10">
+        <xs:value>Deutsch</xs:value>
+    </xs:string>
+    <xs:string xs:name="English" xs:id="11">
+        <xs:value>Englisch</xs:value>
+    </xs:string>
+    <xs:string xs:name="NewProjectNamePrompt" xs:id="12">
+        <xs:value>Bitte geben sie einen Projektnamen ein</xs:value>
+    </xs:string>
+    <xs:string xs:name="Continue" xs:id="13">
+        <xs:value>Fortsetzen</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectNamePlaceholder" xs:id="14">
+        <xs:value>Projektname</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectNameLabel" xs:id="15">
+        <xs:value>Projektname:</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectPathLabel" xs:id="16">
+        <xs:value>Pfad:</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectModifiedLabel" xs:id="17">
+        <xs:value>Zuletzt Geändert:</xs:value>
+    </xs:string>
+    <xs:string xs:name="ProjectCreatedLabel" xs:id="18">
+        <xs:value>Erstellt:</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddWallText" xs:id="19">
+        <xs:value>Wand hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddInnerWallText" xs:id="20">
+        <xs:value>Innenwand hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddWindowText" xs:id="21">
+        <xs:value>Fenster hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddDoorText" xs:id="22">
+        <xs:value>Tür hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="KeyBinds" xs:id="23">
+        <xs:value>Tastenbelegung</xs:value>
+    </xs:string>
+    <xs:string xs:name="Edit" xs:id="24">
+        <xs:value>Bearbeiten</xs:value>
+    </xs:string>
+    <xs:string xs:name="AddItem" xs:id="25">
+        <xs:value>Hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="WarehouseItems" xs:id="26">
+        <xs:value>Warenhaus</xs:value>
+    </xs:string>
+    <xs:string xs:name="SaveItem" xs:id="27">
+        <xs:value>Speichern</xs:value>
+    </xs:string>
+    <xs:string xs:name="Count" xs:id="28">
+        <xs:value>Anzahl</xs:value>
+    </xs:string>
+    <xs:string xs:name="Weight" xs:id="29">
+        <xs:value>Gewicht</xs:value>
+    </xs:string>
+    <xs:string xs:name="Name" xs:id="30">
+        <xs:value>Name</xs:value>
+    </xs:string>
+    <xs:string xs:name="EditItem" xs:id="31">
+        <xs:value>Bearbeiten</xs:value>
+    </xs:string>
+    <xs:string xs:name="RemoveItem" xs:id="32">
+        <xs:value>Entfernen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Queue" xs:id="33">
+        <xs:value>Queue</xs:value>
+    </xs:string>
+    <xs:string xs:name="Confirm" xs:id="34">
+        <xs:value>Bestätigen</xs:value>
+    </xs:string>
+    <xs:string xs:name="EnterAmount" xs:id="35">
+        <xs:value>Menge eingeben:</xs:value>
+    </xs:string>
+    <xs:string xs:name="Amount" xs:id="36">
+        <xs:value>Menge</xs:value>
+    </xs:string>
+    <xs:string xs:name="TimeMeasurements" xs:id="37">
+        <xs:value>Zeitmessungen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Index" xs:id="38">
+        <xs:value>Index</xs:value>
+    </xs:string>
+    <xs:string xs:name="Date" xs:id="39">
+        <xs:value>Datum</xs:value>
+    </xs:string>
+    <xs:string xs:name="Duration" xs:id="40">
+        <xs:value>Dauer</xs:value>
+    </xs:string>
+    <xs:string xs:name="SelectedStorage" xs:id="41">
+        <xs:value>Regal</xs:value>
+    </xs:string>
+    <xs:string xs:name="CountDistributeItem" xs:id="42">
+        <xs:value>Anzahl</xs:value>
+    </xs:string>
+    <xs:string xs:name="DistributeItem" xs:id="43">
+        <xs:value>Hinzufügen</xs:value>
+    </xs:string>
+    <xs:string xs:name="NameDistributeItem" xs:id="44">
+        <xs:value>Name</xs:value>
+    </xs:string>
+    <xs:string xs:name="DistributeItemConfirm" xs:id="45">
+        <xs:value>Bestätigen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Save" xs:id="46">
+        <xs:value>Speichern</xs:value>
+    </xs:string>
+    <xs:string xs:name="WallLengthText" xs:id="47">
+        <xs:value>Länge der Wand:</xs:value>
+    </xs:string>
+    <xs:string xs:name="Idle" xs:id="48">
+        <xs:value>Ruhezustand</xs:value>
+    </xs:string>
+    <xs:string xs:name="WalkTo" xs:id="49">
+        <xs:value>Laufen</xs:value>
+    </xs:string>
+    <xs:string xs:name="Execute" xs:id="50">
+        <xs:value>Ausführen</xs:value>
+    </xs:string>
+    <xs:string xs:name="SuccessfullySavedText" xs:id="51">
+        <xs:value>Projekt wurde gespeichert</xs:value>
+    </xs:string>
+</xs:StringResources>
